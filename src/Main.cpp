@@ -1,6 +1,7 @@
 #include "Main.hpp"
 #include "Gui/Gui.hpp"
 #include "Gui/Menu.hpp"
+#include "Item.hpp"
 #include "PCH.hpp"
 #include "Platform/Platform.hpp"
 #include "SaveHandler.hpp"
@@ -22,7 +23,7 @@ Menu menu;
 Game* game = nullptr;
 bool debug = false;
 Timer timer;
-Camera camera(sf::Vector2f(0.f, 0.f), 20.f);
+Camera camera(sf::Vector2f(0.f, 0.f), 1.f);
 int main()
 {
 	SaveHandler::ResetDir();
@@ -40,6 +41,7 @@ int main()
 		window->close();
 	}
 	//gui.Init();
+	InitItems();
 	menu = InitMenu();
 	camera.Update();
 	deltaClock.restart();
