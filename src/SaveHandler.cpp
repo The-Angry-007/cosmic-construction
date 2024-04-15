@@ -149,7 +149,7 @@ std::vector<std::string> SaveHandler::listDirs(std::string& path)
 void SaveHandler::ResetDir()
 {
 	std::string appdata = getenv("APPDATA");
-	workingDir = appdata + "\\planet-sim";
+	workingDir = appdata + "\\cosmic-construction";
 	if (!dirExists(workingDir))
 	{
 		createDir(workingDir);
@@ -171,65 +171,8 @@ void SaveHandler::SaveGame()
 	seconds += game->timePassed->getElapsedTime().asSeconds();
 	metadata[2] = std::to_string(seconds);
 	WriteLines(metadata, workingDir + "\\metadata.txt");
-	//write structures
-	std::string structureString;
-	/*
-	the format of how structures will be written:
-	part
-	part
-	part
-
-	connections
-	focused
-
-	next structure
-	parts will be in the format type index position rotation special data
-	where type is an integer with 0 being thruster,1 being fuel tank etc etc
-	*/
-	for (uint i = 0; i < game->structures.size(); i++)
-	{
-		structureString += game->structures[i].toString();
-		if (i != game->structures.size() - 1)
-		{
-			structureString += "\n";
-		}
-	}
-	std::ofstream file(workingDir + "\\structures.txt");
-	file << structureString;
-	file.close();
 }
 
 void SaveHandler::LoadGame()
 {
-	std::vector<std::string> structureLines = getLines(workingDir + "\\structures.txt");
-	uint i = 0;
-	int nlCount = 0;
-	std::cout << "loading.." << std::endl;
-	std::vector<std::string> currentStructure;
-	while (i < structureLines.size())
-	{
-		if (structureLines[i] == "")
-		{
-			if (nlCount == 1)
-			{
-				nlCount = -1;
-				currentStructure.push_back("");
-				currentStructure.push_back(structureLines[i + 1]);
-				game->structures.push_back(Structure(currentStructure));
-				std::cout << "creating structure" << std::endl;
-				currentStructure = {};
-				i++;
-			}
-			else
-			{
-				currentStructure.push_back("");
-			}
-			nlCount++;
-		}
-		else
-		{
-			currentStructure.push_back(structureLines[i]);
-		}
-		i++;
-	}
 }

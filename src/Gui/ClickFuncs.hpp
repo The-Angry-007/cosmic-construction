@@ -9,5 +9,4 @@ void GoBack();
 void CreateSave();
 void ResumeGame();
 void QuitToTitle();
-void SetThrottle(float val);
 }

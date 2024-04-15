@@ -43,8 +43,3 @@ void ClickFuncs::QuitToTitle()
 	game = nullptr;
 	menu.OpenMenu(0);
 }
-
-void ClickFuncs::SetThrottle(float val)
-{
-	game->thrusterThrottle = val;
-}

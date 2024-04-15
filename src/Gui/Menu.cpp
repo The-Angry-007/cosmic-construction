@@ -97,7 +97,7 @@ Menu InitMenu()
 	Menu m;
 	Gui mainMenu;
 	mainMenu.Init();
-	mainMenu.AddLabel(Label("Planet Sim", sf::Vector2f(0.5f, 0.2f), sf::Vector2f(0.7f, 0.2f), sf::Color::Black));
+	mainMenu.AddLabel(Label("Cosmic Construction", sf::Vector2f(0.5f, 0.2f), sf::Vector2f(0.7f, 0.2f), sf::Color::Black));
 	sf::Texture moon;
 	if (!moon.loadFromFile("resources/images/moon.png"))
 	{
@@ -133,10 +133,6 @@ Menu InitMenu()
 	m.AddGui(loadGame);
 	Gui mainGame;
 	mainGame.Init();
-	Slider s(sf::Vector2f(0.9f, 0.9f), sf::Vector2f(0.03f, 0.3f));
-	s.updateFunction = ClickFuncs::SetThrottle;
-	mainGame.AddSlider(s);
-	mainGame.AddLabel(Label("Throttle", sf::FloatRect(0.85f, 0.9f, 0.1f, 0.1f), sf::Color::White));
 	m.AddGui(mainGame);
 	Gui paused;
 	paused.Init();
