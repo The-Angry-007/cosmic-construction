@@ -1,5 +1,6 @@
 #include "SaveHandler.hpp"
 #include "Main.hpp"
+#include <cerrno>
 #include <chrono>
 #include <fstream>
 #include <iostream>
@@ -116,7 +117,31 @@ int64_t SaveHandler::getSeconds()
 	auto now = std::chrono::system_clock::now();
 	return std::chrono::duration_cast<std::chrono::seconds>(now.time_since_epoch()).count();
 }
+std::vector<std::string> SaveHandler::listFiles(std::string& directory)
+{
+	std::vector<std::string> files;
+	WIN32_FIND_DATAA fileData;
+	HANDLE hFind = FindFirstFileA((directory + "\\*").c_str(), &fileData); // Find the first file in the directory.
 
+	if (hFind != INVALID_HANDLE_VALUE)
+	{
+		do
+		{
+			if (!(fileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
+			{
+				files.push_back(directory + "\\" + fileData.cFileName); // Add the file path to the vector
+			}
+		} while (FindNextFileA(hFind, &fileData) != 0); // Find the next file
+
+		FindClose(hFind); // Close the handle
+	}
+	else
+	{
+		std::cerr << "Error opening directory" << std::endl;
+	}
+
+	return files;
+}
 std::vector<std::string> SaveHandler::listDirs(std::string& path)
 {
 
@@ -175,4 +200,14 @@ void SaveHandler::SaveGame()
 
 void SaveHandler::LoadGame()
 {
+}
+
+std::string SaveHandler::relToAbsolute(std::string relativePath)
+{
+	char fullPath[MAX_PATH];
+	if (GetFullPathNameA(relativePath.c_str(), MAX_PATH, fullPath, NULL))
+	{
+		return std::string(fullPath);
+	}
+	return ""; // Return an empty string if conversion fails
 }

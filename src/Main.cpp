@@ -4,6 +4,7 @@
 #include "PCH.hpp"
 #include "Platform/Platform.hpp"
 #include "SaveHandler.hpp"
+#include "Timer.hpp"
 #include "inputHandler.hpp"
 #ifndef M_PI
 	#define M_PI 3.14159265358979323846
@@ -20,6 +21,7 @@ int width, height;
 Menu menu;
 Game* game = nullptr;
 bool debug = false;
+Timer timer;
 Camera camera(sf::Vector2f(0.f, 0.f), 20.f);
 int main()
 {
@@ -48,23 +50,41 @@ int main()
 	}
 	while (window->isOpen())
 	{
-
+		timer.TimeFunc("input events", true);
 		inp.ProcessEvents();
+		timer.end();
+		timer.nFrames++;
+		if (inp.keyPressed(sf::Keyboard::LControl) && inp.keyPressed(sf::Keyboard::Key::T))
+		{
+			if (!timer.timing)
+			{
+				timer.StartTiming();
+			}
+			else
+			{
+				timer.EndTiming();
+			}
+		}
 		double dt = deltaClock.restart().asSeconds();
 
 		if (game != nullptr)
 		{
 			game->Update(dt);
 		}
+		timer.TimeFunc("camera update", true);
 		camera.Update();
-
+		timer.end();
+		timer.TimeFunc("menu update", true);
 		menu.Update();
+		timer.end();
 		window->clear(sf::Color(8, 0, 20));
 		if (game != nullptr)
 		{
 			game->Render();
 		}
+		timer.TimeFunc("render menu", false);
 		camera.RenderMenu(menu, dt);
+		timer.end();
 		window->display();
 	}
 	return 0;

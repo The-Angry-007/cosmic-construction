@@ -2,6 +2,7 @@
 #include "Camera.hpp"
 #include "Game.hpp"
 #include "Gui/Gui.hpp"
+#include "Timer.hpp"
 #include "inputHandler.hpp"
 extern sf::RenderWindow* window;
 //the constant that determines the strength of gravity
@@ -12,3 +13,4 @@ extern sf::Font* defaultFont;
 extern Menu menu;
 extern Game* game;
 extern Camera camera;
+extern Timer timer;
