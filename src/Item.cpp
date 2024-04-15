@@ -35,7 +35,9 @@ void Item::Update(double dt)
 	if (height < 0)
 	{
 		height = 0;
-		vertVel *= -0.5f;
+		vertVel *= -0.2f;
+		//friction
+		vel *= 0.98f;
 	}
 }
 void Item::Render()

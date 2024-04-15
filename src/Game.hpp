@@ -11,6 +11,7 @@ public:
 	void Init(bool newGame);
 	void TogglePaused();
 	void NewGame();
+	bool mouseDragsItems;
 	sf::Clock* timePassed;
 	std::vector<Item> items;
 	Game();

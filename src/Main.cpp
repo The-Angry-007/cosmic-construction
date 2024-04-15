@@ -32,7 +32,7 @@ int main()
 	float screenScalingFactor = platform.getScreenScalingFactor(window->getSystemHandle());
 	// Use the screenScalingFactor
 	window->create(sf::VideoMode(800.0f * screenScalingFactor, 500.0f * screenScalingFactor), "Planet Sim");
-	window->setVerticalSyncEnabled(false);
+	window->setVerticalSyncEnabled(true);
 	sf::Image icon;
 	icon.loadFromFile("resources/images/icon.png");
 	window->setIcon(256, 256, icon.getPixelsPtr());
