@@ -9,6 +9,9 @@ Camera::Camera(sf::Vector2f pos, float zoom)
 	view = sf::View(toFloatRect());
 	windowSize = sf::Vector2u(0, 0);
 	rotation = 0.f;
+	bgShape = new sf::RectangleShape(sf::Vector2f(1, 1));
+	bgShape->setFillColor(sf::Color::Blue);
+	bgView = sf::View(sf::FloatRect(0.f, 0.f, 1.f, 1.f));
 }
 void Camera::UpdateView()
 {
@@ -55,6 +58,12 @@ void Camera::Update()
 
 	prevMousePos = inp.mousePos;
 }
+void Camera::RenderBg()
+{
+	window->setView(bgView);
+	window->draw(*bgShape);
+	window->setView(view);
+}
 void Camera::RenderMenu(Menu menu, double dt)
 {
 	sf::View menuView(sf::FloatRect(0.f, 0.f, width, height));
@@ -65,4 +74,9 @@ void Camera::RenderMenu(Menu menu, double dt)
 sf::FloatRect Camera::toFloatRect()
 {
 	return sf::FloatRect(pos.x - width * zoom / 2.f, pos.y - height * zoom / 2.f, width * zoom, height * zoom);
+}
+
+void Camera::SetBgCol(sf::Color col)
+{
+	bgShape->setFillColor(col);
 }

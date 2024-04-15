@@ -4,6 +4,8 @@
 #include "inputHandler.hpp"
 Game::Game()
 {
+	//green grass color
+	camera.SetBgCol(sf::Color(89, 149, 48));
 }
 void Game::NewGame()
 {
@@ -48,6 +50,9 @@ void Game::TogglePaused()
 }
 void Game::Render()
 {
+	timer.TimeFunc("camera draw bg", false);
+	camera.RenderBg();
+	timer.end();
 }
 Game::~Game()
 {

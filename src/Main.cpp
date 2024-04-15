@@ -54,7 +54,7 @@ int main()
 		inp.ProcessEvents();
 		timer.end();
 		timer.nFrames++;
-		if (inp.keyPressed(sf::Keyboard::LControl) && inp.keyPressed(sf::Keyboard::Key::T))
+		if (inp.keyDown(sf::Keyboard::LControl) && inp.keyPressed(sf::Keyboard::Key::T))
 		{
 			if (!timer.timing)
 			{
