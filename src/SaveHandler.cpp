@@ -7,6 +7,8 @@
 #include <sys/stat.h>
 #include <windows.h>
 std::string SaveHandler::workingDir = "";
+//incremented every time the save system is changed, so outdated saves cannot be used
+int SaveHandler::saveVersion = 0;
 void SaveHandler::CreateSave(std::string name)
 {
 	ResetDir();
@@ -53,7 +55,8 @@ void SaveHandler::CreateSave(std::string name)
 	std::ofstream fs(workingDir + "\\metadata.txt");
 	fs << date << std::endl
 	   << seconds << std::endl
-	   << "0";
+	   << "0" << std::endl
+	   << (std::to_string(saveVersion));
 	fs.close();
 }
 
@@ -196,10 +199,21 @@ void SaveHandler::SaveGame()
 	seconds += game->timePassed->getElapsedTime().asSeconds();
 	metadata[2] = std::to_string(seconds);
 	WriteLines(metadata, workingDir + "\\metadata.txt");
+	std::vector<std::string> items;
+	for (uint i = 0; i < game->items.size(); i++)
+	{
+		items.push_back(game->items[i].toString());
+	}
+	WriteLines(items, workingDir + "\\items.txt");
 }
 
 void SaveHandler::LoadGame()
 {
+	std::vector<std::string> items = getLines(workingDir + "\\items.txt");
+	for (uint i = 0; i < items.size(); i++)
+	{
+		game->items.push_back(Item(items[i]));
+	}
 }
 
 std::string SaveHandler::relToAbsolute(std::string relativePath)

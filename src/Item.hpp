@@ -10,6 +10,8 @@ public:
 	Item(sf::Vector2f pos, int id, int stackSize);
 	void Update(double dt);
 	void Render();
+	std::string toString();
+	Item(std::string str);
 };
 
 extern std::string itemNames[3];

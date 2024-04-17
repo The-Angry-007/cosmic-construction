@@ -34,6 +34,22 @@ SaveSlot::SaveSlot(std::string path, sf::Vector2f pos, sf::Vector2f size)
 	std::string s = "time played: " + ss.str() + units;
 	labels.push_back(new Label(s, sf::FloatRect(pos.x - size.x * 0.05f, pos.y - size.y * 0.1f, size.x / 2.f, size.y / 2.f), sf::Color::White));
 	labels[2]->setOrigin(sf::Vector2f(1.f, 1.f));
+	//check whether valid version
+	int version = -1;
+	if (data.size() >= 4)
+	{
+		version = std::stoi(data[3]);
+	}
+	if (version == SaveHandler::saveVersion)
+	{
+		validVersion = true;
+	}
+	else
+	{
+		validVersion = false;
+		labels = {};
+		labels.push_back(new Label("Save made in outdated version", sf::FloatRect(pos.x - size.x * 0.5f, pos.y - size.y * 0.5f, size.x, size.y), sf::Color::Red));
+	}
 }
 
 void SaveSlot::Render()
@@ -46,7 +62,7 @@ void SaveSlot::Render()
 }
 void SaveSlot::Update()
 {
-	if (button->clicked())
+	if (button->clicked() && validVersion)
 	{
 		onClick();
 	}

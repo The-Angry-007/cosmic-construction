@@ -29,8 +29,8 @@ void Game::Init(bool newGame)
 	}
 	else
 	{
-		NewGame();
-		//SaveHandler::LoadGame();
+		//NewGame();
+		SaveHandler::LoadGame();
 	}
 }
 void Game::Update(double dt)

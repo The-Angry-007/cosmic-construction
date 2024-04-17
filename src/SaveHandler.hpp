@@ -1,6 +1,7 @@
 #pragma once
 namespace SaveHandler
 {
+extern int saveVersion;
 void CreateSave(std::string name);
 bool SaveExists(std::string name);
 bool dirExists(std::string& path);

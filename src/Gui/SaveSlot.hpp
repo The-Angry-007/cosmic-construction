@@ -6,6 +6,8 @@ class Label;
 class SaveSlot
 {
 public:
+	
+	bool validVersion;
 	sf::Vector2f pos;
 	sf::Vector2f size;
 	Button* button;
