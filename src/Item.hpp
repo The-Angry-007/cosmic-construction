@@ -5,11 +5,9 @@ public:
 	int id;
 	sf::Vector2f pos;
 	sf::Vector2f vel;
-	float vertVel;
-	float height;
 	int stackSize;
 	sf::Sprite* sprite;
-	Item(sf::Vector2f pos, float height, int id, int stackSize);
+	Item(sf::Vector2f pos, int id, int stackSize);
 	void Update(double dt);
 	void Render();
 };

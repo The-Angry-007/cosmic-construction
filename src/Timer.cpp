@@ -68,7 +68,7 @@ void Timer::TimeFunc(std::string name, bool isUpdate)
 {
 	timer.restart();
 	cName = name;
-	isUpdate = isUpdate;
+	this->isUpdate = isUpdate;
 }
 void Timer::EndTiming()
 {

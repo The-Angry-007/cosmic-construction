@@ -14,9 +14,9 @@ void Game::NewGame()
 {
 	for (int i = 0; i < 100; i++)
 	{
-		items.push_back(Item(sf::Vector2f(rand() % 100 - 50, rand() % 100 - 50), 0.f, rand() % 3, 1));
+		items.push_back(Item(sf::Vector2f(rand() % 100 - 50, rand() % 100 - 50), rand() % 3, 1));
 	}
-	items.push_back(Item(sf::Vector2f(0.f, 0.f), 16.f, 0, 1));
+	items.push_back(Item(sf::Vector2f(0.f, 0.f), 0, 1));
 }
 void Game::Init(bool newGame)
 {
@@ -86,10 +86,12 @@ void Game::Render()
 	timer.TimeFunc("camera draw bg", false);
 	camera.RenderBg();
 	timer.end();
+	timer.TimeFunc("render items", false);
 	for (uint i = 0; i < items.size(); i++)
 	{
 		items[i].Render();
 	}
+	timer.end();
 }
 Game::~Game()
 {
