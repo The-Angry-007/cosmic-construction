@@ -4,5 +4,6 @@ TODO
 - [x] use this to draw texture of item, (pos.x,pos.y-height)
 - [x] draw black and translucent version of shadow on ground
 - [x] items fall when not on ground
-- [ ] function that saves and loads all items
-- [ ] hover over item to see stack size and name
+- [x] function that saves and loads all items
+- [ ] items show stack size
+- [ ] can merge together into bigger stack

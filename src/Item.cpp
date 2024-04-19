@@ -21,10 +21,20 @@ Item::Item(sf::Vector2f pos, int id, int stackSize)
 {
 	this->pos = pos;
 	this->id = id;
+	size = 16.f;
 	this->stackSize = stackSize;
 	sprite = new sf::Sprite(itemTextures[id]);
 	sprite->setOrigin(itemTextures[id].getSize().x / 2.f, itemTextures[id].getSize().y / 2.f);
+	float scale = size / itemTextures[id].getSize().x;
+	sprite->setScale(scale, scale);
 	vel = sf::Vector2f(0.f, 0.f);
+	stackLabel.setFont(*defaultFont);
+	float textScale = size / 64.f / 1.f;
+	stackLabel.setCharacterSize(64);
+	stackLabel.setScale(textScale, textScale);
+	stackLabel.setString(std::to_string(stackSize));
+	sf::FloatRect b = stackLabel.getLocalBounds();
+	std::cout << b.left << " " << b.top << " " << b.width << " " << b.height;
 }
 void Item::Update(double dt)
 {
@@ -36,6 +46,14 @@ void Item::Render()
 {
 	sprite->setPosition(pos.x, pos.y);
 	window->draw(*sprite);
+	sf::FloatRect labelBounds = stackLabel.getLocalBounds();
+	//need to make camera unzoom to draw text then rezoom to prevent blurry
+	labelBounds.left *= stackLabel.getScale().x;
+	labelBounds.width *= stackLabel.getScale().x;
+	labelBounds.height *= stackLabel.getScale().y;
+	labelBounds.height *= stackLabel.getScale().y;
+	stackLabel.setPosition(sf::Vector2f((int)(pos.x + size / 2.f - labelBounds.width - labelBounds.left), (int)(pos.y + size / 2.f - labelBounds.height - labelBounds.top)));
+	window->draw(stackLabel);
 }
 std::string Item::toString()
 {

@@ -18,6 +18,7 @@ sf::Clock deltaClock;
 //Gui gui;
 InputHandler inp;
 sf::Font* defaultFont = new sf::Font();
+sf::Font* pixelFont = new sf::Font();
 int width, height;
 Menu menu;
 Game* game = nullptr;
@@ -40,6 +41,11 @@ int main()
 	{
 		window->close();
 	}
+	if (!pixelFont->loadFromFile("resources/fonts/pixel.ttf"))
+	{
+		window->close();
+	}
+	defaultFont = pixelFont;
 	//gui.Init();
 	InitItems();
 	menu = InitMenu();
