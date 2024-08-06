@@ -5,5 +5,16 @@ TODO
 - [x] draw black and translucent version of shadow on ground
 - [x] items fall when not on ground
 - [x] function that saves and loads all items
+- [ ] grab individual items instead of vacuum affect
 - [ ] items show stack size
 - [ ] can merge together into bigger stack
+- [ ] remove all current guis and create universal gui object that all types inherit
+- [ ] add ability to create guis with a text file that then get imported
+something like:
+MainMenu:
+button 0.5 0.5 0.2 0.2 #ffffff 1 (last parameter is index of click func)
+anchor 0.5 0.5 (pos is defined from middle of object)
+panel 0.5 0.5 1 1
+endGui
+NewGame:
+blah blah balh
