@@ -3,6 +3,7 @@
 #include "utils.hpp"
 Camera::Camera(sf::Vector2f pos, float zoom)
 {
+	this->zoomInc = pow(2.f, 1.f / 7.f) - 1;
 	this->pos = pos;
 	this->zoom = zoom;
 	targetZoom = zoom;
@@ -35,26 +36,26 @@ void Camera::Update()
 	}
 	if (inp.scroll.y != 0)
 	{
-		float zoomRate = 1.1f;
+		float zoomRate = 1 + zoomInc;
 		if (inp.scroll.y > 0)
 		{
-			zoomRate = 0.9f;
+			zoomRate = 1 - zoomInc;
 		}
-		targetZoom *= (zoomRate * abs(inp.scroll.y));
+		targetZoom *= (zoomRate);
 		// // Adjust camera position to keep the point under the mouse stationary
 		// sf::Vector2f mousePosRelativeToView = window->mapPixelToCoords(static_cast<sf::Vector2i>(inp.mousePos));
 		// sf::Vector2f adjustment = (mousePosRelativeToView - pos) * (1 - (zoom / oldZoom));
 		// pos += adjustment;
 		if (targetZoom < 0.1f)
 		{
-			targetZoom = 0.1f;
+			targetZoom /= zoomRate;
 		}
 		if (targetZoom > 100.f)
 		{
-			targetZoom = 100.f;
+			targetZoom *= zoomRate;
 		}
 	}
-	zoom = Lerp(zoom, targetZoom, 0.05f);
+	zoom = targetZoom;
 
 	prevMousePos = inp.mousePos;
 }
@@ -64,11 +65,11 @@ void Camera::RenderBg()
 	window->draw(*bgShape);
 	window->setView(view);
 }
-void Camera::RenderMenu(Menu menu, double dt)
+void Camera::RenderMenu(Menu* menu, double dt)
 {
 	sf::View menuView(sf::FloatRect(0.f, 0.f, width, height));
 	window->setView(menuView);
-	menu.Render(dt);
+	menu->Render(dt);
 	UpdateView();
 }
 sf::FloatRect Camera::toFloatRect()

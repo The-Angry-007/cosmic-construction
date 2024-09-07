@@ -9,6 +9,7 @@ public:
 	float zoom;
 	float rotation;
 	float targetZoom;
+	float zoomInc;
 	sf::Vector2u windowSize;
 	sf::Vector2f prevMousePos;
 	float zoomRate;
@@ -18,6 +19,6 @@ public:
 	void Update();
 	sf::RectangleShape* bgShape;
 	void RenderBg();
-	void RenderMenu(Menu menu, double dt);
+	void RenderMenu(Menu* menu, double dt);
 	void SetBgCol(sf::Color col);
 };
