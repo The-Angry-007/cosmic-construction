@@ -12,11 +12,11 @@ Game::Game()
 }
 void Game::NewGame()
 {
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < 10000; i++)
 	{
-		items.push_back(Item(sf::Vector2f(rand() % 100 - 50, rand() % 100 - 50), rand() % 3, 13));
+		items.push_back(Item(sf::Vector2f(rand() % 100 - 50, rand() % 100 - 50), rand() % 3));
 	}
-	items.push_back(Item(sf::Vector2f(0.f, 0.f), 0, 1));
+	items.push_back(Item(sf::Vector2f(0.f, 0.f), 0));
 }
 void Game::Init(bool newGame)
 {

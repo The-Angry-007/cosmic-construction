@@ -54,6 +54,7 @@ void Camera::Update()
 		{
 			targetZoom *= zoomRate;
 		}
+		std::cout << targetZoom << std::endl;
 	}
 	zoom = targetZoom;
 

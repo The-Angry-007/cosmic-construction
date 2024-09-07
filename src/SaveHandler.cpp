@@ -8,7 +8,7 @@
 #include <windows.h>
 std::string SaveHandler::workingDir = "";
 //incremented every time the save system is changed, so outdated saves cannot be used
-int SaveHandler::saveVersion = 0;
+int SaveHandler::saveVersion = 1;
 void SaveHandler::CreateSave(std::string name)
 {
 	ResetDir();
