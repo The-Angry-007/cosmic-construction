@@ -72,8 +72,7 @@ void Menu::Update()
 	}
 	if (slots.size() != 0)
 	{
-		sf::Vector2f move = inp.scroll * 0.01f;
-
+		sf::Vector2f move = inp.scroll * 0.05f;
 		for (uint i = 0; i < slots.size(); i++)
 		{
 			slots[i].Move(move);
