@@ -12,11 +12,11 @@ Game::Game()
 }
 void Game::NewGame()
 {
-	for (int i = 0; i < 10000; i++)
+	for (int i = 0; i < 1000; i++)
 	{
 		items.push_back(Item(sf::Vector2f(rand() % 100 - 50, rand() % 100 - 50), rand() % 3));
 	}
-	items.push_back(Item(sf::Vector2f(0.f, 0.f), 0));
+	items.push_back(Item(sf::Vector2f(1.f, 0.f), 0));
 }
 void Game::Init(bool newGame)
 {
@@ -31,6 +31,19 @@ void Game::Init(bool newGame)
 	{
 		//NewGame();
 		SaveHandler::LoadGame();
+	}
+	this->ItemVertices = sf::VertexArray(sf::Triangles, this->items.size() * 6);
+	for (uint i = 0; i < items.size(); i++)
+	{
+		uint j = i * 6;
+		sf::Vector2f topLeft(texturePoses[items[i].id].x, texturePoses[items[i].id].y);
+		uint size = items[i].size;
+		ItemVertices[j].texCoords = topLeft;
+		ItemVertices[j + 1].texCoords = sf::Vector2f(topLeft.x + size, topLeft.y);
+		ItemVertices[j + 2].texCoords = sf::Vector2f(topLeft.x, topLeft.y + size);
+		ItemVertices[j + 3].texCoords = sf::Vector2f(topLeft.x, topLeft.y + size);
+		ItemVertices[j + 4].texCoords = sf::Vector2f(topLeft.x + size, topLeft.y);
+		ItemVertices[j + 5].texCoords = sf::Vector2f(topLeft.x + size, topLeft.y + size);
 	}
 }
 void Game::Update(double dt)
@@ -87,10 +100,22 @@ void Game::Render()
 	camera.RenderBg();
 	timer.end();
 	timer.TimeFunc("render items", false);
+	// sf::VertexArray v = *this->ItemVertices;
 	for (uint i = 0; i < items.size(); i++)
 	{
-		items[i].Render();
+		uint j = i * 6;
+		sf::Vector2f halfSizex(0, items[i].size / 2.f);
+		sf::Vector2f halfSizey(items[i].size / 2.f, 0);
+		sf::Vector2f halfSize = halfSizex + halfSizey;
+		sf::Vector2f mid = items[i].pos;
+		ItemVertices[j].position = mid - halfSize;
+		ItemVertices[j + 1].position = mid - halfSizey + halfSizex;
+		ItemVertices[j + 2].position = mid + halfSizey - halfSizex;
+		ItemVertices[j + 3].position = mid + halfSizey - halfSizex;
+		ItemVertices[j + 4].position = mid - halfSizey + halfSizex;
+		ItemVertices[j + 5].position = mid + halfSizey + halfSizex;
 	}
+	window->draw(ItemVertices, &itemTextureAtlas);
 	timer.end();
 }
 Game::~Game()

@@ -14,6 +14,8 @@ public:
 	bool mouseDragsItems;
 	sf::Clock* timePassed;
 	std::vector<Item> items;
+
+	sf::VertexArray ItemVertices;
 	Game();
 	~Game();
 };

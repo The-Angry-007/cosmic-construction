@@ -6,15 +6,16 @@ public:
 	sf::Vector2f pos;
 	sf::Vector2f vel;
 	float size;
-	sf::Sprite* sprite;
+	// sf::Sprite* sprite;
 	Item(sf::Vector2f pos, int id);
 	void Update(double dt);
-	void Render();
 	std::string toString();
 	Item(std::string str);
 };
 
-extern std::string itemNames[3];
+extern std::vector<std::string> itemNames;
 extern int NumItems;
 extern std::vector<sf::Texture> itemTextures;
+extern sf::Texture itemTextureAtlas;
+extern std::vector<sf::Vector2u> texturePoses;
 extern void InitItems();
