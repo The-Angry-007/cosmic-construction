@@ -7,7 +7,7 @@ public:
 	std::vector<std::vector<int>> renderTimes;
 	std::vector<std::string> updateNames;
 	std::vector<std::string> renderNames;
-	std::string cName;
+	std::vector<std::string> activeTimers;
 	bool isUpdate;
 	bool timing;
 	int getIndex(std::string name, bool isUpdate);
@@ -17,6 +17,8 @@ public:
 	void end();
 	void WriteTimes(std::ofstream& file, std::vector<std::string> names, std::vector<std::vector<int>> times);
 	int nFrames;
-	sf::Clock timer;
+	std::vector<sf::Clock> timers;
+	void SortTimes(std::vector<std::string>& names, std::vector<std::vector<int>>& times);
+	std::string MicroToMs(int micro);
 	Timer();
 };

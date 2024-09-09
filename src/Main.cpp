@@ -33,7 +33,7 @@ int main()
 	float screenScalingFactor = platform.getScreenScalingFactor(window->getSystemHandle());
 	// Use the screenScalingFactor
 	window->create(sf::VideoMode(800.0f * screenScalingFactor, 500.0f * screenScalingFactor), "Planet Sim");
-	window->setVerticalSyncEnabled(true);
+	window->setVerticalSyncEnabled(false);
 	sf::Image icon;
 	icon.loadFromFile("resources/images/icon.png");
 	window->setIcon(256, 256, icon.getPixelsPtr());
@@ -58,21 +58,13 @@ int main()
 	}
 	while (window->isOpen())
 	{
+		timer.TimeFunc("whole frame", false);
+		timer.TimeFunc("whole update", true);
 		timer.TimeFunc("input events", true);
 		inp.ProcessEvents();
 		timer.end();
 		timer.nFrames++;
-		if (inp.keyDown(sf::Keyboard::LControl) && inp.keyPressed(sf::Keyboard::Key::T))
-		{
-			if (!timer.timing)
-			{
-				timer.StartTiming();
-			}
-			else
-			{
-				timer.EndTiming();
-			}
-		}
+
 		double dt = deltaClock.restart().asSeconds();
 
 		if (game != nullptr)
@@ -85,15 +77,34 @@ int main()
 		timer.TimeFunc("menu update", true);
 		menu.Update();
 		timer.end();
+		timer.end();
+		timer.TimeFunc("whole render", false);
 		window->clear(sf::Color(8, 0, 20));
+		timer.TimeFunc("game render", false);
 		if (game != nullptr)
 		{
 			game->Render();
 		}
+		timer.end();
 		timer.TimeFunc("render menu", false);
 		camera.RenderMenu(&menu, dt);
 		timer.end();
+		timer.TimeFunc("display window", false);
 		window->display();
+		timer.end();
+		timer.end();
+		timer.end();
+		if (inp.keyDown(sf::Keyboard::LControl) && inp.keyPressed(sf::Keyboard::Key::T))
+		{
+			if (!timer.timing)
+			{
+				timer.StartTiming();
+			}
+			else
+			{
+				timer.EndTiming();
+			}
+		}
 	}
 	return 0;
 }

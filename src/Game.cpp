@@ -12,7 +12,7 @@ Game::Game()
 }
 void Game::NewGame()
 {
-	for (int i = 0; i < 1000; i++)
+	for (int i = 0; i < 100000; i++)
 	{
 		items.push_back(Item(sf::Vector2f(rand() % 100 - 50, rand() % 100 - 50), rand() % 3));
 	}
@@ -75,11 +75,13 @@ void Game::Update(double dt)
 		}
 	}
 	timer.end();
+	timer.TimeFunc("update items", true);
 	for (uint i = 0; i < items.size(); i++)
 	{
 
 		items[i].Update(dt);
 	}
+	timer.end();
 }
 void Game::TogglePaused()
 {
