@@ -33,7 +33,8 @@ int main()
 	float screenScalingFactor = platform.getScreenScalingFactor(window->getSystemHandle());
 	// Use the screenScalingFactor
 	window->create(sf::VideoMode(800.0f * screenScalingFactor, 500.0f * screenScalingFactor), "Planet Sim");
-	window->setVerticalSyncEnabled(false);
+	// window->setVerticalSyncEnabled(false);
+	// window->setFramerateLimit(200);
 	sf::Image icon;
 	icon.loadFromFile("resources/images/icon.png");
 	window->setIcon(256, 256, icon.getPixelsPtr());
@@ -75,7 +76,7 @@ int main()
 		camera.Update();
 		timer.end();
 		timer.TimeFunc("menu update", true);
-		menu.Update();
+		menu.Update(dt);
 		timer.end();
 		timer.end();
 		timer.TimeFunc("whole render", false);

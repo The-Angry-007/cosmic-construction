@@ -6,9 +6,10 @@ class Label;
 class SaveSlot
 {
 public:
-	
 	bool validVersion;
 	sf::Vector2f pos;
+	sf::Vector2f targetPos;
+	float speed;
 	sf::Vector2f size;
 	Button* button;
 	std::vector<Label*> labels;
@@ -16,7 +17,8 @@ public:
 	SaveSlot(std::string path, sf::Vector2f pos, sf::Vector2f size);
 	~SaveSlot();
 	void Render();
-	void Update();
+	void Update(float dt);
 	void Move(sf::Vector2f amt);
+	void Interpolate(float dt);
 	void onClick();
 };

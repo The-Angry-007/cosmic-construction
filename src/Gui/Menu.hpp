@@ -16,7 +16,7 @@ public:
 	//re opens previous gui
 	void GoBack();
 	void AddGui(Gui gui);
-	void Update();
+	void Update(float dt);
 	void Render(float dt);
 	Gui* getOpenGui();
 	std::vector<SaveSlot> slots;

@@ -50,6 +50,8 @@ SaveSlot::SaveSlot(std::string path, sf::Vector2f pos, sf::Vector2f size)
 		labels = {};
 		labels.push_back(new Label("Save made in outdated version", sf::FloatRect(pos.x - size.x * 0.5f, pos.y - size.y * 0.5f, size.x, size.y), sf::Color::Red));
 	}
+	speed = 5.f;
+	targetPos = this->pos;
 }
 
 void SaveSlot::Render()
@@ -60,12 +62,13 @@ void SaveSlot::Render()
 		labels[i]->Render();
 	}
 }
-void SaveSlot::Update()
+void SaveSlot::Update(float dt)
 {
 	if (button->clicked() && validVersion)
 	{
 		onClick();
 	}
+	Interpolate(dt);
 }
 void SaveSlot::onClick()
 {
@@ -85,10 +88,15 @@ SaveSlot::~SaveSlot()
 }
 void SaveSlot::Move(sf::Vector2f amt)
 {
-	pos += amt;
+	targetPos += amt;
+}
+void SaveSlot::Interpolate(float dt)
+{
+	sf::Vector2f adjustment = (targetPos - pos) * speed * dt;
+	pos += adjustment;
 	for (uint i = 0; i < labels.size(); i++)
 	{
-		labels[i]->bounds.top += amt.y;
+		labels[i]->bounds.top += adjustment.y;
 	}
-	button->pos.y += amt.y;
+	button->pos.y += adjustment.y;
 }

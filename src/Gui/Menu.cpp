@@ -64,7 +64,7 @@ void Menu::Render(float dt)
 		slots[i].Render();
 	}
 }
-void Menu::Update()
+void Menu::Update(float dt)
 {
 	if (openMenu != -1 && guis.size() > (uint)openMenu)
 	{
@@ -72,12 +72,27 @@ void Menu::Update()
 	}
 	if (slots.size() != 0)
 	{
-		sf::Vector2f move = inp.scroll * 0.05f;
+		sf::Vector2f move = inp.scroll * (20 / (float)height);
+		float bounds = 0.2f;
+		if (move.y < 0)
+		{
+			if (slots[slots.size() - 1].targetPos.y + slots[0].size.y / 2.f < 1 - bounds)
+			{
+				move = sf::Vector2f(0, 0);
+			}
+		}
+		else
+		{
+			if (slots[0].targetPos.y - slots[0].size.y / 2.f > bounds)
+			{
+				move = sf::Vector2f(0, 0);
+			}
+		}
 		for (uint i = 0; i < slots.size(); i++)
 		{
 			slots[i].Move(move);
 
-			slots[i].Update();
+			slots[i].Update(dt);
 		}
 	}
 }
@@ -125,6 +140,7 @@ Menu InitMenu()
 	newGame.AddLabel(Label("Enter a name", sf::Vector2f(0.5f, 0.3f), sf::Vector2f(0.3f, 0.1f), sf::Color::Black));
 	newGame.AddButton(Button(sf::Vector2f(0.5f, 0.6f), sf::Vector2f(0.3f, 0.1f), sf::Color(80, 80, 80), "Create Save", sf::Color::Black, ClickFuncs::CreateSave));
 	m.AddGui(newGame);
+	//load game menu
 	Gui loadGame;
 	loadGame.Init();
 	loadGame.AddPanel(Panel(sf::FloatRect(0.f, 0.f, 1.f, 1.f), sf::Color(100, 100, 100)));
