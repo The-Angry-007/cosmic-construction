@@ -1,6 +1,4 @@
-#include "inputHandler.hpp"
-#include "Main.hpp"
-#include "SaveHandler.hpp"
+#include "Include.hpp"
 InputHandler::InputHandler()
 {}
 void InputHandler::ProcessEvents()

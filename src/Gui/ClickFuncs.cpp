@@ -1,6 +1,4 @@
-#include "ClickFuncs.hpp"
-#include "Main.hpp"
-#include "SaveHandler.hpp"
+#include "Include.hpp"
 void ClickFuncs::NewGame()
 {
 	menu.OpenMenu(2);

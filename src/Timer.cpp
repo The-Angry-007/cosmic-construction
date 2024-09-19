@@ -1,5 +1,4 @@
-#include "Timer.hpp"
-#include "SaveHandler.hpp"
+#include "Include.hpp"
 #include <cstdio>
 #include <fstream>
 #include <iostream>

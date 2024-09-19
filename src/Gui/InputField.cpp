@@ -1,5 +1,4 @@
-#include "Gui/Gui.hpp"
-#include "Main.hpp"
+#include "Include.hpp"
 InputField::InputField(sf::FloatRect bounds, sf::Color col, int maxChars)
 {
 	this->bounds = bounds;

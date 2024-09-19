@@ -1,8 +1,4 @@
-#include "Game.hpp"
-#include "Item.hpp"
-#include "Main.hpp"
-#include "SaveHandler.hpp"
-#include "inputHandler.hpp"
+#include "Include.hpp"
 Game::Game()
 {
 	gravity = 9.81f * 16.f;

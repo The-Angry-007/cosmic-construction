@@ -1,8 +1,4 @@
-#include "Gui/ClickFuncs.hpp"
-#include "Gui/Gui.hpp"
-#include "Gui/SaveSlot.hpp"
-#include "Main.hpp"
-#include "SaveHandler.hpp"
+#include "Include.hpp"
 Menu::Menu()
 {
 	openMenu = 0;

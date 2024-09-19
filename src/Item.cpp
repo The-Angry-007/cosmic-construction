@@ -1,7 +1,4 @@
-#include "Item.hpp"
-#include "Main.hpp"
-#include "SaveHandler.hpp"
-#include "utils.hpp"
+#include "Include.hpp"
 int NumItems;
 // std::string itemNames[3] = { "placeholder 1", "placeholder 2", "placeholder 3" };
 std::vector<std::string> itemNames;

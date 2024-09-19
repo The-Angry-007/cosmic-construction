@@ -1,8 +1,4 @@
-#include "Gui/Button.hpp"
-#include "Main.hpp"
-#include "PCH.hpp"
-#include "inputHandler.hpp"
-#include "utils.hpp"
+#include "Include.hpp"
 Button::Button(sf::Vector2f pos, sf::Vector2f size, sf::Color col, std::string label, sf::Color labelCol, std::function<void()> onClick)
 {
 	hasImageLabel = false;

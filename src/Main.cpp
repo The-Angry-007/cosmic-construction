@@ -1,12 +1,4 @@
-#include "Main.hpp"
-#include "Gui/Gui.hpp"
-#include "Gui/Menu.hpp"
-#include "Item.hpp"
-#include "PCH.hpp"
-#include "Platform/Platform.hpp"
-#include "SaveHandler.hpp"
-#include "Timer.hpp"
-#include "inputHandler.hpp"
+#include "Include.hpp"
 #ifndef M_PI
 	#define M_PI 3.14159265358979323846
 #endif

@@ -1,5 +1,4 @@
-#include "gui/Panel.hpp"
-#include "Main.hpp"
+#include "Include.hpp"
 Panel::Panel(sf::Vector2f pos, sf::Vector2f size, sf::Color col)
 {
 	this->col = col;

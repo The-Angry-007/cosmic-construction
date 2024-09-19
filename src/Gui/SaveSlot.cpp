@@ -1,7 +1,4 @@
-#include "Gui/SaveSlot.hpp"
-#include "Gui/Gui.hpp"
-#include "Main.hpp"
-#include "SaveHandler.hpp"
+#include "Include.hpp"
 SaveSlot::SaveSlot(std::string path, sf::Vector2f pos, sf::Vector2f size)
 {
 	this->path = path;

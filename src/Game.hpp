@@ -1,5 +1,6 @@
 #pragma once
-#include "Item.hpp"
+#include "Include.hpp"
+class Item;
 class Game
 {
 public:

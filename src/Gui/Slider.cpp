@@ -1,6 +1,4 @@
-#include "Gui/Slider.hpp"
-#include "Main.hpp"
-#include "utils.hpp"
+#include "Include.hpp"
 Slider::Slider(sf::Vector2f pos, sf::Vector2f size, sf::Color bgCol, sf::Color filledCol, sf::Color knobCol)
 {
 	this->pos = pos;

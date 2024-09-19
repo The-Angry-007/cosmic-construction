@@ -1,6 +1,5 @@
 #pragma once
-#include "Gui/Gui.hpp"
-#include "Gui/SaveSlot.hpp"
+class SaveSlot;
 /*
 this isnt so much of a menu class anymore, although thats what it started as.
 its now more of a collection of guis that can be accessed at any time during runtime.

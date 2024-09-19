@@ -1,6 +1,4 @@
-#include "Gui/Label.hpp"
-#include "Main.hpp"
-#include "utils.hpp"
+#include "Include.hpp"
 Label::Label(std::string text, sf::FloatRect bounds, sf::Color col)
 {
 	this->text = text;

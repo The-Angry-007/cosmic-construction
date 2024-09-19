@@ -1,9 +1,7 @@
 #pragma once
-#include "Camera.hpp"
-#include "Game.hpp"
-#include "Gui/Gui.hpp"
-#include "Timer.hpp"
-#include "inputHandler.hpp"
+#include "Include.hpp"
+class Timer;
+class InputHandler;
 extern sf::RenderWindow* window;
 //the constant that determines the strength of gravity
 extern InputHandler inp;

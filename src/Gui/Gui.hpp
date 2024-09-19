@@ -1,13 +1,11 @@
 #pragma once
-#include "Gui/Button.hpp"
-#include "Gui/InputField.hpp"
-#include "Gui/Label.hpp"
-#include "Gui/Menu.hpp"
-#include "Gui/Panel.hpp"
-#include "Gui/Slider.hpp"
 void AddClicked();
 void SelectClicked();
 void DeleteClicked();
+class Label;
+class InputField;
+class Slider;
+class Panel;
 class Gui
 {
 public:

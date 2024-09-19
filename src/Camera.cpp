@@ -1,6 +1,4 @@
-#include "Camera.hpp"
-#include "Main.hpp"
-#include "utils.hpp"
+#include "Include.hpp"
 Camera::Camera(sf::Vector2f pos, float zoom)
 {
 	this->zoomInc = pow(2.f, 1.f / 7.f) - 1;

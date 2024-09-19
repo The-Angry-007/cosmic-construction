@@ -1,7 +1,4 @@
-#include "Gui/Gui.hpp"
-#include "Main.hpp"
-#include "inputHandler.hpp"
-#include "utils.hpp"
+#include "Include.hpp"
 Gui::Gui()
 {
 }
