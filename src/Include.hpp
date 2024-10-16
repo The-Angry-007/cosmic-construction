@@ -4,6 +4,7 @@
 #include "Gui/Button.hpp"
 #include "Gui/ClickFuncs.hpp"
 #include "Gui/Gui.hpp"
+#include "Gui/GuiObject.hpp"
 #include "Gui/InputField.hpp"
 #include "Gui/Label.hpp"
 #include "Gui/Menu.hpp"
