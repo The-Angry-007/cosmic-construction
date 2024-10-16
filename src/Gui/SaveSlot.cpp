@@ -12,6 +12,7 @@ SaveSlot::SaveSlot(std::string path, sf::Vector2f pos, sf::Vector2f size)
 	labels.push_back(new Label(path, sf::FloatRect(pos.x - size.x * 0.45f, pos.y - size.y * 0.5f, size.x / 2.f, size.y / 2.f), sf::Color::White));
 	labels[1]->setOrigin(sf::Vector2f(0.f, 0.f));
 	int seconds = std::stoi(data[2]);
+
 	float toDisplay = seconds;
 	std::string units = "s";
 	if (seconds > 60)
@@ -49,6 +50,10 @@ SaveSlot::SaveSlot(std::string path, sf::Vector2f pos, sf::Vector2f size)
 	}
 	speed = 5.f;
 	targetPos = this->pos;
+	for (uint i = 0; i < labels.size(); i++)
+	{
+		labels[i]->padding = sf::Vector2f(0.02f, 0.02f);
+	}
 }
 
 void SaveSlot::Render()

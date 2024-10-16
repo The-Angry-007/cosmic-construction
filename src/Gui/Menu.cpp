@@ -51,6 +51,10 @@ void Menu::OpenMenu(int menu)
 }
 void Menu::Render(float dt)
 {
+	if (openMenu == 0)
+	{
+		camera.RenderGalaxy(dt);
+	}
 	if (openMenu != -1 && guis.size() > (uint)openMenu)
 	{
 		guis[openMenu].Render(dt);
@@ -107,19 +111,49 @@ Menu InitMenu()
 	Menu m;
 	Gui mainMenu;
 	mainMenu.Init();
-	mainMenu.AddLabel(Label("Cosmic Construction", sf::Vector2f(0.5f, 0.2f), sf::Vector2f(0.7f, 0.2f), sf::Color::Black));
+
+	//mainMenu.AddLabel(Label("Cosmic Construction", sf::Vector2f(0.5f, 0.2f), sf::Vector2f(0.7f, 0.2f), sf::Color::Black));
 	sf::Texture moon;
 	if (!moon.loadFromFile("resources/images/moon.png"))
 	{
 		std::cout << "did not open correctly" << std::endl;
 	}
 
-	mainMenu.AddPanel(Panel(sf::FloatRect(0.f, 0.f, 1.f, 1.f), sf::Color(100, 100, 100)));
-	mainMenu.AddButton(Button(sf::Vector2f(0.5f, 1.f), sf::Vector2f(1.f, 2.f), sf::Color::Transparent, moon));
-	mainMenu.AddButton(Button(sf::Vector2f(0.275f, 0.4f), sf::Vector2f(0.325f, 0.1f), sf::Color(50, 50, 50), "New Game", sf::Color::White, ClickFuncs::NewGame));
-	mainMenu.AddButton(Button(sf::Vector2f(1 - 0.275f, 0.4f), sf::Vector2f(0.325f, 0.1f), sf::Color(50, 50, 50), "Load Game", sf::Color::White, ClickFuncs::LoadGame));
-	mainMenu.AddButton(Button(sf::Vector2f(0.5f, 0.55f), sf::Vector2f(0.4f, 0.1f), sf::Color(50, 50, 50), "Options", sf::Color::White, ClickFuncs::Options));
-	mainMenu.AddButton(Button(sf::Vector2f(0.5f, 0.7f), sf::Vector2f(0.4f, 0.1f), sf::Color(50, 50, 50), "Quit", sf::Color::White, ClickFuncs::Quit));
+	//mainMenu.AddPanel(Panel(sf::FloatRect(0.f, 0.f, 1.f, 1.f), sf::Color(100, 100, 100)));
+	//mainMenu.AddButton(Button(sf::Vector2f(0.5f, 1.f), sf::Vector2f(1.f, 2.f), sf::Color::Transparent, moon));
+	sf::Texture logo;
+	if (!logo.loadFromFile("resources/images/cosmic construction logo 3.png"))
+	{
+		std::cout << "did not load logo correctly" << std::endl;
+	}
+	sf::Texture bezels;
+	if (!bezels.loadFromFile("resources/images/buttonBezels.png"))
+	{
+		std::cout << "did not button bezels correctly" << std::endl;
+	}
+	logo.setSmooth(true);
+	float top = 0.63f;
+	//float bottom = 0.84f;
+	float bottom = 0.9f;
+	float bHeight = 0.075f;
+	float gap = (bottom - top) / 3.f;
+	mainMenu.AddButton(Button(sf::Vector2f(0.5f, .63f / 2.f), sf::Vector2f(0.96f, 0.63f), sf::Color::Transparent, logo));
+	Button b(sf::Vector2f(0.5f, top), sf::Vector2f(0.283f, bHeight), sf::Color(188, 188, 188), bezels, ClickFuncs::NewGame);
+	b.keepImageRatio = false;
+	mainMenu.AddButton(b);
+	b = Button(sf::Vector2f(0.5f, top + gap), sf::Vector2f(0.283f, bHeight), sf::Color(188, 188, 188), bezels, ClickFuncs::LoadGame);
+	b.keepImageRatio = false;
+	mainMenu.AddButton(b);
+	b = Button(sf::Vector2f(0.5f, top + gap * 2), sf::Vector2f(0.283f, bHeight), sf::Color(188, 188, 188), bezels, ClickFuncs::Options);
+	b.keepImageRatio = false;
+	mainMenu.AddButton(b);
+	b = Button(sf::Vector2f(0.5f, top + gap * 3), sf::Vector2f(0.283f, bHeight), sf::Color(188, 188, 188), bezels, ClickFuncs::Quit);
+	b.keepImageRatio = false;
+	mainMenu.AddButton(b);
+	mainMenu.AddLabel(Label("New Game", sf::Vector2f(0.5f, top), sf::Vector2f(0.283f, bHeight), sf::Color::Black));
+	mainMenu.AddLabel(Label("Load Game", sf::Vector2f(0.5f, top + gap), sf::Vector2f(0.283f, bHeight), sf::Color::Black));
+	mainMenu.AddLabel(Label("Settings", sf::Vector2f(0.5f, top + gap * 2), sf::Vector2f(0.283f, bHeight), sf::Color::Black));
+	mainMenu.AddLabel(Label("Quit", sf::Vector2f(0.5f, top + gap * 3), sf::Vector2f(0.283f, bHeight), sf::Color::Black));
 	m.AddGui(mainMenu);
 	//options menu
 	Gui options;

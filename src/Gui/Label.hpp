@@ -10,6 +10,7 @@ public:
 	~Label();
 	void setOrigin(sf::Vector2f origin);
 	sf::FloatRect bounds;
+	sf::Vector2f padding;
 
 private:
 	sf::Color col;

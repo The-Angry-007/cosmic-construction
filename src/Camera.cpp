@@ -11,6 +11,16 @@ Camera::Camera(sf::Vector2f pos, float zoom)
 	bgShape = new sf::RectangleShape(sf::Vector2f(1, 1));
 	bgShape->setFillColor(sf::Color::Blue);
 	bgView = sf::View(sf::FloatRect(0.f, 0.f, 1.f, 1.f));
+	galaxyTexture.loadFromFile("resources/images/galaxy.png");
+	galaxySprite.setTexture(galaxyTexture);
+	galaxySprite.setPosition(galaxyTexture.getSize().x * 0.5f, galaxyTexture.getSize().y * 0.5f);
+	galaxyTexture.setSmooth(true);
+	float dir = (rand() % 1000) / 1000.f;
+	dir *= 6.283185f;
+	// dir = 3.14159265f / 100.f;
+	gvel = sf::Vector2f(cos(dir), sin(dir));
+	float speed = 10.f;
+	gvel *= speed;
 }
 void Camera::UpdateView()
 {
@@ -70,6 +80,38 @@ void Camera::RenderMenu(Menu* menu, double dt)
 	window->setView(menuView);
 	menu->Render(dt);
 	UpdateView();
+}
+
+void Camera::RenderGalaxy(float dt)
+{
+	sf::View galaxyView(sf::FloatRect(0.f, 0.f, width, height));
+	galaxyPos += gvel * dt;
+	galaxySprite.setPosition(galaxyPos);
+	sf::FloatRect bounds = galaxySprite.getGlobalBounds();
+	sf::Vector2f npos = galaxySprite.getPosition();
+	if (bounds.left > 0 || bounds.left + bounds.width < width)
+	{
+		gvel.x *= -1;
+		int iter = 0;
+		while ((bounds.left > 0 || bounds.left + bounds.width < width) && iter < 100)
+		{
+			iter++;
+			npos.x += gvel.x;
+		}
+	}
+	if (bounds.top > 0 || bounds.top + bounds.height < height)
+	{
+		gvel.y *= -1;
+		int iter = 0;
+		while ((bounds.top > 0 || bounds.top + bounds.height < height) && iter < 100)
+		{
+			iter++;
+			npos.y += gvel.y;
+		}
+	}
+	galaxySprite.setPosition(npos);
+	window->setView(galaxyView);
+	window->draw(galaxySprite);
 }
 sf::FloatRect Camera::toFloatRect()
 {

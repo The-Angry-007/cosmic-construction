@@ -1,6 +1,8 @@
 #include "Include.hpp"
 InputHandler::InputHandler()
-{}
+{
+	isFullScreen = false;
+}
 void InputHandler::ProcessEvents()
 {
 	//reset down and released
@@ -67,6 +69,30 @@ void InputHandler::ProcessEvents()
 				mouseButtonsDown.erase(mouseButtonsDown.begin() + index);
 			}
 			mouseButtonsReleased.push_back(code);
+		}
+	}
+	if (keyPressed(sf::Keyboard::Key::F11))
+	{
+		isFullScreen = !isFullScreen;
+		window->close();
+		if (isFullScreen)
+		{
+			lastSmallWidth = width;
+			lastSmallHeight = height;
+			// Use the screenScalingFactor
+			window->create(sf::VideoMode(width, height), "Cosmic Construction", sf::Style::Fullscreen);
+			window->setFramerateLimit(200);
+			sf::Image icon;
+			icon.loadFromFile("resources/images/icon.png");
+			window->setIcon(256, 256, icon.getPixelsPtr());
+		}
+		else
+		{
+			window->create(sf::VideoMode(lastSmallWidth, lastSmallHeight), "Cosmic Construction", sf::Style::Default);
+			window->setFramerateLimit(200);
+			sf::Image icon;
+			icon.loadFromFile("resources/images/icon.png");
+			window->setIcon(256, 256, icon.getPixelsPtr());
 		}
 	}
 }

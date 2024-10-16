@@ -21,6 +21,9 @@ public:
 	std::vector<sf::Keyboard::Key> getAllKeysPressed();
 	std::string typedText;
 	sf::Vector2f scroll;
+	bool isFullScreen;
+	int lastSmallWidth;
+	int lastSmallHeight;
 
 private:
 	sf::Event event;

@@ -16,26 +16,37 @@ void drawLine(sf::Vector2f point1, sf::Vector2f point2, float thickness, sf::Col
 
 void GetMaxFontSize(sf::Text* text, sf::Vector2f bounds)
 {
-	int min = 0;
-	int max = std::max(bounds.x, bounds.y);
-	while (true)
+	text->setCharacterSize(100);
+	float xScale = text->getLocalBounds().width / bounds.x;
+	float yScale = (text->getLocalBounds().height + text->getLocalBounds().top) / bounds.y;
+	if (xScale > yScale)
 	{
-		if (min == max)
-		{
-			break;
-		}
-		int guess = (min + max) / 2;
-		text->setCharacterSize(guess);
-		sf::FloatRect size = text->getLocalBounds();
-		if (size.width > bounds.x || size.height + size.top > bounds.y)
-		{
-			max = guess;
-		}
-		else
-		{
-			min = guess + 1;
-		}
+		text->setScale(1.f / xScale, 1.f / xScale);
 	}
+	else
+	{
+		text->setScale(1.f / yScale, 1.f / yScale);
+	}
+	// int min = 0;
+	// int max = std::max(bounds.x, bounds.y);
+	// while (true)
+	// {
+	// 	if (min == max)
+	// 	{
+	// 		break;
+	// 	}
+	// 	int guess = (min + max) / 2;
+	// 	text->setCharacterSize(guess);
+	// 	sf::FloatRect size = text->getLocalBounds();
+	// 	if (size.width > bounds.x || size.height + size.top > bounds.y)
+	// 	{
+	// 		max = guess;
+	// 	}
+	// 	else
+	// 	{
+	// 		min = guess + 1;
+	// 	}
+	// }
 }
 
 float Lerp(float a, float b, float c)

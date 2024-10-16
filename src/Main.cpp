@@ -24,13 +24,13 @@ int main()
 	// in Windows at least, this must be called before creating the window
 	float screenScalingFactor = platform.getScreenScalingFactor(window->getSystemHandle());
 	// Use the screenScalingFactor
-	window->create(sf::VideoMode(800.0f * screenScalingFactor, 500.0f * screenScalingFactor), "Planet Sim");
+	window->create(sf::VideoMode(800.0f * screenScalingFactor, 500.0f * screenScalingFactor), "Cosmic Construction");
 	// window->setVerticalSyncEnabled(false);
-	// window->setFramerateLimit(200);
+	window->setFramerateLimit(200);
 	sf::Image icon;
 	icon.loadFromFile("resources/images/icon.png");
 	window->setIcon(256, 256, icon.getPixelsPtr());
-	if (!defaultFont->loadFromFile("resources/fonts/Trispace-Regular.ttf"))
+	if (!defaultFont->loadFromFile("resources/fonts/RobotoMono-VariableFont_wght.ttf"))
 	{
 		window->close();
 	}
@@ -38,7 +38,8 @@ int main()
 	{
 		window->close();
 	}
-	defaultFont = pixelFont;
+
+	//defaultFont = pixelFont;
 	//gui.Init();
 	InitItems();
 	menu = InitMenu();

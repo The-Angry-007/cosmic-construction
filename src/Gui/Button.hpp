@@ -10,6 +10,7 @@ public:
 	bool clicked();
 	void AssignOnClick(std::function<void()> func);
 	bool mouseOverButton();
+	bool keepImageRatio;
 	~Button();
 	//sf::Vector2f pos;
 	std::function<void()> onClickFunction;

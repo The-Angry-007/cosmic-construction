@@ -11,6 +11,7 @@ Button::Button(sf::Vector2f pos, sf::Vector2f size, sf::Color col, std::string l
 	textLabel.setString(label);
 	textLabel.setFillColor(labelCol);
 	onClickFunction = onClick;
+	this->keepImageRatio = true;
 }
 
 Button::Button(sf::Vector2f pos, sf::Vector2f size, sf::Color col, sf::Texture image, std::function<void()> onClick)
@@ -23,6 +24,7 @@ Button::Button(sf::Vector2f pos, sf::Vector2f size, sf::Color col, sf::Texture i
 	imageLabel = image;
 	imageSprite = sf::Sprite(imageLabel);
 	onClickFunction = onClick;
+	this->keepImageRatio = true;
 }
 void Button::Render()
 {
@@ -38,16 +40,25 @@ void Button::Render()
 		imageSprite.setPosition(adjustedPos);
 		float vert = adjustedSize.y / imageLabel.getSize().y;
 		float horiz = adjustedSize.x / imageLabel.getSize().x;
-		float scale = std::min(vert, horiz);
-		sf::Vector2f size(scale * imageLabel.getSize().x, scale * imageLabel.getSize().y);
+		sf::Vector2f scale;
+		if (this->keepImageRatio)
+		{
+			float minSize = std::min(horiz, vert);
+			scale = sf::Vector2f(minSize, minSize);
+		}
+		else
+		{
+			scale = sf::Vector2f(horiz, vert);
+		}
 
-		imageSprite.setScale(sf::Vector2f(size.x / imageLabel.getSize().x, size.y / imageLabel.getSize().y));
+		imageSprite.setScale(scale.x, scale.y);
 		imageSprite.setOrigin(imageSprite.getLocalBounds().width / 2.f, imageSprite.getLocalBounds().height / 2.f);
 		window->draw(imageSprite);
 	}
 	else
 	{
-		sf::Vector2f padding(0.02f * width, 0.02f * height);
+		sf::Vector2f padding(0.005f * width, 0.005f * height);
+		// sf::Vector2f padding(0.02f * width, 0.02f * height);
 		textLabel.setPosition((int)adjustedPos.x, (int)adjustedPos.y);
 		//binary search to find text size that fits within bounds
 		GetMaxFontSize(&textLabel, sf::Vector2f(adjustedSize.x - padding.x, adjustedSize.y - padding.y));
