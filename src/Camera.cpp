@@ -85,33 +85,59 @@ void Camera::RenderMenu(Menu* menu, double dt)
 void Camera::RenderGalaxy(float dt)
 {
 	sf::View galaxyView(sf::FloatRect(0.f, 0.f, width, height));
-	galaxyPos += gvel * dt;
-	galaxySprite.setPosition(galaxyPos);
-	sf::FloatRect bounds = galaxySprite.getGlobalBounds();
-	sf::Vector2f npos = galaxySprite.getPosition();
-	if (bounds.left > 0 || bounds.left + bounds.width < width)
+
+	if (inp.mbDown(sf::Mouse::Button::Middle))
 	{
-		gvel.x *= -1;
-		int iter = 0;
-		while ((bounds.left > 0 || bounds.left + bounds.width < width) && iter < 100)
+		sf::Vector2f offset = inp.mousePos - prevMousePos2;
+		sf::Vector2f delta = window->mapPixelToCoords((sf::Vector2i)offset);
+		galaxyPos += delta;
+		galaxySprite.setPosition(galaxyPos);
+
+		sf::FloatRect bounds = galaxySprite.getGlobalBounds();
+		sf::Vector2f npos = galaxySprite.getPosition();
+		if (bounds.left > 0 || bounds.left + bounds.width < width)
 		{
-			iter++;
-			npos.x += gvel.x;
+			npos.x -= delta.x;
 		}
+		if (bounds.top > 0 || bounds.top + bounds.height < height)
+		{
+			npos.y -= delta.y;
+		}
+		galaxySprite.setPosition(npos);
+		galaxyPos = npos;
 	}
-	if (bounds.top > 0 || bounds.top + bounds.height < height)
+	else
 	{
-		gvel.y *= -1;
-		int iter = 0;
-		while ((bounds.top > 0 || bounds.top + bounds.height < height) && iter < 100)
+		galaxyPos += gvel * dt;
+		galaxySprite.setPosition(galaxyPos);
+		sf::FloatRect bounds = galaxySprite.getGlobalBounds();
+		sf::Vector2f npos = galaxySprite.getPosition();
+		if (bounds.left > 0 || bounds.left + bounds.width < width)
 		{
-			iter++;
-			npos.y += gvel.y;
+			gvel.x *= -1;
+			int iter = 0;
+			while ((bounds.left > 0 || bounds.left + bounds.width < width) && iter < 100)
+			{
+				iter++;
+				npos.x += gvel.x;
+			}
 		}
+		if (bounds.top > 0 || bounds.top + bounds.height < height)
+		{
+			gvel.y *= -1;
+			int iter = 0;
+			while ((bounds.top > 0 || bounds.top + bounds.height < height) && iter < 100)
+			{
+				iter++;
+				npos.y += gvel.y;
+			}
+		}
+		galaxySprite.setPosition(npos);
+		galaxyPos = npos;
 	}
-	galaxySprite.setPosition(npos);
 	window->setView(galaxyView);
 	window->draw(galaxySprite);
+	prevMousePos2 = inp.mousePos;
 }
 sf::FloatRect Camera::toFloatRect()
 {

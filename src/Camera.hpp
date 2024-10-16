@@ -12,6 +12,7 @@ public:
 	float zoomInc;
 	sf::Vector2u windowSize;
 	sf::Vector2f prevMousePos;
+	sf::Vector2f prevMousePos2;
 	sf::Sprite galaxySprite;
 	sf::Texture galaxyTexture;
 	sf::Vector2f galaxyPos;
