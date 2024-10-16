@@ -30,7 +30,7 @@ int main()
 	sf::Image icon;
 	icon.loadFromFile("resources/images/icon.png");
 	window->setIcon(256, 256, icon.getPixelsPtr());
-	if (!defaultFont->loadFromFile("resources/fonts/RobotoMono-VariableFont_wght.ttf"))
+	if (!defaultFont->loadFromFile("resources/fonts/RobotoMono-Regular.ttf"))
 	{
 		window->close();
 	}
@@ -41,6 +41,7 @@ int main()
 
 	//defaultFont = pixelFont;
 	//gui.Init();
+
 	InitItems();
 	menu = InitMenu();
 	camera.Update();

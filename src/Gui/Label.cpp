@@ -9,7 +9,8 @@ Label::Label(std::string text, sf::FloatRect bounds, sf::Color col)
 	label.setString(text);
 	label.setFillColor(col);
 	origin = sf::Vector2f(0.5f, 0.5f);
-	this->padding = sf::Vector2f(0.005f, 0.005f);
+	this->padding = sf::Vector2f(0.01f, 0.01f);
+	this->label.setStyle(sf::Text::Style::Regular);
 }
 Label::Label(std::string text, sf::Vector2f pos, sf::Vector2f size, sf::Color col)
 {
@@ -20,7 +21,8 @@ Label::Label(std::string text, sf::Vector2f pos, sf::Vector2f size, sf::Color co
 	label.setString(text);
 	label.setFillColor(col);
 	origin = sf::Vector2f(0.5f, 0.5f);
-	this->padding = sf::Vector2f(0.005f, 0.005f);
+	this->padding = sf::Vector2f(0.01f, 0.01f);
+	this->label.setStyle(sf::Text::Style::Regular);
 }
 void Label::SetText(std::string text)
 {

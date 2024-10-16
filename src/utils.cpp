@@ -16,9 +16,15 @@ void drawLine(sf::Vector2f point1, sf::Vector2f point2, float thickness, sf::Col
 
 void GetMaxFontSize(sf::Text* text, sf::Vector2f bounds)
 {
-	text->setCharacterSize(100);
-	float xScale = text->getLocalBounds().width / bounds.x;
-	float yScale = (text->getLocalBounds().height + text->getLocalBounds().top) / bounds.y;
+	//adding 0.5 essentially rounds up instead of down so char size will always be >= minimum
+	text->setCharacterSize((int)(bounds.y + 0.5f));
+	float xScale = (text->getLocalBounds().width / (int)bounds.x);
+	float yScale = ((text->getLocalBounds().height + text->getLocalBounds().top) / (int)bounds.y);
+	float error = 0.05f;
+	if (abs(1 - xScale) < error || abs(1 - yScale) < error)
+	{
+		return;
+	}
 	if (xScale > yScale)
 	{
 		text->setScale(1.f / xScale, 1.f / xScale);

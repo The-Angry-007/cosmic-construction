@@ -72,8 +72,8 @@ void Menu::Update(float dt)
 	}
 	if (slots.size() != 0)
 	{
-		sf::Vector2f move = inp.scroll * (20 / (float)height);
-		float bounds = 0.2f;
+		sf::Vector2f move = inp.scroll * (50 / (float)height);
+		float bounds = 0.1f;
 		if (move.y < 0)
 		{
 			if (slots[slots.size() - 1].targetPos.y + slots[0].size.y / 2.f < 1 - bounds)
