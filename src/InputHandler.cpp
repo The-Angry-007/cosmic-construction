@@ -77,9 +77,10 @@ void InputHandler::ProcessEvents()
 	keysReleased = {};
 	mouseButtonsPressed = {};
 	mouseButtonsReleased = {};
-	//reset typed text
+	//reset typed text, scroll and mouseIsBlocked status
 	typedText = "";
 	scroll = sf::Vector2f(0, 0);
+	mouseIsBlocked = false;
 	sf::Event event;
 	while (window->pollEvent(event))
 	{
@@ -137,4 +138,20 @@ void InputHandler::ProcessEvents()
 	}
 	mousePos = (sf::Vector2f)sf::Mouse::getPosition(*window);
 	std::cout << std::to_string(scroll.x) + " " + std::to_string(scroll.y) << std::endl;
+}
+
+void InputHandler::RemoveKeyDown(sf::Keyboard::Key key)
+{
+	int index = getIndex(keysDown, key);
+	keysDown.erase(keysDown.begin() + index);
+}
+void InputHandler::RemoveKeyPressed(sf::Keyboard::Key key)
+{
+	int index = getIndex(keysPressed, key);
+	keysPressed.erase(keysPressed.begin() + index);
+}
+void InputHandler::RemoveKeyReleased(sf::Keyboard::Key key)
+{
+	int index = getIndex(keysReleased, key);
+	keysReleased.erase(keysReleased.begin() + index);
 }
