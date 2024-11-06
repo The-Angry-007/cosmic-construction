@@ -79,6 +79,7 @@ void InputHandler::ProcessEvents()
 	mouseButtonsReleased = {};
 	//reset typed text
 	typedText = "";
+	scroll = sf::Vector2f(0, 0);
 	sf::Event event;
 	while (window->pollEvent(event))
 	{
@@ -121,6 +122,19 @@ void InputHandler::ProcessEvents()
 		{
 			typedText += event.text.unicode;
 		}
+		else if (event.type == event.MouseWheelScrolled)
+		{
+			std::cout << event.mouseWheelScroll.wheel << std::endl;
+			if (event.mouseWheelScroll.wheel == sf::Mouse::Wheel::HorizontalWheel)
+			{
+				scroll.x = event.mouseWheelScroll.delta;
+			}
+			else
+			{
+				scroll.y = event.mouseWheelScroll.delta;
+			}
+		}
 	}
 	mousePos = (sf::Vector2f)sf::Mouse::getPosition(*window);
+	std::cout << std::to_string(scroll.x) + " " + std::to_string(scroll.y) << std::endl;
 }

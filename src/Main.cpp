@@ -19,13 +19,10 @@ int main()
 	sf::Image icon;
 	icon.loadFromFile("resources/images/icon.png");
 	window->setIcon(256, 256, icon.getPixelsPtr());
-	std::string typedText;
 	while (window->isOpen())
 	{
 		window->clear(sf::Color::Black);
 		InputHandler::ProcessEvents();
-		typedText += InputHandler::typedText;
-		std::cout << typedText << std::endl;
 		window->display();
 	}
 	return 0;
