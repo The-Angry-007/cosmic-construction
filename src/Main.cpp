@@ -5,7 +5,8 @@
 //a unique pointer to the window object; this is unique to prevent accidentally creating multiple windows
 std::unique_ptr<sf::RenderWindow> window;
 //width and height of the window
-int width, height;
+int width = 800;
+int height = 500;
 
 //the main procedure that runs the program
 int main()
@@ -13,7 +14,7 @@ int main()
 	//initialise the window object
 	window = std::make_unique<sf::RenderWindow>();
 	//make a 800x500 window with the title "Cosmic Construction"
-	window->create(sf::VideoMode(800.0f, 500.0f), "Cosmic Construction");
+	window->create(sf::VideoMode(width, height), "Cosmic Construction");
 	window->setFramerateLimit(3);
 	//set the icon image that is displayed in the corner of the window
 	sf::Image icon;

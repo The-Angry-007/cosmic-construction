@@ -135,9 +135,13 @@ void InputHandler::ProcessEvents()
 				scroll.y = event.mouseWheelScroll.delta;
 			}
 		}
+		else if (event.type == event.Resized)
+		{
+			width = window->getSize().x;
+			height = window->getSize().y;
+		}
 	}
 	mousePos = (sf::Vector2f)sf::Mouse::getPosition(*window);
-	std::cout << std::to_string(scroll.x) + " " + std::to_string(scroll.y) << std::endl;
 }
 
 void InputHandler::RemoveKeyDown(sf::Keyboard::Key key)
