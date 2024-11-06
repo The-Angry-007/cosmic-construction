@@ -77,6 +77,8 @@ void InputHandler::ProcessEvents()
 	keysReleased = {};
 	mouseButtonsPressed = {};
 	mouseButtonsReleased = {};
+	//reset typed text
+	typedText = "";
 	sf::Event event;
 	while (window->pollEvent(event))
 	{
