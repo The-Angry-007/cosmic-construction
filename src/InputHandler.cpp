@@ -115,11 +115,10 @@ void InputHandler::ProcessEvents()
 			mouseButtonsDown.erase(mouseButtonsDown.begin() + index);
 			mouseButtonsReleased.push_back(event.mouseButton.button);
 		}
+		else if (event.type == event.TextEntered)
+		{
+			typedText += event.text.unicode;
+		}
 	}
 	mousePos = (sf::Vector2f)sf::Mouse::getPosition(*window);
-	sf::RectangleShape rect(sf::Vector2f(30, 30));
-	rect.setFillColor(sf::Color::White);
-	rect.setOrigin(15, 15);
-	rect.setPosition(mousePos);
-	window->draw(rect);
 }
