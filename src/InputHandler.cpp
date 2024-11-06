@@ -1,5 +1,5 @@
 #include "InputHandler.hpp"
-
+#include "Main.hpp"
 namespace InputHandler
 {
 std::vector<sf::Keyboard::Key> keysPressed;
@@ -68,4 +68,67 @@ bool InputHandler::mbPressed(sf::Mouse::Button button)
 bool InputHandler::mbReleased(sf::Mouse::Button button)
 {
 	return getIndex(mouseButtonsReleased, button) != -1;
+}
+
+void PrintKeyList(std::vector<sf::Keyboard::Key> keys)
+{
+	for (uint i = 0; i < keys.size(); i++)
+	{
+		std::cout << keys[i] << " ";
+	}
+	std::cout << std::endl;
+}
+
+void InputHandler::ProcessEvents()
+{
+	//reset the keys pressed and released, same with mouse buttons
+	keysPressed = {};
+	keysReleased = {};
+	mouseButtonsPressed = {};
+	mouseButtonsReleased = {};
+	sf::Event event;
+	while (window->pollEvent(event))
+	{
+		if (event.type == event.Closed)
+		{
+			window->close();
+		}
+		else if (event.type == event.KeyPressed)
+		{
+			//only add to pressed and down if not already in down
+			if (getIndex(keysDown, event.key.code) == -1)
+			{
+				keysDown.push_back(event.key.code);
+				keysPressed.push_back(event.key.code);
+			}
+		}
+		else if (event.type == event.KeyReleased)
+		{
+			//remove from keys down
+			int index = getIndex(keysDown, event.key.code);
+			keysDown.erase(keysDown.begin() + index);
+			keysReleased.push_back(event.key.code);
+		}
+		else if (event.type == event.MouseButtonPressed)
+		{
+			//same as 2 conditions above, but for mouse buttons
+			if (getIndex(mouseButtonsDown, event.mouseButton.button) == -1)
+			{
+				mouseButtonsDown.push_back(event.mouseButton.button);
+				mouseButtonsPressed.push_back(event.mouseButton.button);
+			}
+		}
+		else if (event.type == event.MouseButtonReleased)
+		{
+			int index = getIndex(mouseButtonsDown, event.mouseButton.button);
+			mouseButtonsDown.erase(mouseButtonsDown.begin() + index);
+			mouseButtonsReleased.push_back(event.mouseButton.button);
+		}
+	}
+	std::cout << "keys pressed:" << std::endl;
+	PrintKeyList(keysPressed);
+	std::cout << "keys released:" << std::endl;
+	PrintKeyList(keysReleased);
+	std::cout << "keys down:" << std::endl;
+	PrintKeyList(keysDown);
 }
