@@ -117,6 +117,9 @@ void InputHandler::ProcessEvents()
 		}
 	}
 	mousePos = (sf::Vector2f)sf::Mouse::getPosition(*window);
-	std::cout << std::to_string(mousePos.x) + " " + std::to_string(mousePos.y);
-	std::cout << std::endl;
+	sf::RectangleShape rect(sf::Vector2f(30, 30));
+	rect.setFillColor(sf::Color::White);
+	rect.setOrigin(15, 15);
+	rect.setPosition(mousePos);
+	window->draw(rect);
 }
