@@ -70,15 +70,6 @@ bool InputHandler::mbReleased(sf::Mouse::Button button)
 	return getIndex(mouseButtonsReleased, button) != -1;
 }
 
-void PrintKeyList(std::vector<sf::Keyboard::Key> keys)
-{
-	for (uint i = 0; i < keys.size(); i++)
-	{
-		std::cout << keys[i] << " ";
-	}
-	std::cout << std::endl;
-}
-
 void InputHandler::ProcessEvents()
 {
 	//reset the keys pressed and released, same with mouse buttons
@@ -125,10 +116,7 @@ void InputHandler::ProcessEvents()
 			mouseButtonsReleased.push_back(event.mouseButton.button);
 		}
 	}
-	std::cout << "keys pressed:" << std::endl;
-	PrintKeyList(keysPressed);
-	std::cout << "keys released:" << std::endl;
-	PrintKeyList(keysReleased);
-	std::cout << "keys down:" << std::endl;
-	PrintKeyList(keysDown);
+	mousePos = (sf::Vector2f)sf::Mouse::getPosition(*window);
+	std::cout << std::to_string(mousePos.x) + " " + std::to_string(mousePos.y);
+	std::cout << std::endl;
 }
