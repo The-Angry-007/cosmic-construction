@@ -31,5 +31,6 @@ void HitboxRect::Display()
 	sf::RectangleShape drawRect(currentSize * 2.f);
 	drawRect.setPosition(currentPos);
 	drawRect.setOrigin(currentSize);
+	drawRect.setFillColor(sf::Color::White);
 	window->draw(drawRect);
 }

@@ -1,5 +1,6 @@
 #include "Main.hpp"
 #include "InputHandler.hpp"
+#include "hitboxes/HitboxRect.hpp"
 #include <memory>
 
 //a unique pointer to the window object; this is unique to prevent accidentally creating multiple windows
@@ -22,8 +23,10 @@ int main()
 	window->setIcon(256, 256, icon.getPixelsPtr());
 	while (window->isOpen())
 	{
-		window->clear(sf::Color::Black);
 		InputHandler::ProcessEvents();
+
+		window->clear(sf::Color::Black);
+
 		window->display();
 	}
 	return 0;
