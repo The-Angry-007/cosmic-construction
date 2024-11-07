@@ -21,12 +21,15 @@ int main()
 	sf::Image icon;
 	icon.loadFromFile("resources/images/icon.png");
 	window->setIcon(256, 256, icon.getPixelsPtr());
+
+	//rect in middle of screen, 100px away from edges
+	HitboxRect rect(sf::Vector2f(400.f, 250.f), sf::Vector2f(300.f, 150.f));
 	while (window->isOpen())
 	{
 		InputHandler::ProcessEvents();
 
 		window->clear(sf::Color::Black);
-
+		rect.Display();
 		window->display();
 	}
 	return 0;

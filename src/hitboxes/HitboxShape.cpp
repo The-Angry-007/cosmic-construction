@@ -20,8 +20,8 @@ void HitboxShape::ResetTransform()
 	currentSize = size;
 }
 
-//once again this is blank is it will be overridden
-bool intersects(HitboxShape& other)
+//once again this is blank as it will be overridden
+bool HitboxShape::intersects(HitboxShape* other)
 {
 	return false;
 }
