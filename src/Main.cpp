@@ -22,19 +22,11 @@ int main()
 	icon.loadFromFile("resources/images/icon.png");
 	window->setIcon(256, 256, icon.getPixelsPtr());
 
-	//rect in middle of screen, 100px away from edges
-	HitboxRect rect(sf::Vector2f(400.f, 250.f), sf::Vector2f(300.f, 150.f));
-	//rect that will be following the mouse
-	HitboxRect rect2(sf::Vector2f(0.f, 0.f), sf::Vector2f(20.f, 20.f));
 	while (window->isOpen())
 	{
 		InputHandler::ProcessEvents();
 
 		window->clear(sf::Color::Black);
-		//set transform to position of mouse
-		rect2.SetTransform(InputHandler::mousePos, sf::Vector2f(1.f, 1.f));
-		rect2.Display(&rect);
-		rect.Display(&rect2);
 		window->display();
 	}
 	return 0;
