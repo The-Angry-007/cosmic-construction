@@ -12,5 +12,5 @@ public:
 	HitboxShape();
 	void SetTransform(sf::Vector2f position, sf::Vector2f size);
 	void ResetTransform();
-	bool Intersects(HitboxShape& other);
+	bool intersects(HitboxShape& other);
 };
