@@ -10,7 +10,7 @@ public:
 
 	~HitboxShape();
 	HitboxShape();
-	void SetTransform(sf::Vector2f position, sf::Vector2f size);
-	void ResetTransform();
-	bool intersects(HitboxShape& other);
+	virtual void SetTransform(sf::Vector2f position, sf::Vector2f size);
+	virtual void ResetTransform();
+	virtual bool intersects(HitboxShape* other);
 };
