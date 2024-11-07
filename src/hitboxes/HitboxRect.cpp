@@ -26,11 +26,18 @@ bool HitboxRect::intersects(HitboxShape* other)
 	return false;
 }
 
-void HitboxRect::Display()
+void HitboxRect::Display(HitboxRect* other)
 {
 	sf::RectangleShape drawRect(currentSize * 2.f);
 	drawRect.setPosition(currentPos);
 	drawRect.setOrigin(currentSize);
-	drawRect.setFillColor(sf::Color::White);
+	if (intersects(other))
+	{
+		drawRect.setFillColor(sf::Color::Green);
+	}
+	else
+	{
+		drawRect.setFillColor(sf::Color::Red);
+	}
 	window->draw(drawRect);
 }

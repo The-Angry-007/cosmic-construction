@@ -9,5 +9,5 @@ public:
 	bool intersects(HitboxShape* other);
 
 	//temporary function to test
-	void Display();
+	void Display(HitboxRect* other);
 };
