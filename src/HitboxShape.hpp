@@ -7,5 +7,10 @@ public:
 	sf::Vector2f currentPos;
 	sf::Vector2f currentSize;
 	int index;
-	HitboxShape
+
+	~HitboxShape();
+	HitboxShape();
+	void SetTransform(sf::Vector2f position, sf::Vector2f size);
+	void ResetTransform();
+	bool Intersects(HitboxShape& other);
 };
