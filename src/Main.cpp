@@ -21,24 +21,11 @@ int main()
 	sf::Image icon;
 	icon.loadFromFile("resources/images/icon.png");
 	window->setIcon(256, 256, icon.getPixelsPtr());
-	Hitbox* hitbox1 = new Hitbox(sf::Vector2f(100.f, 100.f), sf::Vector2f(1.f, 1.f));
-	hitbox1->AddShape(new HitboxRect(sf::Vector2f(0.f, 0.f), sf::Vector2f(50.f, 50.f)));
-	hitbox1->AddShape(new HitboxCircle(sf::Vector2f(50.f, 0.f), 50.f));
-	Hitbox* hitbox2 = new Hitbox(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.f, 1.f));
-	hitbox2->AddShape(new HitboxRect(sf::Vector2f(0.f, 0.f), sf::Vector2f(20.f, 20.f)));
-	hitbox2->AddShape(new HitboxCircle(sf::Vector2f(-20.f, 0.f), 20.f));
-	hitbox2->AddShape(new HitboxCircle(sf::Vector2f(20.f, 0.f), 20.f));
 	while (window->isOpen())
 	{
 		InputHandler::ProcessEvents();
-		hitbox2->SetTransform(InputHandler::mousePos, sf::Vector2f(1.f, 1.f));
 		window->clear(sf::Color::Black);
-		hitbox2->Display(std::vector<Hitbox*> { hitbox1 });
-		hitbox1->Display(std::vector<Hitbox*> { hitbox2 });
-
 		window->display();
 	}
-	delete hitbox1;
-	delete hitbox2;
 	return 0;
 }
