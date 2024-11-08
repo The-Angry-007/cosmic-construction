@@ -25,3 +25,8 @@ bool HitboxShape::intersects(HitboxShape* other)
 {
 	return false;
 }
+
+void HitboxShape::Display(std::vector<HitboxShape*> shapes)
+{
+	return;
+}

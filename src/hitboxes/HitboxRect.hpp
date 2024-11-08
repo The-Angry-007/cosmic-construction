@@ -9,5 +9,5 @@ public:
 	bool intersects(HitboxShape* other);
 
 	//temporary function to test
-	void Display(HitboxShape* other);
+	void Display(std::vector<HitboxShape*> shapes);
 };

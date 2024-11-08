@@ -13,4 +13,5 @@ public:
 	void SetTransform(sf::Vector2f position, sf::Vector2f size);
 	void ResetTransform();
 	virtual bool intersects(HitboxShape* other);
+	virtual void Display(std::vector<HitboxShape*> shapes);
 };

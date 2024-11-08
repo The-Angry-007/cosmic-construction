@@ -31,12 +31,24 @@ bool HitboxRect::intersects(HitboxShape* other)
 	return false;
 }
 
-void HitboxRect::Display(HitboxShape* other)
+void HitboxRect::Display(std::vector<HitboxShape*> shapes)
 {
 	sf::RectangleShape drawRect(currentSize * 2.f);
 	drawRect.setPosition(currentPos);
 	drawRect.setOrigin(currentSize);
-	if (intersects(other))
+	bool colliding = false;
+	for (uint i = 0; i < shapes.size(); i++)
+	{
+		if (shapes[i] == this)
+		{
+			continue;
+		}
+		if (intersects(shapes[i]))
+		{
+			colliding = true;
+		}
+	}
+	if (colliding)
 	{
 		drawRect.setFillColor(sf::Color::Green);
 	}
