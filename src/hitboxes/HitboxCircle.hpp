@@ -8,5 +8,5 @@ public:
 	~HitboxCircle();
 	bool intersects(HitboxShape* other);
 
-	void Display(std::vector<HitboxShape*> shapes);
+	void Display(bool colliding);
 };

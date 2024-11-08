@@ -14,7 +14,7 @@ public:
 	void AddShape(HitboxShape* shape);
 	void SetTransform(sf::Vector2f position, sf::Vector2f size);
 	void ResetTransform();
-	bool intersects(Hitbox other);
+	bool intersects(Hitbox* other);
 
 	//temporary function for debugging
 	void Display(std::vector<Hitbox*> hitboxes);

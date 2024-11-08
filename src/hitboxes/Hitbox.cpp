@@ -35,13 +35,13 @@ void Hitbox::ResetTransform()
 	currentPos = position;
 	currentSize = size;
 }
-bool Hitbox::intersects(Hitbox other)
+bool Hitbox::intersects(Hitbox* other)
 {
 	for (uint i = 0; i < shapes.size(); i++)
 	{
-		for (uint j = 0; j < other.shapes.size(); j++)
+		for (uint j = 0; j < other->shapes.size(); j++)
 		{
-			if (shapes[i]->intersects(other.shapes[j]))
+			if (shapes[i]->intersects(other->shapes[j]))
 			{
 				return true;
 			}
@@ -52,20 +52,21 @@ bool Hitbox::intersects(Hitbox other)
 
 void Hitbox::Display(std::vector<Hitbox*> hitboxes)
 {
-	std::vector<HitboxShape*> allshapes;
+	bool colliding = false;
 	for (uint i = 0; i < hitboxes.size(); i++)
 	{
 		if (hitboxes[i] == this)
 		{
 			continue;
 		}
-		for (uint j = 0; j < hitboxes[i]->shapes.size(); j++)
+		if (intersects(hitboxes[i]))
 		{
-			allshapes.push_back(hitboxes[i]->shapes[j]);
+			colliding = true;
+			break;
 		}
 	}
 	for (uint i = 0; i < shapes.size(); i++)
 	{
-		shapes[i]->Display(allshapes);
+		shapes[i]->Display(colliding);
 	}
 }

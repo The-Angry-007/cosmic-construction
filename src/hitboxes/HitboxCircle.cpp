@@ -28,24 +28,13 @@ bool HitboxCircle::intersects(HitboxShape* other)
 	return false;
 }
 
-void HitboxCircle::Display(std::vector<HitboxShape*> shapes)
+void HitboxCircle::Display(bool colliding)
 {
 	sf::CircleShape circle;
 	circle.setPosition(currentPos);
 	circle.setRadius(currentSize.x);
 	circle.setOrigin(currentSize);
-	bool colliding = false;
-	for (uint i = 0; i < shapes.size(); i++)
-	{
-		if (shapes[i] == this)
-		{
-			continue;
-		}
-		if (intersects(shapes[i]))
-		{
-			colliding = true;
-		}
-	}
+
 	if (colliding)
 	{
 		circle.setFillColor(sf::Color::Green);
