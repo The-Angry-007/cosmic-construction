@@ -55,7 +55,7 @@ void Hitbox::Display(std::vector<Hitbox*> hitboxes)
 		{
 			continue;
 		}
-		for (uint j = 0; j < hitboxes[i]->shapes.size(); i++)
+		for (uint j = 0; j < hitboxes[i]->shapes.size(); j++)
 		{
 			allshapes.push_back(hitboxes[i]->shapes[j]);
 		}
