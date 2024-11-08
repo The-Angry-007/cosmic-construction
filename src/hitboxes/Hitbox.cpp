@@ -25,6 +25,10 @@ void Hitbox::SetTransform(sf::Vector2f position, sf::Vector2f size)
 {
 	currentPos = this->position + position;
 	currentSize = sf::Vector2f(size.x * this->size.x, size.y * this->size.y);
+	for (uint i = 0; i < shapes.size(); i++)
+	{
+		shapes[i]->SetTransform(currentPos, currentSize);
+	}
 }
 void Hitbox::ResetTransform()
 {
