@@ -23,10 +23,15 @@ bool HitboxRect::intersects(HitboxShape* other)
 		sf::FloatRect rect2(other->currentPos - other->currentSize, other->currentSize * 2.f);
 		return RectIntersectsRect(rect1, rect2);
 	}
+	else if (other->index == 1)
+	{
+		sf::FloatRect rect(currentPos - currentSize, currentSize * 2.f);
+		return RectIntersectsCircle(other->currentPos, other->currentSize.x, rect);
+	}
 	return false;
 }
 
-void HitboxRect::Display(HitboxRect* other)
+void HitboxRect::Display(HitboxShape* other)
 {
 	sf::RectangleShape drawRect(currentSize * 2.f);
 	drawRect.setPosition(currentPos);

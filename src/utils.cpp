@@ -1,5 +1,5 @@
 #include "utils.hpp"
-extern bool RectIntersectsRect(sf::FloatRect rect1, sf::FloatRect rect2)
+bool RectIntersectsRect(sf::FloatRect rect1, sf::FloatRect rect2)
 {
 	//split into multiple conditions to become more readable
 	bool cond1 = (rect2.left > rect1.left + rect1.width);
@@ -11,4 +11,53 @@ extern bool RectIntersectsRect(sf::FloatRect rect1, sf::FloatRect rect2)
 		return true;
 	}
 	return false;
+}
+
+bool RectIntersectsCircle(sf::Vector2f pos, float r, sf::FloatRect rect)
+{
+	//get the closest point to the circle within the rect
+	float closestX = clamp(pos.x, rect.left, rect.left + rect.width);
+	float closestY = clamp(pos.y, rect.top, rect.top + rect.height);
+	//find offset
+	float dx = pos.x - closestX;
+	float dy = pos.y - closestY;
+	//find the squared magnitude
+	float mag = dx * dx + dy * dy;
+	//check if less than the radius squared, if so then intersects
+	if (mag < r * r)
+	{
+		return true;
+	}
+	//otherwise do not intersect
+	return false;
+}
+
+bool CircleIntersectsCircle(sf::Vector2f pos1, float r1, sf::Vector2f pos2, float r2)
+{
+	//find offset between centres
+	sf::Vector2f d = pos2 - pos1;
+	//find squared magnitude
+	float mag = d.x * d.x + d.y * d.y;
+	//get maximum distance between centres for intersection
+	float r = r1 + r2;
+	//compare squared distance to squared magnitude
+	if (mag < r * r)
+	{
+		return true;
+	}
+	//otherwise not intersecting
+	return false;
+}
+
+float clamp(float val, float min, float max)
+{
+	if (val < min)
+	{
+		return min;
+	}
+	if (val > max)
+	{
+		return max;
+	}
+	return val;
 }

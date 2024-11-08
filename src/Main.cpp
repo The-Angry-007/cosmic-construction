@@ -1,6 +1,6 @@
 #include "Main.hpp"
 #include "InputHandler.hpp"
-#include "hitboxes/HitboxRect.hpp"
+#include "hitboxes/Hitboxes.hpp"
 #include <memory>
 
 //a unique pointer to the window object; this is unique to prevent accidentally creating multiple windows
@@ -22,11 +22,17 @@ int main()
 	icon.loadFromFile("resources/images/icon.png");
 	window->setIcon(256, 256, icon.getPixelsPtr());
 
+	HitboxCircle circle(sf::Vector2f(0.f, 0.f), 20.f);
+	HitboxRect rect(sf::Vector2f(200.f, 100.f), sf::Vector2f(50.f, 50.f));
+
 	while (window->isOpen())
 	{
 		InputHandler::ProcessEvents();
 
 		window->clear(sf::Color::Black);
+		circle.SetTransform(InputHandler::mousePos, sf::Vector2f(1.f, 1.f));
+		circle.Display(&rect);
+		rect.Display(&circle);
 		window->display();
 	}
 	return 0;
