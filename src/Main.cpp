@@ -23,22 +23,10 @@ int main()
 	icon.loadFromFile("resources/images/icon.png");
 	window->setIcon(256, 256, icon.getPixelsPtr());
 
-	GUIPanel panel(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.4f, 0.4f), sf::Color::White);
-	panel.blocksMouseInput = true;
 	while (window->isOpen())
 	{
 		InputHandler::ProcessEvents();
 		window->clear(sf::Color::Black);
-		//mouse position scaled to be between 0 and 1
-		if (panel.isClicked())
-		{
-			panel.SetColor(sf::Color::Green);
-		}
-		else
-		{
-			panel.SetColor(sf::Color::Red);
-		}
-		panel.Render();
 		window->display();
 	}
 	return 0;
