@@ -24,11 +24,22 @@ int main()
 	window->setIcon(256, 256, icon.getPixelsPtr());
 
 	GUIPanel panel(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.4f, 0.4f), sf::Color::White);
-
+	panel.blocksMouseInput = true;
 	while (window->isOpen())
 	{
 		InputHandler::ProcessEvents();
 		window->clear(sf::Color::Black);
+		//mouse position scaled to be between 0 and 1
+		sf::Vector2f mp = InputHandler::mousePos;
+		sf::Vector2f guiMP = sf::Vector2f(mp.x / width, mp.y / height);
+		if (panel.isBlockingMouse(guiMP))
+		{
+			panel.SetColor(sf::Color::Green);
+		}
+		else
+		{
+			panel.SetColor(sf::Color::Red);
+		}
 		panel.Render();
 		window->display();
 	}

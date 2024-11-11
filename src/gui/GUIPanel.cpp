@@ -33,3 +33,9 @@ GUIPanel::~GUIPanel()
 		delete hitbox;
 	}
 }
+
+void GUIPanel::SetColor(sf::Color color)
+{
+	this->color = color;
+	rect.setFillColor(color);
+}
