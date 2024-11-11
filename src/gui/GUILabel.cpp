@@ -28,14 +28,17 @@ void GUILabel::SetColor(sf::Color color)
 void GUILabel::Render()
 {
 	text.setString(this->value);
-	sf::Vector2f cPos(position.x * width, position.y * height);
-	sf::Vector2f cSize(size.x * width, size.y * height);
+	sf::Vector2f cPos((float)position.x * width, (float)position.y * height);
+	sf::Vector2f cSize((float)size.x * width, (float)size.y * height);
 	//find maximum character scale that fits in bounds
+	text.setOrigin(0.f, 0.f);
 	text.setScale(sf::Vector2f(1.f, 1.f));
-	text.setCharacterSize(64);
+	text.setCharacterSize(128);
 	sf::FloatRect bounds = text.getLocalBounds();
-	float widthMult = bounds.width / cSize.x;
-	float heightMult = bounds.height / cSize.y;
+	std::cout << bounds.left << " " << bounds.top << " " << bounds.width << " " << bounds.height << std::endl;
+
+	float widthMult = ((float)bounds.width) / cSize.x;
+	float heightMult = ((float)bounds.height) / cSize.y;
 	float scale;
 	if (widthMult < heightMult)
 	{
@@ -47,10 +50,12 @@ void GUILabel::Render()
 	}
 	text.setScale(sf::Vector2f(scale, scale));
 	sf::FloatRect newBounds = text.getLocalBounds();
+	//std::cout << newBounds.left << " " << newBounds.top << " " << newBounds.width << " " << newBounds.height << std::endl;
 	sf::Vector2f topleft(newBounds.left, newBounds.top);
 	sf::Vector2f origin(newBounds.width * this->origin.x, newBounds.height * this->origin.y);
 	text.setOrigin(topleft + origin);
 	text.setPosition(cPos - cSize + 2.f * sf::Vector2f(this->origin.x * cSize.x, this->origin.y * cSize.y));
+	text.setPosition((sf::Vector2f)(sf::Vector2i)text.getPosition());
 
 	window->draw(text);
 }

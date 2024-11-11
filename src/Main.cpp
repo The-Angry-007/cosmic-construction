@@ -17,21 +17,38 @@ int main()
 	window = std::make_unique<sf::RenderWindow>();
 	//make a 800x500 window with the title "Cosmic Construction"
 	window->create(sf::VideoMode(width, height), "Cosmic Construction");
-	window->setFramerateLimit(30);
+	window->setFramerateLimit(120);
 	//set the icon image that is displayed in the corner of the window
 	sf::Image icon;
 	icon.loadFromFile("resources/images/icon.png");
 	window->setIcon(256, 256, icon.getPixelsPtr());
-	GUIPanel bg(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.1f), sf::Color::Blue);
-	GUILabel label(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.1f), "hello world");
-	label.origin = sf::Vector2f(1.f, 1.f);
-	label.SetColor(sf::Color::White);
+
+	std::vector<float> frameLengths;
+	float lengthsSum = 0;
+	int numFrames = 10;
+	sf::Clock deltaClock;
+	GUILabel fpsLabel(sf::Vector2f(0.1f, 0.05f), sf::Vector2f(0.1f, 0.05f), "");
+
+	fpsLabel.origin = sf::Vector2f(0.f, 0.f);
+
 	while (window->isOpen())
 	{
 		InputHandler::ProcessEvents();
+		float dt = deltaClock.restart().asSeconds();
+		frameLengths.push_back(dt);
+		lengthsSum += dt;
+		if (frameLengths.size() > numFrames)
+		{
+			lengthsSum -= frameLengths[0];
+			frameLengths.erase(frameLengths.begin());
+		}
+		int fps = (int)(1.f / (lengthsSum / frameLengths.size()));
+		fpsLabel.value += InputHandler::typedText;
+
 		window->clear(sf::Color::Black);
-		bg.Render();
-		label.Render();
+		GUIPanel p(sf::Vector2f(0.1f, 0.05f), sf::Vector2f(0.1f, 0.05f), sf::Color::Blue);
+		p.Render();
+		fpsLabel.Render();
 		window->display();
 	}
 	return 0;
