@@ -47,6 +47,10 @@ void GUILabel::Render()
 	text.setScale(sf::Vector2f(scale, scale));
 	text.setPosition(cPos);
 	sf::FloatRect newBounds = text.getLocalBounds();
-	text.setOrigin(newBounds.width / 2.f, newBounds.height / 2.f);
+	std::cout << newBounds.top << " ";
+	std::cout << newBounds.left << " ";
+	std::cout << newBounds.width << " ";
+	std::cout << newBounds.height << std::endl;
+	text.setOrigin(newBounds.left + newBounds.width / 2.f, newBounds.top + newBounds.height / 2.f);
 	window->draw(text);
 }
