@@ -22,11 +22,13 @@ int main()
 	sf::Image icon;
 	icon.loadFromFile("resources/images/icon.png");
 	window->setIcon(256, 256, icon.getPixelsPtr());
-
+	GUILabel label(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.1f), "hello world");
+	label.SetColor(sf::Color::White);
 	while (window->isOpen())
 	{
 		InputHandler::ProcessEvents();
 		window->clear(sf::Color::Black);
+		label.Render();
 		window->display();
 	}
 	return 0;
