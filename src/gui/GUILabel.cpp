@@ -32,15 +32,16 @@ void GUILabel::Render()
 	sf::Vector2f cSize((float)size.x * width, (float)size.y * height);
 	//find maximum character scale that fits in bounds
 	text.setOrigin(0.f, 0.f);
-	text.setScale(sf::Vector2f(1.f, 1.f));
 	text.setCharacterSize(128);
+	text.setScale(sf::Vector2f(1.f, 1.f));
+
 	sf::FloatRect bounds = text.getLocalBounds();
 	std::cout << bounds.left << " " << bounds.top << " " << bounds.width << " " << bounds.height << std::endl;
 
-	float widthMult = ((float)bounds.width) / cSize.x;
-	float heightMult = ((float)bounds.height) / cSize.y;
+	float widthMult = ((float)bounds.width) / (cSize.x * 2.f);
+	float heightMult = ((float)bounds.height) / (cSize.y * 2.f);
 	float scale;
-	if (widthMult < heightMult)
+	if (widthMult > heightMult)
 	{
 		scale = 1.f / widthMult;
 	}
