@@ -30,3 +30,8 @@ void HitboxShape::Display(bool colliding)
 {
 	return;
 }
+
+bool HitboxShape::intersectsPoint(sf::Vector2f point)
+{
+	return false;
+}

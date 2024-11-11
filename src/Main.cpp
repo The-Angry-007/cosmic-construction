@@ -1,5 +1,6 @@
 #include "Main.hpp"
 #include "InputHandler.hpp"
+#include "gui/gui.hpp"
 #include "hitboxes/Hitboxes.hpp"
 #include <memory>
 
@@ -21,10 +22,14 @@ int main()
 	sf::Image icon;
 	icon.loadFromFile("resources/images/icon.png");
 	window->setIcon(256, 256, icon.getPixelsPtr());
+
+	GUIPanel panel(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.4f, 0.4f), sf::Color::White);
+
 	while (window->isOpen())
 	{
 		InputHandler::ProcessEvents();
 		window->clear(sf::Color::Black);
+		panel.Render();
 		window->display();
 	}
 	return 0;
