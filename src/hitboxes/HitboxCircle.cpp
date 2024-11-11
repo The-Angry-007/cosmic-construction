@@ -45,3 +45,17 @@ void HitboxCircle::Display(bool colliding)
 	}
 	window->draw(circle);
 }
+
+bool HitboxCircle::intersectsPoint(sf::Vector2f point)
+{
+	//get the offset between the centre of the circle and the point
+	sf::Vector2f d = point - currentPos;
+	//get squared magnitude
+	float mag = d.x * d.x + d.y * d.y;
+	//compare to radius squared
+	if (mag < currentSize.x * currentSize.x)
+	{
+		return true;
+	}
+	return false;
+}

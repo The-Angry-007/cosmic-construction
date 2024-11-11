@@ -70,3 +70,15 @@ void Hitbox::Display(std::vector<Hitbox*> hitboxes)
 		shapes[i]->Display(colliding);
 	}
 }
+
+bool Hitbox::intersectsPoint(sf::Vector2f point)
+{
+	for (uint i = 0; i < shapes.size(); i++)
+	{
+		if (shapes[i]->intersectsPoint(point))
+		{
+			return true;
+		}
+	}
+	return false;
+}

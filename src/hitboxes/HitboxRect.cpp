@@ -47,3 +47,17 @@ void HitboxRect::Display(bool colliding)
 	}
 	window->draw(drawRect);
 }
+
+bool HitboxRect::intersectsPoint(sf::Vector2f point)
+{
+	sf::FloatRect rect(currentPos - currentSize, 2.f * currentSize);
+	if (point.x < rect.left || point.y < rect.top)
+	{
+		return false;
+	}
+	if (point.x > rect.left + rect.width || point.y > rect.top + rect.height)
+	{
+		return false;
+	}
+	return true;
+}

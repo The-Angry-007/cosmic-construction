@@ -14,4 +14,5 @@ public:
 	void ResetTransform();
 	virtual bool intersects(HitboxShape* other);
 	virtual void Display(bool colliding);
+	virtual bool intersectsPoint(sf::Vector2f point);
 };
