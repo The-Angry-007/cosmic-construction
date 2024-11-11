@@ -8,6 +8,8 @@ public:
 
 	void SetColor(sf::Color color);
 	void Render();
+	void Update(float dt);
 	GUIPanel(sf::Vector2f position, sf::Vector2f size, sf::Color color);
+	GUIPanel(sf::FloatRect* container, float aspectRatio, sf::Color color);
 	~GUIPanel();
 };

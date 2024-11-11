@@ -12,6 +12,10 @@ GUIPanel::GUIPanel(sf::Vector2f position, sf::Vector2f size, sf::Color color)
 	hitbox->AddShape(new HitboxRect(position, size));
 }
 
+void GUIPanel::Update(float dt)
+{
+}
+
 void GUIPanel::Render()
 {
 	sf::Vector2f newPos = sf::Vector2f(position.x * width, position.y * height);
@@ -24,10 +28,6 @@ void GUIPanel::Render()
 }
 GUIPanel::~GUIPanel()
 {
-	if (container != nullptr)
-	{
-		delete container;
-	}
 	if (hitbox != nullptr)
 	{
 		delete hitbox;

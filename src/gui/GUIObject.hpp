@@ -5,7 +5,6 @@ class GUIObject
 public:
 	sf::Vector2f position;
 	sf::Vector2f size;
-	sf::FloatRect* container;
 	Hitbox* hitbox;
 	bool blocksMouseInput;
 
