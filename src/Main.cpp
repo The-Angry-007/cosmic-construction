@@ -25,7 +25,8 @@ int main()
 
 	std::vector<float> frameLengths;
 	float lengthsSum = 0;
-	int numFrames = 10;
+	//how many frames to average the framerate of, so its smoother and easier to read
+	int numFrames = 60;
 	sf::Clock deltaClock;
 	GUILabel fpsLabel(sf::Vector2f(0.1f, 0.05f), sf::Vector2f(0.1f, 0.05f), "");
 
@@ -43,11 +44,9 @@ int main()
 			frameLengths.erase(frameLengths.begin());
 		}
 		int fps = (int)(1.f / (lengthsSum / frameLengths.size()));
-		fpsLabel.value += InputHandler::typedText;
+		fpsLabel.value = std::to_string(fps) + " fps";
 
 		window->clear(sf::Color::Black);
-		GUIPanel p(sf::Vector2f(0.1f, 0.05f), sf::Vector2f(0.1f, 0.05f), sf::Color::Blue);
-		p.Render();
 		fpsLabel.Render();
 		window->display();
 	}

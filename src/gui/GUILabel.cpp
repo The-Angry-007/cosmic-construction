@@ -36,7 +36,6 @@ void GUILabel::Render()
 	text.setScale(sf::Vector2f(1.f, 1.f));
 
 	sf::FloatRect bounds = text.getLocalBounds();
-	std::cout << bounds.left << " " << bounds.top << " " << bounds.width << " " << bounds.height << std::endl;
 
 	float widthMult = ((float)bounds.width) / (cSize.x * 2.f);
 	float heightMult = ((float)bounds.height) / (cSize.y * 2.f);
@@ -51,7 +50,6 @@ void GUILabel::Render()
 	}
 	text.setScale(sf::Vector2f(scale, scale));
 	sf::FloatRect newBounds = text.getLocalBounds();
-	//std::cout << newBounds.left << " " << newBounds.top << " " << newBounds.width << " " << newBounds.height << std::endl;
 	sf::Vector2f topleft(newBounds.left, newBounds.top);
 	sf::Vector2f origin(newBounds.width * this->origin.x, newBounds.height * this->origin.y);
 	text.setOrigin(topleft + origin);
