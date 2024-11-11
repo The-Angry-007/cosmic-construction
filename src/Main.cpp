@@ -17,7 +17,7 @@ int main()
 	window = std::make_unique<sf::RenderWindow>();
 	//make a 800x500 window with the title "Cosmic Construction"
 	window->create(sf::VideoMode(width, height), "Cosmic Construction");
-	window->setFramerateLimit(120);
+	window->setFramerateLimit(30);
 	//set the icon image that is displayed in the corner of the window
 	sf::Image icon;
 	icon.loadFromFile("resources/images/icon.png");
@@ -30,9 +30,7 @@ int main()
 		InputHandler::ProcessEvents();
 		window->clear(sf::Color::Black);
 		//mouse position scaled to be between 0 and 1
-		sf::Vector2f mp = InputHandler::mousePos;
-		sf::Vector2f guiMP = sf::Vector2f(mp.x / width, mp.y / height);
-		if (panel.isBlockingMouse(guiMP))
+		if (panel.isClicked())
 		{
 			panel.SetColor(sf::Color::Green);
 		}

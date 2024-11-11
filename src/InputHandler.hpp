@@ -14,6 +14,7 @@ extern std::vector<sf::Mouse::Button> mouseButtonsReleased;
 
 //other data about input events
 extern sf::Vector2f mousePos;
+extern sf::Vector2f guiMP;
 extern sf::Vector2f scroll;
 extern std::string typedText;
 extern bool mouseIsBlocked;

@@ -9,7 +9,8 @@ public:
 	Hitbox* hitbox;
 	bool blocksMouseInput;
 
-	bool isBlockingMouse(sf::Vector2f pos);
+	bool isBlockingMouse();
+	bool isClicked();
 	//dt is an abbreviation for delta time, which is the time passed (in seconds) since the last frame.
 	virtual void Update(float dt);
 	virtual void Render();

@@ -1,11 +1,11 @@
 #include "GUIObject.hpp"
-
+#include "InputHandler.hpp"
 GUIObject::GUIObject()
 {}
 
 //the mouse position is passed in instead of using the variable
 //provided by inputhandler, as it needs to be between 0 and 1
-bool GUIObject::isBlockingMouse(sf::Vector2f pos)
+bool GUIObject::isBlockingMouse()
 {
 	if (!blocksMouseInput)
 	{
@@ -15,7 +15,16 @@ bool GUIObject::isBlockingMouse(sf::Vector2f pos)
 	{
 		return false;
 	}
-	return hitbox->intersectsPoint(pos);
+	return hitbox->intersectsPoint(InputHandler::guiMP);
+}
+
+bool GUIObject::isClicked()
+{
+	if (InputHandler::mbPressed(sf::Mouse::Button::Left))
+	{
+		return isBlockingMouse();
+	}
+	return false;
 }
 
 void GUIObject::Update(float dt)

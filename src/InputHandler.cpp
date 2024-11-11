@@ -11,6 +11,7 @@ std::vector<sf::Mouse::Button> mouseButtonsDown;
 std::vector<sf::Mouse::Button> mouseButtonsReleased;
 
 sf::Vector2f mousePos(0, 0);
+sf::Vector2f guiMP(0, 0);
 sf::Vector2f scroll(0, 0);
 std::string typedText = "";
 bool mouseIsBlocked = false;
@@ -142,6 +143,7 @@ void InputHandler::ProcessEvents()
 		}
 	}
 	mousePos = (sf::Vector2f)sf::Mouse::getPosition(*window);
+	guiMP = sf::Vector2f(mousePos.x / width, mousePos.y / height);
 }
 
 void InputHandler::RemoveKeyDown(sf::Keyboard::Key key)
