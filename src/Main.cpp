@@ -24,7 +24,7 @@ int main()
 	window->setIcon(256, 256, icon.getPixelsPtr());
 	GUIPanel bg(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.1f), sf::Color::Blue);
 	GUILabel label(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.1f), "hello world");
-	label.origin = sf::Vector2f(0.5f, 0.5f);
+	label.origin = sf::Vector2f(1.f, 1.f);
 	label.SetColor(sf::Color::White);
 	while (window->isOpen())
 	{

@@ -50,7 +50,7 @@ void GUILabel::Render()
 	sf::Vector2f topleft(newBounds.left, newBounds.top);
 	sf::Vector2f origin(newBounds.width * this->origin.x, newBounds.height * this->origin.y);
 	text.setOrigin(topleft + origin);
-	text.setPosition(cPos + sf::Vector2f((origin.x - 1) * cSize.x, (origin.y - 1) * cSize.y));
+	text.setPosition(cPos - cSize + 2.f * sf::Vector2f(this->origin.x * cSize.x, this->origin.y * cSize.y));
 
 	window->draw(text);
 }
