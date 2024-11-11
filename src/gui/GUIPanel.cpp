@@ -7,6 +7,7 @@ GUIPanel::GUIPanel(sf::Vector2f position, sf::Vector2f size, sf::Color color)
 	this->size = size;
 	this->color = color;
 	rect = sf::RectangleShape();
+	rect.setFillColor(color);
 	blocksMouseInput = false;
 	hitbox = new Hitbox(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.f, 1.f));
 	hitbox->AddShape(new HitboxRect(position, size));

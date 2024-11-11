@@ -36,7 +36,7 @@ void GUILabel::Render()
 	float widthMult = bounds.width / cSize.x;
 	float heightMult = bounds.height / cSize.y;
 	float scale;
-	if (widthMult > heightMult)
+	if (widthMult < heightMult)
 	{
 		scale = 1.f / widthMult;
 	}
@@ -46,6 +46,7 @@ void GUILabel::Render()
 	}
 	text.setScale(sf::Vector2f(scale, scale));
 	text.setPosition(cPos);
-	text.setOrigin(cSize);
+	sf::FloatRect newBounds = text.getLocalBounds();
+	text.setOrigin(newBounds.width / 2.f, newBounds.height / 2.f);
 	window->draw(text);
 }
