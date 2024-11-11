@@ -17,6 +17,7 @@ GUILabel::GUILabel(sf::Vector2f position, sf::Vector2f size, std::string text)
 	this->text.setFillColor(color);
 	this->text.setString(this->value);
 	this->text.setFont(font);
+	origin = sf::Vector2f(0.5f, 0.5f);
 }
 void GUILabel::SetColor(sf::Color color)
 {
@@ -47,10 +48,8 @@ void GUILabel::Render()
 	text.setScale(sf::Vector2f(scale, scale));
 	text.setPosition(cPos);
 	sf::FloatRect newBounds = text.getLocalBounds();
-	std::cout << newBounds.top << " ";
-	std::cout << newBounds.left << " ";
-	std::cout << newBounds.width << " ";
-	std::cout << newBounds.height << std::endl;
-	text.setOrigin(newBounds.left + newBounds.width / 2.f, newBounds.top + newBounds.height / 2.f);
+	sf::Vector2f topleft(newBounds.left, newBounds.top);
+	sf::Vector2f origin(newBounds.width * origin.x, newBounds.height * origin.y);
+	text.setOrigin(topleft + origin);
 	window->draw(text);
 }
