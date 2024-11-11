@@ -46,10 +46,11 @@ void GUILabel::Render()
 		scale = 1.f / heightMult;
 	}
 	text.setScale(sf::Vector2f(scale, scale));
-	text.setPosition(cPos);
 	sf::FloatRect newBounds = text.getLocalBounds();
 	sf::Vector2f topleft(newBounds.left, newBounds.top);
-	sf::Vector2f origin(newBounds.width * origin.x, newBounds.height * origin.y);
+	sf::Vector2f origin(newBounds.width * this->origin.x, newBounds.height * this->origin.y);
 	text.setOrigin(topleft + origin);
+	text.setPosition(cPos + sf::Vector2f((origin.x - 1) * cSize.x, (origin.y - 1) * cSize.y));
+
 	window->draw(text);
 }
