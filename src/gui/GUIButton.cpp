@@ -12,8 +12,14 @@ GUIButton::GUIButton(sf::Vector2f position, sf::Vector2f size, GUIObject* bgObj,
 }
 void GUIButton::Render()
 {
-	bgObj->Render();
-	labelObj->Render();
+	if (bgObj != nullptr)
+	{
+		bgObj->Render();
+	}
+	if (labelObj != nullptr)
+	{
+		labelObj->Render();
+	}
 }
 void GUIButton::Update(float dt)
 {
