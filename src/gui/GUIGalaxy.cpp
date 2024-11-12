@@ -12,18 +12,18 @@ GUIGalaxy::GUIGalaxy()
 		exit(1);
 	}
 	sprite.setTexture(texture);
-	position = sf::Vector2f(texture.getSize().x / 2.f, texture.getSize().y / 2.f);
 	speed = 100.f;
 	size = sf::Vector2f(0.5f, 0.5f);
-	sprite.setScale(1.f / size.x, 1.f / size.y);
+	sprite.setScale(size.x, size.y);
+	sf::FloatRect bounds = sprite.getLocalBounds();
+	position = sf::Vector2f(0.f, 0.f);
+	sprite.setPosition(position);
 }
 void GUIGalaxy::Update(float dt)
 {
 	position += vel * dt * speed;
 	//half the size of the texture
-	sf::Vector2f hs = (sf::Vector2f)texture.getSize();
-	hs = sf::Vector2f(hs.x * 0.5f * size.x, hs.y * 0.5f * size.y);
-	sf::FloatRect bounds(position - hs, hs * 2.f);
+	sf::FloatRect bounds = sprite.getGlobalBounds();
 	if (bounds.top > 0)
 	{
 		position -= vel * dt * speed;
@@ -48,9 +48,6 @@ void GUIGalaxy::Update(float dt)
 void GUIGalaxy::Render()
 {
 	sprite.setPosition(position);
-	sf::Vector2f hs = (sf::Vector2f)texture.getSize();
-	hs = sf::Vector2f(hs.x * 0.5f * size.x, hs.y * 0.5f * size.y);
 
-	sprite.setOrigin(hs);
 	window->draw(sprite);
 }
