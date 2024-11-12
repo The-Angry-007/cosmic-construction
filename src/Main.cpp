@@ -34,6 +34,7 @@ int main()
 
 	GUIPanel panel(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.2f), sf::Color::Blue);
 	GUIImage im(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.2f), "resources/images/icon.png");
+	im.keepAspectRatio = true;
 	while (window->isOpen())
 	{
 		InputHandler::ProcessEvents();
@@ -50,9 +51,10 @@ int main()
 
 		window->clear(sf::Color::Black);
 		fpsLabel.Render();
-		im.Render();
 
 		panel.Render();
+		im.Render();
+
 		window->display();
 	}
 	return 0;
