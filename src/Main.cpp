@@ -32,8 +32,6 @@ int main()
 
 	fpsLabel.origin = sf::Vector2f(0.f, 0.f);
 
-	GUIPanel panel(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.2f), sf::Color::Blue);
-	GUIImage im(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.2f), "resources/images/icon.png");
 	while (window->isOpen())
 	{
 		InputHandler::ProcessEvents();
@@ -50,9 +48,6 @@ int main()
 
 		window->clear(sf::Color::Black);
 		fpsLabel.Render();
-
-		panel.Render();
-		im.Render();
 
 		window->display();
 	}
