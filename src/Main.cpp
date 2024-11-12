@@ -32,11 +32,6 @@ int main()
 
 	fpsLabel.origin = sf::Vector2f(0.f, 0.f);
 
-	GUIImage i(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.1f), "resources/images/icon.png");
-	GUILabel l(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.1f), "click me!");
-	i.keepAspectRatio = true;
-	l.SetColor(sf::Color::White);
-	GUIButton b(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.1f), &i, &l);
 	while (window->isOpen())
 	{
 		InputHandler::ProcessEvents();
@@ -50,10 +45,8 @@ int main()
 		}
 		int fps = (int)(1.f / (lengthsSum / frameLengths.size()));
 		fpsLabel.value = std::to_string(fps) + " fps";
-		b.Update(dt);
 		window->clear(sf::Color::Black);
 		fpsLabel.Render();
-		b.Render();
 		window->display();
 	}
 	return 0;
