@@ -13,6 +13,7 @@ int height = 500;
 //the main procedure that runs the program
 int main()
 {
+	srand(time(NULL));
 	//initialise the window object
 	window = std::make_unique<sf::RenderWindow>();
 	//make a 800x500 window with the title "Cosmic Construction"
@@ -32,6 +33,7 @@ int main()
 
 	fpsLabel.origin = sf::Vector2f(0.f, 0.f);
 
+	GUIGalaxy g = GUIGalaxy();
 	while (window->isOpen())
 	{
 		InputHandler::ProcessEvents();
@@ -45,8 +47,10 @@ int main()
 		}
 		int fps = (int)(1.f / (lengthsSum / frameLengths.size()));
 		fpsLabel.value = std::to_string(fps) + " fps";
+		g.Update(dt);
 		window->clear(sf::Color::Black);
 		fpsLabel.Render();
+		g.Render();
 		window->display();
 	}
 	return 0;
