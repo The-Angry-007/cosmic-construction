@@ -44,9 +44,7 @@ void GUIImage::Render()
 	sprite.setPosition(cPos);
 	sf::FloatRect bounds = sprite.getLocalBounds();
 	sprite.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
-	hitbox->shapes[0]->currentSize = sf::Vector2f(bounds.width * sprite.getScale().x / 2.f, bounds.height * sprite.getScale().y / 2.f);
-	hitbox->shapes[0]->currentPos = cPos;
-	hitbox->Display({});
+	hitbox->shapes[0]->currentSize = sf::Vector2f(bounds.width * sprite.getScale().x / 2.f / width, bounds.height * sprite.getScale().y / 2.f / height);
 
 	window->draw(sprite);
 }

@@ -33,7 +33,6 @@ int main()
 	fpsLabel.origin = sf::Vector2f(0.f, 0.f);
 
 	GUIImage i(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.1f), "resources/images/icon.png");
-	GUIPanel p(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.1f), sf::Color::Blue);
 	GUILabel l(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.1f), "click me!");
 	i.keepAspectRatio = true;
 	l.SetColor(sf::Color::White);
@@ -54,7 +53,6 @@ int main()
 		b.Update(dt);
 		window->clear(sf::Color::Black);
 		fpsLabel.Render();
-		p.Render();
 		b.Render();
 		window->display();
 	}
