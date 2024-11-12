@@ -12,6 +12,8 @@ GUIImage::GUIImage(sf::Vector2f position, sf::Vector2f size, std::string path)
 	}
 	sprite.setTexture(texture);
 	keepAspectRatio = false;
+	hitbox = new Hitbox(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.f, 1.f));
+	hitbox->AddShape(new HitboxRect(position, size));
 }
 void GUIImage::Render()
 {
