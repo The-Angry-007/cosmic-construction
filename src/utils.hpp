@@ -7,3 +7,7 @@ extern bool RectIntersectsCircle(sf::Vector2f pos, float r, sf::FloatRect rect);
 extern bool CircleIntersectsCircle(sf::Vector2f pos1, float r1, sf::Vector2f pos2, float r2);
 
 float clamp(float val, float min, float max);
+
+extern float Lerp(float a, float b, float t);
+
+extern sf::Vector2f Lerp(sf::Vector2f a, sf::Vector2f b, float t);

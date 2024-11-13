@@ -61,3 +61,13 @@ float clamp(float val, float min, float max)
 	}
 	return val;
 }
+
+float Lerp(float a, float b, float t)
+{
+	return a + (b - a) * t;
+}
+
+sf::Vector2f Lerp(sf::Vector2f a, sf::Vector2f b, float t)
+{
+	return a + (b - a) * t;
+}

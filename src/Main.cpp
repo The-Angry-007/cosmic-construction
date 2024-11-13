@@ -30,9 +30,11 @@ int main()
 	int numFrames = 60;
 	sf::Clock deltaClock;
 	GUILabel fpsLabel(sf::Vector2f(0.1f, 0.05f), sf::Vector2f(0.1f, 0.05f), "");
-
 	fpsLabel.origin = sf::Vector2f(0.f, 0.f);
-
+	GUIPanel p(sf::Vector2f(0, 0), sf::Vector2f(0.5f, 0.1f), sf::Color(100, 100, 100));
+	GUIPanel p2(sf::Vector2f(0, 0), sf::Vector2f(0.5f, 0.1f), sf::Color(150, 150, 150));
+	GUIPanel p3(sf::Vector2f(0, 0), sf::Vector2f(0.15f, 0.15f), sf::Color(255, 255, 255));
+	GUISlider s(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.1f), &p3, &p, &p2);
 	deltaClock.restart();
 	while (window->isOpen())
 	{
@@ -48,6 +50,7 @@ int main()
 		int fps = (int)(1.f / (lengthsSum / frameLengths.size()));
 		fpsLabel.value = std::to_string(fps) + " fps";
 		window->clear(sf::Color::Black);
+		s.Render();
 		fpsLabel.Render();
 		window->display();
 	}
