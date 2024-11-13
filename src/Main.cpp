@@ -34,6 +34,7 @@ int main()
 	fpsLabel.origin = sf::Vector2f(0.f, 0.f);
 
 	GUIGalaxy g = GUIGalaxy();
+	deltaClock.restart();
 	while (window->isOpen())
 	{
 		InputHandler::ProcessEvents();
@@ -49,8 +50,9 @@ int main()
 		fpsLabel.value = std::to_string(fps) + " fps";
 		g.Update(dt);
 		window->clear(sf::Color::Black);
-		fpsLabel.Render();
 		g.Render();
+
+		fpsLabel.Render();
 		window->display();
 	}
 	return 0;
