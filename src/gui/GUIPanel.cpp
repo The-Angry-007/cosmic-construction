@@ -17,6 +17,8 @@ GUIPanel::GUIPanel(sf::Vector2f position, sf::Vector2f size, sf::Color color)
 
 void GUIPanel::Update(float dt)
 {
+	hitbox->shapes[0]->currentPos = position;
+	hitbox->shapes[0]->currentSize = size;
 }
 
 void GUIPanel::Render()
