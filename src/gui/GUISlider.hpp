@@ -12,9 +12,11 @@ public:
 	GUIObject* completion;
 	//how far over the knob is from 0 to 1
 	float value;
+	bool selected;
 
 	void Update(float dt);
 	void Render();
+	void AdjustFromVal();
 	GUISlider(sf::Vector2f position, sf::Vector2f size, GUIObject* knob, GUIObject* background, GUIObject* completion);
 	~GUISlider();
 };

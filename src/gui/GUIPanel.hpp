@@ -5,6 +5,8 @@ class GUIPanel : public GUIObject
 public:
 	sf::Color color;
 	sf::RectangleShape rect;
+	bool keepAspectRatio;
+	float ratio;
 
 	void SetColor(sf::Color color);
 	void Render();
