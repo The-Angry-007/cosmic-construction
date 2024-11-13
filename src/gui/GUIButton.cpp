@@ -23,6 +23,7 @@ void GUIButton::Render()
 }
 void GUIButton::Update(float dt)
 {
+
 	if (bgObj->isClicked() && clickFunc != nullptr)
 	{
 		clickFunc(this);

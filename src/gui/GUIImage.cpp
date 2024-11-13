@@ -17,6 +17,7 @@ GUIImage::GUIImage(sf::Vector2f position, sf::Vector2f size, std::string path)
 }
 void GUIImage::Render()
 {
+	hitbox->shapes[0]->currentPos = position;
 	sf::Vector2u texSize = texture.getSize();
 	sf::Vector2f cPos(position.x * width, position.y * height);
 	sf::Vector2f cSize(size.x * width, size.y * height);
