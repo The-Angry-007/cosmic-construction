@@ -3,8 +3,8 @@
 #define PI 3.14159265f;
 GUIGalaxy::GUIGalaxy()
 {
-	float dir = (float)(rand() % 360) / 180.f * PI;
-	vel = sf::Vector2f(cos(dir), sin(dir));
+	float mag = sqrt(0.5);
+	vel = sf::Vector2f(mag, mag);
 	if (!texture.loadFromFile("resources/images/galaxy.png"))
 	{
 		std::cout << "galaxy failed to load in GUI galaxy" << std::endl;
@@ -12,8 +12,8 @@ GUIGalaxy::GUIGalaxy()
 		exit(1);
 	}
 	sprite.setTexture(texture);
-	speed = 5.f;
-	size = sf::Vector2f(0.5f, 0.5f);
+	speed = 12.f;
+	size = sf::Vector2f(1f, 1f);
 	sprite.setScale(size.x, size.y);
 	sf::FloatRect bounds = sprite.getLocalBounds();
 	position = sf::Vector2f(0.f, 0.f);
@@ -23,6 +23,7 @@ GUIGalaxy::GUIGalaxy()
 void GUIGalaxy::Update(float dt)
 {
 	position += vel * dt * speed;
+	sprite.setPosition(position);
 	//half the size of the texture
 	sf::FloatRect bounds = sprite.getGlobalBounds();
 	if (bounds.top > 0)
