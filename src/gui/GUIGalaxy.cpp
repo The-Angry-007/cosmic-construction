@@ -13,7 +13,7 @@ GUIGalaxy::GUIGalaxy()
 	}
 	sprite.setTexture(texture);
 	speed = 12.f;
-	size = sf::Vector2f(1f, 1f);
+	size = sf::Vector2f(1.f, 1.f);
 	sprite.setScale(size.x, size.y);
 	sf::FloatRect bounds = sprite.getLocalBounds();
 	position = sf::Vector2f(0.f, 0.f);
