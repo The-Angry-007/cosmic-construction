@@ -15,6 +15,7 @@ int main()
 {
 	srand(time(NULL));
 	//initialise the window object
+
 	window = std::make_unique<sf::RenderWindow>();
 	//make a 800x500 window with the title "Cosmic Construction"
 	window->create(sf::VideoMode(width, height), "Cosmic Construction");
@@ -31,10 +32,9 @@ int main()
 	sf::Clock deltaClock;
 	GUILabel fpsLabel(sf::Vector2f(0.1f, 0.05f), sf::Vector2f(0.1f, 0.05f), "");
 	fpsLabel.origin = sf::Vector2f(0.f, 0.f);
-	GUIPanel p(sf::Vector2f(0, 0), sf::Vector2f(0.5f, 0.1f), sf::Color(100, 100, 100));
-	GUIPanel p2(sf::Vector2f(0, 0), sf::Vector2f(0.5f, 0.1f), sf::Color(150, 150, 150));
-	GUIPanel p3(sf::Vector2f(0, 0), sf::Vector2f(0.1f, 0.15f), sf::Color(255, 255, 255));
-	GUISlider s(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.1f), &p3, &p, &p2);
+	GUIInputField i(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.1f));
+	i.SetTextCol(sf::Color::White);
+	i.value = "hello world!";
 	deltaClock.restart();
 	while (window->isOpen())
 	{
@@ -51,10 +51,11 @@ int main()
 		}
 		int fps = (int)(1.f / (lengthsSum / frameLengths.size()));
 		fpsLabel.value = std::to_string(fps) + " fps";
-		s.Update(dt);
+		i.Update(dt);
+
 		window->clear(sf::Color::Black);
-		s.Render();
 		fpsLabel.Render();
+		i.Render();
 		window->display();
 	}
 	return 0;

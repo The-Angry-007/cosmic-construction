@@ -48,7 +48,6 @@ void GUISlider::Update(float dt)
 			x = position.x + size.x;
 		}
 		value = (x - position.x + size.x) / (2 * size.x);
-		std::cout << value << std::endl;
 		if (InputHandler::mbReleased(sf::Mouse::Button::Left))
 		{
 			selected = false;
@@ -58,7 +57,6 @@ void GUISlider::Update(float dt)
 	{
 		if (knob->isClicked())
 		{
-			std::cout << "slider selected" << std::endl;
 
 			selected = true;
 		}

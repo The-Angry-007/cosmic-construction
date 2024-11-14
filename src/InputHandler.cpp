@@ -127,7 +127,6 @@ void InputHandler::ProcessEvents()
 		}
 		else if (event.type == event.MouseWheelScrolled)
 		{
-			std::cout << event.mouseWheelScroll.wheel << std::endl;
 			if (event.mouseWheelScroll.wheel == sf::Mouse::Wheel::HorizontalWheel)
 			{
 				scroll.x = event.mouseWheelScroll.delta;
