@@ -32,6 +32,7 @@ int main()
 	sf::Clock deltaClock;
 	GUILabel fpsLabel(sf::Vector2f(0.1f, 0.05f), sf::Vector2f(0.1f, 0.05f), "");
 	fpsLabel.origin = sf::Vector2f(0.f, 0.f);
+	GUIPanel p(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.1f), sf::Color(100, 100, 100));
 	GUIInputField i(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.1f));
 	i.SetTextCol(sf::Color::White);
 	i.value = "hello world!";
@@ -55,6 +56,7 @@ int main()
 
 		window->clear(sf::Color::Black);
 		fpsLabel.Render();
+		p.Render();
 		i.Render();
 		window->display();
 	}

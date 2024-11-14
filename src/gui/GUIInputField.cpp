@@ -40,7 +40,7 @@ void GUIInputField::Update(float dt)
 		{
 			if (t[i] != '\b')
 			{
-				value += t[i];
+				value.insert(value.begin() + cursorPos + 1, t[i]);
 				cursorPos++;
 			}
 			else
@@ -61,7 +61,7 @@ void GUIInputField::Update(float dt)
 				displayValue += '|';
 			}
 		}
-		if (cursorPos == value.length() - 1)
+		if (value.length() == 0)
 		{
 			displayValue += "|";
 		}
@@ -69,6 +69,22 @@ void GUIInputField::Update(float dt)
 		{
 			focused = false;
 			displayValue = value;
+		}
+		if (InputHandler::keyPressed(sf::Keyboard::Left))
+		{
+			cursorPos--;
+			if (cursorPos < -1)
+			{
+				cursorPos = -1;
+			}
+		}
+		if (InputHandler::keyPressed(sf::Keyboard::Right))
+		{
+			cursorPos++;
+			if (cursorPos > value.length() - 1)
+			{
+				cursorPos--;
+			}
 		}
 	}
 }
