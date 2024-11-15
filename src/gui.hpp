@@ -1,5 +1,7 @@
+#include "gui/GUI.hpp"
 #include "gui/GUIButton.hpp"
 #include "gui/GUIGalaxy.hpp"
+#include "gui/GUIHandler.hpp"
 #include "gui/GUIImage.hpp"
 #include "gui/GUIInputField.hpp"
 #include "gui/GUILabel.hpp"
