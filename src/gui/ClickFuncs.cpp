@@ -8,5 +8,5 @@ void ClickFuncs::blankFunc(GUIButton* button)
 
 void ClickFuncs::NextGUI(GUIButton* button)
 {
-	handler.activeGui++;
+	handler.OpenGUI(1);
 }
