@@ -45,10 +45,6 @@ void GUI::Update(float dt)
 	for (uint i = 0; i < GUIObjects.size(); i++)
 	{
 		GUIObjects[i]->Update(dt);
-		if (GUIObjects[i]->isBlockingMouse())
-		{
-			InputHandler::mouseIsBlocked = true;
-		}
 	}
 }
 

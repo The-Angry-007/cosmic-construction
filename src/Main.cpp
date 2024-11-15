@@ -76,7 +76,7 @@ int main()
 			frameLengths.erase(frameLengths.begin());
 		}
 		int fps = (int)(1.f / (lengthsSum / frameLengths.size()));
-		fpsLabel.value = std::to_string(fps) + " fps";
+		fpsLabel.value = std::to_string(handler.openedGuis.size());
 		handler.Update(dt);
 
 		window->clear(sf::Color::Black);
