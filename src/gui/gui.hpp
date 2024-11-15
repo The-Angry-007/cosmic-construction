@@ -1,8 +1,16 @@
-#include "GUIButton.hpp"
-#include "GUIGalaxy.hpp"
-#include "GUIImage.hpp"
-#include "GUIInputField.hpp"
-#include "GUILabel.hpp"
+#pragma once
 #include "GUIObject.hpp"
-#include "GUIPanel.hpp"
-#include "GUISlider.hpp"
+class GUI
+{
+public:
+	std::vector<GUIObject*> GUIObjects;
+
+	void Render();
+	void Update(float dt);
+	void AddObject(GUIObject* object);
+	void InsertObject(GUIObject* object, int index);
+	int GetIndex(GUIObject* object);
+	void RemoveObject(int index);
+	GUI();
+	~GUI();
+};

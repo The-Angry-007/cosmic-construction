@@ -1,5 +1,5 @@
 #pragma once
-#include "hitboxes/Hitboxes.hpp"
+#include "hitboxes.hpp"
 class GUIObject
 {
 public:

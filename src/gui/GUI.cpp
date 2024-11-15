@@ -1,0 +1,39 @@
+#include "GUI.hpp"
+
+GUI::GUI()
+{
+}
+
+void GUI::AddObject(GUIObject* object)
+{
+	GUIObjects.push_back(object);
+}
+void GUI::InsertObject(GUIObject* object, int index)
+{
+	GUIObjects.insert(GUIObjects.begin() + index, object);
+}
+
+//basic linear search algorithm
+int GUI::GetIndex(GUIObject* object)
+{
+	for (uint i = 0; i < GUIObjects.size(); i++)
+	{
+		if (GUIObjects[i] == object)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+void GUI::RemoveObject(int index)
+{
+	delete GUIObjects[index];
+	GUIObjects.erase(GUIObjects.begin() + index);
+}
+GUI::~GUI()
+{
+	for (uint i = 0; i < GUIObjects.size(); i++)
+	{
+		delete GUIObjects[i];
+	}
+}

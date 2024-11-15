@@ -1,7 +1,7 @@
 #include "Main.hpp"
 #include "InputHandler.hpp"
-#include "gui/gui.hpp"
-#include "hitboxes/Hitboxes.hpp"
+#include "gui.hpp"
+#include "hitboxes.hpp"
 #include <memory>
 
 //a unique pointer to the window object; this is unique to prevent accidentally creating multiple windows
