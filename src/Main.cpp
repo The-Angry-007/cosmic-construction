@@ -10,7 +10,7 @@ std::unique_ptr<sf::RenderWindow> window;
 int width = 800;
 int height = 500;
 
-GUIHandler handler;
+GUIHandler handler = GUIHandler();
 
 //the main procedure that runs the program
 int main()
@@ -35,7 +35,7 @@ int main()
 	GUILabel fpsLabel(sf::Vector2f(0.1f, 0.05f), sf::Vector2f(0.1f, 0.05f), "");
 	fpsLabel.origin = sf::Vector2f(0.f, 0.f);
 
-	GUI gui1;
+	GUI gui1 = GUI();
 	GUIPanel p(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.1f), sf::Color(100, 100, 100));
 	GUIInputField i(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.1f));
 	GUIPanel p2(sf::Vector2f(0.8f, 0.8f), sf::Vector2f(0.1f, 0.1f), sf::Color(50, 50, 50));
@@ -47,7 +47,7 @@ int main()
 	gui1.AddObject(&p);
 	gui1.AddObject(&i);
 	gui1.AddObject(&b);
-	GUI gui2;
+	GUI gui2 = GUI();
 
 	GUIPanel p3(sf::Vector2f(0.8f, 0.8f), sf::Vector2f(0.1f, 0.1f), sf::Color(50, 50, 50));
 	GUILabel text2(sf::Vector2f(0.8f, 0.8f), sf::Vector2f(0.1f, 0.1f), "switch");

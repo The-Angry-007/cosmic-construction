@@ -38,3 +38,8 @@ void GUIHandler::Render()
 {
 	guis[activeGui]->Render();
 }
+
+GUI* GUIHandler::GetOpenGUI()
+{
+	return guis[activeGui];
+}

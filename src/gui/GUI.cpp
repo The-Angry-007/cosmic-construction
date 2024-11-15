@@ -3,6 +3,7 @@
 
 GUI::GUI()
 {
+	GUIObjects = {};
 }
 
 void GUI::AddObject(GUIObject* object)

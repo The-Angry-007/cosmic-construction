@@ -2,6 +2,6 @@
 #include "GUIButton.hpp"
 namespace ClickFuncs
 {
-void blankFunc(GUIButton* button);
-void NextGUI(GUIButton* button);
+void blankFunc();
+void NextGUI();
 }
