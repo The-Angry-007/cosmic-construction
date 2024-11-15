@@ -17,7 +17,6 @@ GUIInputField::GUIInputField(sf::Vector2f position, sf::Vector2f size)
 
 void GUIInputField::Update(float dt)
 {
-	std::cout << cursorPos << std::endl;
 	if (!focused)
 	{
 		displayValue = value;

@@ -2,6 +2,8 @@
 
 GUIHandler::GUIHandler()
 {
+	activeGui = 0;
+	openedGuis = { 0 };
 }
 
 GUIHandler::~GUIHandler()
@@ -15,7 +17,7 @@ void GUIHandler::OpenGUI(int GUI)
 }
 void GUIHandler::GoBack()
 {
-	if (openedGuis.size() > 0)
+	if (openedGuis.size() > 1)
 	{
 		openedGuis.erase(openedGuis.end() - 1);
 		activeGui = openedGuis[openedGuis.size() - 1];
