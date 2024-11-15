@@ -50,3 +50,11 @@ void GUI::Update(float dt)
 		}
 	}
 }
+
+void GUI::Render()
+{
+	for (uint i = 0; i < GUIObjects.size(); i++)
+	{
+		GUIObjects[i]->Render();
+	}
+}

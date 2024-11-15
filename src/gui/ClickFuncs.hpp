@@ -1,5 +1,5 @@
 #pragma once
-#include "gui.hpp"
+#include "GUIButton.hpp"
 namespace ClickFuncs
 {
 void blankFunc(GUIButton* button);
