@@ -4,6 +4,7 @@ GUIHandler::GUIHandler()
 {
 	activeGui = 0;
 	openedGuis = { 0 };
+	guis = {};
 }
 
 GUIHandler::~GUIHandler()
@@ -24,16 +25,16 @@ void GUIHandler::GoBack()
 	}
 }
 
-void GUIHandler::AddGUI(GUI gui)
+void GUIHandler::AddGUI(GUI* gui)
 {
 	guis.push_back(gui);
 }
 void GUIHandler::Update(float dt)
 {
-	guis[activeGui].Update(dt);
+	guis[activeGui]->Update(dt);
 }
 
 void GUIHandler::Render()
 {
-	guis[activeGui].Render();
+	guis[activeGui]->Render();
 }

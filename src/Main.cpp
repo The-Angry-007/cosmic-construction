@@ -42,20 +42,25 @@ int main()
 	GUILabel text(sf::Vector2f(0.8f, 0.8f), sf::Vector2f(0.1f, 0.1f), "go back");
 	GUIButton b(sf::Vector2f(0.8f, 0.8f), sf::Vector2f(0.1f, 0.1f), &p2, &text);
 	b.clickFunc = std::bind(&GUIHandler::GoBack, &handler);
-
 	i.SetTextCol(sf::Color::White);
 	i.value = "hello world!";
 	gui1.AddObject(&p);
 	gui1.AddObject(&i);
 	gui1.AddObject(&b);
 	GUI gui2;
+
 	GUIPanel p3(sf::Vector2f(0.8f, 0.8f), sf::Vector2f(0.1f, 0.1f), sf::Color(50, 50, 50));
 	GUILabel text2(sf::Vector2f(0.8f, 0.8f), sf::Vector2f(0.1f, 0.1f), "switch");
 	GUIButton b2(sf::Vector2f(0.8f, 0.8f), sf::Vector2f(0.1f, 0.1f), &p3, &text2);
 	b2.clickFunc = ClickFuncs::NextGUI;
+
 	gui2.AddObject(&b2);
-	handler.AddGUI(gui2);
-	handler.AddGUI(gui1);
+
+	handler.AddGUI(&gui2);
+
+	handler.AddGUI(&gui1);
+
+	std::cout << handler.guis.size() << " " << handler.activeGui << std::endl;
 	deltaClock.restart();
 	while (window->isOpen())
 	{
