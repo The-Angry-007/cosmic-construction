@@ -54,8 +54,13 @@ void GUIHandler::InitGUIS()
 	//MAIN MENU
 	{
 		GUI* g = new GUI();
+		//galaxy background
 		GUIGalaxy* galaxy = new GUIGalaxy();
 		g->AddObject(galaxy);
+		//cosmic construction logo
+		GUIImage* logo = new GUIImage(sf::Vector2f(0.5f, 0.27f), sf::Vector2f(0.5f, 0.27f), "resources/images/cosmic construction logo 3.png");
+		logo->keepAspectRatio = true;
+		g->AddObject(logo);
 		guis.push_back(g);
 	}
 }

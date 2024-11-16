@@ -55,8 +55,9 @@ int main()
 		fpsLabel.value = std::to_string(fps) + " fps";
 		guihandler.Update(dt);
 		window->clear(sf::Color::Black);
-		fpsLabel.Render();
 		guihandler.Render();
+		fpsLabel.Render();
+
 		window->display();
 	}
 	return 0;
