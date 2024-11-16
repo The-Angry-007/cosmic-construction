@@ -5,8 +5,8 @@ class GUI
 public:
 	std::vector<GUIObject*> GUIObjects;
 
-	void Render();
-	void Update(float dt);
+	virtual void Render();
+	virtual void Update(float dt);
 	void AddObject(GUIObject* object);
 	void InsertObject(GUIObject* object, int index);
 	int GetIndex(GUIObject* object);
