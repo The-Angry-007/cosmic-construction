@@ -16,7 +16,7 @@ GUIGalaxy::GUIGalaxy()
 	size = sf::Vector2f(1.f, 1.f);
 	sprite.setScale(size.x, size.y);
 	sf::FloatRect bounds = sprite.getLocalBounds();
-	position = sf::Vector2f(0.f, 0.f);
+	position = sf::Vector2f(-bounds.width / 2.f, -bounds.height / 2.f);
 	sprite.setPosition(position);
 	sprite.setOrigin(sf::Vector2f(0.f, 0.f));
 }

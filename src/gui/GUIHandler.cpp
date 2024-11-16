@@ -58,7 +58,7 @@ void GUIHandler::InitGUIS()
 		GUIGalaxy* galaxy = new GUIGalaxy();
 		g->AddObject(galaxy);
 		//cosmic construction logo
-		GUIImage* logo = new GUIImage(sf::Vector2f(0.5f, 0.27f), sf::Vector2f(0.5f, 0.27f), "resources/images/cosmic construction logo 3.png");
+		GUIImage* logo = new GUIImage(sf::Vector2f(0.5f, 0.3f), sf::Vector2f(0.5f, 0.3f), "resources/images/cosmic construction logo 3.png");
 		logo->keepAspectRatio = true;
 		g->AddObject(logo);
 		//new game, load game, settings, help buttons
@@ -72,7 +72,7 @@ void GUIHandler::InitGUIS()
 			float y = Lerp(top, bottom, i / 3.f);
 			// GUIPanel* p1 = new GUIPanel(sf::Vector2f(0.5f, y), sf::Vector2f(width, height), sf::Color(100, 100, 100));
 			GUIImage* p1 = new GUIImage(sf::Vector2f(0.5f, y), sf::Vector2f(width, height), "resources/images/buttonBezels.png");
-			GUILabel* l1 = new GUILabel(sf::Vector2f(0.5f, y), sf::Vector2f(width, height), labels[i]);
+			GUILabel* l1 = new GUILabel(sf::Vector2f(0.5f, y), sf::Vector2f(width - 0.01f, height - 0.01f), labels[i]);
 			l1->SetColor(sf::Color::Black);
 			GUIButton* b1 = new GUIButton(sf::Vector2f(0.5f, y), sf::Vector2f(width, height), p1, l1);
 			g->AddObject(b1);
