@@ -1,3 +1,5 @@
-[ ] need to add guilabel
-	[ ] make origin thingy work
-[ ]
+[ ] finish new game gui
+  [ ] add checkboxes
+[ ] finish load game gui
+  [ ] add save slot class
+    [ ] make any gui object capable of having origin

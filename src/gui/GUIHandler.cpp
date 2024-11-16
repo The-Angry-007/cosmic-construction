@@ -114,6 +114,8 @@ void GUIHandler::InitGUIS()
 		nameField->value = "Enter Save Name";
 		g->AddObject(namePanel);
 		g->AddObject(nameField);
+		GUICheckbox* c = new GUICheckbox(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.1f, 0.1f), sf::Color(125, 125, 125));
+		g->AddObject(c);
 		guis.push_back(g);
 	}
 	//LOAD GAME MENU
