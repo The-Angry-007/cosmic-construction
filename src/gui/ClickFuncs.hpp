@@ -7,4 +7,5 @@ void OpenNewGame();
 void OpenLoadGame();
 void OpenSettings();
 void OpenHelp();
+
 }

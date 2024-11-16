@@ -13,12 +13,13 @@ GUIGalaxy::GUIGalaxy()
 	}
 	sprite.setTexture(texture);
 	speed = 12.f;
-	size = sf::Vector2f(1.f, 1.f);
+	size = sf::Vector2f(.8f, .8f);
 	sprite.setScale(size.x, size.y);
 	sf::FloatRect bounds = sprite.getLocalBounds();
-	position = sf::Vector2f(-bounds.width / 2.f, -bounds.height / 2.f);
-	sprite.setPosition(position);
 	sprite.setOrigin(sf::Vector2f(0.f, 0.f));
+
+	position = sf::Vector2f(0.f, 0.f);
+	sprite.setPosition(position);
 }
 void GUIGalaxy::Update(float dt)
 {
