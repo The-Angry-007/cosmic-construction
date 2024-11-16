@@ -44,11 +44,23 @@ GUI* GUIHandler::GetOpenGUI()
 	return guis[activeGui];
 }
 
+//the guis are in the following order:
+/*
+0: main menu
+1: new game menu
+2: load game menu
+3: settings menu
+4: help menu
+5: main game gui
+6: pause menu
+7: tech tree
+*/
 void GUIHandler::InitGUIS()
 {
 	activeGui = 0;
 	openedGuis = { 0 };
 	guis = {};
+	std::function<void()> backfunc = std::bind(&GUIHandler::GoBack, this);
 	//some weird C++ syntax - using {} creates a new local scope
 	//this is done to have multiple variables under the same name within this function (since each is temporary)
 	//MAIN MENU
@@ -70,6 +82,7 @@ void GUIHandler::InitGUIS()
 		float height = 0.033f;
 		float width = 0.16f;
 		std::string labels[4] = { "New Game", "Load Game", "Settings", "Help" };
+		std::function<void()> funcs[4] = { ClickFuncs::OpenNewGame, ClickFuncs::OpenLoadGame, ClickFuncs::OpenSettings, ClickFuncs::OpenHelp };
 		for (int i = 0; i < 4; i++)
 		{
 			float y = Lerp(top, bottom, i / 3.f);
@@ -78,9 +91,58 @@ void GUIHandler::InitGUIS()
 			GUILabel* l1 = new GUILabel(sf::Vector2f(0.5f, y), sf::Vector2f(width - 0.01f, height - 0.01f), labels[i]);
 			l1->SetColor(sf::Color::Black);
 			GUIButton* b1 = new GUIButton(sf::Vector2f(0.5f, y), sf::Vector2f(width, height), p1, l1);
+			b1->clickFunc = funcs[i];
 			g->AddObject(b1);
 		}
 
+		guis.push_back(g);
+	}
+	//NEW GAME MENU
+	{
+		GUI* g = new GUI();
+		GUILabel* l = new GUILabel(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.1f), "new game menu");
+		g->AddObject(l);
+		GUIPanel* p = new GUIPanel(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.2f, 0.1f), sf::Color(100, 100, 100));
+		GUILabel* l2 = new GUILabel(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.2f, 0.1f), "go back");
+		GUIButton* b = new GUIButton(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.2f, 0.1f), p, l2);
+		b->clickFunc = backfunc;
+		g->AddObject(b);
+		guis.push_back(g);
+	}
+	//LOAD GAME MENU
+	{
+		GUI* g = new GUI();
+		GUILabel* l = new GUILabel(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.1f), "load game menu");
+		g->AddObject(l);
+		GUIPanel* p = new GUIPanel(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.2f, 0.1f), sf::Color(100, 100, 100));
+		GUILabel* l2 = new GUILabel(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.2f, 0.1f), "go back");
+		GUIButton* b = new GUIButton(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.2f, 0.1f), p, l2);
+		b->clickFunc = backfunc;
+		g->AddObject(b);
+		guis.push_back(g);
+	}
+	//SETTINGS MENU
+	{
+		GUI* g = new GUI();
+		GUILabel* l = new GUILabel(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.1f), "settings menu");
+		g->AddObject(l);
+		GUIPanel* p = new GUIPanel(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.2f, 0.1f), sf::Color(100, 100, 100));
+		GUILabel* l2 = new GUILabel(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.2f, 0.1f), "go back");
+		GUIButton* b = new GUIButton(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.2f, 0.1f), p, l2);
+		b->clickFunc = backfunc;
+		g->AddObject(b);
+		guis.push_back(g);
+	}
+	//HELP MENU
+	{
+		GUI* g = new GUI();
+		GUILabel* l = new GUILabel(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.1f), "help menu");
+		g->AddObject(l);
+		GUIPanel* p = new GUIPanel(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.2f, 0.1f), sf::Color(100, 100, 100));
+		GUILabel* l2 = new GUILabel(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.2f, 0.1f), "go back");
+		GUIButton* b = new GUIButton(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.2f, 0.1f), p, l2);
+		b->clickFunc = backfunc;
+		g->AddObject(b);
 		guis.push_back(g);
 	}
 }

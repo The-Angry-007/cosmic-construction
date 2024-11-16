@@ -32,7 +32,7 @@ int main()
 	//how many frames to average the framerate of, so its smoother and easier to read
 	int numFrames = 60;
 	sf::Clock deltaClock;
-	GUILabel fpsLabel(sf::Vector2f(0.1f, 0.05f), sf::Vector2f(0.1f, 0.05f), "");
+	GUILabel fpsLabel(sf::Vector2f(0.1f, 0.03f), sf::Vector2f(0.1f, 0.03f), "");
 	fpsLabel.origin = sf::Vector2f(0.f, 0.f);
 
 	guihandler.InitGUIS();
