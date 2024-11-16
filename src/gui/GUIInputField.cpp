@@ -6,6 +6,7 @@ GUIInputField::GUIInputField(sf::Vector2f position, sf::Vector2f size)
 	this->size = size;
 	label = new GUILabel(position, size, "");
 	label->SetColor(sf::Color::Black);
+	label->text.setStyle(label->text.Italic);
 	cursorPos = 0;
 	changed = false;
 	focused = false;

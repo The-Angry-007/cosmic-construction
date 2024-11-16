@@ -110,7 +110,7 @@ void GUIHandler::InitGUIS()
 		g->AddObject(newgamelabel);
 		//enter save name input field
 		GUIPanel* namePanel = new GUIPanel(sf::Vector2f(0.5f, 0.23f), sf::Vector2f(0.3f, 0.06f), sf::Color(150, 150, 150));
-		GUIInputField* nameField = new GUIInputField(sf::Vector2f(0.5f, 0.23f), sf::Vector2f(0.25f, 0.055f));
+		GUIInputField* nameField = new GUIInputField(sf::Vector2f(0.5f, 0.23f), sf::Vector2f(0.25f, 0.05f));
 		nameField->value = "Enter Save Name";
 		g->AddObject(namePanel);
 		g->AddObject(nameField);
