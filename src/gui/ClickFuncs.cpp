@@ -22,3 +22,8 @@ void ClickFuncs::OpenHelp()
 {
 	guihandler.OpenGUI(4);
 }
+
+void ClickFuncs::CreateSave()
+{
+	guihandler.OpenGUI(5);
+}
