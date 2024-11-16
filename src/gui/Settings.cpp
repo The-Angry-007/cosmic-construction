@@ -6,11 +6,42 @@ Settings::Settings()
 
 	bgGUI = new GUI();
 	{
-		GUIPanel* p = new GUIPanel(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.4f, 0.4f), sf::Color(100, 100, 100));
+		GUIPanel* dimmer = new GUIPanel(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.5f, 0.5f), sf::Color(0, 0, 0, 150));
+		bgGUI->AddObject(dimmer);
+		GUIPanel* p = new GUIPanel(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.4f, 0.4f), sf::Color(150, 150, 150));
+
 		bgGUI->AddObject(p);
+		GUIPanel* topPanel = new GUIPanel(sf::Vector2f(0.5f, 0.13f), sf::Vector2f(0.4f, 0.03f), sf::Color(125, 125, 125));
+		bgGUI->AddObject(topPanel);
+		GUILabel* optionsLabel = new GUILabel(sf::Vector2f(0.5f, 0.13f), sf::Vector2f(0.9f, 0.025f), "Options");
+		optionsLabel->SetColor(sf::Color::Black);
+		bgGUI->AddObject(optionsLabel);
 	}
 	pageGuis = {};
-	pageGuis.push_back(new GUI());
+	{
+		GUI* g = new GUI();
+		GUIImage* i = new GUIImage(sf::Vector2f(0.33f, 0.22f), sf::Vector2f(0.15f, 0.04f), "resources/images/buttonBezels.png");
+		GUILabel* l = new GUILabel(sf::Vector2f(0.33f, 0.22f), sf::Vector2f(0.15f - 0.01f, 0.04f - 0.01f), "Controls");
+		l->SetColor(sf::Color::Black);
+		GUIButton* b = new GUIButton(sf::Vector2f(0.33f, 0.22f), sf::Vector2f(0.15f, 0.04f), i, l);
+		g->AddObject(b);
+
+		GUIImage* i2 = new GUIImage(sf::Vector2f(0.67f, 0.22f), sf::Vector2f(0.15f, 0.04f), "resources/images/buttonBezels.png");
+		GUILabel* l2 = new GUILabel(sf::Vector2f(0.67f, 0.22f), sf::Vector2f(0.15f - 0.01f, 0.04f - 0.01f), "Audio");
+		l2->SetColor(sf::Color::Black);
+		GUIButton* b2 = new GUIButton(sf::Vector2f(0.67f, 0.22f), sf::Vector2f(0.15f, 0.04f), i2, l2);
+		g->AddObject(b2);
+		GUILabel* l3 = new GUILabel(sf::Vector2f(0.5f, 0.3f), sf::Vector2f(0.35f, 0.025f), "Framerate:");
+		l3->SetColor(sf::Color::Black);
+		g->AddObject(l3);
+
+		GUIPanel* sliderBG = new GUIPanel(sf::Vector2f(0.5f, 0.37f), sf::Vector2f(0.35f, 0.015f), sf::Color(50, 50, 50));
+		GUIImage* sliderKnob = new GUIImage(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.025f, 0.025f), "resources/images/squareButton.png");
+		sliderKnob->keepAspectRatio = true;
+		GUISlider* s = new GUISlider(sf::Vector2f(0.5f, 0.37f), sf::Vector2f(0.35f, 0.015f), sliderKnob, sliderBG, nullptr);
+		g->AddObject(s);
+		pageGuis.push_back(g);
+	}
 	currentGUI = 0;
 }
 
@@ -24,8 +55,8 @@ void Settings::Update(float dt)
 void Settings::Render()
 {
 	behindGUI->Render();
-	// bgGUI->Render();
-	// pageGuis[currentGUI]->Render();
+	bgGUI->Render();
+	pageGuis[currentGUI]->Render();
 }
 
 Settings::~Settings()
