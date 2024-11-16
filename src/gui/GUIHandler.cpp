@@ -160,13 +160,11 @@ void GUIHandler::InitGUIS()
 	//LOAD GAME MENU
 	{
 		GUI* g = new GUI();
-		GUILabel* l = new GUILabel(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.1f), "load game menu");
-		g->AddObject(l);
-		GUIPanel* p = new GUIPanel(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.2f, 0.1f), sf::Color(100, 100, 100));
-		GUILabel* l2 = new GUILabel(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.2f, 0.1f), "go back");
-		GUIButton* b = new GUIButton(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.2f, 0.1f), p, l2);
-		b->clickFunc = backfunc;
-		g->AddObject(b);
+		g->AddObject(galaxy);
+		g->AddObject(dimpanel);
+		//label at the top of the screen that says "load game"
+		GUILabel* newgamelabel = new GUILabel(sf::Vector2f(0.5f, 0.05f), sf::Vector2f(0.5f, 0.03f), "Load Game");
+
 		guis.push_back(g);
 	}
 	//SETTINGS MENU
