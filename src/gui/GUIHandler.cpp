@@ -1,5 +1,5 @@
 #include "../gui.hpp"
-
+#include "utils.hpp"
 GUIHandler::GUIHandler()
 {
 	activeGui = 0;
@@ -66,11 +66,17 @@ void GUIHandler::InitGUIS()
 		float bottom = 0.95f;
 		float height = 0.033f;
 		float width = 0.16f;
-		GUIPanel* p1 = new GUIPanel(sf::Vector2f(0.5f, top), sf::Vector2f(width, height), sf::Color(100, 100, 100));
-		GUILabel* l1 = new GUILabel(sf::Vector2f(0.5f, top), sf::Vector2f(width, height), "New Game");
-		l1->SetColor(sf::Color::Black);
-		GUIButton* b1 = new GUIButton(sf::Vector2f(0.5f, top), sf::Vector2f(width, height), p1, l1);
-		g->AddObject(b1);
+		std::string labels[4] = { "New Game", "Load Game", "Settings", "Help" };
+		for (int i = 0; i < 4; i++)
+		{
+			float y = Lerp(top, bottom, i / 3.f);
+			GUIPanel* p1 = new GUIPanel(sf::Vector2f(0.5f, y), sf::Vector2f(width, height), sf::Color(100, 100, 100));
+			GUILabel* l1 = new GUILabel(sf::Vector2f(0.5f, y), sf::Vector2f(width, height), labels[i]);
+			l1->SetColor(sf::Color::Black);
+			GUIButton* b1 = new GUIButton(sf::Vector2f(0.5f, y), sf::Vector2f(width, height), p1, l1);
+			g->AddObject(b1);
+		}
+
 		guis.push_back(g);
 	}
 }
