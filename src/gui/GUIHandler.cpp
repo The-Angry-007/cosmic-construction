@@ -130,11 +130,11 @@ void GUIHandler::InitGUIS()
 		c2->exclusives = { c1, c3 };
 		c3->exclusives = { c1, c2 };
 
-		GUILabel* l1 = new GUILabel(sf::Vector2f((p1 + p2) / 2.f, 0.4f), sf::Vector2f((p2 - p1 - 2 * 0.0232f) / 2.f, 0.0232f), "Sparce");
+		GUILabel* l1 = new GUILabel(sf::Vector2f((p1 + p2) / 2.f, 0.4f), sf::Vector2f((p2 - p1 - 2 * 0.0232f) / 2.f - 0.01f, 0.0232f), "Sparce");
 		l1->origin = sf::Vector2f(0.f, 0.5f);
-		GUILabel* l2 = new GUILabel(sf::Vector2f((p2 + p3) / 2.f, 0.4f), sf::Vector2f((p3 - p2 - 2 * 0.0232f) / 2.f, 0.0232f), "Fair");
+		GUILabel* l2 = new GUILabel(sf::Vector2f((p2 + p3) / 2.f, 0.4f), sf::Vector2f((p3 - p2 - 2 * 0.0232f) / 2.f - 0.01f, 0.0232f), "Fair");
 		l2->origin = sf::Vector2f(0.f, 0.5f);
-		GUILabel* l3 = new GUILabel(sf::Vector2f((p3 + p4) / 2.f, 0.4f), sf::Vector2f((p4 - p3 - 2 * 0.0232f) / 2.f, 0.0232f), "Plenty");
+		GUILabel* l3 = new GUILabel(sf::Vector2f((p3 + p4) / 2.f, 0.4f), sf::Vector2f((p4 - p3 - 2 * 0.0232f) / 2.f - 0.01f, 0.0232f), "Plenty");
 		l3->origin = sf::Vector2f(0.f, 0.5f);
 		g->AddObject(c1);
 		g->AddObject(c2);
@@ -144,7 +144,7 @@ void GUIHandler::InitGUIS()
 		g->AddObject(l3);
 		//enter seed input field
 		GUIPanel* seedPanel = new GUIPanel(sf::Vector2f(0.5f, 0.6f), sf::Vector2f(0.25f, 0.06f), sf::Color(191, 191, 191));
-		GUIInputField* seedField = new GUIInputField(sf::Vector2f(0.5f, 0.6f), sf::Vector2f(0.2f, 0.05f));
+		GUIInputField* seedField = new GUIInputField(sf::Vector2f(0.5f, 0.6f), sf::Vector2f(0.2f, 0.04f));
 		seedField->value = "Enter Seed";
 		g->AddObject(seedPanel);
 		g->AddObject(seedField);
