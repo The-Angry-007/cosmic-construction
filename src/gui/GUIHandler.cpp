@@ -78,7 +78,7 @@ void GUIHandler::InitGUIS()
 		g->AddObject(logo);
 		//new game, load game, settings, help buttons
 		float top = 0.27f * 2.f + 0.05f;
-		float bottom = 0.95f;
+		float bottom = 0.9f;
 		float height = 0.033f;
 		float width = 0.16f;
 		std::string labels[4] = { "New Game", "Load Game", "Settings", "Help" };
