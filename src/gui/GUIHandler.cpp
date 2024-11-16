@@ -61,6 +61,15 @@ void GUIHandler::InitGUIS()
 		GUIImage* logo = new GUIImage(sf::Vector2f(0.5f, 0.27f), sf::Vector2f(0.5f, 0.27f), "resources/images/cosmic construction logo 3.png");
 		logo->keepAspectRatio = true;
 		g->AddObject(logo);
+		//new game, load game, settings, help buttons
+		float top = 0.27f * 2.f;
+		float bottom = 0.95f;
+		float height = 0.1f;
+		float width = 0.3f;
+		GUIPanel* p1 = new GUIPanel(sf::Vector2f(0.5f, top), sf::Vector2f(width, height), sf::Color(100, 100, 100));
+		GUILabel* l1 = new GUILabel(sf::Vector2f(0.5f, top), sf::Vector2f(width, height), "New Game");
+		GUIButton* b1 = new GUIButton(sf::Vector2f(0.5f, top), sf::Vector2f(width, height), p1, l1);
+		g->AddObject(b1);
 		guis.push_back(g);
 	}
 }
