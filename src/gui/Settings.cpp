@@ -1,4 +1,5 @@
 #include "../gui.hpp"
+#include "Main.hpp"
 Settings::Settings()
 {
 	//this is not used, it is just part of the base class
@@ -40,6 +41,7 @@ Settings::Settings()
 		sliderKnob->keepAspectRatio = true;
 		GUISlider* s = new GUISlider(sf::Vector2f(0.5f, 0.37f), sf::Vector2f(0.35f, 0.015f), sliderKnob, sliderBG, nullptr);
 		g->AddObject(s);
+		s->value = 0.f;
 
 		GUILabel* l4 = new GUILabel(sf::Vector2f(0.5f, 0.45f), sf::Vector2f(0.35f, 0.025f), "Autosave Interval:");
 		l4->SetColor(sf::Color::Black);
@@ -55,6 +57,7 @@ Settings::Settings()
 		l5->SetColor(sf::Color::Black);
 		GUIButton* b3 = new GUIButton(sf::Vector2f(0.5f, 0.75f), sf::Vector2f(0.3f, 0.04f), i3, l5);
 		g->AddObject(b3);
+		b3->clickFunc = std::bind(&GUIHandler::GoBack, &guihandler);
 
 		pageGuis.push_back(g);
 	}
@@ -65,7 +68,40 @@ void Settings::Update(float dt)
 {
 	behindGUI->Update(dt);
 	bgGUI->Update(dt);
-	pageGuis[currentGUI]->Update(dt);
+	GUI* cGUI = pageGuis[currentGUI];
+	cGUI->Update(dt);
+	if (currentGUI == 0)
+	{
+		GUISlider* s1 = dynamic_cast<GUISlider*>(cGUI->GUIObjects[3]);
+		GUILabel* l1 = dynamic_cast<GUILabel*>(cGUI->GUIObjects[2]);
+		int min = 10;
+		int max = 250;
+		int increments = 10;
+		int steps = (max - min) / increments + 2;
+		s1->value = round(s1->value * steps) / steps;
+		s1->AdjustFromVal();
+		if (s1->value < 0.01f)
+		{
+			l1->value = "Framerate: Vertical Sync enabled";
+			window->setVerticalSyncEnabled(true);
+			window->setFramerateLimit(1000);
+			framerate = -1;
+		}
+		else if (s1->value > 0.99f)
+		{
+			l1->value = "Framerate: Unlimited";
+			window->setVerticalSyncEnabled(false);
+			window->setFramerateLimit(10000);
+			framerate = 10000;
+		}
+		else
+		{
+			framerate = round(min + (max - min) * (s1->value - 1.f / steps) / (1.f - (1.f / steps) * 2.f));
+			l1->value = "Framerate: " + std::to_string(framerate);
+			window->setVerticalSyncEnabled(false);
+			window->setFramerateLimit(framerate);
+		}
+	}
 }
 
 void Settings::Render()

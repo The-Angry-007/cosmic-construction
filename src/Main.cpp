@@ -21,7 +21,8 @@ int main()
 	window = std::make_unique<sf::RenderWindow>();
 	//make a 800x500 window with the title "Cosmic Construction"
 	window->create(sf::VideoMode(width, height), "Cosmic Construction");
-	window->setFramerateLimit(120);
+	window->setFramerateLimit(1000);
+	window->setVerticalSyncEnabled(true);
 	//set the icon image that is displayed in the corner of the window
 	sf::Image icon;
 	icon.loadFromFile("resources/images/icon.png");

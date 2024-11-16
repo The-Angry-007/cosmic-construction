@@ -12,6 +12,8 @@ public:
 	std::vector<GUI*> pageGuis;
 	int currentGUI;
 
+	int framerate;
+
 	Settings();
 	~Settings();
 	void Update(float dt);
