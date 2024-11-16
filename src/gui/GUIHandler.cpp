@@ -62,10 +62,10 @@ void GUIHandler::InitGUIS()
 		logo->keepAspectRatio = true;
 		g->AddObject(logo);
 		//new game, load game, settings, help buttons
-		float top = 0.27f * 2.f;
+		float top = 0.27f * 2.f + 0.05f;
 		float bottom = 0.95f;
-		float height = 0.1f;
-		float width = 0.3f;
+		float height = 0.033f;
+		float width = 0.16f;
 		GUIPanel* p1 = new GUIPanel(sf::Vector2f(0.5f, top), sf::Vector2f(width, height), sf::Color(100, 100, 100));
 		GUILabel* l1 = new GUILabel(sf::Vector2f(0.5f, top), sf::Vector2f(width, height), "New Game");
 		GUIButton* b1 = new GUIButton(sf::Vector2f(0.5f, top), sf::Vector2f(width, height), p1, l1);
