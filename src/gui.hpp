@@ -10,3 +10,4 @@
 #include "gui/GUIObject.hpp"
 #include "gui/GUIPanel.hpp"
 #include "gui/GUISlider.hpp"
+#include "gui/Settings.hpp"
