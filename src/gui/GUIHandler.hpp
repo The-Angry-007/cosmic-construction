@@ -14,5 +14,7 @@ public:
 	void AddGUI(GUI* gui);
 	void Update(float dt);
 	void Render();
+	//creates all the gui menus used throughout the game
+	void InitGUIS();
 	GUI* GetOpenGUI();
 };

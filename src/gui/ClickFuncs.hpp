@@ -3,5 +3,4 @@
 namespace ClickFuncs
 {
 void blankFunc();
-void NextGUI();
 }

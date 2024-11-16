@@ -1,4 +1,4 @@
-#include "GUIHandler.hpp"
+#include "../gui.hpp"
 
 GUIHandler::GUIHandler()
 {
@@ -42,4 +42,20 @@ void GUIHandler::Render()
 GUI* GUIHandler::GetOpenGUI()
 {
 	return guis[activeGui];
+}
+
+void GUIHandler::InitGUIS()
+{
+	activeGui = 0;
+	openedGuis = { 0 };
+	guis = {};
+	//some weird C++ syntax - using {} creates a new local scope
+	//this is done to have multiple variables under the same name within this function (since each is temporary)
+	//MAIN MENU
+	{
+		GUI* g = new GUI();
+		GUIGalaxy* galaxy = new GUIGalaxy();
+		g->AddObject(galaxy);
+		guis.push_back(g);
+	}
 }

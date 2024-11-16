@@ -10,7 +10,7 @@ std::unique_ptr<sf::RenderWindow> window;
 int width = 800;
 int height = 500;
 
-GUIHandler handler = GUIHandler();
+GUIHandler guihandler = GUIHandler();
 
 //the main procedure that runs the program
 int main()
@@ -35,32 +35,8 @@ int main()
 	GUILabel fpsLabel(sf::Vector2f(0.1f, 0.05f), sf::Vector2f(0.1f, 0.05f), "");
 	fpsLabel.origin = sf::Vector2f(0.f, 0.f);
 
-	GUI gui1 = GUI();
-	GUIPanel p(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.1f), sf::Color(100, 100, 100));
-	GUIInputField i(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.1f));
-	GUIPanel p2(sf::Vector2f(0.8f, 0.8f), sf::Vector2f(0.1f, 0.1f), sf::Color(50, 50, 50));
-	GUILabel text(sf::Vector2f(0.8f, 0.8f), sf::Vector2f(0.1f, 0.1f), "go back");
-	GUIButton b(sf::Vector2f(0.8f, 0.8f), sf::Vector2f(0.1f, 0.1f), &p2, &text);
-	b.clickFunc = std::bind(&GUIHandler::GoBack, &handler);
-	i.SetTextCol(sf::Color::White);
-	i.value = "hello world!";
-	gui1.AddObject(&p);
-	gui1.AddObject(&i);
-	gui1.AddObject(&b);
-	GUI gui2 = GUI();
+	guihandler.InitGUIS();
 
-	GUIPanel p3(sf::Vector2f(0.8f, 0.8f), sf::Vector2f(0.1f, 0.1f), sf::Color(50, 50, 50));
-	GUILabel text2(sf::Vector2f(0.8f, 0.8f), sf::Vector2f(0.1f, 0.1f), "switch");
-	GUIButton b2(sf::Vector2f(0.8f, 0.8f), sf::Vector2f(0.1f, 0.1f), &p3, &text2);
-	b2.clickFunc = ClickFuncs::NextGUI;
-
-	gui2.AddObject(&b2);
-
-	handler.AddGUI(&gui2);
-
-	handler.AddGUI(&gui1);
-
-	std::cout << handler.guis.size() << " " << handler.activeGui << std::endl;
 	deltaClock.restart();
 	while (window->isOpen())
 	{
@@ -76,12 +52,11 @@ int main()
 			frameLengths.erase(frameLengths.begin());
 		}
 		int fps = (int)(1.f / (lengthsSum / frameLengths.size()));
-		fpsLabel.value = std::to_string(handler.openedGuis.size());
-		handler.Update(dt);
-
+		fpsLabel.value = std::to_string(fps) + " fps";
+		guihandler.Update(dt);
 		window->clear(sf::Color::Black);
 		fpsLabel.Render();
-		handler.Render();
+		guihandler.Render();
 		window->display();
 	}
 	return 0;
