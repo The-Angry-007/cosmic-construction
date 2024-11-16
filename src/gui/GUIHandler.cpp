@@ -68,6 +68,7 @@ void GUIHandler::InitGUIS()
 		float width = 0.16f;
 		GUIPanel* p1 = new GUIPanel(sf::Vector2f(0.5f, top), sf::Vector2f(width, height), sf::Color(100, 100, 100));
 		GUILabel* l1 = new GUILabel(sf::Vector2f(0.5f, top), sf::Vector2f(width, height), "New Game");
+		l1->SetColor(sf::Color::Black);
 		GUIButton* b1 = new GUIButton(sf::Vector2f(0.5f, top), sf::Vector2f(width, height), p1, l1);
 		g->AddObject(b1);
 		guis.push_back(g);
