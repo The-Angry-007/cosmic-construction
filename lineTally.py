@@ -26,4 +26,4 @@ for root, dirs, files in os.walk(directory):
 			total_lines += total
 linesPerFile()
 
-print("Directory contains",total_lines, "lines of code")
+print("Directory contains",total_lines, "lines of code across",len(paths),"files")
