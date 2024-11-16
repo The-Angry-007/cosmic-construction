@@ -57,6 +57,9 @@ void GUIHandler::InitGUIS()
 		//galaxy background
 		GUIGalaxy* galaxy = new GUIGalaxy();
 		g->AddObject(galaxy);
+		//panel to dim background
+		GUIPanel* p = new GUIPanel(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.5f, 0.5f), sf::Color(0, 0, 0, 75));
+		g->AddObject(p);
 		//cosmic construction logo
 		GUIImage* logo = new GUIImage(sf::Vector2f(0.5f, 0.3f), sf::Vector2f(0.5f, 0.3f), "resources/images/cosmic construction logo 3.png");
 		logo->keepAspectRatio = true;
