@@ -11,8 +11,7 @@ GUICheckbox::GUICheckbox(sf::Vector2f position, sf::Vector2f size, sf::Color col
 	bgObj->ratio = 1.f;
 	checkImage->keepAspectRatio = true;
 	blocksMouseInput = true;
-	hitbox = new Hitbox(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.f, 1.f));
-	hitbox->AddShape(new HitboxRect(position, size));
+	hitbox = checkImage->hitbox;
 }
 
 void GUICheckbox::Update(float dt)
@@ -21,14 +20,37 @@ void GUICheckbox::Update(float dt)
 	bgObj->Update(dt);
 	if (isClicked())
 	{
-		checked = !checked;
+		if (checked)
+		{
+			if (exclusives.size() > 0)
+			{
+				return;
+			}
+			else
+			{
+				checked = false;
+			}
+		}
+		else
+		{
+			for (uint i = 0; i < exclusives.size(); i++)
+			{
+				exclusives[i]->checked = false;
+			}
+			checked = true;
+		}
 	}
 }
 void GUICheckbox::Render()
 {
-	bgObj->Render();
 	if (checked)
 	{
+		bgObj->Render();
 		checkImage->Render();
+	}
+	else
+	{
+		checkImage->Render();
+		bgObj->Render();
 	}
 }

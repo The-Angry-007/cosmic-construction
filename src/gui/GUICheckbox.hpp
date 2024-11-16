@@ -9,6 +9,7 @@ public:
 	bool checked;
 	GUIImage* checkImage;
 	GUIPanel* bgObj;
+	std::vector<GUICheckbox*> exclusives;
 
 	GUICheckbox(sf::Vector2f position, sf::Vector2f size, sf::Color col);
 	void Update(float dt);

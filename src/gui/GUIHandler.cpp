@@ -65,7 +65,7 @@ void GUIHandler::InitGUIS()
 	//the galaxy background is outside the scope since multiple guis share it
 	GUIGalaxy* galaxy = new GUIGalaxy();
 	//same thing with the panel to dim the background
-	GUIPanel* dimpanel = new GUIPanel(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.5f, 0.5f), sf::Color(0, 0, 0, 75));
+	GUIPanel* dimpanel = new GUIPanel(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.5f, 0.5f), sf::Color(0, 0, 0, 100));
 
 	//some weird C++ syntax - using {} creates a new local scope
 	//this is done to have multiple variables under the same name within this function (since each is temporary)
@@ -114,8 +114,46 @@ void GUIHandler::InitGUIS()
 		nameField->value = "Enter Save Name";
 		g->AddObject(namePanel);
 		g->AddObject(nameField);
-		GUICheckbox* c = new GUICheckbox(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.1f, 0.1f), sf::Color(166, 166, 166));
-		g->AddObject(c);
+		//the resources checkboxes
+		GUILabel* resourcesLabel = new GUILabel(sf::Vector2f(0.5f, 0.333f), sf::Vector2f(0.278 / 2.f, 0.025f), "Resource Abundancy");
+		g->AddObject(resourcesLabel);
+		float p1 = 0.25f;
+		float p4 = 0.9f;
+
+		float p2 = Lerp(p1, p4, 0.333333f);
+		float p3 = Lerp(p1, p4, 0.666667f);
+		GUICheckbox* c1 = new GUICheckbox(sf::Vector2f(p1, 0.4f), sf::Vector2f(0.02032f, 0.2032f), sf::Color(166, 166, 166));
+		c1->checked = true;
+		GUICheckbox* c2 = new GUICheckbox(sf::Vector2f(p2, 0.4f), sf::Vector2f(0.02032f, 0.2032f), sf::Color(166, 166, 166));
+		GUICheckbox* c3 = new GUICheckbox(sf::Vector2f(p3, 0.4f), sf::Vector2f(0.02032f, 0.2032f), sf::Color(166, 166, 166));
+		c1->exclusives = { c2, c3 };
+		c2->exclusives = { c1, c3 };
+		c3->exclusives = { c1, c2 };
+
+		GUILabel* l1 = new GUILabel(sf::Vector2f((p1 + p2) / 2.f, 0.4f), sf::Vector2f((p2 - p1 - 2 * 0.0232f) / 2.f, 0.0232f), "Sparce");
+		l1->origin = sf::Vector2f(0.f, 0.5f);
+		GUILabel* l2 = new GUILabel(sf::Vector2f((p2 + p3) / 2.f, 0.4f), sf::Vector2f((p3 - p2 - 2 * 0.0232f) / 2.f, 0.0232f), "Fair");
+		l2->origin = sf::Vector2f(0.f, 0.5f);
+		GUILabel* l3 = new GUILabel(sf::Vector2f((p3 + p4) / 2.f, 0.4f), sf::Vector2f((p4 - p3 - 2 * 0.0232f) / 2.f, 0.0232f), "Plenty");
+		l3->origin = sf::Vector2f(0.f, 0.5f);
+		g->AddObject(c1);
+		g->AddObject(c2);
+		g->AddObject(c3);
+		g->AddObject(l1);
+		g->AddObject(l2);
+		g->AddObject(l3);
+		//enter seed input field
+		GUIPanel* seedPanel = new GUIPanel(sf::Vector2f(0.5f, 0.6f), sf::Vector2f(0.25f, 0.06f), sf::Color(191, 191, 191));
+		GUIInputField* seedField = new GUIInputField(sf::Vector2f(0.5f, 0.6f), sf::Vector2f(0.2f, 0.05f));
+		seedField->value = "Enter Seed";
+		g->AddObject(seedPanel);
+		g->AddObject(seedField);
+		//create save button
+		GUIImage* i = new GUIImage(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.3f, 0.05f), "resources/images/buttonBezels.png");
+		GUILabel* l = new GUILabel(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.25f, 0.025f), "Create Save");
+		l->SetColor(sf::Color::Black);
+		GUIButton* b = new GUIButton(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.3f, 0.05f), i, l);
+		g->AddObject(b);
 		guis.push_back(g);
 	}
 	//LOAD GAME MENU
