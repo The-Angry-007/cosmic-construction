@@ -13,6 +13,7 @@ public:
 	int currentGUI;
 
 	int framerate;
+	int saveInterval;
 
 	Settings();
 	~Settings();

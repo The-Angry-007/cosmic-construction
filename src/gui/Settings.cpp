@@ -54,6 +54,10 @@ Settings::Settings()
 		sliderKnob2->keepAspectRatio = true;
 		GUISlider* s2 = new GUISlider(sf::Vector2f(0.5f, 0.53f), sf::Vector2f(0.35f, 0.015f), sliderKnob2, sliderBG2, nullptr);
 		g->AddObject(s2);
+		s2->minVal = 5;
+		s2->maxVal = 65;
+		s2->numSteps = 12;
+		s2->value = 0.f;
 
 		GUIImage* i3 = new GUIImage(sf::Vector2f(0.5f, 0.75f), sf::Vector2f(0.3f, 0.04f), "resources/images/buttonBezels.png");
 		GUILabel* l5 = new GUILabel(sf::Vector2f(0.5f, 0.75f), sf::Vector2f(0.3f - 0.01f, 0.04f - 0.01f), "Go Back");
@@ -94,9 +98,21 @@ void Settings::Update(float dt)
 		else
 		{
 			framerate = round(s1->pValue);
-			l1->value = "Framerate: " + std::to_string(framerate);
+			l1->value = "Framerate: " + std::to_string(framerate) + " fps";
 			window->setVerticalSyncEnabled(false);
 			window->setFramerateLimit(framerate);
+		}
+		GUISlider* s2 = dynamic_cast<GUISlider*>(cGUI->GUIObjects[5]);
+		GUILabel* l2 = dynamic_cast<GUILabel*>(cGUI->GUIObjects[4]);
+		if (s2->value > 0.99f)
+		{
+			saveInterval = -1;
+			l2->value = "Autosave Interval: Never";
+		}
+		else
+		{
+			saveInterval = s2->pValue;
+			l2->value = "Autosave Interval: " + std::to_string(saveInterval) + " minutes";
 		}
 	}
 }
