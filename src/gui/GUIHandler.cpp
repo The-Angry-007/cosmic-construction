@@ -1,4 +1,6 @@
 #include "../gui.hpp"
+#include "InputHandler.hpp"
+#include "binds.hpp"
 #include "utils.hpp"
 GUIHandler::GUIHandler()
 {
@@ -31,6 +33,10 @@ void GUIHandler::AddGUI(GUI* gui)
 }
 void GUIHandler::Update(float dt)
 {
+	if (activeGui != 5 && InputHandler::pressed(binds::Pause))
+	{
+		GoBack();
+	}
 	guis[activeGui]->Update(dt);
 }
 

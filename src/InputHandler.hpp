@@ -39,4 +39,8 @@ void RemoveKeyReleased(sf::Keyboard::Key key);
 void RemoveMbDown(sf::Mouse::Button button);
 void RemoveMbPressed(sf::Mouse::Button button);
 void RemoveMbReleased(sf::Mouse::Button button);
+
+bool pressed(int code);
+bool down(int code);
+bool released(int code);
 };

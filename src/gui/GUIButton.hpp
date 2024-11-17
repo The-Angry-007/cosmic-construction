@@ -12,4 +12,6 @@ public:
 	~GUIButton();
 	void Render();
 	void Update(float dt);
+	bool isClicked();
+	bool isBlockingMouse();
 };

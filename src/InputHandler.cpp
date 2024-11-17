@@ -161,3 +161,39 @@ void InputHandler::RemoveKeyReleased(sf::Keyboard::Key key)
 	int index = getIndex(keysReleased, key);
 	keysReleased.erase(keysReleased.begin() + index);
 }
+
+bool InputHandler::pressed(int code)
+{
+	if (code > 0)
+	{
+		return keyPressed(static_cast<sf::Keyboard::Key>(code - 1));
+	}
+	else
+	{
+		return mbPressed(static_cast<sf::Mouse::Button>(-code - 1));
+	}
+}
+
+bool InputHandler::down(int code)
+{
+	if (code > 0)
+	{
+		return keyDown(static_cast<sf::Keyboard::Key>(code - 1));
+	}
+	else
+	{
+		return mbDown(static_cast<sf::Mouse::Button>(-code - 1));
+	}
+}
+
+bool InputHandler::released(int code)
+{
+	if (code > 0)
+	{
+		return keyReleased(static_cast<sf::Keyboard::Key>(code - 1));
+	}
+	else
+	{
+		return mbReleased(static_cast<sf::Mouse::Button>(-code - 1));
+	}
+}

@@ -14,6 +14,7 @@ public:
 
 	int framerate;
 	int saveInterval;
+	//this is for the controls
 
 	Settings();
 	~Settings();

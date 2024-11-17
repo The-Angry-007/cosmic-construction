@@ -40,3 +40,12 @@ GUIButton::~GUIButton()
 		delete labelObj;
 	}
 }
+
+bool GUIButton::isBlockingMouse()
+{
+	return bgObj->isBlockingMouse();
+}
+bool GUIButton::isClicked()
+{
+	return bgObj->isClicked();
+}

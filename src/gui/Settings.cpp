@@ -14,11 +14,9 @@ Settings::Settings()
 		bgGUI->AddObject(p);
 		GUIPanel* topPanel = new GUIPanel(sf::Vector2f(0.5f, 0.13f), sf::Vector2f(0.4f, 0.03f), sf::Color(125, 125, 125));
 		bgGUI->AddObject(topPanel);
-		GUILabel* optionsLabel = new GUILabel(sf::Vector2f(0.5f, 0.13f), sf::Vector2f(0.9f, 0.025f), "Options");
-		optionsLabel->SetColor(sf::Color::Black);
-		bgGUI->AddObject(optionsLabel);
 	}
 	pageGuis = {};
+	//FIRST PAGE
 	{
 		GUI* g = new GUI();
 		GUIImage* i = new GUIImage(sf::Vector2f(0.33f, 0.22f), sf::Vector2f(0.15f, 0.04f), "resources/images/buttonBezels.png");
@@ -65,7 +63,17 @@ Settings::Settings()
 		GUIButton* b3 = new GUIButton(sf::Vector2f(0.5f, 0.75f), sf::Vector2f(0.3f, 0.04f), i3, l5);
 		g->AddObject(b3);
 		b3->clickFunc = std::bind(&GUIHandler::GoBack, &guihandler);
-
+		GUILabel* optionsLabel = new GUILabel(sf::Vector2f(0.5f, 0.13f), sf::Vector2f(0.9f, 0.025f), "Options");
+		optionsLabel->SetColor(sf::Color::Black);
+		g->AddObject(optionsLabel);
+		pageGuis.push_back(g);
+	}
+	//CONTROLS PAGE
+	{
+		GUI* g = new GUI();
+		GUILabel* controlsLabel = new GUILabel(sf::Vector2f(0.5f, 0.13f), sf::Vector2f(0.9f, 0.025f), "Controls");
+		controlsLabel->SetColor(sf::Color::Black);
+		g->AddObject(controlsLabel);
 		pageGuis.push_back(g);
 	}
 	currentGUI = 0;
@@ -113,6 +121,10 @@ void Settings::Update(float dt)
 		{
 			saveInterval = s2->pValue;
 			l2->value = "Autosave Interval: " + std::to_string(saveInterval) + " minutes";
+		}
+		if (cGUI->GUIObjects[0]->isClicked())
+		{
+			currentGUI = 1;
 		}
 	}
 }
