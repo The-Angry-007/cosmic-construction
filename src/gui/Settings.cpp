@@ -42,6 +42,9 @@ Settings::Settings()
 		GUISlider* s = new GUISlider(sf::Vector2f(0.5f, 0.37f), sf::Vector2f(0.35f, 0.015f), sliderKnob, sliderBG, nullptr);
 		g->AddObject(s);
 		s->value = 0.f;
+		s->minVal = 0;
+		s->maxVal = 260;
+		s->numSteps = 26;
 
 		GUILabel* l4 = new GUILabel(sf::Vector2f(0.5f, 0.45f), sf::Vector2f(0.35f, 0.025f), "Autosave Interval:");
 		l4->SetColor(sf::Color::Black);
@@ -74,12 +77,6 @@ void Settings::Update(float dt)
 	{
 		GUISlider* s1 = dynamic_cast<GUISlider*>(cGUI->GUIObjects[3]);
 		GUILabel* l1 = dynamic_cast<GUILabel*>(cGUI->GUIObjects[2]);
-		int min = 10;
-		int max = 250;
-		int increments = 10;
-		int steps = (max - min) / increments + 2;
-		s1->value = round(s1->value * steps) / steps;
-		s1->AdjustFromVal();
 		if (s1->value < 0.01f)
 		{
 			l1->value = "Framerate: Vertical Sync enabled";
@@ -96,7 +93,7 @@ void Settings::Update(float dt)
 		}
 		else
 		{
-			framerate = round(min + (max - min) * (s1->value - 1.f / steps) / (1.f - (1.f / steps) * 2.f));
+			framerate = round(s1->pValue);
 			l1->value = "Framerate: " + std::to_string(framerate);
 			window->setVerticalSyncEnabled(false);
 			window->setFramerateLimit(framerate);

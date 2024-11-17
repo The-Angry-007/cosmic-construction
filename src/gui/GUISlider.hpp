@@ -13,6 +13,11 @@ public:
 	//how far over the knob is from 0 to 1
 	float value;
 	bool selected;
+	int numSteps;
+	float minVal;
+	float maxVal;
+	//processed value- the value scaled between minVal and maxVal.
+	float pValue;
 
 	void Update(float dt);
 	void Render();

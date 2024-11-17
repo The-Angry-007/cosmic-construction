@@ -28,6 +28,10 @@ int main()
 	icon.loadFromFile("resources/images/icon.png");
 	window->setIcon(256, 256, icon.getPixelsPtr());
 
+	//make the window black while loading
+	window->clear(sf::Color::Black);
+	window->display();
+
 	std::vector<float> frameLengths;
 	float lengthsSum = 0;
 	//how many frames to average the framerate of, so its smoother and easier to read

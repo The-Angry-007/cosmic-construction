@@ -14,11 +14,20 @@ GUISlider::GUISlider(sf::Vector2f position, sf::Vector2f size, GUIObject* knob, 
 	background->position = this->position;
 	background->size = this->size;
 	selected = false;
+	numSteps = -1;
+	minVal = 0;
+	maxVal = 1;
+	pValue = value;
 	AdjustFromVal();
 }
 
 void GUISlider::AdjustFromVal()
 {
+	if (numSteps != -1)
+	{
+		value = round(value * numSteps) / numSteps;
+	}
+	pValue = Lerp(minVal, maxVal, value);
 	knob->position = Lerp(position - sf::Vector2f(size.x, 0), position + sf::Vector2f(size.x, 0), value);
 
 	if (completion != nullptr)
