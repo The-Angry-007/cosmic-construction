@@ -1,5 +1,6 @@
 #include "../gui.hpp"
 #include "Main.hpp"
+
 Settings::Settings()
 {
 	//this is not used, it is just part of the base class
