@@ -68,4 +68,5 @@ void JSON::Print()
 			std::cout << ",";
 		}
 	}
+	std::cout << "]";
 }

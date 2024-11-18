@@ -44,17 +44,18 @@ int main()
 	guihandler.InitGUIS();
 
 	JSON j = JSON();
-	std::string test1 = "{\
-	ID:00003\
-	TypeID:006\
-	ChunkID:00010\
-	PositionX:2\
-	PositionY:5\
-	}";
+	std::string test1 =
+		"{\n\
+ID:00003\n\
+TypeID:006\n\
+ChunkID:00010\n\
+PositionX:2\n\
+PositionY:5\n\
+}";
 	j.FromString(test1);
 	std::cout << "input:\n"
 			  << test1;
-	std::cout << "output:\n";
+	std::cout << "\noutput:\n";
 	j.Print();
 	std::cout << std::endl;
 
