@@ -83,13 +83,6 @@ Settings::Settings()
 		bindGUIs = {};
 		AddBind("Pause", &binds::Pause);
 		AddBind("Fullscreen", &binds::Fullscreen);
-		AddBind("Fullscreen", &binds::Fullscreen);
-		AddBind("Fullscreen", &binds::Fullscreen);
-		AddBind("Fullscreen", &binds::Fullscreen);
-		AddBind("Fullscreen", &binds::Fullscreen);
-		AddBind("Fullscreen", &binds::Fullscreen);
-		AddBind("Fullscreen", &binds::Fullscreen);
-		AddBind("Fullscreen", &binds::Fullscreen);
 	}
 	currentGUI = 0;
 }
@@ -168,6 +161,7 @@ void Settings::Update(float dt)
 	else if (currentGUI == 1)
 	{
 		float move = InputHandler::scroll.y * 0.03f;
+
 		if (move < 0)
 		{
 			float lowest = bindGUIs[bindGUIs.size() - 1]->GUIObjects[1]->position.y + bindGUIs[0]->GUIObjects[1]->size.y;
@@ -175,8 +169,6 @@ void Settings::Update(float dt)
 			{
 				move = 0.f;
 			}
-			std::cout << lowest << std::endl;
-			std::cout << "x: " << InputHandler::scroll.x << " y: " << InputHandler::scroll.y << std::endl;
 		}
 		else if (move > 0)
 		{
@@ -185,8 +177,6 @@ void Settings::Update(float dt)
 			{
 				move = 0.f;
 			}
-			std::cout << highest << std::endl;
-			std::cout << "x: " << InputHandler::scroll.x << " y: " << InputHandler::scroll.y << std::endl;
 		}
 		for (uint i = 0; i < bindGUIs.size(); i++)
 		{
@@ -214,7 +204,6 @@ void Settings::Update(float dt)
 			{
 				int code = binds::keyToCode(InputHandler::keysPressed[0]);
 				*bindCodes[selectedBind] = code;
-				std::cout << std::to_string(binds::Pause) << std::endl;
 				dynamic_cast<GUILabel*>(bindGUIs[selectedBind]->GUIObjects[2])->value = binds::GetName(code);
 				selectedBind = -1;
 				InputHandler::RemoveKeyPressed(InputHandler::keysPressed[0]);
@@ -223,7 +212,6 @@ void Settings::Update(float dt)
 			{
 				int code = binds::buttonToCode(InputHandler::mouseButtonsPressed[0]);
 				*bindCodes[selectedBind] = code;
-				std::cout << std::to_string(binds::Pause) << std::endl;
 				dynamic_cast<GUILabel*>(bindGUIs[selectedBind]->GUIObjects[2])->value = binds::GetName(code);
 				selectedBind = -1;
 				InputHandler::RemoveMbPressed(InputHandler::mouseButtonsPressed[0]);
@@ -247,7 +235,6 @@ void Settings::Render()
 		{
 			bindGUIs[i]->RenderToTexture(&text);
 		}
-		bindGUIs[3]->GUIObjects[1]->hitbox->Display({});
 		text.display();
 		sf::Sprite s(text.getTexture());
 		sf::IntRect bounds(sf::Vector2i(width * 0.1f, height * 0.16f), sf::Vector2i(width * 0.8f, height * (0.8f - 0.06f)));
