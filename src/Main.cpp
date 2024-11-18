@@ -2,6 +2,7 @@
 #include "InputHandler.hpp"
 #include "gui.hpp"
 #include "hitboxes.hpp"
+#include "saving.hpp"
 #include <memory>
 
 //a unique pointer to the window object; this is unique to prevent accidentally creating multiple windows
@@ -41,6 +42,15 @@ int main()
 	fpsLabel.origin = sf::Vector2f(0.f, 0.f);
 
 	guihandler.InitGUIS();
+
+	//TESTING JSON
+	JSON j = JSON();
+	j.AddAttribute("test1", "1");
+	j.AddAttribute("test2", "2");
+	j.AddAttribute("test3", "3");
+	std::cout << "input: test2, expected: 2, output: " << j.GetValue("test2") << std::endl;
+	std::cout << "input: test3, expected: 3, output: " << j.GetValue("test3") << std::endl;
+	std::cout << "input: test4, expected: not in list, output: " << j.GetValue("test4") << std::endl;
 
 	deltaClock.restart();
 	while (window->isOpen())
