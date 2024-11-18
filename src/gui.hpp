@@ -1,3 +1,4 @@
+#pragma once
 #include "gui/ClickFuncs.hpp"
 #include "gui/GUI.hpp"
 #include "gui/GUIButton.hpp"
