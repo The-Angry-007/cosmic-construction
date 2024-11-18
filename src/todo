@@ -7,3 +7,6 @@
 [ ] finish load game gui
   [] add save slot class
     [ ] make any gui object capable of having origin
+
+
+all of savehandler functions are not yet implemented
