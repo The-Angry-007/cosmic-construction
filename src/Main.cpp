@@ -45,9 +45,10 @@ int main()
 	deltaClock.restart();
 	while (window->isOpen())
 	{
+
+		InputHandler::ProcessEvents();
 		sf::View view(sf::FloatRect(0.f, 0.f, width, height));
 		window->setView(view);
-		InputHandler::ProcessEvents();
 		float dt = deltaClock.restart().asSeconds();
 		frameLengths.push_back(dt);
 		lengthsSum += dt;

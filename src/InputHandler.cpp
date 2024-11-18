@@ -133,7 +133,6 @@ void InputHandler::ProcessEvents()
 		else if (event.type == event.MouseWheelMoved)
 		{
 			scroll.y = event.mouseWheel.delta;
-			std::cout << "x: " << scroll.x << " y: " << scroll.y << std::endl;
 		}
 		else if (event.type == event.Resized)
 		{

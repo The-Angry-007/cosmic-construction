@@ -83,6 +83,10 @@ Settings::Settings()
 		bindGUIs = {};
 		AddBind("Pause", &binds::Pause);
 		AddBind("Fullscreen", &binds::Fullscreen);
+		AddBind("Fullscreen", &binds::Fullscreen);
+		AddBind("Fullscreen", &binds::Fullscreen);
+		AddBind("Fullscreen", &binds::Fullscreen);
+		AddBind("Fullscreen", &binds::Fullscreen);
 	}
 	currentGUI = 0;
 }
@@ -91,7 +95,7 @@ void Settings::AddBind(std::string label, int* value)
 {
 	bindCodes.push_back(value);
 	GUI* g = new GUI();
-	float lowestPos = 0.3f;
+	float lowestPos = 0.13f;
 	float gap = 0.1f;
 	if (bindGUIs.size() > 0)
 	{
@@ -160,15 +164,34 @@ void Settings::Update(float dt)
 	}
 	else if (currentGUI == 1)
 	{
-
+		float move = InputHandler::scroll.y * 0.03f;
+		if (move < 0)
+		{
+			float lowest = bindGUIs[bindGUIs.size() - 1]->GUIObjects[1]->position.y + bindGUIs[0]->GUIObjects[1]->size.y;
+			if (lowest - move < 0.84f)
+			{
+				move = 0.f;
+			}
+			std::cout << lowest << std::endl;
+			std::cout << "x: " << InputHandler::scroll.x << " y: " << InputHandler::scroll.y << std::endl;
+		}
+		else if (move > 0)
+		{
+			float highest = bindGUIs[0]->GUIObjects[1]->position.y - bindGUIs[0]->GUIObjects[1]->size.y;
+			if (highest + move > 0.13f)
+			{
+				move = 0.f;
+			}
+			std::cout << highest << std::endl;
+			std::cout << "x: " << InputHandler::scroll.x << " y: " << InputHandler::scroll.y << std::endl;
+		}
 		for (uint i = 0; i < bindGUIs.size(); i++)
 		{
 			if (abs(InputHandler::scroll.y) > 0.05f)
 			{
 				for (uint j = 0; j < bindGUIs[i]->GUIObjects.size(); j++)
 				{
-					float rate = 0.03f;
-					bindGUIs[i]->GUIObjects[j]->position += sf::Vector2f(0.f, InputHandler::scroll.y * rate);
+					bindGUIs[i]->GUIObjects[j]->position += sf::Vector2f(0.f, move);
 				}
 			}
 			bindGUIs[i]->Update(dt);
@@ -215,11 +238,13 @@ void Settings::Render()
 	{
 		sf::RenderTexture text;
 		text.create(width, height);
+		text.setView(sf::View(sf::Vector2f(width / 2.f, height / 2.f), sf::Vector2f(width, height)));
 		text.clear(sf::Color::Transparent);
 		for (uint i = 0; i < bindGUIs.size(); i++)
 		{
 			bindGUIs[i]->RenderToTexture(&text);
 		}
+		bindGUIs[3]->GUIObjects[1]->hitbox->Display({});
 		text.display();
 		sf::Sprite s(text.getTexture());
 		sf::IntRect bounds(sf::Vector2i(width * 0.1f, height * 0.1f), sf::Vector2i(width * 0.8f, height * (0.8f - 0.06f)));
