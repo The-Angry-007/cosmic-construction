@@ -34,6 +34,20 @@ std::string SaveHandler::RelToAbsolute(std::string path)
 	return "";
 }
 
+std::string SaveHandler::JSONsToString(std::vector<JSON> jsons)
+{
+	std::string s = "";
+	for (uint i = 0; i < jsons.size(); i++)
+	{
+		s += jsons[i].ToString();
+		if (i != jsons.size() - 1)
+		{
+			s += "\n";
+		}
+	}
+	return s;
+}
+
 std::vector<JSON> SaveHandler::StringToJSONs(std::string string)
 {
 	std::vector<JSON> jsons = {};

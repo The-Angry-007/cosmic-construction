@@ -9,7 +9,6 @@ public:
 	JSON();
 	std::string GetValue(std::string keyword);
 	void AddAttribute(std::string keyword, std::string value);
-	std::string ToString();
 
 	/*
 	this is changed slightly from design:
@@ -18,6 +17,7 @@ public:
 	each json will be processed individually.
 	*/
 	void FromString(std::string data);
+	std::string ToString();
 
 	void Print();
 };

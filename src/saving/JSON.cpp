@@ -48,6 +48,17 @@ void JSON::FromString(std::string data)
 	}
 }
 
+std::string JSON::ToString()
+{
+	std::string s = "{\n";
+	for (uint i = 0; i < keywords.size(); i++)
+	{
+		s += keywords[i] + ":" + values[i] + "\n";
+	}
+	s += "}";
+	return s;
+}
+
 void JSON::Print()
 {
 	std::cout << "Keywords: [";
