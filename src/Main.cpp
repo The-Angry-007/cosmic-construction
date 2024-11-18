@@ -43,14 +43,20 @@ int main()
 
 	guihandler.InitGUIS();
 
-	//TESTING JSON
 	JSON j = JSON();
-	j.AddAttribute("test1", "1");
-	j.AddAttribute("test2", "2");
-	j.AddAttribute("test3", "3");
-	std::cout << "input: test2, expected: 2, output: " << j.GetValue("test2") << std::endl;
-	std::cout << "input: test3, expected: 3, output: " << j.GetValue("test3") << std::endl;
-	std::cout << "input: test4, expected: not in list, output: " << j.GetValue("test4") << std::endl;
+	std::string test1 = "{\
+	ID:00003\
+	TypeID:006\
+	ChunkID:00010\
+	PositionX:2\
+	PositionY:5\
+	}";
+	j.FromString(test1);
+	std::cout << "input:\n"
+			  << test1;
+	std::cout << "output:\n";
+	j.Print();
+	std::cout << std::endl;
 
 	deltaClock.restart();
 	while (window->isOpen())
