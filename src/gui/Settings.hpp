@@ -22,7 +22,7 @@ public:
 
 	void Render();
 	int selectedBind;
-	std::vector<std::reference_wrapper<int>> bindCodes;
+	std::vector<int*> bindCodes;
 	std::vector<GUI*> bindGUIs;
-	void AddBind(std::string label, int value);
+	void AddBind(std::string label, int* value);
 };

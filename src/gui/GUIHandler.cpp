@@ -17,6 +17,10 @@ void GUIHandler::OpenGUI(int GUI)
 {
 	activeGui = GUI;
 	openedGuis.push_back(GUI);
+	if (GUI == 3)
+	{
+		dynamic_cast<Settings*>(guis[activeGui])->currentGUI = 0;
+	}
 }
 void GUIHandler::GoBack()
 {
@@ -24,6 +28,8 @@ void GUIHandler::GoBack()
 	{
 		openedGuis.erase(openedGuis.end() - 1);
 		activeGui = openedGuis[openedGuis.size() - 1];
+		openedGuis.erase(openedGuis.end() - 1);
+		OpenGUI(activeGui);
 	}
 }
 
@@ -33,11 +39,12 @@ void GUIHandler::AddGUI(GUI* gui)
 }
 void GUIHandler::Update(float dt)
 {
+
+	guis[activeGui]->Update(dt);
 	if (activeGui != 5 && InputHandler::pressed(binds::Pause))
 	{
 		GoBack();
 	}
-	guis[activeGui]->Update(dt);
 }
 
 void GUIHandler::Render()

@@ -81,12 +81,12 @@ Settings::Settings()
 		selectedBind = -1;
 		bindCodes = {};
 		bindGUIs = {};
-		AddBind("Pause", binds::Pause);
+		AddBind("Pause", &binds::Pause);
 	}
 	currentGUI = 0;
 }
 
-void Settings::AddBind(std::string label, int value)
+void Settings::AddBind(std::string label, int* value)
 {
 	bindCodes.push_back(value);
 	GUI* g = new GUI();
@@ -100,7 +100,7 @@ void Settings::AddBind(std::string label, int value)
 	l->SetColor(sf::Color::Black);
 	GUIPanel* p = new GUIPanel(sf::Vector2f(0.55f, lowestPos), sf::Vector2f(0.15f, 0.04f), sf::Color(100, 100, 100));
 	p->blocksMouseInput = true;
-	GUILabel* l2 = new GUILabel(sf::Vector2f(0.55f, lowestPos), sf::Vector2f(0.1f, 0.03f), binds::GetName(value));
+	GUILabel* l2 = new GUILabel(sf::Vector2f(0.55f, lowestPos), sf::Vector2f(0.1f, 0.03f), binds::GetName(*value));
 	l2->SetColor(sf::Color::Black);
 	g->AddObject(l);
 	g->AddObject(p);
@@ -176,8 +176,20 @@ void Settings::Update(float dt)
 			if (InputHandler::keysPressed.size() > 0)
 			{
 				int code = binds::keyToCode(InputHandler::keysPressed[0]);
-				bindCodes[selectedBind].get() = code;
+				*bindCodes[selectedBind] = code;
+				std::cout << std::to_string(binds::Pause) << std::endl;
 				dynamic_cast<GUILabel*>(bindGUIs[selectedBind]->GUIObjects[2])->value = binds::GetName(code);
+				selectedBind = -1;
+				InputHandler::RemoveKeyPressed(InputHandler::keysPressed[0]);
+			}
+			else if (InputHandler::mouseButtonsPressed.size() > 0)
+			{
+				int code = binds::buttonToCode(InputHandler::mouseButtonsPressed[0]);
+				*bindCodes[selectedBind] = code;
+				std::cout << std::to_string(binds::Pause) << std::endl;
+				dynamic_cast<GUILabel*>(bindGUIs[selectedBind]->GUIObjects[2])->value = binds::GetName(code);
+				selectedBind = -1;
+				InputHandler::RemoveMbPressed(InputHandler::mouseButtonsPressed[0]);
 			}
 		}
 	}
