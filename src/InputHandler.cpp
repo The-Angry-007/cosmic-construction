@@ -108,8 +108,11 @@ void InputHandler::ProcessEvents()
 		{
 			//remove from keys down
 			int index = getIndex(keysDown, event.key.code);
-			keysDown.erase(keysDown.begin() + index);
-			keysReleased.push_back(event.key.code);
+			if (index != -1)
+			{
+				keysDown.erase(keysDown.begin() + index);
+				keysReleased.push_back(event.key.code);
+			}
 		}
 		else if (event.type == event.MouseButtonPressed)
 		{
@@ -123,8 +126,11 @@ void InputHandler::ProcessEvents()
 		else if (event.type == event.MouseButtonReleased)
 		{
 			int index = getIndex(mouseButtonsDown, event.mouseButton.button);
-			mouseButtonsDown.erase(mouseButtonsDown.begin() + index);
-			mouseButtonsReleased.push_back(event.mouseButton.button);
+			if (index != -1)
+			{
+				mouseButtonsDown.erase(mouseButtonsDown.begin() + index);
+				mouseButtonsReleased.push_back(event.mouseButton.button);
+			}
 		}
 		else if (event.type == event.TextEntered)
 		{
@@ -244,5 +250,39 @@ bool InputHandler::released(int code)
 	else
 	{
 		return mbReleased(static_cast<sf::Mouse::Button>(-code - 1));
+	}
+}
+
+void InputHandler::RemovePressed(int code)
+{
+	if (code > 0)
+	{
+		RemoveKeyPressed(static_cast<sf::Keyboard::Key>(code - 1));
+	}
+	else
+	{
+		RemoveMbPressed(static_cast<sf::Mouse::Button>(-code - 1));
+	}
+}
+void InputHandler::RemoveDown(int code)
+{
+	if (code > 0)
+	{
+		RemoveKeyDown(static_cast<sf::Keyboard::Key>(code - 1));
+	}
+	else
+	{
+		RemoveMbDown(static_cast<sf::Mouse::Button>(-code - 1));
+	}
+}
+void InputHandler::RemoveReleased(int code)
+{
+	if (code > 0)
+	{
+		RemoveKeyReleased(static_cast<sf::Keyboard::Key>(code - 1));
+	}
+	else
+	{
+		RemoveMbReleased(static_cast<sf::Mouse::Button>(-code - 1));
 	}
 }

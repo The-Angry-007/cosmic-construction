@@ -1,5 +1,9 @@
-[ ] finish new game gui
-  [ ] add checkboxes
+[X] finish new game gui
+  [X] add checkboxes
+[ ] complete saving and loading
+  [ ] json class
+  [ ] table class
+  [ ] savehandler namespace
 [ ] finish load game gui
-  [ ] add save slot class
+  [] add save slot class
     [ ] make any gui object capable of having origin

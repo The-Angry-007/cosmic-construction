@@ -84,6 +84,37 @@ Settings::Settings()
 		AddBind("Pause", &binds::Pause);
 		AddBind("Fullscreen", &binds::Fullscreen);
 	}
+	//AUDIO PAGE
+	{
+		GUI* g = new GUI();
+		GUILabel* l = new GUILabel(sf::Vector2f(0.5f, 0.2f), sf::Vector2f(0.35f, 0.025f), "Master Volume: ");
+		l->SetColor(sf::Color::Black);
+		g->AddObject(l);
+		GUIPanel* sliderBG = new GUIPanel(sf::Vector2f(0.5f, 0.25f), sf::Vector2f(0.35f, 0.015f), sf::Color(50, 50, 50));
+		GUIImage* sliderKnob = new GUIImage(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.025f, 0.025f), "resources/images/squareButton.png");
+		sliderKnob->keepAspectRatio = true;
+		GUISlider* s = new GUISlider(sf::Vector2f(0.5f, 0.25f), sf::Vector2f(0.35f, 0.015f), sliderKnob, sliderBG, nullptr);
+		g->AddObject(s);
+
+		GUILabel* l2 = new GUILabel(sf::Vector2f(0.5f, 0.35f), sf::Vector2f(0.35f, 0.025f), "Music Volume: ");
+		l2->SetColor(sf::Color::Black);
+		g->AddObject(l2);
+		GUIPanel* sliderBG2 = new GUIPanel(sf::Vector2f(0.5f, 0.4f), sf::Vector2f(0.35f, 0.015f), sf::Color(50, 50, 50));
+		GUIImage* sliderKnob2 = new GUIImage(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.025f, 0.025f), "resources/images/squareButton.png");
+		sliderKnob2->keepAspectRatio = true;
+		GUISlider* s2 = new GUISlider(sf::Vector2f(0.5f, 0.4f), sf::Vector2f(0.35f, 0.015f), sliderKnob2, sliderBG2, nullptr);
+		g->AddObject(s2);
+
+		GUILabel* l3 = new GUILabel(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.35f, 0.025f), "Sound Effects Volume: ");
+		l3->SetColor(sf::Color::Black);
+		g->AddObject(l3);
+		GUIPanel* sliderBG3 = new GUIPanel(sf::Vector2f(0.5f, 0.55f), sf::Vector2f(0.35f, 0.015f), sf::Color(50, 50, 50));
+		GUIImage* sliderKnob3 = new GUIImage(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.025f, 0.025f), "resources/images/squareButton.png");
+		sliderKnob3->keepAspectRatio = true;
+		GUISlider* s3 = new GUISlider(sf::Vector2f(0.5f, 0.55f), sf::Vector2f(0.35f, 0.015f), sliderKnob3, sliderBG3, nullptr);
+		g->AddObject(s3);
+		pageGuis.push_back(g);
+	}
 	currentGUI = 0;
 }
 
@@ -112,6 +143,15 @@ void Settings::AddBind(std::string label, int* value)
 
 void Settings::Update(float dt)
 {
+	if (InputHandler::pressed(binds::Pause))
+	{
+		if (currentGUI > 0)
+		{
+			currentGUI = 0;
+			InputHandler::RemovePressed(binds::Pause);
+			InputHandler::RemoveDown(binds::Pause);
+		}
+	}
 	behindGUI->Update(dt);
 	bgGUI->Update(dt);
 	GUI* cGUI = pageGuis[currentGUI];
@@ -157,6 +197,10 @@ void Settings::Update(float dt)
 		{
 			currentGUI = 1;
 		}
+		else if (cGUI->GUIObjects[1]->isClicked())
+		{
+			currentGUI = 2;
+		}
 	}
 	else if (currentGUI == 1)
 	{
@@ -194,6 +238,7 @@ void Settings::Update(float dt)
 				{
 					selectedBind = i;
 					InputHandler::RemoveMbPressed(sf::Mouse::Button::Left);
+					InputHandler::RemoveMbDown(sf::Mouse::Button::Left);
 					dynamic_cast<GUILabel*>(bindGUIs[i]->GUIObjects[2])->value = "...";
 				}
 			}
@@ -207,6 +252,7 @@ void Settings::Update(float dt)
 				dynamic_cast<GUILabel*>(bindGUIs[selectedBind]->GUIObjects[2])->value = binds::GetName(code);
 				selectedBind = -1;
 				InputHandler::RemoveKeyPressed(InputHandler::keysPressed[0]);
+				InputHandler::RemoveKeyDown(InputHandler::keysPressed[0]);
 			}
 			else if (InputHandler::mouseButtonsPressed.size() > 0)
 			{
@@ -215,8 +261,16 @@ void Settings::Update(float dt)
 				dynamic_cast<GUILabel*>(bindGUIs[selectedBind]->GUIObjects[2])->value = binds::GetName(code);
 				selectedBind = -1;
 				InputHandler::RemoveMbPressed(InputHandler::mouseButtonsPressed[0]);
+				InputHandler::RemoveMbDown(InputHandler::mouseButtonsPressed[0]);
 			}
 		}
+	}
+	else if (currentGUI == 2)
+	{
+		GUI* g = pageGuis[2];
+		dynamic_cast<GUILabel*>(g->GUIObjects[0])->value = "Master Volume: " + std::to_string((int)(dynamic_cast<GUISlider*>(g->GUIObjects[1])->value * 100)) + "%";
+		dynamic_cast<GUILabel*>(g->GUIObjects[2])->value = "Master Volume: " + std::to_string((int)(dynamic_cast<GUISlider*>(g->GUIObjects[3])->value * 100)) + "%";
+		dynamic_cast<GUILabel*>(g->GUIObjects[4])->value = "Master Volume: " + std::to_string((int)(dynamic_cast<GUISlider*>(g->GUIObjects[5])->value * 100)) + "%";
 	}
 }
 
