@@ -87,6 +87,9 @@ Settings::Settings()
 		AddBind("Fullscreen", &binds::Fullscreen);
 		AddBind("Fullscreen", &binds::Fullscreen);
 		AddBind("Fullscreen", &binds::Fullscreen);
+		AddBind("Fullscreen", &binds::Fullscreen);
+		AddBind("Fullscreen", &binds::Fullscreen);
+		AddBind("Fullscreen", &binds::Fullscreen);
 	}
 	currentGUI = 0;
 }
@@ -95,7 +98,7 @@ void Settings::AddBind(std::string label, int* value)
 {
 	bindCodes.push_back(value);
 	GUI* g = new GUI();
-	float lowestPos = 0.13f;
+	float lowestPos = 0.18f + 0.04f;
 	float gap = 0.1f;
 	if (bindGUIs.size() > 0)
 	{
@@ -168,7 +171,7 @@ void Settings::Update(float dt)
 		if (move < 0)
 		{
 			float lowest = bindGUIs[bindGUIs.size() - 1]->GUIObjects[1]->position.y + bindGUIs[0]->GUIObjects[1]->size.y;
-			if (lowest - move < 0.84f)
+			if (lowest - move < 0.87f)
 			{
 				move = 0.f;
 			}
@@ -178,7 +181,7 @@ void Settings::Update(float dt)
 		else if (move > 0)
 		{
 			float highest = bindGUIs[0]->GUIObjects[1]->position.y - bindGUIs[0]->GUIObjects[1]->size.y;
-			if (highest + move > 0.13f)
+			if (highest + move > 0.18f)
 			{
 				move = 0.f;
 			}
@@ -247,9 +250,9 @@ void Settings::Render()
 		bindGUIs[3]->GUIObjects[1]->hitbox->Display({});
 		text.display();
 		sf::Sprite s(text.getTexture());
-		sf::IntRect bounds(sf::Vector2i(width * 0.1f, height * 0.1f), sf::Vector2i(width * 0.8f, height * (0.8f - 0.06f)));
+		sf::IntRect bounds(sf::Vector2i(width * 0.1f, height * 0.16f), sf::Vector2i(width * 0.8f, height * (0.8f - 0.06f)));
 		s.setTextureRect(bounds);
-		s.setPosition(bounds.top, bounds.left);
+		s.setPosition(bounds.left, bounds.top);
 		s.setOrigin(0.f, 0.f);
 
 		window->draw(s);
