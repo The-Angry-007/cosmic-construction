@@ -78,8 +78,34 @@ Settings::Settings()
 		controlsLabel->SetColor(sf::Color::Black);
 		g->AddObject(controlsLabel);
 		pageGuis.push_back(g);
+		selectedBind = -1;
+		bindCodes = {};
+		bindGUIs = {};
+		AddBind("Pause", binds::Pause);
 	}
 	currentGUI = 0;
+}
+
+void Settings::AddBind(std::string label, int value)
+{
+	bindCodes.push_back(value);
+	GUI* g = new GUI();
+	float lowestPos = 0.3f;
+	float gap = 0.1f;
+	if (bindGUIs.size() > 0)
+	{
+		lowestPos = bindGUIs[bindGUIs.size() - 1]->GUIObjects[0]->position.y + gap;
+	}
+	GUILabel* l = new GUILabel(sf::Vector2f(0.3f, lowestPos), sf::Vector2f(0.2f, 0.03f), label);
+	l->SetColor(sf::Color::Black);
+	GUIPanel* p = new GUIPanel(sf::Vector2f(0.55f, lowestPos), sf::Vector2f(0.15f, 0.04f), sf::Color(100, 100, 100));
+	p->blocksMouseInput = true;
+	GUILabel* l2 = new GUILabel(sf::Vector2f(0.55f, lowestPos), sf::Vector2f(0.1f, 0.03f), binds::GetName(value));
+	l2->SetColor(sf::Color::Black);
+	g->AddObject(l);
+	g->AddObject(p);
+	g->AddObject(l2);
+	bindGUIs.push_back(g);
 }
 
 void Settings::Update(float dt)
@@ -132,9 +158,27 @@ void Settings::Update(float dt)
 	}
 	else if (currentGUI == 1)
 	{
-		if (InputHandler::keysPressed.size() > 0)
+		for (uint i = 0; i < bindGUIs.size(); i++)
 		{
-			std::cout << binds::GetName(binds::keyToCode(InputHandler::keysPressed[0])) << std::endl;
+			bindGUIs[i]->Update(dt);
+			if (selectedBind == -1)
+			{
+				if (bindGUIs[i]->GUIObjects[1]->isClicked())
+				{
+					selectedBind = i;
+					InputHandler::RemoveMbPressed(sf::Mouse::Button::Left);
+					dynamic_cast<GUILabel*>(bindGUIs[i]->GUIObjects[2])->value = "waiting for input";
+				}
+			}
+		}
+		if (selectedBind != -1)
+		{
+			if (InputHandler::keysPressed.size() > 0)
+			{
+				int code = binds::keyToCode(InputHandler::keysPressed[0]);
+				bindCodes[selectedBind].get() = code;
+				dynamic_cast<GUILabel*>(bindGUIs[selectedBind]->GUIObjects[2])->value = binds::GetName(code);
+			}
 		}
 	}
 }
@@ -144,6 +188,13 @@ void Settings::Render()
 	behindGUI->Render();
 	bgGUI->Render();
 	pageGuis[currentGUI]->Render();
+	if (currentGUI == 1)
+	{
+		for (uint i = 0; i < bindGUIs.size(); i++)
+		{
+			bindGUIs[i]->Render();
+		}
+	}
 }
 
 Settings::~Settings()

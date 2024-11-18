@@ -161,6 +161,21 @@ void InputHandler::RemoveKeyReleased(sf::Keyboard::Key key)
 	int index = getIndex(keysReleased, key);
 	keysReleased.erase(keysReleased.begin() + index);
 }
+void InputHandler::RemoveMbDown(sf::Mouse::Button button)
+{
+	int index = getIndex(mouseButtonsDown, button);
+	mouseButtonsDown.erase(mouseButtonsDown.begin() + index);
+}
+void InputHandler::RemoveMbPressed(sf::Mouse::Button button)
+{
+	int index = getIndex(mouseButtonsPressed, button);
+	mouseButtonsPressed.erase(mouseButtonsPressed.begin() + index);
+}
+void InputHandler::RemoveMbReleased(sf::Mouse::Button button)
+{
+	int index = getIndex(mouseButtonsReleased, button);
+	mouseButtonsReleased.erase(mouseButtonsReleased.begin() + index);
+}
 
 bool InputHandler::pressed(int code)
 {

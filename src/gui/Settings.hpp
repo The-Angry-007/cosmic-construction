@@ -21,4 +21,8 @@ public:
 	void Update(float dt);
 
 	void Render();
+	int selectedBind;
+	std::vector<std::reference_wrapper<int>> bindCodes;
+	std::vector<GUI*> bindGUIs;
+	void AddBind(std::string label, int value);
 };
