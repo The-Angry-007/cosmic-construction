@@ -1,5 +1,7 @@
 #include "../gui.hpp"
+#include "InputHandler.hpp"
 #include "Main.hpp"
+#include "binds.hpp"
 
 Settings::Settings()
 {
@@ -126,6 +128,13 @@ void Settings::Update(float dt)
 		if (cGUI->GUIObjects[0]->isClicked())
 		{
 			currentGUI = 1;
+		}
+	}
+	else if (currentGUI == 1)
+	{
+		if (InputHandler::keysPressed.size() > 0)
+		{
+			std::cout << binds::GetName(binds::keyToCode(InputHandler::keysPressed[0])) << std::endl;
 		}
 	}
 }
