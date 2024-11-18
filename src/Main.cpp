@@ -45,13 +45,7 @@ int main()
 
 	JSON j = JSON();
 	std::string test1 =
-		"{\n\
-ID:00003\n\
-TypeID:006\n\
-ChunkID:00010\n\
-PositionX:2\n\
-PositionY:5\n\
-}";
+		"{\n}";
 	j.FromString(test1);
 	std::cout << "input:\n"
 			  << test1;
