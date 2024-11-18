@@ -6,6 +6,7 @@
 namespace binds
 {
 int Pause = sf::Keyboard::Key::Escape + 1;
+extern int Fullscreen = sf::Keyboard::Key::F11 + 1;
 }
 
 int binds::keyToCode(sf::Keyboard::Key key)

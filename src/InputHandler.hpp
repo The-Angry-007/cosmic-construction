@@ -12,6 +12,10 @@ extern std::vector<sf::Mouse::Button> mouseButtonsPressed;
 extern std::vector<sf::Mouse::Button> mouseButtonsDown;
 extern std::vector<sf::Mouse::Button> mouseButtonsReleased;
 
+extern int oldWidth;
+extern int oldHeight;
+extern bool isFullscreen;
+
 //other data about input events
 extern sf::Vector2f mousePos;
 extern sf::Vector2f guiMP;

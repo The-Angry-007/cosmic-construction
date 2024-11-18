@@ -82,6 +82,7 @@ Settings::Settings()
 		bindCodes = {};
 		bindGUIs = {};
 		AddBind("Pause", &binds::Pause);
+		AddBind("Fullscreen", &binds::Fullscreen);
 	}
 	currentGUI = 0;
 }
@@ -97,10 +98,11 @@ void Settings::AddBind(std::string label, int* value)
 		lowestPos = bindGUIs[bindGUIs.size() - 1]->GUIObjects[0]->position.y + gap;
 	}
 	GUILabel* l = new GUILabel(sf::Vector2f(0.3f, lowestPos), sf::Vector2f(0.2f, 0.03f), label);
+	l->origin = sf::Vector2f(1.f, 0.5f);
 	l->SetColor(sf::Color::Black);
-	GUIPanel* p = new GUIPanel(sf::Vector2f(0.55f, lowestPos), sf::Vector2f(0.15f, 0.04f), sf::Color(100, 100, 100));
+	GUIPanel* p = new GUIPanel(sf::Vector2f(0.66f, lowestPos), sf::Vector2f(0.15f, 0.04f), sf::Color(100, 100, 100));
 	p->blocksMouseInput = true;
-	GUILabel* l2 = new GUILabel(sf::Vector2f(0.55f, lowestPos), sf::Vector2f(0.1f, 0.03f), binds::GetName(*value));
+	GUILabel* l2 = new GUILabel(sf::Vector2f(0.66f, lowestPos), sf::Vector2f(0.1f, 0.03f), binds::GetName(*value));
 	l2->SetColor(sf::Color::Black);
 	g->AddObject(l);
 	g->AddObject(p);
@@ -158,8 +160,17 @@ void Settings::Update(float dt)
 	}
 	else if (currentGUI == 1)
 	{
+
 		for (uint i = 0; i < bindGUIs.size(); i++)
 		{
+			if (abs(InputHandler::scroll.y) > 0.05f)
+			{
+				for (uint j = 0; j < bindGUIs[i]->GUIObjects.size(); j++)
+				{
+					float rate = 0.03f;
+					bindGUIs[i]->GUIObjects[j]->position += sf::Vector2f(0.f, InputHandler::scroll.y * rate);
+				}
+			}
 			bindGUIs[i]->Update(dt);
 			if (selectedBind == -1)
 			{
@@ -167,7 +178,7 @@ void Settings::Update(float dt)
 				{
 					selectedBind = i;
 					InputHandler::RemoveMbPressed(sf::Mouse::Button::Left);
-					dynamic_cast<GUILabel*>(bindGUIs[i]->GUIObjects[2])->value = "waiting for input";
+					dynamic_cast<GUILabel*>(bindGUIs[i]->GUIObjects[2])->value = "...";
 				}
 			}
 		}

@@ -198,6 +198,8 @@ void GUIHandler::InitGUIS()
 		bg->AddObject(dimpanel);
 		s->behindGUI = bg;
 		guis.push_back(s);
+		//used to get framerate, etc
+		this->settings = s;
 	}
 	//HELP MENU
 	{

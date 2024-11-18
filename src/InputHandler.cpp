@@ -1,5 +1,6 @@
 #include "InputHandler.hpp"
 #include "Main.hpp"
+#include "binds.hpp"
 namespace InputHandler
 {
 std::vector<sf::Keyboard::Key> keysPressed;
@@ -15,6 +16,10 @@ sf::Vector2f guiMP(0, 0);
 sf::Vector2f scroll(0, 0);
 std::string typedText = "";
 bool mouseIsBlocked = false;
+
+int oldWidth = width;
+int oldHeight = height;
+bool isFullscreen = false;
 };
 
 int InputHandler::getIndex(std::vector<sf::Keyboard::Key> keys, sf::Keyboard::Key key)
@@ -125,16 +130,10 @@ void InputHandler::ProcessEvents()
 		{
 			typedText += event.text.unicode;
 		}
-		else if (event.type == event.MouseWheelScrolled)
+		else if (event.type == event.MouseWheelMoved)
 		{
-			if (event.mouseWheelScroll.wheel == sf::Mouse::Wheel::HorizontalWheel)
-			{
-				scroll.x = event.mouseWheelScroll.delta;
-			}
-			else
-			{
-				scroll.y = event.mouseWheelScroll.delta;
-			}
+			scroll.y = event.mouseWheel.delta;
+			std::cout << "x: " << scroll.x << " y: " << scroll.y << std::endl;
 		}
 		else if (event.type == event.Resized)
 		{
@@ -144,6 +143,42 @@ void InputHandler::ProcessEvents()
 	}
 	mousePos = (sf::Vector2f)sf::Mouse::getPosition(*window);
 	guiMP = sf::Vector2f(mousePos.x / width, mousePos.y / height);
+	//do fullscreen changing
+	if (pressed(binds::Fullscreen))
+	{
+		isFullscreen = !isFullscreen;
+		int style;
+		window->close();
+		sf::VideoMode v(width, height);
+		if (isFullscreen)
+		{
+			oldWidth = width;
+			oldHeight = height;
+			style = sf::Style::Fullscreen;
+			v = sf::VideoMode::getFullscreenModes()[0];
+		}
+		else
+		{
+			width = oldWidth;
+			height = oldHeight;
+			style = sf::Style::Default;
+			v = sf::VideoMode(width, height);
+		}
+		window->create(v, "Cosmic Construction", style);
+		int fr = guihandler.settings->framerate;
+		if (fr == -1)
+		{
+			window->setFramerateLimit(1000);
+			window->setVerticalSyncEnabled(true);
+		}
+		else
+		{
+			window->setFramerateLimit(fr);
+		}
+		sf::Image icon;
+		icon.loadFromFile("resources/images/icon.png");
+		window->setIcon(256, 256, icon.getPixelsPtr());
+	}
 }
 
 void InputHandler::RemoveKeyDown(sf::Keyboard::Key key)
