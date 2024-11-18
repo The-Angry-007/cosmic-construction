@@ -5,31 +5,51 @@ namespace SaveHandler
 std::string workingDir = "";
 }
 
-void CreateSave(std::string name)
+void SaveHandler::CreateSave(std::string name)
 {}
-void LoadGame(std::string name)
+void SaveHandler::LoadGame(std::string name)
 {}
-bool DirExists(std::string path)
+bool SaveHandler::DirExists(std::string path)
 {
 	return false;
 }
-void CreateDirectory(std::string path)
+void SaveHandler::CreateDirectory(std::string path)
 {}
 
-void UpdateTimePlayed()
+void SaveHandler::UpdateTimePlayed()
 {}
-std::string ReadData(std::string path)
+std::string SaveHandler::ReadData(std::string path)
 {
 	return "";
 }
-void WriteData(std::string path, std::string string)
+void SaveHandler::WriteData(std::string path, std::string string)
 {
 }
-std::vector<std::string> ListDirectories(std::string path)
+std::vector<std::string> SaveHandler::ListDirectories(std::string path)
 {
 	return {};
 }
-std::string RelToAbsolute(std::string path)
+std::string SaveHandler::RelToAbsolute(std::string path)
 {
 	return "";
+}
+
+std::vector<JSON> SaveHandler::StringToJSONs(std::string string)
+{
+	std::vector<JSON> jsons = {};
+	for (uint i = 0; i < string.size(); i++)
+	{
+		std::string current;
+		while (string[i] != '}')
+		{
+			current += string[i];
+			i++;
+		}
+		current += string[i];
+		JSON j = JSON();
+		j.FromString(current);
+		current = "";
+		i++;
+	}
+	return jsons;
 }

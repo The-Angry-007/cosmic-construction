@@ -43,15 +43,19 @@ int main()
 
 	guihandler.InitGUIS();
 
-	JSON j = JSON();
-	std::string test1 =
-		"{\n}";
-	j.FromString(test1);
-	std::cout << "input:\n"
-			  << test1;
-	std::cout << "\noutput:\n";
-	j.Print();
-	std::cout << std::endl;
+	std::string test1 = "{\n\
+Obj1:value1\n\
+}\n\
+{\n\
+Obj2:value2\n\
+}";
+	std::cout << "input:\n" + test1 << "\noutput:" << std::endl;
+	std::vector<JSON> jsons = SaveHandler::StringToJSONs(test1);
+	for (uint i = 0; i < jsons.size(); i++)
+	{
+		jsons[i].Print();
+		std::cout << std::endl;
+	}
 
 	deltaClock.restart();
 	while (window->isOpen())
