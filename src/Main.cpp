@@ -43,13 +43,11 @@ int main()
 
 	guihandler.InitGUIS();
 
-	JSON j = JSON();
-	j.AddAttribute("ID", "00003");
-	j.AddAttribute("TypeID", "006");
-	j.AddAttribute("ChunkID", "00010");
-	j.AddAttribute("PositionX", "2");
-	j.AddAttribute("PositionY", "5");
-	std::cout << SaveHandler::JSONsToString({ j }) << std::endl;
+	JSON j1 = JSON();
+	j1.AddAttribute("Obj1", "value1");
+	JSON j2 = JSON();
+	j2.AddAttribute("Obj2", "value2");
+	std::cout << SaveHandler::JSONsToString({ j1, j2 }) << std::endl;
 
 	deltaClock.restart();
 	while (window->isOpen())
