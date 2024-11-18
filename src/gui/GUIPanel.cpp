@@ -47,6 +47,32 @@ void GUIPanel::Render()
 	rect.setOrigin(newSize);
 	window->draw(rect);
 }
+void GUIPanel::RenderToTexture(sf::RenderTexture* texture)
+{
+	sf::Vector2f newPos = sf::Vector2f(position.x * width, position.y * height);
+	sf::Vector2f newSize = sf::Vector2f(size.x * width, size.y * height);
+	if (keepAspectRatio)
+	{
+		float desiredHeight = newSize.x * ratio;
+		if (desiredHeight > newSize.y)
+		{
+			float mult = desiredHeight / newSize.y;
+			newSize.x /= mult;
+			hitbox->shapes[0]->currentSize.x = newSize.x / width;
+		}
+		else
+		{
+			float desiredWidth = newSize.y / ratio;
+			float mult = desiredWidth / newSize.x;
+			newSize.y /= mult;
+			hitbox->shapes[0]->currentSize.y = newSize.y / height;
+		}
+	}
+	rect.setPosition(newPos);
+	rect.setSize(newSize * 2.f);
+	rect.setOrigin(newSize);
+	texture->draw(rect);
+}
 GUIPanel::~GUIPanel()
 {
 	if (hitbox != nullptr)

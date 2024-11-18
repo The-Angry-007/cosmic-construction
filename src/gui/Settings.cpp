@@ -213,10 +213,17 @@ void Settings::Render()
 	pageGuis[currentGUI]->Render();
 	if (currentGUI == 1)
 	{
+		sf::RenderTexture text;
+		text.create(width, height);
 		for (uint i = 0; i < bindGUIs.size(); i++)
 		{
-			bindGUIs[i]->Render();
+			bindGUIs[i]->RenderToTexture(&text);
 		}
+		text.display();
+		sf::Sprite s(text.getTexture());
+		sf::IntRect bounds(0.1f * width, 0.1f * height, 0.8f * width, 0.8f * height);
+		s.setTextureRect(bounds);
+		window->draw(s);
 	}
 }
 

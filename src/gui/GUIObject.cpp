@@ -35,3 +35,6 @@ void GUIObject::Render()
 
 GUIObject::~GUIObject()
 {}
+
+void GUIObject::RenderToTexture(sf::RenderTexture* texture)
+{}

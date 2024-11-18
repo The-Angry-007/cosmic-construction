@@ -55,3 +55,11 @@ void GUI::Render()
 		GUIObjects[i]->Render();
 	}
 }
+
+void GUI::RenderToTexture(sf::RenderTexture* text)
+{
+	for (uint i = 0; i < GUIObjects.size(); i++)
+	{
+		GUIObjects[i]->RenderToTexture(text);
+	}
+}

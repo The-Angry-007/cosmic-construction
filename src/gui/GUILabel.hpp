@@ -12,4 +12,5 @@ public:
 	GUILabel(sf::Vector2f position, sf::Vector2f size, std::string text);
 	void SetColor(sf::Color color);
 	void Render();
+	void RenderToTexture(sf::RenderTexture* texture);
 };

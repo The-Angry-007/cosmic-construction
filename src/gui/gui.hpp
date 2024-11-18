@@ -11,6 +11,7 @@ public:
 	void InsertObject(GUIObject* object, int index);
 	int GetIndex(GUIObject* object);
 	void RemoveObject(int index);
+	void RenderToTexture(sf::RenderTexture* text);
 	GUI();
 	~GUI();
 };
