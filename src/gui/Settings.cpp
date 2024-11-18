@@ -239,7 +239,7 @@ void Settings::Update(float dt)
 					selectedBind = i;
 					InputHandler::RemoveMbPressed(sf::Mouse::Button::Left);
 					InputHandler::RemoveMbDown(sf::Mouse::Button::Left);
-					dynamic_cast<GUILabel*>(bindGUIs[i]->GUIObjects[2])->value = "...";
+					dynamic_cast<GUILabel*>(bindGUIs[i]->GUIObjects[2])->value = "   ...   ";
 				}
 			}
 		}
@@ -249,7 +249,12 @@ void Settings::Update(float dt)
 			{
 				int code = binds::keyToCode(InputHandler::keysPressed[0]);
 				*bindCodes[selectedBind] = code;
-				dynamic_cast<GUILabel*>(bindGUIs[selectedBind]->GUIObjects[2])->value = binds::GetName(code);
+				std::string str = binds::GetName(code);
+				if (str.size() < 5)
+				{
+					str = "  " + str + "  ";
+				}
+				dynamic_cast<GUILabel*>(bindGUIs[selectedBind]->GUIObjects[2])->value = str;
 				selectedBind = -1;
 				InputHandler::RemoveKeyPressed(InputHandler::keysPressed[0]);
 				InputHandler::RemoveKeyDown(InputHandler::keysPressed[0]);

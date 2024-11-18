@@ -170,6 +170,8 @@ void InputHandler::ProcessEvents()
 			v = sf::VideoMode(width, height);
 		}
 		window->create(v, "Cosmic Construction", style);
+		width = window->getSize().x;
+		height = window->getSize().y;
 		int fr = guihandler.settings->framerate;
 		if (fr == -1)
 		{
