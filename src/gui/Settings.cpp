@@ -215,14 +215,18 @@ void Settings::Render()
 	{
 		sf::RenderTexture text;
 		text.create(width, height);
+		text.clear(sf::Color::Transparent);
 		for (uint i = 0; i < bindGUIs.size(); i++)
 		{
 			bindGUIs[i]->RenderToTexture(&text);
 		}
 		text.display();
 		sf::Sprite s(text.getTexture());
-		sf::IntRect bounds(0.1f * width, 0.1f * height, 0.8f * width, 0.8f * height);
+		sf::IntRect bounds(sf::Vector2i(width * 0.1f, height * 0.1f), sf::Vector2i(width * 0.8f, height * (0.8f - 0.06f)));
 		s.setTextureRect(bounds);
+		s.setPosition(bounds.top, bounds.left);
+		s.setOrigin(0.f, 0.f);
+
 		window->draw(s);
 	}
 }
