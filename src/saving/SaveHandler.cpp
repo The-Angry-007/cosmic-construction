@@ -39,7 +39,7 @@ std::vector<JSON> SaveHandler::StringToJSONs(std::string string)
 	std::vector<JSON> jsons = {};
 	for (uint i = 0; i < string.size(); i++)
 	{
-		std::string current;
+		std::string current = "";
 		while (string[i] != '}')
 		{
 			current += string[i];
@@ -48,6 +48,7 @@ std::vector<JSON> SaveHandler::StringToJSONs(std::string string)
 		current += string[i];
 		JSON j = JSON();
 		j.FromString(current);
+		jsons.push_back(j);
 		current = "";
 		i++;
 	}
