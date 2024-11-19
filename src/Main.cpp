@@ -3,6 +3,7 @@
 #include "gui.hpp"
 #include "hitboxes.hpp"
 #include "saving.hpp"
+#include "utils.hpp"
 #include <memory>
 
 //a unique pointer to the window object; this is unique to prevent accidentally creating multiple windows
@@ -12,6 +13,23 @@ int width = 800;
 int height = 500;
 
 GUIHandler guihandler = GUIHandler();
+
+void Print(std::vector<std::string> arr)
+{
+	std::cout << "[";
+	for (uint i = 0; i < arr.size(); i++)
+	{
+		std::cout << '\"';
+		std::cout << arr[i];
+		std::cout << '\"';
+
+		if (i < arr.size() - 1)
+		{
+			std::cout << ",";
+		}
+	}
+	std::cout << "]\n";
+}
 
 //the main procedure that runs the program
 int main()
@@ -42,6 +60,14 @@ int main()
 	fpsLabel.origin = sf::Vector2f(0.f, 0.f);
 
 	guihandler.InitGUIS();
+	std::cout << "input: 234,567,8\noutput: ";
+	Print(Split("234,567,8", ','));
+	std::cout << "input: \noutput: ";
+	Print(Split("", ','));
+	std::cout << "input: test\noutput: ";
+	Print(Split("test", ','));
+	std::cout << "input: ,\noutput: ";
+	Print(Split(",", ','));
 
 	deltaClock.restart();
 	while (window->isOpen())
