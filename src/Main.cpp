@@ -74,9 +74,8 @@ int main()
 
 	guihandler.InitGUIS();
 
-	std::string test = "header1,header2,header3\n\
-R1C1,R1C2,R1C3\n\
-R2C1,R2C2,R2C3";
+	std::string test = "header\n\
+record";
 	Table t = Table();
 	t.FromString(test);
 	std::cout << "Headers:" << std::endl;
