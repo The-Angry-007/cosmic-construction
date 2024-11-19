@@ -75,6 +75,7 @@ int main()
 	guihandler.InitGUIS();
 
 	Table t = Table();
+	t.headers = { "header" };
 	std::cout << "headers:" << std::endl;
 	Print(t.headers);
 	std::cout << "\nrecords" << std::endl;
