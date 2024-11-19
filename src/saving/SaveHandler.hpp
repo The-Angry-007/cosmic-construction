@@ -5,6 +5,7 @@ namespace SaveHandler
 {
 extern std::string workingDir;
 
+void Init();
 void CreateSave(std::string name);
 void LoadGame(std::string name);
 bool DirExists(std::string path);

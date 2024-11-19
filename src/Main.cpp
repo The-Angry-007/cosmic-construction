@@ -73,7 +73,7 @@ int main()
 	fpsLabel.origin = sf::Vector2f(0.f, 0.f);
 
 	guihandler.InitGUIS();
-
+	SaveHandler::Init();
 	deltaClock.restart();
 	while (window->isOpen())
 	{

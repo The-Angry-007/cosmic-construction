@@ -5,6 +5,23 @@
 namespace SaveHandler
 {
 std::string workingDir = "";
+
+}
+
+void SaveHandler::Init()
+{
+	//reset working directory and make sure root folder exists
+	std::string appdata = getenv("APPDATA");
+	workingDir = appdata + "\\cosmic-construction";
+	if (!DirExists(workingDir))
+	{
+		CreateDirectory(workingDir);
+	}
+	auto saveDir = workingDir + "\\saves";
+	if (!DirExists(saveDir))
+	{
+		CreateDirectory(saveDir);
+	}
 }
 
 void SaveHandler::CreateSave(std::string name)
