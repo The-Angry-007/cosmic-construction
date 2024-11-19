@@ -74,14 +74,15 @@ int main()
 
 	guihandler.InitGUIS();
 
-	std::string test = "";
 	Table t = Table();
-	t.FromString(test);
-	std::cout << "Headers:" << std::endl;
+	t.headers = { "header1", "header2", "header3" };
+	t.records = { { "R1C1", "R1C2", "R1C3" }, { "R2C1", "R2C2", "R2C3" } };
+	std::cout << "headers:" << std::endl;
 	Print(t.headers);
-	std::cout << std::endl
-			  << "Records:" << std::endl;
+	std::cout << "\nrecords" << std::endl;
 	Print(t.records);
+	std::cout << "\nresult:\n";
+	std::cout << t.ToString() << std::endl;
 	deltaClock.restart();
 	while (window->isOpen())
 	{

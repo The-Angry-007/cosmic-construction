@@ -36,3 +36,33 @@ std::string Table::GetValue(std::string header, int row)
 	}
 	return "data not found";
 }
+
+std::string Table::ToString()
+{
+	std::string result = "";
+	for (uint i = 0; i < headers.size(); i++)
+	{
+		result += headers[i];
+		if (i != headers.size() - 1)
+		{
+			result += ",";
+		}
+	}
+	result += "\n";
+	for (uint i = 0; i < records.size(); i++)
+	{
+		for (uint j = 0; j < records[i].size(); j++)
+		{
+			result += records[i][j];
+			if (j != records[i].size() - 1)
+			{
+				result += ",";
+			}
+		}
+		if (i != records.size() - 1)
+		{
+			result += "\n";
+		}
+	}
+	return result;
+}
