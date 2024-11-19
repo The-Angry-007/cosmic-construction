@@ -28,6 +28,19 @@ void Print(std::vector<std::string> arr)
 			std::cout << ",";
 		}
 	}
+	std::cout << "]";
+}
+void Print(std::vector<std::vector<std::string>> arr)
+{
+	std::cout << "[";
+	for (uint i = 0; i < arr.size(); i++)
+	{
+		Print(arr[i]);
+		if (i != arr.size() - 1)
+		{
+			std::cout << ",";
+		}
+	}
 	std::cout << "]\n";
 }
 
@@ -60,15 +73,17 @@ int main()
 	fpsLabel.origin = sf::Vector2f(0.f, 0.f);
 
 	guihandler.InitGUIS();
-	std::cout << "input: 234,567,8\noutput: ";
-	Print(Split("234,567,8", ','));
-	std::cout << "input: \noutput: ";
-	Print(Split("", ','));
-	std::cout << "input: test\noutput: ";
-	Print(Split("test", ','));
-	std::cout << "input: ,\noutput: ";
-	Print(Split(",", ','));
 
+	std::string test = "header1,header2,header3\n\
+R1C1,R1C2,R1C3\n\
+R2C1,R2C2,R2C3";
+	Table t = Table();
+	t.FromString(test);
+	std::cout << "Headers:" << std::endl;
+	Print(t.headers);
+	std::cout << std::endl
+			  << "Records:" << std::endl;
+	Print(t.records);
 	deltaClock.restart();
 	while (window->isOpen())
 	{
