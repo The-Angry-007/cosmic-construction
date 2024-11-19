@@ -274,8 +274,8 @@ void Settings::Update(float dt)
 	{
 		GUI* g = pageGuis[2];
 		dynamic_cast<GUILabel*>(g->GUIObjects[0])->value = "Master Volume: " + std::to_string((int)(dynamic_cast<GUISlider*>(g->GUIObjects[1])->value * 100)) + "%";
-		dynamic_cast<GUILabel*>(g->GUIObjects[2])->value = "Master Volume: " + std::to_string((int)(dynamic_cast<GUISlider*>(g->GUIObjects[3])->value * 100)) + "%";
-		dynamic_cast<GUILabel*>(g->GUIObjects[4])->value = "Master Volume: " + std::to_string((int)(dynamic_cast<GUISlider*>(g->GUIObjects[5])->value * 100)) + "%";
+		dynamic_cast<GUILabel*>(g->GUIObjects[2])->value = "Music Volume: " + std::to_string((int)(dynamic_cast<GUISlider*>(g->GUIObjects[3])->value * 100)) + "%";
+		dynamic_cast<GUILabel*>(g->GUIObjects[4])->value = "Sound Effects Volume: " + std::to_string((int)(dynamic_cast<GUISlider*>(g->GUIObjects[5])->value * 100)) + "%";
 	}
 }
 

@@ -71,3 +71,25 @@ sf::Vector2f Lerp(sf::Vector2f a, sf::Vector2f b, float t)
 {
 	return a + (b - a) * t;
 }
+
+std::vector<std::string> Split(std::string string, char chr)
+{
+	std::vector<std::string> split = {};
+	std::string current = "";
+	int i = 0;
+	while (i < string.length())
+	{
+		if (string[i] == chr)
+		{
+			split.push_back(current);
+			current = "";
+		}
+		else
+		{
+			current += string[i];
+		}
+		i++;
+	}
+	split.push_back(current);
+	return split;
+}
