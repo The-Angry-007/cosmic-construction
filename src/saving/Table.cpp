@@ -18,6 +18,10 @@ void Table::FromString(std::string string)
 
 std::string Table::GetValue(int column, int row)
 {
+	if (row > records.size() || column > headers.size())
+	{
+		return "out of bounds";
+	}
 	return records[row][column];
 }
 
