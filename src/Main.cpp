@@ -74,14 +74,6 @@ int main()
 
 	guihandler.InitGUIS();
 
-	Table t = Table();
-	t.headers = { "header" };
-	std::cout << "headers:" << std::endl;
-	Print(t.headers);
-	std::cout << "\nrecords" << std::endl;
-	Print(t.records);
-	std::cout << "\nresult:\n";
-	std::cout << t.ToString() << std::endl;
 	deltaClock.restart();
 	while (window->isOpen())
 	{
