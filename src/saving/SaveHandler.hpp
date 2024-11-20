@@ -8,7 +8,8 @@ extern int startTime;
 
 void Init();
 void CreateSave(std::string name);
-void LoadGame(std::string name);
+void LoadGame(int index);
+void SaveGame();
 bool DirExists(std::string path);
 bool CreateDirectory(std::string path);
 void UpdateTimePlayed();

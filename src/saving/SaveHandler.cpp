@@ -47,8 +47,11 @@ void SaveHandler::CreateSave(std::string name)
 	UpdateTimePlayed();
 	UpdateLastModified();
 }
-void SaveHandler::LoadGame(std::string name)
-{}
+void SaveHandler::LoadGame(int index)
+{
+	startTime = GetTime();
+	workingDir += "\\" + std::to_string(index);
+}
 bool SaveHandler::DirExists(std::string path)
 {
 	struct stat info;
