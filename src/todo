@@ -6,9 +6,12 @@
   [X] savehandler namespace
 [ ] finish load game gui
   [] add save slot class
-    [ ] make any gui object capable of having origin
+    [X] make any gui object capable of having origin
 [ ] finish rest of gui
-
+  [ ] start main game gui
+    [ ] pause menu
+  [ ] start tech tree
+  [ ] start help menu
 
 
 

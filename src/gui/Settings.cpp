@@ -87,6 +87,9 @@ Settings::Settings()
 	//AUDIO PAGE
 	{
 		GUI* g = new GUI();
+		GUILabel* audiolabel = new GUILabel(sf::Vector2f(0.5f, 0.13f), sf::Vector2f(0.9f, 0.025f), "Audio");
+		audiolabel->SetColor(sf::Color::Black);
+		g->AddObject(audiolabel);
 		GUILabel* l = new GUILabel(sf::Vector2f(0.5f, 0.2f), sf::Vector2f(0.35f, 0.025f), "Master Volume: ");
 		l->SetColor(sf::Color::Black);
 		g->AddObject(l);
@@ -273,9 +276,9 @@ void Settings::Update(float dt)
 	else if (currentGUI == 2)
 	{
 		GUI* g = pageGuis[2];
-		dynamic_cast<GUILabel*>(g->GUIObjects[0])->value = "Master Volume: " + std::to_string((int)(dynamic_cast<GUISlider*>(g->GUIObjects[1])->value * 100)) + "%";
-		dynamic_cast<GUILabel*>(g->GUIObjects[2])->value = "Music Volume: " + std::to_string((int)(dynamic_cast<GUISlider*>(g->GUIObjects[3])->value * 100)) + "%";
-		dynamic_cast<GUILabel*>(g->GUIObjects[4])->value = "Sound Effects Volume: " + std::to_string((int)(dynamic_cast<GUISlider*>(g->GUIObjects[5])->value * 100)) + "%";
+		dynamic_cast<GUILabel*>(g->GUIObjects[1])->value = "Master Volume: " + std::to_string((int)(dynamic_cast<GUISlider*>(g->GUIObjects[2])->value * 100)) + "%";
+		dynamic_cast<GUILabel*>(g->GUIObjects[3])->value = "Music Volume: " + std::to_string((int)(dynamic_cast<GUISlider*>(g->GUIObjects[4])->value * 100)) + "%";
+		dynamic_cast<GUILabel*>(g->GUIObjects[5])->value = "Sound Effects Volume: " + std::to_string((int)(dynamic_cast<GUISlider*>(g->GUIObjects[6])->value * 100)) + "%";
 	}
 }
 
