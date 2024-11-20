@@ -74,7 +74,11 @@ int main()
 
 	guihandler.InitGUIS();
 	SaveHandler::Init();
-	SaveHandler::GetTime();
+	std::string path = SaveHandler::RelToAbsolute("testFile.txt");
+
+	SaveHandler::WriteData(path, "hello world\nmulti-line test");
+	std::string data = SaveHandler::ReadData(path);
+	std::cout << data << std::endl;
 	deltaClock.restart();
 	while (window->isOpen())
 	{

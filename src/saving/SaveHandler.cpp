@@ -83,10 +83,29 @@ void SaveHandler::UpdateLastModified()
 }
 std::string SaveHandler::ReadData(std::string path)
 {
-	return "";
+	std::string data;
+	std::ifstream file(path);
+	std::string line;
+	while (std::getline(file, line))
+	{
+		data += line;
+	}
+	file.close();
+	return data;
 }
 void SaveHandler::WriteData(std::string path, std::string string)
 {
+	std::ofstream file(path);
+	auto lines = Split(string, '\n');
+	for (uint i = 0; i < lines.size(); i++)
+	{
+		file << lines[i];
+		if (i != lines.size() - 1)
+		{
+			file << std::endl;
+		}
+	}
+	file.close();
 }
 std::vector<std::string> SaveHandler::ListDirectories(std::string path)
 {

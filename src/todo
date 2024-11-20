@@ -10,9 +10,6 @@
 [ ] finish rest of gui
 
 
-UpdateLastModified
-ReadData
-WriteData
 SaveGame
 LoadGame
 
