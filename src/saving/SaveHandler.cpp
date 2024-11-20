@@ -29,7 +29,24 @@ void SaveHandler::Init()
 }
 
 void SaveHandler::CreateSave(std::string name)
-{}
+{
+	//folders are named numbers instead of the actual name
+	//this allows for illegal characters etc in the name
+
+	//get the number to be used for the folder
+	//this will be one more than the number of existing saves
+	auto existingSaves = ListDirectories(workingDir + "\\saves");
+	std::string fileName = std::to_string(existingSaves.size() + 1);
+	workingDir += "\\saves\\" + fileName;
+	CreateDirectory(workingDir);
+	//the 2 zeroes are to set default values for
+	//time played and last modified
+	std::string metadata = name + "\n0\n0";
+	WriteData(workingDir + "\\metadata.txt", metadata);
+	startTime = GetTime();
+	UpdateTimePlayed();
+	UpdateLastModified();
+}
 void SaveHandler::LoadGame(std::string name)
 {}
 bool SaveHandler::DirExists(std::string path)
@@ -67,7 +84,6 @@ int SaveHandler::GetTime()
 	auto now = std::chrono::system_clock::now();
 	auto epoch = now.time_since_epoch();
 	auto seconds = std::chrono::duration_cast<std::chrono::seconds>(epoch);
-	std::cout << seconds.count() << std::endl;
 	return seconds.count();
 }
 
