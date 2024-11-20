@@ -7,6 +7,7 @@ public:
 	sf::Texture texture;
 	sf::Sprite sprite;
 	bool keepAspectRatio;
+	sf::Vector2f origin;
 	GUIImage(sf::Vector2f position, sf::Vector2f size, std::string path);
 	~GUIImage();
 	void Render();

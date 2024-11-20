@@ -14,6 +14,7 @@ GUIImage::GUIImage(sf::Vector2f position, sf::Vector2f size, std::string path)
 	keepAspectRatio = false;
 	hitbox = new Hitbox(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.f, 1.f));
 	hitbox->AddShape(new HitboxRect(position, size));
+	origin = sf::Vector2f(.5f, .5f);
 }
 void GUIImage::Render()
 {
@@ -44,9 +45,15 @@ void GUIImage::Render()
 	}
 	sprite.setPosition(cPos);
 	sf::FloatRect bounds = sprite.getLocalBounds();
-	sprite.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
+	sf::Vector2f topleft(bounds.left, bounds.top);
+	sf::Vector2f origin(bounds.width * this->origin.x, bounds.height * this->origin.y);
+	sprite.setOrigin(topleft + origin);
+	sprite.setPosition(cPos - cSize + 2.f * sf::Vector2f(this->origin.x * cSize.x, this->origin.y * cSize.y));
+	sf::FloatRect finalBounds = sprite.getGlobalBounds();
+	sf::Vector2f s = sf::Vector2f(bounds.width * sprite.getScale().x, bounds.height * sprite.getScale().y);
 	hitbox->shapes[0]->currentSize = sf::Vector2f(bounds.width * sprite.getScale().x / 2.f / width, bounds.height * sprite.getScale().y / 2.f / height);
-
+	sf::Vector2f mid(finalBounds.left + s.x / 2.f, finalBounds.top + s.y / 2.f);
+	hitbox->shapes[0]->currentPos = sf::Vector2f(mid.x / width, mid.y / height);
 	window->draw(sprite);
 }
 
