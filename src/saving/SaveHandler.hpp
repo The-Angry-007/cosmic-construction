@@ -12,6 +12,7 @@ void LoadGame(std::string name);
 bool DirExists(std::string path);
 bool CreateDirectory(std::string path);
 void UpdateTimePlayed();
+void UpdateLastModified();
 std::string ReadData(std::string path);
 void WriteData(std::string path, std::string string);
 std::vector<std::string> ListFiles(std::string path);

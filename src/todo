@@ -10,15 +10,11 @@
 [ ] finish rest of gui
 
 
-UpdateTimePlayed
 UpdateLastModified
 ReadData
 WriteData
-ListDirectories
 SaveGame
 LoadGame
-RelToAbsolute
-GetCurrentTime
 
 
 

@@ -70,6 +70,17 @@ int SaveHandler::GetTime()
 	std::cout << seconds.count() << std::endl;
 	return seconds.count();
 }
+
+void SaveHandler::UpdateLastModified()
+{
+	std::string path = RelToAbsolute("metadata.txt");
+	std::string data = ReadData(path);
+	auto lines = Split(data, '\n');
+	int currentTime = GetTime();
+	lines[2] = std::to_string(currentTime);
+	data = concat(lines);
+	WriteData(path, data);
+}
 std::string SaveHandler::ReadData(std::string path)
 {
 	return "";
@@ -128,7 +139,7 @@ std::vector<std::string> SaveHandler::ListFiles(std::string path)
 }
 std::string SaveHandler::RelToAbsolute(std::string path)
 {
-	return "";
+	return workingDir + '\\' + path;
 }
 
 std::string SaveHandler::JSONsToString(std::vector<JSON> jsons)
