@@ -93,3 +93,17 @@ std::vector<std::string> Split(std::string string, char chr)
 	split.push_back(current);
 	return split;
 }
+
+std::string concat(std::vector<std::string> lines)
+{
+	std::string result = "";
+	for (uint i = 0; i < lines.size(); i++)
+	{
+		result += lines[i];
+		if (i != lines.size() - 1)
+		{
+			result += '\n';
+		}
+	}
+	return result;
+}

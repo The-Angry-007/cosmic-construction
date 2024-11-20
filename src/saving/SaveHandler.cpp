@@ -1,11 +1,15 @@
 #include "SaveHandler.hpp"
+#include "utils.hpp"
+#include <chrono>
+#include <ctime>
 #include <iostream>
 #include <sys/stat.h>
 #include <windows.h>
 namespace SaveHandler
 {
 std::string workingDir = "";
-
+//the time the current save was opened
+int startTime = 0;
 }
 
 void SaveHandler::Init()
@@ -41,7 +45,31 @@ bool SaveHandler::CreateDirectory(std::string path)
 }
 
 void SaveHandler::UpdateTimePlayed()
-{}
+{
+	//note that the structure of metadata will be:
+	/*
+	name
+	time played
+	last modified
+	*/
+	std::string path = RelToAbsolute("metadata.txt");
+	std::string data = ReadData(path);
+	auto lines = Split(data, '\n');
+	int played = std::stoi(lines[1]);
+	int currentTime = GetTime();
+	played += currentTime - startTime;
+	lines[1] = std::to_string(played);
+	data = concat(lines);
+	WriteData(path, data);
+}
+int SaveHandler::GetTime()
+{
+	auto now = std::chrono::system_clock::now();
+	auto epoch = now.time_since_epoch();
+	auto seconds = std::chrono::duration_cast<std::chrono::seconds>(epoch);
+	std::cout << seconds.count() << std::endl;
+	return seconds.count();
+}
 std::string SaveHandler::ReadData(std::string path)
 {
 	return "";

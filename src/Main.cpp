@@ -74,6 +74,7 @@ int main()
 
 	guihandler.InitGUIS();
 	SaveHandler::Init();
+	SaveHandler::GetTime();
 	deltaClock.restart();
 	while (window->isOpen())
 	{

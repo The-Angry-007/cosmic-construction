@@ -13,3 +13,5 @@ extern float Lerp(float a, float b, float t);
 extern sf::Vector2f Lerp(sf::Vector2f a, sf::Vector2f b, float t);
 
 extern std::vector<std::string> Split(std::string string, char chr);
+
+extern std::string concat(std::vector<std::string> lines);

@@ -4,6 +4,7 @@
 namespace SaveHandler
 {
 extern std::string workingDir;
+extern int startTime;
 
 void Init();
 void CreateSave(std::string name);
@@ -16,6 +17,7 @@ void WriteData(std::string path, std::string string);
 std::vector<std::string> ListFiles(std::string path);
 std::vector<std::string> ListDirectories(std::string path);
 std::string RelToAbsolute(std::string path);
+int GetTime();
 
 std::string JSONsToString(std::vector<JSON> jsons);
 std::vector<JSON> StringToJSONs(std::string string);

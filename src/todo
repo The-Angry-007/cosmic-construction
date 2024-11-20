@@ -1,12 +1,25 @@
 [X] finish new game gui
   [X] add checkboxes
 [ ] complete saving and loading
-  [ ] json class
-  [ ] table class
+  [X] json class
+  [X] table class
   [ ] savehandler namespace
 [ ] finish load game gui
   [] add save slot class
     [ ] make any gui object capable of having origin
+[ ] finish rest of gui
+
+
+UpdateTimePlayed
+UpdateLastModified
+ReadData
+WriteData
+ListDirectories
+SaveGame
+LoadGame
+RelToAbsolute
+GetCurrentTime
+
 
 
 all of savehandler functions are not yet implemented
