@@ -89,7 +89,10 @@ std::string SaveHandler::ReadData(std::string path)
 	while (std::getline(file, line))
 	{
 		data += line;
+		data += '\n';
 	}
+	//get rid of final new line
+	data = data.substr(0, data.size() - 1);
 	file.close();
 	return data;
 }
