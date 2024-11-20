@@ -217,3 +217,9 @@ std::vector<JSON> SaveHandler::StringToJSONs(std::string string)
 	}
 	return jsons;
 }
+
+void SaveHandler::SaveGame()
+{
+	UpdateTimePlayed();
+	UpdateLastModified();
+}
