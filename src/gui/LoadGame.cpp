@@ -2,6 +2,7 @@
 #include "InputHandler.hpp"
 #include "Main.hpp"
 #include "saving.hpp"
+#include "utils.hpp"
 LoadGame::LoadGame(GUIGalaxy* galaxy, GUIPanel* dimpanel)
 {
 	GUIObjects = {};
@@ -62,6 +63,14 @@ void LoadGame::Update(float dt)
 	{
 		saveSlots[i]->Move(move);
 		saveSlots[i]->Update(dt);
+		if (saveSlots[i]->bgObj->isClicked())
+		{
+			std::string saves = SaveHandler::workingDir + "\\saves\\";
+			std::string folder = saveSlots[i]->path.substr(saves.length());
+			std::cout << folder << std::endl;
+			SaveHandler::LoadGame(std::stoi(folder));
+			guihandler.OpenGUI(5);
+		}
 	}
 }
 void LoadGame::Render()
@@ -87,4 +96,54 @@ void LoadGame::Render()
 	s.setTexture(t.getTexture());
 	s.setTextureRect(sf::IntRect(sf::Vector2i(0.1f * width, 0.18f * height), sf::Vector2i(0.8f * width, 0.72f * height)));
 	window->draw(s);
+}
+
+void LoadGame::Reload()
+{
+	for (uint i = 0; i < saveSlots.size(); i++)
+	{
+		delete saveSlots[i];
+	}
+	saveSlots = {};
+	std::vector<std::string> dirs = SaveHandler::ListDirectories(SaveHandler::workingDir + "\\saves");
+	std::vector<int> creationTimes = {};
+	std::vector<std::string*> ptrs = {};
+	for (uint i = 0; i < dirs.size(); i++)
+	{
+		ptrs.push_back(&dirs[i]);
+		std::string path = SaveHandler::workingDir;
+		path += "\\saves\\" + dirs[i];
+		path += "\\metadata.txt";
+		auto data = Split(SaveHandler::ReadData(path), '\n');
+		creationTimes.push_back(std::stoi(data[2]));
+	}
+	//sort directories using bubble sort algorithm
+	for (uint i = 0; i < dirs.size(); i++)
+	{
+		bool swapped = false;
+		for (int j = 0; j < dirs.size() - i - 1; j++)
+		{
+			if (creationTimes[j] < creationTimes[j + 1])
+			{
+				int temp = creationTimes[j];
+				creationTimes[j] = creationTimes[j + 1];
+				creationTimes[j + 1] = temp;
+				std::string* temp2 = ptrs[j];
+				ptrs[j] = ptrs[j + 1];
+				ptrs[j + 1] = temp2;
+				swapped = true;
+			}
+		}
+		if (!swapped)
+		{
+			break;
+		}
+	}
+	sf::Vector2f startPos(0.5f, 0.3f);
+	float gap = 0.24f;
+	for (uint i = 0; i < dirs.size(); i++)
+	{
+		saveSlots.push_back(new GUISaveSlot(startPos, SaveHandler::workingDir + "\\saves\\" + *ptrs[i]));
+		startPos.y += gap;
+	}
 }

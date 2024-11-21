@@ -7,12 +7,12 @@
 #include <iostream>
 GUISaveSlot::GUISaveSlot(sf::Vector2f position, std::string path)
 {
+	this->path = path;
 	this->position = position;
 	auto slotData = Split(SaveHandler::ReadData(path + "\\metadata.txt"), '\n');
 	std::string playedString = "";
 	std::string suffix = "seconds";
 	float timePlayed = std::stof(slotData[1]);
-	std::cout << timePlayed << " ";
 	if (timePlayed > 60)
 	{
 		timePlayed /= 60;
@@ -32,7 +32,6 @@ GUISaveSlot::GUISaveSlot(sf::Vector2f position, std::string path)
 		playedString = playedString.substr(0, playedString.length() - 2);
 	}
 	playedString = "Playtime: " + playedString + " " + suffix;
-	std::cout << playedString << std::endl;
 	size = sf::Vector2f(0.35f, 0.1f);
 	bgObj = new GUIPanel(position, size, sf::Color(177, 177, 177));
 	sf::Vector2f nameSize(0.5f, 0.06f);
@@ -57,6 +56,7 @@ GUISaveSlot::GUISaveSlot(sf::Vector2f position, std::string path)
 	modifiedLabel = new GUILabel(position + sf::Vector2f(-size.x + modifiedSize.x, size.y - modifiedSize.y) + sf::Vector2f(offset.x, -offset.y), modifiedSize, modified);
 	modifiedLabel->origin = sf::Vector2f(0.f, 1.f);
 	modifiedLabel->SetColor(sf::Color::Black);
+	bgObj->blocksMouseInput = true;
 }
 
 void GUISaveSlot::Update(float dt)

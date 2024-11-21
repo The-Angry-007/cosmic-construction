@@ -12,6 +12,12 @@ std::string workingDir = "";
 int startTime = 0;
 }
 
+void SaveHandler::ResetWorkingDir()
+{
+	std::string appdata = getenv("APPDATA");
+	workingDir = appdata + "\\cosmic-construction";
+}
+
 void SaveHandler::Init()
 {
 	//reset working directory and make sure root folder exists
@@ -28,7 +34,7 @@ void SaveHandler::Init()
 	}
 }
 
-void SaveHandler::CreateSave(std::string name)
+void SaveHandler::CreateSave(std::string name, int difficulty, std::string seed)
 {
 	//folders are named numbers instead of the actual name
 	//this allows for illegal characters etc in the name
@@ -41,7 +47,7 @@ void SaveHandler::CreateSave(std::string name)
 	CreateDirectory(workingDir);
 	//the 2 zeroes are to set default values for
 	//time played and last modified
-	std::string metadata = name + "\n0\n0";
+	std::string metadata = name + "\n0\n0\n" + std::to_string(difficulty) + "\n" + seed;
 	WriteData(workingDir + "\\metadata.txt", metadata);
 	startTime = GetTime();
 	UpdateTimePlayed();

@@ -1,4 +1,5 @@
 #include "../gui.hpp"
+#include "../saving.hpp"
 #include "InputHandler.hpp"
 #include "binds.hpp"
 #include "utils.hpp"
@@ -15,11 +16,19 @@ GUIHandler::~GUIHandler()
 
 void GUIHandler::OpenGUI(int GUI)
 {
+	if (GUI != 5)
+	{
+		SaveHandler::ResetWorkingDir();
+	}
 	activeGui = GUI;
 	openedGuis.push_back(GUI);
 	if (GUI == 3)
 	{
 		dynamic_cast<Settings*>(guis[activeGui])->currentGUI = 0;
+	}
+	else if (GUI == 2)
+	{
+		dynamic_cast<LoadGame*>(guis[activeGui])->Reload();
 	}
 }
 void GUIHandler::GoBack()
@@ -126,7 +135,7 @@ void GUIHandler::InitGUIS()
 		GUIInputField* nameField = new GUIInputField(sf::Vector2f(0.5f, 0.23f), sf::Vector2f(0.25f, 0.05f));
 		nameField->value = "Enter Save Name";
 		g->AddObject(namePanel);
-		g->AddObject(nameField);
+
 		//the resources checkboxes
 		GUILabel* resourcesLabel = new GUILabel(sf::Vector2f(0.5f, 0.333f), sf::Vector2f(0.278 / 2.f, 0.025f), "Resource Abundancy");
 		g->AddObject(resourcesLabel);
@@ -149,9 +158,7 @@ void GUIHandler::InitGUIS()
 		l2->origin = sf::Vector2f(0.f, 0.5f);
 		GUILabel* l3 = new GUILabel(sf::Vector2f((p3 + p4) / 2.f, 0.4f), sf::Vector2f((p4 - p3 - 2 * 0.0232f) / 2.f - 0.01f, 0.0232f), "Plenty");
 		l3->origin = sf::Vector2f(0.f, 0.5f);
-		g->AddObject(c1);
-		g->AddObject(c2);
-		g->AddObject(c3);
+
 		g->AddObject(l1);
 		g->AddObject(l2);
 		g->AddObject(l3);
@@ -160,7 +167,6 @@ void GUIHandler::InitGUIS()
 		GUIInputField* seedField = new GUIInputField(sf::Vector2f(0.5f, 0.6f), sf::Vector2f(0.2f, 0.04f));
 		seedField->value = "Enter Seed";
 		g->AddObject(seedPanel);
-		g->AddObject(seedField);
 		//create save button
 		GUIImage* i = new GUIImage(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.3f, 0.05f), "resources/images/buttonBezels.png");
 		GUILabel* l = new GUILabel(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.25f, 0.025f), "Create Save");
@@ -168,6 +174,11 @@ void GUIHandler::InitGUIS()
 		GUIButton* b = new GUIButton(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.3f, 0.05f), i, l);
 		b->clickFunc = ClickFuncs::CreateSave;
 		g->AddObject(b);
+		g->AddObject(nameField);
+		g->AddObject(seedField);
+		g->AddObject(c1);
+		g->AddObject(c2);
+		g->AddObject(c3);
 		guis.push_back(g);
 	}
 	//LOAD GAME MENU

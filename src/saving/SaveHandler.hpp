@@ -7,7 +7,7 @@ extern std::string workingDir;
 extern int startTime;
 
 void Init();
-void CreateSave(std::string name);
+void CreateSave(std::string name, int difficulty, std::string seed);
 void LoadGame(int index);
 void SaveGame();
 bool DirExists(std::string path);
@@ -20,6 +20,7 @@ std::vector<std::string> ListFiles(std::string path);
 std::vector<std::string> ListDirectories(std::string path);
 std::string RelToAbsolute(std::string path);
 int GetTime();
+void ResetWorkingDir();
 
 std::string JSONsToString(std::vector<JSON> jsons);
 std::vector<JSON> StringToJSONs(std::string string);
