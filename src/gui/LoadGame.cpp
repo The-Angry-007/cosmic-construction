@@ -1,8 +1,9 @@
 #include "LoadGame.hpp"
+#include "Main.hpp"
 
 LoadGame::LoadGame(GUIGalaxy* galaxy, GUIPanel* dimpanel)
 {
-	// saveSlots.push_back(new GUISaveSlot(sf::Vector2f(0.5f, 0.5f), ""));
+	saveSlots.push_back(new GUISaveSlot(sf::Vector2f(0.5f, 0.5f), ""));
 	GUIObjects = {};
 	{
 		GUI* g = new GUI();
@@ -27,15 +28,40 @@ LoadGame::LoadGame(GUIGalaxy* galaxy, GUIPanel* dimpanel)
 
 void LoadGame::Update(float dt)
 {
+	std::cout << "updating" << std::endl;
+
 	for (uint i = 0; i < GUIObjects.size(); i++)
 	{
 		GUIObjects[i]->Update(dt);
 	}
+	for (uint i = 0; i < saveSlots.size(); i++)
+	{
+		saveSlots[i]->Update(dt);
+	}
 }
 void LoadGame::Render()
 {
+	std::cout << "rendering" << std::endl;
+
 	for (uint i = 0; i < GUIObjects.size(); i++)
 	{
 		GUIObjects[i]->Render();
 	}
+	std::cout << "starting drawing texture" << std::endl;
+
+	sf::RenderTexture t;
+	t.create(width, height);
+	t.clear(sf::Color::Transparent);
+	for (uint i = 0; i < saveSlots.size(); i++)
+	{
+		saveSlots[i]->RenderToTexture(&t);
+	}
+	t.display();
+	std::cout << "finished drawing to texture" << std::endl;
+	sf::Sprite s;
+	// s.setPosition(0.1f * width, 0.1f * height);
+	s.setTexture(t.getTexture());
+	// s.setTextureRect(sf::IntRect(sf::Vector2i(0.5f * width, 0.5f * height), sf::Vector2i(0.8f * width, 0.8f * height)));
+	window->draw(s);
+	std::cout << "drawn to window" << std::endl;
 }
