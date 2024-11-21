@@ -207,7 +207,7 @@ void Settings::Update(float dt)
 	}
 	else if (currentGUI == 1)
 	{
-		float move = InputHandler::scroll.y * 0.03f;
+		float move = InputHandler::scroll.y * 0.05f;
 
 		if (move < 0)
 		{

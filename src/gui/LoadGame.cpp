@@ -36,7 +36,7 @@ LoadGame::LoadGame(GUIGalaxy* galaxy, GUIPanel* dimpanel)
 
 void LoadGame::Update(float dt)
 {
-	float move = InputHandler::scroll.y * 0.03f;
+	float move = InputHandler::scroll.y * 0.05f;
 
 	if (move < 0)
 	{
