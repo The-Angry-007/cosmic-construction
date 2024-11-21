@@ -10,5 +10,7 @@
 #include "gui/GUILabel.hpp"
 #include "gui/GUIObject.hpp"
 #include "gui/GUIPanel.hpp"
+#include "gui/GUISaveSlot.hpp"
 #include "gui/GUISlider.hpp"
+#include "gui/LoadGame.hpp"
 #include "gui/Settings.hpp"
