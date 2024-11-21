@@ -1,9 +1,9 @@
 #include "LoadGame.hpp"
+#include "InputHandler.hpp"
 #include "Main.hpp"
-
+#include "saving.hpp"
 LoadGame::LoadGame(GUIGalaxy* galaxy, GUIPanel* dimpanel)
 {
-	saveSlots.push_back(new GUISaveSlot(sf::Vector2f(0.5f, 0.5f), ""));
 	GUIObjects = {};
 	{
 		GUI* g = new GUI();
@@ -24,44 +24,67 @@ LoadGame::LoadGame(GUIGalaxy* galaxy, GUIPanel* dimpanel)
 		g->AddObject(headerText);
 		this->GUIObjects = g->GUIObjects;
 	}
+	std::vector<std::string> dirs = SaveHandler::ListDirectories(SaveHandler::workingDir + "\\saves");
+	sf::Vector2f startPos(0.5f, 0.3f);
+	float gap = 0.24f;
+	for (uint i = 0; i < dirs.size(); i++)
+	{
+		saveSlots.push_back(new GUISaveSlot(startPos, SaveHandler::workingDir + "\\saves\\" + dirs[i]));
+		startPos.y += gap;
+	}
 }
 
 void LoadGame::Update(float dt)
 {
-	std::cout << "updating" << std::endl;
+	float move = InputHandler::scroll.y * 0.03f;
 
+	if (move < 0)
+	{
+		float lowest = saveSlots[saveSlots.size() - 1]->bgObj->position.y + saveSlots[0]->bgObj->size.y;
+		if (lowest - move < 0.90f)
+		{
+			move = 0.f;
+		}
+	}
+	else if (move > 0)
+	{
+		float highest = saveSlots[0]->bgObj->position.y - saveSlots[0]->bgObj->size.y;
+		if (highest + move > 0.22f)
+		{
+			move = 0.f;
+		}
+	}
 	for (uint i = 0; i < GUIObjects.size(); i++)
 	{
 		GUIObjects[i]->Update(dt);
 	}
 	for (uint i = 0; i < saveSlots.size(); i++)
 	{
+		saveSlots[i]->Move(move);
 		saveSlots[i]->Update(dt);
 	}
 }
 void LoadGame::Render()
 {
-	std::cout << "rendering" << std::endl;
 
 	for (uint i = 0; i < GUIObjects.size(); i++)
 	{
 		GUIObjects[i]->Render();
 	}
-	std::cout << "starting drawing texture" << std::endl;
 
 	sf::RenderTexture t;
 	t.create(width, height);
 	t.clear(sf::Color::Transparent);
+	t.setView(sf::View(sf::Vector2f(width / 2.f, height / 2.f), sf::Vector2f(width, height)));
+
 	for (uint i = 0; i < saveSlots.size(); i++)
 	{
 		saveSlots[i]->RenderToTexture(&t);
 	}
 	t.display();
-	std::cout << "finished drawing to texture" << std::endl;
 	sf::Sprite s;
-	// s.setPosition(0.1f * width, 0.1f * height);
+	s.setPosition(0.1f * width, 0.18f * height);
 	s.setTexture(t.getTexture());
-	// s.setTextureRect(sf::IntRect(sf::Vector2i(0.5f * width, 0.5f * height), sf::Vector2i(0.8f * width, 0.8f * height)));
+	s.setTextureRect(sf::IntRect(sf::Vector2i(0.1f * width, 0.18f * height), sf::Vector2i(0.8f * width, 0.72f * height)));
 	window->draw(s);
-	std::cout << "drawn to window" << std::endl;
 }

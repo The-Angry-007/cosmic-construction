@@ -1,14 +1,16 @@
 #include "GUISaveSlot.hpp"
-#include "Main.hpp"
-
+#include "../Main.hpp"
+#include "../saving.hpp"
+#include "../utils.hpp"
 GUISaveSlot::GUISaveSlot(sf::Vector2f position, std::string path)
 {
 	this->position = position;
+	auto slotData = Split(SaveHandler::ReadData(path + "\\metadata.txt"), '\n');
 	size = sf::Vector2f(0.35f, 0.1f);
 	bgObj = new GUIPanel(position, size, sf::Color(177, 177, 177));
 	sf::Vector2f nameSize(0.3f, 0.07f);
 	sf::Vector2f offset(0.01f, 0.01f);
-	nameLabel = new GUILabel(position - size + nameSize * 0.5f + offset, nameSize * 0.5f, "Name");
+	nameLabel = new GUILabel(position - size + nameSize * 0.5f + offset, nameSize * 0.5f, slotData[0]);
 	nameLabel->SetColor(sf::Color::Black);
 	nameLabel->text.setStyle(sf::Text::Bold);
 	nameLabel->origin = sf::Vector2f(0.f, 0.f);

@@ -47,9 +47,11 @@ void Print(std::vector<std::vector<std::string>> arr)
 //the main procedure that runs the program
 int main()
 {
+	//initialise save handler
+	SaveHandler::Init();
+
 	srand(time(NULL));
 	//initialise the window object
-
 	window = std::make_unique<sf::RenderWindow>();
 	//make a 800x500 window with the title "Cosmic Construction"
 	window->create(sf::VideoMode(width, height), "Cosmic Construction");
@@ -73,8 +75,6 @@ int main()
 	fpsLabel.origin = sf::Vector2f(0.f, 0.f);
 
 	guihandler.InitGUIS();
-	SaveHandler::Init();
-	SaveHandler::CreateSave("test save");
 
 	deltaClock.restart();
 	while (window->isOpen())
