@@ -63,6 +63,11 @@ void LoadGame::Update(float dt)
 	{
 		saveSlots[i]->Move(move);
 		saveSlots[i]->Update(dt);
+		if (saveSlots[i]->deleteBG->isClicked())
+		{
+			Reload();
+			return;
+		}
 		if (saveSlots[i]->bgObj->isClicked())
 		{
 			std::string saves = SaveHandler::workingDir + "\\saves\\";

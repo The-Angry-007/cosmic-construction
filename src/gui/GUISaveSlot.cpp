@@ -57,6 +57,15 @@ GUISaveSlot::GUISaveSlot(sf::Vector2f position, std::string path)
 	modifiedLabel->origin = sf::Vector2f(0.f, 1.f);
 	modifiedLabel->SetColor(sf::Color::Black);
 	bgObj->blocksMouseInput = true;
+	sf::Vector2f deleteSize(0.04f, 0.04f);
+	deleteBG = new GUIImage(position + sf::Vector2f(size.x - deleteSize.x, -size.y + deleteSize.y), deleteSize, "resources/images/squareButton.png");
+	deleteBG->blocksMouseInput = true;
+	deleteBG->keepAspectRatio = true;
+	deleteBG->origin = sf::Vector2f(1.f, 0.f);
+	deleteIcon = new GUIImage(position + sf::Vector2f(size.x - deleteSize.x, -size.y + deleteSize.y), deleteSize, "resources/images/trashcan.png");
+	deleteIcon->blocksMouseInput = true;
+	deleteIcon->keepAspectRatio = true;
+	deleteIcon->origin = sf::Vector2f(1.f, 0.f);
 }
 
 void GUISaveSlot::Update(float dt)
@@ -65,7 +74,12 @@ void GUISaveSlot::Update(float dt)
 	nameLabel->Update(dt);
 	playtimeLabel->Update(dt);
 	modifiedLabel->Update(dt);
-	// deleteButton->Update(dt);
+	deleteBG->Update(dt);
+	deleteIcon->Update(dt);
+	if (deleteBG->isClicked())
+	{
+		SaveHandler::DeleteDirectory(path);
+	}
 }
 
 void GUISaveSlot::Move(float amt)
@@ -75,6 +89,8 @@ void GUISaveSlot::Move(float amt)
 	nameLabel->position.y += amt;
 	playtimeLabel->position.y += amt;
 	modifiedLabel->position.y += amt;
+	deleteBG->position.y += amt;
+	deleteIcon->position.y += amt;
 }
 
 void GUISaveSlot::RenderToTexture(sf::RenderTexture* texture)
@@ -92,6 +108,13 @@ void GUISaveSlot::RenderToTexture(sf::RenderTexture* texture)
 	nameLabel->RenderToTexture(texture);
 	playtimeLabel->RenderToTexture(texture);
 	modifiedLabel->RenderToTexture(texture);
+	deleteBG->size += adjustment;
+	deleteBG->sprite.setColor(sf::Color(100, 100, 100));
+	deleteBG->RenderToTexture(texture);
+	deleteBG->size -= adjustment;
+	deleteBG->sprite.setColor(sf::Color::White);
+	deleteBG->RenderToTexture(texture);
+	deleteIcon->RenderToTexture(texture);
 }
 GUISaveSlot::~GUISaveSlot()
 {

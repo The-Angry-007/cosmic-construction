@@ -1,5 +1,6 @@
 #pragma once
 #include "GUIButton.hpp"
+#include "GUIImage.hpp"
 #include "GUILabel.hpp"
 #include "GUIObject.hpp"
 #include "GUIPanel.hpp"
@@ -10,7 +11,8 @@ public:
 	GUILabel* nameLabel;
 	GUILabel* playtimeLabel;
 	GUILabel* modifiedLabel;
-	GUIButton* deleteButton;
+	GUIImage* deleteBG;
+	GUIImage* deleteIcon;
 	std::string path;
 	GUISaveSlot(sf::Vector2f position, std::string path);
 	void Update(float dt);

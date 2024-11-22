@@ -21,6 +21,7 @@ std::vector<std::string> ListDirectories(std::string path);
 std::string RelToAbsolute(std::string path);
 int GetTime();
 void ResetWorkingDir();
+bool DeleteDirectory(std::string& path);
 
 std::string JSONsToString(std::vector<JSON> jsons);
 std::vector<JSON> StringToJSONs(std::string string);

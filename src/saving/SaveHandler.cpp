@@ -229,3 +229,47 @@ void SaveHandler::SaveGame()
 	UpdateTimePlayed();
 	UpdateLastModified();
 }
+
+bool SaveHandler::DeleteDirectory(std::string& path)
+{
+	WIN32_FIND_DATAA findFileData;
+	HANDLE hFind = INVALID_HANDLE_VALUE;
+	std::string searchPath = path + "\\*";
+	hFind = FindFirstFileA(searchPath.c_str(), &findFileData);
+
+	if (hFind == INVALID_HANDLE_VALUE)
+	{
+		return false;
+	}
+	do
+	{
+		std::string itemName = findFileData.cFileName;
+		if (itemName == "." || itemName == "..")
+		{
+			continue;
+		}
+		std::string fullPath = path + "\\" + itemName;
+		if (findFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+		{
+			if (!DeleteDirectory(fullPath))
+			{
+				FindClose(hFind);
+				return false;
+			}
+		}
+		else
+		{
+			if (DeleteFileA(fullPath.c_str()) == 0)
+			{
+				FindClose(hFind);
+				return false;
+			}
+		}
+	} while (FindNextFileA(hFind, &findFileData) != 0);
+	FindClose(hFind);
+	if (RemoveDirectoryA(path.c_str()) == 0)
+	{
+		return false;
+	}
+	return true;
+}

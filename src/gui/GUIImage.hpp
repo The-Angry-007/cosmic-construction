@@ -11,4 +11,5 @@ public:
 	GUIImage(sf::Vector2f position, sf::Vector2f size, std::string path);
 	~GUIImage();
 	void Render();
+	void RenderToTexture(sf::RenderTexture* texture);
 };
