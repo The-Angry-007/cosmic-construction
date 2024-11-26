@@ -107,3 +107,33 @@ std::string concat(std::vector<std::string> lines)
 	}
 	return result;
 }
+
+void Print(std::vector<std::string> arr)
+{
+	std::cout << "[";
+	for (uint i = 0; i < arr.size(); i++)
+	{
+		std::cout << '\"';
+		std::cout << arr[i];
+		std::cout << '\"';
+
+		if (i < arr.size() - 1)
+		{
+			std::cout << ",";
+		}
+	}
+	std::cout << "]";
+}
+void Print(std::vector<std::vector<std::string>> arr)
+{
+	std::cout << "[";
+	for (uint i = 0; i < arr.size(); i++)
+	{
+		Print(arr[i]);
+		if (i != arr.size() - 1)
+		{
+			std::cout << ",";
+		}
+	}
+	std::cout << "]\n";
+}
