@@ -19,7 +19,7 @@ int main()
 {
 	//initialise save handler
 	SaveHandler::Init();
-
+	//initialise the random number generator (for scrolling galaxy)
 	srand(time(NULL));
 	//initialise the window object
 	window = std::make_unique<sf::RenderWindow>();
@@ -36,38 +36,49 @@ int main()
 	window->clear(sf::Color::Black);
 	window->display();
 
+	//used to caclulate the average framerate over the past few frames
 	std::vector<float> frameLengths;
 	float lengthsSum = 0;
 	//how many frames to average the framerate of, so its smoother and easier to read
 	int numFrames = 60;
 	sf::Clock deltaClock;
+	//label to display fps
 	GUILabel fpsLabel(sf::Vector2f(0.1f, 0.03f), sf::Vector2f(0.1f, 0.03f), "");
 	fpsLabel.origin = sf::Vector2f(0.f, 0.f);
-
+	//construct the interfaces
 	guihandler.InitGUIS();
 
 	deltaClock.restart();
+	//main loop: runs once for each frame
 	while (window->isOpen())
 	{
-
 		InputHandler::ProcessEvents();
+		//adjust the window's view to match the window's dimensions
 		sf::View view(sf::FloatRect(0.f, 0.f, width, height));
 		window->setView(view);
+		//calculate delta time (time passed since last frame)
 		float dt = deltaClock.restart().asSeconds();
 		frameLengths.push_back(dt);
 		lengthsSum += dt;
+		//trim framelengths if too many are stored
 		if (frameLengths.size() > numFrames)
 		{
 			lengthsSum -= frameLengths[0];
 			frameLengths.erase(frameLengths.begin());
 		}
+		//calculate the avg fps as an integer
 		int fps = (int)(1.f / (lengthsSum / frameLengths.size()));
 		fpsLabel.value = std::to_string(fps) + " fps";
+		/* ---UPDATE--- */
 		guihandler.Update(dt);
+		/* ---RENDER--- */
+		//reset contents of window
 		window->clear(sf::Color::Black);
+
 		guihandler.Render();
 		fpsLabel.Render();
 
+		//display window
 		window->display();
 	}
 	return 0;
