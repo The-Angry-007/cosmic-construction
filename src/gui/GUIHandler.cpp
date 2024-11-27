@@ -3,6 +3,7 @@
 #include "InputHandler.hpp"
 #include "binds.hpp"
 #include "utils.hpp"
+//constructor
 GUIHandler::GUIHandler()
 {
 	activeGui = 0;
@@ -10,27 +11,30 @@ GUIHandler::GUIHandler()
 	guis = {};
 }
 
-GUIHandler::~GUIHandler()
-{
-}
-
+//sets the active gui to the gui given
 void GUIHandler::OpenGUI(int GUI)
 {
+	//if the gui to switch to is not the main game, reset the working directory
 	if (GUI != 5)
 	{
 		SaveHandler::ResetWorkingDir();
 	}
+	//set the active gui to the gui given and push the new index to the stack
 	activeGui = GUI;
 	openedGuis.push_back(GUI);
+	//if it is 3, reset the current page of the settings gui
 	if (GUI == 3)
 	{
 		dynamic_cast<Settings*>(guis[activeGui])->currentGUI = 0;
 	}
+	//otherwise, if it is 2, reload the save slots in the load game gui
 	else if (GUI == 2)
 	{
 		dynamic_cast<LoadGame*>(guis[activeGui])->Reload();
 	}
 }
+//if there is more than one opened gui in the stack, pop it and open the new top gui in the stack.
+//note that the new gui must also be erased since it will be re-added when opened
 void GUIHandler::GoBack()
 {
 	if (openedGuis.size() > 1)
@@ -41,26 +45,27 @@ void GUIHandler::GoBack()
 		OpenGUI(activeGui);
 	}
 }
-
+//simply pushes the new gui to the list of guis
 void GUIHandler::AddGUI(GUI* gui)
 {
 	guis.push_back(gui);
 }
+//updates the active gui
 void GUIHandler::Update(float dt)
 {
-
 	guis[activeGui]->Update(dt);
+	//the pause keybind also serves as a back button in menus that arent the main game gui
 	if (activeGui != 5 && InputHandler::pressed(binds::Pause))
 	{
 		GoBack();
 	}
 }
-
+//render the active gui
 void GUIHandler::Render()
 {
 	guis[activeGui]->Render();
 }
-
+//return the active gui
 GUI* GUIHandler::GetOpenGUI()
 {
 	return guis[activeGui];
@@ -82,6 +87,7 @@ void GUIHandler::InitGUIS()
 	activeGui = 0;
 	openedGuis = { 0 };
 	guis = {};
+	//get a reference to the go back function of this object
 	std::function<void()> backfunc = std::bind(&GUIHandler::GoBack, this);
 
 	//the galaxy background is outside the scope since multiple guis share it
@@ -89,8 +95,10 @@ void GUIHandler::InitGUIS()
 	//same thing with the panel to dim the background
 	GUIPanel* dimpanel = new GUIPanel(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.5f, 0.5f), sf::Color(0, 0, 0, 100));
 
-	//some weird C++ syntax - using {} creates a new local scope
+	//using {} creates a new local scope
 	//this is done to have multiple variables under the same name within this function (since each is temporary)
+
+	//the specifics of each of these menus is not very important, it is just definining the positions and sizes of various gui objects
 	//MAIN MENU
 	{
 		GUI* g = new GUI();
@@ -197,6 +205,7 @@ void GUIHandler::InitGUIS()
 		//used to get framerate, etc
 		this->settings = s;
 	}
+	//the following two menus are incomplete, so they are just placeholders for now.
 	//HELP MENU
 	{
 		GUI* g = new GUI();

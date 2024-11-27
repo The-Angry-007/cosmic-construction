@@ -11,7 +11,7 @@ public:
 	Settings* settings;
 
 	GUIHandler();
-	~GUIHandler();
+	//note that guihandler has no destructor as it persists throughout the entire runtime of the program
 
 	void OpenGUI(int GUI);
 	void GoBack();

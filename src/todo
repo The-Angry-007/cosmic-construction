@@ -1,9 +1,4 @@
 files to comment:
-gui
-guibutton
-guicheckbox
-guigalaxy
-guihandler
 guiimage
 guiinputfield
 guilabel
@@ -25,3 +20,8 @@ x binds
 x inputhandler
 x main
 x utils
+x gui
+x guicheckbox
+x guibutton
+x guigalaxy
+x guihandler
