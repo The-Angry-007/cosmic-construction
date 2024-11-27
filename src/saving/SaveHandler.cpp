@@ -42,7 +42,17 @@ void SaveHandler::CreateSave(std::string name, int difficulty, std::string seed)
 	//get the number to be used for the folder
 	//this will be one more than the number of existing saves
 	auto existingSaves = ListDirectories(workingDir + "\\saves");
-	std::string fileName = std::to_string(existingSaves.size() + 1);
+	int highest = 0;
+	for (uint i = 0; i < existingSaves.size(); i++)
+	{
+		std::string name = existingSaves[i];
+		int index = std::stoi(name);
+		if (index > highest)
+		{
+			highest = index;
+		}
+	}
+	std::string fileName = std::to_string(highest + 1);
 	workingDir += "\\saves\\" + fileName;
 	CreateDirectory(workingDir);
 	//the 2 zeroes are to set default values for
