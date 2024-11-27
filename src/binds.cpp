@@ -1,23 +1,28 @@
 #include "binds.hpp"
 //a macro that is used later to convert an input code to a string representing the name of that code
+//this was to make the code more legible
 #define CODE(a, b) \
 	case a: ret = b; break;
 
 namespace binds
 {
+//here is where each keybind is defined and its default value.
 int Pause = sf::Keyboard::Key::Escape + 1;
 int Fullscreen = sf::Keyboard::Key::F11 + 1;
 }
-
+//the code version of keycodes adds 1, since keyboard keys has a code assigned to the value 0 as well as mouse buttons.
 int binds::keyToCode(sf::Keyboard::Key key)
 {
 	return key + 1;
 }
+//mouse buttons are stored as negative numbers.
 int binds::buttonToCode(sf::Mouse::Button button)
 {
 	return -button - 1;
 }
 
+/*uses the SFML enums for keyboard keys and mouse buttons to assign a string name to each code.
+this is so that the controls menu can display the name of the code assigned to each keybind.*/
 std::string binds::GetName(int code)
 {
 	std::string ret = "";
