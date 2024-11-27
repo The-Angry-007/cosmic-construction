@@ -1,5 +1,6 @@
 #include "GUIInputField.hpp"
 #include "InputHandler.hpp"
+//constructor: just takes position and size
 GUIInputField::GUIInputField(sf::Vector2f position, sf::Vector2f size)
 {
 	this->position = position;

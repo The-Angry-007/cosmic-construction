@@ -1,5 +1,4 @@
 files to comment:
-guiimage
 guiinputfield
 guilabel
 guiobject
@@ -25,3 +24,4 @@ x guicheckbox
 x guibutton
 x guigalaxy
 x guihandler
+x guiimage
