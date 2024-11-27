@@ -1,18 +1,27 @@
-[X] finish new game gui
-  [X] add checkboxes
-[X] complete saving and loading
-  [X] json class
-  [X] table class
-  [X] savehandler namespace
-[ ] finish load game gui
-  [] add save slot class
-    [X] make any gui object capable of having origin
-[ ] finish rest of gui
-  [ ] start main game gui
-    [ ] pause menu
-  [ ] start tech tree
-  [ ] start help menu
-
-
-
-all of savehandler functions are not yet implemented
+files to comment:
+gui
+guibutton
+guicheckbox
+guigalaxy
+guihandler
+guiimage
+guiinputfield
+guilabel
+guiobject
+guipanel
+guisaveslot
+guislider
+loadgame
+settings
+json
+savehandler
+table
+hitbox
+hitboxcircle
+hitboxrect
+hitboxshape
+x clickfuncs
+x binds
+x inputhandler
+x main
+x utils
