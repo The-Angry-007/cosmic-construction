@@ -35,6 +35,7 @@ void Hitbox::ResetTransform()
 	currentPos = position;
 	currentSize = size;
 }
+//2 hitboxes intersect if any shape in the first one intersects any shape in the second one.
 bool Hitbox::intersects(Hitbox* other)
 {
 	for (uint i = 0; i < shapes.size(); i++)
@@ -52,6 +53,7 @@ bool Hitbox::intersects(Hitbox* other)
 
 void Hitbox::Display(std::vector<Hitbox*> hitboxes)
 {
+	//must find whether this hitbox collides with any others
 	bool colliding = false;
 	for (uint i = 0; i < hitboxes.size(); i++)
 	{
@@ -65,6 +67,7 @@ void Hitbox::Display(std::vector<Hitbox*> hitboxes)
 			break;
 		}
 	}
+	//then display each shape
 	for (uint i = 0; i < shapes.size(); i++)
 	{
 		shapes[i]->Display(colliding);

@@ -13,7 +13,7 @@ table
 hitbox
 hitboxcircle
 hitboxrect
-hitboxshape
+x hitboxshape
 x clickfuncs
 x binds
 x inputhandler
