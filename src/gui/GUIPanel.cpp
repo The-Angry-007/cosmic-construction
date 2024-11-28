@@ -74,6 +74,7 @@ void GUIPanel::RenderToTexture(sf::RenderTexture* texture)
 	rect.setOrigin(newSize);
 	texture->draw(rect);
 }
+
 GUIPanel::~GUIPanel()
 {
 	if (hitbox != nullptr)
@@ -81,7 +82,6 @@ GUIPanel::~GUIPanel()
 		delete hitbox;
 	}
 }
-
 void GUIPanel::SetColor(sf::Color color)
 {
 	this->color = color;

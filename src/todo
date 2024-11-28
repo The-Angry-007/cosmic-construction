@@ -25,3 +25,25 @@ x guibutton
 x guigalaxy
 x guihandler
 x guiimage
+
+
+files to document:
+gui label
+gui button
+clickfuncs
+gui input field
+gui slider
+gui checkbox
+gui galaxy
+gui
+guihandler
+load game
+settings
+binds
+json
+table
+savehandler
+utils
+
+
+17 to go!!
