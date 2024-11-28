@@ -10,9 +10,9 @@ settings
 json
 savehandler
 table
-hitbox
-hitboxcircle
-hitboxrect
+x hitbox
+x hitboxcircle
+x hitboxrect
 x hitboxshape
 x clickfuncs
 x binds

@@ -3,8 +3,6 @@
 GUIObject::GUIObject()
 {}
 
-//the mouse position is passed in instead of using the variable
-//provided by inputhandler, as it needs to be between 0 and 1
 bool GUIObject::isBlockingMouse()
 {
 	if (!blocksMouseInput)

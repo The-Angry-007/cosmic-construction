@@ -12,6 +12,7 @@ GUIPanel::GUIPanel(sf::Vector2f position, sf::Vector2f size, sf::Color color)
 	hitbox = new Hitbox(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.f, 1.f));
 	hitbox->AddShape(new HitboxRect(position, size));
 	keepAspectRatio = false;
+	//ratio is what the width should be multiplied to get the height.
 	ratio = 1.f;
 }
 
