@@ -5,7 +5,7 @@
 Game::Game()
 {
 	paused = false;
-	item = new Item(sf::Vector2f(0.f, 0.f));
+	item = new Item(sf::Vector2f(rand() % width, rand() % height));
 }
 Game::~Game()
 {
