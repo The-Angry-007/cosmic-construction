@@ -28,13 +28,13 @@ x guiimage
 
 
 files to document:
+settings
 gui slider
 gui checkbox
 gui galaxy
 gui
 guihandler
 load game
-settings
 binds
 json
 table

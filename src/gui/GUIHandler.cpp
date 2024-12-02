@@ -66,6 +66,7 @@ void GUIHandler::Update(float dt)
 //render the active gui
 void GUIHandler::Render()
 {
+	std::cout << activeGui << " " << guis.size() << std::endl;
 	guis[activeGui]->Render();
 }
 //return the active gui

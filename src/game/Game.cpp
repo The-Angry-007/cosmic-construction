@@ -19,10 +19,12 @@ void Game::TogglePaused()
 	if (paused)
 	{
 		guihandler.activeGui = 6;
+		guihandler.openedGuis[guihandler.openedGuis.size() - 1] = 6;
 	}
 	else
 	{
 		guihandler.activeGui = 5;
+		guihandler.openedGuis[guihandler.openedGuis.size() - 1] = 5;
 	}
 }
 void Game::LoadGame()

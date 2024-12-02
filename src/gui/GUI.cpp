@@ -15,7 +15,6 @@ void GUI::InsertObject(GUIObject* object, int index)
 {
 	GUIObjects.insert(GUIObjects.begin() + index, object);
 }
-
 //basic linear search algorithm
 int GUI::GetIndex(GUIObject* object)
 {

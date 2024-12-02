@@ -73,7 +73,6 @@ void ClickFuncs::ResumeGame()
 }
 void ClickFuncs::OpenSettingsInGame()
 {
-	delete guihandler.settings->behindGUI;
 	guihandler.settings->behindGUI = new GUI();
 	guihandler.OpenGUI(3);
 }

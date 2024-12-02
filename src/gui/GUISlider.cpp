@@ -72,6 +72,7 @@ void GUISlider::Update(float dt)
 	}
 	AdjustFromVal();
 }
+
 void GUISlider::Render()
 {
 	background->Render();

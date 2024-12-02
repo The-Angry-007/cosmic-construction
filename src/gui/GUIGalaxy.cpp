@@ -1,6 +1,5 @@
 #include "GUIGalaxy.hpp"
 #include "Main.hpp"
-#define PI 3.14159265f;
 //constructor
 GUIGalaxy::GUIGalaxy()
 {
