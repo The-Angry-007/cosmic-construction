@@ -35,12 +35,14 @@ void Game::LoadGame()
 }
 void Game::Update(float dt)
 {
+
 	if (InputHandler::pressed(binds::Pause))
 	{
 		TogglePaused();
 	}
 	if (paused)
 	{
+		camera->SetView();
 		return;
 	}
 	camera->Update(dt);

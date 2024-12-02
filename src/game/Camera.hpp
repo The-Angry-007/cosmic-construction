@@ -8,10 +8,12 @@ public:
 	float zoom;
 	float targetZoom;
 	float zoomRate;
+	float zoomSpeed;
 	sf::Vector2f prevMousePos;
 	Hitbox* hitbox;
 	~Camera();
 	Camera(sf::Vector2f position, float zoom);
 	void Update(float dt);
+	void SetView();
 	sf::FloatRect toFloatRect();
 };

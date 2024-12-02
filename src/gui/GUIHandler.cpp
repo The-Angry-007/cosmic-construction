@@ -62,6 +62,8 @@ void GUIHandler::Update(float dt)
 	{
 		GoBack();
 	}
+	fps = (int)(1.f / dt);
+	fpsLabel->value = std::to_string(fps) + " fps";
 }
 //render the active gui
 void GUIHandler::Render()
@@ -70,6 +72,7 @@ void GUIHandler::Render()
 	sf::View GUIView(sf::FloatRect(0.f, 0.f, width, height));
 	window->setView(GUIView);
 	guis[activeGui]->Render();
+	fpsLabel->Render();
 	window->setView(currentView);
 }
 //return the active gui
@@ -101,6 +104,9 @@ void GUIHandler::InitGUIS()
 	GUIGalaxy* galaxy = new GUIGalaxy();
 	//same thing with the panel to dim the background
 	GUIPanel* dimpanel = new GUIPanel(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.5f, 0.5f), sf::Color(0, 0, 0, 100));
+
+	fpsLabel = new GUILabel(sf::Vector2f(0.1f, 0.03f), sf::Vector2f(0.1f, 0.03f), "");
+	fpsLabel->origin = sf::Vector2f(0.f, 0.f);
 
 	//using {} creates a new local scope
 	//this is done to have multiple variables under the same name within this function (since each is temporary)

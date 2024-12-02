@@ -18,7 +18,6 @@ void ClickFuncs::OpenLoadGame()
 }
 void ClickFuncs::OpenSettings()
 {
-	delete guihandler.settings->behindGUI;
 	GUI* g = new GUI();
 	g->AddObject(guihandler.guis[0]->GUIObjects[0]);
 	g->AddObject(guihandler.guis[0]->GUIObjects[1]);

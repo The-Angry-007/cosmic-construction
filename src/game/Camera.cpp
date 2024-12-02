@@ -8,10 +8,12 @@ Camera::Camera(sf::Vector2f position, float zoom)
 	this->zoom = zoom;
 	targetZoom = zoom;
 	prevMousePos = InputHandler::mousePos;
-	//what the zoom is multiplied by; 2^1/7 so that 7 scrolls exactly doubles the zoom
-	zoomRate = pow(2.f, 1.f / 1.7f) - 1.f;
+	//the zoom rate is the (numscrollstodouble)th root of 2, so that it takes that many scrolls to double the zoom
+	int numScrollsToDouble = 3;
+	zoomRate = pow(2.f, 1.f / numScrollsToDouble);
 	hitbox = new Hitbox(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.f, 1.f));
 	hitbox->AddShape(new HitboxRect(position, sf::Vector2f(zoom * width, zoom * height)));
+	zoomSpeed = 25.f;
 }
 
 void Camera::Update(float dt)
@@ -24,32 +26,41 @@ void Camera::Update(float dt)
 	}
 	if (InputHandler::scroll.y != 0)
 	{
-		float zoomInc = 1 + zoomRate;
-		if (InputHandler::scroll.y < 0)
+		if (InputHandler::scroll.y > 0)
 		{
-			zoomInc = 1 - zoomRate;
+			targetZoom /= zoomRate;
 		}
-		targetZoom *= zoomInc;
+		else
+		{
+			targetZoom *= zoomRate;
+		}
 		//minimum and maximum zoom
 		if (targetZoom < 0.1f)
 		{
-			targetZoom /= zoomInc;
+			targetZoom *= zoomRate;
 		}
-		if (targetZoom > 100.f)
+		if (targetZoom > 8.f)
 		{
-			targetZoom *= zoomInc;
+			targetZoom /= zoomRate;
 		}
 	}
-	zoom = targetZoom;
+	std::cout << targetZoom << std::endl;
+	//exponential decay algorithm from "Lerp smoothing is broken" https://www.youtube.com/watch?v=LSNQuFEDOyQ&t=3050s&ab_channel=FreyaHolm%C3%A9r
+	zoom = targetZoom + (zoom - targetZoom) * exp(-zoomSpeed * dt);
 	prevMousePos = InputHandler::mousePos;
-	sf::FloatRect rect = toFloatRect();
-	hitbox->shapes[0]->position = sf::Vector2f(rect.left, rect.top) + 0.5f * sf::Vector2f(rect.width, rect.height);
-
-	auto view = sf::View(rect);
-	window->setView(view);
+	SetView();
 }
 sf::FloatRect Camera::toFloatRect()
 {
 	//get float rect representing camera
 	return sf::FloatRect(position.x - width * zoom / 2.f, position.y - height * zoom / 2.f, width * zoom, height * zoom);
+}
+
+void Camera::SetView()
+{
+	sf::FloatRect rect = toFloatRect();
+	hitbox->shapes[0]->position = sf::Vector2f(rect.left, rect.top) + 0.5f * sf::Vector2f(rect.width, rect.height);
+
+	auto view = sf::View(rect);
+	window->setView(view);
 }

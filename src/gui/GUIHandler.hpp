@@ -1,5 +1,6 @@
 #pragma once
 #include "GUI.hpp"
+#include "GUILabel.hpp"
 #include "Settings.hpp"
 class GUIHandler
 {
@@ -9,6 +10,8 @@ public:
 	std::vector<int> openedGuis;
 
 	Settings* settings;
+	GUILabel* fpsLabel;
+	int fps;
 
 	GUIHandler();
 	//note that guihandler has no destructor as it persists throughout the entire runtime of the program

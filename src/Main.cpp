@@ -37,11 +37,6 @@ int main()
 	window->clear(sf::Color::Black);
 	window->display();
 
-	//used to caclulate the average framerate over the past few frames
-	std::vector<float> frameLengths;
-	float lengthsSum = 0;
-	//how many frames to average the framerate of, so its smoother and easier to read
-	int numFrames = 60;
 	sf::Clock deltaClock;
 	//label to display fps
 	GUILabel fpsLabel(sf::Vector2f(0.1f, 0.03f), sf::Vector2f(0.1f, 0.03f), "");
@@ -59,17 +54,7 @@ int main()
 		window->setView(view);
 		//calculate delta time (time passed since last frame)
 		float dt = deltaClock.restart().asSeconds();
-		frameLengths.push_back(dt);
-		lengthsSum += dt;
-		//trim framelengths if too many are stored
-		if (frameLengths.size() > numFrames)
-		{
-			lengthsSum -= frameLengths[0];
-			frameLengths.erase(frameLengths.begin());
-		}
-		//calculate the avg fps as an integer
-		int fps = (int)(1.f / (lengthsSum / frameLengths.size()));
-		fpsLabel.value = std::to_string(fps) + " fps";
+
 		/* ---UPDATE--- */
 		guihandler.Update(dt);
 		if (game != nullptr)
@@ -86,7 +71,6 @@ int main()
 		}
 
 		guihandler.Render();
-		fpsLabel.Render();
 
 		//display window
 		window->display();
