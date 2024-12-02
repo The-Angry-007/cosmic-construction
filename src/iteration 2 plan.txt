@@ -1,0 +1,10 @@
+ITERATION 2 PLAN
+things to accomplish:
+audio
+camera
+game
+item
+terrain
+structure
+one planet
+resourceHandler

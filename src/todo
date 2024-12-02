@@ -28,10 +28,6 @@ x guiimage
 
 
 files to document:
-gui label
-gui button
-clickfuncs
-gui input field
 gui slider
 gui checkbox
 gui galaxy
@@ -46,4 +42,4 @@ savehandler
 utils
 
 
-17 to go!!
+12 to go!!

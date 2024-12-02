@@ -1,6 +1,8 @@
 #include "GUIButton.hpp"
 #include "ClickFuncs.hpp"
-//constructor for the button. takes a position, size, background object (necessary) and label object (can be a nullptr (meaning no object provided)).
+#include "GUIPanel.hpp"
+/*constructor for the button. takes a position, size, background object (necessary)
+and label object (can be a nullptr (meaning no object provided)).*/
 GUIButton::GUIButton(sf::Vector2f position, sf::Vector2f size, GUIObject* bgObj, GUIObject* labelObj)
 {
 	this->position = position;
@@ -12,11 +14,17 @@ GUIButton::GUIButton(sf::Vector2f position, sf::Vector2f size, GUIObject* bgObj,
 	bgObj->blocksMouseInput = true;
 	//sets the click function to the default
 	clickFunc = ClickFuncs::blankFunc;
+	this->dimObj = new GUIPanel(position, size, sf::Color(0, 0, 0, 150));
 }
 void GUIButton::Render()
 {
 	//background object is never going to be nullptr so always render.
 	bgObj->Render();
+
+	if (isBlockingMouse())
+	{
+		dimObj->Render();
+	}
 	//only render label if it isn't a nullptr
 	if (labelObj != nullptr)
 	{

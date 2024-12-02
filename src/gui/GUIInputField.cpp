@@ -48,8 +48,11 @@ void GUIInputField::Update(float dt)
 			{
 				if (value.length() > 0)
 				{
-					value.erase(value.end() - 1);
-					cursorPos--;
+					if (cursorPos != -1)
+					{
+						value.erase(value.begin() + cursorPos);
+						cursorPos--;
+					}
 				}
 			}
 		}
@@ -103,3 +106,4 @@ void GUIInputField::Render()
 	label->value = displayValue;
 	label->Render();
 }
+

@@ -5,6 +5,7 @@ class GUIButton : public GUIObject
 public:
 	GUIObject* bgObj;
 	GUIObject* labelObj;
+	GUIObject* dimObj;
 	//a variable representing a function that returns void and takes in a pointer to a button object
 	std::function<void()> clickFunc;
 
