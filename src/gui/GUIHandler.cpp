@@ -66,7 +66,6 @@ void GUIHandler::Update(float dt)
 //render the active gui
 void GUIHandler::Render()
 {
-	std::cout << activeGui << " " << guis.size() << std::endl;
 	guis[activeGui]->Render();
 }
 //return the active gui
@@ -242,10 +241,10 @@ void GUIHandler::InitGUIS()
 		GUILabel* l = new GUILabel(sf::Vector2f(0.5f, 0.1f), sf::Vector2f(0.4f, 0.05f), "Game Paused");
 		l->SetColor(sf::Color::White);
 		g->AddObject(l);
-		float top = 0.2f;
-		float bottom = 0.9f;
-		float height = 0.033f;
-		float width = 0.16f;
+		float top = 0.3f;
+		float bottom = 0.8f;
+		float height = 0.055f;
+		float width = 0.3f;
 		std::string labels[4] = { "Resume Game", "Help", "Settings", "Save And Quit" };
 		std::function<void()> funcs[4] = { ClickFuncs::ResumeGame, ClickFuncs::OpenHelp, ClickFuncs::OpenSettingsInGame, ClickFuncs::SaveAndQuit };
 		for (int i = 0; i < 4; i++)

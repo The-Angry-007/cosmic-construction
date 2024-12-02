@@ -71,29 +71,22 @@ int main()
 		int fps = (int)(1.f / (lengthsSum / frameLengths.size()));
 		fpsLabel.value = std::to_string(fps) + " fps";
 		/* ---UPDATE--- */
-		std::cout << "started updating gui" << std::endl;
 		guihandler.Update(dt);
-		std::cout << "finished updating gui" << std::endl;
 		if (game != nullptr)
 		{
-			std::cout << "updating game" << std::endl;
 			game->Update(dt);
 		}
-		std::cout << "finished update" << std::endl;
 
 		/* ---RENDER--- */
 		//reset contents of window
 		window->clear(sf::Color::Black);
 		if (game != nullptr)
 		{
-			std::cout << "rendering game" << std::endl;
 			game->Render();
 		}
-		std::cout << "about to render" << std::endl;
 
 		guihandler.Render();
 		fpsLabel.Render();
-		std::cout << "finished render" << std::endl;
 
 		//display window
 		window->display();
