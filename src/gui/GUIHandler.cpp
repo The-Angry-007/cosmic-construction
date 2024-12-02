@@ -66,7 +66,11 @@ void GUIHandler::Update(float dt)
 //render the active gui
 void GUIHandler::Render()
 {
+	sf::View currentView = window->getView();
+	sf::View GUIView(sf::FloatRect(0.f, 0.f, width, height));
+	window->setView(GUIView);
 	guis[activeGui]->Render();
+	window->setView(currentView);
 }
 //return the active gui
 GUI* GUIHandler::GetOpenGUI()

@@ -83,6 +83,7 @@ Settings::Settings()
 		bindGUIs = {};
 		AddBind("Pause", &binds::Pause);
 		AddBind("Fullscreen", &binds::Fullscreen);
+		AddBind("Camera Pan", &binds::Pan);
 	}
 	//AUDIO PAGE
 	{
