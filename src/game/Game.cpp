@@ -5,6 +5,7 @@
 Game::Game()
 {
 	paused = false;
+	item = new Item(sf::Vector2f(0.f, 0.f));
 }
 Game::~Game()
 {
@@ -40,6 +41,7 @@ void Game::Update(float dt)
 	{
 		return;
 	}
+	item->Update(dt);
 }
 void Game::Render()
 {
@@ -47,4 +49,5 @@ void Game::Render()
 	sf::RectangleShape r(sf::Vector2f(width, height));
 	r.setFillColor(sf::Color(100, 255, 100));
 	window->draw(r);
+	item->Render();
 }

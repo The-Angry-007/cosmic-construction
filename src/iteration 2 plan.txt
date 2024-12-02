@@ -13,7 +13,7 @@ resourceHandler
 
 
 FULL PLAN
-- create barebones game class with update and render functions
+x create barebones game class with update and render functions
 - create basic item class that just draws a blue square in its position
 - make camera class that belongs to game that can pan around and zoom
 - create table with a few placeholder item names and their sprites

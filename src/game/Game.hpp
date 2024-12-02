@@ -1,9 +1,10 @@
 #pragma once
+#include "Item.hpp"
 class Game
 {
 public:
 	bool paused;
-
+	Item* item;
 	Game();
 	~Game();
 	void TogglePaused();
