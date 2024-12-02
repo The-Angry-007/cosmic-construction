@@ -1,6 +1,7 @@
 #include "../gui.hpp"
 #include "../saving.hpp"
 #include "InputHandler.hpp"
+#include "Main.hpp"
 #include "binds.hpp"
 #include "utils.hpp"
 //constructor
@@ -14,11 +15,13 @@ GUIHandler::GUIHandler()
 //sets the active gui to the gui given
 void GUIHandler::OpenGUI(int GUI)
 {
-	//if the gui to switch to is not the main game, reset the working directory
-	if (GUI != 5)
-	{
-		SaveHandler::ResetWorkingDir();
-	}
+	// //if the gui to switch to is not the main game, reset the working directory
+	// if (GUI != 5 && GUI != 6)
+	// {
+	// 	SaveHandler::ResetWorkingDir();
+	// 	delete game;
+	// 	game = nullptr;
+	// }
 	//set the active gui to the gui given and push the new index to the stack
 	activeGui = GUI;
 	openedGuis.push_back(GUI);
@@ -55,7 +58,7 @@ void GUIHandler::Update(float dt)
 {
 	guis[activeGui]->Update(dt);
 	//the pause keybind also serves as a back button in menus that arent the main game gui
-	if (activeGui != 5 && InputHandler::pressed(binds::Pause))
+	if (activeGui != 5 && InputHandler::pressed(binds::Pause) && activeGui != 6)
 	{
 		GoBack();
 	}
@@ -221,13 +224,40 @@ void GUIHandler::InitGUIS()
 	//MAIN GAME GUI
 	{
 		GUI* g = new GUI();
-		GUILabel* l = new GUILabel(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.1f), "main game gui");
+		// GUILabel* l = new GUILabel(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.1f), "main game gui");
+		// g->AddObject(l);
+		// GUIPanel* p = new GUIPanel(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.2f, 0.1f), sf::Color(100, 100, 100));
+		// GUILabel* l2 = new GUILabel(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.2f, 0.1f), "go back");
+		// GUIButton* b = new GUIButton(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.2f, 0.1f), p, l2);
+		// b->clickFunc = backfunc;
+		// g->AddObject(b);
+		guis.push_back(g);
+	}
+	//PAUSE GUI
+	{
+		GUI* g = new GUI();
+		GUIPanel* p = new GUIPanel(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.5f, 0.5f), sf::Color(0, 0, 0, 100));
+		g->AddObject(p);
+		GUILabel* l = new GUILabel(sf::Vector2f(0.5f, 0.1f), sf::Vector2f(0.4f, 0.05f), "Game Paused");
+		l->SetColor(sf::Color::White);
 		g->AddObject(l);
-		GUIPanel* p = new GUIPanel(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.2f, 0.1f), sf::Color(100, 100, 100));
-		GUILabel* l2 = new GUILabel(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.2f, 0.1f), "go back");
-		GUIButton* b = new GUIButton(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.2f, 0.1f), p, l2);
-		b->clickFunc = backfunc;
-		g->AddObject(b);
+		float top = 0.2f;
+		float bottom = 0.9f;
+		float height = 0.033f;
+		float width = 0.16f;
+		std::string labels[4] = { "Resume Game", "Help", "Settings", "Save And Quit" };
+		std::function<void()> funcs[4] = { ClickFuncs::ResumeGame, ClickFuncs::OpenHelp, ClickFuncs::OpenSettingsInGame, ClickFuncs::SaveAndQuit };
+		for (int i = 0; i < 4; i++)
+		{
+			float y = Lerp(top, bottom, i / 3.f);
+			// GUIPanel* p1 = new GUIPanel(sf::Vector2f(0.5f, y), sf::Vector2f(width, height), sf::Color(100, 100, 100));
+			GUIImage* p1 = new GUIImage(sf::Vector2f(0.5f, y), sf::Vector2f(width, height), "resources/images/buttonBezels.png");
+			GUILabel* l1 = new GUILabel(sf::Vector2f(0.5f, y), sf::Vector2f(width - 0.01f, height - 0.01f), labels[i]);
+			l1->SetColor(sf::Color::Black);
+			GUIButton* b1 = new GUIButton(sf::Vector2f(0.5f, y), sf::Vector2f(width, height), p1, l1);
+			b1->clickFunc = funcs[i];
+			g->AddObject(b1);
+		}
 		guis.push_back(g);
 	}
 }

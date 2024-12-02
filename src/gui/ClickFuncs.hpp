@@ -8,5 +8,8 @@ void OpenLoadGame();
 void OpenSettings();
 void OpenHelp();
 void CreateSave();
+void ResumeGame();
+void OpenSettingsInGame();
+void SaveAndQuit();
 
 }

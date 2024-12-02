@@ -13,6 +13,8 @@ int height = 500;
 
 GUIHandler guihandler = GUIHandler();
 
+Game* game = nullptr;
+
 //the main procedure that runs the program
 int main()
 {
@@ -69,11 +71,20 @@ int main()
 		int fps = (int)(1.f / (lengthsSum / frameLengths.size()));
 		fpsLabel.value = std::to_string(fps) + " fps";
 		/* ---UPDATE--- */
+		std::cout << "started updating gui" << std::endl;
 		guihandler.Update(dt);
+		std::cout << "finished updating gui" << std::endl;
+		if (game != nullptr)
+		{
+			game->Update(dt);
+		}
 		/* ---RENDER--- */
 		//reset contents of window
 		window->clear(sf::Color::Black);
-
+		if (game != nullptr)
+		{
+			game->Render();
+		}
 		guihandler.Render();
 		fpsLabel.Render();
 

@@ -18,6 +18,11 @@ void ClickFuncs::OpenLoadGame()
 }
 void ClickFuncs::OpenSettings()
 {
+	delete guihandler.settings->behindGUI;
+	GUI* g = new GUI();
+	g->AddObject(guihandler.guis[0]->GUIObjects[0]);
+	g->AddObject(guihandler.guis[0]->GUIObjects[1]);
+	guihandler.settings->behindGUI = g;
 	guihandler.OpenGUI(3);
 }
 void ClickFuncs::OpenHelp()
@@ -60,4 +65,22 @@ void ClickFuncs::CreateSave()
 	SaveHandler::CreateSave(name, difficulty, seed);
 	//switch to the main game gui
 	guihandler.OpenGUI(5);
+}
+
+void ClickFuncs::ResumeGame()
+{
+	game->TogglePaused();
+}
+void ClickFuncs::OpenSettingsInGame()
+{
+	delete guihandler.settings->behindGUI;
+	guihandler.settings->behindGUI = new GUI();
+	guihandler.OpenGUI(3);
+}
+void ClickFuncs::SaveAndQuit()
+{
+	delete game;
+	game = nullptr;
+	SaveHandler::ResetWorkingDir();
+	guihandler.OpenGUI(0);
 }

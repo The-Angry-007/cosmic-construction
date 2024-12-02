@@ -8,3 +8,27 @@ terrain
 structure
 one planet
 resourceHandler
+
+
+
+
+FULL PLAN
+- create barebones game class with update and render functions
+- create basic item class that just draws a blue square in its position
+- make camera class that belongs to game that can pan around and zoom
+- create table with a few placeholder item names and their sprites
+- create resourceHandler that loads in this info
+- add saving and loading of items (default directory is just items)
+- add planet class to store items
+- add chunk class and get saving and loading of chunks working
+- add structure base class
+- create sprites for conveyor belt and add it
+- get saving and loading of structures working
+- add few more structure types
+- add terrain class with saving and loading
+- create some terrain types
+- add procedural generation to planet
+- make GUI fully functional
+- flesh out all the items, structures, terrain
+- finish tech tree and help menu
+- add sound effects and audio (maybe)

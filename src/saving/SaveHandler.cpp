@@ -1,4 +1,5 @@
 #include "SaveHandler.hpp"
+#include "Main.hpp"
 #include "utils.hpp"
 #include <chrono>
 #include <ctime>
@@ -62,11 +63,15 @@ void SaveHandler::CreateSave(std::string name, int difficulty, std::string seed)
 	startTime = GetTime();
 	UpdateTimePlayed();
 	UpdateLastModified();
+	game = new Game();
+	game->NewGame();
 }
 void SaveHandler::LoadGame(int index)
 {
 	startTime = GetTime();
 	workingDir += "\\" + std::to_string(index);
+	game = new Game();
+	game->LoadGame();
 }
 bool SaveHandler::DirExists(std::string path)
 {
