@@ -8,6 +8,7 @@ public:
 	sf::Color color;
 	sf::Vector2f origin;
 	sf::Text text;
+	bool altCharSize;
 
 	GUILabel(sf::Vector2f position, sf::Vector2f size, std::string text);
 	void SetColor(sf::Color color);

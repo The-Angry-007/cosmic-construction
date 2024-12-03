@@ -140,6 +140,10 @@ void GUIHandler::InitGUIS()
 			// GUIPanel* p1 = new GUIPanel(sf::Vector2f(0.5f, y), sf::Vector2f(width, height), sf::Color(100, 100, 100));
 			GUIImage* p1 = new GUIImage(sf::Vector2f(0.5f, y), sf::Vector2f(width, height), "resources/images/buttonBezels.png");
 			GUILabel* l1 = new GUILabel(sf::Vector2f(0.5f, y), sf::Vector2f(width - 0.01f, height - 0.01f), labels[i]);
+			if (i == 0)
+			{
+				l1->altCharSize = true;
+			}
 			l1->SetColor(sf::Color::Black);
 			GUIButton* b1 = new GUIButton(sf::Vector2f(0.5f, y), sf::Vector2f(width, height), p1, l1);
 			b1->clickFunc = funcs[i];

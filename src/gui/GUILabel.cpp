@@ -18,6 +18,7 @@ GUILabel::GUILabel(sf::Vector2f position, sf::Vector2f size, std::string text)
 	this->text.setString(this->value);
 	this->text.setFont(font);
 	origin = sf::Vector2f(0.5f, 0.5f);
+	altCharSize = false;
 }
 void GUILabel::SetColor(sf::Color color)
 {
@@ -33,6 +34,11 @@ void GUILabel::Render()
 	//find maximum character scale that fits in bounds
 	text.setOrigin(0.f, 0.f);
 	text.setCharacterSize(128);
+	if (true)
+	{
+		float ratio = 128.f / (text.getLocalBounds().height - abs(text.getLocalBounds().top));
+		text.setCharacterSize(floor(cSize.y * ratio) + 3);
+	}
 	text.setScale(sf::Vector2f(1.f, 1.f));
 
 	sf::FloatRect bounds = text.getLocalBounds();
@@ -67,6 +73,12 @@ void GUILabel::RenderToTexture(sf::RenderTexture* texture)
 	//find maximum character scale that fits in bounds
 	text.setOrigin(0.f, 0.f);
 	text.setCharacterSize(128);
+	if (true)
+	{
+		float ratio = 128.f / (text.getLocalBounds().height - abs(text.getLocalBounds().top));
+
+		text.setCharacterSize(floor(cSize.y * ratio) + 1);
+	}
 	text.setScale(sf::Vector2f(1.f, 1.f));
 
 	sf::FloatRect bounds = text.getLocalBounds();
