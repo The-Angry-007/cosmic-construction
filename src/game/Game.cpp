@@ -5,7 +5,13 @@
 Game::Game()
 {
 	paused = false;
-	item = new Item(sf::Vector2f(0.f, 0.f));
+	int numItems = 10;
+	items = {};
+	for (uint i = 0; i < numItems; i++)
+	{
+		int size = 100;
+		items.push_back(new Item(sf::Vector2f(rand() % (size * 2) - size, rand() % (size * 2) - size)));
+	}
 	// item = new Item(sf::Vector2f(rand() % width, rand() % height));
 	camera = new Camera(sf::Vector2f(0.f, 0.f), 1.f);
 }
@@ -46,9 +52,15 @@ void Game::Update(float dt)
 		return;
 	}
 	camera->Update(dt);
-	item->Update(dt);
+	for (uint i = 0; i < items.size(); i++)
+	{
+		items[i]->Update(dt);
+	}
 }
 void Game::Render()
 {
-	item->Render();
+	for (uint i = 0; i < items.size(); i++)
+	{
+		items[i]->Render();
+	}
 }

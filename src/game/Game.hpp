@@ -5,7 +5,7 @@ class Game
 {
 public:
 	bool paused;
-	Item* item;
+	std::vector<Item*> items;
 	Camera* camera;
 	Game();
 	~Game();

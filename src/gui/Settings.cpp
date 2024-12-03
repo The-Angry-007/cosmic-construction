@@ -2,9 +2,11 @@
 #include "InputHandler.hpp"
 #include "Main.hpp"
 #include "binds.hpp"
-
+#include "saving.hpp"
+#include "utils.hpp"
 Settings::Settings()
 {
+
 	//this is not used, it is just part of the base class
 	GUIObjects = {};
 
@@ -120,6 +122,19 @@ Settings::Settings()
 		pageGuis.push_back(g);
 	}
 	currentGUI = 0;
+	//load settings from memory
+	std::string dir = SaveHandler::workingDir;
+	SaveHandler::ResetWorkingDir();
+	std::cout << SaveHandler::workingDir << std::endl;
+	std::string data = SaveHandler::ReadData(SaveHandler::workingDir + "\\settings.txt");
+	SaveHandler::workingDir = dir;
+	auto lines = Split(data, '\n');
+	//settings have not been created yet
+	if (lines.size() == 0)
+	{
+		lines[0] = "-1";
+		lines[1] = "10";
+	}
 }
 
 void Settings::AddBind(std::string label, int* value)

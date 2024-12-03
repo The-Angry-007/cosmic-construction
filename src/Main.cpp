@@ -48,6 +48,7 @@ int main()
 	//main loop: runs once for each frame
 	while (window->isOpen())
 	{
+
 		InputHandler::ProcessEvents();
 		//adjust the window's view to match the window's dimensions
 		sf::View view(sf::FloatRect(0.f, 0.f, width, height));

@@ -18,11 +18,16 @@ Camera::Camera(sf::Vector2f position, float zoom)
 
 void Camera::Update(float dt)
 {
-
+	if (InputHandler::pressed(binds::Pan))
+	{
+		mouseStartPos = InputHandler::mousePos;
+		cameraStartPos = position;
+	}
 	if (InputHandler::down(binds::Pan))
 	{
-		sf::Vector2f offset = (prevMousePos - InputHandler::mousePos) * zoom;
-		position += offset;
+		sf::Vector2f offset = InputHandler::mousePos - mouseStartPos;
+		offset *= zoom;
+		position = cameraStartPos - offset;
 	}
 	if (InputHandler::scroll.y != 0)
 	{
@@ -44,10 +49,9 @@ void Camera::Update(float dt)
 			targetZoom /= zoomRate;
 		}
 	}
-	std::cout << targetZoom << std::endl;
 	//exponential decay algorithm from "Lerp smoothing is broken" https://www.youtube.com/watch?v=LSNQuFEDOyQ&t=3050s&ab_channel=FreyaHolm%C3%A9r
 	zoom = targetZoom + (zoom - targetZoom) * exp(-zoomSpeed * dt);
-	prevMousePos = InputHandler::mousePos;
+	prevMousePos = (sf::Vector2f)sf::Mouse::getPosition(*window);
 	SetView();
 }
 sf::FloatRect Camera::toFloatRect()

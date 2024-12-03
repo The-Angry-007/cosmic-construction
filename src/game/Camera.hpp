@@ -5,6 +5,8 @@ class Camera
 {
 public:
 	sf::Vector2f position;
+	sf::Vector2f mouseStartPos;
+	sf::Vector2f cameraStartPos;
 	float zoom;
 	float targetZoom;
 	float zoomRate;
