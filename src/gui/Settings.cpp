@@ -67,7 +67,8 @@ Settings::Settings()
 		l5->SetColor(sf::Color::Black);
 		GUIButton* b3 = new GUIButton(sf::Vector2f(0.5f, 0.75f), sf::Vector2f(0.3f, 0.04f), i3, l5);
 		g->AddObject(b3);
-		b3->clickFunc = std::bind(&GUIHandler::GoBack, &guihandler);
+		std::function<void()> exit = std::bind(&Settings::ExitSettings, this);
+		b3->clickFunc = exit;
 		GUILabel* optionsLabel = new GUILabel(sf::Vector2f(0.5f, 0.13f), sf::Vector2f(0.9f, 0.025f), "Options");
 		optionsLabel->SetColor(sf::Color::Black);
 		g->AddObject(optionsLabel);
@@ -122,21 +123,103 @@ Settings::Settings()
 		pageGuis.push_back(g);
 	}
 	currentGUI = 0;
+	masterVolume = 1.f;
+	musicVolume = 1.f;
+	effectsVolume = 1.f;
+
 	//load settings from memory
 	std::string dir = SaveHandler::workingDir;
 	SaveHandler::ResetWorkingDir();
-	std::cout << SaveHandler::workingDir << std::endl;
-	std::string data = SaveHandler::ReadData(SaveHandler::workingDir + "\\settings.txt");
+	saveDir = SaveHandler::workingDir + "\\settings.txt";
 	SaveHandler::workingDir = dir;
+
+	std::string data = SaveHandler::ReadData(saveDir);
 	auto lines = Split(data, '\n');
 	//settings have not been created yet
-	if (lines.size() == 0)
+	if (lines.size() == 1)
 	{
-		lines[0] = "-1";
-		lines[1] = "10";
+		SaveSettings();
+	}
+	else
+	{
+		LoadSettings();
 	}
 }
+void Settings::LoadSettings()
+{
+	auto data = SaveHandler::ReadData(saveDir);
+	auto lines = Split(data, '\n');
+	uint numLines = lines.size();
+	//how many binds are saved
+	numLines -= 5;
+	framerate = std::stoi(lines[0]);
+	GUI* cGUI = pageGuis[0];
+	GUISlider* s1 = dynamic_cast<GUISlider*>(cGUI->GUIObjects[3]);
+	if (framerate == -1)
+	{
+		window->setFramerateLimit(1000);
+		window->setVerticalSyncEnabled(true);
+		s1->value = 0;
+	}
+	else if (framerate == 10000)
+	{
+		window->setVerticalSyncEnabled(false);
+		window->setFramerateLimit(10000);
 
+		s1->value = 1.f;
+	}
+	else
+	{
+		window->setVerticalSyncEnabled(false);
+		window->setFramerateLimit(framerate);
+		s1->value = ((float)framerate) / 260.f;
+	}
+	saveInterval = std::stoi(lines[1]);
+	GUISlider* s2 = dynamic_cast<GUISlider*>(cGUI->GUIObjects[5]);
+	if (saveInterval == -1)
+	{
+		s2->value = 1.f;
+	}
+	else
+	{
+		s2->value = (saveInterval - 5.f) / 65.f;
+	}
+	masterVolume = std::stof(lines[2]);
+	musicVolume = std::stof(lines[3]);
+	effectsVolume = std::stof(lines[4]);
+	GUI* g = pageGuis[2];
+	dynamic_cast<GUISlider*>(g->GUIObjects[2])->value = masterVolume;
+	dynamic_cast<GUISlider*>(g->GUIObjects[4])->value = musicVolume;
+	dynamic_cast<GUISlider*>(g->GUIObjects[6])->value = effectsVolume;
+	for (uint i = 0; i < numLines; i++)
+	{
+		*bindCodes[i] = std::stoi(lines[i + 5]);
+		std::string str = binds::GetName(*bindCodes[i]);
+		if (str.size() < 5)
+		{
+			str = "  " + str + "  ";
+		}
+		dynamic_cast<GUILabel*>(bindGUIs[i]->GUIObjects[2])->value = str;
+	}
+}
+void Settings::SaveSettings()
+{
+	std::vector<std::string> lines = {};
+	//framerate
+	lines.push_back(std::to_string(framerate));
+	//autosave interval
+	lines.push_back(std::to_string(saveInterval));
+	//volumes
+	lines.push_back(std::to_string(masterVolume));
+	lines.push_back(std::to_string(musicVolume));
+	lines.push_back(std::to_string(effectsVolume));
+	for (uint i = 0; i < bindCodes.size(); i++)
+	{
+		lines.push_back(std::to_string(*bindCodes[i]));
+	}
+	std::string data = concat(lines);
+	SaveHandler::WriteData(saveDir, data);
+}
 void Settings::AddBind(std::string label, int* value)
 {
 	bindCodes.push_back(value);
@@ -292,6 +375,9 @@ void Settings::Update(float dt)
 	else if (currentGUI == 2)
 	{
 		GUI* g = pageGuis[2];
+		masterVolume = dynamic_cast<GUISlider*>(g->GUIObjects[2])->value;
+		musicVolume = dynamic_cast<GUISlider*>(g->GUIObjects[4])->value;
+		effectsVolume = dynamic_cast<GUISlider*>(g->GUIObjects[6])->value;
 		dynamic_cast<GUILabel*>(g->GUIObjects[1])->value = "Master Volume: " + std::to_string((int)(dynamic_cast<GUISlider*>(g->GUIObjects[2])->value * 100)) + "%";
 		dynamic_cast<GUILabel*>(g->GUIObjects[3])->value = "Music Volume: " + std::to_string((int)(dynamic_cast<GUISlider*>(g->GUIObjects[4])->value * 100)) + "%";
 		dynamic_cast<GUILabel*>(g->GUIObjects[5])->value = "Sound Effects Volume: " + std::to_string((int)(dynamic_cast<GUISlider*>(g->GUIObjects[6])->value * 100)) + "%";
@@ -332,4 +418,9 @@ Settings::~Settings()
 	{
 		delete pageGuis[i];
 	}
+}
+void Settings::ExitSettings()
+{
+	SaveSettings();
+	guihandler.GoBack();
 }

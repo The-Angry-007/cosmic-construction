@@ -40,6 +40,11 @@ void GUIHandler::OpenGUI(int GUI)
 //note that the new gui must also be erased since it will be re-added when opened
 void GUIHandler::GoBack()
 {
+	//exiting out of settings
+	if (openedGuis[openedGuis.size() - 1] == 3)
+	{
+		settings->SaveSettings();
+	}
 	if (openedGuis.size() > 1)
 	{
 		openedGuis.erase(openedGuis.end() - 1);
