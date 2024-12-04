@@ -36,8 +36,7 @@ void GUILabel::Render()
 	text.setCharacterSize(128);
 	if (true)
 	{
-		float ratio = 128.f / (text.getLocalBounds().height - abs(text.getLocalBounds().top));
-		text.setCharacterSize(floor(cSize.y * ratio) + 3);
+		text.setCharacterSize(ceil(((floor(cSize.y) + 1)) * 3.f));
 	}
 	text.setScale(sf::Vector2f(1.f, 1.f));
 
@@ -72,14 +71,12 @@ void GUILabel::RenderToTexture(sf::RenderTexture* texture)
 	sf::Vector2f cSize((float)size.x * width, (float)size.y * height);
 	//find maximum character scale that fits in bounds
 	text.setOrigin(0.f, 0.f);
-	text.setCharacterSize(128);
-	if (true)
-	{
-		float ratio = 128.f / (text.getLocalBounds().height - abs(text.getLocalBounds().top));
-
-		text.setCharacterSize(floor(cSize.y * ratio) + 1);
-	}
 	text.setScale(sf::Vector2f(1.f, 1.f));
+	text.setCharacterSize(128);
+	if (false)
+	{
+		text.setCharacterSize(ceil(((floor(cSize.y) + 1)) * 3.f));
+	}
 
 	sf::FloatRect bounds = text.getLocalBounds();
 
@@ -94,6 +91,7 @@ void GUILabel::RenderToTexture(sf::RenderTexture* texture)
 	{
 		scale = 1.f / heightMult;
 	}
+	std::cout << scale << std::endl;
 	text.setScale(sf::Vector2f(scale, scale));
 	sf::FloatRect newBounds = text.getLocalBounds();
 	sf::Vector2f topleft(newBounds.left, newBounds.top);
