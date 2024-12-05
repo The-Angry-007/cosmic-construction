@@ -44,6 +44,8 @@ int main()
 	//construct the interfaces
 	guihandler.InitGUIS();
 
+	ResourceHandler::Init();
+
 	deltaClock.restart();
 	//main loop: runs once for each frame
 	while (window->isOpen())

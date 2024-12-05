@@ -9,7 +9,8 @@ namespace binds
 //here is where each keybind is defined and its default value.
 int Pause = sf::Keyboard::Key::Escape + 1;
 int Fullscreen = sf::Keyboard::Key::F11 + 1;
-int Pan = -(sf::Mouse::Button::Middle + 1);
+int Pan = -(sf::Mouse::Button::Right + 1);
+int DragItem = -(sf::Mouse::Button::Left + 1);
 }
 //the code version of keycodes adds 1, since keyboard keys has a code assigned to the value 0 as well as mouse buttons.
 int binds::keyToCode(sf::Keyboard::Key key)

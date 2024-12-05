@@ -9,10 +9,10 @@ Table::Table()
 void Table::FromString(std::string string)
 {
 	auto lines = Split(string, '\n');
-	headers = Split(lines[0], ',');
+	headers = Split(lines[0], '/');
 	for (uint i = 1; i < lines.size(); i++)
 	{
-		records.push_back(Split(lines[i], ','));
+		records.push_back(Split(lines[i], '/'));
 	}
 }
 
@@ -45,7 +45,7 @@ std::string Table::ToString()
 		result += headers[i];
 		if (i != headers.size() - 1)
 		{
-			result += ",";
+			result += "/";
 		}
 	}
 	result += "\n";
