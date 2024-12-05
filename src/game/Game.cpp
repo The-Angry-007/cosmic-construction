@@ -12,8 +12,10 @@ Game::Game()
 		int size = 100;
 		items.push_back(new Item(sf::Vector2f(rand() % (size * 2) - size, rand() % (size * 2) - size)));
 	}
-	// item = new Item(sf::Vector2f(rand() % width, rand() % height));
 	camera = new Camera(sf::Vector2f(0.f, 0.f), 1.f);
+	draggingItem = -1;
+	mouseStartDraggingPos = sf::Vector2f(0.f, 0.f);
+	itemStartDraggingPos = sf::Vector2f(0.f, 0.f);
 }
 Game::~Game()
 {
@@ -52,6 +54,35 @@ void Game::Update(float dt)
 		return;
 	}
 	camera->Update(dt);
+	if (draggingItem == -1)
+	{
+		if (InputHandler::pressed(binds::DragItem))
+		{
+
+			for (int i = items.size() - 1; i > -1; i--)
+			{
+				if (items[i]->accurateHitbox->intersectsPoint(camera->WorldMousePos()))
+				{
+					draggingItem = i;
+					mouseStartDraggingPos = camera->WorldMousePos();
+					itemStartDraggingPos = items[i]->position;
+					break;
+				}
+			}
+		}
+	}
+	else
+	{
+		if (!InputHandler::down(binds::DragItem))
+		{
+			draggingItem = -1;
+		}
+		else
+		{
+			sf::Vector2f offset = camera->WorldMousePos() - mouseStartDraggingPos;
+			items[draggingItem]->position = itemStartDraggingPos + offset;
+		}
+	}
 	for (uint i = 0; i < items.size(); i++)
 	{
 		items[i]->Update(dt);

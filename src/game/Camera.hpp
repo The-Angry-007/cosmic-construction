@@ -17,5 +17,6 @@ public:
 	Camera(sf::Vector2f position, float zoom);
 	void Update(float dt);
 	void SetView();
+	sf::Vector2f WorldMousePos();
 	sf::FloatRect toFloatRect();
 };

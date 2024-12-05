@@ -9,7 +9,8 @@ public:
 	sf::Vector2f position;
 	int typeId;
 	sf::Sprite sprite;
-	Hitbox hitbox;
+	Hitbox* hitbox;
+	Hitbox* accurateHitbox;
 
 	Item(sf::Vector2f position);
 	void Update(float dt);

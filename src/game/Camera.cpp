@@ -68,3 +68,8 @@ void Camera::SetView()
 	auto view = sf::View(rect);
 	window->setView(view);
 }
+
+sf::Vector2f Camera::WorldMousePos()
+{
+	return window->mapPixelToCoords((sf::Vector2i)InputHandler::mousePos);
+}
