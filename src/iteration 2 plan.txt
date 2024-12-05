@@ -15,7 +15,7 @@ resourceHandler
 FULL PLAN
 x create barebones game class with update and render functions
 x create basic item class that just draws a blue square in its position
-- make camera class that belongs to game that can pan around and zoom
+x make camera class that belongs to game that can pan around and zoom
 - create table with a few placeholder item names and their sprites
 - create resourceHandler that loads in this info
 - add saving and loading of items (default directory is just items)
