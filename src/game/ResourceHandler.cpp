@@ -65,6 +65,10 @@ void ResourceHandler::Init()
 				{
 					newImage.setPixel(x, y, sf::Color::White);
 				}
+				else
+				{
+					newImage.setPixel(x, y, sf::Color::Transparent);
+				}
 			}
 		}
 		outline.loadFromImage(newImage);

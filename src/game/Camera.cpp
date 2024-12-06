@@ -40,7 +40,7 @@ void Camera::Update(float dt)
 			targetZoom *= zoomRate;
 		}
 		//minimum and maximum zoom
-		if (targetZoom < 0.1f)
+		if (targetZoom < 0.01f)
 		{
 			targetZoom *= zoomRate;
 		}

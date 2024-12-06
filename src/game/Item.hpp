@@ -11,6 +11,7 @@ public:
 	sf::Sprite sprite;
 	Hitbox* hitbox;
 	Hitbox* accurateHitbox;
+	bool selected;
 
 	Item(sf::Vector2f position);
 	void Update(float dt);

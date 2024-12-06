@@ -56,18 +56,23 @@ void Game::Update(float dt)
 	camera->Update(dt);
 	if (draggingItem == -1)
 	{
-		if (InputHandler::pressed(binds::DragItem))
-		{
 
-			for (int i = items.size() - 1; i > -1; i--)
+		for (int i = items.size() - 1; i > -1; i--)
+		{
+			if (items[i]->accurateHitbox->intersectsPoint(camera->WorldMousePos()))
 			{
-				if (items[i]->accurateHitbox->intersectsPoint(camera->WorldMousePos()))
+
+				if (InputHandler::pressed(binds::DragItem))
 				{
 					draggingItem = i;
 					mouseStartDraggingPos = camera->WorldMousePos();
 					itemStartDraggingPos = items[i]->position;
-					break;
 				}
+				else if (!InputHandler::down(binds::DragItem))
+				{
+					items[i]->selected = true;
+				}
+				break;
 			}
 		}
 	}
