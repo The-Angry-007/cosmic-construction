@@ -1,8 +1,8 @@
 #include "ResourceHandler.hpp"
-
 namespace ResourceHandler
 {
 std::vector<sf::Texture> itemTextures;
+std::vector<sf::Texture> outlineTextures;
 Table* itemTable;
 int numItems = 0;
 }
@@ -21,5 +21,53 @@ void ResourceHandler::Init()
 			std::cout << "failed to load item texture: row " << i << std::endl;
 		}
 		itemTextures.push_back(t);
+		auto image = t.copyToImage();
+		sf::Image newImage;
+		newImage.create(ITEM_SIZE + 2, ITEM_SIZE + 2);
+		sf::Texture outline;
+		auto inBounds = [](int x, int y) {
+			return (x >= 0 && x < ITEM_SIZE && y >= 0 && y < ITEM_SIZE);
+		};
+		for (int i = 0; i < ITEM_SIZE + 2; i++)
+		{
+			for (int j = 0; j < ITEM_SIZE + 2; j++)
+			{
+				int x = j - 1;
+				int y = i - 1;
+				if (inBounds(x, y) && image.getPixel(x, y).a != 0)
+				{
+					newImage.setPixel(x, y, image.getPixel(x, y));
+					continue;
+				}
+				bool adjacent = false;
+				bool doDiagonal = true;
+				for (int k = -1; k < 2; k++)
+				{
+					for (int l = -1; l < 2; l++)
+					{
+						if (l == 0 && k == 0)
+						{
+							continue;
+						}
+						if (!doDiagonal && (k != 0 && l != 0))
+						{
+							continue;
+						}
+						int nx = x + k;
+						int ny = y + l;
+						if (inBounds(nx, ny) && image.getPixel(nx, ny).a != 0)
+						{
+							adjacent = true;
+						}
+					}
+				}
+				if (adjacent)
+				{
+					newImage.setPixel(x, y, sf::Color::White);
+				}
+			}
+		}
+		outline.loadFromImage(newImage);
+		outlineTextures.push_back(outline);
 	}
 }

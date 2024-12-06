@@ -16,10 +16,11 @@ FULL PLAN
 x create barebones game class with update and render functions
 x create basic item class that just draws a blue square in its position
 x make camera class that belongs to game that can pan around and zoom
-- create table with a few placeholder item names and their sprites
-- create resourceHandler that loads in this info
-- add saving and loading of items (default directory is just items)
+x create table with a few placeholder item names and their sprites
+x create resourceHandler that loads in this info
+- draw outline around items when being hovered
 - add planet class to store items
+- add saving and loading of items (default directory is just items)
 - add chunk class and get saving and loading of chunks working
 - add structure base class
 - create sprites for conveyor belt and add it
@@ -32,3 +33,8 @@ x make camera class that belongs to game that can pan around and zoom
 - flesh out all the items, structures, terrain
 - finish tech tree and help menu
 - add sound effects and audio (maybe)
+
+
+possible optimisations:
+calculate accurate hitboxes for items in resource handler
+draw items using vertex array instead of sprites
