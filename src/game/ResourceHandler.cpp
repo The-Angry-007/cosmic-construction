@@ -9,6 +9,9 @@ int numItems = 0;
 
 void ResourceHandler::Init()
 {
+	std::cout << "initing resource handler" << std::endl;
+	itemTextures = {};
+	outlineTextures = {};
 	itemTable = new Table();
 	std::string data = SaveHandler::ReadData("resources\\items\\itemTable.txt");
 	itemTable->FromString(data);

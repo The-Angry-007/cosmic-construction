@@ -1,15 +1,13 @@
 #pragma once
 #include "Camera.hpp"
 #include "Item.hpp"
+#include "Planet.hpp"
 class Game
 {
 public:
 	bool paused;
-	std::vector<Item*> items;
-	int draggingItem;
-	sf::Vector2f mouseStartDraggingPos;
-	sf::Vector2f itemStartDraggingPos;
-	Camera* camera;
+	std::vector<Planet> planets;
+	int activePlanet;
 	Game();
 	~Game();
 	void TogglePaused();

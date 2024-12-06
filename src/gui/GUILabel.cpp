@@ -91,7 +91,6 @@ void GUILabel::RenderToTexture(sf::RenderTexture* texture)
 	{
 		scale = 1.f / heightMult;
 	}
-	std::cout << scale << std::endl;
 	text.setScale(sf::Vector2f(scale, scale));
 	sf::FloatRect newBounds = text.getLocalBounds();
 	sf::Vector2f topleft(newBounds.left, newBounds.top);

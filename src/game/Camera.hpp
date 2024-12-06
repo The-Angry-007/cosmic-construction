@@ -14,6 +14,7 @@ public:
 	sf::Vector2f prevMousePos;
 	Hitbox* hitbox;
 	~Camera();
+	Camera();
 	Camera(sf::Vector2f position, float zoom);
 	void Update(float dt);
 	void SetView();

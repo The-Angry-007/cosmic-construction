@@ -5,17 +5,10 @@
 Game::Game()
 {
 	paused = false;
-	int numItems = 10;
-	items = {};
-	for (uint i = 0; i < numItems; i++)
-	{
-		int size = 100;
-		items.push_back(new Item(sf::Vector2f(rand() % (size * 2) - size, rand() % (size * 2) - size)));
-	}
-	camera = new Camera(sf::Vector2f(0.f, 0.f), 1.f);
-	draggingItem = -1;
-	mouseStartDraggingPos = sf::Vector2f(0.f, 0.f);
-	itemStartDraggingPos = sf::Vector2f(0.f, 0.f);
+	planets = {};
+	planets.push_back(Planet(0));
+	planets.push_back(Planet(1));
+	activePlanet = 0;
 }
 Game::~Game()
 {
@@ -50,53 +43,20 @@ void Game::Update(float dt)
 	}
 	if (paused)
 	{
-		camera->SetView();
+		planets[activePlanet].camera.SetView();
 		return;
 	}
-	camera->Update(dt);
-	if (draggingItem == -1)
+	if (InputHandler::keyPressed(sf::Keyboard::Key::Right))
 	{
-
-		for (int i = items.size() - 1; i > -1; i--)
+		activePlanet++;
+		if (activePlanet >= planets.size())
 		{
-			if (items[i]->accurateHitbox->intersectsPoint(camera->WorldMousePos()))
-			{
-
-				if (InputHandler::pressed(binds::DragItem))
-				{
-					draggingItem = i;
-					mouseStartDraggingPos = camera->WorldMousePos();
-					itemStartDraggingPos = items[i]->position;
-				}
-				else if (!InputHandler::down(binds::DragItem))
-				{
-					items[i]->selected = true;
-				}
-				break;
-			}
+			activePlanet = 0;
 		}
 	}
-	else
-	{
-		if (!InputHandler::down(binds::DragItem))
-		{
-			draggingItem = -1;
-		}
-		else
-		{
-			sf::Vector2f offset = camera->WorldMousePos() - mouseStartDraggingPos;
-			items[draggingItem]->position = itemStartDraggingPos + offset;
-		}
-	}
-	for (uint i = 0; i < items.size(); i++)
-	{
-		items[i]->Update(dt);
-	}
+	planets[activePlanet].Update(dt);
 }
 void Game::Render()
 {
-	for (uint i = 0; i < items.size(); i++)
-	{
-		items[i]->Render();
-	}
+	planets[activePlanet].Render();
 }

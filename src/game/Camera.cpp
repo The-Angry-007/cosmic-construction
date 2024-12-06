@@ -15,6 +15,19 @@ Camera::Camera(sf::Vector2f position, float zoom)
 	hitbox->AddShape(new HitboxRect(position, sf::Vector2f(zoom * width, zoom * height)));
 	zoomSpeed = 25.f;
 }
+Camera::Camera()
+{
+	position = sf::Vector2f(0.f, 0.f);
+	zoom = 1;
+	targetZoom = zoom;
+	prevMousePos = InputHandler::mousePos;
+	//the zoom rate is the (numscrollstodouble)th root of 2, so that it takes that many scrolls to double the zoom
+	int numScrollsToDouble = 3;
+	zoomRate = pow(2.f, 1.f / numScrollsToDouble);
+	hitbox = new Hitbox(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.f, 1.f));
+	hitbox->AddShape(new HitboxRect(position, sf::Vector2f(zoom * width, zoom * height)));
+	zoomSpeed = 25.f;
+}
 
 void Camera::Update(float dt)
 {
@@ -72,4 +85,8 @@ void Camera::SetView()
 sf::Vector2f Camera::WorldMousePos()
 {
 	return window->mapPixelToCoords((sf::Vector2i)InputHandler::mousePos);
+}
+Camera::~Camera()
+{
+	// delete hitbox;
 }
