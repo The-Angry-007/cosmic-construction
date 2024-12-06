@@ -16,4 +16,5 @@ public:
 	Planet(int id);
 	void Update(float dt);
 	void Render();
+	void Save();
 };

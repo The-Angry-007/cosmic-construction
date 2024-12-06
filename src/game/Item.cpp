@@ -52,7 +52,7 @@ void Item::Update(float dt)
 	if (selected)
 	{
 		sprite.setTexture(ResourceHandler::outlineTextures[typeId]);
-		sprite.setOrigin(ITEM_SIZE / 2, ITEM_SIZE / 2);
+		sprite.setOrigin(ITEM_SIZE / 2 + 1, ITEM_SIZE / 2 + 1);
 	}
 	else
 	{

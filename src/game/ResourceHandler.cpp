@@ -1,4 +1,5 @@
 #include "ResourceHandler.hpp"
+#include "Item.hpp"
 #define inBounds(x, y) (x >= 0 && x < ITEM_SIZE && y >= 0 && y < ITEM_SIZE)
 namespace ResourceHandler
 {
@@ -17,66 +18,68 @@ void ResourceHandler::Init()
 	std::string data = SaveHandler::ReadData("resources\\items\\itemTable.txt");
 	itemTable->FromString(data);
 	numItems = itemTable->records.size();
-	for (uint i = 0; i < numItems; i++)
+	std::vector<sf::Image> images = {};
+	for (int i = 0; i < itemTable->records.size(); i++)
 	{
 		sf::Texture t;
 		if (!t.loadFromFile("resources\\items\\" + itemTable->GetValue("ImagePath", i)))
 		{
 			std::cout << "failed to load item texture: row " << i << std::endl;
 		}
-		std::cout << "loaded texture ";
 		itemTextures.push_back(t);
 		auto image = t.copyToImage();
 		sf::Image newImage;
-		newImage.create(ITEM_SIZE + 2, ITEM_SIZE + 2);
-		sf::Texture outline;
-		std::cout << "starting outline creation" << std::endl;
-		for (int i = 0; i < ITEM_SIZE + 2; i++)
+		images.push_back(image);
+		images.push_back(newImage);
+		newImage.create(ITEM_SIZE + 2, ITEM_SIZE + 2, sf::Color::Transparent);
+		newImage.copy(image, 1, 1);
+		sf::Image newImage2;
+		newImage2.create(ITEM_SIZE + 3, ITEM_SIZE + 3, sf::Color::Transparent);
+		newImage2.copy(newImage, 0, 0);
+
+		for (uint i = 0; i < ITEM_SIZE + 2; i++)
 		{
-			for (int j = 0; j < ITEM_SIZE + 2; j++)
+			for (uint j = 0; j < ITEM_SIZE + 2; j++)
 			{
-				int x = j - 1;
-				int y = i - 1;
-				if (inBounds(x, y) && image.getPixel(x, y).a != 0)
+				if (newImage.getPixel(i, j).a != 0)
 				{
-					newImage.setPixel(x, y, image.getPixel(x, y));
 					continue;
 				}
-				bool adjacent = false;
-				bool doDiagonal = true;
+				bool adj = false;
 				for (int k = -1; k < 2; k++)
 				{
 					for (int l = -1; l < 2; l++)
 					{
-						if (l == 0 && k == 0)
+						int x = i + k;
+						int y = j + l;
+						if (k == 0 && l == 0)
 						{
 							continue;
 						}
-						if (!doDiagonal && (k != 0 && l != 0))
+						if (x < 0 || x > ITEM_SIZE + 1 || y < 0 || y > ITEM_SIZE + 1)
 						{
 							continue;
 						}
-						int nx = x + k;
-						int ny = y + l;
-						if (inBounds(nx, ny) && image.getPixel(nx, ny).a != 0)
+						if (newImage.getPixel(x, y).a != 0)
 						{
-							adjacent = true;
+							adj = true;
+							break;
 						}
 					}
 				}
-				if (adjacent)
+				if (adj)
 				{
-					newImage.setPixel(x, y, sf::Color::White);
-				}
-				else
-				{
-					newImage.setPixel(x, y, sf::Color::Transparent);
+					newImage2.setPixel(i, j, sf::Color::White);
 				}
 			}
-			std::cout << "finished row" << std::endl;
 		}
-		outline.loadFromImage(newImage);
+		sf::Texture outline;
+		outline.create(ITEM_SIZE + 2, ITEM_SIZE + 2);
+		if (!outline.loadFromImage(newImage2))
+		{
+			std::cout << "failed to create texture from image" << std::endl;
+		}
+		std::cout << outline.getSize().x << " " << outline.getSize().y << std::endl;
 		outlineTextures.push_back(outline);
 	}
-	std::cout << "finished init" << std::endl;
 }

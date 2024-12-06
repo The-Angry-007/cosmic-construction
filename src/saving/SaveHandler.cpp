@@ -69,7 +69,7 @@ void SaveHandler::CreateSave(std::string name, int difficulty, std::string seed)
 void SaveHandler::LoadGame(int index)
 {
 	startTime = GetTime();
-	workingDir += "\\" + std::to_string(index);
+	workingDir += "\\saves\\" + std::to_string(index);
 	game = new Game();
 	game->LoadGame();
 }
@@ -94,8 +94,10 @@ void SaveHandler::UpdateTimePlayed()
 	last modified
 	*/
 	std::string path = RelToAbsolute("metadata.txt");
+	std::cout << path << std::endl;
 	std::string data = ReadData(path);
 	auto lines = Split(data, '\n');
+	std::cout << data << std::endl;
 	int played = std::stoi(lines[1]);
 	int currentTime = GetTime();
 	played += currentTime - startTime;
@@ -243,6 +245,10 @@ void SaveHandler::SaveGame()
 {
 	UpdateTimePlayed();
 	UpdateLastModified();
+	for (uint i = 0; i < game->planets.size(); i++)
+	{
+		game->planets[i].Save();
+	}
 }
 
 bool SaveHandler::DeleteDirectory(std::string& path)

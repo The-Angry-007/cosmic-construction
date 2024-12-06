@@ -2,6 +2,7 @@
 #include "InputHandler.hpp"
 #include "Main.hpp"
 #include "binds.hpp"
+#define sh SaveHandler
 
 Planet::Planet(int id)
 {
@@ -81,4 +82,29 @@ void Planet::Render()
 	{
 		items[i].Render();
 	}
+}
+
+void Planet::Save()
+{
+	std::string path = sh::workingDir + "\\planets";
+	if (!sh::DirExists(path))
+	{
+		sh::CreateDirectoryW(path);
+	}
+	path += "\\" + std::to_string(id);
+	if (!sh::DirExists(path))
+	{
+		sh::CreateDirectory(path);
+	}
+	Table itemTable = Table();
+	itemTable.headers = { "ItemID", "TypeID", "PositionX", "PositionY", "Parent" };
+	for (uint i = 0; i < items.size(); i++)
+	{
+		itemTable.records.push_back({ std::to_string(i),
+			std::to_string(items[i].typeId),
+			std::to_string(items[i].position.x),
+			std::to_string(items[i].position.y),
+			"-1" });
+	}
+	sh::WriteData(path + "\\items.txt", itemTable.ToString());
 }
