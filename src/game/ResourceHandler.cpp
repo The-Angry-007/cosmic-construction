@@ -1,4 +1,5 @@
 #include "ResourceHandler.hpp"
+#define inBounds(x, y) (x >= 0 && x < ITEM_SIZE && y >= 0 && y < ITEM_SIZE)
 namespace ResourceHandler
 {
 std::vector<sf::Texture> itemTextures;
@@ -23,14 +24,13 @@ void ResourceHandler::Init()
 		{
 			std::cout << "failed to load item texture: row " << i << std::endl;
 		}
+		std::cout << "loaded texture ";
 		itemTextures.push_back(t);
 		auto image = t.copyToImage();
 		sf::Image newImage;
 		newImage.create(ITEM_SIZE + 2, ITEM_SIZE + 2);
 		sf::Texture outline;
-		auto inBounds = [](int x, int y) {
-			return (x >= 0 && x < ITEM_SIZE && y >= 0 && y < ITEM_SIZE);
-		};
+		std::cout << "starting outline creation" << std::endl;
 		for (int i = 0; i < ITEM_SIZE + 2; i++)
 		{
 			for (int j = 0; j < ITEM_SIZE + 2; j++)
@@ -73,8 +73,10 @@ void ResourceHandler::Init()
 					newImage.setPixel(x, y, sf::Color::Transparent);
 				}
 			}
+			std::cout << "finished row" << std::endl;
 		}
 		outline.loadFromImage(newImage);
 		outlineTextures.push_back(outline);
 	}
+	std::cout << "finished init" << std::endl;
 }
