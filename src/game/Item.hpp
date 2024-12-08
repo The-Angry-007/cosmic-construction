@@ -14,7 +14,7 @@ public:
 	Hitbox* accurateHitbox;
 	bool selected;
 
-	Item(sf::Vector2f position, int id);
+	Item(sf::Vector2f position, int id, int typeID);
 	void Update(float dt);
 	void Render();
 };

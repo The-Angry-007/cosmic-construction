@@ -1,7 +1,7 @@
 #include "Item.hpp"
 #include "Main.hpp"
 int CurrentItemID = 0;
-Item::Item(sf::Vector2f position, int id)
+Item::Item(sf::Vector2f position, int id, int typeID)
 {
 	if (id == -1)
 	{
@@ -16,7 +16,7 @@ Item::Item(sf::Vector2f position, int id)
 		}
 	}
 	this->position = position;
-	typeId = rand() % ResourceHandler::numItems;
+	this->typeId = typeID;
 	sf::Texture& t = ResourceHandler::itemTextures[typeId];
 	sprite.setTexture(t);
 	sprite.setOrigin((sf::Vector2f)t.getSize() / 2.f);
@@ -78,6 +78,5 @@ void Item::Update(float dt)
 void Item::Render()
 {
 	sprite.setPosition(position);
-
 	window->draw(sprite);
 }

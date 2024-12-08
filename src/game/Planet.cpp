@@ -33,10 +33,22 @@ Planet::Planet(int id, bool load)
 			pos.x = std::stof(itemTable.GetValue("PositionX", i));
 			pos.y = std::stof(itemTable.GetValue("PositionY", i));
 			int id = std::stoi(itemTable.GetValue("ItemID", i));
-			Item item = Item(pos, id);
-			item.typeId = std::stoi(itemTable.GetValue("TypeID", i));
+			int typeId = std::stoi(itemTable.GetValue("TypeID", i));
+
+			Item item = Item(pos, id, typeId);
 			//TODO: DEAL WITH PARENT ATTRIBUTE
 			items.push_back(item);
+		}
+		//loading camera
+		{
+			JSON camjson = JSON();
+			camjson.FromString(SaveHandler::ReadData(path + "camera.txt"));
+			sf::Vector2f pos(0, 0);
+			pos.x = std::stof(camjson.GetValue("PositionX"));
+			pos.y = std::stof(camjson.GetValue("PositionY"));
+			camera.position = pos;
+			camera.zoom = std::stof(camjson.GetValue("Zoom"));
+			camera.targetZoom = camera.zoom;
 		}
 	}
 	else
@@ -45,7 +57,10 @@ Planet::Planet(int id, bool load)
 		for (uint i = 0; i < numItems; i++)
 		{
 			int size = 100;
-			items.push_back(Item(sf::Vector2f(rand() % (size * 2) - size, rand() % (size * 2) - size), -1));
+			items.push_back(Item(
+				sf::Vector2f(rand() % (size * 2) - size, rand() % (size * 2) - size),
+				-1,
+				rand() % ResourceHandler::numItems));
 		}
 	}
 }
@@ -118,6 +133,7 @@ void Planet::Save()
 	{
 		sh::CreateDirectory(path);
 	}
+	//items
 	Table itemTable = Table();
 	itemTable.headers = { "ItemID", "TypeID", "PositionX", "PositionY", "Parent" };
 	for (uint i = 0; i < items.size(); i++)
@@ -129,4 +145,10 @@ void Planet::Save()
 			"-1" });
 	}
 	sh::WriteData(path + "\\items.txt", itemTable.ToString());
+	//camera
+	JSON camjson = JSON();
+	camjson.AddAttribute("PositionX", std::to_string(camera.position.x));
+	camjson.AddAttribute("PositionY", std::to_string(camera.position.y));
+	camjson.AddAttribute("Zoom", std::to_string(camera.zoom));
+	sh::WriteData(path + "\\camera.txt", camjson.ToString());
 }
