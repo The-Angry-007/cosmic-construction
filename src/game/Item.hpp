@@ -1,6 +1,6 @@
 #pragma once
 //how big an item is in pixels
-#define ITEM_SIZE 16.f
+#define ITEM_SIZE 16
 #include "Hitboxes.hpp"
 #include "ResourceHandler.hpp"
 class Item

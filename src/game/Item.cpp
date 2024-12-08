@@ -51,12 +51,12 @@ void Item::Update(float dt)
 	accurateHitbox->SetTransform(position, sf::Vector2f(1.f, 1.f));
 	if (selected)
 	{
-		sprite.setTexture(ResourceHandler::outlineTextures[typeId]);
+		sprite.setTexture(ResourceHandler::outlineTextures[typeId], true);
 		sprite.setOrigin(ITEM_SIZE / 2 + 1, ITEM_SIZE / 2 + 1);
 	}
 	else
 	{
-		sprite.setTexture(ResourceHandler::itemTextures[typeId]);
+		sprite.setTexture(ResourceHandler::itemTextures[typeId], true);
 		sprite.setOrigin(ITEM_SIZE / 2, ITEM_SIZE / 2);
 	}
 	selected = false;
