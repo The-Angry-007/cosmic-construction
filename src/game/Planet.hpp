@@ -13,7 +13,7 @@ public:
 	int draggingItem;
 	sf::Vector2f mouseStartDraggingPos;
 	sf::Vector2f itemStartDraggingPos;
-	Planet(int id);
+	Planet(int id, bool load);
 	void Update(float dt);
 	void Render();
 	void Save();

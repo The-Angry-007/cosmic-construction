@@ -1,7 +1,20 @@
 #include "Item.hpp"
 #include "Main.hpp"
-Item::Item(sf::Vector2f position)
+int CurrentItemID = 0;
+Item::Item(sf::Vector2f position, int id)
 {
+	if (id == -1)
+	{
+		this->id = CurrentItemID++;
+	}
+	else
+	{
+		this->id = id;
+		if (this->id >= CurrentItemID)
+		{
+			CurrentItemID = this->id + 1;
+		}
+	}
 	this->position = position;
 	typeId = rand() % ResourceHandler::numItems;
 	sf::Texture& t = ResourceHandler::itemTextures[typeId];

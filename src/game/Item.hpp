@@ -8,12 +8,14 @@ class Item
 public:
 	sf::Vector2f position;
 	int typeId;
+	int id;
 	sf::Sprite sprite;
 	Hitbox* hitbox;
 	Hitbox* accurateHitbox;
 	bool selected;
 
-	Item(sf::Vector2f position);
+	Item(sf::Vector2f position, int id);
 	void Update(float dt);
 	void Render();
 };
+extern int CurrentItemID;

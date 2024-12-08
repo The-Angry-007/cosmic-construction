@@ -56,7 +56,7 @@ std::string Table::ToString()
 			result += records[i][j];
 			if (j != records[i].size() - 1)
 			{
-				result += ",";
+				result += "/";
 			}
 		}
 		if (i != records.size() - 1)

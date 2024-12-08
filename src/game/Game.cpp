@@ -6,8 +6,7 @@ Game::Game()
 {
 	paused = false;
 	planets = {};
-	planets.push_back(Planet(0));
-	planets.push_back(Planet(1));
+
 	activePlanet = 0;
 }
 Game::~Game()
@@ -16,6 +15,8 @@ Game::~Game()
 
 void Game::NewGame()
 {
+	planets.push_back(Planet(0, false));
+	planets.push_back(Planet(1, false));
 }
 void Game::TogglePaused()
 {
@@ -33,6 +34,8 @@ void Game::TogglePaused()
 }
 void Game::LoadGame()
 {
+	planets.push_back(Planet(0, true));
+	planets.push_back(Planet(1, true));
 }
 void Game::Update(float dt)
 {

@@ -4,7 +4,7 @@
 #include "binds.hpp"
 #define sh SaveHandler
 
-Planet::Planet(int id)
+Planet::Planet(int id, bool load)
 {
 	this->id = id;
 	if (id == 0)
@@ -15,17 +15,39 @@ Planet::Planet(int id)
 	{
 		backgroundColor = sf::Color(176, 98, 49);
 	}
-	int numItems = 10;
 	items = {};
-	for (uint i = 0; i < numItems; i++)
-	{
-		int size = 100;
-		items.push_back(Item(sf::Vector2f(rand() % (size * 2) - size, rand() % (size * 2) - size)));
-	}
 	draggingItem = -1;
 	mouseStartDraggingPos = sf::Vector2f(0.f, 0.f);
 	itemStartDraggingPos = sf::Vector2f(0.f, 0.f);
 	camera = Camera();
+	if (load)
+	{
+		std::string path = sh::workingDir + "\\planets\\" + std::to_string(id) + "\\";
+		//loading items
+		std::string itemPath = path + "items.txt";
+		Table itemTable = Table();
+		itemTable.FromString(SaveHandler::ReadData(itemPath));
+		for (uint i = 0; i < itemTable.records.size(); i++)
+		{
+			sf::Vector2f pos(0, 0);
+			pos.x = std::stof(itemTable.GetValue("PositionX", i));
+			pos.y = std::stof(itemTable.GetValue("PositionY", i));
+			int id = std::stoi(itemTable.GetValue("ItemID", i));
+			Item item = Item(pos, id);
+			item.typeId = std::stoi(itemTable.GetValue("TypeID", i));
+			//TODO: DEAL WITH PARENT ATTRIBUTE
+			items.push_back(item);
+		}
+	}
+	else
+	{
+		int numItems = 10;
+		for (uint i = 0; i < numItems; i++)
+		{
+			int size = 100;
+			items.push_back(Item(sf::Vector2f(rand() % (size * 2) - size, rand() % (size * 2) - size), -1));
+		}
+	}
 }
 
 void Planet::Update(float dt)
