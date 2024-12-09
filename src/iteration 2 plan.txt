@@ -20,7 +20,7 @@ x create table with a few placeholder item names and their sprites
 x create resourceHandler that loads in this info
 x draw outline around items when being hovered
 x add planet class to store items
-- add saving and loading of items (default directory is just items)
+x add saving and loading of items (default directory is just items)
 - add chunk class and get saving and loading of chunks working
 - add structure base class
 - create sprites for conveyor belt and add it

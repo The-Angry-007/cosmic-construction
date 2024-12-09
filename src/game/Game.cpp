@@ -16,7 +16,6 @@ Game::~Game()
 void Game::NewGame()
 {
 	planets.push_back(Planet(0, false));
-	planets.push_back(Planet(1, false));
 }
 void Game::TogglePaused()
 {
@@ -35,7 +34,6 @@ void Game::TogglePaused()
 void Game::LoadGame()
 {
 	planets.push_back(Planet(0, true));
-	planets.push_back(Planet(1, true));
 }
 void Game::Update(float dt)
 {
@@ -49,17 +47,14 @@ void Game::Update(float dt)
 		planets[activePlanet].camera.SetView();
 		return;
 	}
-	if (InputHandler::keyPressed(sf::Keyboard::Key::Right))
-	{
-		activePlanet++;
-		if (activePlanet >= planets.size())
-		{
-			activePlanet = 0;
-		}
-	}
 	planets[activePlanet].Update(dt);
 }
 void Game::Render()
 {
 	planets[activePlanet].Render();
+}
+
+Planet* Game::ActivePlanet()
+{
+	return &planets[activePlanet];
 }

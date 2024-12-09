@@ -10,6 +10,7 @@ public:
 	int activePlanet;
 	Game();
 	~Game();
+	Planet* ActivePlanet();
 	void TogglePaused();
 	void NewGame();
 	void LoadGame();

@@ -13,6 +13,7 @@ public:
 	Hitbox* hitbox;
 	Hitbox* accurateHitbox;
 	bool selected;
+	bool selectedSprite;
 
 	Item(sf::Vector2f position, int id, int typeID);
 	void Update(float dt);

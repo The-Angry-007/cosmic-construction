@@ -1,5 +1,6 @@
 #pragma once
 #include "Camera.hpp"
+#include "Chunk.hpp"
 #include "Item.hpp"
 #include "saving.hpp"
 class Planet
@@ -7,10 +8,12 @@ class Planet
 public:
 	//0-7 for each planet in the solar system
 	int id;
-	std::vector<Item> items;
+	std::vector<Chunk> chunks;
 	Camera camera;
 	sf::Color backgroundColor;
 	int draggingItem;
+	int draggingChunk;
+	std::string savePath;
 	sf::Vector2f mouseStartDraggingPos;
 	sf::Vector2f itemStartDraggingPos;
 	Planet(int id, bool load);

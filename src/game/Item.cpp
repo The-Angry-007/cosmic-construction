@@ -56,19 +56,22 @@ Item::Item(sf::Vector2f position, int id, int typeID)
 			accurateHitbox->AddShape(rect);
 		}
 	}
+	selectedSprite = false;
 }
 
 void Item::Update(float dt)
 {
 	hitbox->shapes[0]->currentPos = position;
 	accurateHitbox->SetTransform(position, sf::Vector2f(1.f, 1.f));
-	if (selected)
+	if (selected && !selectedSprite)
 	{
 		sprite.setTexture(ResourceHandler::outlineTextures[typeId], true);
 		sprite.setOrigin(ITEM_SIZE / 2 + 1, ITEM_SIZE / 2 + 1);
+		selectedSprite = true;
 	}
-	else
+	else if (!selected && selectedSprite)
 	{
+		selectedSprite = false;
 		sprite.setTexture(ResourceHandler::itemTextures[typeId], true);
 		sprite.setOrigin(ITEM_SIZE / 2, ITEM_SIZE / 2);
 	}
