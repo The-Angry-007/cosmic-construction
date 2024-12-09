@@ -20,6 +20,10 @@ Chunk::Chunk(sf::Vector2i position, int id, int planetID)
 	items = {};
 	this->planetID = planetID;
 	this->position = position;
+	hitbox = new Hitbox(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.f, 1.f));
+	sf::Vector2f halfSize = sf::Vector2f(CHUNK_SIZE_PIXELS / 2.f, CHUNK_SIZE_PIXELS / 2.f);
+	sf::Vector2f midpoint = GetWorldPos(halfSize);
+	hitbox->AddShape(new HitboxRect(midpoint, halfSize));
 }
 
 void Chunk::Update(float dt)
@@ -31,11 +35,11 @@ void Chunk::Update(float dt)
 }
 sf::Vector2f Chunk::GetWorldPos(sf::Vector2f position)
 {
-	return ((sf::Vector2f)this->position) * (float)CHUNK_SIZE * (float)TILE_SIZE + position;
+	return ((sf::Vector2f)this->position) * (float)CHUNK_SIZE_PIXELS + position;
 }
 void Chunk::Render()
 {
-	sf::RectangleShape chunkRect(sf::Vector2f(CHUNK_SIZE * TILE_SIZE, CHUNK_SIZE * TILE_SIZE));
+	sf::RectangleShape chunkRect(sf::Vector2f(CHUNK_SIZE_PIXELS, CHUNK_SIZE_PIXELS));
 	chunkRect.setFillColor(sf::Color(abs(position.x) * 25, abs(position.y) * 25, 0));
 	chunkRect.setPosition(GetWorldPos(sf::Vector2f(0, 0)));
 	window->draw(chunkRect);
@@ -43,4 +47,9 @@ void Chunk::Render()
 	{
 		items[i].Render();
 	}
+}
+
+bool Chunk::isVisible()
+{
+	return hitbox->intersects(game->planets[planetID].camera.hitbox);
 }

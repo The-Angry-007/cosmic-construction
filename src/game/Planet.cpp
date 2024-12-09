@@ -143,7 +143,8 @@ void Planet::Render()
 	window->draw(rect);
 	for (uint i = 0; i < chunks.size(); i++)
 	{
-		chunks[i].Render();
+		if (chunks[i].isVisible())
+			chunks[i].Render();
 	}
 }
 
