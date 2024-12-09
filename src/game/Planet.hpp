@@ -8,6 +8,7 @@ class Planet
 public:
 	//0-7 for each planet in the solar system
 	int id;
+	std::vector<Item> items;
 	std::vector<Chunk> chunks;
 	Camera camera;
 	sf::Color backgroundColor;
@@ -16,6 +17,7 @@ public:
 	std::string savePath;
 	sf::Vector2f mouseStartDraggingPos;
 	sf::Vector2f itemStartDraggingPos;
+	void MoveItem(int index);
 	Planet(int id, bool load);
 	void GenerateChunk(sf::Vector2i position);
 	void GenerateChunksInView();

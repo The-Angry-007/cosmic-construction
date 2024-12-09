@@ -9,6 +9,7 @@ public:
 	sf::Vector2f position;
 	int typeId;
 	int id;
+	int chunkID;
 	sf::Sprite sprite;
 	Hitbox* hitbox;
 	Hitbox* accurateHitbox;

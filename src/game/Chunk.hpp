@@ -12,7 +12,7 @@ public:
 	sf::Vector2i position;
 	int id;
 	int planetID;
-	std::vector<Item> items;
+	std::vector<int> items;
 	Chunk(sf::Vector2i position, int id, int planetID);
 	void Save();
 	void Update(float dt);

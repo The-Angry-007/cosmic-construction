@@ -94,10 +94,8 @@ void SaveHandler::UpdateTimePlayed()
 	last modified
 	*/
 	std::string path = RelToAbsolute("metadata.txt");
-	std::cout << path << std::endl;
 	std::string data = ReadData(path);
 	auto lines = Split(data, '\n');
-	std::cout << data << std::endl;
 	int played = std::stoi(lines[1]);
 	int currentTime = GetTime();
 	played += currentTime - startTime;

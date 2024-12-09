@@ -3,6 +3,7 @@
 int CurrentItemID = 0;
 Item::Item(sf::Vector2f position, int id, int typeID)
 {
+	chunkID = -1;
 	if (id == -1)
 	{
 		this->id = CurrentItemID++;
@@ -61,8 +62,11 @@ Item::Item(sf::Vector2f position, int id, int typeID)
 
 void Item::Update(float dt)
 {
+	std::cout << hitbox->shapes[0] << std::endl;
+	std::cout << "in items" << std::endl;
 	hitbox->shapes[0]->currentPos = position;
 	accurateHitbox->SetTransform(position, sf::Vector2f(1.f, 1.f));
+
 	if (selected && !selectedSprite)
 	{
 		sprite.setTexture(ResourceHandler::outlineTextures[typeId], true);
@@ -75,6 +79,7 @@ void Item::Update(float dt)
 		sprite.setTexture(ResourceHandler::itemTextures[typeId], true);
 		sprite.setOrigin(ITEM_SIZE / 2, ITEM_SIZE / 2);
 	}
+
 	selected = false;
 }
 

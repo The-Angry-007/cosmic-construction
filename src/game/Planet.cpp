@@ -15,6 +15,7 @@ Planet::Planet(int id, bool load)
 	mouseStartDraggingPos = sf::Vector2f(0.f, 0.f);
 	itemStartDraggingPos = sf::Vector2f(0.f, 0.f);
 	chunks = {};
+	items = {};
 	camera = Camera();
 	if (load)
 	{
@@ -44,17 +45,10 @@ Planet::Planet(int id, bool load)
 			pos.y = std::stof(itemTable.GetValue("PositionY", i));
 			int id = std::stoi(itemTable.GetValue("ItemID", i));
 			int typeId = std::stoi(itemTable.GetValue("TypeID", i));
-			int chunkID = std::stoi(itemTable.GetValue("ChunkID", i));
 			Item item = Item(pos, id, typeId);
+			items.push_back(item);
 			//TODO: DEAL WITH PARENT ATTRIBUTE
-			for (uint i = 0; i < chunks.size(); i++)
-			{
-				if (chunks[i].id == chunkID)
-				{
-					chunks[i].items.push_back(item);
-					break;
-				}
-			}
+			MoveItem(items.size() - 1);
 		}
 		//loading camera
 		{
@@ -71,14 +65,15 @@ Planet::Planet(int id, bool load)
 	else
 	{
 		int numItems = 10;
-		chunks.push_back(Chunk(sf::Vector2i(0, 0), -1, this->id));
+		// chunks.push_back(Chunk(sf::Vector2i(0, 0), -1, this->id));
+		GenerateChunksInView();
 		for (uint i = 0; i < numItems; i++)
 		{
 			int size = 100;
-			chunks[0].items.push_back(Item(
-				sf::Vector2f(rand() % (size * 2) - size, rand() % (size * 2) - size),
+			items.push_back(Item(sf::Vector2f(rand() % (size * 2) - size, rand() % (size * 2) - size),
 				-1,
 				rand() % ResourceHandler::numItems));
+			MoveItem(items.size() - 1);
 		}
 	}
 }
@@ -89,31 +84,26 @@ void Planet::Update(float dt)
 	GenerateChunksInView();
 	if (draggingItem == -1)
 	{
-		for (int j = 0; j < chunks.size(); j++)
+		bool end = false;
+		for (int i = items.size() - 1; i > -1; i--)
 		{
-			bool end = false;
-			for (int i = chunks[j].items.size() - 1; i > -1; i--)
-			{
-				if (chunks[j].items[i].accurateHitbox->intersectsPoint(camera.WorldMousePos()))
-				{
 
-					if (InputHandler::pressed(binds::DragItem))
-					{
-						draggingItem = i;
-						draggingChunk = j;
-						mouseStartDraggingPos = camera.WorldMousePos();
-						itemStartDraggingPos = chunks[j].items[i].position;
-					}
-					else if (!InputHandler::down(binds::DragItem))
-					{
-						chunks[j].items[i].selected = true;
-					}
-					end = true;
-					break;
+			if (items[i].accurateHitbox->intersectsPoint(camera.WorldMousePos()))
+			{
+
+				if (InputHandler::pressed(binds::DragItem))
+				{
+					draggingItem = i;
+					mouseStartDraggingPos = camera.WorldMousePos();
+					itemStartDraggingPos = items[i].position;
 				}
-			}
-			if (end)
+				else if (!InputHandler::down(binds::DragItem))
+				{
+					items[i].selected = true;
+				}
+				end = true;
 				break;
+			}
 		}
 	}
 	else
@@ -125,11 +115,13 @@ void Planet::Update(float dt)
 		else
 		{
 			sf::Vector2f offset = camera.WorldMousePos() - mouseStartDraggingPos;
-			chunks[draggingChunk].items[draggingItem].position = itemStartDraggingPos + offset;
+			items[draggingItem].position = itemStartDraggingPos + offset;
+			MoveItem(draggingItem);
 		}
 	}
 	for (uint i = 0; i < chunks.size(); i++)
 	{
+
 		chunks[i].Update(dt);
 	}
 }
@@ -162,18 +154,14 @@ void Planet::Save()
 	}
 	//items
 	Table itemTable = Table();
-	itemTable.headers = { "ItemID", "TypeID", "ChunkID", "PositionX", "PositionY", "Parent" };
-	for (uint i = 0; i < chunks.size(); i++)
+	itemTable.headers = { "ItemID", "TypeID", "PositionX", "PositionY", "Parent" };
+	for (int i = 0; i < items.size(); i++)
 	{
-		for (int j = 0; j < chunks[i].items.size(); j++)
-		{
-			itemTable.records.push_back({ std::to_string(chunks[i].items[j].id),
-				std::to_string(chunks[i].items[j].typeId),
-				std::to_string(chunks[i].id),
-				std::to_string(chunks[i].items[j].position.x),
-				std::to_string(chunks[i].items[j].position.y),
-				"-1" });
-		}
+		itemTable.records.push_back({ std::to_string(items[i].id),
+			std::to_string(items[i].typeId),
+			std::to_string(items[i].position.x),
+			std::to_string(items[i].position.y),
+			"-1" });
 	}
 	sh::WriteData(path + "\\items.txt", itemTable.ToString());
 	//camera
@@ -222,5 +210,43 @@ void Planet::GenerateChunksInView()
 			if (!exists)
 				GenerateChunk(sf::Vector2i(x, y));
 		}
+	}
+}
+
+void Planet::MoveItem(int index)
+{
+	Item* item = &items[index];
+	if (item->chunkID != -1)
+	{
+		Chunk* c = &chunks[item->chunkID];
+		for (uint i = 0; i < c->items.size(); i++)
+		{
+			if (c->items[i] == index)
+			{
+				c->items.erase(c->items.begin() + i);
+				break;
+			}
+		}
+	}
+	sf::Vector2f chunkPos = item->position / (float)CHUNK_SIZE_PIXELS;
+	sf::Vector2i chunkCoords((int)floor(chunkPos.x), (int)floor(chunkPos.y));
+	bool sorted = false;
+	for (uint i = 0; i < chunks.size(); i++)
+	{
+		if (chunks[i].position.x == chunkCoords.x && chunks[i].position.y == chunkCoords.y)
+		{
+			chunks[i].items.push_back(index);
+			item->chunkID = chunks[i].id;
+			sorted = true;
+
+			break;
+		}
+	}
+	if (!sorted)
+	{
+		GenerateChunk(chunkCoords);
+		uint i = chunks.size() - 1;
+		chunks[i].items.push_back(index);
+		item->chunkID = chunks[i].id;
 	}
 }
