@@ -86,6 +86,7 @@ Planet::Planet(int id, bool load)
 void Planet::Update(float dt)
 {
 	camera.Update(dt);
+	GenerateChunksInView();
 	if (draggingItem == -1)
 	{
 		for (int j = 0; j < chunks.size(); j++)
@@ -190,4 +191,35 @@ void Planet::Save()
 			std::to_string(chunks[i].position.y) });
 	}
 	sh::WriteData(path + "\\chunks.txt", chunkTable.ToString());
+}
+
+void Planet::GenerateChunk(sf::Vector2i position)
+{
+	Chunk c = Chunk(position, -1, id);
+	chunks.push_back(c);
+}
+void Planet::GenerateChunksInView()
+{
+	HitboxShape* hitbox = camera.hitbox->shapes[0];
+	sf::Vector2f topleft = hitbox->currentPos - hitbox->currentSize;
+	sf::Vector2i minPos((int)floor(topleft.x / CHUNK_SIZE / TILE_SIZE), (int)floor(topleft.y / CHUNK_SIZE / TILE_SIZE));
+	sf::Vector2f bottomright = hitbox->currentPos + hitbox->currentSize;
+	sf::Vector2i maxPos((int)ceil(bottomright.x / CHUNK_SIZE / TILE_SIZE), (int)ceil(bottomright.y / CHUNK_SIZE / TILE_SIZE));
+	for (int x = minPos.x; x <= maxPos.x; x++)
+	{
+		for (int y = minPos.y; y <= maxPos.y; y++)
+		{
+			bool exists = false;
+			for (int i = 0; i < chunks.size(); i++)
+			{
+				if (chunks[i].position.x == x && chunks[i].position.y == y)
+				{
+					exists = true;
+					continue;
+				}
+			}
+			if (!exists)
+				GenerateChunk(sf::Vector2i(x, y));
+		}
+	}
 }

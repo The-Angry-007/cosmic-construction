@@ -17,6 +17,8 @@ public:
 	sf::Vector2f mouseStartDraggingPos;
 	sf::Vector2f itemStartDraggingPos;
 	Planet(int id, bool load);
+	void GenerateChunk(sf::Vector2i position);
+	void GenerateChunksInView();
 	void Update(float dt);
 	void Render();
 	void Save();

@@ -31,7 +31,7 @@ void Chunk::Update(float dt)
 }
 sf::Vector2f Chunk::GetWorldPos(sf::Vector2f position)
 {
-	return ((sf::Vector2f)position) * (float)CHUNK_SIZE * (float)TILE_SIZE + position;
+	return ((sf::Vector2f)this->position) * (float)CHUNK_SIZE * (float)TILE_SIZE + position;
 }
 void Chunk::Render()
 {

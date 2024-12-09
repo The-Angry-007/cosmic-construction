@@ -76,8 +76,8 @@ sf::FloatRect Camera::toFloatRect()
 void Camera::SetView()
 {
 	sf::FloatRect rect = toFloatRect();
-	hitbox->shapes[0]->position = sf::Vector2f(rect.left, rect.top) + 0.5f * sf::Vector2f(rect.width, rect.height);
-
+	hitbox->shapes[0]->currentPos = sf::Vector2f(rect.left, rect.top) + 0.5f * sf::Vector2f(rect.width, rect.height);
+	hitbox->shapes[0]->currentSize = sf::Vector2f(rect.width / 2.f, rect.height / 2.f) * 0.5f;
 	auto view = sf::View(rect);
 	window->setView(view);
 }
