@@ -4,7 +4,7 @@
 #include "binds.hpp"
 #define sh SaveHandler
 
-Planet::Planet(int id, bool load)
+Planet::Planet(int id)
 {
 	this->id = id;
 	if (id == 0)
@@ -17,6 +17,9 @@ Planet::Planet(int id, bool load)
 	chunks = {};
 	items = {};
 	camera = Camera();
+}
+void Planet::Init(bool load)
+{
 	if (load)
 	{
 		std::string path = sh::workingDir + "\\planets\\" + std::to_string(id) + "\\";
@@ -78,7 +81,6 @@ Planet::Planet(int id, bool load)
 	}
 	structure = new Structure(sf::Vector2i(0, 0), 0, -1, 0, 0);
 }
-
 void Planet::Update(float dt)
 {
 	camera.Update(dt);
@@ -262,4 +264,5 @@ Chunk* Planet::GetChunk(int chunkID)
 			return &chunks[i];
 		}
 	}
+	return nullptr;
 }

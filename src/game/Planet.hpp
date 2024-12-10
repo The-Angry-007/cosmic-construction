@@ -20,7 +20,8 @@ public:
 	sf::Vector2f itemStartDraggingPos;
 	Structure* structure;
 	void MoveItem(int index);
-	Planet(int id, bool load);
+	Planet(int id);
+	void Init(bool load);
 	void GenerateChunk(sf::Vector2i position);
 	void GenerateChunksInView();
 	void Update(float dt);

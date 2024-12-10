@@ -62,8 +62,6 @@ Item::Item(sf::Vector2f position, int id, int typeID)
 
 void Item::Update(float dt)
 {
-	std::cout << hitbox->shapes[0] << std::endl;
-	std::cout << "in items" << std::endl;
 	hitbox->shapes[0]->currentPos = position;
 	accurateHitbox->SetTransform(position, sf::Vector2f(1.f, 1.f));
 

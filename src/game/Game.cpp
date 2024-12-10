@@ -8,6 +8,7 @@ Game::Game()
 	planets = {};
 
 	activePlanet = 0;
+	planets.push_back(Planet(0));
 }
 Game::~Game()
 {
@@ -15,7 +16,10 @@ Game::~Game()
 
 void Game::NewGame()
 {
-	planets.push_back(Planet(0, false));
+	for (uint i = 0; i < planets.size(); i++)
+	{
+		planets[i].Init(false);
+	}
 }
 void Game::TogglePaused()
 {
@@ -33,7 +37,10 @@ void Game::TogglePaused()
 }
 void Game::LoadGame()
 {
-	planets.push_back(Planet(0, true));
+	for (uint i = 0; i < planets.size(); i++)
+	{
+		planets[i].Init(true);
+	}
 }
 void Game::Update(float dt)
 {

@@ -21,16 +21,16 @@ Structure::Structure(sf::Vector2i position, int typeID, int id, int chunkID, int
 	this->planetID = planetID;
 	this->typeID = typeID;
 	this->position = position;
+
 	tileSize = ResourceHandler::structureSizes[typeID];
 	sf::Texture& text = ResourceHandler::structureTextures[typeID];
-	sprite.setTexture(text);
+	sprite = sf::Sprite(text);
 	sprite.setPosition(sf::Vector2f(
-						   (position.x + tileSize.x / 2.f) * TILE_SIZE.x,
-						   (position.y + tileSize.y / 2.f) * TILE_SIZE.y)
+						   ((float)position.x + tileSize.x / 2.f) * (float)TILE_SIZE.x,
+						   ((float)position.y + tileSize.y / 2.f) * (float)TILE_SIZE.y)
 		+ game->planets[planetID].GetChunk(chunkID)->GetWorldPos(sf::Vector2f(0, 0)));
-	sprite.setOrigin(sf::Vector2f(
-		tileSize.x / 2.f * TILE_SIZE.x,
-		tileSize.y / 2.f * TILE_SIZE.y));
+	sprite.setOrigin((sf::Vector2f)text.getSize() / 2.f);
+	std::cout << "finished constructor" << std::endl;
 }
 
 void Structure::Update(float dt)

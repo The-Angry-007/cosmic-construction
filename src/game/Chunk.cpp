@@ -39,20 +39,14 @@ sf::Vector2f Chunk::GetWorldPos(sf::Vector2f position)
 }
 void Chunk::Render()
 {
-	sf::RectangleShape chunkRect((sf::Vector2f)CHUNK_SIZE_PIXELS);
-	chunkRect.setFillColor(sf::Color(abs(position.x) * 25, abs(position.y) * 25, 0));
-	chunkRect.setPosition(GetWorldPos(sf::Vector2f(0, 0)));
-	window->draw(chunkRect);
+	// sf::RectangleShape chunkRect((sf::Vector2f)CHUNK_SIZE_PIXELS);
+	// chunkRect.setFillColor(sf::Color(abs(position.x) * 25, abs(position.y) * 25, 0));
+	// chunkRect.setPosition(GetWorldPos(sf::Vector2f(0, 0)));
+	// window->draw(chunkRect);
 	Planet* planet = &game->planets[planetID];
 	for (int i = 0; i < items.size(); i++)
 	{
 		planet->items[items[i]].Render();
-		if (planet->items[items[i]].selectedSprite)
-		{
-			chunkRect.setFillColor(sf::Color(abs(position.x) * 25, abs(position.y) * 25, 0, 100));
-
-			window->draw(chunkRect);
-		}
 	}
 }
 
