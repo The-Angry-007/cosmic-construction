@@ -2,6 +2,7 @@
 #include "Camera.hpp"
 #include "Chunk.hpp"
 #include "Item.hpp"
+#include "Structure.hpp"
 #include "saving.hpp"
 class Planet
 {
@@ -17,6 +18,7 @@ public:
 	std::string savePath;
 	sf::Vector2f mouseStartDraggingPos;
 	sf::Vector2f itemStartDraggingPos;
+	Structure* structure;
 	void MoveItem(int index);
 	Planet(int id, bool load);
 	void GenerateChunk(sf::Vector2i position);
@@ -24,4 +26,5 @@ public:
 	void Update(float dt);
 	void Render();
 	void Save();
+	Chunk* GetChunk(int chunkID);
 };

@@ -69,7 +69,7 @@ void Item::Update(float dt)
 
 	if (selected && !selectedSprite)
 	{
-		sprite.setTexture(ResourceHandler::outlineTextures[typeId], true);
+		sprite.setTexture(ResourceHandler::itemOutlines[typeId], true);
 		sprite.setOrigin(ITEM_SIZE / 2 + 1, ITEM_SIZE / 2 + 1);
 		selectedSprite = true;
 	}

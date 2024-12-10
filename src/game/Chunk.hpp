@@ -3,9 +3,9 @@
 #include "Item.hpp"
 
 //chunks will be chunk_size * tile_size pixels wide
-#define CHUNK_SIZE 16
-#define TILE_SIZE 32
-#define CHUNK_SIZE_PIXELS (CHUNK_SIZE * TILE_SIZE)
+const int CHUNK_SIZE = 32;
+const sf::Vector2i TILE_SIZE(16, 12);
+const sf::Vector2i CHUNK_SIZE_PIXELS = CHUNK_SIZE * TILE_SIZE;
 class Chunk
 {
 public:

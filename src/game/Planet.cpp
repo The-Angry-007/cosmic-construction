@@ -76,6 +76,7 @@ Planet::Planet(int id, bool load)
 			MoveItem(items.size() - 1);
 		}
 	}
+	structure = new Structure(sf::Vector2i(0, 0), 0, -1, 0, 0);
 }
 
 void Planet::Update(float dt)
@@ -124,6 +125,7 @@ void Planet::Update(float dt)
 
 		chunks[i].Update(dt);
 	}
+	structure->Update(dt);
 }
 
 void Planet::Render()
@@ -138,6 +140,7 @@ void Planet::Render()
 		if (chunks[i].isVisible())
 			chunks[i].Render();
 	}
+	structure->Render();
 }
 
 void Planet::Save()
@@ -191,9 +194,9 @@ void Planet::GenerateChunksInView()
 {
 	HitboxShape* hitbox = camera.hitbox->shapes[0];
 	sf::Vector2f topleft = hitbox->currentPos - hitbox->currentSize;
-	sf::Vector2i minPos((int)floor(topleft.x / CHUNK_SIZE / TILE_SIZE), (int)floor(topleft.y / CHUNK_SIZE / TILE_SIZE));
+	sf::Vector2i minPos((int)floor(topleft.x / CHUNK_SIZE_PIXELS.x), (int)floor(topleft.y / CHUNK_SIZE_PIXELS.y));
 	sf::Vector2f bottomright = hitbox->currentPos + hitbox->currentSize;
-	sf::Vector2i maxPos((int)ceil(bottomright.x / CHUNK_SIZE / TILE_SIZE), (int)ceil(bottomright.y / CHUNK_SIZE / TILE_SIZE));
+	sf::Vector2i maxPos((int)ceil(bottomright.x / CHUNK_SIZE_PIXELS.x), (int)ceil(bottomright.y / CHUNK_SIZE_PIXELS.y));
 	for (int x = minPos.x; x <= maxPos.x; x++)
 	{
 		for (int y = minPos.y; y <= maxPos.y; y++)
@@ -228,7 +231,7 @@ void Planet::MoveItem(int index)
 			}
 		}
 	}
-	sf::Vector2f chunkPos = item->position / (float)CHUNK_SIZE_PIXELS;
+	sf::Vector2f chunkPos(item->position.x / CHUNK_SIZE_PIXELS.x, item->position.y / CHUNK_SIZE_PIXELS.y);
 	sf::Vector2i chunkCoords((int)floor(chunkPos.x), (int)floor(chunkPos.y));
 	bool sorted = false;
 	for (uint i = 0; i < chunks.size(); i++)
@@ -248,5 +251,15 @@ void Planet::MoveItem(int index)
 		uint i = chunks.size() - 1;
 		chunks[i].items.push_back(index);
 		item->chunkID = chunks[i].id;
+	}
+}
+Chunk* Planet::GetChunk(int chunkID)
+{
+	for (uint i = 0; i < chunks.size(); i++)
+	{
+		if (chunks[i].id == chunkID)
+		{
+			return &chunks[i];
+		}
 	}
 }

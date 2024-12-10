@@ -5,3 +5,4 @@
 #include "game/Item.hpp"
 #include "game/Planet.hpp"
 #include "game/ResourceHandler.hpp"
+#include "game/Structure.hpp"

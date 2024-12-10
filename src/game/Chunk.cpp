@@ -21,7 +21,7 @@ Chunk::Chunk(sf::Vector2i position, int id, int planetID)
 	this->planetID = planetID;
 	this->position = position;
 	hitbox = new Hitbox(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.f, 1.f));
-	sf::Vector2f halfSize = sf::Vector2f(CHUNK_SIZE_PIXELS / 2.f, CHUNK_SIZE_PIXELS / 2.f);
+	sf::Vector2f halfSize = (sf::Vector2f)CHUNK_SIZE_PIXELS / 2.f;
 	sf::Vector2f midpoint = GetWorldPos(halfSize);
 	hitbox->AddShape(new HitboxRect(midpoint, halfSize * 1.1f));
 }
@@ -35,11 +35,11 @@ void Chunk::Update(float dt)
 }
 sf::Vector2f Chunk::GetWorldPos(sf::Vector2f position)
 {
-	return ((sf::Vector2f)this->position) * (float)CHUNK_SIZE_PIXELS + position;
+	return sf::Vector2f((float)this->position.x * CHUNK_SIZE_PIXELS.x, (float)this->position.y * CHUNK_SIZE_PIXELS.y) + position;
 }
 void Chunk::Render()
 {
-	sf::RectangleShape chunkRect(sf::Vector2f(CHUNK_SIZE_PIXELS, CHUNK_SIZE_PIXELS));
+	sf::RectangleShape chunkRect((sf::Vector2f)CHUNK_SIZE_PIXELS);
 	chunkRect.setFillColor(sf::Color(abs(position.x) * 25, abs(position.y) * 25, 0));
 	chunkRect.setPosition(GetWorldPos(sf::Vector2f(0, 0)));
 	window->draw(chunkRect);
