@@ -8,7 +8,8 @@ std::vector<sf::Texture> structureTextures;
 std::vector<sf::Vector2f> structureOrigins;
 std::vector<sf::Texture> structureOutlines;
 std::vector<sf::Vector2i> structureSizes;
-
+sf::Texture itemAtlas;
+sf::Texture structureAtlas;
 Table* itemTable;
 Table* structureTable;
 int numItems = 0;
