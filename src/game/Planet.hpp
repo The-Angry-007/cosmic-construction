@@ -14,7 +14,7 @@ public:
 	Camera camera;
 	sf::Color backgroundColor;
 	int draggingItem;
-	int draggingChunk;
+	int hoveringItem;
 	std::string savePath;
 	sf::Vector2f mouseStartDraggingPos;
 	sf::Vector2f itemStartDraggingPos;
@@ -27,5 +27,6 @@ public:
 	void Update(float dt);
 	void Render();
 	void Save();
+
 	Chunk* GetChunk(int chunkID);
 };

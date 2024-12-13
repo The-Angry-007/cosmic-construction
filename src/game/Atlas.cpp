@@ -37,4 +37,13 @@ Atlas::Atlas(std::vector<sf::Texture>& textures)
 		im.copy(i2, positions[i].x, positions[i].y);
 	}
 	im.saveToFile(SaveHandler::workingDir + "\\atlas.png");
+	texture.loadFromImage(im);
+	this->textures = textures;
+}
+
+void Atlas::SetSprite(sf::Sprite& sprite, int id)
+{
+	sprite.setTexture(texture);
+	sprite.setTextureRect(sf::IntRect(positions[id], (sf::Vector2i)textures[id].getSize()));
+	sprite.setOrigin((sf::Vector2f)(textures[id].getSize()) / 2.f);
 }

@@ -1,5 +1,4 @@
 #include "ResourceHandler.hpp"
-#include "Atlas.hpp"
 #define inBounds(x, y) (x >= 0 && x < ITEM_SIZE && y >= 0 && y < ITEM_SIZE)
 namespace ResourceHandler
 {
@@ -9,8 +8,8 @@ std::vector<sf::Texture> structureTextures;
 std::vector<sf::Vector2f> structureOrigins;
 std::vector<sf::Texture> structureOutlines;
 std::vector<sf::Vector2i> structureSizes;
-sf::Texture itemAtlas;
-sf::Texture structureAtlas;
+Atlas* itemAtlas;
+Atlas* structureAtlas;
 Table* itemTable;
 Table* structureTable;
 int numItems = 0;
@@ -24,6 +23,7 @@ void ResourceHandler::Init()
 	std::string data = SaveHandler::ReadData("resources\\items\\itemTable.txt");
 	itemTable->FromString(data);
 	numItems = itemTable->records.size();
+	std::vector<sf::Texture> allItems = {};
 	for (uint i = 0; i < numItems; i++)
 	{
 		sf::Texture t;
@@ -34,8 +34,14 @@ void ResourceHandler::Init()
 		itemTextures.push_back(t);
 		sf::Texture outlineTexture = GenerateOutline(t);
 		itemOutlines.push_back(outlineTexture);
+		allItems.push_back(itemTextures[i]);
 	}
-	Atlas a = Atlas(itemTextures);
+	for (uint i = 0; i < numItems; i++)
+	{
+		allItems.push_back(itemOutlines[i]);
+	}
+
+	itemAtlas = new Atlas(allItems);
 	//structures
 	structureTable = new Table();
 	data = SaveHandler::ReadData("resources\\structures\\structureTable.txt");
@@ -56,6 +62,7 @@ void ResourceHandler::Init()
 		size.y = std::stoi(structureTable->GetValue("SizeY", i));
 		structureSizes.push_back(size);
 	}
+	structureAtlas = new Atlas(structureTextures);
 }
 
 sf::Texture ResourceHandler::GenerateOutline(sf::Texture& texture)

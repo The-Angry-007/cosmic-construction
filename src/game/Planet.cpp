@@ -12,6 +12,7 @@ Planet::Planet(int id)
 		backgroundColor = sf::Color(90, 128, 62);
 	}
 	draggingItem = -1;
+	hoveringItem = -1;
 	mouseStartDraggingPos = sf::Vector2f(0.f, 0.f);
 	itemStartDraggingPos = sf::Vector2f(0.f, 0.f);
 	chunks = {};
@@ -85,6 +86,10 @@ void Planet::Update(float dt)
 {
 	camera.Update(dt);
 	GenerateChunksInView();
+	if (hoveringItem != -1)
+	{
+		ResourceHandler::itemAtlas->SetSprite(items[hoveringItem].sprite, items[hoveringItem].typeId);
+	}
 	if (draggingItem == -1)
 	{
 		bool end = false;
@@ -102,7 +107,8 @@ void Planet::Update(float dt)
 				}
 				else if (!InputHandler::down(binds::DragItem))
 				{
-					items[i].selected = true;
+					hoveringItem = i;
+					ResourceHandler::itemAtlas->SetSprite(items[hoveringItem].sprite, items[hoveringItem].typeId + ResourceHandler::numItems);
 				}
 				end = true;
 				break;

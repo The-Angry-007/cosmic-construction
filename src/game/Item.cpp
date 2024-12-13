@@ -18,14 +18,12 @@ Item::Item(sf::Vector2f position, int id, int typeID)
 	}
 	this->position = position;
 	this->typeId = typeID;
-	sf::Texture& t = ResourceHandler::itemTextures[typeId];
-	sprite.setTexture(t);
-	sprite.setOrigin((sf::Vector2f)t.getSize() / 2.f);
+
+	ResourceHandler::itemAtlas->SetSprite(sprite, typeID);
 	hitbox = new Hitbox(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.f, 1.f));
 	hitbox->AddShape(new HitboxRect(sf::Vector2f(0.f, 0.f), sf::Vector2f(ITEM_SIZE / 2.f, ITEM_SIZE / 2.f)));
 	accurateHitbox = new Hitbox(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.f, 1.f));
-	selected = false;
-	auto image = t.copyToImage();
+	auto image = ResourceHandler::itemTextures[typeID].copyToImage();
 	for (uint i = 0; i < 16; i++)
 	{
 		int startPos = -1;
@@ -57,28 +55,12 @@ Item::Item(sf::Vector2f position, int id, int typeID)
 			accurateHitbox->AddShape(rect);
 		}
 	}
-	selectedSprite = false;
 }
 
 void Item::Update(float dt)
 {
 	hitbox->shapes[0]->currentPos = position;
 	accurateHitbox->SetTransform(position, sf::Vector2f(1.f, 1.f));
-
-	if (selected && !selectedSprite)
-	{
-		sprite.setTexture(ResourceHandler::itemOutlines[typeId], true);
-		sprite.setOrigin(ITEM_SIZE / 2 + 1, ITEM_SIZE / 2 + 1);
-		selectedSprite = true;
-	}
-	else if (!selected && selectedSprite)
-	{
-		selectedSprite = false;
-		sprite.setTexture(ResourceHandler::itemTextures[typeId], true);
-		sprite.setOrigin(ITEM_SIZE / 2, ITEM_SIZE / 2);
-	}
-
-	selected = false;
 }
 
 void Item::Render()
