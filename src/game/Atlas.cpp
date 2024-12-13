@@ -20,16 +20,21 @@ Atlas::Atlas(std::vector<sf::Texture>& textures)
 		{
 			totalWidth = newWidth;
 		}
+		if (textures[i].getSize().y > rowHeight)
+		{
+			rowHeight = textures[i].getSize().y;
+		}
 		positions.push_back(sf::Vector2i(rowWidth, totalHeight));
+		rowWidth += textures[i].getSize().x;
 	}
+	totalHeight += rowHeight;
 	sf::Image im;
+	std::cout << totalWidth << " " << totalHeight << std::endl;
 	im.create(totalWidth, totalHeight);
 	for (uint i = 0; i < textures.size(); i++)
 	{
 		auto i2 = textures[i].copyToImage();
 		im.copy(i2, positions[i].x, positions[i].y);
 	}
-	im.create(100, 100);
-	im.setPixel(50, 50, sf::Color::Blue);
 	im.saveToFile(SaveHandler::workingDir + "\\atlas.png");
 }
