@@ -1,4 +1,5 @@
 #include "ResourceHandler.hpp"
+#include "Atlas.hpp"
 #define inBounds(x, y) (x >= 0 && x < ITEM_SIZE && y >= 0 && y < ITEM_SIZE)
 namespace ResourceHandler
 {
@@ -34,6 +35,7 @@ void ResourceHandler::Init()
 		sf::Texture outlineTexture = GenerateOutline(t);
 		itemOutlines.push_back(outlineTexture);
 	}
+	Atlas a = Atlas(itemTextures);
 	//structures
 	structureTable = new Table();
 	data = SaveHandler::ReadData("resources\\structures\\structureTable.txt");
@@ -54,7 +56,6 @@ void ResourceHandler::Init()
 		size.y = std::stoi(structureTable->GetValue("SizeY", i));
 		structureSizes.push_back(size);
 	}
-	std::cout << structureTextures.size() << std::endl;
 }
 
 sf::Texture ResourceHandler::GenerateOutline(sf::Texture& texture)
