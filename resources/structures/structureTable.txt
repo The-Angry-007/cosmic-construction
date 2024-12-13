@@ -1,2 +1,2 @@
-StructureID/Name/Description/ImagePath/SizeX/SizeY
-1/Test Structure/this is a test/testStructure.png/3/4
+StructureID/Name/Description/SizeX/SizeY
+1/Conveyor Belt/basic conveyor/1/1

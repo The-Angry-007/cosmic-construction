@@ -15,6 +15,7 @@ extern Table* itemTable;
 extern Table* structureTable;
 extern int numItems;
 extern int numStructures;
+extern int numStructureTextures;
 void Init();
 sf::Texture GenerateOutline(sf::Texture& texture);
 };

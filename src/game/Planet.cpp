@@ -68,19 +68,18 @@ void Planet::Init(bool load)
 	}
 	else
 	{
-		int numItems = 10000;
+		int numItems = 100;
 		// chunks.push_back(Chunk(sf::Vector2i(0, 0), -1, this->id));
 		GenerateChunksInView();
 		for (uint i = 0; i < numItems; i++)
 		{
-			int size = 1000;
+			int size = 100;
 			items.push_back(Item(sf::Vector2f(rand() % (size * 2) - size, rand() % (size * 2) - size),
 				-1,
 				rand() % ResourceHandler::numItems));
 			MoveItem(items.size() - 1);
 		}
 	}
-	structure = new Structure(sf::Vector2i(0, 0), 0, -1, 0, 0);
 }
 void Planet::Update(float dt)
 {
@@ -133,7 +132,6 @@ void Planet::Update(float dt)
 
 		chunks[i].Update(dt);
 	}
-	structure->Update(dt);
 }
 
 void Planet::Render()
@@ -148,7 +146,6 @@ void Planet::Render()
 		if (chunks[i].isVisible())
 			chunks[i].Render();
 	}
-	structure->Render();
 }
 
 void Planet::Save()

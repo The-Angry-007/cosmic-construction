@@ -14,6 +14,7 @@ Table* itemTable;
 Table* structureTable;
 int numItems = 0;
 int numStructures = 0;
+int numStructureTextures = 0;
 }
 
 void ResourceHandler::Init()
@@ -49,20 +50,38 @@ void ResourceHandler::Init()
 	numStructures = structureTable->records.size();
 	for (uint i = 0; i < numStructures; i++)
 	{
-		sf::Texture t;
-		if (!t.loadFromFile("resources\\structures\\" + structureTable->GetValue("ImagePath", i)))
-		{
-			std::cout << "failed to load structure texture: row" << i << std::endl;
-		}
-		structureTextures.push_back(t);
-		sf::Texture outlineTexture = GenerateOutline(t);
-		structureOutlines.push_back(outlineTexture);
 		sf::Vector2i size(0, 0);
 		size.x = std::stoi(structureTable->GetValue("SizeX", i));
 		size.y = std::stoi(structureTable->GetValue("SizeY", i));
 		structureSizes.push_back(size);
 	}
-	structureAtlas = new Atlas(structureTextures);
+	Table pathTable = Table();
+	data = SaveHandler::ReadData("resources\\structures\\pathTable.txt");
+	pathTable.FromString(data);
+	std::vector<int> ids;
+	std::vector<sf::Texture> allStructureTextures = {};
+	for (uint i = 0; i < pathTable.records.size(); i++)
+	{
+		std::string path = pathTable.GetValue("Path", i);
+		int id = std::stoi(pathTable.GetValue("StructureID", i));
+		ids.push_back(id);
+		sf::Texture t;
+		if (!t.loadFromFile("resources\\structures\\" + path))
+		{
+			std::cout << "failed to load structure texture" << std::endl;
+		}
+
+		structureTextures.push_back(t);
+		sf::Texture outline = GenerateOutline(t);
+		structureOutlines.push_back(outline);
+		allStructureTextures.push_back(t);
+	}
+	numStructureTextures = structureTextures.size();
+	for (uint i = 0; i < structureOutlines.size(); i++)
+	{
+		allStructureTextures.push_back(structureOutlines[i]);
+	}
+	structureAtlas = new Atlas(allStructureTextures, ids);
 }
 
 sf::Texture ResourceHandler::GenerateOutline(sf::Texture& texture)

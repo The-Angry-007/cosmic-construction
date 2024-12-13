@@ -18,7 +18,6 @@ public:
 	std::string savePath;
 	sf::Vector2f mouseStartDraggingPos;
 	sf::Vector2f itemStartDraggingPos;
-	Structure* structure;
 	void MoveItem(int index);
 	Planet(int id);
 	void Init(bool load);

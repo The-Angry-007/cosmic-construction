@@ -21,8 +21,8 @@ x create resourceHandler that loads in this info
 x draw outline around items when being hovered
 x add planet class to store items
 x add saving and loading of items (default directory is just items)
-- add chunk class and get saving and loading of chunks working
-- add structure base class
+x add chunk class and get saving and loading of chunks working
+x add structure base class
 - create sprites for conveyor belt and add it
 - get saving and loading of structures working
 - add few more structure types
@@ -38,3 +38,8 @@ x add saving and loading of items (default directory is just items)
 possible optimisations:
 calculate accurate hitboxes for items in resource handler
 draw items using vertex array instead of sprites
+
+
+CURRENT SPOT
+- need to adjust for structures having multiple frames
+added a new table for the paths to different frames
