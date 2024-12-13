@@ -67,12 +67,12 @@ void Planet::Init(bool load)
 	}
 	else
 	{
-		int numItems = 10;
+		int numItems = 10000;
 		// chunks.push_back(Chunk(sf::Vector2i(0, 0), -1, this->id));
 		GenerateChunksInView();
 		for (uint i = 0; i < numItems; i++)
 		{
-			int size = 100;
+			int size = 1000;
 			items.push_back(Item(sf::Vector2f(rand() % (size * 2) - size, rand() % (size * 2) - size),
 				-1,
 				rand() % ResourceHandler::numItems));
