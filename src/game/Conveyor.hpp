@@ -16,5 +16,4 @@ public:
 	void Render();
 	void CollectItems();
 	void SetDirection(int direction);
-	float progress(sf::Vector2f position);
 };

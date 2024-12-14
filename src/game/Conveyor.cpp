@@ -10,15 +10,15 @@ Conveyor::Conveyor(int id, int planetID, int direction)
 	SetDirection(direction);
 	tileSize = ResourceHandler::structureSizes[typeID];
 	ResourceHandler::structureAtlas->SetSprite(sprite, direction);
-	gap = 0.1f;
+	gap = 0.4f;
 	positions = {};
-	speed = 0.2f;
+	speed = 0.4f;
 }
 void Conveyor::Update(float dt)
 {
 	for (uint i = 0; i < positions.size(); i++)
 	{
-		if (i == positions.size() - 1)
+		if (i == 0)
 		{
 			positions[i] += dt * speed;
 			if (positions[i] > 1.f)
@@ -30,9 +30,9 @@ void Conveyor::Update(float dt)
 		{
 			positions[i] += dt * speed;
 
-			if (positions[i + 1] - positions[i] < gap)
+			if (positions[i - 1] - positions[i] < gap)
 			{
-				positions[i] = positions[i + 1] - gap;
+				positions[i] = positions[i - 1] - gap;
 			}
 		}
 	}
@@ -43,9 +43,9 @@ void Conveyor::Render()
 	window->draw(sprite);
 	Planet& p = game->planets[planetID];
 	sf::Vector2f startPos = this->startPos + (sf::Vector2f)position;
-	sf::Vector2f endPos = this->startPos + (sf::Vector2f)position;
+	sf::Vector2f endPos = this->endPos + (sf::Vector2f)position;
 	startPos = p.worldPos(startPos, chunkID);
-	endPos = p.worldPos(startPos, chunkID);
+	endPos = p.worldPos(endPos, chunkID);
 	for (uint i = 0; i < items.size(); i++)
 	{
 		p.items[items[i]].position = Lerp(startPos, endPos, positions[i]);
