@@ -45,3 +45,20 @@ void Structure::Render()
 {
 	window->draw(sprite);
 }
+
+void Structure::SetPosition(sf::Vector2i position, int index)
+{
+	sf::Vector2i chunkPos = position / CHUNK_SIZE;
+	auto& chunks = game->planets[planetID].chunks;
+	for (uint i = 0; i < chunks.size(); i++)
+	{
+		if (chunks[i].position.x == chunkPos.x && chunks[i].position.y == chunkPos.y)
+		{
+			chunkID = chunks[i].id;
+			chunks[i].structures.push_back(index);
+		}
+	}
+	this->position = sf::Vector2i(position.x % CHUNK_SIZE, position.y % CHUNK_SIZE);
+	bottomRightPos = this->position + tileSize;
+	sprite.setPosition(sf::Vector2f((position.x + tileSize.x / 2.f) * TILE_SIZE.x, (position.y + tileSize.y / 2.f) * TILE_SIZE.y));
+}

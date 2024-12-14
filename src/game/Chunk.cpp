@@ -28,10 +28,10 @@ Chunk::Chunk(sf::Vector2i position, int id, int planetID)
 
 void Chunk::Update(float dt)
 {
-	for (int i = 0; i < items.size(); i++)
-	{
-		game->planets[planetID].items[items[i]].Update(dt);
-	}
+	// for (int i = 0; i < items.size(); i++)
+	// {
+	// 	game->planets[planetID].items[items[i]].Update(dt);
+	// }
 }
 sf::Vector2f Chunk::GetWorldPos(sf::Vector2f position)
 {
@@ -44,6 +44,10 @@ void Chunk::Render()
 	// chunkRect.setPosition(GetWorldPos(sf::Vector2f(0, 0)));
 	// window->draw(chunkRect);
 	Planet* planet = &game->planets[planetID];
+	for (int i = 0; i < structures.size(); i++)
+	{
+		planet->structures[structures[i]]->Render();
+	}
 	for (int i = 0; i < items.size(); i++)
 	{
 		planet->items[items[i]].Render();

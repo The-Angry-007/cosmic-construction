@@ -7,6 +7,7 @@ public:
 	int id;
 	int chunkID;
 	int planetID;
+	sf::Vector2i bottomRightPos;
 	sf::Vector2i position;
 	sf::Vector2i tileSize;
 	sf::Sprite sprite;
@@ -14,6 +15,7 @@ public:
 	Structure();
 	virtual void Update(float dt);
 	virtual void Render();
+	void SetPosition(sf::Vector2i position, int index);
 	void SetID(int id);
 };
 

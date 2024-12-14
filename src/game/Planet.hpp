@@ -2,8 +2,8 @@
 #include "Camera.hpp"
 #include "Chunk.hpp"
 #include "Item.hpp"
-#include "Structure.hpp"
 #include "saving.hpp"
+#include "structures.hpp"
 class Planet
 {
 public:
@@ -11,6 +11,7 @@ public:
 	int id;
 	std::vector<Item> items;
 	std::vector<Chunk> chunks;
+	std::vector<Structure*> structures;
 	Camera camera;
 	sf::Color backgroundColor;
 	int draggingItem;
@@ -26,6 +27,6 @@ public:
 	void Update(float dt);
 	void Render();
 	void Save();
-
+	int StructureInPos(sf::Vector2i position);
 	Chunk* GetChunk(int chunkID);
 };

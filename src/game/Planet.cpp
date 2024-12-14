@@ -50,6 +50,7 @@ void Planet::Init(bool load)
 			int id = std::stoi(itemTable.GetValue("ItemID", i));
 			int typeId = std::stoi(itemTable.GetValue("TypeID", i));
 			Item item = Item(pos, id, typeId);
+			item.SetParent(std::stoi(itemTable.GetValue("Parent", i)));
 			items.push_back(item);
 			//TODO: DEAL WITH PARENT ATTRIBUTE
 			MoveItem(items.size() - 1);
@@ -77,6 +78,7 @@ void Planet::Init(bool load)
 			items.push_back(Item(sf::Vector2f(rand() % (size * 2) - size, rand() % (size * 2) - size),
 				-1,
 				rand() % ResourceHandler::numItems));
+			items[items.size() - 1].SetParent(-1);
 			MoveItem(items.size() - 1);
 		}
 	}
@@ -132,6 +134,26 @@ void Planet::Update(float dt)
 
 		chunks[i].Update(dt);
 	}
+	for (uint i = 0; i < items.size(); i++)
+	{
+		items[i].Update(dt);
+	}
+	for (uint i = 0; i < structures.size(); i++)
+	{
+		structures[i]->Update(dt);
+	}
+	if (InputHandler::keyPressed(sf::Keyboard::Key::Space))
+	{
+		sf::Vector2f mousePos = camera.WorldMousePos();
+		sf::Vector2i tilePos(floor(mousePos.x / TILE_SIZE.x), floor(mousePos.y / TILE_SIZE.y));
+		if (StructureInPos(tilePos) == -1)
+		{
+			Structure* s = new Conveyor(-1, id, 0);
+			structures.push_back(s);
+
+			s->SetPosition(tilePos, structures.size() - 1);
+		}
+	}
 }
 
 void Planet::Render()
@@ -169,7 +191,7 @@ void Planet::Save()
 			std::to_string(items[i].typeId),
 			std::to_string(items[i].position.x),
 			std::to_string(items[i].position.y),
-			"-1" });
+			std::to_string(items[i].parent) });
 	}
 	sh::WriteData(path + "\\items.txt", itemTable.ToString());
 	//camera
@@ -268,4 +290,38 @@ Chunk* Planet::GetChunk(int chunkID)
 		}
 	}
 	return nullptr;
+}
+
+int Planet::StructureInPos(sf::Vector2i position)
+{
+	sf::Vector2i chunkPos = position / CHUNK_SIZE;
+	//need to also check the chunks left and up
+	for (int x = chunkPos.x - 1; x <= chunkPos.x; x++)
+	{
+		for (int y = chunkPos.y - 1; y <= chunkPos.y; y++)
+		{
+			int chunk = -1;
+			for (uint i = 0; i < chunks.size(); i++)
+			{
+				if (chunks[i].position.x == x && chunks[i].position.y == y)
+				{
+					chunk = i;
+				}
+			}
+			if (chunk == -1)
+				continue;
+			for (uint i = 0; i < chunks[chunk].structures.size(); i++)
+			{
+				Structure* s = structures[chunks[chunk].structures[i]];
+				if (s->position.x <= x && s->position.y <= y)
+				{
+					if (s->bottomRightPos.x >= x && s->bottomRightPos.y >= y)
+					{
+						return chunks[chunk].structures[i];
+					}
+				}
+			}
+		}
+	}
+	return -1;
 }
