@@ -12,8 +12,29 @@ Conveyor::Conveyor(int id, int planetID, int direction)
 }
 void Conveyor::Update(float dt)
 {
+	CollectItems();
 }
 void Conveyor::Render()
 {
 	window->draw(sprite);
+}
+
+void Conveyor::CollectItems()
+{
+	auto& allItems = game->planets[planetID].items;
+	auto& items = game->planets[planetID].GetChunk(chunkID)->items;
+	for (uint i = 0; i < items.size(); i++)
+	{
+		if (items[i] == game->planets[planetID].draggingItem)
+		{
+			continue;
+		}
+		if (allItems[items[i]].GetTilePos() == position)
+		{
+			this->items.push_back(items[i]);
+			allItems[items[i]].parent = id;
+			items.erase(items.begin() + i);
+			i--;
+		}
+	}
 }

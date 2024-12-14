@@ -9,4 +9,5 @@ public:
 	Conveyor(int id, int planetID, int direction);
 	void Update(float dt);
 	void Render();
+	void CollectItems();
 };

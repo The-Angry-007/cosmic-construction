@@ -19,5 +19,6 @@ public:
 	void SetParent(int index);
 	void Update(float dt);
 	void Render();
+	sf::Vector2i GetTilePos();
 };
 extern int CurrentItemID;

@@ -23,16 +23,19 @@ x add planet class to store items
 x add saving and loading of items (default directory is just items)
 x add chunk class and get saving and loading of chunks working
 x add structure base class
-- create sprites for conveyor belt and add it
+x create sprites for conveyor belt and add it
+- make conveyors actually functional
 - get saving and loading of structures working
 - add few more structure types
+- add actual build menu
 - add terrain class with saving and loading
 - create some terrain types
-- add procedural generation to planet
+- add procedural generation to planet (xor shift random)
 - make GUI fully functional
 - flesh out all the items, structures, terrain
 - finish tech tree and help menu
 - add sound effects and audio (maybe)
+
 
 
 possible optimisations:
@@ -40,6 +43,10 @@ calculate accurate hitboxes for items in resource handler
 draw items using vertex array instead of sprites
 
 
-CURRENT SPOT
-- need to adjust for structures having multiple frames
-added a new table for the paths to different frames
+CURRENT TODO
+- make functions for getting the chunk of a specific position (both absolute and tile)
+- make function for converting absolute position to a tile position
+- make function for converting tile position to tile position within chunk
+- conveyors should collect items every frame (maybe?)
+- conveyors need to have a list of the positions of all the items along the path
+- move the items a little every frame

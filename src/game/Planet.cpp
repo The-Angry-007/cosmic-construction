@@ -69,7 +69,7 @@ void Planet::Init(bool load)
 	}
 	else
 	{
-		int numItems = 100;
+		int numItems = 1000;
 		// chunks.push_back(Chunk(sf::Vector2i(0, 0), -1, this->id));
 		GenerateChunksInView();
 		for (uint i = 0; i < numItems; i++)
@@ -96,7 +96,10 @@ void Planet::Update(float dt)
 		bool end = false;
 		for (int i = items.size() - 1; i > -1; i--)
 		{
-
+			if (items[i].parent != -1)
+			{
+				continue;
+			}
 			if (items[i].accurateHitbox->intersectsPoint(camera.WorldMousePos()))
 			{
 
@@ -148,7 +151,7 @@ void Planet::Update(float dt)
 		sf::Vector2i tilePos(floor(mousePos.x / TILE_SIZE.x), floor(mousePos.y / TILE_SIZE.y));
 		if (StructureInPos(tilePos) == -1)
 		{
-			Structure* s = new Conveyor(-1, id, 0);
+			Conveyor* s = new Conveyor(-1, id, 0);
 			structures.push_back(s);
 
 			s->SetPosition(tilePos, structures.size() - 1);
@@ -313,10 +316,15 @@ int Planet::StructureInPos(sf::Vector2i position)
 			for (uint i = 0; i < chunks[chunk].structures.size(); i++)
 			{
 				Structure* s = structures[chunks[chunk].structures[i]];
-				if (s->position.x <= x && s->position.y <= y)
+				sf::Vector2i pos = s->position + sf::Vector2i((x - chunkPos.x) * CHUNK_SIZE, (y - chunkPos.y) * CHUNK_SIZE);
+				sf::Vector2i pos2 = s->bottomRightPos + sf::Vector2i((x - chunkPos.x) * CHUNK_SIZE, (y - chunkPos.y) * CHUNK_SIZE);
+				if (pos.x <= position.x && pos.y <= position.y)
 				{
-					if (s->bottomRightPos.x >= x && s->bottomRightPos.y >= y)
+					if (pos2.x >= position.x && pos2.y >= position.y)
 					{
+						std::cout << pos.x << " " << pos.y << std::endl;
+						std::cout << pos2.x << " " << pos2.y << std::endl;
+						std::cout << x << " " << y << std::endl;
 						return chunks[chunk].structures[i];
 					}
 				}
