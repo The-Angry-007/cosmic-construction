@@ -44,9 +44,25 @@ draw items using vertex array instead of sprites
 
 
 CURRENT TODO
-- make functions for getting the chunk of a specific position (both absolute and tile)
-- make function for converting absolute position to a tile position
-- make function for converting tile position to tile position within chunk
-- conveyors should collect items every frame (maybe?)
+DRAWING OBJECTS FROM BOTTOM TO TOP
+
+need to figure out how to add z indexes into this
+maybe z index outweighs y position?
+(less than operator checks z index first, if same then uses y position)
+
+
+add a less than operator for chunks that sorts based on y position
+render chunks with smaller y position first
+within chunks:
+create a struct local to the render function that simply has a sprite
+define its less than operator like with chunks
+sort all sprites from top to bottom
+draw in that order
+
+
+x make functions for getting the chunk of a specific position (both absolute and tile)
+x make function for converting absolute position to a tile position
+x make function for converting tile position to tile position within chunk
+x conveyors should collect items every frame (maybe?)
 - conveyors need to have a list of the positions of all the items along the path
 - move the items a little every frame

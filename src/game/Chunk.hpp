@@ -4,7 +4,7 @@
 
 //chunks will be chunk_size * tile_size pixels wide
 const int CHUNK_SIZE = 32;
-const sf::Vector2i TILE_SIZE(16, 16);
+const sf::Vector2i TILE_SIZE(32, 32);
 const sf::Vector2i CHUNK_SIZE_PIXELS = CHUNK_SIZE * TILE_SIZE;
 class Chunk
 {

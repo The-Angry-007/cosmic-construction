@@ -261,27 +261,9 @@ void Planet::MoveItem(int index)
 			}
 		}
 	}
-	sf::Vector2f chunkPos(item->position.x / CHUNK_SIZE_PIXELS.x, item->position.y / CHUNK_SIZE_PIXELS.y);
-	sf::Vector2i chunkCoords((int)floor(chunkPos.x), (int)floor(chunkPos.y));
-	bool sorted = false;
-	for (uint i = 0; i < chunks.size(); i++)
-	{
-		if (chunks[i].position.x == chunkCoords.x && chunks[i].position.y == chunkCoords.y)
-		{
-			chunks[i].items.push_back(index);
-			item->chunkID = chunks[i].id;
-			sorted = true;
-
-			break;
-		}
-	}
-	if (!sorted)
-	{
-		GenerateChunk(chunkCoords);
-		uint i = chunks.size() - 1;
-		chunks[i].items.push_back(index);
-		item->chunkID = chunks[i].id;
-	}
+	int chunk = ChunkAtPos(item->position);
+	chunks[chunk].items.push_back(index);
+	item->chunkID = chunks[chunk].id;
 }
 Chunk* Planet::GetChunk(int chunkID)
 {
@@ -332,4 +314,60 @@ int Planet::StructureInPos(sf::Vector2i position)
 		}
 	}
 	return -1;
+}
+
+int Planet::ChunkAtPos(sf::Vector2f position)
+{
+	sf::Vector2f chunkPosf(
+		position.x / CHUNK_SIZE_PIXELS.x,
+		position.y / CHUNK_SIZE_PIXELS.y);
+	sf::Vector2i chunkPos(floor(chunkPosf.x), floor(chunkPosf.y));
+	for (uint i = 0; i < chunks.size(); i++)
+	{
+		if (chunks[i].position == chunkPos)
+		{
+			return i;
+		}
+	}
+	GenerateChunk(chunkPos);
+	return chunks.size() - 1;
+}
+int Planet::ChunkAtPos(sf::Vector2i position)
+{
+	sf::Vector2f chunkPosf = (sf::Vector2f)position / (float)CHUNK_SIZE;
+	sf::Vector2i chunkPos(floor(chunkPosf.x), floor(chunkPosf.y));
+	for (uint i = 0; i < chunks.size(); i++)
+	{
+		if (chunks[i].position == chunkPos)
+		{
+			return i;
+		}
+	}
+	GenerateChunk(chunkPos);
+	return chunks.size() - 1;
+}
+
+sf::Vector2i Planet::tilePos(sf::Vector2f position)
+{
+	return sf::Vector2i(floor(position.x / TILE_SIZE.x), floor(position.y / TILE_SIZE.y));
+}
+
+sf::Vector2i Planet::chunkTilePos(sf::Vector2i position)
+{
+	return sf::Vector2i(position.x % CHUNK_SIZE, position.y % CHUNK_SIZE);
+}
+sf::Vector2i Planet::chunkTilePos(sf::Vector2f position)
+{
+	sf::Vector2i tp = tilePos(position);
+	return sf::Vector2i(tp.x % CHUNK_SIZE, tp.y % CHUNK_SIZE);
+}
+
+sf::Vector2f Planet::worldPos(sf::Vector2f tilePos, int chunkID)
+{
+	auto chunk = GetChunk(chunkID);
+	sf::Vector2f pos = (sf::Vector2f)chunk->position;
+	pos.x *= CHUNK_SIZE_PIXELS.x;
+	pos.y *= CHUNK_SIZE_PIXELS.y;
+	pos += sf::Vector2f(tilePos.x * TILE_SIZE.x, tilePos.y * TILE_SIZE.y);
+	return pos;
 }
