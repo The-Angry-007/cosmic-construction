@@ -21,6 +21,7 @@ Conveyor::Conveyor(int id, int planetID, int direction)
 	positions = {};
 	speed = 0.4f;
 	currentNeighbourIndex = 0;
+	zindex = 0;
 }
 void Conveyor::UpdateNeighbours()
 {
@@ -86,8 +87,8 @@ void Conveyor::Update(float dt)
 					}
 					else
 					{
-						positions[i].x -= dt * speed;
-						if (positions[i].x < 0.5f)
+						positions[i].x += dt * speed;
+						if (positions[i].x > 0.5f)
 						{
 							positions[i].x = 0.5f;
 						}
@@ -126,18 +127,50 @@ void Conveyor::Update(float dt)
 				offCentre = true;
 				if (positions[i].y < 0.5f)
 				{
-					positions[i].y += dt * speed;
-					if (positions[i].y > 0.5f)
+					if (i > 0)
 					{
-						positions[i].y = 0.5f;
+						float dx = positions[i].x - positions[i - 1].x;
+						float dy = positions[i].y - positions[i - 1].y;
+						if (dx * dx + dy * dy > gap * gap)
+						{
+							positions[i].y += dt * speed;
+							if (positions[i].y > 0.5f)
+							{
+								positions[i].y = 0.5f;
+							}
+						}
+					}
+					else
+					{
+						positions[i].y += dt * speed;
+						if (positions[i].y > 0.5f)
+						{
+							positions[i].y = 0.5f;
+						}
 					}
 				}
 				else
 				{
-					positions[i].y -= dt * speed;
-					if (positions[i].y < 0.5f)
+					if (i > 0)
 					{
-						positions[i].y = 0.5f;
+						float dx = positions[i].x - positions[i - 1].x;
+						float dy = positions[i].y - positions[i - 1].y;
+						if (dx * dx + dy * dy > gap * gap)
+						{
+							positions[i].y -= dt * speed;
+							if (positions[i].y < 0.5f)
+							{
+								positions[i].y = 0.5f;
+							}
+						}
+					}
+					else
+					{
+						positions[i].y -= dt * speed;
+						if (positions[i].y < 0.5f)
+						{
+							positions[i].y = 0.5f;
+						}
 					}
 				}
 			}
@@ -157,10 +190,13 @@ void Conveyor::Update(float dt)
 		}
 		else
 		{
-			positions[i] += (sf::Vector2f)CONVEYOR_OFFSETS[direction] * dt * speed;
+			if (positions[i].x < 1 || positions[i].x > 0 && positions[i].y < 1 && positions[i].y > 0)
+			{
+				positions[i] += (sf::Vector2f)CONVEYOR_OFFSETS[direction] * dt * speed;
+			}
 
-			positions[i].x = clamp(positions[i].x, 0.f, 1.f);
-			positions[i].y = clamp(positions[i].y, 0.f, 1.f);
+			// positions[i].x = clamp(positions[i].x, 0.f, 1.f);
+			// positions[i].y = clamp(positions[i].y, 0.f, 1.f);
 		}
 	}
 	//get items from neighbours and attempt to add to this one
@@ -173,26 +209,32 @@ void Conveyor::Update(float dt)
 		if (neighbour->positions.size() > 0)
 		{
 			bool ready = false;
-			if (neighbour->direction == 0 && neighbour->positions[0].y == 0.f)
+			float extra;
+			if (neighbour->direction == 0 && neighbour->positions[0].y < 0.f)
 			{
+				extra = -neighbour->positions[0].y;
 				ready = true;
 			}
-			else if (neighbour->direction == 1 && neighbour->positions[0].x == 1.f)
+			else if (neighbour->direction == 1 && neighbour->positions[0].x > 1.f)
 			{
+				extra = neighbour->positions[0].x - 1;
 				ready = true;
 			}
-			else if (neighbour->direction == 2 && neighbour->positions[0].y == 1.f)
+			else if (neighbour->direction == 2 && neighbour->positions[0].y > 1.f)
 			{
+				extra = neighbour->positions[0].y - 1;
 				ready = true;
 			}
-			else if (neighbour->direction == 3 && neighbour->positions[0].x == 0.f)
+			else if (neighbour->direction == 3 && neighbour->positions[0].x < 0.f)
 			{
+				extra = -neighbour->positions[0].x;
 				ready = true;
 			}
 			if (ready)
 			{
 				sf::Vector2f pos(0.5f, 0.5f);
 				pos -= (sf::Vector2f)CONVEYOR_OFFSETS[neighbour->direction] / 2.f;
+				pos += (sf::Vector2f)CONVEYOR_OFFSETS[neighbour->direction] * extra;
 				int closestPos = -1;
 				float dist = 1000000.f;
 				for (int i = 0; i < positions.size(); i++)

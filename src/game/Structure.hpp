@@ -7,6 +7,7 @@ public:
 	int id;
 	int chunkID;
 	int planetID;
+	int zindex;
 	sf::Vector2i bottomRightPos;
 	sf::Vector2i position;
 	sf::Vector2i tileSize;

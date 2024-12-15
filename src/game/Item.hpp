@@ -14,6 +14,7 @@ public:
 	Hitbox* hitbox;
 	Hitbox* accurateHitbox;
 	int parent;
+	int zindex;
 
 	Item(sf::Vector2f position, int id, int typeID);
 	void SetParent(int index);
