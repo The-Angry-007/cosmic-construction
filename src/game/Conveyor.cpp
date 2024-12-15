@@ -17,7 +17,7 @@ Conveyor::Conveyor(int id, int planetID, int direction)
 	SetDirection(direction);
 	tileSize = ResourceHandler::structureSizes[typeID];
 	ResourceHandler::structureAtlas->SetSprite(sprite, 0, direction);
-	gap = 0.2f;
+	gap = 0.4f;
 	progress = { {}, {}, {}, {} };
 	items = { {}, {}, {}, {} };
 	speed = 1.f;
@@ -66,7 +66,83 @@ void Conveyor::Update(float dt)
 	//should ideally only be done when new structures created or destroyed
 	UpdateNeighbours();
 	//moving items
+	int numChecked = 0;
+	int index = currentNeighbourIndex;
+	while (numChecked < 3)
+	{
+		numChecked++;
+		if (index == direction)
+		{
+			index = (index + 1) % 4;
+			numChecked--;
+			continue;
+		}
+		if (progress[index].size() > 0)
+		{
+			ProgressLane(index, dt);
+			break;
+		}
+		index = (index + 1) % 4;
+	}
+	for (uint i = 0; i < items[direction].size(); i++)
+	{
+		if (i == 0)
+		{
+			progress[direction][i] += speed * dt;
+			if (progress[direction][i] > 1.f)
+			{
+				progress[direction][i] = 1.f;
+			}
+		}
+		else
+		{
+			if (progress[direction][i - 1] - progress[direction][i] > gap)
+			{
+				progress[direction][i] += speed * dt;
+			}
+		}
+	}
 }
+
+void Conveyor::ProgressLane(int lane, float dt)
+{
+	for (uint i = 0; i < progress[lane].size(); i++)
+	{
+		progress[lane][i] += dt * speed;
+		if (i == 0)
+		{
+			if (progress[direction].size() > 0)
+			{
+				float prog = progress[direction][progress[direction].size() - 1];
+				if ((1 - progress[lane][i]) + prog < gap)
+				{
+					progress[lane][i] -= dt * speed;
+				}
+			}
+			if (progress[lane][0] > 1.f)
+			{
+				progress[direction].push_back(progress[lane][0] - 1.f);
+				items[direction].push_back(items[lane][0]);
+				items[lane].erase(items[lane].begin());
+				progress[lane].erase(progress[lane].begin());
+				//cycle current neighbour index
+				currentNeighbourIndex = (currentNeighbourIndex + 1) % 4;
+				if (currentNeighbourIndex == direction)
+				{
+					currentNeighbourIndex = (currentNeighbourIndex + 1) % 4;
+				}
+			}
+		}
+		else if (i != 0)
+		{
+			if (progress[lane][i - 1] - progress[lane][i] < gap)
+			{
+				progress[lane][i] -= dt * speed;
+			}
+		}
+	}
+}
+
 void Conveyor::Render()
 {
 
@@ -81,7 +157,10 @@ void Conveyor::Render()
 			sf::Vector2f startPos(0.5f, 0.5f);
 			startPos += (sf::Vector2f)CONVEYOR_OFFSETS[i] / 2.f;
 			sf::Vector2f endPos(0.5f, 0.5f);
-			sf::Vector2f pos = Lerp(startPos, endPos, progress[i][j]);
+			float prog = progress[i][j];
+			if (i == direction)
+				prog = 1 - prog;
+			sf::Vector2f pos = Lerp(startPos, endPos, prog);
 			pos += (sf::Vector2f)position;
 			pos += (sf::Vector2f)(game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE);
 			pos.x *= TILE_SIZE.x;

@@ -16,6 +16,7 @@ public:
 	Conveyor(int id, int planetID, int direction);
 	void Update(float dt);
 	void Render();
+	void ProgressLane(int lane, float dt);
 	void CollectItems();
 	void SetDirection(int direction);
 	int StructureInFront();
