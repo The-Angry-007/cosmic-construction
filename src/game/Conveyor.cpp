@@ -93,6 +93,20 @@ void Conveyor::Update(float dt)
 			{
 				progress[direction][i] = 1.f;
 			}
+			if (neighbours[direction != -1])
+			{
+				Structure* s = game->planets[planetID].structures[neighbours[direction]];
+				Conveyor* c = dynamic_cast<Conveyor*>(s);
+				int dir = (direction + 2) % 4;
+				if (c->progress[dir].size() > 0)
+				{
+					float prog = c->progress[dir][c->progress[dir].size() - 1];
+					if (prog + (1 - progress[direction][i]) < gap)
+					{
+						progress[direction][i] -= speed * dt;
+					}
+				}
+			}
 		}
 		else
 		{
