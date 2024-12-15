@@ -50,15 +50,28 @@ CURRENT TODO
 - when items on conveyors reach centre of conveyor, any excess should be used to move forward
 - switch to a tick system (maybe have tickphase1, tickphase2, etc for different stages)
 - move chunks into all chunks array
-- implement active chunks thing in documentation
 - make the drag item tool actually match the visuals (lowest y pos item should be selected)
 
-theres gotta be a better way to do this whole conveyor system surely
-idk ill do some pondering
-anyway sleepy time
 
-
-
-new idea:
-have 4 list of items and just have progresses as floats
-these are the items in each direction from the centre of the conveyor
+more detailed to do:
+- add to json and from json functions to structure/conveyor classes
+- add saving and loading of structures
+- add the different tools in the gui
+- have seperate class for handling tools
+- make drag tool match visuals (the lowest y pos item is the one selected)
+- add conveyor placement algorithm:
+	- store last placed structure, reset this whenever mouse is lifted
+	- when mouse is moved, check if in new tile
+	- if so, last placed conveyor should face this tile
+	- place new tile facing the direction moved
+	- have a default rotation as well
+	- add a keybind to only place in the default rotation, if this is held then do that
+- add silo and silo gui
+- make placing conveyors require items
+- add terrain class
+- get saving and loading of terrain working
+- start terrain generation algorithm
+	- rocks and piles of twigs, when clicked they drop their respective items
+	- patches of grass for visuals etc
+- add more structures that use terrain to produce items
+call it wraps here ig

@@ -20,7 +20,7 @@ Conveyor::Conveyor(int id, int planetID, int direction)
 	gap = 0.4f;
 	progress = { {}, {}, {}, {} };
 	items = { {}, {}, {}, {} };
-	speed = 1.f;
+	speed = 3.f;
 	currentNeighbourIndex = 0;
 	zindex = 0;
 }
