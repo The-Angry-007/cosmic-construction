@@ -167,7 +167,7 @@ void Conveyor::ProgressLane(int lane, float dt)
 				items[lane].erase(items[lane].begin());
 				progress[lane].erase(progress[lane].begin());
 				//cycle current neighbour index
-				currentNeighbourIndex = (currentNeighbourIndex + 1) % 4;
+				currentNeighbourIndex = (lane + 1) % 4;
 				if (currentNeighbourIndex == direction)
 				{
 					currentNeighbourIndex = (currentNeighbourIndex + 1) % 4;
