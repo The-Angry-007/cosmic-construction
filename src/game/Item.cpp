@@ -82,7 +82,6 @@ void Item::SetParent(int index)
 sf::Vector2i Item::GetTilePos()
 {
 	sf::Vector2i worldTilePos(floor(position.x / TILE_SIZE.x), floor(position.y / TILE_SIZE.y));
-	worldTilePos.x %= CHUNK_SIZE;
-	worldTilePos.y %= CHUNK_SIZE;
-	return worldTilePos;
+	sf::Vector2i chunkPos(floor((float)worldTilePos.x / CHUNK_SIZE), floor((float)worldTilePos.y / CHUNK_SIZE));
+	return worldTilePos - chunkPos * CHUNK_SIZE;
 }

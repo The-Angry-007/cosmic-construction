@@ -82,6 +82,7 @@ void Planet::Init(bool load)
 			MoveItem(items.size() - 1);
 		}
 	}
+	placeDir = 0;
 }
 void Planet::Update(float dt)
 {
@@ -151,10 +152,18 @@ void Planet::Update(float dt)
 		sf::Vector2i tilePos(floor(mousePos.x / TILE_SIZE.x), floor(mousePos.y / TILE_SIZE.y));
 		if (StructureInPos(tilePos) == -1)
 		{
-			Conveyor* s = new Conveyor(-1, id, 0);
+			Conveyor* s = new Conveyor(-1, id, placeDir);
 			structures.push_back(s);
 
 			s->SetPosition(tilePos, structures.size() - 1);
+		}
+	}
+	if (InputHandler::keyPressed(sf::Keyboard::Key::Right))
+	{
+		placeDir++;
+		if (placeDir == 4)
+		{
+			placeDir = 0;
 		}
 	}
 }
@@ -279,7 +288,9 @@ Chunk* Planet::GetChunk(int chunkID)
 
 int Planet::StructureInPos(sf::Vector2i position)
 {
-	sf::Vector2i chunkPos = position / CHUNK_SIZE;
+	sf::Vector2i chunkPos(
+		floor((float)position.x / CHUNK_SIZE),
+		floor((float)position.y / CHUNK_SIZE));
 	//need to also check the chunks left and up
 	for (int x = chunkPos.x - 1; x <= chunkPos.x; x++)
 	{
@@ -304,9 +315,6 @@ int Planet::StructureInPos(sf::Vector2i position)
 				{
 					if (pos2.x >= position.x && pos2.y >= position.y)
 					{
-						std::cout << pos.x << " " << pos.y << std::endl;
-						std::cout << pos2.x << " " << pos2.y << std::endl;
-						std::cout << x << " " << y << std::endl;
 						return chunks[chunk].structures[i];
 					}
 				}
@@ -350,16 +358,6 @@ int Planet::ChunkAtPos(sf::Vector2i position)
 sf::Vector2i Planet::tilePos(sf::Vector2f position)
 {
 	return sf::Vector2i(floor(position.x / TILE_SIZE.x), floor(position.y / TILE_SIZE.y));
-}
-
-sf::Vector2i Planet::chunkTilePos(sf::Vector2i position)
-{
-	return sf::Vector2i(position.x % CHUNK_SIZE, position.y % CHUNK_SIZE);
-}
-sf::Vector2i Planet::chunkTilePos(sf::Vector2f position)
-{
-	sf::Vector2i tp = tilePos(position);
-	return sf::Vector2i(tp.x % CHUNK_SIZE, tp.y % CHUNK_SIZE);
 }
 
 sf::Vector2f Planet::worldPos(sf::Vector2f tilePos, int chunkID)

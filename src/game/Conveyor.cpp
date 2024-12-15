@@ -2,6 +2,13 @@
 #include "Main.hpp"
 #include "ResourceHandler.hpp"
 #include "utils.hpp"
+
+std::vector<sf::Vector2i> CONVEYOR_OFFSETS = {
+	sf::Vector2i(0, -1),
+	sf::Vector2i(1, 0),
+	sf::Vector2i(0, 1),
+	sf::Vector2i(-1, 0),
+};
 Conveyor::Conveyor(int id, int planetID, int direction)
 {
 	SetID(id);
@@ -9,46 +16,26 @@ Conveyor::Conveyor(int id, int planetID, int direction)
 	typeID = 0;
 	SetDirection(direction);
 	tileSize = ResourceHandler::structureSizes[typeID];
-	ResourceHandler::structureAtlas->SetSprite(sprite, direction);
+	ResourceHandler::structureAtlas->SetSprite(sprite, 0, direction);
 	gap = 0.4f;
 	positions = {};
 	speed = 0.4f;
+	currentNeighbourIndex = 0;
 }
 void Conveyor::Update(float dt)
 {
-	for (uint i = 0; i < positions.size(); i++)
-	{
-		if (i == 0)
-		{
-			positions[i] += dt * speed;
-			if (positions[i] > 1.f)
-			{
-				positions[i] = 1.f;
-			}
-		}
-		else
-		{
-			positions[i] += dt * speed;
-
-			if (positions[i - 1] - positions[i] < gap)
-			{
-				positions[i] = positions[i - 1] - gap;
-			}
-		}
-	}
 	CollectItems();
 }
 void Conveyor::Render()
 {
 	window->draw(sprite);
 	Planet& p = game->planets[planetID];
-	sf::Vector2f startPos = this->startPos + (sf::Vector2f)position;
-	sf::Vector2f endPos = this->endPos + (sf::Vector2f)position;
-	startPos = p.worldPos(startPos, chunkID);
-	endPos = p.worldPos(endPos, chunkID);
+
 	for (uint i = 0; i < items.size(); i++)
 	{
-		p.items[items[i]].position = Lerp(startPos, endPos, positions[i]);
+		sf::Vector2f pos = positions[i];
+		pos += (sf::Vector2f)position;
+		p.items[items[i]].position = p.worldPos(pos, chunkID);
 		p.items[items[i]].Render();
 	}
 }
@@ -56,7 +43,7 @@ void Conveyor::Render()
 void Conveyor::CollectItems()
 {
 	//only add new items if there is room
-	if (positions.size() > 0 && positions[positions.size() - 1] < gap)
+	if (positions.size() > 0 && positions[positions.size() - 1].x < gap)
 	{
 		return;
 	}
@@ -70,35 +57,23 @@ void Conveyor::CollectItems()
 		}
 		if (allItems[items[i]].GetTilePos() == position)
 		{
-			positions.push_back(0.f);
+			positions.push_back(sf::Vector2f(0.f, 0.f));
 			this->items.push_back(items[i]);
 			allItems[items[i]].parent = id;
 			items.erase(items.begin() + i);
-			i--;
+			return;
 		}
 	}
 }
 void Conveyor::SetDirection(int direction)
 {
 	this->direction = direction;
-	if (direction == 0)
-	{
-		startPos = sf::Vector2f(0.5f, 1.f);
-		endPos = sf::Vector2f(0.5f, 0.f);
-	}
-	else if (direction == 1)
-	{
-		startPos = sf::Vector2f(0.f, 0.5f);
-		endPos = sf::Vector2f(1.f, 0.5f);
-	}
-	else if (direction == 2)
-	{
-		startPos = sf::Vector2f(0.5f, 0.f);
-		endPos = sf::Vector2f(0.5f, 1.f);
-	}
-	else
-	{
-		startPos = sf::Vector2f(1.f, 0.5f);
-		endPos = sf::Vector2f(0.f, 0.5f);
-	}
+}
+
+int Conveyor::StructureInFront()
+{
+	sf::Vector2i pos = position + CONVEYOR_OFFSETS[direction];
+	Chunk* chunk = game->planets[planetID].GetChunk(chunkID);
+	pos += chunk->position * CHUNK_SIZE;
+	return game->planets[planetID].StructureInPos(pos);
 }

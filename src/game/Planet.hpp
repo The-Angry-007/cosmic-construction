@@ -16,6 +16,7 @@ public:
 	sf::Color backgroundColor;
 	int draggingItem;
 	int hoveringItem;
+	int placeDir;
 	std::string savePath;
 	sf::Vector2f mouseStartDraggingPos;
 	sf::Vector2f itemStartDraggingPos;
@@ -32,7 +33,5 @@ public:
 	int ChunkAtPos(sf::Vector2f position);
 	int ChunkAtPos(sf::Vector2i position);
 	sf::Vector2i tilePos(sf::Vector2f position);
-	sf::Vector2i chunkTilePos(sf::Vector2i position);
-	sf::Vector2i chunkTilePos(sf::Vector2f position);
 	sf::Vector2f worldPos(sf::Vector2f tilePos, int chunkID);
 };
