@@ -93,7 +93,7 @@ void Conveyor::Update(float dt)
 			{
 				progress[direction][i] = 1.f;
 			}
-			if (neighbours[direction != -1])
+			if (neighbours[direction] != -1)
 			{
 				Structure* s = game->planets[planetID].structures[neighbours[direction]];
 				Conveyor* c = dynamic_cast<Conveyor*>(s);
@@ -113,6 +113,33 @@ void Conveyor::Update(float dt)
 			if (progress[direction][i - 1] - progress[direction][i] > gap)
 			{
 				progress[direction][i] += speed * dt;
+			}
+		}
+	}
+	//get items from neighbouring conveyors
+	for (uint i = 0; i < 4; i++)
+	{
+		if (i == direction)
+		{
+			continue;
+		}
+		if (neighbours[i] == -1)
+		{
+			continue;
+		}
+		if (progress[i].size() == 0 || progress[i][progress[i].size() - 1] > gap)
+		{
+			Structure* s = game->planets[planetID].structures[neighbours[i]];
+			Conveyor* c = dynamic_cast<Conveyor*>(s);
+			if (c->items[c->direction].size() > 0)
+			{
+				if (c->progress[c->direction][0] >= 1.f)
+				{
+					items[i].push_back(c->items[c->direction][0]);
+					progress[i].push_back(c->progress[c->direction][0] - 1.f);
+					c->items[c->direction].erase(c->items[c->direction].begin());
+					c->progress[c->direction].erase(c->progress[c->direction].begin());
+				}
 			}
 		}
 	}
