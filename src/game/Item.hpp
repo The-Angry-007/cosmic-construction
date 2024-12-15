@@ -3,6 +3,7 @@
 #define ITEM_SIZE 16
 #include "Hitboxes.hpp"
 #include "ResourceHandler.hpp"
+class Planet;
 class Item
 {
 public:
@@ -19,7 +20,7 @@ public:
 	Item(sf::Vector2f position, int id, int typeID);
 	void SetParent(int index);
 	void Update(float dt);
-	void Render();
+	void Render(Planet* planet);
 	sf::Vector2i GetTilePos();
 };
 extern int CurrentItemID;

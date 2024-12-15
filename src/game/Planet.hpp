@@ -2,6 +2,7 @@
 #include "Camera.hpp"
 #include "Chunk.hpp"
 #include "Item.hpp"
+#include "RenderObject.hpp"
 #include "saving.hpp"
 #include "structures.hpp"
 class Planet
@@ -20,6 +21,7 @@ public:
 	std::string savePath;
 	sf::Vector2f mouseStartDraggingPos;
 	sf::Vector2f itemStartDraggingPos;
+	std::vector<RenderObject> renderObjects;
 	void MoveItem(int index);
 	Planet(int id);
 	void Init(bool load);

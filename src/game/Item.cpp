@@ -33,10 +33,12 @@ void Item::Update(float dt)
 		accurateHitbox->SetTransform(position, sf::Vector2f(1.f, 1.f));
 }
 
-void Item::Render()
+void Item::Render(Planet* planet)
 {
 	sprite.setPosition(position);
-	window->draw(sprite);
+	planet->renderObjects.push_back(RenderObject {
+		&sprite,
+		zindex });
 }
 
 void Item::SetParent(int index)

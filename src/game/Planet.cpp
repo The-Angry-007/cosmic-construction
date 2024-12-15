@@ -170,6 +170,7 @@ void Planet::Update(float dt)
 
 void Planet::Render()
 {
+	renderObjects = {};
 	sf::FloatRect camRect = camera.toFloatRect();
 	sf::RectangleShape rect(sf::Vector2f(camRect.width, camRect.height));
 	rect.setPosition(camRect.left, camRect.top);
@@ -179,6 +180,11 @@ void Planet::Render()
 	{
 		if (chunks[i].isVisible())
 			chunks[i].Render();
+	}
+	std::sort(renderObjects.begin(), renderObjects.end());
+	for (uint i = 0; i < renderObjects.size(); i++)
+	{
+		window->draw(*renderObjects[i].sprite);
 	}
 }
 
@@ -291,7 +297,8 @@ int Planet::StructureInPos(sf::Vector2i position)
 	sf::Vector2i chunkPos(
 		floor((float)position.x / (float)CHUNK_SIZE),
 		floor((float)position.y / (float)CHUNK_SIZE));
-	// std::cout << chunkPos.x << " " << chunkPos.y << std::endl;
+	// position -= sf::Vector2i(chunkPos.x * CHUNK_SIZE, chunkPos.y * CHUNK_SIZE);
+	std::cout << chunkPos.x << " " << chunkPos.y << std::endl;
 	//need to also check the chunks left and up
 	for (int x = chunkPos.x - 1; x <= chunkPos.x; x++)
 	{
@@ -312,8 +319,13 @@ int Planet::StructureInPos(sf::Vector2i position)
 			for (uint i = 0; i < chunks[chunk].structures.size(); i++)
 			{
 				Structure* s = structures[chunks[chunk].structures[i]];
-				sf::Vector2i pos = s->position + sf::Vector2i((x - chunkPos.x) * CHUNK_SIZE, (y - chunkPos.y) * CHUNK_SIZE);
-				sf::Vector2i pos2 = s->bottomRightPos + sf::Vector2i((x - chunkPos.x) * CHUNK_SIZE, (y - chunkPos.y) * CHUNK_SIZE);
+				sf::Vector2i pos = s->position + sf::Vector2i(x * CHUNK_SIZE, y * CHUNK_SIZE);
+				sf::Vector2i pos2 = s->bottomRightPos + sf::Vector2i(x * CHUNK_SIZE, y * CHUNK_SIZE);
+				// if (x == 0 && y == 0)
+				// {
+				// 	std::cout << "position is:" << pos.x << " " << pos.y << std::endl;
+				// 	std::cout << "position2 is:" << pos2.x << " " << pos2.y << std::endl;
+				// }
 				if (pos.x <= position.x && pos.y <= position.y)
 				{
 					if (pos2.x >= position.x && pos2.y >= position.y)

@@ -47,7 +47,9 @@ void Conveyor::UpdateNeighbours()
 				if (game->planets[planetID].structures[index]->typeID == 0)
 				{
 					Conveyor* c = dynamic_cast<Conveyor*>(game->planets[planetID].structures[index]);
-					if (c->position + CONVEYOR_OFFSETS[c->direction] == position)
+					sf::Vector2i p1 = position + game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE;
+					sf::Vector2i p2 = c->position + CONVEYOR_OFFSETS[c->direction] + game->planets[c->planetID].GetChunk(c->chunkID)->position * CHUNK_SIZE;
+					if (p1 == p2)
 					{
 						neighbours.push_back(index);
 					}
@@ -129,9 +131,12 @@ void Conveyor::Update(float dt)
 				{
 					if (i > 0)
 					{
-						float dx = positions[i].x - positions[i - 1].x;
-						float dy = positions[i].y - positions[i - 1].y;
-						if (dx * dx + dy * dy > gap * gap)
+						bool dist = false;
+						if ((direction == 0 || direction == 2) && abs(positions[i - 1].y - positions[i].y) > gap)
+							dist = true;
+						if ((direction == 1 || direction == 3) && abs(positions[i - 1].x - positions[i].x) > gap)
+							dist = true;
+						if (dist)
 						{
 							positions[i].y += dt * speed;
 							if (positions[i].y > 0.5f)
@@ -153,9 +158,12 @@ void Conveyor::Update(float dt)
 				{
 					if (i > 0)
 					{
-						float dx = positions[i].x - positions[i - 1].x;
-						float dy = positions[i].y - positions[i - 1].y;
-						if (dx * dx + dy * dy > gap * gap)
+						bool dist = false;
+						if ((direction == 0 || direction == 2) && abs(positions[i - 1].y - positions[i].y) > gap)
+							dist = true;
+						if ((direction == 1 || direction == 3) && abs(positions[i - 1].x - positions[i].x) > gap)
+							dist = true;
+						if (dist)
 						{
 							positions[i].y -= dt * speed;
 							if (positions[i].y < 0.5f)
@@ -181,16 +189,19 @@ void Conveyor::Update(float dt)
 		}
 		if (i > 0)
 		{
-			float dx = positions[i].x - positions[i - 1].x;
-			float dy = positions[i].y - positions[i - 1].y;
-			if (dx * dx + dy * dy > gap * gap)
+			bool dist = false;
+			if ((direction == 0 || direction == 2) && abs(positions[i - 1].y - positions[i].y) > gap)
+				dist = true;
+			if ((direction == 1 || direction == 3) && abs(positions[i - 1].x - positions[i].x) > gap)
+				dist = true;
+			if (dist)
 			{
 				positions[i] += (sf::Vector2f)CONVEYOR_OFFSETS[direction] * dt * speed;
 			}
 		}
 		else
 		{
-			if (positions[i].x < 1 || positions[i].x > 0 && positions[i].y < 1 && positions[i].y > 0)
+			if (positions[i].x < 1.f && positions[i].x > 0.f && positions[i].y < 1.f && positions[i].y > 0.f)
 			{
 				positions[i] += (sf::Vector2f)CONVEYOR_OFFSETS[direction] * dt * speed;
 			}
@@ -291,19 +302,21 @@ void Conveyor::Update(float dt)
 	{
 		currentNeighbourIndex = (startIndex + 1) % neighbours.size();
 	}
-	std::cout << neighbours.size() << std::endl;
 }
 void Conveyor::Render()
 {
-	window->draw(sprite);
+
 	Planet& p = game->planets[planetID];
+	p.renderObjects.push_back(RenderObject {
+		&sprite,
+		zindex });
 
 	for (uint i = 0; i < items.size(); i++)
 	{
 		sf::Vector2f pos = positions[i];
 		pos += (sf::Vector2f)position;
 		p.items[items[i]].position = p.worldPos(pos, chunkID);
-		p.items[items[i]].Render();
+		p.items[items[i]].Render(&game->planets[planetID]);
 	}
 }
 

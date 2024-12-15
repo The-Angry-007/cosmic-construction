@@ -50,7 +50,7 @@ void Chunk::Render()
 	}
 	for (int i = 0; i < items.size(); i++)
 	{
-		planet->items[items[i]].Render();
+		planet->items[items[i]].Render(planet);
 	}
 }
 
