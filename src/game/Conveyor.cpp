@@ -22,9 +22,234 @@ Conveyor::Conveyor(int id, int planetID, int direction)
 	speed = 0.4f;
 	currentNeighbourIndex = 0;
 }
+void Conveyor::UpdateNeighbours()
+{
+	neighbours = {};
+	for (int x = -1; x <= 1; x++)
+	{
+		for (int y = -1; y <= 1; y++)
+		{
+			if (x == 0 && y == 0)
+			{
+				continue;
+			}
+			if (x != 0 && y != 0)
+			{
+				continue;
+			}
+			sf::Vector2i pos = position + sf::Vector2i(x, y);
+
+			pos += game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE;
+			int index = game->planets[planetID].StructureInPos(pos);
+			if (index != -1)
+			{
+				if (game->planets[planetID].structures[index]->typeID == 0)
+				{
+					Conveyor* c = dynamic_cast<Conveyor*>(game->planets[planetID].structures[index]);
+					if (c->position + CONVEYOR_OFFSETS[c->direction] == position)
+					{
+						neighbours.push_back(index);
+					}
+				}
+			}
+		}
+	}
+}
 void Conveyor::Update(float dt)
 {
 	CollectItems();
+	//should ideally only be done when new structures created or destroyed
+	UpdateNeighbours();
+	//moving items
+	for (uint i = 0; i < positions.size(); i++)
+	{
+		bool offCentre = false;
+		if (direction == 0 || direction == 2)
+		{
+			if (positions[i].x != 0.5f)
+			{
+				offCentre = true;
+				if (positions[i].x < 0.5f)
+				{
+					if (i > 0)
+					{
+						float dx = positions[i].x - positions[i - 1].x;
+						float dy = positions[i].y - positions[i - 1].y;
+						if (dx * dx + dy * dy > gap * gap)
+						{
+							positions[i].x += dt * speed;
+							if (positions[i].x > 0.5f)
+							{
+								positions[i].x = 0.5f;
+							}
+						}
+					}
+					else
+					{
+						positions[i].x -= dt * speed;
+						if (positions[i].x < 0.5f)
+						{
+							positions[i].x = 0.5f;
+						}
+					}
+				}
+				else
+				{
+					if (i > 0)
+					{
+						float dx = positions[i].x - positions[i - 1].x;
+						float dy = positions[i].y - positions[i - 1].y;
+						if (dx * dx + dy * dy > gap * gap)
+						{
+							positions[i].x -= dt * speed;
+							if (positions[i].x < 0.5f)
+							{
+								positions[i].x = 0.5f;
+							}
+						}
+					}
+					else
+					{
+						positions[i].x -= dt * speed;
+						if (positions[i].x < 0.5f)
+						{
+							positions[i].x = 0.5f;
+						}
+					}
+				}
+			}
+		}
+		else
+		{
+			if (positions[i].y != 0.5f)
+			{
+				offCentre = true;
+				if (positions[i].y < 0.5f)
+				{
+					positions[i].y += dt * speed;
+					if (positions[i].y > 0.5f)
+					{
+						positions[i].y = 0.5f;
+					}
+				}
+				else
+				{
+					positions[i].y -= dt * speed;
+					if (positions[i].y < 0.5f)
+					{
+						positions[i].y = 0.5f;
+					}
+				}
+			}
+		}
+		if (offCentre)
+		{
+			continue;
+		}
+		if (i > 0)
+		{
+			float dx = positions[i].x - positions[i - 1].x;
+			float dy = positions[i].y - positions[i - 1].y;
+			if (dx * dx + dy * dy > gap * gap)
+			{
+				positions[i] += (sf::Vector2f)CONVEYOR_OFFSETS[direction] * dt * speed;
+			}
+		}
+		else
+		{
+			positions[i] += (sf::Vector2f)CONVEYOR_OFFSETS[direction] * dt * speed;
+
+			positions[i].x = clamp(positions[i].x, 0.f, 1.f);
+			positions[i].y = clamp(positions[i].y, 0.f, 1.f);
+		}
+	}
+	//get items from neighbours and attempt to add to this one
+	int checkedNeighbours = 0;
+	int startIndex = currentNeighbourIndex;
+	bool transferred = false;
+	while (checkedNeighbours < neighbours.size())
+	{
+		Conveyor* neighbour = dynamic_cast<Conveyor*>(game->planets[planetID].structures[neighbours[currentNeighbourIndex]]);
+		if (neighbour->positions.size() > 0)
+		{
+			bool ready = false;
+			if (neighbour->direction == 0 && neighbour->positions[0].y == 0.f)
+			{
+				ready = true;
+			}
+			else if (neighbour->direction == 1 && neighbour->positions[0].x == 1.f)
+			{
+				ready = true;
+			}
+			else if (neighbour->direction == 2 && neighbour->positions[0].y == 1.f)
+			{
+				ready = true;
+			}
+			else if (neighbour->direction == 3 && neighbour->positions[0].x == 0.f)
+			{
+				ready = true;
+			}
+			if (ready)
+			{
+				sf::Vector2f pos(0.5f, 0.5f);
+				pos -= (sf::Vector2f)CONVEYOR_OFFSETS[neighbour->direction] / 2.f;
+				int closestPos = -1;
+				float dist = 1000000.f;
+				for (int i = 0; i < positions.size(); i++)
+				{
+					float dx = pos.x - positions[i].x;
+					float dy = pos.y - positions[i].y;
+					float d = dx * dx + dy * dy;
+					if (d < dist)
+					{
+						closestPos = i;
+						dist = d;
+					}
+				}
+				if (closestPos == -1 || dist > gap * gap)
+				{
+					//add item
+					int index = positions.size();
+					for (uint i = 0; i < positions.size(); i++)
+					{
+						if (direction == 0 && positions[i].y > pos.y)
+						{
+							index = i;
+							break;
+						}
+						else if (direction == 1 && positions[i].x < pos.x)
+						{
+							index = i;
+							break;
+						}
+						else if (direction == 2 && positions[i].y < pos.y)
+						{
+							index = i;
+							break;
+						}
+						else if (direction == 3 && positions[i].x > pos.x)
+						{
+							index = i;
+							break;
+						}
+					}
+					positions.insert(positions.begin() + index, pos);
+					items.insert(items.begin() + index, neighbour->items[0]);
+					neighbour->items.erase(neighbour->items.begin());
+					neighbour->positions.erase(neighbour->positions.begin());
+					transferred = true;
+					break;
+				}
+			}
+		}
+		currentNeighbourIndex = (currentNeighbourIndex + 1) % neighbours.size();
+		checkedNeighbours++;
+	}
+	if (transferred)
+	{
+		currentNeighbourIndex = (startIndex + 1) % neighbours.size();
+	}
+	std::cout << neighbours.size() << std::endl;
 }
 void Conveyor::Render()
 {
@@ -55,9 +280,19 @@ void Conveyor::CollectItems()
 		{
 			continue;
 		}
-		if (allItems[items[i]].GetTilePos() == position)
+		auto tilePos = allItems[items[i]].GetTilePos();
+		if (tilePos == position)
 		{
-			positions.push_back(sf::Vector2f(0.f, 0.f));
+			sf::Vector2f pos = allItems[items[i]].position;
+			pos.x /= TILE_SIZE.x;
+			pos.y /= TILE_SIZE.y;
+			pos.x -= (int)pos.x;
+			pos.y -= (int)pos.y;
+			if (pos.x < 0)
+				pos.x = (1 + pos.x);
+			if (pos.y < 0)
+				pos.y = (1 + pos.y);
+			positions.push_back(pos);
 			this->items.push_back(items[i]);
 			allItems[items[i]].parent = id;
 			items.erase(items.begin() + i);

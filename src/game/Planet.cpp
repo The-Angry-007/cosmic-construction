@@ -289,8 +289,9 @@ Chunk* Planet::GetChunk(int chunkID)
 int Planet::StructureInPos(sf::Vector2i position)
 {
 	sf::Vector2i chunkPos(
-		floor((float)position.x / CHUNK_SIZE),
-		floor((float)position.y / CHUNK_SIZE));
+		floor((float)position.x / (float)CHUNK_SIZE),
+		floor((float)position.y / (float)CHUNK_SIZE));
+	// std::cout << chunkPos.x << " " << chunkPos.y << std::endl;
 	//need to also check the chunks left and up
 	for (int x = chunkPos.x - 1; x <= chunkPos.x; x++)
 	{
@@ -305,7 +306,9 @@ int Planet::StructureInPos(sf::Vector2i position)
 				}
 			}
 			if (chunk == -1)
+			{
 				continue;
+			}
 			for (uint i = 0; i < chunks[chunk].structures.size(); i++)
 			{
 				Structure* s = structures[chunks[chunk].structures[i]];
