@@ -24,7 +24,7 @@ x add saving and loading of items (default directory is just items)
 x add chunk class and get saving and loading of chunks working
 x add structure base class
 x create sprites for conveyor belt and add it
-- make conveyors actually functional
+x make conveyors actually functional
 - get saving and loading of structures working
 - add few more structure types
 - add actual build menu
@@ -41,28 +41,24 @@ x create sprites for conveyor belt and add it
 possible optimisations:
 calculate accurate hitboxes for items in resource handler
 draw items using vertex array instead of sprites
+chunks have a 2d array storing the index of the structure in every tile
+
 
 
 CURRENT TODO
-DRAWING OBJECTS FROM BOTTOM TO TOP
+- conveyors need to check neighbouring conveyors to keep spacing
+- when items on conveyors reach centre of conveyor, any excess should be used to move forward
+- switch to a tick system (maybe have tickphase1, tickphase2, etc for different stages)
+- move chunks into all chunks array
+- implement active chunks thing in documentation
+- make the drag item tool actually match the visuals (lowest y pos item should be selected)
 
-need to figure out how to add z indexes into this
-maybe z index outweighs y position?
-(less than operator checks z index first, if same then uses y position)
-
-
-add a less than operator for chunks that sorts based on y position
-render chunks with smaller y position first
-within chunks:
-create a struct local to the render function that simply has a sprite
-define its less than operator like with chunks
-sort all sprites from top to bottom
-draw in that order
+theres gotta be a better way to do this whole conveyor system surely
+idk ill do some pondering
+anyway sleepy time
 
 
-x make functions for getting the chunk of a specific position (both absolute and tile)
-x make function for converting absolute position to a tile position
-x make function for converting tile position to tile position within chunk
-x conveyors should collect items every frame (maybe?)
-- conveyors need to have a list of the positions of all the items along the path
-- move the items a little every frame
+
+new idea:
+have 4 list of items and just have progresses as floats
+these are the items in each direction from the centre of the conveyor

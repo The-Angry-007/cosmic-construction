@@ -298,7 +298,6 @@ int Planet::StructureInPos(sf::Vector2i position)
 		floor((float)position.x / (float)CHUNK_SIZE),
 		floor((float)position.y / (float)CHUNK_SIZE));
 	// position -= sf::Vector2i(chunkPos.x * CHUNK_SIZE, chunkPos.y * CHUNK_SIZE);
-	std::cout << chunkPos.x << " " << chunkPos.y << std::endl;
 	//need to also check the chunks left and up
 	for (int x = chunkPos.x - 1; x <= chunkPos.x; x++)
 	{

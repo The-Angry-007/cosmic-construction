@@ -6,9 +6,9 @@ class Conveyor : public Structure
 public:
 	int currentNeighbourIndex;
 	std::vector<int> neighbours;
-	std::vector<int> inputs;
-	std::vector<int> items;
-	std::vector<sf::Vector2f> positions;
+	int numNeighbours;
+	std::vector<std::vector<int>> items;
+	std::vector<std::vector<float>> progress;
 
 	int direction;
 	float speed;
