@@ -1,5 +1,6 @@
 #pragma once
 #include "Hitboxes.hpp"
+#include "saving.hpp"
 class Structure
 {
 public:
@@ -16,8 +17,10 @@ public:
 	Structure();
 	virtual void Update(float dt);
 	virtual void Render();
-	void SetPosition(sf::Vector2i position, int index);
+	void SetPosition(sf::Vector2i position);
 	void SetID(int id);
+	virtual JSON ToJSON();
+	virtual void FromJSON();
 };
 
 extern int CurrentStructureID;

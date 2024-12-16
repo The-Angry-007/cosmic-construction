@@ -54,6 +54,7 @@ void SaveHandler::CreateSave(std::string name, int difficulty, std::string seed)
 		}
 	}
 	std::string fileName = std::to_string(highest + 1);
+	ResetWorkingDir();
 	workingDir += "\\saves\\" + fileName;
 	CreateDirectory(workingDir);
 	//the 2 zeroes are to set default values for

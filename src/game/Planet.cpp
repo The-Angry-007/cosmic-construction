@@ -6,6 +6,7 @@
 
 Planet::Planet(int id)
 {
+	structures = {};
 	this->id = id;
 	if (id == 0)
 	{
@@ -65,6 +66,20 @@ void Planet::Init(bool load)
 			camera.position = pos;
 			camera.zoom = std::stof(camjson.GetValue("Zoom"));
 			camera.targetZoom = camera.zoom;
+		}
+		//loading structures
+		{
+			std::string structureData = sh::ReadData(path + "structures.txt");
+			std::vector<JSON> jsons = sh::StringToJSONs(structureData);
+			for (uint i = 0; i < jsons.size(); i++)
+			{
+				if (jsons[i].GetValue("TypeID") == "0")
+				{
+					Conveyor* c = new Conveyor();
+					structures.push_back(c);
+					c->FromJSON(jsons[i]);
+				}
+			}
 		}
 	}
 	else
@@ -150,14 +165,16 @@ void Planet::Update(float dt)
 	{
 		sf::Vector2f mousePos = camera.WorldMousePos();
 		sf::Vector2i tilePos(floor(mousePos.x / TILE_SIZE.x), floor(mousePos.y / TILE_SIZE.y));
+
 		if (StructureInPos(tilePos) == -1)
 		{
 			Conveyor* s = new Conveyor(-1, id, placeDir);
 			structures.push_back(s);
 
-			s->SetPosition(tilePos, structures.size() - 1);
+			s->SetPosition(tilePos);
 		}
 	}
+
 	if (InputHandler::keyPressed(sf::Keyboard::Key::Right))
 	{
 		placeDir++;
@@ -228,6 +245,14 @@ void Planet::Save()
 			std::to_string(chunks[i].position.y) });
 	}
 	sh::WriteData(path + "\\chunks.txt", chunkTable.ToString());
+	//structures
+	std::vector<JSON> sJSONs;
+	for (int i = 0; i < structures.size(); i++)
+	{
+		sJSONs.push_back(structures[i]->ToJSON());
+	}
+	std::string structureData = sh::JSONsToString(sJSONs);
+	sh::WriteData(path + "\\structures.txt", structureData);
 }
 
 void Planet::GenerateChunk(sf::Vector2i position)
@@ -378,8 +403,11 @@ sf::Vector2f Planet::worldPos(sf::Vector2f tilePos, int chunkID)
 {
 	auto chunk = GetChunk(chunkID);
 	sf::Vector2f pos = (sf::Vector2f)chunk->position;
-	pos.x *= CHUNK_SIZE_PIXELS.x;
-	pos.y *= CHUNK_SIZE_PIXELS.y;
+
+	pos.x *= (float)CHUNK_SIZE_PIXELS.x;
+	pos.y *= (float)CHUNK_SIZE_PIXELS.y;
+
 	pos += sf::Vector2f(tilePos.x * TILE_SIZE.x, tilePos.y * TILE_SIZE.y);
+
 	return pos;
 }

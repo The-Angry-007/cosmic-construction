@@ -16,6 +16,7 @@ Conveyor::Conveyor(int id, int planetID, int direction)
 	typeID = 0;
 	SetDirection(direction);
 	tileSize = ResourceHandler::structureSizes[typeID];
+	sprite = sf::Sprite();
 	ResourceHandler::structureAtlas->SetSprite(sprite, 0, direction);
 	gap = 0.4f;
 	progress = { {}, {}, {}, {} };
@@ -27,7 +28,6 @@ Conveyor::Conveyor(int id, int planetID, int direction)
 void Conveyor::UpdateNeighbours()
 {
 	neighbours = {};
-	numNeighbours = 0;
 	for (uint i = 0; i < 4; i++)
 	{
 		sf::Vector2i pos = CONVEYOR_OFFSETS[i] + position;
@@ -46,7 +46,6 @@ void Conveyor::UpdateNeighbours()
 				if (c->direction == (i + 2) % 4)
 				{
 					neighbours.push_back(index);
-					numNeighbours++;
 				}
 				else
 				{
@@ -224,7 +223,7 @@ void Conveyor::CollectItems()
 	auto& items = game->planets[planetID].GetChunk(chunkID)->items;
 	for (uint i = 0; i < items.size(); i++)
 	{
-		if (items[i] == game->planets[planetID].draggingItem)
+		if (items[i] == game->planets[planetID].draggingItem || allItems[items[i]].parent != -1)
 		{
 			continue;
 		}
@@ -251,3 +250,73 @@ int Conveyor::StructureInFront()
 	pos += chunk->position * CHUNK_SIZE;
 	return game->planets[planetID].StructureInPos(pos);
 }
+
+JSON Conveyor::ToJSON()
+{
+	JSON j = JSON();
+	j.AddAttribute("PositionX", std::to_string(position.x));
+	j.AddAttribute("PositionY", std::to_string(position.y));
+	j.AddAttribute("TypeID", std::to_string(typeID));
+	j.AddAttribute("Direction", std::to_string(direction));
+	j.AddAttribute("ID", std::to_string(id));
+	j.AddAttribute("ChunkID", std::to_string(chunkID));
+	j.AddAttribute("CurrentNeighbourIndex", std::to_string(currentNeighbourIndex));
+	for (uint i = 0; i < 4; i++)
+	{
+		std::string strItems = "";
+		std::string strProgress = "";
+		for (int j = 0; j < items[i].size(); j++)
+		{
+			strItems += std::to_string(items[i][j]);
+			strProgress += std::to_string(progress[i][j]);
+			if (j != items[i].size() - 1)
+			{
+				strItems += ",";
+				strProgress += ",";
+			}
+		}
+		j.AddAttribute("items " + std::to_string(i), strItems);
+		j.AddAttribute("progress " + std::to_string(i), strProgress);
+	}
+	return j;
+}
+void Conveyor::FromJSON(JSON j)
+{
+	sf::Vector2i pos;
+	pos.x = std::stoi(j.GetValue("PositionX"));
+	pos.y = std::stoi(j.GetValue("PositionY"));
+	typeID = std::stoi(j.GetValue("TypeID"));
+	direction = std::stoi(j.GetValue("Direction"));
+	id = std::stoi(j.GetValue("ID"));
+	chunkID = std::stoi(j.GetValue("ChunkID"));
+	SetPosition(pos);
+
+	tileSize = ResourceHandler::structureSizes[typeID];
+	sprite = sf::Sprite();
+	ResourceHandler::structureAtlas->SetSprite(sprite, 0, direction);
+	gap = 0.4f;
+	progress = { {}, {}, {}, {} };
+	items = { {}, {}, {}, {} };
+	speed = 3.f;
+	zindex = 0;
+
+	currentNeighbourIndex = std::stoi(j.GetValue("CurrentNeighbourIndex"));
+	for (int i = 0; i < 4; i++)
+	{
+		auto items = Split(j.GetValue("items " + std::to_string(i)), ',');
+		//no items
+		if (items.size() == 1 && items[0].length() == 0)
+		{
+			continue;
+		}
+		auto progress = Split(j.GetValue("progress " + std::to_string(i)), ',');
+		for (int j = 0; j < items.size(); j++)
+		{
+			this->items[i].push_back(std::stoi(items[j]));
+			this->progress[i].push_back(std::stof(progress[j]));
+		}
+	}
+}
+
+Conveyor::Conveyor()
+{}

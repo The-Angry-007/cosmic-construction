@@ -6,7 +6,6 @@ class Conveyor : public Structure
 public:
 	int currentNeighbourIndex;
 	std::vector<int> neighbours;
-	int numNeighbours;
 	std::vector<std::vector<int>> items;
 	std::vector<std::vector<float>> progress;
 
@@ -14,6 +13,8 @@ public:
 	float speed;
 	float gap;
 	Conveyor(int id, int planetID, int direction);
+	Conveyor();
+	void FromJSON(JSON j);
 	void Update(float dt);
 	void Render();
 	void ProgressLane(int lane, float dt);
@@ -23,4 +24,5 @@ public:
 	bool GetAdjacentItems(int dir);
 	void TryInsertItem(int item, float progress);
 	void UpdateNeighbours();
+	JSON ToJSON();
 };

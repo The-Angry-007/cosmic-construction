@@ -18,6 +18,7 @@ Chunk::Chunk(sf::Vector2i position, int id, int planetID)
 		}
 	}
 	this->items = {};
+	this->structures = {};
 	this->planetID = planetID;
 	this->position = position;
 	hitbox = new Hitbox(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.f, 1.f));
