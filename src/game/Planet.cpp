@@ -75,7 +75,7 @@ void Planet::Init(bool load)
 			{
 				if (jsons[i].GetValue("TypeID") == "0")
 				{
-					Conveyor* c = new Conveyor();
+					Conveyor* c = new Conveyor(id);
 					structures.push_back(c);
 					c->FromJSON(jsons[i]);
 				}

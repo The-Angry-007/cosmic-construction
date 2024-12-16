@@ -8,6 +8,7 @@ public:
 	bool paused;
 	std::vector<Planet> planets;
 	int activePlanet;
+	int loadedTimer;
 	Game();
 	~Game();
 	Planet* ActivePlanet();

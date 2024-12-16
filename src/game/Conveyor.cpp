@@ -289,11 +289,13 @@ void Conveyor::FromJSON(JSON j)
 	direction = std::stoi(j.GetValue("Direction"));
 	id = std::stoi(j.GetValue("ID"));
 	chunkID = std::stoi(j.GetValue("ChunkID"));
-	SetPosition(pos);
+	pos += game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE;
 
 	tileSize = ResourceHandler::structureSizes[typeID];
 	sprite = sf::Sprite();
 	ResourceHandler::structureAtlas->SetSprite(sprite, 0, direction);
+	SetPosition(pos);
+
 	gap = 0.4f;
 	progress = { {}, {}, {}, {} };
 	items = { {}, {}, {}, {} };
@@ -318,5 +320,7 @@ void Conveyor::FromJSON(JSON j)
 	}
 }
 
-Conveyor::Conveyor()
-{}
+Conveyor::Conveyor(int planetID)
+{
+	this->planetID = planetID;
+}

@@ -9,6 +9,7 @@ Game::Game()
 
 	activePlanet = 0;
 	planets.push_back(Planet(0));
+	loadedTimer = 5;
 }
 Game::~Game()
 {
@@ -41,10 +42,15 @@ void Game::LoadGame()
 	{
 		planets[i].Init(true);
 	}
+	loadedTimer = 5;
 }
 void Game::Update(float dt)
 {
-
+	if (loadedTimer > 0)
+	{
+		loadedTimer--;
+		return;
+	}
 	if (InputHandler::pressed(binds::Pause))
 	{
 		TogglePaused();
