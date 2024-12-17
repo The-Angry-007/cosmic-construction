@@ -87,7 +87,9 @@ Settings::Settings()
 		AddBind("Pause", &binds::Pause);
 		AddBind("Fullscreen", &binds::Fullscreen);
 		AddBind("Camera Pan", &binds::Pan);
-		AddBind("Drag Item", &binds::DragItem);
+		AddBind("Use Tool", &binds::UseTool);
+		AddBind("Tool 1", &binds::Tool1);
+		AddBind("Tool 2", &binds::Tool2);
 	}
 	//AUDIO PAGE
 	{

@@ -13,6 +13,7 @@ public:
 	GUILabel* fpsLabel;
 	int fps;
 	std::vector<sf::Vector2f> toolPoses;
+	int numTools;
 
 	GUIHandler();
 	//note that guihandler has no destructor as it persists throughout the entire runtime of the program

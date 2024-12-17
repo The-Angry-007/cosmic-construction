@@ -2,6 +2,7 @@
 #include "Camera.hpp"
 #include "Item.hpp"
 #include "Planet.hpp"
+#include "ToolHandler.hpp"
 class Game
 {
 public:
@@ -9,6 +10,8 @@ public:
 	std::vector<Planet> planets;
 	int activePlanet;
 	int loadedTimer;
+	ToolHandler* toolHandler;
+
 	Game();
 	~Game();
 	Planet* ActivePlanet();

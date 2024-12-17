@@ -250,7 +250,7 @@ void GUIHandler::InitGUIS()
 		// GUIButton* b = new GUIButton(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.2f, 0.1f), p, l2);
 		// b->clickFunc = backfunc;
 		// g->AddObject(b);
-		int numTools = 2;
+		numTools = 2;
 		std::string paths[2] = { "GUIHammer.png", "GUIGrab.png" };
 		sf::Vector2f middle(0.5f, 0.85f);
 		float size = 0.08f;

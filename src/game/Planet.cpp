@@ -107,7 +107,7 @@ void Planet::Update(float dt)
 	{
 		ResourceHandler::itemAtlas->SetSprite(items[hoveringItem].sprite, items[hoveringItem].typeId);
 	}
-	if (draggingItem == -1)
+	if (draggingItem == -1 && game->toolHandler->selectedTool == 1)
 	{
 		bool end = false;
 		for (int i = items.size() - 1; i > -1; i--)
@@ -116,16 +116,16 @@ void Planet::Update(float dt)
 			{
 				continue;
 			}
-			if (items[i].accurateHitbox->intersectsPoint(camera.WorldMousePos()))
+			if (items[i].accurateHitbox->intersectsPoint(camera.WorldMousePos()) && !InputHandler::mouseIsBlocked)
 			{
 
-				if (InputHandler::pressed(binds::DragItem))
+				if (InputHandler::pressed(binds::UseTool))
 				{
 					draggingItem = i;
 					mouseStartDraggingPos = camera.WorldMousePos();
 					itemStartDraggingPos = items[i].position;
 				}
-				else if (!InputHandler::down(binds::DragItem))
+				else if (!InputHandler::down(binds::UseTool))
 				{
 					hoveringItem = i;
 					ResourceHandler::itemAtlas->SetSprite(items[hoveringItem].sprite, items[hoveringItem].typeId + ResourceHandler::numItems);
@@ -135,9 +135,9 @@ void Planet::Update(float dt)
 			}
 		}
 	}
-	else
+	else if (game->toolHandler->selectedTool == 1)
 	{
-		if (!InputHandler::down(binds::DragItem))
+		if (!InputHandler::down(binds::UseTool))
 		{
 			draggingItem = -1;
 		}
@@ -161,7 +161,7 @@ void Planet::Update(float dt)
 	{
 		structures[i]->Update(dt);
 	}
-	if (InputHandler::keyPressed(sf::Keyboard::Key::Space))
+	if (InputHandler::down(binds::UseTool) && game->toolHandler->selectedTool == 0)
 	{
 		sf::Vector2f mousePos = camera.WorldMousePos();
 		sf::Vector2i tilePos(floor(mousePos.x / TILE_SIZE.x), floor(mousePos.y / TILE_SIZE.y));

@@ -10,6 +10,7 @@ Game::Game()
 	activePlanet = 0;
 	planets.push_back(Planet(0));
 	loadedTimer = 5;
+	toolHandler = new ToolHandler();
 }
 Game::~Game()
 {
@@ -60,6 +61,7 @@ void Game::Update(float dt)
 		planets[activePlanet].camera.SetView();
 		return;
 	}
+	toolHandler->Update(dt);
 	planets[activePlanet].Update(dt);
 }
 void Game::Render()
