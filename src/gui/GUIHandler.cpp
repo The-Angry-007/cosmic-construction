@@ -250,6 +250,40 @@ void GUIHandler::InitGUIS()
 		// GUIButton* b = new GUIButton(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.2f, 0.1f), p, l2);
 		// b->clickFunc = backfunc;
 		// g->AddObject(b);
+		int numTools = 2;
+		std::string paths[2] = { "GUIHammer.png", "GUIGrab.png" };
+		sf::Vector2f middle(0.5f, 0.85f);
+		float size = 0.08f;
+		for (int i = 0; i < numTools; i++)
+		{
+			sf::Vector2f left = middle - sf::Vector2f(size * (numTools - 1), 0) / 2.f;
+			sf::Vector2f right = middle + sf::Vector2f(size * (numTools - 1), 0) / 2.f;
+			sf::Vector2f pos = Lerp(left, right, i / (numTools - 1));
+			GUIPanel* outline = new GUIPanel(pos, sf::Vector2f(size, size) / 2.f * 1.4f, sf::Color(150, 150, 150));
+			outline->keepAspectRatio = true;
+			outline->ratio = 1.f;
+			g->AddObject(outline);
+		}
+		toolPoses = {};
+		for (int i = 0; i < numTools; i++)
+		{
+			sf::Vector2f left = middle - sf::Vector2f(size * (numTools - 1), 0) / 2.f;
+			sf::Vector2f right = middle + sf::Vector2f(size * (numTools - 1), 0) / 2.f;
+			sf::Vector2f pos = Lerp(left, right, i / (numTools - 1));
+			toolPoses.push_back(pos);
+			std::string path = "resources\\images\\" + paths[i];
+			GUIPanel* bg = new GUIPanel(pos, sf::Vector2f(size, size) / 2.f * 1.2f, sf::Color(50, 50, 50));
+			bg->keepAspectRatio = true;
+			bg->ratio = 1.f;
+
+			g->AddObject(bg);
+			GUIImage* im = new GUIImage(pos, sf::Vector2f(size, size) / 2.f, path);
+			im->keepAspectRatio = true;
+			g->AddObject(im);
+		}
+		GUIImage* selectedTool = new GUIImage(toolPoses[0], sf::Vector2f(size, size) / 2.f / 16.f * 24.f, "resources\\images\\GUISelectedTool.png");
+		selectedTool->keepAspectRatio = true;
+		g->AddObject(selectedTool);
 		guis.push_back(g);
 	}
 	//PAUSE GUI

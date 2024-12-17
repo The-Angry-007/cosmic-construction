@@ -54,8 +54,8 @@ CURRENT TODO
 
 
 more detailed to do:
-- add to json and from json functions to structure/conveyor classes
-- add saving and loading of structures
+x add to json and from json functions to structure/conveyor classes
+x add saving and loading of structures
 - add the different tools in the gui
 - have seperate class for handling tools
 - make drag tool match visuals (the lowest y pos item is the one selected)
