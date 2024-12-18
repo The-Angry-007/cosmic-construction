@@ -241,6 +241,7 @@ void Conveyor::CollectItems()
 void Conveyor::SetDirection(int direction)
 {
 	this->direction = direction;
+	ResourceHandler::structureAtlas->SetSprite(sprite, 0, direction);
 }
 
 int Conveyor::StructureInFront()

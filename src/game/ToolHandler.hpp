@@ -6,6 +6,7 @@ class ToolHandler
 {
 public:
 	int selectedTool;
+	int lastPlacedStructure;
 	GUIObject* selectedObj;
 	std::vector<GUIPanel*> bgObjs;
 	int hoveringItem;

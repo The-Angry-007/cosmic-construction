@@ -19,6 +19,7 @@ ToolHandler::ToolHandler()
 	placeDir = 0;
 	mouseStartDraggingPos = sf::Vector2f(0.f, 0.f);
 	itemStartDraggingPos = sf::Vector2f(0.f, 0.f);
+	lastPlacedStructure = -1;
 }
 
 void ToolHandler::Update(float dt, Planet* p)
@@ -58,10 +59,33 @@ void ToolHandler::Update(float dt, Planet* p)
 
 			if (p->StructureInPos(tilePos) == -1)
 			{
-				Conveyor* s = new Conveyor(-1, p->id, placeDir);
+				int direction = placeDir;
+				if (lastPlacedStructure != -1)
+				{
+					int dir = 0;
+					sf::Vector2i offset = tilePos;
+					sf::Vector2i prevpos = p->structures[lastPlacedStructure]->position + p->GetChunk(p->structures[lastPlacedStructure]->chunkID)->position * CHUNK_SIZE;
+					offset -= prevpos;
+					for (int i = 0; i < 4; i++)
+					{
+						if (CONVEYOR_OFFSETS[i] == offset)
+						{
+							dir = i;
+						}
+					}
+					direction = dir;
+
+					dynamic_cast<Conveyor*>(p->structures[lastPlacedStructure])->SetDirection(direction);
+				}
+				Conveyor* s = new Conveyor(-1, p->id, direction);
+				lastPlacedStructure = p->structures.size();
 				p->structures.push_back(s);
 				s->SetPosition(tilePos);
 			}
+		}
+		else
+		{
+			lastPlacedStructure = -1;
 		}
 	}
 	else if (selectedTool == 1)

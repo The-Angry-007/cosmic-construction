@@ -25,7 +25,7 @@ x add chunk class and get saving and loading of chunks working
 x add structure base class
 x create sprites for conveyor belt and add it
 x make conveyors actually functional
-- get saving and loading of structures working
+x get saving and loading of structures working
 - add few more structure types
 - add actual build menu
 - add terrain class with saving and loading
@@ -56,9 +56,9 @@ CURRENT TODO
 more detailed to do:
 x add to json and from json functions to structure/conveyor classes
 x add saving and loading of structures
-- add the different tools in the gui
-- have seperate class for handling tools
-- make drag tool match visuals (the lowest y pos item is the one selected)
+x add the different tools in the gui
+x have seperate class for handling tools
+x make drag tool match visuals (the lowest y pos item is the one selected)
 - add conveyor placement algorithm:
 	- store last placed structure, reset this whenever mouse is lifted
 	- when mouse is moved, check if in new tile
