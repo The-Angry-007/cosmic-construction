@@ -223,7 +223,7 @@ void Conveyor::CollectItems()
 	auto& items = game->planets[planetID].GetChunk(chunkID)->items;
 	for (uint i = 0; i < items.size(); i++)
 	{
-		if (items[i] == game->planets[planetID].draggingItem || allItems[items[i]].parent != -1)
+		if ((game->activePlanet == planetID && items[i] == game->toolHandler->draggingItem) || allItems[items[i]].parent != -1)
 		{
 			continue;
 		}

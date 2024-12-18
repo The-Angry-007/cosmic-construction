@@ -73,7 +73,8 @@ void ToolHandler::Update(float dt, Planet* p)
 		if (draggingItem == -1)
 		{
 			bool end = false;
-			for (int i = p->items.size() - 1; i > -1; i--)
+			std::vector<int> touchingItems = {};
+			for (int i = 0; i < p->items.size(); i++)
 			{
 				if (p->items[i].parent != -1)
 				{
@@ -81,20 +82,37 @@ void ToolHandler::Update(float dt, Planet* p)
 				}
 				if (p->items[i].accurateHitbox->intersectsPoint(p->camera.WorldMousePos()) && !InputHandler::mouseIsBlocked)
 				{
-
-					if (InputHandler::pressed(binds::UseTool))
+					touchingItems.push_back(i);
+				}
+			}
+			if (touchingItems.size() > 0)
+			{
+				int lowestYIndex = 0;
+				for (int i = 0; i < touchingItems.size(); i++)
+				{
+					if (p->items[touchingItems[i]].position.y > p->items[touchingItems[lowestYIndex]].position.y)
 					{
-						draggingItem = i;
-						mouseStartDraggingPos = p->camera.WorldMousePos();
-						itemStartDraggingPos = p->items[i].position;
+						lowestYIndex = i;
 					}
-					else if (!InputHandler::down(binds::UseTool))
+					else if (p->items[touchingItems[i]].position.y == p->items[touchingItems[lowestYIndex]].position.y)
 					{
-						hoveringItem = i;
-						ResourceHandler::itemAtlas->SetSprite(p->items[hoveringItem].sprite, p->items[hoveringItem].typeId + ResourceHandler::numItems);
+						if (p->items[touchingItems[i]].position.x > p->items[touchingItems[lowestYIndex]].position.x)
+						{
+							lowestYIndex = i;
+						}
 					}
-					end = true;
-					break;
+				}
+				int i = touchingItems[lowestYIndex];
+				if (InputHandler::pressed(binds::UseTool))
+				{
+					draggingItem = i;
+					mouseStartDraggingPos = p->camera.WorldMousePos();
+					itemStartDraggingPos = p->items[i].position;
+				}
+				else if (!InputHandler::down(binds::UseTool))
+				{
+					hoveringItem = i;
+					ResourceHandler::itemAtlas->SetSprite(p->items[hoveringItem].sprite, p->items[hoveringItem].typeId + ResourceHandler::numItems);
 				}
 			}
 		}
