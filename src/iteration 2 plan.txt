@@ -59,12 +59,12 @@ x add saving and loading of structures
 x add the different tools in the gui
 x have seperate class for handling tools
 x make drag tool match visuals (the lowest y pos item is the one selected)
-- add conveyor placement algorithm:
-	- store last placed structure, reset this whenever mouse is lifted
-	- when mouse is moved, check if in new tile
-	- if so, last placed conveyor should face this tile
-	- place new tile facing the direction moved
-	- have a default rotation as well
+x add conveyor placement algorithm:
+	x store last placed structure, reset this whenever mouse is lifted
+	x when mouse is moved, check if in new tile
+	x if so, last placed conveyor should face this tile
+	x place new tile facing the direction moved
+	x have a default rotation as well
 	- add a keybind to only place in the default rotation, if this is held then do that
 - add silo and silo gui
 - make placing conveyors require items

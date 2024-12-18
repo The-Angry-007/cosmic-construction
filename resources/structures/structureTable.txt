@@ -1,2 +1,3 @@
 StructureID/Name/Description/SizeX/SizeY
-1/Conveyor Belt/basic conveyor/1/1
+0/Conveyor Belt/basic conveyor/1/1
+1/Storage Silo/Stores items to be used to build structures/3/3

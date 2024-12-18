@@ -1,5 +1,7 @@
 StructureID/Path
-1/conveyor_up.png
-1/conveyor_right.png
-1/conveyor_down.png
-1/conveyor_left.png
+0/conveyor_up.png
+0/conveyor_right.png
+0/conveyor_down.png
+0/conveyor_left.png
+1/storage_silo_base.png
+1/storage_silo_top.png
