@@ -61,8 +61,8 @@ void Game::Update(float dt)
 		planets[activePlanet].camera.SetView();
 		return;
 	}
-	toolHandler->Update(dt);
 	planets[activePlanet].Update(dt);
+	toolHandler->Update(dt, &planets[activePlanet]);
 }
 void Game::Render()
 {

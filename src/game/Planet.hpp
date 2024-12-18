@@ -17,10 +17,8 @@ public:
 	sf::Color backgroundColor;
 	int draggingItem;
 	int hoveringItem;
-	int placeDir;
 	std::string savePath;
-	sf::Vector2f mouseStartDraggingPos;
-	sf::Vector2f itemStartDraggingPos;
+
 	std::vector<RenderObject> renderObjects;
 	void MoveItem(int index);
 	Planet(int id);

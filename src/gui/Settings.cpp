@@ -90,6 +90,7 @@ Settings::Settings()
 		AddBind("Use Tool", &binds::UseTool);
 		AddBind("Tool 1", &binds::Tool1);
 		AddBind("Tool 2", &binds::Tool2);
+		AddBind("Rotate Structure", &binds::RotateStructure);
 	}
 	//AUDIO PAGE
 	{

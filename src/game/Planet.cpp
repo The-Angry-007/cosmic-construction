@@ -14,8 +14,7 @@ Planet::Planet(int id)
 	}
 	draggingItem = -1;
 	hoveringItem = -1;
-	mouseStartDraggingPos = sf::Vector2f(0.f, 0.f);
-	itemStartDraggingPos = sf::Vector2f(0.f, 0.f);
+
 	chunks = {};
 	items = {};
 	camera = Camera();
@@ -97,57 +96,12 @@ void Planet::Init(bool load)
 			MoveItem(items.size() - 1);
 		}
 	}
-	placeDir = 0;
 }
 void Planet::Update(float dt)
 {
 	camera.Update(dt);
 	GenerateChunksInView();
-	if (hoveringItem != -1)
-	{
-		ResourceHandler::itemAtlas->SetSprite(items[hoveringItem].sprite, items[hoveringItem].typeId);
-	}
-	if (draggingItem == -1 && game->toolHandler->selectedTool == 1)
-	{
-		bool end = false;
-		for (int i = items.size() - 1; i > -1; i--)
-		{
-			if (items[i].parent != -1)
-			{
-				continue;
-			}
-			if (items[i].accurateHitbox->intersectsPoint(camera.WorldMousePos()) && !InputHandler::mouseIsBlocked)
-			{
 
-				if (InputHandler::pressed(binds::UseTool))
-				{
-					draggingItem = i;
-					mouseStartDraggingPos = camera.WorldMousePos();
-					itemStartDraggingPos = items[i].position;
-				}
-				else if (!InputHandler::down(binds::UseTool))
-				{
-					hoveringItem = i;
-					ResourceHandler::itemAtlas->SetSprite(items[hoveringItem].sprite, items[hoveringItem].typeId + ResourceHandler::numItems);
-				}
-				end = true;
-				break;
-			}
-		}
-	}
-	else if (game->toolHandler->selectedTool == 1)
-	{
-		if (!InputHandler::down(binds::UseTool))
-		{
-			draggingItem = -1;
-		}
-		else
-		{
-			sf::Vector2f offset = camera.WorldMousePos() - mouseStartDraggingPos;
-			items[draggingItem].position = itemStartDraggingPos + offset;
-			MoveItem(draggingItem);
-		}
-	}
 	for (uint i = 0; i < chunks.size(); i++)
 	{
 
@@ -161,28 +115,18 @@ void Planet::Update(float dt)
 	{
 		structures[i]->Update(dt);
 	}
-	if (InputHandler::down(binds::UseTool) && game->toolHandler->selectedTool == 0)
-	{
-		sf::Vector2f mousePos = camera.WorldMousePos();
-		sf::Vector2i tilePos(floor(mousePos.x / TILE_SIZE.x), floor(mousePos.y / TILE_SIZE.y));
+	// if (InputHandler::down(binds::UseTool) && game->toolHandler->selectedTool == 0)
+	// {
+	// }
 
-		if (StructureInPos(tilePos) == -1)
-		{
-			Conveyor* s = new Conveyor(-1, id, placeDir);
-			structures.push_back(s);
-
-			s->SetPosition(tilePos);
-		}
-	}
-
-	if (InputHandler::keyPressed(sf::Keyboard::Key::Right))
-	{
-		placeDir++;
-		if (placeDir == 4)
-		{
-			placeDir = 0;
-		}
-	}
+	// if (InputHandler::keyPressed(sf::Keyboard::Key::Right))
+	// {
+	// 	placeDir++;
+	// 	if (placeDir == 4)
+	// 	{
+	// 		placeDir = 0;
+	// 	}
+	// }
 }
 
 void Planet::Render()
