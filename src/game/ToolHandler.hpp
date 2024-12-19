@@ -7,6 +7,7 @@ class ToolHandler
 public:
 	int selectedTool;
 	int lastPlacedStructure;
+	int placeType;
 	GUIObject* selectedObj;
 	std::vector<GUIPanel*> bgObjs;
 	int hoveringItem;

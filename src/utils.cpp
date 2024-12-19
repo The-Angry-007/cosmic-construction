@@ -19,6 +19,25 @@ bool RectIntersectsRect(sf::FloatRect rect1, sf::FloatRect rect2)
 	//return false if not intersecting
 	return false;
 }
+bool RectIntersectsRect(sf::IntRect rect1, sf::IntRect rect2)
+{
+	//split into multiple conditions to become more readable
+	//first checks if the second rect's left side is past the first rect's right side
+	bool cond1 = (rect2.left >= rect1.left + rect1.width);
+	//same as cond1 but opposite side of rect
+	bool cond2 = (rect2.left + rect2.width <= rect1.left);
+	//same as cond1 but for y instead of x
+	bool cond3 = (rect2.top >= rect1.top + rect1.height);
+	//same as cond2 but for y instead of x
+	bool cond4 = (rect2.top + rect2.height <= rect1.top);
+	//only intersecting if none of the conditions are true
+	if (!(cond1 || cond2 || cond3 || cond4))
+	{
+		return true;
+	}
+	//return false if not intersecting
+	return false;
+}
 //used to check if hitboxrects collide with hitboxcircles
 bool RectIntersectsCircle(sf::Vector2f pos, float r, sf::FloatRect rect)
 {

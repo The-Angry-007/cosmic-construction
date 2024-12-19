@@ -20,6 +20,7 @@ ToolHandler::ToolHandler()
 	mouseStartDraggingPos = sf::Vector2f(0.f, 0.f);
 	itemStartDraggingPos = sf::Vector2f(0.f, 0.f);
 	lastPlacedStructure = -1;
+	placeType = 1;
 }
 
 void ToolHandler::Update(float dt, Planet* p)
@@ -52,40 +53,56 @@ void ToolHandler::Update(float dt, Planet* p)
 	}
 	if (selectedTool == 0)
 	{
-		if (InputHandler::down(binds::UseTool))
+		sf::Vector2f mousePos = p->camera.WorldMousePos();
+		sf::Vector2i tilePos(floor(mousePos.x / TILE_SIZE.x), floor(mousePos.y / TILE_SIZE.y));
+		if (placeType == 0)
 		{
-			sf::Vector2f mousePos = p->camera.WorldMousePos();
-			sf::Vector2i tilePos(floor(mousePos.x / TILE_SIZE.x), floor(mousePos.y / TILE_SIZE.y));
 
-			if (p->StructureInPos(tilePos) == -1)
+			if (InputHandler::down(binds::UseTool))
 			{
-				int direction = placeDir;
-				if (lastPlacedStructure != -1)
+				if (p->StructureInPos(tilePos) == -1)
 				{
-					int dir = 0;
-					sf::Vector2i offset = tilePos;
-					sf::Vector2i prevpos = p->structures[lastPlacedStructure]->position + p->GetChunk(p->structures[lastPlacedStructure]->chunkID)->position * CHUNK_SIZE;
-					offset -= prevpos;
-					for (int i = 0; i < 4; i++)
+					int direction = placeDir;
+					if (lastPlacedStructure != -1)
 					{
-						if (CONVEYOR_OFFSETS[i] == offset)
+						int dir = 0;
+						sf::Vector2i offset = tilePos;
+						sf::Vector2i prevpos = p->structures[lastPlacedStructure]->position + p->GetChunk(p->structures[lastPlacedStructure]->chunkID)->position * CHUNK_SIZE;
+						offset -= prevpos;
+						for (int i = 0; i < 4; i++)
 						{
-							dir = i;
+							if (CONVEYOR_OFFSETS[i] == offset)
+							{
+								dir = i;
+							}
 						}
-					}
-					direction = dir;
+						direction = dir;
 
-					dynamic_cast<Conveyor*>(p->structures[lastPlacedStructure])->SetDirection(direction);
+						dynamic_cast<Conveyor*>(p->structures[lastPlacedStructure])->SetDirection(direction);
+					}
+					Conveyor* s = new Conveyor(-1, p->id, direction);
+					lastPlacedStructure = p->structures.size();
+					p->structures.push_back(s);
+					s->SetPosition(tilePos);
 				}
-				Conveyor* s = new Conveyor(-1, p->id, direction);
-				lastPlacedStructure = p->structures.size();
-				p->structures.push_back(s);
-				s->SetPosition(tilePos);
+			}
+			else
+			{
+				lastPlacedStructure = -1;
 			}
 		}
-		else
+		else if (placeType == 1)
 		{
-			lastPlacedStructure = -1;
+			if (InputHandler::pressed(binds::UseTool))
+			{
+				if (!p->StructureInArea(tilePos, ResourceHandler::structureSizes[1]))
+				{
+					StorageSilo* s = new StorageSilo(-1, p->id);
+					p->structures.push_back(s);
+
+					s->SetPosition(tilePos);
+				}
+			}
 		}
 	}
 	else if (selectedTool == 1)

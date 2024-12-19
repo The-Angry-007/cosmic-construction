@@ -97,8 +97,8 @@ void Atlas::SetSprite(sf::Sprite& sprite, int id, int frameNum)
 {
 	int index = idPoses[id] + frameNum;
 	sprite.setTexture(texture);
-	sprite.setTextureRect(sf::IntRect(positions[index], (sf::Vector2i)textures[id].getSize()));
-	sprite.setOrigin((sf::Vector2f)(textures[id].getSize()) / 2.f);
+	sprite.setTextureRect(sf::IntRect(positions[index], (sf::Vector2i)textures[index].getSize()));
+	sprite.setOrigin((sf::Vector2f)(textures[index].getSize()) / 2.f);
 }
 
 void Atlas::SetSprite(sf::Sprite& sprite, int id)

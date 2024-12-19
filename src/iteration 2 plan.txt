@@ -67,6 +67,7 @@ x add conveyor placement algorithm:
 	x have a default rotation as well
 	- add a keybind to only place in the default rotation, if this is held then do that
 - add silo and silo gui
+- make hotbar tools sit right next to eachother no matter what
 - make placing conveyors require items
 - add terrain class
 - get saving and loading of terrain working

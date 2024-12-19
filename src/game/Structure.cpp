@@ -63,7 +63,7 @@ void Structure::SetPosition(sf::Vector2i position)
 	chunks[i].structures.push_back(index);
 	this->position = sf::Vector2i(position.x - chunks[i].position.x * CHUNK_SIZE, position.y - chunks[i].position.y * CHUNK_SIZE);
 	bottomRightPos = this->position + tileSize - sf::Vector2i(1, 1);
-	sf::Vector2f pos2 = (sf::Vector2f)this->position + sf::Vector2f(0.5f, 0.5f);
+	sf::Vector2f pos2 = (sf::Vector2f)this->position + (sf::Vector2f)tileSize / 2.f;
 	sf::Vector2f pos = game->planets[planetID].worldPos(pos2, chunks[i].id);
 	sprite.setPosition(pos);
 }

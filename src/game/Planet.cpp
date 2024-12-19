@@ -2,6 +2,7 @@
 #include "InputHandler.hpp"
 #include "Main.hpp"
 #include "binds.hpp"
+#include "utils.hpp"
 #define sh SaveHandler
 
 Planet::Planet(int id)
@@ -259,6 +260,53 @@ Chunk* Planet::GetChunk(int chunkID)
 		}
 	}
 	return nullptr;
+}
+bool Planet::StructureInArea(sf::Vector2i position, sf::Vector2i size)
+{
+	sf::Vector2i minChunkPos(
+		floor((float)position.x / (float)CHUNK_SIZE),
+		floor((float)position.y / (float)CHUNK_SIZE));
+	sf::Vector2i maxChunkPos(
+		floor((float)(position.x + size.x) / (float)CHUNK_SIZE),
+		floor((float)(position.y + size.y) / (float)CHUNK_SIZE));
+	// position -= sf::Vector2i(chunkPos.x * CHUNK_SIZE, chunkPos.y * CHUNK_SIZE);
+	//need to also check the chunks left and up
+	for (int x = minChunkPos.x - 1; x <= maxChunkPos.x; x++)
+	{
+		for (int y = minChunkPos.y - 1; y <= maxChunkPos.y; y++)
+		{
+			int chunk = -1;
+			for (uint i = 0; i < chunks.size(); i++)
+			{
+				if (chunks[i].position.x == x && chunks[i].position.y == y)
+				{
+					chunk = i;
+				}
+			}
+			if (chunk == -1)
+			{
+				continue;
+			}
+			for (uint i = 0; i < chunks[chunk].structures.size(); i++)
+			{
+				Structure* s = structures[chunks[chunk].structures[i]];
+				sf::Vector2i pos = s->position + sf::Vector2i(x * CHUNK_SIZE, y * CHUNK_SIZE);
+				sf::Vector2i pos2 = s->bottomRightPos + sf::Vector2i(x * CHUNK_SIZE, y * CHUNK_SIZE);
+				// if (x == 0 && y == 0)
+				// {
+				// 	std::cout << "position is:" << pos.x << " " << pos.y << std::endl;
+				// 	std::cout << "position2 is:" << pos2.x << " " << pos2.y << std::endl;
+				// }
+				sf::IntRect rect1(pos, s->tileSize);
+				sf::IntRect rect2(position, size);
+				if (RectIntersectsRect(rect1, rect2))
+				{
+					return true;
+				}
+			}
+		}
+	}
+	return false;
 }
 
 int Planet::StructureInPos(sf::Vector2i position)

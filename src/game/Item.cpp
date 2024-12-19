@@ -22,7 +22,7 @@ Item::Item(sf::Vector2f position, int id, int typeID)
 	ResourceHandler::itemAtlas->SetSprite(sprite, typeID);
 	hitbox = new Hitbox(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.f, 1.f));
 	hitbox->AddShape(new HitboxRect(sf::Vector2f(0.f, 0.f), sf::Vector2f(ITEM_SIZE / 2.f, ITEM_SIZE / 2.f)));
-	zindex = 1;
+	zindex = 2;
 }
 
 void Item::Update(float dt)

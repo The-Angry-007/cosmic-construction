@@ -17,7 +17,7 @@ public:
 	Structure();
 	virtual void Update(float dt);
 	virtual void Render();
-	void SetPosition(sf::Vector2i position);
+	virtual void SetPosition(sf::Vector2i position);
 	void SetID(int id);
 	virtual JSON ToJSON();
 	virtual void FromJSON();
