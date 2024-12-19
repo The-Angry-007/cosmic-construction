@@ -11,7 +11,7 @@ ToolHandler::ToolHandler()
 	bgObjs = {};
 	for (int i = 0; i < guihandler.numTools; i++)
 	{
-		bgObjs.push_back(dynamic_cast<GUIPanel*>(guihandler.guis[5]->GUIObjects[guihandler.numTools + i * 2]));
+		bgObjs.push_back(dynamic_cast<GUIImage*>(guihandler.guis[5]->GUIObjects[guihandler.numTools + i * 2 + 1]));
 		bgObjs[i]->blocksMouseInput = true;
 	}
 	hoveringItem = -1;

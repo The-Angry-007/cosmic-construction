@@ -67,8 +67,17 @@ x add conveyor placement algorithm:
 	x have a default rotation as well
 	- add a keybind to only place in the default rotation, if this is held then do that
 - add silo and silo gui
+	-detect conveyors pointing into silo on all edges and display tunnel sprites
+	-keep track of the last item index that left each side of silo
+	-if a conveyor pointing away from silo then eject item and increment last item index
+	-for gui:
+		-add a gui item class that has an image and some text (to display count)
+		-draw items in a big grid in an area that can be scrolled
+		-add new bind to enter the menu and leave it again
 - make hotbar tools sit right next to eachother no matter what
+- add tool to delete buildings
 - make placing conveyors require items
+- add proper build menu
 - add terrain class
 - get saving and loading of terrain working
 - start terrain generation algorithm
@@ -76,3 +85,7 @@ x add conveyor placement algorithm:
 	- patches of grass for visuals etc
 - add more structures that use terrain to produce items
 call it wraps here ig
+
+number of things to do: 17
+days left: 18
+need to complete AT LEAST one bullet point per day

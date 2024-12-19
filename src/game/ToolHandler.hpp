@@ -9,7 +9,7 @@ public:
 	int lastPlacedStructure;
 	int placeType;
 	GUIObject* selectedObj;
-	std::vector<GUIPanel*> bgObjs;
+	std::vector<GUIImage*> bgObjs;
 	int hoveringItem;
 	int draggingItem;
 	sf::Vector2f mouseStartDraggingPos;

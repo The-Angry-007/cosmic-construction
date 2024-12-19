@@ -5,3 +5,6 @@ StructureID/Path
 0/conveyor_left.png
 1/storage_silo_base.png
 1/storage_silo_top.png
+1/storage_silo_tunnel_0.png
+1/storage_silo_tunnel_1.png
+1/storage_silo_tunnel_2.png
