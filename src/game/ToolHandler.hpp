@@ -8,6 +8,7 @@ public:
 	int selectedTool;
 	int lastPlacedStructure;
 	int placeType;
+	sf::Vector2i prevTilePos;
 	GUIObject* selectedObj;
 	std::vector<GUIImage*> bgObjs;
 	int hoveringItem;

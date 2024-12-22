@@ -21,6 +21,7 @@ ToolHandler::ToolHandler()
 	itemStartDraggingPos = sf::Vector2f(0.f, 0.f);
 	lastPlacedStructure = -1;
 	placeType = 1;
+	prevTilePos = sf::Vector2i(-10000, -10000);
 }
 
 void ToolHandler::Update(float dt, Planet* p)
@@ -53,6 +54,10 @@ void ToolHandler::Update(float dt, Planet* p)
 	}
 	if (selectedTool == 0)
 	{
+		if (InputHandler::keyPressed(sf::Keyboard::Key::Right))
+		{
+			placeType = (placeType + 1) % 2;
+		}
 		sf::Vector2f mousePos = p->camera.WorldMousePos();
 		sf::Vector2i tilePos(floor(mousePos.x / TILE_SIZE.x), floor(mousePos.y / TILE_SIZE.y));
 		if (placeType == 0)
@@ -80,15 +85,34 @@ void ToolHandler::Update(float dt, Planet* p)
 
 						dynamic_cast<Conveyor*>(p->structures[lastPlacedStructure])->SetDirection(direction);
 					}
+					else
+					{
+						if (prevTilePos.x != -10000)
+						{
+							sf::Vector2i offset = tilePos;
+							offset -= prevTilePos;
+							int dir = 0;
+							for (int i = 0; i < 4; i++)
+							{
+								if (CONVEYOR_OFFSETS[i] == offset)
+								{
+									dir = i;
+								}
+							}
+							direction = dir;
+						}
+					}
 					Conveyor* s = new Conveyor(-1, p->id, direction);
 					lastPlacedStructure = p->structures.size();
 					p->structures.push_back(s);
 					s->SetPosition(tilePos);
 				}
+				prevTilePos = tilePos;
 			}
 			else
 			{
 				lastPlacedStructure = -1;
+				prevTilePos = sf::Vector2i(-10000, -10000);
 			}
 		}
 		else if (placeType == 1)

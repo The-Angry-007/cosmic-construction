@@ -23,6 +23,10 @@ StorageSilo::StorageSilo(int planetID)
 	{
 		sf::Sprite s;
 		ResourceHandler::structureAtlas->SetSprite(s, typeID, i);
+		// if (i >= 2)
+		// {
+		// 	s.setPosition(s.getPosition() + sf::Vector2f(1.f, 1.f));
+		// }
 		sprites.push_back(s);
 	}
 	this->sprite = sf::Sprite();
@@ -78,10 +82,21 @@ void StorageSilo::Render()
 	game->planets[planetID].renderObjects.push_back(RenderObject {
 		&sprites[1],
 		1 });
-	if (neighbours[neighbours.size() - 1] != -1)
+	for (int i = 0; i < tileSize.x; i++)
 	{
-		game->planets[planetID].renderObjects.push_back(RenderObject {
-			&sprites[4],
-			1 });
+		if (neighbours[neighbours.size() - 1 - i] != -1)
+		{
+			Structure* s = game->planets[planetID].structures[neighbours[neighbours.size() - 1 - i]];
+			if (s->typeID == 0)
+			{
+				Conveyor* c = dynamic_cast<Conveyor*>(s);
+				if (c->direction == 0)
+				{
+					game->planets[planetID].renderObjects.push_back(RenderObject {
+						&sprites[sprites.size() - i - 1],
+						1 });
+				}
+			}
+		}
 	}
 }
