@@ -12,6 +12,7 @@ public:
 	int id;
 	int chunkID;
 	sf::Sprite sprite;
+	sf::Vector2f moveDir;
 	Hitbox* hitbox;
 	Hitbox* accurateHitbox;
 	int parent;
@@ -19,7 +20,7 @@ public:
 
 	Item(sf::Vector2f position, int id, int typeID);
 	void SetParent(int index);
-	void Update(float dt);
+	void Update(float dt, Planet* planet);
 	void Render(Planet* planet);
 	sf::Vector2i GetTilePos();
 };

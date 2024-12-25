@@ -61,7 +61,6 @@ void Conveyor::UpdateNeighbours()
 }
 void Conveyor::Update(float dt)
 {
-	CollectItems();
 	//should ideally only be done when new structures created or destroyed
 	UpdateNeighbours();
 	//moving items
@@ -211,33 +210,60 @@ void Conveyor::Render()
 	}
 }
 
-void Conveyor::CollectItems()
+bool Conveyor::TryAddGroundItem(int index)
 {
 	//only add new items if there is room
 	int dir = (direction + 2) % 4;
 	if (progress[dir].size() > 0 && progress[dir][progress[dir].size() - 1] < gap)
 	{
-		return;
+		return false;
 	}
-	auto& allItems = game->planets[planetID].items;
-	auto& items = game->planets[planetID].GetChunk(chunkID)->items;
-	for (uint i = 0; i < items.size(); i++)
+	if (index == game->toolHandler->draggingItem && game->activePlanet == planetID)
 	{
-		if ((game->activePlanet == planetID && items[i] == game->toolHandler->draggingItem) || allItems[items[i]].parent != -1)
+		return false;
+	}
+	this->items[dir].push_back(index);
+	progress[dir].push_back(0.f);
+	game->planets[planetID].items[index].parent = id;
+	Item* item = &game->planets[planetID].items[index];
+	Chunk* chunk = game->planets[planetID].GetChunk(item->chunkID);
+	for (int i = 0; i < chunk->items.size(); i++)
+	{
+		if (chunk->items[i] == index)
 		{
-			continue;
-		}
-		auto tilePos = allItems[items[i]].GetTilePos();
-		if (tilePos == position)
-		{
-			this->items[dir].push_back(items[i]);
-			progress[dir].push_back(0.f);
-			allItems[items[i]].parent = id;
-			items.erase(items.begin() + i);
-			return;
+			chunk->items.erase(chunk->items.begin() + i);
+			break;
 		}
 	}
+	return true;
 }
+// void Conveyor::CollectItems()
+// {
+// 	//only add new items if there is room
+// 	int dir = (direction + 2) % 4;
+// 	if (progress[dir].size() > 0 && progress[dir][progress[dir].size() - 1] < gap)
+// 	{
+// 		return;
+// 	}
+// 	auto& allItems = game->planets[planetID].items;
+// 	auto& items = game->planets[planetID].GetChunk(chunkID)->items;
+// 	for (uint i = 0; i < items.size(); i++)
+// 	{
+// 		if ((game->activePlanet == planetID && items[i] == game->toolHandler->draggingItem) || allItems[items[i]].parent != -1)
+// 		{
+// 			continue;
+// 		}
+// 		auto tilePos = allItems[items[i]].GetTilePos();
+// 		if (tilePos == position)
+// 		{
+// 			this->items[dir].push_back(items[i]);
+// 			progress[dir].push_back(0.f);
+// 			allItems[items[i]].parent = id;
+// 			items.erase(items.begin() + i);
+// 			return;
+// 		}
+// 	}
+// }
 void Conveyor::SetDirection(int direction)
 {
 	this->direction = direction;

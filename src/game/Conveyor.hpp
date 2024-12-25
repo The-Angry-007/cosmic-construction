@@ -18,7 +18,8 @@ public:
 	void Update(float dt);
 	void Render();
 	void ProgressLane(int lane, float dt);
-	void CollectItems();
+	bool TryAddGroundItem(int index);
+	// void CollectItems();
 	void SetDirection(int direction);
 	int StructureInFront();
 	bool GetAdjacentItems(int dir);

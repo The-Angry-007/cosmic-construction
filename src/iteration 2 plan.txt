@@ -67,7 +67,9 @@ x add conveyor placement algorithm:
 	x have a default rotation as well
 	- add a keybind to only place in the default rotation, if this is held then do that
 - add silo and silo gui
-	-detect conveyors pointing into silo on all edges and display tunnel sprites
+	x detect conveyors pointing into silo on all edges and display tunnel sprites
+	- collect any items within bounds of silo
+	- split neighbours into inwards neighbours and outwards neighbours
 	-keep track of the last item index that left each side of silo
 	-if a conveyor pointing away from silo then eject item and increment last item index
 	-for gui:

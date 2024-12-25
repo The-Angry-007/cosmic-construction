@@ -23,14 +23,65 @@ Item::Item(sf::Vector2f position, int id, int typeID)
 	hitbox = new Hitbox(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.f, 1.f));
 	hitbox->AddShape(new HitboxRect(sf::Vector2f(0.f, 0.f), sf::Vector2f(ITEM_SIZE / 2.f, ITEM_SIZE / 2.f)));
 	zindex = 2;
+	moveDir = sf::Vector2f(0.f, 0.f);
 }
 
-void Item::Update(float dt)
+void Item::Update(float dt, Planet* planet)
 {
 	hitbox->shapes[0]->currentPos = position;
 	hitbox->SetTransform(position, sf::Vector2f(1.f, 1.f));
 	if (accurateHitbox != nullptr)
 		accurateHitbox->SetTransform(position, sf::Vector2f(1.f, 1.f));
+	sf::Vector2i tilePos = planet->tilePos(position);
+	int i = planet->StructureInPos(tilePos);
+	if (i == -1)
+	{
+		moveDir = sf::Vector2f(0.f, 0.f);
+		return;
+	}
+	Structure* s = planet->structures[i];
+	int index;
+	for (int i = 0; i < planet->items.size(); i++)
+	{
+		if (planet->items[i].id == id)
+		{
+			index = i;
+			break;
+		}
+	}
+	if (s->typeID == 0)
+	{
+		dynamic_cast<Conveyor*>(s)->TryAddGroundItem(index);
+	}
+	// else if (s->typeID == 1)
+	// {
+	// 	dynamic_cast<StorageSilo*>(s)->TryAddGroundItem(index);
+	// }
+	else
+	{
+		sf::Vector2f worldTilePos(tilePos.x * TILE_SIZE.x, tilePos.y * TILE_SIZE.y);
+		sf::Vector2f pos = position - worldTilePos;
+		pos.x /= TILE_SIZE.x;
+		pos.y /= TILE_SIZE.y;
+		float distx = (pos.x < 0.5f) ? pos.x : 1 - pos.x;
+		float disty = (pos.y < 0.5f) ? pos.y : 1 - pos.y;
+		if (moveDir == sf::Vector2f(0.f, 0.f))
+		{
+			if (distx < disty)
+			{
+				moveDir = sf::Vector2f((pos.x < 0.5f) ? -1 : 1, 0.f);
+			}
+			else
+			{
+				moveDir = sf::Vector2f(0.f, (pos.y < 0.5f) ? -1 : 1);
+			}
+			moveDir.x *= 1.1f;
+			moveDir.y *= 1.1f;
+		}
+
+		position.x = (tilePos.x + (moveDir.x + 1) / 2.f) * TILE_SIZE.x;
+		position.y = (tilePos.y + (moveDir.y + 1) / 2.f) * TILE_SIZE.y;
+	}
 }
 
 void Item::Render(Planet* planet)

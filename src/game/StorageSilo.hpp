@@ -10,9 +10,11 @@ public:
 	StorageSilo(int id, int planetID);
 	StorageSilo(int planetID);
 	void SetPosition(sf::Vector2i pos);
+	void TryAddGroundItem(int index);
 	void UpdateNeighbours();
 	void Update(float dt);
 	void Render();
 	JSON ToJSON();
 	void FromJSON(JSON j);
+	void AddItem(int index);
 };

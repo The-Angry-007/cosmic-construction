@@ -150,9 +150,9 @@ void InputHandler::ProcessEvents()
 			typedText += event.text.unicode;
 		}
 		//update scroll
-		else if (event.type == event.MouseWheelMoved)
+		else if (event.type == event.MouseWheelScrolled)
 		{
-			scroll.y = event.mouseWheel.delta;
+			scroll.y = event.mouseWheelScroll.delta;
 		}
 		//if window is resized, set width and height to new size
 		else if (event.type == event.Resized)

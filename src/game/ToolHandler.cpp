@@ -191,6 +191,7 @@ void ToolHandler::Update(float dt, Planet* p)
 			{
 				sf::Vector2f offset = p->camera.WorldMousePos() - mouseStartDraggingPos;
 				p->items[draggingItem].position = itemStartDraggingPos + offset;
+				p->items[draggingItem].moveDir = sf::Vector2f(0.f, 0.f);
 				p->MoveItem(draggingItem);
 			}
 		}

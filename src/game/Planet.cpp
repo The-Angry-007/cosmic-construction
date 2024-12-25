@@ -110,7 +110,11 @@ void Planet::Update(float dt)
 	}
 	for (uint i = 0; i < items.size(); i++)
 	{
-		items[i].Update(dt);
+		if (items[i].parent != -1)
+		{
+			continue;
+		}
+		items[i].Update(dt, &game->planets[id]);
 	}
 	for (uint i = 0; i < structures.size(); i++)
 	{

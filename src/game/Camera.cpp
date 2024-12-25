@@ -46,11 +46,11 @@ void Camera::Update(float dt)
 	{
 		if (InputHandler::scroll.y > 0)
 		{
-			targetZoom /= zoomRate;
+			targetZoom /= (((zoomRate - 1) * abs(InputHandler::scroll.y)) + 1);
 		}
 		else
 		{
-			targetZoom *= zoomRate;
+			targetZoom *= (((zoomRate - 1) * abs(InputHandler::scroll.y)) + 1);
 		}
 		//minimum and maximum zoom
 		if (targetZoom < 0.01f)
