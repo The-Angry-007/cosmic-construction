@@ -10,6 +10,8 @@ Game::Game()
 	activePlanet = 0;
 	planets.push_back(Planet(0));
 	loadedTimer = 5;
+	InputHandler::RemoveMbPressed(sf::Mouse::Button::Left);
+	InputHandler::RemoveMbDown(sf::Mouse::Button::Left);
 	toolHandler = new ToolHandler();
 }
 Game::~Game()

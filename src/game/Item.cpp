@@ -53,10 +53,10 @@ void Item::Update(float dt, Planet* planet)
 	{
 		dynamic_cast<Conveyor*>(s)->TryAddGroundItem(index);
 	}
-	// else if (s->typeID == 1)
-	// {
-	// 	dynamic_cast<StorageSilo*>(s)->TryAddGroundItem(index);
-	// }
+	else if (s->typeID == 1)
+	{
+		dynamic_cast<StorageSilo*>(s)->TryAddGroundItem(index);
+	}
 	else
 	{
 		sf::Vector2f worldTilePos(tilePos.x * TILE_SIZE.x, tilePos.y * TILE_SIZE.y);

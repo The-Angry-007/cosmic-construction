@@ -9,7 +9,9 @@ public:
 	std::vector<sf::Sprite> sprites;
 	StorageSilo(int id, int planetID);
 	StorageSilo(int planetID);
+	~StorageSilo();
 	void SetPosition(sf::Vector2i pos);
+	void SetVisualPosition(sf::Vector2i pos);
 	void TryAddGroundItem(int index);
 	void UpdateNeighbours();
 	void Update(float dt);
@@ -17,4 +19,5 @@ public:
 	JSON ToJSON();
 	void FromJSON(JSON j);
 	void AddItem(int index);
+	void RenderPreview();
 };

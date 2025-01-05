@@ -18,6 +18,7 @@ Planet::Planet(int id)
 
 	chunks = {};
 	items = {};
+
 	camera = Camera();
 }
 void Planet::Init(bool load)
@@ -100,6 +101,7 @@ void Planet::Init(bool load)
 }
 void Planet::Update(float dt)
 {
+
 	camera.Update(dt);
 	GenerateChunksInView();
 
@@ -114,29 +116,21 @@ void Planet::Update(float dt)
 		{
 			continue;
 		}
+		if (game->activePlanet == id && game->toolHandler->draggingItem == i)
+		{
+			continue;
+		}
 		items[i].Update(dt, &game->planets[id]);
 	}
 	for (uint i = 0; i < structures.size(); i++)
 	{
 		structures[i]->Update(dt);
 	}
-	// if (InputHandler::down(binds::UseTool) && game->toolHandler->selectedTool == 0)
-	// {
-	// }
-
-	// if (InputHandler::keyPressed(sf::Keyboard::Key::Right))
-	// {
-	// 	placeDir++;
-	// 	if (placeDir == 4)
-	// 	{
-	// 		placeDir = 0;
-	// 	}
-	// }
 }
 
 void Planet::Render()
 {
-	renderObjects = {};
+
 	sf::FloatRect camRect = camera.toFloatRect();
 	sf::RectangleShape rect(sf::Vector2f(camRect.width, camRect.height));
 	rect.setPosition(camRect.left, camRect.top);
@@ -147,11 +141,16 @@ void Planet::Render()
 		if (chunks[i].isVisible())
 			chunks[i].Render();
 	}
-	std::sort(renderObjects.begin(), renderObjects.end());
-	for (uint i = 0; i < renderObjects.size(); i++)
+
+	if (renderObjects.size() > 0)
 	{
-		window->draw(*renderObjects[i].sprite);
+		std::sort(renderObjects.begin(), renderObjects.end());
+		for (uint i = 0; i < renderObjects.size(); i++)
+		{
+			window->draw(*renderObjects[i].sprite);
+		}
 	}
+	renderObjects = {};
 }
 
 void Planet::Save()

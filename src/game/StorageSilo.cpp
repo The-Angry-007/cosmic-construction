@@ -6,7 +6,7 @@ StorageSilo::StorageSilo(int id, int planetID)
 	SetID(id);
 	this->planetID = planetID;
 	typeID = 1;
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 11; i++)
 	{
 		sf::Sprite s;
 		ResourceHandler::structureAtlas->SetSprite(s, typeID, i);
@@ -23,10 +23,7 @@ StorageSilo::StorageSilo(int planetID)
 	{
 		sf::Sprite s;
 		ResourceHandler::structureAtlas->SetSprite(s, typeID, i);
-		// if (i >= 2)
-		// {
-		// 	s.setPosition(s.getPosition() + sf::Vector2f(1.f, 1.f));
-		// }
+
 		sprites.push_back(s);
 	}
 	this->sprite = sf::Sprite();
@@ -40,6 +37,10 @@ void StorageSilo::SetPosition(sf::Vector2i position)
 		sprites[i].setPosition(this->sprite.getPosition());
 	}
 	UpdateNeighbours();
+}
+
+StorageSilo::~StorageSilo()
+{
 }
 
 void StorageSilo::UpdateNeighbours()
@@ -98,7 +99,21 @@ void StorageSilo::UpdateNeighbours()
 		}
 	}
 }
-
+void StorageSilo::TryAddGroundItem(int index)
+{
+	Item* item = &game->planets[planetID].items[index];
+	Chunk* chunk = game->planets[planetID].GetChunk(item->chunkID);
+	for (int i = 0; i < chunk->items.size(); i++)
+	{
+		if (chunk->items[i] == index)
+		{
+			chunk->items.erase(chunk->items.begin() + i);
+			break;
+		}
+	}
+	item->parent = id;
+	AddItem(index);
+}
 void StorageSilo::Update(float dt)
 {
 	UpdateNeighbours();
@@ -151,13 +166,41 @@ void StorageSilo::Render()
 	game->planets[planetID].renderObjects.push_back(RenderObject {
 		&sprites[1],
 		1 });
-	for (int i = 0; i < tileSize.x; i++)
+	for (int i = 0; i < 9; i++)
 	{
-		if (neighbours[neighbours.size() - 1 - i] != -1)
+		if (neighbours[i + 3] != -1)
 		{
 			game->planets[planetID].renderObjects.push_back(RenderObject {
-				&sprites[sprites.size() - i - 1],
+				&sprites[i + 2],
 				1 });
 		}
+	}
+}
+
+void StorageSilo::RenderPreview()
+{
+	int opacity = 100;
+	sf::Color col = sf::Color::White;
+	if (!CanBePlaced())
+	{
+		col = sf::Color::Red;
+	}
+	col.a = opacity;
+	sprites[0].setColor(col);
+	sprites[1].setColor(col);
+	game->planets[planetID]
+		.renderObjects.push_back(RenderObject {
+			&sprites[0],
+			0 });
+	game->planets[planetID].renderObjects.push_back(RenderObject {
+		&sprites[1],
+		1 });
+}
+void StorageSilo::SetVisualPosition(sf::Vector2i pos)
+{
+	Structure::SetVisualPosition(pos);
+	for (uint i = 0; i < sprites.size(); i++)
+	{
+		sprites[i].setPosition(sprite.getPosition());
 	}
 }

@@ -20,8 +20,9 @@ ToolHandler::ToolHandler()
 	mouseStartDraggingPos = sf::Vector2f(0.f, 0.f);
 	itemStartDraggingPos = sf::Vector2f(0.f, 0.f);
 	lastPlacedStructure = -1;
-	placeType = 1;
+	placeType = 0;
 	prevTilePos = sf::Vector2i(-10000, -10000);
+	previewStructure = nullptr;
 }
 
 void ToolHandler::Update(float dt, Planet* p)
@@ -54,15 +55,27 @@ void ToolHandler::Update(float dt, Planet* p)
 	}
 	if (selectedTool == 0)
 	{
+
 		if (InputHandler::keyPressed(sf::Keyboard::Key::Right))
 		{
 			placeType = (placeType + 1) % 2;
+		}
+
+		if (previewStructure != nullptr)
+		{
+			delete previewStructure;
+			previewStructure = nullptr;
 		}
 		sf::Vector2f mousePos = p->camera.WorldMousePos();
 		sf::Vector2i tilePos(floor(mousePos.x / TILE_SIZE.x), floor(mousePos.y / TILE_SIZE.y));
 		if (placeType == 0)
 		{
 
+			Conveyor* c = new Conveyor(0, game->activePlanet, placeDir);
+			c->SetVisualPosition(tilePos);
+
+			previewStructure = c;
+			previewStructure->RenderPreview();
 			if (InputHandler::down(binds::UseTool))
 			{
 				if (p->StructureInPos(tilePos) == -1)
@@ -107,6 +120,30 @@ void ToolHandler::Update(float dt, Planet* p)
 					p->structures.push_back(s);
 					s->SetPosition(tilePos);
 				}
+				else
+				{
+					if (lastPlacedStructure != -1)
+					{
+						if (prevTilePos != tilePos && prevTilePos.x != -10000)
+						{
+							sf::Vector2i offset = tilePos;
+							offset -= prevTilePos;
+							int dir = 0;
+							for (int i = 0; i < 4; i++)
+							{
+								if (CONVEYOR_OFFSETS[i] == offset)
+								{
+									dir = i;
+								}
+							}
+							dynamic_cast<Conveyor*>(p->structures[lastPlacedStructure])->SetDirection(dir);
+						}
+					}
+					if (p->structures[p->StructureInPos(tilePos)]->typeID == 0)
+					{
+						lastPlacedStructure = p->StructureInPos(tilePos);
+					}
+				}
 				prevTilePos = tilePos;
 			}
 			else
@@ -117,6 +154,11 @@ void ToolHandler::Update(float dt, Planet* p)
 		}
 		else if (placeType == 1)
 		{
+			StorageSilo* s = new StorageSilo(0, game->activePlanet);
+			s->SetVisualPosition(tilePos);
+
+			previewStructure = s;
+			previewStructure->RenderPreview();
 			if (InputHandler::pressed(binds::UseTool))
 			{
 				if (!p->StructureInArea(tilePos, ResourceHandler::structureSizes[1]))

@@ -14,6 +14,7 @@ public:
 	float gap;
 	Conveyor(int id, int planetID, int direction);
 	Conveyor(int planetID);
+	~Conveyor();
 	void FromJSON(JSON j);
 	void Update(float dt);
 	void Render();
@@ -21,9 +22,11 @@ public:
 	bool TryAddGroundItem(int index);
 	// void CollectItems();
 	void SetDirection(int direction);
+
 	int StructureInFront();
 	bool GetAdjacentItems(int dir);
 	void TryInsertItem(int item, float progress);
 	void UpdateNeighbours();
 	JSON ToJSON();
+	void RenderPreview();
 };

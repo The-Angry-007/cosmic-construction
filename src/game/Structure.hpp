@@ -20,7 +20,11 @@ public:
 	virtual void SetPosition(sf::Vector2i position);
 	void SetID(int id);
 	virtual JSON ToJSON();
+	virtual void SetVisualPosition(sf::Vector2i pos);
 	virtual void FromJSON();
+	virtual void RenderPreview();
+	bool CanBePlaced();
+	virtual ~Structure();
 };
 
 extern int CurrentStructureID;

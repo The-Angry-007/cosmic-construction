@@ -5,21 +5,6 @@
 int CurrentStructureID = 0;
 Structure::Structure()
 {
-
-	// this->chunkID = chunkID;
-	// this->planetID = planetID;
-	// this->typeID = typeID;
-	// this->position = position;
-
-	// tileSize = ResourceHandler::structureSizes[typeID];
-	// sf::Texture& text = ResourceHandler::structureTextures[typeID];
-	// sprite = sf::Sprite(text);
-	// sprite.setPosition(sf::Vector2f(
-	// 					   ((float)position.x + tileSize.x / 2.f) * (float)TILE_SIZE.x,
-	// 					   ((float)position.y + tileSize.y / 2.f) * (float)TILE_SIZE.y)
-	// 	+ game->planets[planetID].GetChunk(chunkID)->GetWorldPos(sf::Vector2f(0, 0)));
-	// sprite.setOrigin((sf::Vector2f)text.getSize() / 2.f);
-	// std::cout << "finished constructor" << std::endl;
 }
 
 void Structure::SetID(int id)
@@ -75,4 +60,32 @@ JSON Structure::ToJSON()
 
 void Structure::FromJSON()
 {
+}
+
+Structure::~Structure()
+{
+	// delete hitbox;
+}
+
+bool Structure::CanBePlaced()
+{
+	sf::Vector2i pos = position + game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE;
+	return !(game->planets[planetID].StructureInArea(pos, tileSize));
+}
+
+void Structure::RenderPreview()
+{
+	std::cout << "i should not be called" << std::endl;
+}
+
+void Structure::SetVisualPosition(sf::Vector2i pos)
+{
+	auto& chunks = game->planets[planetID].chunks;
+
+	int i = game->planets[planetID].ChunkAtPos(pos);
+	this->chunkID = chunks[i].id;
+	this->position = sf::Vector2i(pos.x - chunks[i].position.x * CHUNK_SIZE, pos.y - chunks[i].position.y * CHUNK_SIZE);
+	sf::Vector2f p2(pos.x + tileSize.x / 2.f, pos.y + tileSize.y / 2.f);
+	sf::Vector2f p(p2.x * TILE_SIZE.x, p2.y * TILE_SIZE.y);
+	sprite.setPosition(p);
 }

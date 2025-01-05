@@ -9,6 +9,7 @@ std::vector<sf::Vector2i> CONVEYOR_OFFSETS = {
 	sf::Vector2i(0, 1),
 	sf::Vector2i(-1, 0),
 };
+
 Conveyor::Conveyor(int id, int planetID, int direction)
 {
 	SetID(id);
@@ -237,33 +238,7 @@ bool Conveyor::TryAddGroundItem(int index)
 	}
 	return true;
 }
-// void Conveyor::CollectItems()
-// {
-// 	//only add new items if there is room
-// 	int dir = (direction + 2) % 4;
-// 	if (progress[dir].size() > 0 && progress[dir][progress[dir].size() - 1] < gap)
-// 	{
-// 		return;
-// 	}
-// 	auto& allItems = game->planets[planetID].items;
-// 	auto& items = game->planets[planetID].GetChunk(chunkID)->items;
-// 	for (uint i = 0; i < items.size(); i++)
-// 	{
-// 		if ((game->activePlanet == planetID && items[i] == game->toolHandler->draggingItem) || allItems[items[i]].parent != -1)
-// 		{
-// 			continue;
-// 		}
-// 		auto tilePos = allItems[items[i]].GetTilePos();
-// 		if (tilePos == position)
-// 		{
-// 			this->items[dir].push_back(items[i]);
-// 			progress[dir].push_back(0.f);
-// 			allItems[items[i]].parent = id;
-// 			items.erase(items.begin() + i);
-// 			return;
-// 		}
-// 	}
-// }
+
 void Conveyor::SetDirection(int direction)
 {
 	this->direction = direction;
@@ -350,4 +325,26 @@ void Conveyor::FromJSON(JSON j)
 Conveyor::Conveyor(int planetID)
 {
 	this->planetID = planetID;
+}
+
+Conveyor::~Conveyor()
+{
+	// delete hitbox;
+}
+
+void Conveyor::RenderPreview()
+{
+	int opacity = 100;
+	sf::Color col = sf::Color::White;
+
+	if (!CanBePlaced())
+	{
+		col = sf::Color(255, 100, 100);
+	}
+	col.a = opacity;
+	sprite.setColor(col);
+	Planet& p = game->planets[planetID];
+	p.renderObjects.push_back(RenderObject {
+		&sprite,
+		zindex + 100 });
 }
