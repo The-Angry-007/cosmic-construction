@@ -89,3 +89,6 @@ void Structure::SetVisualPosition(sf::Vector2i pos)
 	sf::Vector2f p(p2.x * TILE_SIZE.x, p2.y * TILE_SIZE.y);
 	sprite.setPosition(p);
 }
+
+void Structure::Interact()
+{}

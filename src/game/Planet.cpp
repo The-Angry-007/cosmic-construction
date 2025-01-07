@@ -126,6 +126,16 @@ void Planet::Update(float dt)
 	{
 		structures[i]->Update(dt);
 	}
+	if (InputHandler::pressed(binds::Interact))
+	{
+		sf::Vector2f wmp = camera.WorldMousePos();
+		sf::Vector2i mouseTilePos(floor(wmp.x), floor(wmp.y));
+		int s = StructureInPos(mouseTilePos);
+		if (s != -1)
+		{
+			structures[s]->Interact();
+		}
+	}
 }
 
 void Planet::Render()

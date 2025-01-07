@@ -14,6 +14,7 @@ public:
 	int fps;
 	std::vector<sf::Vector2f> toolPoses;
 	int numTools;
+	int numGUIs;
 
 	GUIHandler();
 	//note that guihandler has no destructor as it persists throughout the entire runtime of the program

@@ -1,5 +1,6 @@
 #pragma once
 #include "Structure.hpp"
+#include "gui.hpp"
 class StorageSilo : public Structure
 {
 public:
@@ -20,4 +21,5 @@ public:
 	void FromJSON(JSON j);
 	void AddItem(int index);
 	void RenderPreview();
+	void Interact();
 };

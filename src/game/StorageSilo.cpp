@@ -204,3 +204,9 @@ void StorageSilo::SetVisualPosition(sf::Vector2i pos)
 		sprites[i].setPosition(sprite.getPosition());
 	}
 }
+
+void StorageSilo::Interact()
+{
+	SiloMenu s(this);
+	guihandler.AddGUI(&s);
+}

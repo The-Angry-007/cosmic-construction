@@ -14,3 +14,4 @@
 #include "gui/GUISlider.hpp"
 #include "gui/LoadGame.hpp"
 #include "gui/Settings.hpp"
+#include "gui/SiloMenu.hpp"

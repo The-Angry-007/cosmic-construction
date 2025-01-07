@@ -23,6 +23,7 @@ public:
 	virtual void SetVisualPosition(sf::Vector2i pos);
 	virtual void FromJSON();
 	virtual void RenderPreview();
+	virtual void Interact();
 	bool CanBePlaced();
 	virtual ~Structure();
 };

@@ -313,4 +313,5 @@ void GUIHandler::InitGUIS()
 		}
 		guis.push_back(g);
 	}
+	numGUIs = guis.size();
 }
