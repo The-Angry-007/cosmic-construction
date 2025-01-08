@@ -75,7 +75,8 @@ void ToolHandler::Update(float dt, Planet* p)
 			c->SetVisualPosition(tilePos);
 
 			previewStructure = c;
-			previewStructure->RenderPreview();
+			if (!InputHandler::mouseIsBlocked)
+				previewStructure->RenderPreview();
 			if (InputHandler::down(binds::UseTool))
 			{
 				if (p->StructureInPos(tilePos) == -1)
@@ -158,7 +159,9 @@ void ToolHandler::Update(float dt, Planet* p)
 			s->SetVisualPosition(tilePos);
 
 			previewStructure = s;
-			previewStructure->RenderPreview();
+			if (!InputHandler::mouseIsBlocked)
+
+				previewStructure->RenderPreview();
 			if (InputHandler::pressed(binds::UseTool))
 			{
 				if (!p->StructureInArea(tilePos, ResourceHandler::structureSizes[1]))

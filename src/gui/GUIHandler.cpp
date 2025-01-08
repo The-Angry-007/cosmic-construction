@@ -61,6 +61,10 @@ void GUIHandler::AddGUI(GUI* gui)
 //updates the active gui
 void GUIHandler::Update(float dt)
 {
+	if (guis.size() > numGUIs)
+	{
+		guis[guis.size() - 1]->Update(dt);
+	}
 	guis[activeGui]->Update(dt);
 	//the pause keybind also serves as a back button in menus that arent the main game gui
 	if (activeGui != 5 && InputHandler::pressed(binds::Pause) && activeGui != 6)

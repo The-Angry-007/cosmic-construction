@@ -5,13 +5,16 @@ GUIImage::GUIImage(sf::Vector2f position, sf::Vector2f size, std::string path)
 {
 	this->position = position;
 	this->size = size;
-	if (!texture.loadFromFile(path))
+	if (path != "")
 	{
-		std::cout << "GUIImage failed to load texture";
-		window->close();
-		exit(EXIT_FAILURE);
+		if (!texture.loadFromFile(path))
+		{
+			std::cout << "GUIImage failed to load texture";
+			window->close();
+			exit(EXIT_FAILURE);
+		}
+		sprite.setTexture(texture);
 	}
-	sprite.setTexture(texture);
 	//do not keep the aspect ratio by default
 	keepAspectRatio = false;
 	hitbox = new Hitbox(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.f, 1.f));

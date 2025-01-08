@@ -7,7 +7,7 @@ GUIItem::GUIItem(sf::Vector2f position, sf::Vector2f size, int typeID, int amoun
 	this->size = size;
 	this->typeID = typeID;
 	this->amount = amount;
-	image = new GUIImage(position, size, "resources/images/squareButton.png");
+	image = new GUIImage(position, size, "");
 	label = new GUILabel(position + size / 2.f, size / 4.f, std::to_string(amount));
 	label->origin = sf::Vector2f(1.f, 1.f);
 	ResourceHandler::itemAtlas->SetSprite(image->sprite, typeID);
@@ -19,6 +19,8 @@ void GUIItem::Update(float dt)
 }
 void GUIItem::RenderToTexture(sf::RenderTexture* texture)
 {
+	image->position = position;
+	image->size = size;
 	image->RenderToTexture(texture);
 	actualSize = sf::Vector2f(image->sprite.getGlobalBounds().width / width / 2.f, image->sprite.getGlobalBounds().height / height / 2.f);
 	label->position = position + actualSize / 2.f;
