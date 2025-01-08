@@ -27,7 +27,8 @@ void GUIImage::Render()
 	//update position of hitbox
 	hitbox->shapes[0]->currentPos = position;
 	//get size of texture
-	sf::Vector2u texSize = texture.getSize();
+	// sf::Vector2u texSize = texture.getSize();
+	sf::Vector2u texSize(sprite.getTextureRect().width, sprite.getTextureRect().height);
 	//scale position and size to be in terms of pixels
 	sf::Vector2f cPos(position.x * width, position.y * height);
 	sf::Vector2f cSize(size.x * width, size.y * height);
@@ -80,7 +81,8 @@ void GUIImage::Render()
 void GUIImage::RenderToTexture(sf::RenderTexture* texture)
 {
 	hitbox->shapes[0]->currentPos = position;
-	sf::Vector2u texSize = this->texture.getSize();
+	sf::Vector2u texSize(sprite.getTextureRect().width, sprite.getTextureRect().height);
+	// sf::Vector2u texSize = this->texture.getSize();
 	sf::Vector2f cPos(position.x * width, position.y * height);
 	sf::Vector2f cSize(size.x * width, size.y * height);
 	float widthMult = ((float)texSize.x) / (cSize.x * 2.f);
