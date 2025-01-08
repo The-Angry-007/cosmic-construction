@@ -15,6 +15,7 @@ public:
 	std::vector<sf::Vector2f> toolPoses;
 	int numTools;
 	int numGUIs;
+	sf::Font guifont;
 
 	GUIHandler();
 	//note that guihandler has no destructor as it persists throughout the entire runtime of the program

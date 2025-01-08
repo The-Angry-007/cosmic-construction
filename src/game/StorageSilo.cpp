@@ -14,6 +14,8 @@ StorageSilo::StorageSilo(int id, int planetID)
 	}
 	this->sprite = sf::Sprite();
 	tileSize = ResourceHandler::structureSizes[typeID];
+	itemIDs = {};
+	itemQuantities = {};
 }
 StorageSilo::StorageSilo(int planetID)
 {
@@ -28,6 +30,8 @@ StorageSilo::StorageSilo(int planetID)
 	}
 	this->sprite = sf::Sprite();
 	tileSize = ResourceHandler::structureSizes[typeID];
+	itemIDs = {};
+	itemQuantities = {};
 }
 void StorageSilo::SetPosition(sf::Vector2i position)
 {
@@ -147,8 +151,22 @@ void StorageSilo::AddItem(int index)
 	}
 	if (!existing)
 	{
-		itemIDs.push_back(item.typeId);
-		itemQuantities.push_back(1);
+
+		if (itemIDs.size() == 0 || item.typeId > itemIDs[itemIDs.size() - 1])
+		{
+			itemIDs.push_back(item.typeId);
+			itemQuantities.push_back(1);
+		}
+		else
+			for (uint i = 0; i < itemIDs.size(); i++)
+			{
+				if (item.typeId < itemIDs[i])
+				{
+					itemIDs.insert(itemIDs.begin() + i, item.typeId);
+					itemQuantities.insert(itemQuantities.begin() + i, 1);
+					break;
+				}
+			}
 	}
 }
 JSON StorageSilo::ToJSON()

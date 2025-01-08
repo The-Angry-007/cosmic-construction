@@ -3,20 +3,20 @@
 GUILabel::GUILabel(sf::Vector2f position, sf::Vector2f size, std::string text)
 {
 	//attempt to load default font
-	if (!font.loadFromFile("resources/fonts/default font.ttf"))
-	{
-		std::cout << "gui label failed to load default font" << std::endl;
-		//this ends the program immediately
-		window->close();
-		exit(EXIT_FAILURE);
-	}
+	// if (!font.loadFromFile("resources/fonts/default font.ttf"))
+	// {
+	// 	std::cout << "gui label failed to load default font" << std::endl;
+	// 	//this ends the program immediately
+	// 	window->close();
+	// 	exit(EXIT_FAILURE);
+	// }
 	this->position = position;
 	this->size = size;
 	this->value = text;
 	color = sf::Color::White;
 	this->text.setFillColor(color);
 	this->text.setString(this->value);
-	this->text.setFont(font);
+	this->text.setFont(guihandler.guifont);
 	origin = sf::Vector2f(0.5f, 0.5f);
 	altCharSize = false;
 }

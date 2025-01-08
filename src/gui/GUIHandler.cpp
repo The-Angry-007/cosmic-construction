@@ -107,6 +107,7 @@ GUI* GUIHandler::GetOpenGUI()
 */
 void GUIHandler::InitGUIS()
 {
+	guifont.loadFromFile("resources/fonts/default font.ttf");
 	activeGui = 0;
 	openedGuis = { 0 };
 	guis = {};
