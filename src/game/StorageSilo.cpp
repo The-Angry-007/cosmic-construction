@@ -191,10 +191,10 @@ void StorageSilo::RenderPreview()
 	game->planets[planetID]
 		.renderObjects.push_back(RenderObject {
 			&sprites[0],
-			0 });
+			100 });
 	game->planets[planetID].renderObjects.push_back(RenderObject {
 		&sprites[1],
-		1 });
+		101 });
 }
 void StorageSilo::SetVisualPosition(sf::Vector2i pos)
 {
@@ -207,6 +207,6 @@ void StorageSilo::SetVisualPosition(sf::Vector2i pos)
 
 void StorageSilo::Interact()
 {
-	SiloMenu s(this);
-	guihandler.AddGUI(&s);
+	std::cout << "interacted with silo" << std::endl;
+	guihandler.AddGUI(new SiloMenu(this));
 }

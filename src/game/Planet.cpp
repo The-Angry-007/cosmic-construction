@@ -129,7 +129,7 @@ void Planet::Update(float dt)
 	if (InputHandler::pressed(binds::Interact))
 	{
 		sf::Vector2f wmp = camera.WorldMousePos();
-		sf::Vector2i mouseTilePos(floor(wmp.x), floor(wmp.y));
+		sf::Vector2i mouseTilePos(floor(wmp.x / TILE_SIZE.x), floor(wmp.y / TILE_SIZE.y));
 		int s = StructureInPos(mouseTilePos);
 		if (s != -1)
 		{

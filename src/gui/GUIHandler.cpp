@@ -77,6 +77,10 @@ void GUIHandler::Render()
 	sf::View GUIView(sf::FloatRect(0.f, 0.f, width, height));
 	window->setView(GUIView);
 	guis[activeGui]->Render();
+	if (guis.size() > numGUIs)
+	{
+		guis[guis.size() - 1]->Render();
+	}
 	fpsLabel->Render();
 	window->setView(currentView);
 }
