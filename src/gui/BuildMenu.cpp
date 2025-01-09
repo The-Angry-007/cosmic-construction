@@ -1,4 +1,5 @@
 #include "BuildMenu.hpp"
+#include "GUIStructure.hpp"
 #include "utils.hpp"
 BuildMenu::BuildMenu()
 {
@@ -21,10 +22,13 @@ BuildMenu::BuildMenu()
 	infoLabel->SetColor(sf::Color::Black);
 	infoLabel->origin = sf::Vector2f(0.5f, 0.f);
 	bg = new GUIPanel(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.4f, 0.4f), sf::Color(150, 150, 150));
+	menus.push_back({});
+	menus[0].push_back(new GUIStructure(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.2f, 0.2f), 0, { 0 }));
 }
 
 void BuildMenu::SetTab(int tab)
 {
+	currentTab = tab;
 	for (int i = 0; i < 3; i++)
 	{
 		sf::Color col(100, 100, 100);
@@ -48,6 +52,10 @@ void BuildMenu::Update(float dt)
 			SetTab(i);
 		}
 	}
+	for (int i = 0; i < menus[currentTab].size(); i++)
+	{
+		menus[currentTab][i]->Update(dt);
+	}
 	infoLabel->Update(dt);
 }
 void BuildMenu::Render()
@@ -56,6 +64,11 @@ void BuildMenu::Render()
 	for (int i = 0; i < tabs.size(); i++)
 	{
 		tabs[i]->Render();
+	}
+
+	for (int i = 0; i < menus[currentTab].size(); i++)
+	{
+		menus[currentTab][i]->Render();
 	}
 	infoLabel->Render();
 }

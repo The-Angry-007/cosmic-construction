@@ -41,13 +41,11 @@ int main()
 	window->display();
 	sf::Clock deltaClock;
 	float timePerUpdate = 1.f / ups;
-	//label to display fps
-	GUILabel fpsLabel(sf::Vector2f(0.1f, 0.03f), sf::Vector2f(0.1f, 0.03f), "");
-	fpsLabel.origin = sf::Vector2f(0.f, 0.f);
-	//construct the interfaces
-	guihandler.InitGUIS();
 
 	ResourceHandler::Init();
+
+	//construct the interfaces
+	guihandler.InitGUIS();
 
 	deltaClock.restart();
 	//main loop: runs once for each frame

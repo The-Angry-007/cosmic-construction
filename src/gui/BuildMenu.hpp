@@ -11,6 +11,7 @@ public:
 	GUIPanel* bg;
 	GUILabel* infoText;
 	GUILabel* infoLabel;
+	std::vector<std::vector<GUIObject*>> menus;
 	BuildMenu();
 	void Update(float dt);
 	void Render();
