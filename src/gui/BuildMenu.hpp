@@ -12,6 +12,7 @@ public:
 	GUILabel* infoText;
 	GUILabel* infoLabel;
 	std::vector<std::vector<GUIObject*>> menus;
+	std::vector<std::vector<int>> typeIDs;
 	BuildMenu();
 	void Update(float dt);
 	void Render();

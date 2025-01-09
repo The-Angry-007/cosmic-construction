@@ -1,5 +1,6 @@
 #include "BuildMenu.hpp"
 #include "GUIStructure.hpp"
+#include "game/ResourceHandler.hpp"
 #include "utils.hpp"
 BuildMenu::BuildMenu()
 {
@@ -23,7 +24,36 @@ BuildMenu::BuildMenu()
 	infoLabel->origin = sf::Vector2f(0.5f, 0.f);
 	bg = new GUIPanel(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.4f, 0.4f), sf::Color(150, 150, 150));
 	menus.push_back({});
-	menus[0].push_back(new GUIStructure(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.2f, 0.2f), 0, { 0 }));
+	std::vector<int> typeIDs = { 0, 0, 1 };
+	std::vector<std::vector<int>> frames = { { 0 }, { 1 }, { 0, 1 } };
+	sf::Vector2f imageSize(0.05f, 0.05f);
+	float textHeight = 0.01f;
+	float gapSize = 0.03f;
+
+	sf::Vector2f startPos = sf::Vector2f(0.1f, 0.1f + height * 2.f + gapSize) + imageSize;
+	sf::Vector2f pos = startPos;
+	for (int i = 0; i < typeIDs.size(); i++)
+	{
+		GUIStructure* s = new GUIStructure(pos, imageSize, typeIDs[i], frames[i]);
+
+		s->Render();
+
+		sf::Vector2f textPos(0.f, s->actualSize.y / 2.f + textHeight);
+		textPos += pos;
+		sf::Vector2f textSize(s->actualSize.x / 2.f, textHeight);
+		std::string text = ResourceHandler::structureTable->GetValue("Name", typeIDs[i]);
+		GUILabel* l = new GUILabel(textPos, textSize, text);
+		l->SetColor(sf::Color::Black);
+		menus[0].push_back(s);
+		menus[0].push_back(l);
+		pos.x += s->actualSize.x;
+		pos.x += gapSize;
+		if (pos.x + s->actualSize.x > 0.9f - infoSize)
+		{
+			pos.x = startPos.x;
+			pos.y += s->actualSize.y + textHeight * 2.f + gapSize;
+		}
+	}
 }
 
 void BuildMenu::SetTab(int tab)
