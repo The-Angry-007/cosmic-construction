@@ -14,6 +14,9 @@ int height = 500;
 GUIHandler guihandler = GUIHandler();
 
 Game* game = nullptr;
+int ups = 100;
+sf::Clock updateClock;
+int numUpdates = 0;
 
 //the main procedure that runs the program
 int main()
@@ -36,8 +39,8 @@ int main()
 	//make the window black while loading
 	window->clear(sf::Color::Black);
 	window->display();
-
 	sf::Clock deltaClock;
+	float timePerUpdate = 1.f / ups;
 	//label to display fps
 	GUILabel fpsLabel(sf::Vector2f(0.1f, 0.03f), sf::Vector2f(0.1f, 0.03f), "");
 	fpsLabel.origin = sf::Vector2f(0.f, 0.f);
@@ -63,6 +66,11 @@ int main()
 		if (game != nullptr)
 		{
 			game->Update(dt);
+			while (updateClock.getElapsedTime().asSeconds() * ups > numUpdates)
+			{
+				game->WorldUpdate(timePerUpdate);
+				numUpdates++;
+			}
 		}
 
 		/* ---RENDER--- */

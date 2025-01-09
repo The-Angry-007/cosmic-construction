@@ -19,5 +19,6 @@ public:
 	void NewGame();
 	void LoadGame();
 	void Update(float dt);
+	void WorldUpdate(float dt);
 	void Render();
 };

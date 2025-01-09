@@ -105,27 +105,6 @@ void Planet::Update(float dt)
 	camera.Update(dt);
 	GenerateChunksInView();
 
-	for (uint i = 0; i < chunks.size(); i++)
-	{
-
-		chunks[i].Update(dt);
-	}
-	for (uint i = 0; i < items.size(); i++)
-	{
-		if (items[i].parent != -1)
-		{
-			continue;
-		}
-		if (game->activePlanet == id && game->toolHandler->draggingItem == i)
-		{
-			continue;
-		}
-		items[i].Update(dt, &game->planets[id]);
-	}
-	for (uint i = 0; i < structures.size(); i++)
-	{
-		structures[i]->Update(dt);
-	}
 	if (InputHandler::pressed(binds::Interact))
 	{
 		sf::Vector2f wmp = camera.WorldMousePos();
@@ -415,4 +394,29 @@ sf::Vector2f Planet::worldPos(sf::Vector2f tilePos, int chunkID)
 	pos += sf::Vector2f(tilePos.x * TILE_SIZE.x, tilePos.y * TILE_SIZE.y);
 
 	return pos;
+}
+
+void Planet::WorldUpdate(float dt)
+{
+	for (uint i = 0; i < chunks.size(); i++)
+	{
+
+		chunks[i].Update(dt);
+	}
+	for (uint i = 0; i < items.size(); i++)
+	{
+		if (items[i].parent != -1)
+		{
+			continue;
+		}
+		if (game->activePlanet == id && game->toolHandler->draggingItem == i)
+		{
+			continue;
+		}
+		items[i].Update(dt, &game->planets[id]);
+	}
+	for (uint i = 0; i < structures.size(); i++)
+	{
+		structures[i]->Update(dt);
+	}
 }

@@ -2,4 +2,3 @@ ItemID/Name/Description/ImagePath
 0/Twig/A small piece of wood that can be found on the ground on Earth. Used to create basic machinery and tools./twig.png
 1/Stone/A small rock that can be found on the ground on the Earth. Used to create basic machinery and tools./stone.png
 2/Fibre/Can be harvested from wheat. Used to create more advanced machinery./fibre.png
-3/TestImage/asodfjoasdfj/testImage.png

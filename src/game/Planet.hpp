@@ -35,4 +35,5 @@ public:
 	int ChunkAtPos(sf::Vector2i position);
 	sf::Vector2i tilePos(sf::Vector2f position);
 	sf::Vector2f worldPos(sf::Vector2f tilePos, int chunkID);
+	void WorldUpdate(float dt);
 };

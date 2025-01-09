@@ -13,6 +13,8 @@ Game::Game()
 	InputHandler::RemoveMbPressed(sf::Mouse::Button::Left);
 	InputHandler::RemoveMbDown(sf::Mouse::Button::Left);
 	toolHandler = new ToolHandler();
+	updateClock.restart();
+	numUpdates = 0;
 }
 Game::~Game()
 {
@@ -74,4 +76,9 @@ void Game::Render()
 Planet* Game::ActivePlanet()
 {
 	return &planets[activePlanet];
+}
+
+void Game::WorldUpdate(float dt)
+{
+	planets[activePlanet].WorldUpdate(dt);
 }
