@@ -27,6 +27,24 @@ ToolHandler::ToolHandler()
 
 void ToolHandler::Update(float dt, Planet* p)
 {
+	if (InputHandler::pressed(binds::Build))
+	{
+		if (guihandler.activeGui == 7)
+		{
+			guihandler.GoBack();
+			game->inMenu = false;
+		}
+		else
+		{
+			game->inMenu = true;
+
+			guihandler.OpenGUI(7);
+		}
+	}
+	if (game->inMenu)
+	{
+		return;
+	}
 	for (int i = 0; i < bgObjs.size(); i++)
 	{
 		if (bgObjs[i]->isClicked())
@@ -240,20 +258,6 @@ void ToolHandler::Update(float dt, Planet* p)
 				p->items[draggingItem].moveDir = sf::Vector2f(0.f, 0.f);
 				p->MoveItem(draggingItem);
 			}
-		}
-	}
-	if (InputHandler::pressed(binds::Build))
-	{
-		if (guihandler.activeGui == 7)
-		{
-			guihandler.GoBack();
-			game->inMenu = false;
-		}
-		else
-		{
-			game->inMenu = true;
-
-			guihandler.OpenGUI(7);
 		}
 	}
 }

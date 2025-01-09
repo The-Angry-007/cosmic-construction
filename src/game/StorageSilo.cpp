@@ -180,17 +180,19 @@ void StorageSilo::Render()
 {
 	game->planets[planetID].renderObjects.push_back(RenderObject {
 		&sprites[0],
-		2 });
+		3 });
 	game->planets[planetID].renderObjects.push_back(RenderObject {
 		&sprites[1],
-		3 });
+		4 });
 	for (int i = 0; i < 9; i++)
 	{
 		if (neighbours[i + 3] != -1)
 		{
+			int zindex = 4;
+
 			game->planets[planetID].renderObjects.push_back(RenderObject {
 				&sprites[i + 2],
-				3 });
+				4 });
 		}
 	}
 }

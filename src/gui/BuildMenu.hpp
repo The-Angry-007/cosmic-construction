@@ -7,9 +7,12 @@ class BuildMenu : public GUI
 {
 public:
 	std::vector<GUIButton*> tabs;
+	int currentTab;
 	GUIPanel* bg;
+	GUILabel* infoText;
 	GUILabel* infoLabel;
 	BuildMenu();
 	void Update(float dt);
 	void Render();
+	void SetTab(int tab);
 };
