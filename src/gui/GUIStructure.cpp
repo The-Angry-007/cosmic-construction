@@ -11,10 +11,11 @@ GUIStructure::GUIStructure(sf::Vector2f position, sf::Vector2f size, int typeID,
 	{
 		GUIImage* im = new GUIImage(position, size, "");
 		im->keepAspectRatio = true;
-		im->blocksMouseInput = true;
 		ResourceHandler::structureAtlas->SetSprite(im->sprite, typeID, frames[i]);
 		images.push_back(im);
 	}
+	hitbox = images[0]->hitbox;
+	blocksMouseInput = true;
 }
 void GUIStructure::Update(float dt)
 {

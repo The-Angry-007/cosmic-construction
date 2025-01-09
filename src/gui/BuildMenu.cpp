@@ -1,5 +1,6 @@
 #include "BuildMenu.hpp"
 #include "GUIStructure.hpp"
+#include "Main.hpp"
 #include "game/ResourceHandler.hpp"
 #include "utils.hpp"
 BuildMenu::BuildMenu()
@@ -26,7 +27,7 @@ BuildMenu::BuildMenu()
 	menus.push_back({});
 	menus.push_back({});
 	menus.push_back({});
-	std::vector<std::vector<int>> typeIDs = { { 0, 0, 1 }, { 0 }, { 0 } };
+	typeIDs = { { 0, 0, 1 }, { 0 }, { 0 } };
 	std::vector<std::vector<std::vector<int>>> frames = { { { 0 }, { 1 }, { 0, 1 } }, { { 2 } }, { { 1 } } };
 	for (int j = 0; j < 3; j++)
 	{
@@ -90,6 +91,17 @@ void BuildMenu::Update(float dt)
 	for (int i = 0; i < menus[currentTab].size(); i++)
 	{
 		menus[currentTab][i]->Update(dt);
+		if (i % 2 == 0)
+		{
+			if (menus[currentTab][i]->isClicked())
+			{
+				game->toolHandler->placeType = typeIDs[currentTab][i / 2];
+				guihandler.OpenGUI(5);
+				game->inMenu = false;
+				InputHandler::RemoveMbPressed(sf::Mouse::Button::Left);
+				InputHandler::RemoveMbDown(sf::Mouse::Button::Left);
+			}
+		}
 	}
 	infoLabel->Update(dt);
 }
