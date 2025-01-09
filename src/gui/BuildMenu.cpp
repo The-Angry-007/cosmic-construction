@@ -53,7 +53,7 @@ BuildMenu::BuildMenu()
 			}
 		}
 	}
-	infoText = new GUILabel(sf::Vector2f(0.9f - infoSize / 2.f, 0.5f + height * 2.f), sf::Vector2f(infoSize / 2.f, 0.4f - height), "");
+	infoText = new GUILabel(sf::Vector2f(0.9f - infoSize / 2.f, 0.5f + height * 2.f), sf::Vector2f(infoSize / 2.f - 0.01f, 0.4f - height), "");
 	infoText->origin = sf::Vector2f(0.f, 0.f);
 	infoText->SetColor(sf::Color::Black);
 }
@@ -101,7 +101,7 @@ void BuildMenu::Update(float dt)
 		{
 			infoText->value = ResourceHandler::structureTable->GetValue("Name", typeIDs[currentTab][i]);
 			infoText->value += "\n" + ResourceHandler::structureTable->GetValue("Description", typeIDs[currentTab][i]);
-			infoText->DoWrapping(20);
+			infoText->DoWrapping(15);
 		}
 	}
 	infoBG->Update(dt);

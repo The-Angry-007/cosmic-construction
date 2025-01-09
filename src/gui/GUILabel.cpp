@@ -1,5 +1,6 @@
 #include "GUILabel.hpp"
 #include "Main.hpp"
+#include "utils.hpp"
 GUILabel::GUILabel(sf::Vector2f position, sf::Vector2f size, std::string text)
 {
 	//attempt to load default font
@@ -104,4 +105,55 @@ void GUILabel::RenderToTexture(sf::RenderTexture* texture)
 
 void GUILabel::DoWrapping(int charsPerLine)
 {
+	std::string newVal = "";
+	std::vector<std::string> lines = Split(value, '\n');
+	for (int i = 0; i < lines.size(); i++)
+	{
+		int length = lines[i].size();
+		if (length <= charsPerLine)
+		{
+			continue;
+		}
+		else
+		{
+			int wordCount = 0;
+			int charCount = 0;
+
+			std::vector<std::string> words = Split(lines[i], ' ');
+			while (charCount <= charsPerLine)
+			{
+				charCount += words[wordCount].size() + 1;
+				wordCount++;
+			}
+			std::string nextLine = "";
+			for (int i = wordCount; i < words.size(); i++)
+			{
+				nextLine += words[i];
+				if (i != words.size() - 1)
+				{
+					nextLine += " ";
+				}
+			}
+			lines.insert(lines.begin() + i + 1, nextLine);
+			std::string currLine = "";
+			for (int i = 0; i < wordCount; i++)
+			{
+				currLine += words[i];
+				if (i != wordCount - 1)
+				{
+					currLine += " ";
+				}
+			}
+			lines[i] = currLine;
+		}
+	}
+	for (int i = 0; i < lines.size(); i++)
+	{
+		newVal += lines[i];
+		if (i != lines.size() - 1)
+		{
+			newVal += '\n';
+		}
+	}
+	value = newVal;
 }

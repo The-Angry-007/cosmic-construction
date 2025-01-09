@@ -74,11 +74,6 @@ void ToolHandler::Update(float dt, Planet* p)
 	if (selectedTool == 0)
 	{
 
-		if (InputHandler::keyPressed(sf::Keyboard::Key::Right))
-		{
-			placeType = (placeType + 1) % 2;
-		}
-
 		if (previewStructure != nullptr)
 		{
 			delete previewStructure;
