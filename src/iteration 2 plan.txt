@@ -91,3 +91,10 @@ call it wraps here ig
 number of things to do: 17
 days left: 18
 need to complete AT LEAST one bullet point per day
+
+
+NEW NEW TODO
+-add structure costs table
+-add build menu
+-limit how much stuff can be in storage silo
+-figure out how to display full

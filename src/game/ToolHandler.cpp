@@ -75,8 +75,7 @@ void ToolHandler::Update(float dt, Planet* p)
 			c->SetVisualPosition(tilePos);
 
 			previewStructure = c;
-			if (!InputHandler::mouseIsBlocked)
-				previewStructure->RenderPreview();
+
 			if (InputHandler::down(binds::UseTool))
 			{
 				if (p->StructureInPos(tilePos) == -1)
@@ -159,9 +158,7 @@ void ToolHandler::Update(float dt, Planet* p)
 			s->SetVisualPosition(tilePos);
 
 			previewStructure = s;
-			if (!InputHandler::mouseIsBlocked)
 
-				previewStructure->RenderPreview();
 			if (InputHandler::pressed(binds::UseTool))
 			{
 				if (!p->StructureInArea(tilePos, ResourceHandler::structureSizes[1]))
@@ -172,6 +169,10 @@ void ToolHandler::Update(float dt, Planet* p)
 					s->SetPosition(tilePos);
 				}
 			}
+		}
+		if (previewStructure != nullptr && !InputHandler::mouseIsBlocked && !game->inMenu)
+		{
+			previewStructure->RenderPreview();
 		}
 	}
 	else if (selectedTool == 1)
@@ -239,6 +240,20 @@ void ToolHandler::Update(float dt, Planet* p)
 				p->items[draggingItem].moveDir = sf::Vector2f(0.f, 0.f);
 				p->MoveItem(draggingItem);
 			}
+		}
+	}
+	if (InputHandler::pressed(binds::Build))
+	{
+		if (guihandler.activeGui == 7)
+		{
+			guihandler.GoBack();
+			game->inMenu = false;
+		}
+		else
+		{
+			game->inMenu = true;
+
+			guihandler.OpenGUI(7);
 		}
 	}
 }

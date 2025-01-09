@@ -1,5 +1,6 @@
 #include "../gui.hpp"
 #include "../saving.hpp"
+#include "BuildMenu.hpp"
 #include "InputHandler.hpp"
 #include "Main.hpp"
 #include "binds.hpp"
@@ -103,7 +104,7 @@ GUI* GUIHandler::GetOpenGUI()
 4: help menu
 5: main game gui
 6: pause menu
-7: tech tree
+7: build menu
 */
 void GUIHandler::InitGUIS()
 {
@@ -322,5 +323,7 @@ void GUIHandler::InitGUIS()
 		}
 		guis.push_back(g);
 	}
+	BuildMenu* b = new BuildMenu();
+	guis.push_back(b);
 	numGUIs = guis.size();
 }

@@ -7,6 +7,7 @@ class Game
 {
 public:
 	bool paused;
+	bool inMenu;
 	std::vector<Planet> planets;
 	int activePlanet;
 	int loadedTimer;

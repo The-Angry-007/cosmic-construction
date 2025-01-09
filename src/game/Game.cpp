@@ -5,6 +5,7 @@
 Game::Game()
 {
 	paused = false;
+	inMenu = false;
 	planets = {};
 
 	activePlanet = 0;
@@ -60,12 +61,16 @@ void Game::Update(float dt)
 	{
 		TogglePaused();
 	}
+	planets[activePlanet].camera.SetView();
+
 	if (paused)
 	{
-		planets[activePlanet].camera.SetView();
 		return;
 	}
-	planets[activePlanet].Update(dt);
+	if (!inMenu)
+	{
+		planets[activePlanet].Update(dt);
+	}
 	toolHandler->Update(dt, &planets[activePlanet]);
 }
 void Game::Render()
@@ -80,5 +85,9 @@ Planet* Game::ActivePlanet()
 
 void Game::WorldUpdate(float dt)
 {
+	if (paused)
+	{
+		return;
+	}
 	planets[activePlanet].WorldUpdate(dt);
 }

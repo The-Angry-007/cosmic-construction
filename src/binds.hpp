@@ -12,6 +12,7 @@ extern int Tool1;
 extern int Tool2;
 extern int RotateStructure;
 extern int Interact;
+extern int Build;
 int keyToCode(sf::Keyboard::Key key);
 int buttonToCode(sf::Mouse::Button button);
 std::string GetName(int code);

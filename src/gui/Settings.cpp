@@ -92,6 +92,7 @@ Settings::Settings()
 		AddBind("Tool 2", &binds::Tool2);
 		AddBind("Rotate Structure", &binds::RotateStructure);
 		AddBind("Interact", &binds::Interact);
+		AddBind("Open Build Menu", &binds::Build);
 	}
 	//AUDIO PAGE
 	{
