@@ -20,6 +20,7 @@ BuildMenu::BuildMenu()
 		tabs.push_back(b);
 	}
 	SetTab(0);
+	infoBG = new GUIPanel(sf::Vector2f(0.9f - infoSize / 2.f, 0.5f), sf::Vector2f(infoSize / 2.f, 0.4f), sf::Color(120, 120, 120));
 	infoLabel = new GUILabel(sf::Vector2f(0.9f - infoSize / 2.f, 0.1f + height), sf::Vector2f(infoSize / 2.f, height * 0.9f), "Info");
 	infoLabel->SetColor(sf::Color::Black);
 	infoLabel->origin = sf::Vector2f(0.5f, 0.f);
@@ -27,12 +28,11 @@ BuildMenu::BuildMenu()
 	menus.push_back({});
 	menus.push_back({});
 	menus.push_back({});
-	typeIDs = { { 0, 0, 1 }, { 0 }, { 0 } };
-	std::vector<std::vector<std::vector<int>>> frames = { { { 0 }, { 1 }, { 0, 1 } }, { { 2 } }, { { 1 } } };
+	typeIDs = { { 0 }, {}, { 1 } };
+	std::vector<std::vector<std::vector<int>>> frames = { { { 0 } }, {}, { { 0, 1 } } };
 	for (int j = 0; j < 3; j++)
 	{
 		sf::Vector2f imageSize(0.05f, 0.05f);
-		float textHeight = 0.01f;
 		float gapSize = 0.03f;
 
 		sf::Vector2f startPos = sf::Vector2f(0.1f, 0.1f + height * 2.f + gapSize) + imageSize;
@@ -43,23 +43,19 @@ BuildMenu::BuildMenu()
 
 			s->Render();
 
-			sf::Vector2f textPos(0.f, s->actualSize.y / 2.f + textHeight);
-			textPos += pos;
-			sf::Vector2f textSize(s->actualSize.x / 2.f, textHeight);
-			std::string text = ResourceHandler::structureTable->GetValue("Name", typeIDs[j][i]);
-			GUILabel* l = new GUILabel(textPos, textSize, text);
-			l->SetColor(sf::Color::Black);
 			menus[j].push_back(s);
-			menus[j].push_back(l);
 			pos.x += s->actualSize.x;
 			pos.x += gapSize;
 			if (pos.x + s->actualSize.x > 0.9f - infoSize)
 			{
 				pos.x = startPos.x;
-				pos.y += s->actualSize.y + textHeight * 2.f + gapSize;
+				pos.y += s->actualSize.y + gapSize;
 			}
 		}
 	}
+	infoText = new GUILabel(sf::Vector2f(0.9f - infoSize / 2.f, 0.5f + height * 2.f), sf::Vector2f(infoSize / 2.f, 0.4f - height), "");
+	infoText->origin = sf::Vector2f(0.f, 0.f);
+	infoText->SetColor(sf::Color::Black);
 }
 
 void BuildMenu::SetTab(int tab)
@@ -88,26 +84,34 @@ void BuildMenu::Update(float dt)
 			SetTab(i);
 		}
 	}
+	infoText->value = "";
 	for (int i = 0; i < menus[currentTab].size(); i++)
 	{
 		menus[currentTab][i]->Update(dt);
-		if (i % 2 == 0)
+
+		if (menus[currentTab][i]->isClicked())
 		{
-			if (menus[currentTab][i]->isClicked())
-			{
-				game->toolHandler->placeType = typeIDs[currentTab][i / 2];
-				guihandler.OpenGUI(5);
-				game->inMenu = false;
-				InputHandler::RemoveMbPressed(sf::Mouse::Button::Left);
-				InputHandler::RemoveMbDown(sf::Mouse::Button::Left);
-			}
+			game->toolHandler->placeType = typeIDs[currentTab][i];
+			guihandler.OpenGUI(5);
+			game->inMenu = false;
+			InputHandler::RemoveMbPressed(sf::Mouse::Button::Left);
+			InputHandler::RemoveMbDown(sf::Mouse::Button::Left);
+		}
+		else if (menus[currentTab][i]->isBlockingMouse())
+		{
+			infoText->value = ResourceHandler::structureTable->GetValue("Name", typeIDs[currentTab][i]);
+			infoText->value += "\n" + ResourceHandler::structureTable->GetValue("Description", typeIDs[currentTab][i]);
+			infoText->DoWrapping(20);
 		}
 	}
+	infoBG->Update(dt);
 	infoLabel->Update(dt);
+	infoText->Update(dt);
 }
 void BuildMenu::Render()
 {
 	bg->Render();
+	infoBG->Render();
 	for (int i = 0; i < tabs.size(); i++)
 	{
 		tabs[i]->Render();
@@ -117,5 +121,6 @@ void BuildMenu::Render()
 	{
 		menus[currentTab][i]->Render();
 	}
+	infoText->Render();
 	infoLabel->Render();
 }

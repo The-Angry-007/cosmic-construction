@@ -11,6 +11,7 @@ public:
 	GUIPanel* bg;
 	GUILabel* infoText;
 	GUILabel* infoLabel;
+	GUIPanel* infoBG;
 	std::vector<std::vector<GUIObject*>> menus;
 	std::vector<std::vector<int>> typeIDs;
 	BuildMenu();

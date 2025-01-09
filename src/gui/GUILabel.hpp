@@ -14,4 +14,5 @@ public:
 	void SetColor(sf::Color color);
 	void Render();
 	void RenderToTexture(sf::RenderTexture* texture);
+	void DoWrapping(int charsPerLine);
 };

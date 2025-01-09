@@ -101,3 +101,7 @@ void GUILabel::RenderToTexture(sf::RenderTexture* texture)
 
 	texture->draw(text);
 }
+
+void GUILabel::DoWrapping(int charsPerLine)
+{
+}
