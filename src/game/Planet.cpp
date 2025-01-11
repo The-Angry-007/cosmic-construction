@@ -80,6 +80,12 @@ void Planet::Init(bool load)
 					structures.push_back(c);
 					c->FromJSON(jsons[i]);
 				}
+				else if (jsons[i].GetValue("TypeID") == "1")
+				{
+					StorageSilo* s = new StorageSilo(id);
+					structures.push_back(s);
+					s->FromJSON(jsons[i]);
+				}
 			}
 		}
 	}

@@ -15,6 +15,7 @@ std::string JSON::GetValue(std::string keyword)
 			return values[i];
 		}
 	}
+	std::cout << "could not find " << keyword << std::endl;
 	return "not in list";
 }
 

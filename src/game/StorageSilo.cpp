@@ -37,7 +37,13 @@ StorageSilo::StorageSilo(int planetID)
 	this->sprite = sf::Sprite();
 	tileSize = ResourceHandler::structureSizes[typeID];
 	itemIDs = {};
+	previousOutputs = {};
 	itemQuantities = {};
+	for (int i = 0; i < 12; i++)
+	{
+		previousOutputs.push_back(0);
+	}
+	items = {};
 }
 void StorageSilo::SetPosition(sf::Vector2i position)
 {
@@ -212,10 +218,42 @@ void StorageSilo::AddItem(int index)
 JSON StorageSilo::ToJSON()
 {
 	JSON j = JSON();
-	j.AddAttribute("PositionX", std::to_string(position.x));
+	j.AddAttribute("Position", position);
+	j.AddAttribute("TypeID", typeID);
+	j.AddAttribute("ID", id);
+	j.AddAttribute("ChunkID", chunkID);
+	j.AddAttribute("NumItems", (int)items.size());
+	for (int i = 0; i < items.size(); i++)
+	{
+		j.AddAttribute("Item" + std::to_string(i), items[i]);
+	}
+	j.AddAttribute("NumItemIDs", (int)itemIDs.size());
+	for (int i = 0; i < itemIDs.size(); i++)
+	{
+		j.AddAttribute("ItemID" + std::to_string(i), itemIDs[i]);
+		j.AddAttribute("ItemQuantity" + std::to_string(i), itemQuantities[i]);
+	}
+	return j;
 }
 void StorageSilo::FromJSON(JSON j)
 {
+	sf::Vector2i pos = j.GetV2i("Position");
+	typeID = j.GetInt("TypeID");
+	id = j.GetInt("ID");
+	chunkID = j.GetInt("ChunkID");
+	pos += game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE;
+	SetPosition(pos);
+	int numItems = j.GetInt("NumItems");
+	for (int i = 0; i < numItems; i++)
+	{
+		items.push_back(j.GetInt("Item" + std::to_string(i)));
+	}
+	int numIds = j.GetInt("NumItemIDs");
+	for (int i = 0; i < numIds; i++)
+	{
+		itemIDs.push_back(j.GetInt("ItemID" + std::to_string(i)));
+		itemQuantities.push_back(j.GetInt("ItemQuantity" + std::to_string(i)));
+	}
 }
 void StorageSilo::Render()
 {
