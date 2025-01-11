@@ -29,7 +29,6 @@ Atlas::Atlas(std::vector<sf::Texture>& textures)
 	}
 	totalHeight += rowHeight;
 	sf::Image im;
-	std::cout << totalWidth << " " << totalHeight << std::endl;
 	im.create(totalWidth, totalHeight);
 	for (uint i = 0; i < textures.size(); i++)
 	{
@@ -81,7 +80,6 @@ Atlas::Atlas(std::vector<sf::Texture>& textures, std::vector<int> ids)
 	}
 	totalHeight += rowHeight;
 	sf::Image im;
-	std::cout << totalWidth << " " << totalHeight << std::endl;
 	im.create(totalWidth, totalHeight);
 	for (uint i = 0; i < textures.size(); i++)
 	{

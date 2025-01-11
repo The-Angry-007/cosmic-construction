@@ -5,7 +5,6 @@
 //default click function that buttons use
 void ClickFuncs::blankFunc()
 {
-	std::cout << "button was clicked" << std::endl;
 }
 //the functions that open the correct gui when menu buttons are clicked
 void ClickFuncs::OpenNewGame()

@@ -5,6 +5,7 @@ namespace SaveHandler
 {
 extern std::string workingDir;
 extern int startTime;
+extern sf::Clock saveTimer;
 
 void Init();
 void CreateSave(std::string name, int difficulty, std::string seed);

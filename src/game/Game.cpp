@@ -16,6 +16,7 @@ Game::Game()
 	toolHandler = new ToolHandler();
 	updateClock.restart();
 	numUpdates = 0;
+	SaveHandler::saveTimer.restart();
 }
 Game::~Game()
 {
@@ -52,6 +53,14 @@ void Game::LoadGame()
 }
 void Game::Update(float dt)
 {
+
+	float timeSinceSave = SaveHandler::saveTimer.getElapsedTime().asSeconds();
+	if (guihandler.settings->saveInterval != -1 && timeSinceSave > guihandler.settings->saveInterval * 60)
+	{
+		std::cout << "running autosave" << std::endl;
+		SaveHandler::saveTimer.restart();
+		SaveHandler::SaveGame();
+	}
 	if (loadedTimer > 0)
 	{
 		loadedTimer--;

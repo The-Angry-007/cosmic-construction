@@ -306,6 +306,5 @@ void StorageSilo::SetVisualPosition(sf::Vector2i pos)
 
 void StorageSilo::Interact()
 {
-	std::cout << "interacted with silo" << std::endl;
 	guihandler.AddGUI(new SiloMenu(this));
 }

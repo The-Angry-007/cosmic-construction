@@ -11,6 +11,7 @@ namespace SaveHandler
 std::string workingDir = "";
 //the time the current save was opened
 int startTime = 0;
+sf::Clock saveTimer;
 }
 
 void SaveHandler::ResetWorkingDir()

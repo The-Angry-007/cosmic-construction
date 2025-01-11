@@ -47,7 +47,6 @@ void SiloMenu::Update(float dt)
 	{
 		items[i].Update(dt);
 	}
-	std::cout << items.size() << std::endl;
 	InputHandler::mouseIsBlocked = true;
 	if (InputHandler::pressed(binds::Interact))
 	{
