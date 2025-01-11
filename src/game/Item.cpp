@@ -139,3 +139,9 @@ sf::Vector2i Item::GetTilePos()
 	sf::Vector2i chunkPos(floor((float)worldTilePos.x / CHUNK_SIZE), floor((float)worldTilePos.y / CHUNK_SIZE));
 	return worldTilePos - chunkPos * CHUNK_SIZE;
 }
+
+void Item::SetType(int typeID)
+{
+	this->typeId = typeID;
+	ResourceHandler::itemAtlas->SetSprite(this->sprite, typeID);
+}

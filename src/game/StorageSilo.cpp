@@ -16,6 +16,12 @@ StorageSilo::StorageSilo(int id, int planetID)
 	tileSize = ResourceHandler::structureSizes[typeID];
 	itemIDs = {};
 	itemQuantities = {};
+	previousOutputs = {};
+	for (int i = 0; i < 12; i++)
+	{
+		previousOutputs.push_back(0);
+	}
+	items = {};
 }
 StorageSilo::StorageSilo(int planetID)
 {
@@ -49,7 +55,8 @@ StorageSilo::~StorageSilo()
 
 void StorageSilo::UpdateNeighbours()
 {
-	neighbours = {};
+	inputNeighbours = {};
+	outputNeighbours = {};
 	sf::Vector2i pos = position + (tileSize - sf::Vector2i(1, 1)) / 2;
 	pos += game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE;
 	int targetLength = 0;
@@ -92,13 +99,21 @@ void StorageSilo::UpdateNeighbours()
 					Conveyor* c = dynamic_cast<Conveyor*>(s);
 					if (c->direction == direction)
 					{
-						neighbours.push_back(neighbour);
+						inputNeighbours.push_back(neighbour);
+					}
+					else if (c->direction == (direction + 2) % 4)
+					{
+						outputNeighbours.push_back(neighbour);
 					}
 				}
 			}
-			if (neighbours.size() != targetLength)
+			if (inputNeighbours.size() != targetLength)
 			{
-				neighbours.push_back(-1);
+				inputNeighbours.push_back(-1);
+			}
+			if (outputNeighbours.size() != targetLength)
+			{
+				outputNeighbours.push_back(-1);
 			}
 		}
 	}
@@ -115,19 +130,19 @@ void StorageSilo::TryAddGroundItem(int index)
 			break;
 		}
 	}
-	item->parent = id;
+	// item->parent = id;
 	AddItem(index);
 }
 void StorageSilo::Update(float dt)
 {
 	UpdateNeighbours();
-	for (int i = 0; i < neighbours.size(); i++)
+	for (int i = 0; i < inputNeighbours.size(); i++)
 	{
-		if (neighbours[i] == -1)
+		if (inputNeighbours[i] == -1)
 		{
 			continue;
 		}
-		Conveyor* c = dynamic_cast<Conveyor*>(game->planets[planetID].structures[neighbours[i]]);
+		Conveyor* c = dynamic_cast<Conveyor*>(game->planets[planetID].structures[inputNeighbours[i]]);
 		if (c->items[c->direction].size() > 0 && c->progress[c->direction][0] >= 1.f)
 		{
 			AddItem(c->items[c->direction][0]);
@@ -135,10 +150,42 @@ void StorageSilo::Update(float dt)
 			c->progress[c->direction].erase(c->progress[c->direction].begin());
 		}
 	}
+	for (int i = 0; i < outputNeighbours.size(); i++)
+	{
+		if (outputNeighbours[i] != -1)
+		{
+			Conveyor* c = dynamic_cast<Conveyor*>(game->planets[planetID].structures[outputNeighbours[i]]);
+			int dir = (c->direction + 2) % 4;
+			if (c->progress[dir].size() == 0 || c->progress[dir][c->progress[dir].size() - 1] > c->gap)
+			{
+				if (itemIDs.size() > 0)
+				{
+					previousOutputs[i] %= itemIDs.size();
+					//eject item here
+					int index = items[items.size() - 1];
+					Item& item = game->planets[planetID].items[index];
+					item.SetType(itemIDs[previousOutputs[i]]);
+					item.parent = outputNeighbours[i];
+					c->items[dir].push_back(index);
+					c->progress[dir].push_back(0.f);
+					itemQuantities[previousOutputs[i]]--;
+					if (itemQuantities[previousOutputs[i]] == 0)
+					{
+						itemQuantities.erase(itemQuantities.begin() + previousOutputs[i]);
+						itemIDs.erase(itemIDs.begin() + previousOutputs[i]);
+					}
+					items.erase(items.end() - 1);
+					previousOutputs[i]++;
+				}
+			}
+		}
+	}
 }
 void StorageSilo::AddItem(int index)
 {
 	Item& item = game->planets[planetID].items[index];
+	item.parent = id;
+	items.push_back(index);
 	bool existing = false;
 	for (int i = 0; i < itemIDs.size(); i++)
 	{
@@ -168,6 +215,8 @@ void StorageSilo::AddItem(int index)
 				}
 			}
 	}
+
+	//need to remove item from world - also need to figure out why not rendering?
 }
 JSON StorageSilo::ToJSON()
 {
@@ -180,19 +229,19 @@ void StorageSilo::Render()
 {
 	game->planets[planetID].renderObjects.push_back(RenderObject {
 		&sprites[0],
-		3 });
+		2 });
 	game->planets[planetID].renderObjects.push_back(RenderObject {
 		&sprites[1],
-		4 });
+		3 });
 	for (int i = 0; i < 9; i++)
 	{
-		if (neighbours[i + 3] != -1)
+		if (inputNeighbours[i + 3] != -1 || outputNeighbours[i + 3] != -1)
 		{
 			int zindex = 4;
 
 			game->planets[planetID].renderObjects.push_back(RenderObject {
 				&sprites[i + 2],
-				4 });
+				3 });
 		}
 	}
 }

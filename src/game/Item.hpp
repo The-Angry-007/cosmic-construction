@@ -19,6 +19,7 @@ public:
 	int zindex;
 
 	Item(sf::Vector2f position, int id, int typeID);
+	void SetType(int typeID);
 	void SetParent(int index);
 	void Update(float dt, Planet* planet);
 	void Render(Planet* planet);

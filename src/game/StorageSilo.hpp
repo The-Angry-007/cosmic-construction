@@ -4,9 +4,12 @@
 class StorageSilo : public Structure
 {
 public:
+	std::vector<int> items;
 	std::vector<int> itemIDs;
 	std::vector<int> itemQuantities;
-	std::vector<int> neighbours;
+	std::vector<int> inputNeighbours;
+	std::vector<int> outputNeighbours;
+	std::vector<int> previousOutputs;
 	std::vector<sf::Sprite> sprites;
 	StorageSilo(int id, int planetID);
 	StorageSilo(int planetID);
