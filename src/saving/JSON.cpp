@@ -23,7 +23,46 @@ void JSON::AddAttribute(std::string keyword, std::string value)
 	keywords.push_back(keyword);
 	values.push_back(value);
 }
-
+void JSON::AddAttribute(std::string keyword, int value)
+{
+	keywords.push_back(keyword);
+	values.push_back(std::to_string(value));
+}
+void JSON::AddAttribute(std::string keyword, float value)
+{
+	keywords.push_back(keyword);
+	values.push_back(std::to_string(value));
+}
+void JSON::AddAttribute(std::string keyword, sf::Vector2f value)
+{
+	AddAttribute(keyword + "X", value.x);
+	AddAttribute(keyword + "Y", value.y);
+}
+void JSON::AddAttribute(std::string keyword, sf::Vector2i value)
+{
+	AddAttribute(keyword + "X", value.x);
+	AddAttribute(keyword + "Y", value.y);
+}
+int JSON::GetInt(std::string keyword)
+{
+	return std::stoi(GetValue(keyword));
+}
+float JSON::GetFloat(std::string keyword)
+{
+	return std::stof(GetValue(keyword));
+}
+sf::Vector2f JSON::GetV2f(std::string keyword)
+{
+	return sf::Vector2f(
+		GetFloat(keyword + "X"),
+		GetFloat(keyword + "Y"));
+}
+sf::Vector2i JSON::GetV2i(std::string keyword)
+{
+	return sf::Vector2i(
+		GetInt(keyword + "X"),
+		GetInt(keyword + "Y"));
+}
 void JSON::FromString(std::string data)
 {
 	//skip first two chars as they will always be {\n

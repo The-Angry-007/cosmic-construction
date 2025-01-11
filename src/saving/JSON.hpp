@@ -8,6 +8,14 @@ public:
 
 	JSON();
 	std::string GetValue(std::string keyword);
+	void AddAttribute(std::string keyword, int value);
+	void AddAttribute(std::string keyword, float value);
+	void AddAttribute(std::string keyword, sf::Vector2f value);
+	void AddAttribute(std::string keyword, sf::Vector2i value);
+	int GetInt(std::string keyword);
+	float GetFloat(std::string keyword);
+	sf::Vector2f GetV2f(std::string keyword);
+	sf::Vector2i GetV2i(std::string keyword);
 	void AddAttribute(std::string keyword, std::string value);
 
 	/*

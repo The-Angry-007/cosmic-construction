@@ -211,7 +211,8 @@ void StorageSilo::AddItem(int index)
 }
 JSON StorageSilo::ToJSON()
 {
-	return JSON();
+	JSON j = JSON();
+	j.AddAttribute("PositionX", std::to_string(position.x));
 }
 void StorageSilo::FromJSON(JSON j)
 {
