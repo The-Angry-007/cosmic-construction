@@ -1,9 +1,11 @@
 #include "RenderObject.hpp"
 bool operator<(const RenderObject& lhs, const RenderObject& rhs)
 {
-	if (lhs.zindex < rhs.zindex)
+	float y1 = lhs.sprite->getPosition().y + lhs.zindex;
+	float y2 = rhs.sprite->getPosition().y + rhs.zindex;
+	if (y1 != y2)
 	{
-		return true;
+		return y1 < y2;
 	}
-	return (lhs.zindex == rhs.zindex) && (lhs.sprite->getPosition().y < rhs.sprite->getPosition().y || (lhs.sprite->getPosition().y == rhs.sprite->getPosition().y && lhs.sprite->getPosition().x < rhs.sprite->getPosition().x));
+	return lhs.sprite->getPosition().x < rhs.sprite->getPosition().x;
 }

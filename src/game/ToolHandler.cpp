@@ -192,6 +192,7 @@ void ToolHandler::Update(float dt, Planet* p)
 	{
 		if (hoveringItem != -1)
 		{
+			p->items[hoveringItem].zindex = 100;
 			ResourceHandler::itemAtlas->SetSprite(p->items[hoveringItem].sprite, p->items[hoveringItem].typeId);
 		}
 		if (draggingItem == -1)
@@ -236,6 +237,8 @@ void ToolHandler::Update(float dt, Planet* p)
 				else if (!InputHandler::down(binds::UseTool))
 				{
 					hoveringItem = i;
+					p->items[hoveringItem].zindex = 1;
+
 					ResourceHandler::itemAtlas->SetSprite(p->items[hoveringItem].sprite, p->items[hoveringItem].typeId + ResourceHandler::numItems);
 				}
 			}

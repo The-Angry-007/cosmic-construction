@@ -24,7 +24,6 @@ Conveyor::Conveyor(int id, int planetID, int direction)
 	items = { {}, {}, {}, {} };
 	speed = 3.f;
 	currentNeighbourIndex = 0;
-	zindex = 0;
 }
 void Conveyor::UpdateNeighbours()
 {
@@ -185,7 +184,7 @@ void Conveyor::ProgressLane(int lane, float dt)
 
 void Conveyor::Render()
 {
-
+	zindex = -32;
 	Planet& p = game->planets[planetID];
 	p.renderObjects.push_back(RenderObject {
 		&sprite,
@@ -302,7 +301,6 @@ void Conveyor::FromJSON(JSON j)
 	progress = { {}, {}, {}, {} };
 	items = { {}, {}, {}, {} };
 	speed = 3.f;
-	zindex = 0;
 
 	currentNeighbourIndex = std::stoi(j.GetValue("CurrentNeighbourIndex"));
 	for (int i = 0; i < 4; i++)

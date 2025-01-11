@@ -57,64 +57,55 @@ void StorageSilo::UpdateNeighbours()
 {
 	inputNeighbours = {};
 	outputNeighbours = {};
-	sf::Vector2i pos = position + (tileSize - sf::Vector2i(1, 1)) / 2;
+	sf::Vector2i pos = position;
 	pos += game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE;
 	int targetLength = 0;
-	for (int i = -2; i <= 2; i++)
+	std::vector<sf::Vector2i> offsets = {
+		sf::Vector2i(0, -1),
+		sf::Vector2i(1, -1),
+		sf::Vector2i(2, -1),
+		sf::Vector2i(-1, 0),
+		sf::Vector2i(3, 0),
+		sf::Vector2i(-1, 1),
+		sf::Vector2i(3, 1),
+		sf::Vector2i(-1, 2),
+		sf::Vector2i(3, 2),
+		sf::Vector2i(0, 3),
+		sf::Vector2i(1, 3),
+		sf::Vector2i(2, 3),
+	};
+	std::vector<int> directions = {
+		2, 2, 2, 1, 3, 1, 3, 1, 3, 0, 0, 0
+	};
+	for (int i = 0; i < offsets.size(); i++)
 	{
-		for (int j = -2; j <= 2; j++)
+
+		targetLength++;
+		int direction = directions[i];
+		int neighbour = game->planets[planetID].StructureInPos(pos + offsets[i]);
+		if (neighbour != -1)
 		{
-			if (abs(j) == 2 && abs(i) == 2)
+			Structure* s = game->planets[planetID].structures[neighbour];
+			if (s->typeID == 0)
 			{
-				continue;
-			}
-			if (abs(i) < 2 && abs(j) < 2)
-			{
-				continue;
-			}
-			targetLength++;
-			int direction;
-			if (i == 2)
-			{
-				direction = 0;
-			}
-			else if (i == -2)
-			{
-				direction = 2;
-			}
-			else if (j == -2)
-			{
-				direction = 1;
-			}
-			else
-			{
-				direction = 3;
-			}
-			int neighbour = game->planets[planetID].StructureInPos(pos + sf::Vector2i(j, i));
-			if (neighbour != -1)
-			{
-				Structure* s = game->planets[planetID].structures[neighbour];
-				if (s->typeID == 0)
+				Conveyor* c = dynamic_cast<Conveyor*>(s);
+				if (c->direction == direction)
 				{
-					Conveyor* c = dynamic_cast<Conveyor*>(s);
-					if (c->direction == direction)
-					{
-						inputNeighbours.push_back(neighbour);
-					}
-					else if (c->direction == (direction + 2) % 4)
-					{
-						outputNeighbours.push_back(neighbour);
-					}
+					inputNeighbours.push_back(neighbour);
+				}
+				else if (c->direction == (direction + 2) % 4)
+				{
+					outputNeighbours.push_back(neighbour);
 				}
 			}
-			if (inputNeighbours.size() != targetLength)
-			{
-				inputNeighbours.push_back(-1);
-			}
-			if (outputNeighbours.size() != targetLength)
-			{
-				outputNeighbours.push_back(-1);
-			}
+		}
+		if (inputNeighbours.size() != targetLength)
+		{
+			inputNeighbours.push_back(-1);
+		}
+		if (outputNeighbours.size() != targetLength)
+		{
+			outputNeighbours.push_back(-1);
 		}
 	}
 }
@@ -229,10 +220,10 @@ void StorageSilo::Render()
 {
 	game->planets[planetID].renderObjects.push_back(RenderObject {
 		&sprites[0],
-		2 });
+		48 });
 	game->planets[planetID].renderObjects.push_back(RenderObject {
 		&sprites[1],
-		3 });
+		49 });
 	for (int i = 0; i < 9; i++)
 	{
 		if (inputNeighbours[i + 3] != -1 || outputNeighbours[i + 3] != -1)
@@ -241,7 +232,7 @@ void StorageSilo::Render()
 
 			game->planets[planetID].renderObjects.push_back(RenderObject {
 				&sprites[i + 2],
-				3 });
+				49 });
 		}
 	}
 }
