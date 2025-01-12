@@ -11,4 +11,5 @@ public:
 	JSON ToJSON();
 	void Update(float dt);
 	void Render();
+	void Destroy();
 };

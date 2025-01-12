@@ -272,6 +272,7 @@ void ToolHandler::Update(float dt, Planet* p)
 					t->health--;
 					if (t->health <= 0)
 					{
+						t->Destroy();
 						p->RemoveStructure(index);
 					}
 				}

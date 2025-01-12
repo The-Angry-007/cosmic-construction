@@ -28,6 +28,49 @@ Tree::Tree(int planetID)
 Tree ::~Tree()
 {}
 
+void Tree::Destroy()
+{
+	int numItems = 5;
+	//get possible positions to place items
+	std::vector<sf::Vector2i> possiblePositions = {};
+	Planet& p = game->planets[planetID];
+	sf::Vector2i pos = position + p.GetChunk(chunkID)->position * CHUNK_SIZE;
+	for (int y = -1; y < 2; y++)
+	{
+		for (int x = -1; x < 2; x++)
+		{
+			sf::Vector2i position = pos + sf::Vector2i(x, y);
+			int index = p.StructureInPos(position);
+			if (index == -1)
+			{
+				possiblePositions.push_back(position);
+			}
+			else
+			{
+				Structure* s = p.structures[index];
+				if (s->id == id || !s->blocksItems)
+				{
+					possiblePositions.push_back(position);
+				}
+			}
+		}
+	}
+	if (possiblePositions.size() == 0)
+	{
+		possiblePositions.push_back(pos);
+	}
+	for (int i = 0; i < numItems; i++)
+	{
+		sf::Vector2f pos = (sf::Vector2f)possiblePositions[rand() % possiblePositions.size()];
+		pos += sf::Vector2f(rand() % 1000, rand() % 1000) / 1000.f;
+		pos.x *= TILE_SIZE.x;
+		pos.y *= TILE_SIZE.y;
+		p.items.push_back(Item(pos, -1, 0));
+		p.items.back().SetParent(-1);
+		p.MoveItem(p.items.size() - 1);
+	}
+}
+
 void Tree::FromJSON(JSON j)
 {
 	sf::Vector2i pos = j.GetV2i("Position");
