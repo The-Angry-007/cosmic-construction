@@ -214,6 +214,7 @@ void Planet::GenerateChunk(sf::Vector2i position)
 	sf::Vector2i worldPos = position * CHUNK_SIZE;
 	for (int i = 0; i < numTrees; i++)
 	{
+
 		bool validPos = false;
 		while (!validPos)
 		{
@@ -222,13 +223,14 @@ void Planet::GenerateChunk(sf::Vector2i position)
 			sf::Vector2i pos = sf::Vector2i(x, y) + worldPos;
 			if (!StructureInArea(pos, sf::Vector2i(1, 3)))
 			{
-				Tree* t = new Tree(id);
+				Tree* t = new Tree(-1, id);
 				structures.push_back(t);
 				t->SetPosition(pos);
 				validPos = true;
 			}
 		}
 	}
+	std::cout << "generated " << chunks.size() << std::endl;
 }
 void Planet::GenerateChunksInView()
 {
