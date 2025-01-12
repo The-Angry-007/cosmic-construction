@@ -53,9 +53,17 @@ BuildMenu::BuildMenu()
 			}
 		}
 	}
-	infoText = new GUILabel(sf::Vector2f(0.9f - infoSize / 2.f, 0.5f + height * 2.f), sf::Vector2f(infoSize / 2.f - 0.01f, 0.4f - height), "");
+	float bottom = 0.5f;
+	float x = 0.9f - infoSize / 2.f;
+	float w = infoSize / 2.f - 0.01f;
+	infoText = new GUILabel(sf::Vector2f(x, (0.1f + height * 2.f + bottom) / 2.f), sf::Vector2f(w, (bottom - (0.1f + 2 * height)) / 2.f), "");
 	infoText->origin = sf::Vector2f(0.f, 0.f);
 	infoText->SetColor(sf::Color::Black);
+	costLabel = new GUILabel(sf::Vector2f(x, bottom + height), sf::Vector2f(w, height), "Cost");
+	costLabel->SetColor(sf::Color::Black);
+	costText = new GUILabel(sf::Vector2f(x, (0.9f + bottom + 2 * height) / 2.f + 0.01f), sf::Vector2f(w, (0.9f - (bottom + 2 * height)) / 2.f - 0.005f), "");
+	costText->SetColor(sf::Color::Black);
+	costText->origin = sf::Vector2f(0.f, 0.f);
 }
 
 void BuildMenu::SetTab(int tab)
@@ -85,6 +93,7 @@ void BuildMenu::Update(float dt)
 		}
 	}
 	infoText->value = "";
+	costText->value = "";
 	for (int i = 0; i < menus[currentTab].size(); i++)
 	{
 		menus[currentTab][i]->Update(dt);
@@ -101,12 +110,26 @@ void BuildMenu::Update(float dt)
 		{
 			infoText->value = ResourceHandler::structureTable->GetValue("Name", typeIDs[currentTab][i]);
 			infoText->value += "\n" + ResourceHandler::structureTable->GetValue("Description", typeIDs[currentTab][i]);
-			infoText->DoWrapping(15);
+			infoText->DoWrapping(10);
+			costText->value = "";
+			auto cost = ResourceHandler::GetCost(typeIDs[currentTab][i]);
+			for (int i = 1; i < cost.size(); i += 2)
+			{
+				if (i != 1)
+				{
+					costText->value += "\n";
+				}
+				costText->value += ResourceHandler::itemTable->GetValue("Name", cost[i]);
+				costText->value += " x ";
+				costText->value += std::to_string(cost[i + 1]);
+			}
 		}
 	}
 	infoBG->Update(dt);
 	infoLabel->Update(dt);
 	infoText->Update(dt);
+	costLabel->Update(dt);
+	costText->Update(dt);
 }
 void BuildMenu::Render()
 {
@@ -123,4 +146,6 @@ void BuildMenu::Render()
 	}
 	infoText->Render();
 	infoLabel->Render();
+	costLabel->Render();
+	costText->Render();
 }

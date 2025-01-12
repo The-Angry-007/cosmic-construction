@@ -8,6 +8,7 @@ std::vector<sf::Texture> structureTextures;
 std::vector<sf::Vector2f> structureOrigins;
 std::vector<sf::Texture> structureOutlines;
 std::vector<sf::Vector2i> structureSizes;
+std::vector<std::vector<int>> structureCosts;
 Atlas* itemAtlas;
 Atlas* structureAtlas;
 Table* itemTable;
@@ -82,6 +83,29 @@ void ResourceHandler::Init()
 		allStructureTextures.push_back(structureOutlines[i]);
 	}
 	structureAtlas = new Atlas(allStructureTextures, ids);
+	structureCosts = {};
+	Table costTable = Table();
+	costTable.FromString(SaveHandler::ReadData("resources\\structures\\costTable.txt"));
+	for (int i = 0; i < costTable.records.size(); i++)
+	{
+		int id = std::stoi(costTable.GetValue("StructureID", i));
+		int index = -1;
+		for (int j = 0; j < structureCosts.size(); j++)
+		{
+			if (structureCosts[j][0] == id)
+			{
+				index = j;
+				break;
+			}
+		}
+		if (index == -1)
+		{
+			structureCosts.push_back({ id });
+			index = structureCosts.size() - 1;
+		}
+		structureCosts[index].push_back(std::stoi(costTable.GetValue("ItemID", i)));
+		structureCosts[index].push_back(std::stoi(costTable.GetValue("Amount", i)));
+	}
 }
 
 sf::Texture ResourceHandler::GenerateOutline(sf::Texture& texture)
@@ -131,4 +155,16 @@ sf::Texture ResourceHandler::GenerateOutline(sf::Texture& texture)
 	}
 	outline.loadFromImage(newImage);
 	return outline;
+}
+
+std::vector<int> ResourceHandler::GetCost(int structureID)
+{
+	for (int i = 0; i < structureCosts.size(); i++)
+	{
+		if (structureCosts[i][0] == structureID)
+		{
+			return structureCosts[i];
+		}
+	}
+	return {};
 }

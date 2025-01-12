@@ -11,6 +11,8 @@ public:
 	GUIPanel* bg;
 	GUILabel* infoText;
 	GUILabel* infoLabel;
+	GUILabel* costText;
+	GUILabel* costLabel;
 	GUIPanel* infoBG;
 	std::vector<std::vector<GUIObject*>> menus;
 	std::vector<std::vector<int>> typeIDs;
