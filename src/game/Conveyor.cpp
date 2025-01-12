@@ -30,6 +30,8 @@ Conveyor::Conveyor(int planetID)
 {
 	this->planetID = planetID;
 	blocksItems = false;
+	speed = 3.f;
+	gap = 0.2f;
 }
 void Conveyor::UpdateNeighbours()
 {
