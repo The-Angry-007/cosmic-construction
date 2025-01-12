@@ -84,14 +84,7 @@ void Item::Update(float dt, Planet* planet)
 
 void Item::Render(Planet* planet)
 {
-	if (parent == -1)
-	{
-		zindex = 32;
-	}
-	else
-	{
-		zindex = 1;
-	}
+
 	sprite.setPosition(position);
 	planet->renderObjects.push_back(RenderObject {
 		&sprite,
@@ -100,6 +93,14 @@ void Item::Render(Planet* planet)
 
 void Item::SetParent(int index)
 {
+	if (parent == -1)
+	{
+		zindex = 32;
+	}
+	else
+	{
+		zindex = 1;
+	}
 	parent = index;
 	if (parent == -1 && accurateHitbox == nullptr)
 	{

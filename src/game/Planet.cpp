@@ -112,6 +112,11 @@ void Planet::Init(bool load)
 			items[items.size() - 1].SetParent(-1);
 			MoveItem(items.size() - 1);
 		}
+
+		RemoveStructuresInArea(sf::Vector2i(9, 9), sf::Vector2i(3, 3));
+		StorageSilo* s = new StorageSilo(-1, id);
+		AddStructure(s);
+		s->SetPosition(sf::Vector2i(9, 9));
 	}
 }
 void Planet::Update(float dt)
@@ -665,4 +670,13 @@ bool Planet::DeductResources(int typeID, sf::Vector2i position)
 	}
 
 	return true;
+}
+
+void Planet::RemoveStructuresInArea(sf::Vector2i position, sf::Vector2i size)
+{
+	std::vector<int> structures = StructuresInArea(position, size);
+	for (int i = 0; i < structures.size(); i++)
+	{
+		RemoveStructure(structures[i]);
+	}
 }

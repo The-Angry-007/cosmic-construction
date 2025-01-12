@@ -92,33 +92,18 @@ void ToolHandler::Update(float dt, Planet* p)
 
 			if (InputHandler::down(binds::UseTool))
 			{
-				if (p->StructureInPos(tilePos) == -1 && p->DeductResources(0, tilePos))
+				if (p->StructureInPos(tilePos) == -1)
 				{
-					int direction = placeDir;
-					if (lastPlacedStructure != -1)
+					if (p->DeductResources(0, tilePos))
 					{
-						int dir = 0;
-						sf::Vector2i offset = tilePos;
-						sf::Vector2i prevpos = p->structures[lastPlacedStructure]->position + p->GetChunk(p->structures[lastPlacedStructure]->chunkID)->position * CHUNK_SIZE;
-						offset -= prevpos;
-						for (int i = 0; i < 4; i++)
-						{
-							if (CONVEYOR_OFFSETS[i] == offset)
-							{
-								dir = i;
-							}
-						}
-						direction = dir;
 
-						dynamic_cast<Conveyor*>(p->structures[lastPlacedStructure])->SetDirection(direction);
-					}
-					else
-					{
-						if (prevTilePos.x != -10000)
+						int direction = placeDir;
+						if (lastPlacedStructure != -1)
 						{
-							sf::Vector2i offset = tilePos;
-							offset -= prevTilePos;
 							int dir = 0;
+							sf::Vector2i offset = tilePos;
+							sf::Vector2i prevpos = p->structures[lastPlacedStructure]->position + p->GetChunk(p->structures[lastPlacedStructure]->chunkID)->position * CHUNK_SIZE;
+							offset -= prevpos;
 							for (int i = 0; i < 4; i++)
 							{
 								if (CONVEYOR_OFFSETS[i] == offset)
@@ -127,12 +112,31 @@ void ToolHandler::Update(float dt, Planet* p)
 								}
 							}
 							direction = dir;
+
+							dynamic_cast<Conveyor*>(p->structures[lastPlacedStructure])->SetDirection(direction);
 						}
+						else
+						{
+							if (prevTilePos.x != -10000)
+							{
+								sf::Vector2i offset = tilePos;
+								offset -= prevTilePos;
+								int dir = 0;
+								for (int i = 0; i < 4; i++)
+								{
+									if (CONVEYOR_OFFSETS[i] == offset)
+									{
+										dir = i;
+									}
+								}
+								direction = dir;
+							}
+						}
+						Conveyor* s = new Conveyor(-1, p->id, direction);
+						lastPlacedStructure = p->structures.size();
+						p->AddStructure(s);
+						s->SetPosition(tilePos);
 					}
-					Conveyor* s = new Conveyor(-1, p->id, direction);
-					lastPlacedStructure = p->structures.size();
-					p->AddStructure(s);
-					s->SetPosition(tilePos);
 				}
 				else
 				{
@@ -177,7 +181,7 @@ void ToolHandler::Update(float dt, Planet* p)
 
 			if (InputHandler::pressed(binds::UseTool))
 			{
-				if (!p->StructureInArea(pos, ResourceHandler::structureSizes[1]))
+				if (!p->StructureInArea(pos, ResourceHandler::structureSizes[1]) && p->DeductResources(1, pos))
 				{
 					StorageSilo* s = new StorageSilo(-1, p->id);
 					p->AddStructure(s);

@@ -163,7 +163,7 @@ void StorageSilo::Update(float dt)
 					int index = items[items.size() - 1];
 					Item& item = game->planets[planetID].items[index];
 					item.SetType(itemIDs[previousOutputs[i]]);
-					item.parent = outputNeighbours[i];
+					item.SetParent(outputNeighbours[i]);
 					c->items[dir].push_back(index);
 					c->progress[dir].push_back(0.f);
 					itemQuantities[previousOutputs[i]]--;
@@ -182,7 +182,7 @@ void StorageSilo::Update(float dt)
 void StorageSilo::AddItem(int index)
 {
 	Item& item = game->planets[planetID].items[index];
-	item.parent = id;
+	item.SetParent(id);
 	items.push_back(index);
 	bool existing = false;
 	for (int i = 0; i < itemIDs.size(); i++)

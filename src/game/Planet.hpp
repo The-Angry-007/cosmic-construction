@@ -42,4 +42,5 @@ public:
 	void AddStructure(Structure* s);
 	void RemoveStructure(int index);
 	bool DeductResources(int typeID, sf::Vector2i position);
+	void RemoveStructuresInArea(sf::Vector2i position, sf::Vector2i size);
 };
