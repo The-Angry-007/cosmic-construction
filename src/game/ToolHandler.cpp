@@ -71,6 +71,8 @@ void ToolHandler::Update(float dt, Planet* p)
 	{
 		placeDir = (placeDir + 1) % 4;
 	}
+	sf::Vector2f mousePos = p->camera.WorldMousePos();
+	sf::Vector2i tilePos(floor(mousePos.x / TILE_SIZE.x), floor(mousePos.y / TILE_SIZE.y));
 	if (selectedTool == 0)
 	{
 
@@ -79,8 +81,7 @@ void ToolHandler::Update(float dt, Planet* p)
 			delete previewStructure;
 			previewStructure = nullptr;
 		}
-		sf::Vector2f mousePos = p->camera.WorldMousePos();
-		sf::Vector2i tilePos(floor(mousePos.x / TILE_SIZE.x), floor(mousePos.y / TILE_SIZE.y));
+
 		if (placeType == 0)
 		{
 
@@ -257,6 +258,23 @@ void ToolHandler::Update(float dt, Planet* p)
 				p->items[draggingItem].position = itemStartDraggingPos + offset;
 				p->items[draggingItem].moveDir = sf::Vector2f(0.f, 0.f);
 				p->MoveItem(draggingItem);
+			}
+		}
+		if (InputHandler::pressed(binds::UseTool) && draggingItem == -1)
+		{
+			int index = p->StructureInPos(tilePos);
+			if (index != -1)
+			{
+				Structure* s = p->structures[index];
+				if (s->typeID == 2)
+				{
+					Tree* t = dynamic_cast<Tree*>(s);
+					t->health--;
+					if (t->health <= 0)
+					{
+						p->RemoveStructure(index);
+					}
+				}
 			}
 		}
 	}

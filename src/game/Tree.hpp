@@ -3,6 +3,7 @@
 class Tree : public Structure
 {
 public:
+	int health;
 	Tree(int id, int planetID);
 	Tree(int planetID);
 	~Tree();

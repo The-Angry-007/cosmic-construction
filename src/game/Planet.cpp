@@ -22,6 +22,7 @@ Planet::Planet(int id)
 
 	camera = Camera();
 	structuresToUpdate = {};
+	emptyStructureSlots = {};
 }
 void Planet::Init(bool load)
 {
@@ -200,6 +201,10 @@ void Planet::Save()
 	std::vector<JSON> sJSONs;
 	for (int i = 0; i < structures.size(); i++)
 	{
+		if (structures[i] == nullptr)
+		{
+			continue;
+		}
 		sJSONs.push_back(structures[i]->ToJSON());
 	}
 	std::string structureData = sh::JSONsToString(sJSONs);
@@ -467,9 +472,45 @@ void Planet::AddStructure(Structure* s)
 			break;
 		}
 	}
-	if (update)
+	if (emptyStructureSlots.size() > 0)
 	{
-		structuresToUpdate.push_back(structures.size());
+		int index = emptyStructureSlots[emptyStructureSlots.size() - 1];
+		if (update)
+		{
+			structuresToUpdate.push_back(index);
+		}
+		structures.insert(structures.begin() + index, s);
+		emptyStructureSlots.erase(emptyStructureSlots.end() - 1);
 	}
-	structures.push_back(s);
+	else
+	{
+		if (update)
+		{
+			structuresToUpdate.push_back(structures.size());
+		}
+		structures.push_back(s);
+	}
+}
+
+void Planet::RemoveStructure(int index)
+{
+	Chunk* c = GetChunk(structures[index]->chunkID);
+	for (int i = 0; i < c->structures.size(); i++)
+	{
+		if (c->structures[i] == index)
+		{
+			c->structures.erase(c->structures.begin() + i);
+			break;
+		}
+	}
+	structures[index] = nullptr;
+	emptyStructureSlots.push_back(index);
+	for (int i = 0; i < structuresToUpdate.size(); i++)
+	{
+		if (structuresToUpdate[i] == index)
+		{
+			structuresToUpdate.erase(structuresToUpdate.begin() + i);
+			break;
+		}
+	}
 }

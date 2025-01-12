@@ -6,6 +6,7 @@ Tree::Tree(int id, int planetID)
 	SetID(id);
 	this->planetID = planetID;
 	typeID = 2;
+	health = 3;
 	tileSize = ResourceHandler::structureSizes[typeID];
 	sprite = sf::Sprite();
 	ResourceHandler::structureAtlas->SetSprite(sprite, 2, 0);
@@ -16,6 +17,7 @@ Tree::Tree(int planetID)
 	this->planetID = planetID;
 	this->planetID = planetID;
 	typeID = 2;
+	health = 3;
 	tileSize = ResourceHandler::structureSizes[typeID];
 	sprite = sf::Sprite();
 	ResourceHandler::structureAtlas->SetSprite(sprite, 2, 0);
@@ -31,6 +33,7 @@ void Tree::FromJSON(JSON j)
 	position = pos + game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE;
 	id = j.GetInt("ID");
 	SetPosition(position);
+	health = j.GetInt("Health");
 }
 JSON Tree::ToJSON()
 {
@@ -39,6 +42,7 @@ JSON Tree::ToJSON()
 	j.AddAttribute("ChunkID", chunkID);
 	j.AddAttribute("TypeID", typeID);
 	j.AddAttribute("ID", id);
+	j.AddAttribute("Health", health);
 	return j;
 }
 void Tree::Update(float dt)

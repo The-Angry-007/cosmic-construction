@@ -14,6 +14,7 @@ public:
 	std::vector<Chunk> chunks;
 	std::vector<int> structuresToUpdate;
 	std::vector<Structure*> structures;
+	std::vector<int> emptyStructureSlots;
 	Camera camera;
 	sf::Color backgroundColor;
 	int draggingItem;
@@ -38,4 +39,5 @@ public:
 	sf::Vector2f worldPos(sf::Vector2f tilePos, int chunkID);
 	void WorldUpdate(float dt);
 	void AddStructure(Structure* s);
+	void RemoveStructure(int index);
 };
