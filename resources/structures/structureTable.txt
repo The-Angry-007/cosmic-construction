@@ -1,3 +1,4 @@
 StructureID/Name/Description/SizeX/SizeY
 0/Conveyor Belt/Basic conveyor. Can move 450 items per minute./1/1
 1/Storage Silo/Stores and outputs items which can then be used to build structures nearby./3/3
+3/Tree/blank/1/3

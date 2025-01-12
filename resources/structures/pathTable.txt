@@ -14,3 +14,4 @@ StructureID/Path
 1/silo_tunnel_6.png
 1/silo_tunnel_7.png
 1/silo_tunnel_8.png
+2/tree.png
