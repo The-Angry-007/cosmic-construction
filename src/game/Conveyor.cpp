@@ -348,5 +348,5 @@ void Conveyor::RenderPreview()
 	Planet& p = game->planets[planetID];
 	p.renderObjects.push_back(RenderObject {
 		&sprite,
-		zindex + 100 });
+		zindex + 200 });
 }
