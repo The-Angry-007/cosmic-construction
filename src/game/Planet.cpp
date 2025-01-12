@@ -515,3 +515,154 @@ void Planet::RemoveStructure(int index)
 		}
 	}
 }
+
+std::vector<int> Planet::StructuresInArea(sf::Vector2i position, sf::Vector2i size)
+{
+	std::vector<int> structs = {};
+	sf::Vector2i minChunkPos(
+		floor((float)position.x / (float)CHUNK_SIZE),
+		floor((float)position.y / (float)CHUNK_SIZE));
+	sf::Vector2i maxChunkPos(
+		floor((float)(position.x + size.x) / (float)CHUNK_SIZE),
+		floor((float)(position.y + size.y) / (float)CHUNK_SIZE));
+	// position -= sf::Vector2i(chunkPos.x * CHUNK_SIZE, chunkPos.y * CHUNK_SIZE);
+	//need to also check the chunks left and up
+	for (int x = minChunkPos.x - 1; x <= maxChunkPos.x; x++)
+	{
+		for (int y = minChunkPos.y - 1; y <= maxChunkPos.y; y++)
+		{
+			int chunk = -1;
+			for (uint i = 0; i < chunks.size(); i++)
+			{
+				if (chunks[i].position.x == x && chunks[i].position.y == y)
+				{
+					chunk = i;
+				}
+			}
+			if (chunk == -1)
+			{
+				continue;
+			}
+			for (uint i = 0; i < chunks[chunk].structures.size(); i++)
+			{
+				Structure* s = structures[chunks[chunk].structures[i]];
+				sf::Vector2i pos = s->position + sf::Vector2i(x * CHUNK_SIZE, y * CHUNK_SIZE);
+				sf::Vector2i pos2 = s->bottomRightPos + sf::Vector2i(x * CHUNK_SIZE, y * CHUNK_SIZE);
+				// if (x == 0 && y == 0)
+				// {
+				// 	std::cout << "position is:" << pos.x << " " << pos.y << std::endl;
+				// 	std::cout << "position2 is:" << pos2.x << " " << pos2.y << std::endl;
+				// }
+				sf::IntRect rect1(pos, s->tileSize);
+				sf::IntRect rect2(position, size);
+				if (RectIntersectsRect(rect1, rect2))
+				{
+					structs.push_back(chunks[chunk].structures[i]);
+				}
+			}
+		}
+	}
+	return structs;
+}
+
+bool Planet::DeductResources(int typeID, sf::Vector2i position)
+{
+	sf::Vector2i distance(50, 50);
+	std::vector<int> structures = StructuresInArea(position - distance, 2 * distance);
+	std::vector<int> silos = {};
+	std::vector<float> dists = {};
+
+	for (int i = 0; i < structures.size(); i++)
+	{
+		if (this->structures[structures[i]]->typeID == 1)
+		{
+			float x = position.x - this->structures[structures[i]]->position.x;
+			float y = position.y - this->structures[structures[i]]->position.y;
+			float dist = x * x + y * y;
+			int index = dists.size();
+			for (int j = 0; j < dists.size(); j++)
+			{
+				if (dists[j] > dist)
+				{
+					index = j;
+					break;
+				}
+			}
+			dists.insert(dists.begin() + index, dist);
+			silos.insert(silos.begin() + index, structures[i]);
+		}
+	}
+	std::vector<int> idsLeft = {};
+	std::vector<int> idsCopy = {};
+	std::vector<int> amountsLeft = {};
+	std::vector<int> amountsCopy = {};
+
+	auto cost = ResourceHandler::GetCost(typeID);
+	for (int i = 1; i < cost.size(); i += 2)
+	{
+		idsLeft.push_back(cost[i]);
+		idsCopy.push_back(cost[i]);
+		amountsLeft.push_back(cost[i] + 1);
+		amountsCopy.push_back(cost[i] + 1);
+	}
+
+	for (int i = 0; i < silos.size(); i++)
+	{
+		StorageSilo* s = dynamic_cast<StorageSilo*>(this->structures[silos[i]]);
+
+		for (int k = 0; k < idsCopy.size(); k++)
+		{
+			for (int j = 0; j < s->itemIDs.size(); j++)
+			{
+				if (s->itemIDs[j] == idsCopy[k])
+				{
+
+					amountsCopy[k] -= s->itemQuantities[j];
+					if (amountsCopy[k] <= 0)
+					{
+						amountsCopy.erase(amountsCopy.begin() + k);
+						idsCopy.erase(idsCopy.begin() + k);
+						k--;
+						break;
+					}
+				}
+			}
+		}
+	}
+
+	if (idsCopy.size() != 0)
+	{
+		return false;
+	}
+	for (int i = 0; i < silos.size(); i++)
+	{
+		for (int k = 0; k < idsLeft.size(); k++)
+		{
+			StorageSilo* s = dynamic_cast<StorageSilo*>(this->structures[silos[i]]);
+			for (int j = 0; j < s->itemIDs.size(); j++)
+			{
+				if (s->itemIDs[j] == idsLeft[k])
+				{
+					s->itemQuantities[j] -= amountsLeft[k];
+					if (s->itemQuantities[j] <= 0)
+					{
+						amountsLeft[k] = -(s->itemQuantities[j]);
+						s->itemQuantities.erase(s->itemQuantities.begin() + j);
+						s->itemIDs.erase(s->itemIDs.begin() + j);
+					}
+					else
+					{
+						amountsLeft[k] = 0;
+					}
+					if (amountsLeft[k] <= 0)
+					{
+						amountsLeft.erase(amountsLeft.begin() + k);
+						idsLeft.erase(idsLeft.begin() + k);
+					}
+				}
+			}
+		}
+	}
+
+	return true;
+}

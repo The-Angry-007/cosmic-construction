@@ -32,6 +32,7 @@ public:
 	void Save();
 	int StructureInPos(sf::Vector2i position);
 	bool StructureInArea(sf::Vector2i position, sf::Vector2i size);
+	std::vector<int> StructuresInArea(sf::Vector2i position, sf::Vector2i size);
 	Chunk* GetChunk(int chunkID);
 	int ChunkAtPos(sf::Vector2f position);
 	int ChunkAtPos(sf::Vector2i position);
@@ -40,4 +41,5 @@ public:
 	void WorldUpdate(float dt);
 	void AddStructure(Structure* s);
 	void RemoveStructure(int index);
+	bool DeductResources(int typeID, sf::Vector2i position);
 };

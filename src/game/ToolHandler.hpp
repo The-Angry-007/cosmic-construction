@@ -13,7 +13,7 @@ public:
 	std::vector<GUIImage*> bgObjs;
 	int hoveringItem;
 	int draggingItem;
-sf::Vector2f mouseStartDraggingPos;
+	sf::Vector2f mouseStartDraggingPos;
 	sf::Vector2f itemStartDraggingPos;
 	int placeDir;
 	Structure* previewStructure;

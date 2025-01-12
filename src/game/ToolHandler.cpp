@@ -92,7 +92,7 @@ void ToolHandler::Update(float dt, Planet* p)
 
 			if (InputHandler::down(binds::UseTool))
 			{
-				if (p->StructureInPos(tilePos) == -1)
+				if (p->StructureInPos(tilePos) == -1 && p->DeductResources(0, tilePos))
 				{
 					int direction = placeDir;
 					if (lastPlacedStructure != -1)
