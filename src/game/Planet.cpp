@@ -21,6 +21,7 @@ Planet::Planet(int id)
 	items = {};
 
 	camera = Camera();
+	structuresToUpdate = {};
 }
 void Planet::Init(bool load)
 {
@@ -78,19 +79,19 @@ void Planet::Init(bool load)
 				if (jsons[i].GetValue("TypeID") == "0")
 				{
 					Conveyor* c = new Conveyor(id);
-					structures.push_back(c);
+					AddStructure(c);
 					c->FromJSON(jsons[i]);
 				}
 				else if (jsons[i].GetValue("TypeID") == "1")
 				{
 					StorageSilo* s = new StorageSilo(id);
-					structures.push_back(s);
+					AddStructure(s);
 					s->FromJSON(jsons[i]);
 				}
 				else if (jsons[i].GetValue("TypeID") == "2")
 				{
 					Tree* t = new Tree(id);
-					structures.push_back(t);
+					AddStructure(t);
 					t->FromJSON(jsons[i]);
 				}
 			}
@@ -98,7 +99,7 @@ void Planet::Init(bool load)
 	}
 	else
 	{
-		int numItems = 1000;
+		int numItems = 100;
 		// chunks.push_back(Chunk(sf::Vector2i(0, 0), -1, this->id));
 		GenerateChunksInView();
 		for (uint i = 0; i < numItems; i++)
@@ -215,22 +216,16 @@ void Planet::GenerateChunk(sf::Vector2i position)
 	for (int i = 0; i < numTrees; i++)
 	{
 
-		bool validPos = false;
-		while (!validPos)
+		int x = RandomHandler::GetNextNumber() % 32;
+		int y = RandomHandler::GetNextNumber() % 32;
+		sf::Vector2i pos = sf::Vector2i(x, y) + worldPos;
+		if (!StructureInArea(pos, sf::Vector2i(1, 3)))
 		{
-			int x = RandomHandler::GetNextNumber() % 32;
-			int y = RandomHandler::GetNextNumber() % 32;
-			sf::Vector2i pos = sf::Vector2i(x, y) + worldPos;
-			if (!StructureInArea(pos, sf::Vector2i(1, 3)))
-			{
-				Tree* t = new Tree(-1, id);
-				structures.push_back(t);
-				t->SetPosition(pos);
-				validPos = true;
-			}
+			Tree* t = new Tree(-1, id);
+			AddStructure(t);
+			t->SetPosition(pos);
 		}
 	}
-	std::cout << "generated " << chunks.size() << std::endl;
 }
 void Planet::GenerateChunksInView()
 {
@@ -437,11 +432,11 @@ sf::Vector2f Planet::worldPos(sf::Vector2f tilePos, int chunkID)
 
 void Planet::WorldUpdate(float dt)
 {
-	for (uint i = 0; i < chunks.size(); i++)
-	{
+	// for (uint i = 0; i < chunks.size(); i++)
+	// {
 
-		chunks[i].Update(dt);
-	}
+	// 	chunks[i].Update(dt);
+	// }
 	for (uint i = 0; i < items.size(); i++)
 	{
 		if (items[i].parent != -1)
@@ -454,8 +449,27 @@ void Planet::WorldUpdate(float dt)
 		}
 		items[i].Update(dt, &game->planets[id]);
 	}
-	for (uint i = 0; i < structures.size(); i++)
+	for (uint i = 0; i < structuresToUpdate.size(); i++)
 	{
-		structures[i]->Update(dt);
+		structures[structuresToUpdate[i]]->Update(dt);
 	}
+}
+
+void Planet::AddStructure(Structure* s)
+{
+	std::vector<int> nonUpdateIds = { 2 };
+	bool update = true;
+	for (int i = 0; i < nonUpdateIds.size(); i++)
+	{
+		if (nonUpdateIds[i] == s->typeID)
+		{
+			update = false;
+			break;
+		}
+	}
+	if (update)
+	{
+		structuresToUpdate.push_back(structures.size());
+	}
+	structures.push_back(s);
 }

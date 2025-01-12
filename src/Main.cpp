@@ -51,7 +51,6 @@ int main()
 	//main loop: runs once for each frame
 	while (window->isOpen())
 	{
-
 		InputHandler::ProcessEvents();
 		//adjust the window's view to match the window's dimensions
 		sf::View view(sf::FloatRect(0.f, 0.f, width, height));
@@ -64,13 +63,16 @@ int main()
 		if (game != nullptr)
 		{
 			game->Update(dt);
-			while (updateClock.getElapsedTime().asSeconds() * ups > numUpdates)
+			int maxUpdates = 5;
+			int num = 0;
+
+			while ((num < maxUpdates) && updateClock.getElapsedTime().asSeconds() * ups > numUpdates)
 			{
+				num++;
 				game->WorldUpdate(timePerUpdate);
 				numUpdates++;
 			}
 		}
-
 		/* ---RENDER--- */
 		//reset contents of window
 		window->clear(sf::Color::Black);

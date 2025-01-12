@@ -130,7 +130,7 @@ void ToolHandler::Update(float dt, Planet* p)
 					}
 					Conveyor* s = new Conveyor(-1, p->id, direction);
 					lastPlacedStructure = p->structures.size();
-					p->structures.push_back(s);
+					p->AddStructure(s);
 					s->SetPosition(tilePos);
 				}
 				else
@@ -179,7 +179,7 @@ void ToolHandler::Update(float dt, Planet* p)
 				if (!p->StructureInArea(pos, ResourceHandler::structureSizes[1]))
 				{
 					StorageSilo* s = new StorageSilo(-1, p->id);
-					p->structures.push_back(s);
+					p->AddStructure(s);
 
 					s->SetPosition(pos);
 				}
