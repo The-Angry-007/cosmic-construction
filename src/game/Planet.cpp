@@ -474,13 +474,13 @@ void Planet::AddStructure(Structure* s)
 	}
 	if (emptyStructureSlots.size() > 0)
 	{
-		int index = emptyStructureSlots[emptyStructureSlots.size() - 1];
+		int index = emptyStructureSlots.back();
 		if (update)
 		{
 			structuresToUpdate.push_back(index);
 		}
-		structures.insert(structures.begin() + index, s);
-		emptyStructureSlots.erase(emptyStructureSlots.end() - 1);
+		structures[index] = s;
+		emptyStructureSlots.pop_back();
 	}
 	else
 	{
@@ -503,6 +503,7 @@ void Planet::RemoveStructure(int index)
 			break;
 		}
 	}
+	delete structures[index];
 	structures[index] = nullptr;
 	emptyStructureSlots.push_back(index);
 	for (int i = 0; i < structuresToUpdate.size(); i++)

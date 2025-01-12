@@ -53,5 +53,5 @@ void Tree::Render()
 {
 	game->planets[planetID].renderObjects.push_back(RenderObject {
 		&sprite,
-		50 });
+		64 });
 }
