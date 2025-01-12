@@ -244,6 +244,10 @@ void Planet::MoveItem(int index)
 			}
 		}
 	}
+	if (item->parent != -1)
+	{
+		return;
+	}
 	int chunk = ChunkAtPos(item->position);
 	chunks[chunk].items.push_back(index);
 	item->chunkID = chunks[chunk].id;
