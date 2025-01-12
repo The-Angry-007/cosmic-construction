@@ -278,7 +278,7 @@ void StorageSilo::Render()
 void StorageSilo::RenderPreview()
 {
 	int opacity = 100;
-	sf::Color col = sf::Color::White;
+	sf::Color col = sf::Color::Green;
 	if (!CanBePlaced())
 	{
 		col = sf::Color::Red;

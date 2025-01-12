@@ -167,19 +167,21 @@ void ToolHandler::Update(float dt, Planet* p)
 		}
 		else if (placeType == 1)
 		{
+			sf::Vector2i pos = tilePos - sf::Vector2i(1, 1);
+
 			StorageSilo* s = new StorageSilo(0, game->activePlanet);
-			s->SetVisualPosition(tilePos);
+			s->SetVisualPosition(pos);
 
 			previewStructure = s;
 
 			if (InputHandler::pressed(binds::UseTool))
 			{
-				if (!p->StructureInArea(tilePos, ResourceHandler::structureSizes[1]))
+				if (!p->StructureInArea(pos, ResourceHandler::structureSizes[1]))
 				{
 					StorageSilo* s = new StorageSilo(-1, p->id);
 					p->structures.push_back(s);
 
-					s->SetPosition(tilePos);
+					s->SetPosition(pos);
 				}
 			}
 		}

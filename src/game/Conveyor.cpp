@@ -19,7 +19,7 @@ Conveyor::Conveyor(int id, int planetID, int direction)
 	tileSize = ResourceHandler::structureSizes[typeID];
 	sprite = sf::Sprite();
 	ResourceHandler::structureAtlas->SetSprite(sprite, 0, direction);
-	gap = 0.4f;
+	gap = 0.2f;
 	progress = { {}, {}, {}, {} };
 	items = { {}, {}, {}, {} };
 	speed = 3.f;
@@ -86,11 +86,12 @@ void Conveyor::Update(float dt)
 	{
 		if (i == 0)
 		{
-			progress[direction][i] += speed * dt;
 			if (progress[direction][i] > 1.f)
 			{
 				progress[direction][i] = 1.f;
 			}
+			progress[direction][i] += speed * dt;
+
 			if (neighbours[direction] != -1)
 			{
 				Structure* s = game->planets[planetID].structures[neighbours[direction]];
@@ -199,6 +200,10 @@ void Conveyor::Render()
 			float prog = progress[i][j];
 			if (i == direction)
 				prog = 1 - prog;
+			if (prog > 1.f)
+			{
+				prog = 1.f;
+			}
 			sf::Vector2f pos = Lerp(startPos, endPos, prog);
 			pos += (sf::Vector2f)position;
 			pos += (sf::Vector2f)(game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE);
@@ -297,10 +302,8 @@ void Conveyor::FromJSON(JSON j)
 	ResourceHandler::structureAtlas->SetSprite(sprite, 0, direction);
 	SetPosition(pos);
 
-	gap = 0.4f;
 	progress = { {}, {}, {}, {} };
 	items = { {}, {}, {}, {} };
-	speed = 3.f;
 
 	currentNeighbourIndex = std::stoi(j.GetValue("CurrentNeighbourIndex"));
 	for (int i = 0; i < 4; i++)
@@ -333,7 +336,7 @@ Conveyor::~Conveyor()
 void Conveyor::RenderPreview()
 {
 	int opacity = 100;
-	sf::Color col = sf::Color::White;
+	sf::Color col = sf::Color::Green;
 
 	if (!CanBePlaced())
 	{

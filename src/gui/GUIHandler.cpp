@@ -68,7 +68,7 @@ void GUIHandler::Update(float dt)
 	}
 	guis[activeGui]->Update(dt);
 	//the pause keybind also serves as a back button in menus that arent the main game gui
-	if (activeGui != 5 && InputHandler::pressed(binds::Pause) && activeGui != 6)
+	if (activeGui != 5 && InputHandler::pressed(binds::Pause) && activeGui != 6 && activeGui != 0)
 	{
 		GoBack();
 	}
