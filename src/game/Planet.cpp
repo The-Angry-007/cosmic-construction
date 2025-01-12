@@ -1,6 +1,7 @@
 #include "Planet.hpp"
 #include "InputHandler.hpp"
 #include "Main.hpp"
+#include "RandomHandler.hpp"
 #include "binds.hpp"
 #include "utils.hpp"
 #define sh SaveHandler
@@ -207,7 +208,27 @@ void Planet::Save()
 void Planet::GenerateChunk(sf::Vector2i position)
 {
 	Chunk c = Chunk(position, -1, id);
+	RandomHandler::SetNum(position);
 	chunks.push_back(c);
+	int numTrees = RandomHandler::GetNextNumber() % 20;
+	sf::Vector2i worldPos = position * CHUNK_SIZE;
+	for (int i = 0; i < numTrees; i++)
+	{
+		bool validPos = false;
+		while (!validPos)
+		{
+			int x = RandomHandler::GetNextNumber() % 32;
+			int y = RandomHandler::GetNextNumber() % 32;
+			sf::Vector2i pos = sf::Vector2i(x, y) + worldPos;
+			if (!StructureInArea(pos, sf::Vector2i(1, 3)))
+			{
+				Tree* t = new Tree(id);
+				structures.push_back(t);
+				t->SetPosition(pos);
+				validPos = true;
+			}
+		}
+	}
 }
 void Planet::GenerateChunksInView()
 {
