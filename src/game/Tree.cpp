@@ -10,6 +10,7 @@ Tree::Tree(int id, int planetID)
 	tileSize = ResourceHandler::structureSizes[typeID];
 	sprite = sf::Sprite();
 	ResourceHandler::structureAtlas->SetSprite(sprite, 2, 0);
+	blocksItems = true;
 }
 
 Tree::Tree(int planetID)
@@ -21,6 +22,7 @@ Tree::Tree(int planetID)
 	tileSize = ResourceHandler::structureSizes[typeID];
 	sprite = sf::Sprite();
 	ResourceHandler::structureAtlas->SetSprite(sprite, 2, 0);
+	blocksItems = true;
 }
 
 Tree ::~Tree()

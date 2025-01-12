@@ -52,7 +52,8 @@ void Structure::SetPosition(sf::Vector2i position)
 	sf::Vector2f pos = game->planets[planetID].worldPos(pos2, chunks[i].id);
 	sprite.setPosition(pos);
 }
-
+void Structure::TryAddGroundItem(int index)
+{}
 JSON Structure::ToJSON()
 {
 	return JSON();

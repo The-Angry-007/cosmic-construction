@@ -49,13 +49,9 @@ void Item::Update(float dt, Planet* planet)
 			break;
 		}
 	}
-	if (s->typeID == 0)
+	if (!s->blocksItems)
 	{
-		dynamic_cast<Conveyor*>(s)->TryAddGroundItem(index);
-	}
-	else if (s->typeID == 1)
-	{
-		dynamic_cast<StorageSilo*>(s)->TryAddGroundItem(index);
+		s->TryAddGroundItem(index);
 	}
 	else
 	{

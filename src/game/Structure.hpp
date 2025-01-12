@@ -9,6 +9,7 @@ public:
 	int chunkID;
 	int planetID;
 	int zindex;
+	bool blocksItems;
 	sf::Vector2i bottomRightPos;
 	sf::Vector2i position;
 	sf::Vector2i tileSize;
@@ -24,6 +25,8 @@ public:
 	virtual void FromJSON();
 	virtual void RenderPreview();
 	virtual void Interact();
+	virtual void TryAddGroundItem(int index);
+
 	bool CanBePlaced();
 	virtual ~Structure();
 };

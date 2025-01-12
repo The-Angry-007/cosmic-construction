@@ -19,7 +19,7 @@ public:
 	void Update(float dt);
 	void Render();
 	void ProgressLane(int lane, float dt);
-	bool TryAddGroundItem(int index);
+	void TryAddGroundItem(int index);
 	// void CollectItems();
 	void SetDirection(int direction);
 

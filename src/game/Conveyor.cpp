@@ -24,6 +24,12 @@ Conveyor::Conveyor(int id, int planetID, int direction)
 	items = { {}, {}, {}, {} };
 	speed = 3.f;
 	currentNeighbourIndex = 0;
+	blocksItems = false;
+}
+Conveyor::Conveyor(int planetID)
+{
+	this->planetID = planetID;
+	blocksItems = false;
 }
 void Conveyor::UpdateNeighbours()
 {
@@ -215,17 +221,17 @@ void Conveyor::Render()
 	}
 }
 
-bool Conveyor::TryAddGroundItem(int index)
+void Conveyor::TryAddGroundItem(int index)
 {
 	//only add new items if there is room
 	int dir = (direction + 2) % 4;
 	if (progress[dir].size() > 0 && progress[dir][progress[dir].size() - 1] < gap)
 	{
-		return false;
+		return;
 	}
 	if (index == game->toolHandler->draggingItem && game->activePlanet == planetID)
 	{
-		return false;
+		return;
 	}
 	this->items[dir].push_back(index);
 	progress[dir].push_back(0.f);
@@ -240,7 +246,7 @@ bool Conveyor::TryAddGroundItem(int index)
 			break;
 		}
 	}
-	return true;
+	return;
 }
 
 void Conveyor::SetDirection(int direction)
@@ -321,11 +327,6 @@ void Conveyor::FromJSON(JSON j)
 			this->progress[i].push_back(std::stof(progress[j]));
 		}
 	}
-}
-
-Conveyor::Conveyor(int planetID)
-{
-	this->planetID = planetID;
 }
 
 Conveyor::~Conveyor()

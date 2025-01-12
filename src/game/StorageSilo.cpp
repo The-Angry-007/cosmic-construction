@@ -22,6 +22,7 @@ StorageSilo::StorageSilo(int id, int planetID)
 		previousOutputs.push_back(0);
 	}
 	items = {};
+	blocksItems = false;
 }
 StorageSilo::StorageSilo(int planetID)
 {
@@ -43,6 +44,7 @@ StorageSilo::StorageSilo(int planetID)
 		previousOutputs.push_back(0);
 	}
 	items = {};
+	blocksItems = false;
 }
 void StorageSilo::SetPosition(sf::Vector2i position)
 {
