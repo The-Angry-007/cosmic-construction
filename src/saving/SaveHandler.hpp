@@ -23,6 +23,7 @@ std::string RelToAbsolute(std::string path);
 int GetTime();
 void ResetWorkingDir();
 bool DeleteDirectory(std::string& path);
+uint64_t HashFromString(std::string& str);
 
 std::string JSONsToString(std::vector<JSON> jsons);
 std::vector<JSON> StringToJSONs(std::string string);

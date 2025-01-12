@@ -109,9 +109,6 @@ void Planet::Init(bool load)
 			items[items.size() - 1].SetParent(-1);
 			MoveItem(items.size() - 1);
 		}
-		Tree* t = new Tree(-1, id);
-		structures.push_back(t);
-		t->SetPosition(sf::Vector2i(10, 10));
 	}
 }
 void Planet::Update(float dt)

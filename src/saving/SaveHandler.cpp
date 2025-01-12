@@ -1,5 +1,6 @@
 #include "SaveHandler.hpp"
 #include "Main.hpp"
+#include "game/RandomHandler.hpp"
 #include "utils.hpp"
 #include <chrono>
 #include <ctime>
@@ -38,6 +39,11 @@ void SaveHandler::Init()
 
 void SaveHandler::CreateSave(std::string name, int difficulty, std::string seed)
 {
+	uint64_t hashedSeed = HashFromString(seed);
+	RandomHandler::SetSeed(hashedSeed);
+	hashedSeed = RandomHandler::GetNextNumber();
+	RandomHandler::SetSeed(hashedSeed);
+	std::cout << seed << " " << hashedSeed << std::endl;
 	//folders are named numbers instead of the actual name
 	//this allows for illegal characters etc in the name
 
@@ -60,7 +66,7 @@ void SaveHandler::CreateSave(std::string name, int difficulty, std::string seed)
 	CreateDirectory(workingDir);
 	//the 2 zeroes are to set default values for
 	//time played and last modified
-	std::string metadata = name + "\n0\n0\n" + std::to_string(difficulty) + "\n" + seed;
+	std::string metadata = name + "\n0\n0\n" + std::to_string(difficulty) + "\n" + std::to_string(hashedSeed);
 	WriteData(workingDir + "\\metadata.txt", metadata);
 	startTime = GetTime();
 	UpdateTimePlayed();
@@ -72,6 +78,9 @@ void SaveHandler::LoadGame(int index)
 {
 	startTime = GetTime();
 	workingDir += "\\saves\\" + std::to_string(index);
+	auto metadata = Split(ReadData(workingDir + "\\metadata.txt"), '\n');
+	uint64_t seed = std::stoull(metadata[4]);
+	RandomHandler::SetSeed(seed);
 	game = new Game();
 	game->LoadGame();
 }
@@ -293,4 +302,19 @@ bool SaveHandler::DeleteDirectory(std::string& path)
 		return false;
 	}
 	return true;
+}
+//FNV-1a algorithm
+uint64_t SaveHandler::HashFromString(std::string& str)
+{
+	// Constants for FNV-1a
+	const uint64_t FNV_OFFSET_BASIS = 14695981039346656037ULL;
+	const uint64_t FNV_PRIME = 1099511628211ULL;
+
+	uint64_t hash = FNV_OFFSET_BASIS;
+	for (char c : str)
+	{
+		hash ^= static_cast<uint64_t>(c);
+		hash *= FNV_PRIME;
+	}
+	return hash;
 }
