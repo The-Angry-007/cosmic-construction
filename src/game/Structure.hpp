@@ -10,6 +10,7 @@ public:
 	int planetID;
 	int zindex;
 	bool blocksItems;
+	bool placedByPlayer;
 	sf::Vector2i bottomRightPos;
 	sf::Vector2i position;
 	sf::Vector2i tileSize;

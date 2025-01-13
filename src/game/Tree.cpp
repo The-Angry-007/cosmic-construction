@@ -11,6 +11,7 @@ Tree::Tree(int id, int planetID)
 	sprite = sf::Sprite();
 	ResourceHandler::structureAtlas->SetSprite(sprite, 2, 0);
 	blocksItems = true;
+	placedByPlayer = false;
 }
 
 Tree::Tree(int planetID)
@@ -23,6 +24,7 @@ Tree::Tree(int planetID)
 	sprite = sf::Sprite();
 	ResourceHandler::structureAtlas->SetSprite(sprite, 2, 0);
 	blocksItems = true;
+	placedByPlayer = false;
 }
 
 Tree ::~Tree()

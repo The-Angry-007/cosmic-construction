@@ -23,6 +23,7 @@ StorageSilo::StorageSilo(int id, int planetID)
 	}
 	items = {};
 	blocksItems = false;
+	placedByPlayer = true;
 }
 StorageSilo::StorageSilo(int planetID)
 {
@@ -45,6 +46,7 @@ StorageSilo::StorageSilo(int planetID)
 	}
 	items = {};
 	blocksItems = false;
+	placedByPlayer = true;
 }
 void StorageSilo::SetPosition(sf::Vector2i position)
 {

@@ -91,6 +91,10 @@ void ToolHandler::Update(float dt, Planet* p)
 	{
 		selectedTool = 1;
 	}
+	if (InputHandler::pressed(binds::Tool3))
+	{
+		selectedTool = 2;
+	}
 	selectedObj->position = guihandler.toolPoses[selectedTool];
 	if (InputHandler::pressed(binds::RotateStructure))
 	{
@@ -102,6 +106,7 @@ void ToolHandler::Update(float dt, Planet* p)
 	for (int i = 0; i < 4; i++)
 	{
 		int j = guihandler.guis[5]->GetIndex(selectedImages[i]);
+		selectedImages[i]->sprite.setColor(sf::Color::White);
 		if (j != -1)
 		{
 			guihandler.guis[5]->RemoveObject(j);
@@ -349,6 +354,38 @@ void ToolHandler::Update(float dt, Planet* p)
 						p->RemoveStructure(index);
 					}
 				}
+			}
+		}
+	}
+	else if (selectedTool == 2)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			selectedImages[i]->sprite.setColor(sf::Color::Red);
+		}
+		if (InputHandler::down(binds::UseTool) && index != -1)
+		{
+			if (p->structures[index]->placedByPlayer)
+			{
+				int type = p->structures[index]->typeID;
+				auto cost = ResourceHandler::GetCost(type);
+				sf::Vector2f pos = (sf::Vector2f)tilePos;
+				pos += (sf::Vector2f)p->structures[index]->tileSize / 2.f;
+
+				for (int i = 1; i < cost.size(); i += 2)
+				{
+					for (int j = 0; j < cost[i + 1]; j++)
+					{
+						std::cout << "adding item" << std::endl;
+
+						// Item item = Item(sf::Vector2f(rand() % 1000, rand() % 1000) / 1000.f + pos, -1, cost[i]);
+						p->items.push_back(Item(pos, -1, cost[i]));
+						p->items.back().SetParent(-1);
+						p->MoveItem(p->items.size() - 1);
+					}
+				}
+				p->RemoveStructure(index);
+				std::cout << p->items.size() << std::endl;
 			}
 		}
 	}

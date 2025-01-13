@@ -25,6 +25,7 @@ Conveyor::Conveyor(int id, int planetID, int direction)
 	speed = 3.f;
 	currentNeighbourIndex = 0;
 	blocksItems = false;
+	placedByPlayer = true;
 }
 Conveyor::Conveyor(int planetID)
 {
@@ -37,6 +38,7 @@ Conveyor::Conveyor(int planetID)
 	sprite = sf::Sprite();
 	progress = { {}, {}, {}, {} };
 	items = { {}, {}, {}, {} };
+	placedByPlayer = true;
 }
 void Conveyor::UpdateNeighbours()
 {

@@ -13,6 +13,7 @@ int Pan = -(sf::Mouse::Button::Right + 1);
 int UseTool = -(sf::Mouse::Button::Left + 1);
 int Tool1 = sf::Keyboard::Key::Num1 + 1;
 int Tool2 = sf::Keyboard::Key::Num2 + 1;
+int Tool3 = sf::Keyboard::Key::Num3 + 1;
 int RotateStructure = sf::Keyboard::Key::R + 1;
 int Interact = sf::Keyboard::Key::E + 1;
 int Build = sf::Keyboard::Key::B + 1;

@@ -115,6 +115,7 @@ void Planet::Init(bool load)
 
 		RemoveStructuresInArea(sf::Vector2i(9, 9), sf::Vector2i(3, 3));
 		StorageSilo* s = new StorageSilo(-1, id);
+		s->placedByPlayer = false;
 		AddStructure(s);
 		s->SetPosition(sf::Vector2i(9, 9));
 		for (int i = 0; i < 100; i++)

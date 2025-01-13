@@ -10,6 +10,7 @@ extern int DragItem;
 extern int UseTool;
 extern int Tool1;
 extern int Tool2;
+extern int Tool3;
 extern int RotateStructure;
 extern int Interact;
 extern int Build;
