@@ -675,8 +675,8 @@ bool Planet::DeductResources(int typeID, sf::Vector2i position)
 	{
 		idsLeft.push_back(cost[i]);
 		idsCopy.push_back(cost[i]);
-		amountsLeft.push_back(cost[i] + 1);
-		amountsCopy.push_back(cost[i] + 1);
+		amountsLeft.push_back(cost[i + 1]);
+		amountsCopy.push_back(cost[i + 1]);
 	}
 
 	for (int i = 0; i < silos.size(); i++)
