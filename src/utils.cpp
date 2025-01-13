@@ -19,6 +19,7 @@ bool RectIntersectsRect(sf::FloatRect rect1, sf::FloatRect rect2)
 	//return false if not intersecting
 	return false;
 }
+
 bool RectIntersectsRect(sf::IntRect rect1, sf::IntRect rect2)
 {
 	//split into multiple conditions to become more readable
