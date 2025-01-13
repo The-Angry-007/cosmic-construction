@@ -76,7 +76,7 @@ void Tree::FromJSON(JSON j)
 	sf::Vector2i pos = j.GetV2i("Position");
 	chunkID = j.GetInt("ChunkID");
 	position = pos + game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE;
-	id = j.GetInt("ID");
+	SetID(j.GetInt("ID"));
 	SetPosition(position);
 	health = j.GetInt("Health");
 }

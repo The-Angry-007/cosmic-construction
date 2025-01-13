@@ -240,7 +240,7 @@ void StorageSilo::FromJSON(JSON j)
 {
 	sf::Vector2i pos = j.GetV2i("Position");
 	typeID = j.GetInt("TypeID");
-	id = j.GetInt("ID");
+	SetID(j.GetInt("ID"));
 	chunkID = j.GetInt("ChunkID");
 	pos += game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE;
 	SetPosition(pos);

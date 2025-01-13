@@ -306,7 +306,7 @@ void Conveyor::FromJSON(JSON j)
 	pos.y = std::stoi(j.GetValue("PositionY"));
 	typeID = std::stoi(j.GetValue("TypeID"));
 	direction = std::stoi(j.GetValue("Direction"));
-	id = std::stoi(j.GetValue("ID"));
+	SetID(std::stoi(j.GetValue("ID")));
 	chunkID = std::stoi(j.GetValue("ChunkID"));
 	pos += game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE;
 
