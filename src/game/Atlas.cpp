@@ -1,4 +1,5 @@
 #include "Atlas.hpp"
+#include "ResourceHandler.hpp"
 Atlas::Atlas(std::vector<sf::Texture>& textures)
 {
 	positions = {};
@@ -93,6 +94,11 @@ Atlas::Atlas(std::vector<sf::Texture>& textures, std::vector<int> ids)
 
 void Atlas::SetSprite(sf::Sprite& sprite, int id, int frameNum)
 {
+	if (ResourceHandler::structureAtlas == this)
+	{
+		ResourceHandler::completeAtlas->SetSprite(sprite, id + 2 * ResourceHandler::numItems);
+		return;
+	}
 	int index = idPoses[id] + frameNum;
 	sprite.setTexture(texture);
 	sprite.setTextureRect(sf::IntRect(positions[index], (sf::Vector2i)textures[index].getSize()));
@@ -101,7 +107,8 @@ void Atlas::SetSprite(sf::Sprite& sprite, int id, int frameNum)
 
 void Atlas::SetSprite(sf::Sprite& sprite, int id)
 {
-	sprite.setTexture(texture);
-	sprite.setTextureRect(sf::IntRect(positions[id], (sf::Vector2i)textures[id].getSize()));
-	sprite.setOrigin((sf::Vector2f)(textures[id].getSize()) / 2.f);
+	ResourceHandler::completeAtlas->SetSprite(sprite, id, 0);
+	// sprite.setTexture(texture);
+	// sprite.setTextureRect(sf::IntRect(positions[id], (sf::Vector2i)textures[id].getSize()));
+	// sprite.setOrigin((sf::Vector2f)(textures[id].getSize()) / 2.f);
 }

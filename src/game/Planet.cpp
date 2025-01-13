@@ -229,7 +229,7 @@ void Planet::GenerateChunk(sf::Vector2i position)
 			sf::Vector2i p(x, y);
 			p += worldPos;
 			float noise = RandomHandler::getNoise(p.x, p.y);
-			if (noise > 0.65f && RandomHandler::GetNextNumber() % 5 == 0)
+			if (noise > 0.75f && RandomHandler::GetNextNumber() % 5 == 0)
 			{
 				Tree* t = new Tree(-1, id);
 				AddStructure(t);

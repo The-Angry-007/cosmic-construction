@@ -11,6 +11,7 @@ std::vector<sf::Vector2i> structureSizes;
 std::vector<std::vector<int>> structureCosts;
 Atlas* itemAtlas;
 Atlas* structureAtlas;
+Atlas* completeAtlas;
 Table* itemTable;
 Table* structureTable;
 int numItems = 0;
@@ -74,15 +75,24 @@ void ResourceHandler::Init()
 
 		structureTextures.push_back(t);
 		sf::Texture outline = GenerateOutline(t);
-		structureOutlines.push_back(outline);
 		allStructureTextures.push_back(t);
 	}
 	numStructureTextures = structureTextures.size();
-	for (uint i = 0; i < structureOutlines.size(); i++)
-	{
-		allStructureTextures.push_back(structureOutlines[i]);
-	}
 	structureAtlas = new Atlas(allStructureTextures, ids);
+	//making complete atlas
+	std::vector<sf::Texture> everyTexture = {};
+	std::vector<int> everyID = {};
+	for (int i = 0; i < allItems.size(); i++)
+	{
+		everyTexture.push_back(allItems[i]);
+		everyID.push_back(i);
+	}
+	for (int i = 0; i < structureTextures.size(); i++)
+	{
+		everyTexture.push_back(structureTextures[i]);
+		everyID.push_back(ids[i] + 2 * numItems);
+	}
+	completeAtlas = new Atlas(everyTexture, everyID);
 	structureCosts = {};
 	Table costTable = Table();
 	costTable.FromString(SaveHandler::ReadData("resources\\structures\\costTable.txt"));

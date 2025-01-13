@@ -10,6 +10,7 @@ extern std::vector<sf::Texture> structureTextures;
 extern std::vector<sf::Vector2i> structureSizes;
 extern std::vector<sf::Texture> structureOutlines;
 extern std::vector<std::vector<int>> structureCosts;
+extern Atlas* completeAtlas;
 extern Atlas* itemAtlas;
 extern Atlas* structureAtlas;
 extern Table* itemTable;
