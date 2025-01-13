@@ -5,7 +5,7 @@
 #include "binds.hpp"
 #include "utils.hpp"
 #define sh SaveHandler
-
+#include "PerlinNoise.hpp"
 Planet::Planet(int id)
 {
 	structures = {};
@@ -221,21 +221,35 @@ void Planet::GenerateChunk(sf::Vector2i position)
 	Chunk c = Chunk(position, -1, id);
 	RandomHandler::SetNum(position);
 	chunks.push_back(c);
-	int numTrees = RandomHandler::GetNextNumber() % 20;
 	sf::Vector2i worldPos = position * CHUNK_SIZE;
-	for (int i = 0; i < numTrees; i++)
+	for (int x = 0; x < 32; x++)
 	{
-
-		int x = RandomHandler::GetNextNumber() % 32;
-		int y = RandomHandler::GetNextNumber() % 32;
-		sf::Vector2i pos = sf::Vector2i(x, y) + worldPos;
-		if (!StructureInArea(pos, sf::Vector2i(1, 3)))
+		for (int y = 0; y < 32; y++)
 		{
-			Tree* t = new Tree(-1, id);
-			AddStructure(t);
-			t->SetPosition(pos);
+			sf::Vector2i p(x, y);
+			p += worldPos;
+			float noise = RandomHandler::getNoise(p.x, p.y);
+			if (noise > 0.65f && RandomHandler::GetNextNumber() % 5 == 0)
+			{
+				Tree* t = new Tree(-1, id);
+				AddStructure(t);
+				t->SetPosition(p);
+			}
 		}
 	}
+	// for (int i = 0; i < numTrees; i++)
+	// {
+
+	// 	int x = RandomHandler::GetNextNumber() % 32;
+	// 	int y = RandomHandler::GetNextNumber() % 32;
+	// 	sf::Vector2i pos = sf::Vector2i(x, y) + worldPos;
+	// 	if (!StructureInArea(pos, sf::Vector2i(1, 3)))
+	// 	{
+	// 		Tree* t = new Tree(-1, id);
+	// 		AddStructure(t);
+	// 		t->SetPosition(pos);
+	// 	}
+	// }
 }
 void Planet::GenerateChunksInView()
 {
