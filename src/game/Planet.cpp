@@ -268,7 +268,7 @@ void Planet::MoveItem(int index)
 	Item* item = &items[index];
 	if (item->chunkID != -1)
 	{
-		Chunk* c = &chunks[item->chunkID];
+		Chunk* c = GetChunk(item->chunkID);
 		for (uint i = 0; i < c->items.size(); i++)
 		{
 			if (c->items[i] == index)
