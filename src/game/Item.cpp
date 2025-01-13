@@ -33,6 +33,10 @@ void Item::Update(float dt, Planet* planet)
 	hitbox->SetTransform(position, sf::Vector2f(1.f, 1.f));
 	if (accurateHitbox != nullptr)
 		accurateHitbox->SetTransform(position, sf::Vector2f(1.f, 1.f));
+	if (parent != -1)
+	{
+		return;
+	}
 	sf::Vector2i tilePos = planet->tilePos(position);
 	int i = planet->StructureInPos(tilePos);
 	if (i == -1)
@@ -102,6 +106,7 @@ void Item::SetParent(int index)
 	else
 	{
 		zindex = 1;
+		chunkID = -1;
 	}
 	if (parent == -1 && accurateHitbox == nullptr)
 	{

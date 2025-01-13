@@ -323,6 +323,7 @@ void ToolHandler::Update(float dt, Planet* p)
 			if (!InputHandler::down(binds::UseTool))
 			{
 				draggingItem = -1;
+				hoveringItem = -1;
 			}
 			else
 			{

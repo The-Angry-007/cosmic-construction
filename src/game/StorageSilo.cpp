@@ -129,6 +129,7 @@ void StorageSilo::TryAddGroundItem(int index)
 		}
 	}
 	// item->parent = id;
+	item->SetParent(id);
 	AddItem(index);
 }
 void StorageSilo::Update(float dt)
