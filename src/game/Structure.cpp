@@ -36,7 +36,7 @@ void Structure::SetPosition(sf::Vector2i position)
 	int index;
 	for (uint i = 0; i < game->planets[planetID].structures.size(); i++)
 	{
-		if (game->planets[planetID].structures[i]->id == id)
+		if (game->planets[planetID].structures[i] != nullptr && game->planets[planetID].structures[i]->id == id)
 		{
 			index = i;
 			break;
