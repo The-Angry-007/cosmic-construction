@@ -268,7 +268,6 @@ void StorageSilo::Render()
 	{
 		if (inputNeighbours[i + 3] != -1 || outputNeighbours[i + 3] != -1)
 		{
-			int zindex = 4;
 
 			game->planets[planetID].renderObjects.push_back(RenderObject {
 				&sprites[i + 2],

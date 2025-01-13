@@ -52,6 +52,10 @@ int main()
 	while (window->isOpen())
 	{
 		InputHandler::ProcessEvents();
+		if (InputHandler::keyDown(sf::Keyboard::Key::LControl) && InputHandler::keyPressed(sf::Keyboard::Key::B))
+		{
+			continue;
+		}
 		//adjust the window's view to match the window's dimensions
 		sf::View view(sf::FloatRect(0.f, 0.f, width, height));
 		window->setView(view);

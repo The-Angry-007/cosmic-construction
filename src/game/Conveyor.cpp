@@ -32,6 +32,11 @@ Conveyor::Conveyor(int planetID)
 	blocksItems = false;
 	speed = 3.f;
 	gap = 0.2f;
+	typeID = 0;
+	tileSize = ResourceHandler::structureSizes[typeID];
+	sprite = sf::Sprite();
+	progress = { {}, {}, {}, {} };
+	items = { {}, {}, {}, {} };
 }
 void Conveyor::UpdateNeighbours()
 {
@@ -296,7 +301,7 @@ JSON Conveyor::ToJSON()
 }
 void Conveyor::FromJSON(JSON j)
 {
-	sf::Vector2i pos;
+	sf::Vector2i pos(0, 0);
 	pos.x = std::stoi(j.GetValue("PositionX"));
 	pos.y = std::stoi(j.GetValue("PositionY"));
 	typeID = std::stoi(j.GetValue("TypeID"));
@@ -305,13 +310,8 @@ void Conveyor::FromJSON(JSON j)
 	chunkID = std::stoi(j.GetValue("ChunkID"));
 	pos += game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE;
 
-	tileSize = ResourceHandler::structureSizes[typeID];
-	sprite = sf::Sprite();
 	ResourceHandler::structureAtlas->SetSprite(sprite, 0, direction);
 	SetPosition(pos);
-
-	progress = { {}, {}, {}, {} };
-	items = { {}, {}, {}, {} };
 
 	currentNeighbourIndex = std::stoi(j.GetValue("CurrentNeighbourIndex"));
 	for (int i = 0; i < 4; i++)

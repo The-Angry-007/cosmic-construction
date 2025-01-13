@@ -93,6 +93,8 @@ void Item::Render(Planet* planet)
 
 void Item::SetParent(int index)
 {
+	parent = index;
+
 	if (parent == -1)
 	{
 		zindex = 32;
@@ -101,7 +103,6 @@ void Item::SetParent(int index)
 	{
 		zindex = 1;
 	}
-	parent = index;
 	if (parent == -1 && accurateHitbox == nullptr)
 	{
 		accurateHitbox = new Hitbox(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.f, 1.f));
