@@ -57,7 +57,7 @@ void Camera::Update(float dt)
 		{
 			targetZoom *= zoomRate;
 		}
-		if (targetZoom > 8.f)
+		if (targetZoom > 4.f)
 		{
 			targetZoom /= zoomRate;
 		}

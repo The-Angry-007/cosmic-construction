@@ -242,7 +242,6 @@ void Conveyor::TryAddGroundItem(int index)
 	}
 	this->items[dir].push_back(index);
 	progress[dir].push_back(0.f);
-	game->planets[planetID].items[index].SetParent(id);
 	Item* item = &game->planets[planetID].items[index];
 	Chunk* chunk = game->planets[planetID].GetChunk(item->chunkID);
 	for (int i = 0; i < chunk->items.size(); i++)
@@ -253,6 +252,8 @@ void Conveyor::TryAddGroundItem(int index)
 			break;
 		}
 	}
+	game->planets[planetID].items[index].SetParent(id);
+
 	return;
 }
 

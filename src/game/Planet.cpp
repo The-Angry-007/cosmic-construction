@@ -117,6 +117,14 @@ void Planet::Init(bool load)
 		StorageSilo* s = new StorageSilo(-1, id);
 		AddStructure(s);
 		s->SetPosition(sf::Vector2i(9, 9));
+		for (int i = 0; i < 100; i++)
+		{
+			Item item = Item(sf::Vector2f(0.f, 0.f), -1, 0);
+			item.SetParent(-1);
+			items.push_back(item);
+			MoveItem(items.size() - 1);
+			s->TryAddGroundItem(items.size() - 1);
+		}
 	}
 }
 void Planet::Update(float dt)

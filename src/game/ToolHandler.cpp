@@ -267,7 +267,7 @@ void ToolHandler::Update(float dt, Planet* p)
 	{
 		if (hoveringItem != -1)
 		{
-			p->items[hoveringItem].SetParent(-1);
+			// p->items[hoveringItem].SetParent(-1);
 			ResourceHandler::itemAtlas->SetSprite(p->items[hoveringItem].sprite, p->items[hoveringItem].typeId);
 		}
 		if (draggingItem == -1)
