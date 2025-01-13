@@ -5,6 +5,8 @@
 #include "RenderObject.hpp"
 #include "saving.hpp"
 #include "structures.hpp"
+extern void buildVertexArray(const std::vector<RenderObject>& renderObjects);
+
 class Planet
 {
 public:
@@ -20,6 +22,7 @@ public:
 	int draggingItem;
 	int hoveringItem;
 	std::string savePath;
+	sf::VertexArray vertexArray;
 
 	std::vector<RenderObject> renderObjects;
 	void MoveItem(int index);

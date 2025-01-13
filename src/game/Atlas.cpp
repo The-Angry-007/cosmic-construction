@@ -96,7 +96,7 @@ void Atlas::SetSprite(sf::Sprite& sprite, int id, int frameNum)
 {
 	if (ResourceHandler::structureAtlas == this)
 	{
-		ResourceHandler::completeAtlas->SetSprite(sprite, id + 2 * ResourceHandler::numItems);
+		ResourceHandler::completeAtlas->SetSprite(sprite, id + 2 * ResourceHandler::numItems, frameNum);
 		return;
 	}
 	int index = idPoses[id] + frameNum;

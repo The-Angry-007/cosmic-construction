@@ -17,6 +17,10 @@ public:
 	sf::Vector2f itemStartDraggingPos;
 	int placeDir;
 	Structure* previewStructure;
+	GUILabel* insufficientLabel;
+	sf::Clock insufficientTimer;
+	std::vector<GUIImage*> selectedImages;
+	void ShowInsufficient();
 	void Update(float dt, Planet* p);
 	ToolHandler();
 };

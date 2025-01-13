@@ -1,6 +1,7 @@
 #include "ToolHandler.hpp"
 #include "Main.hpp"
 #include "binds.hpp"
+#include "utils.hpp"
 
 ToolHandler::ToolHandler()
 {
@@ -23,10 +24,34 @@ ToolHandler::ToolHandler()
 	placeType = 0;
 	prevTilePos = sf::Vector2i(-10000, -10000);
 	previewStructure = nullptr;
+	insufficientLabel = nullptr;
+	selectedImages = {};
+	for (int i = 0; i < 4; i++)
+	{
+		selectedImages.push_back(new GUIImage(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.5f, 0.5f), "resources\\images\\selection" + std::to_string(i + 1) + ".png"));
+		selectedImages[i]->keepAspectRatio = true;
+	}
 }
 
 void ToolHandler::Update(float dt, Planet* p)
 {
+	if (insufficientLabel != nullptr)
+	{
+		float time = 1.5f;
+		if (insufficientTimer.getElapsedTime().asSeconds() > time)
+		{
+			guihandler.guis[5]->RemoveObject(guihandler.guis[5]->GetIndex(insufficientLabel));
+			insufficientLabel = nullptr;
+		}
+		else
+		{
+			float prog = insufficientTimer.getElapsedTime().asSeconds() / time;
+			prog = 1 - prog;
+			insufficientLabel->SetColor(sf::Color(255, 0, 0, Lerp(0, 255, prog)));
+			insufficientLabel->position = { 0.5f, 0.3f + prog * 0.2f };
+		}
+	}
+
 	if (InputHandler::pressed(binds::Build))
 	{
 		if (guihandler.activeGui == 7)
@@ -73,6 +98,38 @@ void ToolHandler::Update(float dt, Planet* p)
 	}
 	sf::Vector2f mousePos = p->camera.WorldMousePos();
 	sf::Vector2i tilePos(floor(mousePos.x / TILE_SIZE.x), floor(mousePos.y / TILE_SIZE.y));
+	//draw selections
+	for (int i = 0; i < 4; i++)
+	{
+		int j = guihandler.guis[5]->GetIndex(selectedImages[i]);
+		if (j != -1)
+		{
+			guihandler.guis[5]->RemoveObject(j);
+		}
+	}
+	int index = p->StructureInPos(tilePos);
+	if (index != -1)
+	{
+		Structure* s = p->structures[index];
+		sf::Vector2f coords = (sf::Vector2f)(s->position + p->GetChunk(s->chunkID)->position * CHUNK_SIZE);
+		sf::Vector2f tileSize = (sf::Vector2f)s->tileSize - sf::Vector2f(1.f, 1.f);
+		sf::Vector2f tl = p->camera.tileToGUIPos({ 0.f, 0.f });
+		sf::Vector2f br = p->camera.tileToGUIPos({ 1.f, 1.f });
+		sf::Vector2f size = (br - tl) / 2.f;
+		selectedImages[0]->position = p->camera.tileToGUIPos(coords + sf::Vector2f(0.f, 0.f) + sf::Vector2f(0.5f, 0.5f));
+		selectedImages[0]->size = size;
+		selectedImages[1]->position = p->camera.tileToGUIPos(coords + sf::Vector2f(tileSize.x, 0.f) + sf::Vector2f(0.5f, 0.5f));
+		selectedImages[1]->size = size;
+		selectedImages[2]->position = p->camera.tileToGUIPos(coords + tileSize + sf::Vector2f(0.5f, 0.5f));
+		selectedImages[2]->size = size;
+		selectedImages[3]->position = p->camera.tileToGUIPos(coords + sf::Vector2f(0.f, tileSize.y) + sf::Vector2f(0.5f, 0.5f));
+		selectedImages[3]->size = size;
+
+		guihandler.guis[5]->AddObject(selectedImages[0]);
+		guihandler.guis[5]->AddObject(selectedImages[1]);
+		guihandler.guis[5]->AddObject(selectedImages[2]);
+		guihandler.guis[5]->AddObject(selectedImages[3]);
+	}
 	if (selectedTool == 0)
 	{
 
@@ -137,6 +194,10 @@ void ToolHandler::Update(float dt, Planet* p)
 						p->AddStructure(s);
 						s->SetPosition(tilePos);
 					}
+					else
+					{
+						ShowInsufficient();
+					}
 				}
 				else
 				{
@@ -181,12 +242,19 @@ void ToolHandler::Update(float dt, Planet* p)
 
 			if (InputHandler::pressed(binds::UseTool))
 			{
-				if (!p->StructureInArea(pos, ResourceHandler::structureSizes[1]) && p->DeductResources(1, pos))
+				if (!p->StructureInArea(pos, ResourceHandler::structureSizes[1]))
 				{
-					StorageSilo* s = new StorageSilo(-1, p->id);
-					p->AddStructure(s);
+					if (p->DeductResources(1, pos))
+					{
+						StorageSilo* s = new StorageSilo(-1, p->id);
+						p->AddStructure(s);
 
-					s->SetPosition(pos);
+						s->SetPosition(pos);
+					}
+					else
+					{
+						ShowInsufficient();
+					}
 				}
 			}
 		}
@@ -199,7 +267,7 @@ void ToolHandler::Update(float dt, Planet* p)
 	{
 		if (hoveringItem != -1)
 		{
-			p->items[hoveringItem].zindex = 100;
+			p->items[hoveringItem].SetParent(-1);
 			ResourceHandler::itemAtlas->SetSprite(p->items[hoveringItem].sprite, p->items[hoveringItem].typeId);
 		}
 		if (draggingItem == -1)
@@ -244,7 +312,7 @@ void ToolHandler::Update(float dt, Planet* p)
 				else if (!InputHandler::down(binds::UseTool))
 				{
 					hoveringItem = i;
-					p->items[hoveringItem].zindex = 1;
+					p->items[hoveringItem].zindex = 100;
 
 					ResourceHandler::itemAtlas->SetSprite(p->items[hoveringItem].sprite, p->items[hoveringItem].typeId + ResourceHandler::numItems);
 				}
@@ -283,4 +351,15 @@ void ToolHandler::Update(float dt, Planet* p)
 			}
 		}
 	}
+}
+
+void ToolHandler::ShowInsufficient()
+{
+	if (insufficientLabel == nullptr)
+	{
+		insufficientLabel = new GUILabel(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.3f, 0.1f), "Insufficient Resources");
+		insufficientLabel->SetColor(sf::Color::Red);
+		guihandler.guis[5]->AddObject(insufficientLabel);
+	}
+	insufficientTimer.restart();
 }

@@ -97,7 +97,7 @@ void Item::SetParent(int index)
 
 	if (parent == -1)
 	{
-		zindex = 32;
+		zindex = 8;
 	}
 	else
 	{

@@ -96,5 +96,5 @@ void Tree::Render()
 {
 	game->planets[planetID].renderObjects.push_back(RenderObject {
 		&sprite,
-		64 });
+		17 });
 }

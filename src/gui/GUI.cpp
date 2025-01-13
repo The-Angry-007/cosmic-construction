@@ -32,7 +32,7 @@ int GUI::GetIndex(GUIObject* object)
 void GUI::RemoveObject(int index)
 {
 	//need to call delete since it is a pointer.
-	delete GUIObjects[index];
+	// delete GUIObjects[index];
 	GUIObjects.erase(GUIObjects.begin() + index);
 }
 //destructor just deletes every gui object

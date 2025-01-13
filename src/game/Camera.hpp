@@ -19,5 +19,6 @@ public:
 	void Update(float dt);
 	void SetView();
 	sf::Vector2f WorldMousePos();
+	sf::Vector2f tileToGUIPos(sf::Vector2f tilePos);
 	sf::FloatRect toFloatRect();
 };

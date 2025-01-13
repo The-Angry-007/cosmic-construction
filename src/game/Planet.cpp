@@ -137,6 +137,50 @@ void Planet::Update(float dt)
 	}
 }
 
+void buildVertexArray(const std::vector<RenderObject>& renderObjects, sf::VertexArray& vertexArray)
+{
+	// Set the vertex array to quads and resize it to fit all sprites
+	vertexArray.setPrimitiveType(sf::Quads);
+	vertexArray.resize(renderObjects.size() * 4);
+
+	for (size_t i = 0; i < renderObjects.size(); ++i)
+	{
+		const RenderObject& obj = renderObjects[i];
+		const sf::Sprite* sprite = obj.sprite;
+
+		// Extract texture rectangle and position
+		const sf::FloatRect globalBounds = sprite->getGlobalBounds();
+		const sf::IntRect textureRect = sprite->getTextureRect();
+
+		// Calculate quad vertices
+		sf::Vertex* quad = &vertexArray[i * 4];
+
+		// Top-left
+		quad[0].position = sf::Vector2f(globalBounds.left, globalBounds.top);
+		quad[0].texCoords = sf::Vector2f(textureRect.left, textureRect.top);
+		quad[0].color = sprite->getColor();
+
+		// Top-right
+		quad[1].position = sf::Vector2f(globalBounds.left + globalBounds.width, globalBounds.top);
+		quad[1].texCoords = sf::Vector2f(textureRect.left + textureRect.width, textureRect.top);
+		quad[1].color = sprite->getColor();
+
+		// Bottom-right
+		quad[2].position = sf::Vector2f(globalBounds.left + globalBounds.width, globalBounds.top + globalBounds.height);
+		quad[2].texCoords = sf::Vector2f(textureRect.left + textureRect.width, textureRect.top + textureRect.height);
+		quad[2].color = sprite->getColor();
+
+		// Bottom-left
+		quad[3].position = sf::Vector2f(globalBounds.left, globalBounds.top + globalBounds.height);
+		quad[3].texCoords = sf::Vector2f(textureRect.left, textureRect.top + textureRect.height);
+		quad[3].color = sprite->getColor();
+	}
+	sf::RenderStates states;
+	states.texture = &ResourceHandler::completeAtlas->texture;
+
+	window->draw(vertexArray, states);
+}
+
 void Planet::Render()
 {
 
@@ -154,10 +198,11 @@ void Planet::Render()
 	if (renderObjects.size() > 0)
 	{
 		std::sort(renderObjects.begin(), renderObjects.end());
-		for (uint i = 0; i < renderObjects.size(); i++)
-		{
-			window->draw(*renderObjects[i].sprite);
-		}
+		buildVertexArray(renderObjects, vertexArray);
+		// for (uint i = 0; i < renderObjects.size(); i++)
+		// {
+		// 	window->draw(*renderObjects[i].sprite);
+		// }
 	}
 	renderObjects = {};
 }
@@ -229,7 +274,7 @@ void Planet::GenerateChunk(sf::Vector2i position)
 			sf::Vector2i p(x, y);
 			p += worldPos;
 			float noise = RandomHandler::getNoise(p.x, p.y);
-			if (noise > 0.75f && RandomHandler::GetNextNumber() % 5 == 0)
+			if (noise > 0.65f && RandomHandler::GetNextNumber() % 5 == 0)
 			{
 				Tree* t = new Tree(-1, id);
 				AddStructure(t);

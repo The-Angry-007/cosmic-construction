@@ -90,3 +90,10 @@ Camera::~Camera()
 {
 	// delete hitbox;
 }
+
+sf::Vector2f Camera::tileToGUIPos(sf::Vector2f tilePos)
+{
+	sf::Vector2f worldPos(tilePos.x * TILE_SIZE.x, tilePos.y * TILE_SIZE.y);
+	sf::Vector2f p = (sf::Vector2f)window->mapCoordsToPixel(worldPos);
+	return sf::Vector2f(p.x / width, p.y / height);
+}
