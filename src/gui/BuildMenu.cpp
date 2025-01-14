@@ -28,8 +28,8 @@ BuildMenu::BuildMenu()
 	menus.push_back({});
 	menus.push_back({});
 	menus.push_back({});
-	typeIDs = { { 0 }, {}, { 1 } };
-	std::vector<std::vector<std::vector<int>>> frames = { { { 0 } }, {}, { { 0, 1 } } };
+	typeIDs = { { 0 }, { 3 }, { 1 } };
+	std::vector<std::vector<std::vector<int>>> frames = { { { 0 } }, { { 4 * 15 } }, { { 0, 1 } } };
 	for (int j = 0; j < 3; j++)
 	{
 		sf::Vector2f imageSize(0.05f, 0.05f);
@@ -103,6 +103,7 @@ void BuildMenu::Update(float dt)
 			game->toolHandler->placeType = typeIDs[currentTab][i];
 			guihandler.OpenGUI(5);
 			game->inMenu = false;
+			game->toolHandler->selectedTool = 0;
 			InputHandler::RemoveMbPressed(sf::Mouse::Button::Left);
 			InputHandler::RemoveMbDown(sf::Mouse::Button::Left);
 		}

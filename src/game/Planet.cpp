@@ -114,6 +114,11 @@ void Planet::Init(bool load)
 		}
 
 		RemoveStructuresInArea(sf::Vector2i(9, 9), sf::Vector2i(3, 3));
+		RemoveStructuresInArea(sf::Vector2i(5, 5), sf::Vector2i(3, 3));
+		TreeChopper* t = new TreeChopper(-1, id, 0);
+		AddStructure(t);
+		t->SetPosition(sf::Vector2i(12, 9));
+
 		StorageSilo* s = new StorageSilo(-1, id);
 		s->placedByPlayer = false;
 		AddStructure(s);
@@ -299,7 +304,7 @@ void Planet::GenerateChunk(sf::Vector2i position)
 	// 	sf::Vector2i pos = sf::Vector2i(x, y) + worldPos;
 	// 	if (!StructureInArea(pos, sf::Vector2i(1, 3)))
 	// 	{
-	// 		Tree* t = new Tree(-1, id);
+	// 		Tree* t = n0ew Tree(-1, id);
 	// 		AddStructure(t);
 	// 		t->SetPosition(pos);
 	// 	}
