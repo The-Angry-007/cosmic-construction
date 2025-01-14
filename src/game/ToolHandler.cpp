@@ -32,7 +32,22 @@ ToolHandler::ToolHandler()
 		selectedImages[i]->keepAspectRatio = true;
 	}
 }
-
+ToolHandler::~ToolHandler()
+{
+	for (int i = 0; i < 4; i++)
+	{
+		int j = guihandler.guis[5]->GetIndex(selectedImages[i]);
+		selectedImages[i]->sprite.setColor(sf::Color::White);
+		if (j != -1)
+		{
+			guihandler.guis[5]->RemoveObject(j);
+		}
+	}
+	if (insufficientLabel != nullptr)
+	{
+		guihandler.guis[5]->RemoveObject(guihandler.guis[5]->GetIndex(insufficientLabel));
+	}
+}
 void ToolHandler::Update(float dt, Planet* p)
 {
 	if (insufficientLabel != nullptr)

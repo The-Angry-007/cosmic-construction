@@ -24,4 +24,5 @@ public:
 	void Update(float dt, Planet* p);
 	Structure* CreateStructure(int type);
 	ToolHandler();
+	~ToolHandler();
 };

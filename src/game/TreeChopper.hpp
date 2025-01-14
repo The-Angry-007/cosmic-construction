@@ -11,4 +11,6 @@ public:
 	void Update(float dt);
 	void Render();
 	void RenderPreview();
+	JSON ToJSON();
+	void FromJSON(JSON j);
 };

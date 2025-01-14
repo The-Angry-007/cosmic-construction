@@ -104,3 +104,28 @@ void TreeChopper::RenderPreview()
 
 TreeChopper::~TreeChopper()
 {}
+
+JSON TreeChopper::ToJSON()
+{
+	JSON j = JSON();
+	j.AddAttribute("Position", position);
+	j.AddAttribute("ChunkID", chunkID);
+	j.AddAttribute("TypeID", typeID);
+	j.AddAttribute("ID", id);
+	j.AddAttribute("Phase", phase);
+	j.AddAttribute("Direction", direction);
+	j.AddAttribute("TimeSinceAction", timeSinceAction);
+	return j;
+}
+void TreeChopper::FromJSON(JSON j)
+{
+	sf::Vector2i pos = j.GetV2i("Position");
+	chunkID = j.GetInt("ChunkID");
+	id = j.GetInt("ID");
+	phase = j.GetInt("Phase");
+	direction = j.GetInt("Direction");
+	timeSinceAction = j.GetFloat("TimeSinceAction");
+	pos += game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE;
+	SetPosition(pos);
+	ResourceHandler::structureAtlas->SetSprite(sprite, typeID, direction * 15);
+}
