@@ -58,7 +58,7 @@ Atlas::Atlas(std::vector<sf::Texture>& textures, std::vector<int> ids)
 	int rowWidth = 0;
 	int totalWidth = 0;
 	int totalHeight = 0;
-	int maxSize = 1024;
+	int maxSize = sf::Texture::getMaximumSize();
 	for (uint i = 0; i < textures.size(); i++)
 	{
 		int newWidth = rowWidth + textures[i].getSize().x;

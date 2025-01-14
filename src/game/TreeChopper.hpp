@@ -7,6 +7,7 @@ public:
 	float timeSinceAction;
 	int phase;
 	TreeChopper(int id, int planetID, int direction);
+	~TreeChopper();
 	void Update(float dt);
 	void Render();
 	void RenderPreview();

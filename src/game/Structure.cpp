@@ -6,12 +6,15 @@ int CurrentStructureID = 0;
 Structure::Structure()
 {
 }
-
 void Structure::SetID(int id)
 {
 	if (id == -1)
 	{
 		this->id = CurrentStructureID++;
+	}
+	else if (id == -2)
+	{
+		this->id = -CurrentStructureID;
 	}
 	else
 	{

@@ -263,6 +263,33 @@ void ToolHandler::Update(float dt, Planet* p)
 				}
 			}
 		}
+		else if (placeType == 3)
+		{
+			sf::Vector2i pos = tilePos;
+
+			TreeChopper* s = new TreeChopper(-2, game->activePlanet, placeDir);
+			s->SetVisualPosition(pos);
+
+			previewStructure = s;
+
+			if (InputHandler::pressed(binds::UseTool))
+			{
+				if (!p->StructureInArea(pos, ResourceHandler::structureSizes[3]))
+				{
+					if (p->DeductResources(3, pos))
+					{
+						TreeChopper* s = new TreeChopper(-1, p->id, placeDir);
+						p->AddStructure(s);
+
+						s->SetPosition(pos);
+					}
+					else
+					{
+						ShowInsufficient();
+					}
+				}
+			}
+		}
 		if (previewStructure != nullptr && !InputHandler::mouseIsBlocked && !game->inMenu)
 		{
 			previewStructure->RenderPreview();
