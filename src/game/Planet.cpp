@@ -101,6 +101,12 @@ void Planet::Init(bool load)
 					AddStructure(t);
 					t->FromJSON(jsons[i]);
 				}
+				else if (jsons[i].GetValue("TypeID") == "4")
+				{
+					SaplingPlanter* t = new SaplingPlanter(-2, id, 0);
+					AddStructure(t);
+					t->FromJSON(jsons[i]);
+				}
 			}
 		}
 	}

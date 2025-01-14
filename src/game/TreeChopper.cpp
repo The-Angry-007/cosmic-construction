@@ -40,6 +40,15 @@ void TreeChopper::Update(float dt)
 			phase = 1;
 			timeSinceAction = 0.f;
 		}
+		else if (index != -1 && p.structures[index]->typeID == 4)
+		{
+			SaplingPlanter* s = dynamic_cast<SaplingPlanter*>(p.structures[index]);
+			if (s->tree != -1)
+			{
+				phase = 1;
+				timeSinceAction = 0.f;
+			}
+		}
 	}
 	else if (phase == 1)
 	{
@@ -58,6 +67,25 @@ void TreeChopper::Update(float dt)
 	{
 		if (timeSinceAction > timePerStep)
 		{
+			if (p.structures[index]->typeID == 4)
+			{
+				SaplingPlanter* s = dynamic_cast<SaplingPlanter*>(p.structures[index]);
+				for (int i = 0; i < p.structures.size(); i++)
+				{
+					if (p.structures[i] != nullptr && p.structures[i]->id == s->tree)
+					{
+						index = i;
+						break;
+					}
+				}
+				if (index == -1)
+				{
+					phase = 3;
+					timeSinceAction = 0.f;
+					return;
+				}
+				s->tree = -1;
+			}
 			dynamic_cast<Tree*>(p.structures[index])->Destroy();
 			p.RemoveStructure(index);
 			phase = 3;

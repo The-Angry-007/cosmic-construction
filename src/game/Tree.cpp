@@ -12,6 +12,7 @@ Tree::Tree(int id, int planetID)
 	ResourceHandler::structureAtlas->SetSprite(sprite, 2, 0);
 	blocksItems = true;
 	placedByPlayer = false;
+	parent = -1;
 }
 
 Tree ::~Tree()
@@ -29,18 +30,23 @@ void Tree::Destroy()
 		for (int x = -1; x < 2; x++)
 		{
 			sf::Vector2i position = pos + sf::Vector2i(x, y);
-			int index = p.StructureInPos(position);
-			if (index == -1)
+			std::vector<int> structures = p.StructuresInArea(position, sf::Vector2i(1, 1));
+			bool canAdd = true;
+			for (int i = 0; i < structures.size(); i++)
+			{
+				if (p.structures[structures[i]]->id != id && p.structures[structures[i]]->blocksItems)
+				{
+					canAdd = false;
+					break;
+				}
+			}
+			if (x == 0 && y == 0 && parent != -1)
+			{
+				canAdd = false;
+			}
+			if (canAdd)
 			{
 				possiblePositions.push_back(position);
-			}
-			else
-			{
-				Structure* s = p.structures[index];
-				if (s->id == id || !s->blocksItems)
-				{
-					possiblePositions.push_back(position);
-				}
 			}
 		}
 	}
@@ -68,6 +74,7 @@ void Tree::FromJSON(JSON j)
 	SetID(j.GetInt("ID"));
 	SetPosition(position);
 	health = j.GetInt("Health");
+	parent = j.GetInt("Parent");
 }
 JSON Tree::ToJSON()
 {
@@ -77,6 +84,7 @@ JSON Tree::ToJSON()
 	j.AddAttribute("TypeID", typeID);
 	j.AddAttribute("ID", id);
 	j.AddAttribute("Health", health);
+	j.AddAttribute("Parent", parent);
 	return j;
 }
 void Tree::Update(float dt)

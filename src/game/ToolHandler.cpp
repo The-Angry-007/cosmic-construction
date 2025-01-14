@@ -267,7 +267,7 @@ void ToolHandler::Update(float dt, Planet* p)
 			{
 				if (!p->StructureInArea(pos, size))
 				{
-					if (p->DeductResources(1, pos))
+					if (p->DeductResources(placeType, pos))
 					{
 						Structure* s2 = CreateStructure(placeType);
 						s2->SetID(-1);
@@ -436,6 +436,10 @@ Structure* ToolHandler::CreateStructure(int type)
 	else if (type == 3)
 	{
 		return new TreeChopper(-2, game->activePlanet, placeDir);
+	}
+	else if (type == 4)
+	{
+		return new SaplingPlanter(-2, game->activePlanet, placeDir);
 	}
 	else
 	{

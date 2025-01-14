@@ -4,6 +4,7 @@ class Tree : public Structure
 {
 public:
 	int health;
+	int parent;
 	Tree(int id, int planetID);
 	~Tree();
 	void FromJSON(JSON j);
