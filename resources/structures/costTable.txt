@@ -2,3 +2,4 @@ StructureID/ItemID/Amount
 0/0/1
 1/0/10
 3/0/1
+4/0/1

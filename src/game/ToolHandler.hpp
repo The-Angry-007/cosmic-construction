@@ -22,5 +22,6 @@ public:
 	std::vector<GUIImage*> selectedImages;
 	void ShowInsufficient();
 	void Update(float dt, Planet* p);
+	Structure* CreateStructure(int type);
 	ToolHandler();
 };

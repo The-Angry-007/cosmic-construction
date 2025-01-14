@@ -79,19 +79,19 @@ void Planet::Init(bool load)
 			{
 				if (jsons[i].GetValue("TypeID") == "0")
 				{
-					Conveyor* c = new Conveyor(id);
+					Conveyor* c = new Conveyor(-2, id, 0);
 					AddStructure(c);
 					c->FromJSON(jsons[i]);
 				}
 				else if (jsons[i].GetValue("TypeID") == "1")
 				{
-					StorageSilo* s = new StorageSilo(id);
+					StorageSilo* s = new StorageSilo(-2, id);
 					AddStructure(s);
 					s->FromJSON(jsons[i]);
 				}
 				else if (jsons[i].GetValue("TypeID") == "2")
 				{
-					Tree* t = new Tree(id);
+					Tree* t = new Tree(-2, id);
 					AddStructure(t);
 					t->FromJSON(jsons[i]);
 				}

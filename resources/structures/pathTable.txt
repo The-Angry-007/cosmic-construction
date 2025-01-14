@@ -76,3 +76,5 @@ StructureID/Path
 3/chopper_3_14.png
 3/chopper_3_15.png
 3/chopper_icon.png
+4/planter_0.png
+4/planter_1.png

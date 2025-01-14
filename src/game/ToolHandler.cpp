@@ -236,25 +236,29 @@ void ToolHandler::Update(float dt, Planet* p)
 				prevTilePos = sf::Vector2i(-10000, -10000);
 			}
 		}
-		else if (placeType == 1)
+		else
 		{
-			sf::Vector2i pos = tilePos - sf::Vector2i(1, 1);
+			sf::Vector2i pos = tilePos;
+			sf::Vector2i size = ResourceHandler::structureSizes[placeType];
+			pos -= size / 2;
 
-			StorageSilo* s = new StorageSilo(0, game->activePlanet);
+			// StorageSilo* s = new StorageSilo(0, game->activePlanet);
+			Structure* s = CreateStructure(placeType);
 			s->SetVisualPosition(pos);
 
 			previewStructure = s;
 
 			if (InputHandler::pressed(binds::UseTool))
 			{
-				if (!p->StructureInArea(pos, ResourceHandler::structureSizes[1]))
+				if (!p->StructureInArea(pos, size))
 				{
 					if (p->DeductResources(1, pos))
 					{
-						StorageSilo* s = new StorageSilo(-1, p->id);
-						p->AddStructure(s);
+						Structure* s2 = CreateStructure(placeType);
+						s2->SetID(-1);
+						p->AddStructure(s2);
 
-						s->SetPosition(pos);
+						s2->SetPosition(pos);
 					}
 					else
 					{
@@ -263,33 +267,7 @@ void ToolHandler::Update(float dt, Planet* p)
 				}
 			}
 		}
-		else if (placeType == 3)
-		{
-			sf::Vector2i pos = tilePos;
 
-			TreeChopper* s = new TreeChopper(-2, game->activePlanet, placeDir);
-			s->SetVisualPosition(pos);
-
-			previewStructure = s;
-
-			if (InputHandler::pressed(binds::UseTool))
-			{
-				if (!p->StructureInArea(pos, ResourceHandler::structureSizes[3]))
-				{
-					if (p->DeductResources(3, pos))
-					{
-						TreeChopper* s = new TreeChopper(-1, p->id, placeDir);
-						p->AddStructure(s);
-
-						s->SetPosition(pos);
-					}
-					else
-					{
-						ShowInsufficient();
-					}
-				}
-			}
-		}
 		if (previewStructure != nullptr && !InputHandler::mouseIsBlocked && !game->inMenu)
 		{
 			previewStructure->RenderPreview();
@@ -432,4 +410,20 @@ void ToolHandler::ShowInsufficient()
 		guihandler.guis[5]->AddObject(insufficientLabel);
 	}
 	insufficientTimer.restart();
+}
+
+Structure* ToolHandler::CreateStructure(int type)
+{
+	if (type == 1)
+	{
+		return new StorageSilo(-2, game->activePlanet, placeDir);
+	}
+	else if (type == 3)
+	{
+		return new TreeChopper(-2, game->activePlanet, placeDir);
+	}
+	else
+	{
+		return nullptr;
+	}
 }

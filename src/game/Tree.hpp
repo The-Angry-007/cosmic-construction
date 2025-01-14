@@ -5,7 +5,6 @@ class Tree : public Structure
 public:
 	int health;
 	Tree(int id, int planetID);
-	Tree(int planetID);
 	~Tree();
 	void FromJSON(JSON j);
 	JSON ToJSON();

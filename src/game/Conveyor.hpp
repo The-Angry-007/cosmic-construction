@@ -13,7 +13,6 @@ public:
 	float speed;
 	float gap;
 	Conveyor(int id, int planetID, int direction);
-	Conveyor(int planetID);
 	~Conveyor();
 	void FromJSON(JSON j);
 	void Update(float dt);

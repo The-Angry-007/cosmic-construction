@@ -3,3 +3,4 @@ StructureID/Name/Description/SizeX/SizeY
 1/Storage Silo/Stores and outputs items which can then be used to build structures nearby./3/3
 2/Tree/blank/1/1
 3/Tree Chopper/Can be used to chop down trees./1/1
+4/Sapling Planter/Automatically grows trees/1/1

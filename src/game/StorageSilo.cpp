@@ -1,7 +1,7 @@
 #include "StorageSilo.hpp"
 #include "Main.hpp"
 #include "ResourceHandler.hpp"
-StorageSilo::StorageSilo(int id, int planetID)
+StorageSilo::StorageSilo(int id, int planetID, int direction)
 {
 	SetID(id);
 	this->planetID = planetID;
@@ -25,29 +25,7 @@ StorageSilo::StorageSilo(int id, int planetID)
 	blocksItems = false;
 	placedByPlayer = true;
 }
-StorageSilo::StorageSilo(int planetID)
-{
-	this->planetID = planetID;
-	typeID = 1;
-	for (int i = 0; i < 11; i++)
-	{
-		sf::Sprite s;
-		ResourceHandler::structureAtlas->SetSprite(s, typeID, i);
-		sprites.push_back(s);
-	}
-	this->sprite = sf::Sprite();
-	tileSize = ResourceHandler::structureSizes[typeID];
-	itemIDs = {};
-	itemQuantities = {};
-	previousOutputs = {};
-	for (int i = 0; i < 12; i++)
-	{
-		previousOutputs.push_back(0);
-	}
-	items = {};
-	blocksItems = false;
-	placedByPlayer = true;
-}
+
 void StorageSilo::SetPosition(sf::Vector2i position)
 {
 	Structure::SetPosition(position);

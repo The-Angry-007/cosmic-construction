@@ -27,19 +27,7 @@ Conveyor::Conveyor(int id, int planetID, int direction)
 	blocksItems = false;
 	placedByPlayer = true;
 }
-Conveyor::Conveyor(int planetID)
-{
-	this->planetID = planetID;
-	blocksItems = false;
-	speed = 3.f;
-	gap = 0.2f;
-	typeID = 0;
-	tileSize = ResourceHandler::structureSizes[typeID];
-	sprite = sf::Sprite();
-	progress = { {}, {}, {}, {} };
-	items = { {}, {}, {}, {} };
-	placedByPlayer = true;
-}
+
 void Conveyor::UpdateNeighbours()
 {
 	neighbours = {};
@@ -308,6 +296,7 @@ void Conveyor::FromJSON(JSON j)
 	pos.x = std::stoi(j.GetValue("PositionX"));
 	pos.y = std::stoi(j.GetValue("PositionY"));
 	typeID = std::stoi(j.GetValue("TypeID"));
+
 	direction = std::stoi(j.GetValue("Direction"));
 	SetID(std::stoi(j.GetValue("ID")));
 	chunkID = std::stoi(j.GetValue("ChunkID"));

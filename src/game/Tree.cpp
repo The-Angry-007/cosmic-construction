@@ -14,19 +14,6 @@ Tree::Tree(int id, int planetID)
 	placedByPlayer = false;
 }
 
-Tree::Tree(int planetID)
-{
-	this->planetID = planetID;
-	this->planetID = planetID;
-	typeID = 2;
-	health = 3;
-	tileSize = ResourceHandler::structureSizes[typeID];
-	sprite = sf::Sprite();
-	ResourceHandler::structureAtlas->SetSprite(sprite, 2, 0);
-	blocksItems = true;
-	placedByPlayer = false;
-}
-
 Tree ::~Tree()
 {}
 

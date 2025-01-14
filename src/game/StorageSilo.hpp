@@ -11,8 +11,7 @@ public:
 	std::vector<int> outputNeighbours;
 	std::vector<int> previousOutputs;
 	std::vector<sf::Sprite> sprites;
-	StorageSilo(int id, int planetID);
-	StorageSilo(int planetID);
+	StorageSilo(int id, int planetID, int direction = 0);
 	~StorageSilo();
 	void SetPosition(sf::Vector2i pos);
 	void SetVisualPosition(sf::Vector2i pos);
