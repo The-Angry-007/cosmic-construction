@@ -374,6 +374,16 @@ void ToolHandler::Update(float dt, Planet* p)
 						p->RemoveStructure(index);
 					}
 				}
+				else if (s->typeID == 5)
+				{
+					Boulder* t = dynamic_cast<Boulder*>(s);
+					t->health--;
+					if (t->health <= 0)
+					{
+						t->Destroy();
+						p->RemoveStructure(index);
+					}
+				}
 			}
 		}
 	}

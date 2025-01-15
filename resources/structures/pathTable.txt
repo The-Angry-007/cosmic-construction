@@ -78,3 +78,4 @@ StructureID/Path
 3/chopper_icon.png
 4/planter_0.png
 4/planter_1.png
+5/boulder.png

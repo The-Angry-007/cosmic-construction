@@ -107,6 +107,12 @@ void Planet::Init(bool load)
 					AddStructure(t);
 					t->FromJSON(jsons[i]);
 				}
+				else if (jsons[i].GetValue("TypeID") == "5")
+				{
+					Boulder* t = new Boulder(-2, id);
+					AddStructure(t);
+					t->FromJSON(jsons[i]);
+				}
 			}
 		}
 	}
@@ -293,6 +299,7 @@ void Planet::GenerateChunk(sf::Vector2i position)
 	RandomHandler::SetNum(position);
 	chunks.push_back(c);
 	sf::Vector2i worldPos = position * CHUNK_SIZE;
+	int seed = RandomHandler::seed;
 	for (int x = 0; x < 32; x++)
 	{
 		for (int y = 0; y < 32; y++)
@@ -308,19 +315,23 @@ void Planet::GenerateChunk(sf::Vector2i position)
 			}
 		}
 	}
-	// for (int i = 0; i < numTrees; i++)
-	// {
-
-	// 	int x = RandomHandler::GetNextNumber() % 32;
-	// 	int y = RandomHandler::GetNextNumber() % 32;
-	// 	sf::Vector2i pos = sf::Vector2i(x, y) + worldPos;
-	// 	if (!StructureInArea(pos, sf::Vector2i(1, 3)))
-	// 	{
-	// 		Tree* t = n0ew Tree(-1, id);
-	// 		AddStructure(t);
-	// 		t->SetPosition(pos);
-	// 	}
-	// }
+	RandomHandler::SetSeed(seed + 1);
+	for (int x = 0; x < 32; x++)
+	{
+		for (int y = 0; y < 32; y++)
+		{
+			sf::Vector2i p(x, y);
+			p += worldPos;
+			float noise = RandomHandler::getNoise(p.x, p.y);
+			if (StructureInPos(p) == -1 && noise > 0.65f && RandomHandler::GetNextNumber() % 5 == 0)
+			{
+				Boulder* t = new Boulder(-1, id);
+				AddStructure(t);
+				t->SetPosition(p);
+			}
+		}
+	}
+	RandomHandler::SetSeed(seed);
 }
 void Planet::GenerateChunksInView()
 {
