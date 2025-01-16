@@ -77,6 +77,7 @@ void ClickFuncs::OpenSettingsInGame()
 void ClickFuncs::SaveAndQuit()
 {
 	SaveHandler::SaveGame();
+	delete game->toolHandler;
 	// delete game;
 	game = nullptr;
 	SaveHandler::ResetWorkingDir();

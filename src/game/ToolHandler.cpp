@@ -128,7 +128,7 @@ void ToolHandler::Update(float dt, Planet* p)
 		}
 	}
 	int index = p->StructureInPos(tilePos);
-	if (index != -1)
+	if (index != -1 && selectedTool == 1)
 	{
 		Structure* s = p->structures[index];
 		sf::Vector2f coords = (sf::Vector2f)(s->position + p->GetChunk(s->chunkID)->position * CHUNK_SIZE);

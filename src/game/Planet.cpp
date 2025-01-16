@@ -21,6 +21,7 @@ Planet::Planet(int id)
 	items = {};
 
 	camera = Camera();
+	camera.position = sf::Vector2f(32 * 17, 32 * 17);
 	structuresToUpdate = {};
 	emptyStructureSlots = {};
 }
@@ -118,37 +119,8 @@ void Planet::Init(bool load)
 	}
 	else
 	{
-		int numItems = 100;
 		// chunks.push_back(Chunk(sf::Vector2i(0, 0), -1, this->id));
 		GenerateChunksInView();
-		for (uint i = 0; i < numItems; i++)
-		{
-			int size = 100;
-			items.push_back(Item(sf::Vector2f(rand() % (size * 2) - size, rand() % (size * 2) - size),
-				-1,
-				rand() % ResourceHandler::numItems));
-			items[items.size() - 1].SetParent(-1);
-			MoveItem(items.size() - 1);
-		}
-
-		RemoveStructuresInArea(sf::Vector2i(9, 9), sf::Vector2i(3, 3));
-		RemoveStructuresInArea(sf::Vector2i(5, 5), sf::Vector2i(3, 3));
-		TreeChopper* t = new TreeChopper(-1, id, 0);
-		AddStructure(t);
-		t->SetPosition(sf::Vector2i(12, 9));
-
-		StorageSilo* s = new StorageSilo(-1, id);
-		s->placedByPlayer = false;
-		AddStructure(s);
-		s->SetPosition(sf::Vector2i(9, 9));
-		for (int i = 0; i < 100; i++)
-		{
-			Item item = Item(sf::Vector2f(0.f, 0.f), -1, 0);
-			item.SetParent(-1);
-			items.push_back(item);
-			MoveItem(items.size() - 1);
-			s->TryAddGroundItem(items.size() - 1);
-		}
 	}
 }
 void Planet::Update(float dt)
@@ -296,8 +268,41 @@ void Planet::Save()
 void Planet::GenerateChunk(sf::Vector2i position)
 {
 	Chunk c = Chunk(position, -1, id);
-	RandomHandler::SetNum(position);
 	chunks.push_back(c);
+
+	if (position == sf::Vector2i(0, 0))
+	{
+		StorageSilo* s = new StorageSilo(-1, id);
+		s->placedByPlayer = false;
+		AddStructure(s);
+		s->SetPosition(sf::Vector2i(16, 16));
+		for (int i = 0; i < 10; i++)
+		{
+			Item item = Item(sf::Vector2f(0.f, 0.f), -1, 0);
+			item.SetParent(-1);
+			items.push_back(item);
+			MoveItem(items.size() - 1);
+			s->TryAddGroundItem(items.size() - 1);
+		}
+		{
+			for (int i = 0; i < 3; i++)
+			{
+				Tree* t = new Tree(-1, id);
+				AddStructure(t);
+				t->SetPosition(sf::Vector2i(20 + i, 17));
+			}
+		}
+		{
+			for (int i = 0; i < 5; i++)
+			{
+				Boulder* t = new Boulder(-1, id);
+				AddStructure(t);
+				t->SetPosition(sf::Vector2i(25 + i, 17));
+			}
+		}
+		return;
+	}
+	RandomHandler::SetNum(position);
 	sf::Vector2i worldPos = position * CHUNK_SIZE;
 	int seed = RandomHandler::seed;
 	for (int x = 0; x < 32; x++)
@@ -323,7 +328,7 @@ void Planet::GenerateChunk(sf::Vector2i position)
 			sf::Vector2i p(x, y);
 			p += worldPos;
 			float noise = RandomHandler::getNoise(p.x, p.y);
-			if (StructureInPos(p) == -1 && noise > 0.65f && RandomHandler::GetNextNumber() % 5 == 0)
+			if (StructureInPos(p) == -1 && noise > 0.65f && RandomHandler::GetNextNumber() % 9 == 0)
 			{
 				Boulder* t = new Boulder(-1, id);
 				AddStructure(t);

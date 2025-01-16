@@ -19,7 +19,7 @@ Boulder ::~Boulder()
 
 void Boulder::Destroy()
 {
-	int numItems = 5;
+	int numItems = 3;
 	Planet& p = game->planets[planetID];
 	for (int i = 0; i < numItems; i++)
 	{
