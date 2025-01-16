@@ -129,16 +129,16 @@ void Planet::Update(float dt)
 	camera.Update(dt);
 	GenerateChunksInView();
 
-	if (InputHandler::pressed(binds::Interact))
-	{
-		sf::Vector2f wmp = camera.WorldMousePos();
-		sf::Vector2i mouseTilePos(floor(wmp.x / TILE_SIZE.x), floor(wmp.y / TILE_SIZE.y));
-		int s = StructureInPos(mouseTilePos);
-		if (s != -1)
-		{
-			structures[s]->Interact();
-		}
-	}
+	// if (InputHandler::pressed(binds::Interact))
+	// {
+	// 	sf::Vector2f wmp = camera.WorldMousePos();
+	// 	sf::Vector2i mouseTilePos(floor(wmp.x / TILE_SIZE.x), floor(wmp.y / TILE_SIZE.y));
+	// 	int s = StructureInPos(mouseTilePos);
+	// 	if (s != -1)
+	// 	{
+	// 		structures[s]->Interact();
+	// 	}
+	// }
 }
 
 void buildVertexArray(const std::vector<RenderObject>& renderObjects, sf::VertexArray& vertexArray)

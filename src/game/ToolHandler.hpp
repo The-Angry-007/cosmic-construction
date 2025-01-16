@@ -10,7 +10,7 @@ public:
 	int placeType;
 	sf::Vector2i prevTilePos;
 	GUIObject* selectedObj;
-	std::vector<GUIImage*> bgObjs;
+	std::vector<GUIPanel*> bgObjs;
 	int hoveringItem;
 	int draggingItem;
 	sf::Vector2f mouseStartDraggingPos;
@@ -22,6 +22,7 @@ public:
 	std::vector<GUIImage*> selectedImages;
 	void ShowInsufficient();
 	void Update(float dt, Planet* p);
+	void Render();
 	Structure* CreateStructure(int type);
 	ToolHandler();
 	~ToolHandler();

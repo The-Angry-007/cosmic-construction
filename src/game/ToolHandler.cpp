@@ -12,7 +12,7 @@ ToolHandler::ToolHandler()
 	bgObjs = {};
 	for (int i = 0; i < guihandler.numTools; i++)
 	{
-		bgObjs.push_back(dynamic_cast<GUIImage*>(guihandler.guis[5]->GUIObjects[guihandler.numTools + i * 2 + 1]));
+		bgObjs.push_back(dynamic_cast<GUIPanel*>(guihandler.guis[5]->GUIObjects[guihandler.numTools + i * 2]));
 		bgObjs[i]->blocksMouseInput = true;
 	}
 	hoveringItem = -1;
@@ -89,6 +89,11 @@ void ToolHandler::Update(float dt, Planet* p)
 	{
 		if (bgObjs[i]->isClicked())
 		{
+			if (i == 0 && selectedTool == 0)
+			{
+				game->inMenu = true;
+				guihandler.OpenGUI(7);
+			}
 			selectedTool = i;
 			InputHandler::RemoveMbPressed(sf::Mouse::Button::Left);
 			InputHandler::RemoveMbDown(sf::Mouse::Button::Left);
@@ -100,6 +105,7 @@ void ToolHandler::Update(float dt, Planet* p)
 	}
 	if (InputHandler::pressed(binds::Tool1))
 	{
+
 		selectedTool = 0;
 	}
 	if (InputHandler::pressed(binds::Tool2))
@@ -117,18 +123,9 @@ void ToolHandler::Update(float dt, Planet* p)
 	}
 	sf::Vector2f mousePos = p->camera.WorldMousePos();
 	sf::Vector2i tilePos(floor(mousePos.x / TILE_SIZE.x), floor(mousePos.y / TILE_SIZE.y));
-	//draw selections
-	for (int i = 0; i < 4; i++)
-	{
-		int j = guihandler.guis[5]->GetIndex(selectedImages[i]);
-		selectedImages[i]->sprite.setColor(sf::Color::White);
-		if (j != -1)
-		{
-			guihandler.guis[5]->RemoveObject(j);
-		}
-	}
+
 	int index = p->StructureInPos(tilePos);
-	if (index != -1 && selectedTool == 1)
+	if (index != -1 && (selectedTool == 1 || selectedTool == 2))
 	{
 		Structure* s = p->structures[index];
 		sf::Vector2f coords = (sf::Vector2f)(s->position + p->GetChunk(s->chunkID)->position * CHUNK_SIZE);
@@ -145,14 +142,13 @@ void ToolHandler::Update(float dt, Planet* p)
 		selectedImages[3]->position = p->camera.tileToGUIPos(coords + sf::Vector2f(0.f, tileSize.y) + sf::Vector2f(0.5f, 0.5f));
 		selectedImages[3]->size = size;
 
-		guihandler.guis[5]->AddObject(selectedImages[0]);
-		guihandler.guis[5]->AddObject(selectedImages[1]);
-		guihandler.guis[5]->AddObject(selectedImages[2]);
-		guihandler.guis[5]->AddObject(selectedImages[3]);
+		guihandler.guis[5]->InsertObject(selectedImages[0], 0);
+		guihandler.guis[5]->InsertObject(selectedImages[1], 0);
+		guihandler.guis[5]->InsertObject(selectedImages[2], 0);
+		guihandler.guis[5]->InsertObject(selectedImages[3], 0);
 	}
 	if (selectedTool == 0)
 	{
-
 		if (previewStructure != nullptr)
 		{
 			delete previewStructure;
@@ -358,32 +354,11 @@ void ToolHandler::Update(float dt, Planet* p)
 				p->MoveItem(draggingItem);
 			}
 		}
-		if (InputHandler::pressed(binds::UseTool) && draggingItem == -1)
+		if (draggingItem == -1 && hoveringItem == -1)
 		{
-			int index = p->StructureInPos(tilePos);
-			if (index != -1)
+			if (InputHandler::pressed(binds::UseTool) && index != -1)
 			{
-				Structure* s = p->structures[index];
-				if (s->typeID == 2)
-				{
-					Tree* t = dynamic_cast<Tree*>(s);
-					t->health--;
-					if (t->health <= 0)
-					{
-						t->Destroy();
-						p->RemoveStructure(index);
-					}
-				}
-				else if (s->typeID == 5)
-				{
-					Boulder* t = dynamic_cast<Boulder*>(s);
-					t->health--;
-					if (t->health <= 0)
-					{
-						t->Destroy();
-						p->RemoveStructure(index);
-					}
-				}
+				p->structures[index]->Interact();
 			}
 		}
 	}
@@ -423,6 +398,34 @@ void ToolHandler::Update(float dt, Planet* p)
 				std::cout << p->items.size() << std::endl;
 			}
 		}
+		if (InputHandler::pressed(binds::UseTool))
+		{
+			int index = p->StructureInPos(tilePos);
+			if (index != -1)
+			{
+				Structure* s = p->structures[index];
+				if (s->typeID == 2)
+				{
+					Tree* t = dynamic_cast<Tree*>(s);
+					t->health--;
+					if (t->health <= 0)
+					{
+						t->Destroy();
+						p->RemoveStructure(index);
+					}
+				}
+				else if (s->typeID == 5)
+				{
+					Boulder* t = dynamic_cast<Boulder*>(s);
+					t->health--;
+					if (t->health <= 0)
+					{
+						t->Destroy();
+						p->RemoveStructure(index);
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -454,5 +457,19 @@ Structure* ToolHandler::CreateStructure(int type)
 	else
 	{
 		return nullptr;
+	}
+}
+
+void ToolHandler::Render()
+{
+	//remove selections
+	for (int i = 0; i < 4; i++)
+	{
+		int j = guihandler.guis[5]->GetIndex(selectedImages[i]);
+		selectedImages[i]->sprite.setColor(sf::Color::White);
+		if (j != -1)
+		{
+			guihandler.guis[5]->RemoveObject(j);
+		}
 	}
 }

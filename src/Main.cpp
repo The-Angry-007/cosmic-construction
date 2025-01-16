@@ -86,7 +86,10 @@ int main()
 		}
 
 		guihandler.Render();
-
+		if (game != nullptr)
+		{
+			game->toolHandler->Render();
+		}
 		//display window
 		window->display();
 	}
