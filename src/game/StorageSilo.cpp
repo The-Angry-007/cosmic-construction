@@ -290,3 +290,17 @@ void StorageSilo::Interact()
 {
 	guihandler.AddGUI(new SiloMenu(this));
 }
+
+void StorageSilo::Destroy()
+{
+	for (int j = 0; j < items.size(); j++)
+	{
+		Item& item = game->planets[planetID].items[items[j]];
+		item.SetParent(-1);
+		item.position = (sf::Vector2f)(position + game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE);
+		item.position += sf::Vector2f(rand() % 1000 * tileSize.x, rand() % 1000 * tileSize.y) / 1000.f;
+		item.position.x *= TILE_SIZE.x;
+		item.position.y *= TILE_SIZE.y;
+		game->planets[planetID].MoveItem(items[j]);
+	}
+}

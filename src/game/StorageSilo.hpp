@@ -24,4 +24,5 @@ public:
 	void AddItem(int index);
 	void RenderPreview();
 	void Interact();
+	void Destroy();
 };

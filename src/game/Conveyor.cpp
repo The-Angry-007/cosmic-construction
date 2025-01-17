@@ -358,6 +358,7 @@ void Conveyor::Destroy()
 			item.position += sf::Vector2f(rand() % 1000, rand() % 1000) / 1000.f;
 			item.position.x *= TILE_SIZE.x;
 			item.position.y *= TILE_SIZE.y;
+			game->planets[planetID].MoveItem(items[i][j]);
 		}
 	}
 }
