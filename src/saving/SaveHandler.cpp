@@ -109,6 +109,7 @@ void SaveHandler::UpdateTimePlayed()
 	auto lines = Split(data, '\n');
 	int played = std::stoi(lines[1]);
 	int currentTime = GetTime();
+	startTime = currentTime;
 	played += currentTime - startTime;
 	lines[1] = std::to_string(played);
 	data = concat(lines);
