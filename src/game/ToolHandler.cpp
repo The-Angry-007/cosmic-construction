@@ -303,17 +303,19 @@ void ToolHandler::Update(float dt, Planet* p)
 			}
 			else
 			{
-				sf::Vector2f diff = mousePos - prevmousepos;
-				sf::Vector2i tileDiff(diff.x / TILE_SIZE.x, diff.y / TILE_SIZE.y);
-				if (tileDiff != sf::Vector2i(0, 0))
+
+				sf::Vector2i originalTilePos(floor(prevmousepos.x / TILE_SIZE.x), floor(prevmousepos.y / TILE_SIZE.y));
+				sf::Vector2i newTilePos(floor(mousePos.x / TILE_SIZE.x), floor(mousePos.y / TILE_SIZE.y));
+				if (newTilePos != originalTilePos)
 				{
+					sf::Vector2i diff = newTilePos - originalTilePos;
 					Structure* s = p->structures[draggingStructure];
-					sf::Vector2i newPos = tileDiff + s->position + p->GetChunk(s->chunkID)->position * CHUNK_SIZE;
+					sf::Vector2i newPos = diff + s->position + p->GetChunk(s->chunkID)->position * CHUNK_SIZE;
 					auto structs = p->StructuresInArea(newPos, s->tileSize);
 					if (structs.size() == 0 || structs.size() == 1 && structs[0] == draggingStructure)
 					{
 						s->SetPosition(newPos);
-						prevmousepos += sf::Vector2f(tileDiff.x * TILE_SIZE.x, tileDiff.y * TILE_SIZE.y);
+						prevmousepos = mousePos;
 					}
 				}
 			}
