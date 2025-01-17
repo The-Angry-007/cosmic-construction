@@ -15,7 +15,10 @@ public:
 	Item* hoveringItem;
 	sf::Vector2f mouseStartDraggingPos;
 	sf::Vector2f itemStartDraggingPos;
+	sf::Vector2f structureStartDraggingPos;
+	int draggingStructure;
 	int placeDir;
+	sf::Vector2f prevmousepos;
 	Structure* previewStructure;
 	GUILabel* insufficientLabel;
 	sf::Clock insufficientTimer;

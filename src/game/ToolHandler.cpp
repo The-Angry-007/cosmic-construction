@@ -29,6 +29,8 @@ ToolHandler::ToolHandler()
 		selectedImages.push_back(new GUIImage(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.5f, 0.5f), "resources\\images\\selection" + std::to_string(i + 1) + ".png"));
 		selectedImages[i]->keepAspectRatio = true;
 	}
+	draggingStructure = -1;
+	prevmousepos = sf::Vector2f(0.f, 0.f);
 }
 ToolHandler::~ToolHandler()
 {
@@ -85,6 +87,7 @@ void ToolHandler::Update(float dt, Planet* p)
 	{
 		return;
 	}
+	//CHANGING CURRENT TOOL
 	for (int i = 0; i < bgObjs.size(); i++)
 	{
 		if (bgObjs[i]->isClicked())
@@ -121,10 +124,17 @@ void ToolHandler::Update(float dt, Planet* p)
 	{
 		placeDir = (placeDir + 1) % 4;
 	}
+	//SOME USEFUL VARIABLES
 	sf::Vector2f mousePos = p->camera.WorldMousePos();
 	sf::Vector2i tilePos(floor(mousePos.x / TILE_SIZE.x), floor(mousePos.y / TILE_SIZE.y));
 
 	int index = p->StructureInPos(tilePos);
+
+	// #
+	// #
+	// #SELECTED TOOL 0
+	// #
+	// #
 
 	if (selectedTool == 0)
 	{
@@ -263,10 +273,52 @@ void ToolHandler::Update(float dt, Planet* p)
 			previewStructure->RenderPreview();
 		}
 	}
+	// #
+	// #
+	// #SELECTED TOOL 1
+	// #
+	// #
+
 	else if (selectedTool == 1)
 	{
+		if (draggingStructure != -1)
+		{
+			if (prevmousepos == sf::Vector2f(0.f, 0.f))
+			{
+				prevmousepos = mousePos;
+			}
+			if (p->structures[draggingStructure] == nullptr)
+			{
+				draggingStructure = -1;
+			}
+			if (!InputHandler::down(binds::UseTool))
+			{
+				if (structureStartDraggingPos == mousePos)
+				{
 
-		if (draggingItems.size() == 0 || InputHandler::keyDown(sf::Keyboard::Key::LShift))
+					p->structures[draggingStructure]->Interact();
+				}
+				draggingStructure = -1;
+				prevmousepos = sf::Vector2f(0.f, 0.f);
+			}
+			else
+			{
+				sf::Vector2i originalTilePos(floor(prevmousepos.x / TILE_SIZE.x), floor(prevmousepos.y / TILE_SIZE.y));
+				sf::Vector2i newTilePos(floor(mousePos.x / TILE_SIZE.x), floor(mousePos.y / TILE_SIZE.y));
+				if (newTilePos != originalTilePos)
+				{
+					sf::Vector2i diff = newTilePos - originalTilePos;
+					Structure* s = p->structures[draggingStructure];
+					sf::Vector2i newPos = diff + s->position + p->GetChunk(s->chunkID)->position * CHUNK_SIZE;
+					if (!p->StructureInArea(newPos, s->tileSize))
+					{
+						s->SetPosition(newPos);
+						prevmousepos = mousePos;
+					}
+				}
+			}
+		}
+		else if (draggingItems.size() == 0 || InputHandler::keyDown(sf::Keyboard::Key::LShift))
 		{
 			bool end = false;
 			std::vector<int> touchingItems = {};
@@ -346,12 +398,20 @@ void ToolHandler::Update(float dt, Planet* p)
 		}
 		if (draggingItems.size() == 0 && hoveringItem == nullptr)
 		{
-			if (InputHandler::pressed(binds::UseTool) && index != -1)
+			if (InputHandler::pressed(binds::UseTool) && index != -1 && p->structures[index]->placedByPlayer)
 			{
-				p->structures[index]->Interact();
+				structureStartDraggingPos = mousePos;
+				draggingStructure = index;
+				std::cout << "dragging" << std::endl;
 			}
 		}
 	}
+
+	// #
+	// #
+	// #SELECTED TOOL 2
+	// #
+	// #
 	else if (selectedTool == 2)
 	{
 
