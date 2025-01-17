@@ -28,4 +28,5 @@ public:
 	void UpdateNeighbours();
 	JSON ToJSON();
 	void RenderPreview();
+	void Destroy();
 };

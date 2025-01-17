@@ -108,3 +108,6 @@ void Structure::SetVisualPosition(sf::Vector2i pos)
 
 void Structure::Interact()
 {}
+
+void Structure::Destroy()
+{}

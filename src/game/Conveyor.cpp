@@ -345,3 +345,19 @@ void Conveyor::RenderPreview()
 		&sprite,
 		2000 });
 }
+
+void Conveyor::Destroy()
+{
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < items[i].size(); j++)
+		{
+			Item& item = game->planets[planetID].items[items[i][j]];
+			item.SetParent(-1);
+			item.position = (sf::Vector2f)(position + game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE);
+			item.position += sf::Vector2f(rand() % 1000, rand() % 1000) / 1000.f;
+			item.position.x *= TILE_SIZE.x;
+			item.position.y *= TILE_SIZE.y;
+		}
+	}
+}

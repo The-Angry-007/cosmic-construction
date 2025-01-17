@@ -27,6 +27,7 @@ public:
 	virtual void RenderPreview();
 	virtual void Interact();
 	virtual void TryAddGroundItem(int index);
+	virtual void Destroy();
 
 	bool CanBePlaced();
 	virtual ~Structure();

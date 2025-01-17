@@ -441,6 +441,7 @@ void ToolHandler::Update(float dt, Planet* p)
 						p->MoveItem(p->items.size() - 1);
 					}
 				}
+				p->structures[index]->Destroy();
 				p->RemoveStructure(index);
 				std::cout << p->items.size() << std::endl;
 			}
