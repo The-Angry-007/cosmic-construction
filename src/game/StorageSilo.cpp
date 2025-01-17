@@ -24,6 +24,7 @@ StorageSilo::StorageSilo(int id, int planetID, int direction)
 	items = {};
 	blocksItems = false;
 	placedByPlayer = true;
+	chunkID = -1;
 }
 
 void StorageSilo::SetPosition(sf::Vector2i position)

@@ -12,6 +12,7 @@ Boulder::Boulder(int id, int planetID)
 	ResourceHandler::structureAtlas->SetSprite(sprite, typeID, 0);
 	blocksItems = true;
 	placedByPlayer = false;
+	chunkID = -1;
 }
 
 Boulder ::~Boulder()

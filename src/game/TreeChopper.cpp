@@ -18,6 +18,7 @@ TreeChopper::TreeChopper(int id, int planetID, int direction)
 	//phase 2: chopping down tree
 	//phase 3: moving back
 	phase = 0;
+	chunkID = -1;
 }
 
 void TreeChopper::Update(float dt)

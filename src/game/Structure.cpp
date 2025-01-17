@@ -46,6 +46,18 @@ void Structure::SetPosition(sf::Vector2i position)
 		}
 	}
 	auto& chunks = game->planets[planetID].chunks;
+	if (chunkID != -1)
+	{
+		auto& structures = game->planets[planetID].GetChunk(chunkID)->structures;
+		for (int i = 0; i < structures.size(); i++)
+		{
+			if (structures[i] == index)
+			{
+				structures.erase(structures.begin() + i);
+				break;
+			}
+		}
+	}
 	int i = game->planets[planetID].ChunkAtPos(position);
 	chunkID = chunks[i].id;
 	chunks[i].structures.push_back(index);

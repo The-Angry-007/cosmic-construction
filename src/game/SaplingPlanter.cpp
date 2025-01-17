@@ -14,12 +14,24 @@ SaplingPlanter::SaplingPlanter(int id, int planetID, int direction)
 	placedByPlayer = true;
 	tileSize = ResourceHandler::structureSizes[typeID];
 	tree = -1;
+	chunkID = -1;
 }
 
 void SaplingPlanter::SetPosition(sf::Vector2i pos)
 {
 	Structure::SetPosition(pos);
 	topSprite.setPosition(sprite.getPosition());
+	if (tree != -1)
+	{
+		auto& structs = game->planets[planetID].structures;
+		for (int i = 0; i < structs.size(); i++)
+		{
+			if (structs[i] != nullptr && structs[i]->id == tree)
+			{
+				structs[i]->SetPosition(pos);
+			}
+		}
+	}
 	std::cout << sprite.getPosition().x << " " << sprite.getPosition().y << std::endl;
 }
 
