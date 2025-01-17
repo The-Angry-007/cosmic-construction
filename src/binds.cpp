@@ -15,7 +15,7 @@ int Tool1 = sf::Keyboard::Key::Num1 + 1;
 int Tool2 = sf::Keyboard::Key::Num2 + 1;
 int Tool3 = sf::Keyboard::Key::Num3 + 1;
 int RotateStructure = sf::Keyboard::Key::R + 1;
-int Interact = sf::Keyboard::Key::E + 1;
+int CloseInventory = sf::Keyboard::Key::E + 1;
 int Build = sf::Keyboard::Key::B + 1;
 }
 //the code version of keycodes adds 1, since keyboard keys has a code assigned to the value 0 as well as mouse buttons.

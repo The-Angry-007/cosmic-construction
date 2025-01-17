@@ -15,11 +15,9 @@ ToolHandler::ToolHandler()
 		bgObjs.push_back(dynamic_cast<GUIPanel*>(guihandler.guis[5]->GUIObjects[guihandler.numTools + i * 2]));
 		bgObjs[i]->blocksMouseInput = true;
 	}
-	hoveringItem = -1;
-	draggingItem = -1;
+	draggingItems = {};
+	hoveringItem = nullptr;
 	placeDir = 0;
-	mouseStartDraggingPos = sf::Vector2f(0.f, 0.f);
-	itemStartDraggingPos = sf::Vector2f(0.f, 0.f);
 	lastPlacedStructure = -1;
 	placeType = 0;
 	prevTilePos = sf::Vector2i(-10000, -10000);
@@ -50,6 +48,8 @@ ToolHandler::~ToolHandler()
 }
 void ToolHandler::Update(float dt, Planet* p)
 {
+	delete hoveringItem;
+	hoveringItem = nullptr;
 	if (insufficientLabel != nullptr)
 	{
 		float time = 1.5f;
@@ -125,28 +125,7 @@ void ToolHandler::Update(float dt, Planet* p)
 	sf::Vector2i tilePos(floor(mousePos.x / TILE_SIZE.x), floor(mousePos.y / TILE_SIZE.y));
 
 	int index = p->StructureInPos(tilePos);
-	if (index != -1 && (selectedTool == 1 || selectedTool == 2))
-	{
-		Structure* s = p->structures[index];
-		sf::Vector2f coords = (sf::Vector2f)(s->position + p->GetChunk(s->chunkID)->position * CHUNK_SIZE);
-		sf::Vector2f tileSize = (sf::Vector2f)s->tileSize - sf::Vector2f(1.f, 1.f);
-		sf::Vector2f tl = p->camera.tileToGUIPos({ 0.f, 0.f });
-		sf::Vector2f br = p->camera.tileToGUIPos({ 1.f, 1.f });
-		sf::Vector2f size = (br - tl) / 2.f;
-		selectedImages[0]->position = p->camera.tileToGUIPos(coords + sf::Vector2f(0.f, 0.f) + sf::Vector2f(0.5f, 0.5f));
-		selectedImages[0]->size = size;
-		selectedImages[1]->position = p->camera.tileToGUIPos(coords + sf::Vector2f(tileSize.x, 0.f) + sf::Vector2f(0.5f, 0.5f));
-		selectedImages[1]->size = size;
-		selectedImages[2]->position = p->camera.tileToGUIPos(coords + tileSize + sf::Vector2f(0.5f, 0.5f));
-		selectedImages[2]->size = size;
-		selectedImages[3]->position = p->camera.tileToGUIPos(coords + sf::Vector2f(0.f, tileSize.y) + sf::Vector2f(0.5f, 0.5f));
-		selectedImages[3]->size = size;
 
-		guihandler.guis[5]->InsertObject(selectedImages[0], 0);
-		guihandler.guis[5]->InsertObject(selectedImages[1], 0);
-		guihandler.guis[5]->InsertObject(selectedImages[2], 0);
-		guihandler.guis[5]->InsertObject(selectedImages[3], 0);
-	}
 	if (selectedTool == 0)
 	{
 		if (previewStructure != nullptr)
@@ -286,12 +265,8 @@ void ToolHandler::Update(float dt, Planet* p)
 	}
 	else if (selectedTool == 1)
 	{
-		if (hoveringItem != -1)
-		{
-			// p->items[hoveringItem].SetParent(-1);
-			ResourceHandler::itemAtlas->SetSprite(p->items[hoveringItem].sprite, p->items[hoveringItem].typeId);
-		}
-		if (draggingItem == -1)
+
+		if (draggingItems.size() == 0 || InputHandler::keyDown(sf::Keyboard::Key::LShift))
 		{
 			bool end = false;
 			std::vector<int> touchingItems = {};
@@ -301,6 +276,17 @@ void ToolHandler::Update(float dt, Planet* p)
 				{
 					continue;
 				}
+				bool dragging = false;
+				for (int j = 0; j < draggingItems.size(); j++)
+				{
+					if (draggingItems[j] == i)
+					{
+						dragging = true;
+						break;
+					}
+				}
+				if (dragging)
+					continue;
 				if (p->items[i].accurateHitbox->intersectsPoint(p->camera.WorldMousePos()) && !InputHandler::mouseIsBlocked)
 				{
 					touchingItems.push_back(i);
@@ -326,35 +312,39 @@ void ToolHandler::Update(float dt, Planet* p)
 				int i = touchingItems[lowestYIndex];
 				if (InputHandler::pressed(binds::UseTool))
 				{
-					draggingItem = i;
-					mouseStartDraggingPos = p->camera.WorldMousePos();
-					itemStartDraggingPos = p->items[i].position;
+					draggingItems = { i };
 				}
 				else if (!InputHandler::down(binds::UseTool))
 				{
-					hoveringItem = i;
-					p->items[hoveringItem].zindex = 100;
 
-					ResourceHandler::itemAtlas->SetSprite(p->items[hoveringItem].sprite, p->items[hoveringItem].typeId + ResourceHandler::numItems);
+					hoveringItem = new Item(p->items[i].position, -2, p->items[i].typeId);
+					hoveringItem->zindex = 100;
+					ResourceHandler::itemAtlas->SetSprite(hoveringItem->sprite, hoveringItem->typeId + ResourceHandler::numItems);
+					hoveringItem->Render(p);
+				}
+				else if (InputHandler::down(binds::UseTool) && InputHandler::keyDown(sf::Keyboard::Key::LShift))
+				{
+					draggingItems.push_back(i);
 				}
 			}
 		}
+
+		if (!InputHandler::down(binds::UseTool))
+		{
+			draggingItems = {};
+		}
 		else
 		{
-			if (!InputHandler::down(binds::UseTool))
+			sf::Vector2f offset = p->camera.WorldMousePos();
+			for (int i = 0; i < draggingItems.size(); i++)
 			{
-				draggingItem = -1;
-				hoveringItem = -1;
-			}
-			else
-			{
-				sf::Vector2f offset = p->camera.WorldMousePos() - mouseStartDraggingPos;
-				p->items[draggingItem].position = itemStartDraggingPos + offset;
-				p->items[draggingItem].moveDir = sf::Vector2f(0.f, 0.f);
-				p->MoveItem(draggingItem);
+				sf::Vector2f stackOffset(0.f, 1.f * i);
+				p->items[draggingItems[i]].position = offset - stackOffset;
+				p->items[draggingItems[i]].moveDir = sf::Vector2f(0.f, 0.f);
+				p->MoveItem(draggingItems[i]);
 			}
 		}
-		if (draggingItem == -1 && hoveringItem == -1)
+		if (draggingItems.size() == 0 && hoveringItem == nullptr)
 		{
 			if (InputHandler::pressed(binds::UseTool) && index != -1)
 			{
@@ -364,10 +354,7 @@ void ToolHandler::Update(float dt, Planet* p)
 	}
 	else if (selectedTool == 2)
 	{
-		for (int i = 0; i < 4; i++)
-		{
-			selectedImages[i]->sprite.setColor(sf::Color::Red);
-		}
+
 		if (InputHandler::down(binds::UseTool) && index != -1)
 		{
 			if (p->structures[index]->placedByPlayer)
@@ -425,6 +412,36 @@ void ToolHandler::Update(float dt, Planet* p)
 					}
 				}
 			}
+		}
+	}
+	index = p->StructureInPos(tilePos);
+	if (index != -1 && ((selectedTool == 1 && hoveringItem == nullptr && draggingItems.size() == 0) || selectedTool == 2))
+	{
+		Structure* s = p->structures[index];
+		sf::Vector2f coords = (sf::Vector2f)(s->position + p->GetChunk(s->chunkID)->position * CHUNK_SIZE);
+		sf::Vector2f tileSize = (sf::Vector2f)s->tileSize - sf::Vector2f(1.f, 1.f);
+		sf::Vector2f tl = p->camera.tileToGUIPos({ 0.f, 0.f });
+		sf::Vector2f br = p->camera.tileToGUIPos({ 1.f, 1.f });
+		sf::Vector2f size = (br - tl) / 2.f;
+		selectedImages[0]->position = p->camera.tileToGUIPos(coords + sf::Vector2f(0.f, 0.f) + sf::Vector2f(0.5f, 0.5f));
+		selectedImages[0]->size = size;
+		selectedImages[1]->position = p->camera.tileToGUIPos(coords + sf::Vector2f(tileSize.x, 0.f) + sf::Vector2f(0.5f, 0.5f));
+		selectedImages[1]->size = size;
+		selectedImages[2]->position = p->camera.tileToGUIPos(coords + tileSize + sf::Vector2f(0.5f, 0.5f));
+		selectedImages[2]->size = size;
+		selectedImages[3]->position = p->camera.tileToGUIPos(coords + sf::Vector2f(0.f, tileSize.y) + sf::Vector2f(0.5f, 0.5f));
+		selectedImages[3]->size = size;
+
+		guihandler.guis[5]->InsertObject(selectedImages[0], 0);
+		guihandler.guis[5]->InsertObject(selectedImages[1], 0);
+		guihandler.guis[5]->InsertObject(selectedImages[2], 0);
+		guihandler.guis[5]->InsertObject(selectedImages[3], 0);
+	}
+	if (selectedTool == 2)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			selectedImages[i]->sprite.setColor(sf::Color::Red);
 		}
 	}
 }

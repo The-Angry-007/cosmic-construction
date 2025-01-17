@@ -11,8 +11,8 @@ public:
 	sf::Vector2i prevTilePos;
 	GUIObject* selectedObj;
 	std::vector<GUIPanel*> bgObjs;
-	int hoveringItem;
-	int draggingItem;
+	std::vector<int> draggingItems;
+	Item* hoveringItem;
 	sf::Vector2f mouseStartDraggingPos;
 	sf::Vector2f itemStartDraggingPos;
 	int placeDir;

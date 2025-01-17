@@ -226,10 +226,10 @@ void Conveyor::TryAddGroundItem(int index)
 	{
 		return;
 	}
-	if (index == game->toolHandler->draggingItem && game->activePlanet == planetID)
-	{
-		return;
-	}
+	// if (index == game->toolHandler->draggingItem && game->activePlanet == planetID)
+	// {
+	// 	return;
+	// }
 	this->items[dir].push_back(index);
 	progress[dir].push_back(0.f);
 	Item* item = &game->planets[planetID].items[index];

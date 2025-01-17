@@ -91,8 +91,8 @@ Settings::Settings()
 		AddBind("Tool 1", &binds::Tool1);
 		AddBind("Tool 2", &binds::Tool2);
 		AddBind("Tool 3", &binds::Tool3);
+		AddBind("Close Inventory", &binds::CloseInventory);
 		AddBind("Rotate Structure", &binds::RotateStructure);
-		AddBind("Interact", &binds::Interact);
 		AddBind("Open Build Menu", &binds::Build);
 	}
 	//AUDIO PAGE

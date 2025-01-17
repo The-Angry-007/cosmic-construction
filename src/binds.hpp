@@ -12,7 +12,7 @@ extern int Tool1;
 extern int Tool2;
 extern int Tool3;
 extern int RotateStructure;
-extern int Interact;
+extern int CloseInventory;
 extern int Build;
 int keyToCode(sf::Keyboard::Key key);
 int buttonToCode(sf::Mouse::Button button);

@@ -554,9 +554,18 @@ void Planet::WorldUpdate(float dt)
 		{
 			continue;
 		}
-		if (game->activePlanet == id && game->toolHandler->draggingItem == i)
+		if (game->activePlanet == id)
 		{
-			continue;
+			bool dragging = false;
+			for (int j = 0; j < game->toolHandler->draggingItems.size(); j++)
+			{
+				if (game->toolHandler->draggingItems[j] == i)
+				{
+					dragging = true;
+				}
+			}
+			if (dragging)
+				continue;
 		}
 		items[i].Update(dt, &game->planets[id]);
 	}

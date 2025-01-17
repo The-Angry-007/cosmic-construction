@@ -17,6 +17,7 @@ SiloMenu::SiloMenu(StorageSilo* s)
 	GUILabel* topLabel = new GUILabel(sf::Vector2f(0.5f, 0.13f), sf::Vector2f(0.9f, 0.025f), "Storage Silo");
 	topLabel->SetColor(sf::Color::Black);
 	GUIObjects.push_back(topLabel);
+	game->inMenu = true;
 }
 
 void SiloMenu::Update(float dt)
@@ -48,11 +49,12 @@ void SiloMenu::Update(float dt)
 		items[i].Update(dt);
 	}
 	InputHandler::mouseIsBlocked = true;
-	if (InputHandler::pressed(binds::Interact))
+	if (InputHandler::pressed(binds::CloseInventory))
 	{
-		InputHandler::RemovePressed(binds::Interact);
-		InputHandler::RemoveDown(binds::Interact);
+		InputHandler::RemovePressed(binds::CloseInventory);
+		InputHandler::RemoveDown(binds::CloseInventory);
 		guihandler.guis.erase(guihandler.guis.end() - 1);
+		game->inMenu = false;
 		delete this;
 	}
 }

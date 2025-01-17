@@ -62,7 +62,7 @@ void GUIHandler::AddGUI(GUI* gui)
 //updates the active gui
 void GUIHandler::Update(float dt)
 {
-	if (guis.size() > numGUIs)
+	if (guis.size() > numGUIs && activeGui == 5)
 	{
 		guis[guis.size() - 1]->Update(dt);
 	}
@@ -82,7 +82,7 @@ void GUIHandler::Render()
 	sf::View GUIView(sf::FloatRect(0.f, 0.f, width, height));
 	window->setView(GUIView);
 	guis[activeGui]->Render();
-	if (guis.size() > numGUIs)
+	if (guis.size() > numGUIs && activeGui == 5)
 	{
 		guis[guis.size() - 1]->Render();
 	}
