@@ -293,9 +293,10 @@ void ToolHandler::Update(float dt, Planet* p)
 			}
 			if (!InputHandler::down(binds::UseTool))
 			{
-				if (structureStartDraggingPos == mousePos)
+				sf::Vector2f offset = structureStartDraggingPos - mousePos;
+				std::cout << offset.x * offset.x + offset.y * offset.y << std::endl;
+				if (offset.x * offset.x + offset.y * offset.y < 9.f)
 				{
-
 					p->structures[draggingStructure]->Interact();
 				}
 				draggingStructure = -1;
@@ -306,7 +307,7 @@ void ToolHandler::Update(float dt, Planet* p)
 
 				sf::Vector2i originalTilePos(floor(prevmousepos.x / TILE_SIZE.x), floor(prevmousepos.y / TILE_SIZE.y));
 				sf::Vector2i newTilePos(floor(mousePos.x / TILE_SIZE.x), floor(mousePos.y / TILE_SIZE.y));
-				if (newTilePos != originalTilePos)
+				if (newTilePos != originalTilePos && p->structures[draggingStructure]->placedByPlayer)
 				{
 					sf::Vector2i diff = newTilePos - originalTilePos;
 					Structure* s = p->structures[draggingStructure];
@@ -400,7 +401,7 @@ void ToolHandler::Update(float dt, Planet* p)
 		}
 		if (draggingItems.size() == 0 && hoveringItem == nullptr)
 		{
-			if (InputHandler::pressed(binds::UseTool) && index != -1 && p->structures[index]->placedByPlayer)
+			if (InputHandler::pressed(binds::UseTool) && index != -1)
 			{
 				structureStartDraggingPos = mousePos;
 				draggingStructure = index;
