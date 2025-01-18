@@ -11,5 +11,5 @@ void CreateSave();
 void ResumeGame();
 void OpenSettingsInGame();
 void SaveAndQuit();
-
+void ResetCamPos();
 }

@@ -295,6 +295,16 @@ void GUIHandler::InitGUIS()
 		GUIImage* selectedTool = new GUIImage(toolPoses[0], sf::Vector2f(size, size) / 2.f / 16.f * 24.f, "resources\\images\\GUISelectedTool.png");
 		selectedTool->keepAspectRatio = true;
 		g->AddObject(selectedTool);
+		{
+			float size = 0.05f;
+			GUIImage* im = new GUIImage(sf::Vector2f(1.f - size, size), sf::Vector2f(size, size), "resources\\images\\GUIHome.png");
+			im->keepAspectRatio = true;
+			im->origin = sf::Vector2f(1.f, 0.f);
+			GUIButton* b = new GUIButton(sf::Vector2f(1.f - size, size), sf::Vector2f(size, size), im, nullptr);
+			b->clickFunc = ClickFuncs::ResetCamPos;
+			b->dimObj = nullptr;
+			g->AddObject(b);
+		}
 		guis.push_back(g);
 	}
 	//PAUSE GUI

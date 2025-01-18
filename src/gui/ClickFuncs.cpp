@@ -83,3 +83,10 @@ void ClickFuncs::SaveAndQuit()
 	SaveHandler::ResetWorkingDir();
 	guihandler.OpenGUI(0);
 }
+
+void ClickFuncs::ResetCamPos()
+{
+	InputHandler::RemoveMbDown(sf::Mouse::Button::Left);
+	InputHandler::RemoveMbPressed(sf::Mouse::Button::Left);
+	game->planets[game->activePlanet].camera.position = sf::Vector2f(0.f, 0.f);
+}

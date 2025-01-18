@@ -20,8 +20,7 @@ void GUIButton::Render()
 {
 	//background object is never going to be nullptr so always render.
 	bgObj->Render();
-
-	if (isBlockingMouse())
+	if (isBlockingMouse() && dimObj != nullptr)
 	{
 		dimObj->Render();
 	}
