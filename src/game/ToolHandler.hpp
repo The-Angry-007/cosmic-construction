@@ -22,8 +22,10 @@ public:
 	Structure* previewStructure;
 	GUILabel* insufficientLabel;
 	sf::Clock insufficientTimer;
+	std::vector<GUIObject*> tallyObjs;
 	std::vector<GUIImage*> selectedImages;
 	void ShowInsufficient();
+	void ReloadTally(sf::Vector2i tilePos);
 	void Update(float dt, Planet* p);
 	void Render();
 	Structure* CreateStructure(int type);

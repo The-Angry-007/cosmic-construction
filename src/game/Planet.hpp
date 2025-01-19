@@ -46,4 +46,5 @@ public:
 	void RemoveStructure(int index);
 	bool DeductResources(int typeID, sf::Vector2i position);
 	void RemoveStructuresInArea(sf::Vector2i position, sf::Vector2i size);
+	std::vector<int> TallyResources(sf::Vector2i position, std::vector<int> types);
 };

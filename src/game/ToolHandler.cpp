@@ -31,6 +31,7 @@ ToolHandler::ToolHandler()
 	}
 	draggingStructure = -1;
 	prevmousepos = sf::Vector2f(0.f, 0.f);
+	tallyObjs = {};
 }
 ToolHandler::~ToolHandler()
 {
@@ -143,7 +144,7 @@ void ToolHandler::Update(float dt, Planet* p)
 			delete previewStructure;
 			previewStructure = nullptr;
 		}
-
+		ReloadTally(tilePos);
 		if (placeType == 0)
 		{
 
@@ -553,5 +554,41 @@ void ToolHandler::Render()
 		{
 			guihandler.guis[5]->RemoveObject(j);
 		}
+	}
+}
+
+void ToolHandler::ReloadTally(sf::Vector2i tilePos)
+{
+	auto cost = ResourceHandler::GetCost(placeType);
+	std::vector<int> types = {};
+	for (int i = 1; i < cost.size(); i += 2)
+	{
+		types.push_back(cost[i]);
+	}
+	Planet& p = game->planets[game->activePlanet];
+	std::vector<int> tally = p.TallyResources(tilePos, types);
+	GUI* g = guihandler.guis[5];
+	for (int i = 0; i < tallyObjs.size(); i++)
+	{
+		g->RemoveObject(g->GetIndex(tallyObjs[i]));
+		delete tallyObjs[i];
+	}
+	tallyObjs = {};
+	float width = 0.1f;
+	float totalWidth = (tally.size() * 2.f) * width;
+	float y = 0.8f;
+	sf::Vector2f startPos(0.5f - totalWidth / 2.f, y);
+	sf::Vector2f endPos(0.5f - totalWidth / 2.f, y);
+	int N = tally.size() * 2;
+	for (int i = 0; i < tally.size(); i++)
+	{
+		sf::Vector2f pos1 = Lerp(startPos, endPos, (2 * i + 1) / (N + 1));
+		sf::Vector2f pos2 = Lerp(startPos, endPos, (2 * i + 2) / (N + 1));
+		std::string str = std::to_string(tally[i]);
+		str += " / ";
+		str += std::to_string(cost[i * 2 + 1]);
+		GUILabel* l = new GUILabel(pos2, sf::Vector2f(width, width), str);
+		tallyObjs.push_back(l);
+		g->AddObject(l);
 	}
 }

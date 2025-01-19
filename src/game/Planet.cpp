@@ -787,3 +787,38 @@ void Planet::RemoveStructuresInArea(sf::Vector2i position, sf::Vector2i size)
 		RemoveStructure(structures[i]);
 	}
 }
+
+std::vector<int> Planet::TallyResources(sf::Vector2i position, std::vector<int> types)
+{
+	sf::Vector2i distance(50, 50);
+	std::vector<int> structures = StructuresInArea(position - distance, 2 * distance);
+	std::vector<int> silos = {};
+
+	for (int i = 0; i < structures.size(); i++)
+	{
+		if (this->structures[structures[i]]->typeID == 1)
+		{
+			silos.push_back(structures[i]);
+		}
+	}
+	std::vector<int> tally = {};
+	for (int i = 0; i < types.size(); i++)
+	{
+		tally.push_back(0);
+	}
+	for (int i = 0; i < silos.size(); i++)
+	{
+		StorageSilo* s = dynamic_cast<StorageSilo*>(this->structures[silos[i]]);
+		for (int j = 0; j < s->itemIDs.size(); j++)
+		{
+			for (int k = 0; k < types.size(); k++)
+			{
+				if (s->itemIDs[j] == types[k])
+				{
+					tally[k] += s->itemQuantities[j];
+				}
+			}
+		}
+	}
+	return tally;
+}
