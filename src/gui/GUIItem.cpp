@@ -8,8 +8,14 @@ GUIItem::GUIItem(sf::Vector2f position, sf::Vector2f size, int typeID, int amoun
 	this->typeID = typeID;
 	this->amount = amount;
 	image = new GUIImage(position, size, "");
-	label = new GUILabel(position + size / 2.f, size / 4.f, std::to_string(amount));
-	label->origin = sf::Vector2f(1.f, 1.f);
+	if (amount != 0)
+	{
+		label = new GUILabel(position + size / 2.f, size / 4.f, std::to_string(amount));
+		label->origin = sf::Vector2f(1.f, 1.f);
+	}
+	else
+		label = nullptr;
+
 	ResourceHandler::itemAtlas->SetSprite(image->sprite, typeID);
 	image->keepAspectRatio = true;
 }
@@ -23,7 +29,10 @@ void GUIItem::RenderToTexture(sf::RenderTexture* texture)
 	image->size = size;
 	image->RenderToTexture(texture);
 	actualSize = sf::Vector2f(image->sprite.getGlobalBounds().width / width / 2.f, image->sprite.getGlobalBounds().height / height / 2.f);
-	label->position = position + actualSize / 2.f;
-	label->size = actualSize / 4.f;
-	label->RenderToTexture(texture);
+	if (label != nullptr)
+	{
+		label->position = position + actualSize / 2.f;
+		label->size = actualSize / 4.f;
+		label->RenderToTexture(texture);
+	}
 }

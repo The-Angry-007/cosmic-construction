@@ -574,21 +574,24 @@ void ToolHandler::ReloadTally(sf::Vector2i tilePos)
 		delete tallyObjs[i];
 	}
 	tallyObjs = {};
-	float width = 0.1f;
-	float totalWidth = (tally.size() * 2.f) * width;
-	float y = 0.8f;
+	float width = 0.05f;
+	float totalWidth = (tally.size() * 2.f) * width * 2.f;
+	float y = 0.6f;
 	sf::Vector2f startPos(0.5f - totalWidth / 2.f, y);
-	sf::Vector2f endPos(0.5f - totalWidth / 2.f, y);
+	sf::Vector2f endPos(0.5f + totalWidth / 2.f, y);
 	int N = tally.size() * 2;
 	for (int i = 0; i < tally.size(); i++)
 	{
-		sf::Vector2f pos1 = Lerp(startPos, endPos, (2 * i + 1) / (N + 1));
-		sf::Vector2f pos2 = Lerp(startPos, endPos, (2 * i + 2) / (N + 1));
+		sf::Vector2f pos1 = Lerp(startPos, endPos, (2.f * i + 1.f) / (N + 1.f));
+		sf::Vector2f pos2 = Lerp(startPos, endPos, (2.f * i + 2.f) / (N + 1.f));
 		std::string str = std::to_string(tally[i]);
 		str += " / ";
-		str += std::to_string(cost[i * 2 + 1]);
+		str += std::to_string(cost[i * 2 + 2]);
 		GUILabel* l = new GUILabel(pos2, sf::Vector2f(width, width), str);
+		GUIItem* item = new GUIItem(pos1, sf::Vector2f(width, width), cost[i * 2 + 1], 0);
 		tallyObjs.push_back(l);
+		tallyObjs.push_back(item);
 		g->AddObject(l);
+		g->AddObject(item);
 	}
 }
