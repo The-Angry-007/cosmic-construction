@@ -20,4 +20,6 @@ public:
 	void Render();
 	void RenderPreview();
 	void UpdateNeighbours();
+	void SetPosition(sf::Vector2i position);
+	void SetVisualPosition(sf::Vector2i position);
 };

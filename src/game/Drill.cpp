@@ -10,6 +10,9 @@ Drill::Drill(int id, int planetID, int direction)
 	sprite = sf::Sprite();
 	currentFrame = 0;
 	ResourceHandler::structureAtlas->SetSprite(sprite, typeID, currentFrame);
+	groundSprite = sf::Sprite();
+	ResourceHandler::structureAtlas->SetSprite(groundSprite, typeID, 3);
+
 	blocksItems = true;
 	placedByPlayer = true;
 	timePerFrame = 0.3333f;
@@ -28,15 +31,15 @@ void Drill::UpdateNeighbours()
 	std::vector<sf::Vector2i> offsets = {
 		{ 0, -1 },
 		{ 1, -1 },
-		{ -1, 0 },
 		{ 2, 0 },
-		{ -1, 1 },
 		{ 2, 1 },
+		{ 1, 2 },
 		{ 0, 2 },
-		{ 1, 2 }
+		{ -1, 1 },
+		{ -1, 0 }
 	};
 	std::vector<int> directions = {
-		2, 2, 1, 3, 1, 3, 0, 0
+		2, 2, 3, 3, 0, 0, 1, 1
 	};
 	neighbours = {};
 	Planet& p = game->planets[planetID];
@@ -86,7 +89,7 @@ void Drill::Update(float dt)
 				int dir = (c->direction + 2) % 4;
 				if (c->progress[dir].size() == 0 || c->progress[dir][c->progress[dir].size() - 1] > c->gap)
 				{
-					numStone = (numStone + 1) % 4;
+					numStone = (numStone + 1) % 5;
 					int output = (numStone == 0) ? 2 : 1;
 					Item item = Item(sf::Vector2f(0.f, 0.f), -1, output);
 					game->planets[planetID].items.push_back(item);
@@ -106,8 +109,15 @@ void Drill::Render()
 	game->planets[planetID].renderObjects.push_back(RenderObject {
 		&sprite,
 		32 });
+	game->planets[planetID].renderObjects.push_back(RenderObject {
+		&groundSprite,
+		-32 });
 }
-
+void Drill::SetPosition(sf::Vector2i position)
+{
+	Structure::SetPosition(position);
+	groundSprite.setPosition(sprite.getPosition());
+}
 void Drill::RenderPreview()
 {
 	int opacity = 100;
@@ -119,16 +129,48 @@ void Drill::RenderPreview()
 	}
 	col.a = opacity;
 	sprite.setColor(col);
+	groundSprite.setColor(col);
 	Planet& p = game->planets[planetID];
 	p.renderObjects.push_back(RenderObject {
 		&sprite,
 		2000 });
+	p.renderObjects.push_back(RenderObject {
+		&groundSprite,
+		1999 });
 }
 
 JSON Drill::ToJSON()
 {
-	return JSON();
+	JSON j = JSON();
+	j.AddAttribute("Position", position);
+	j.AddAttribute("TypeID", typeID);
+	j.AddAttribute("ChunkID", chunkID);
+	j.AddAttribute("ID", id);
+	j.AddAttribute("NumStone", numStone);
+	j.AddAttribute("TimeSinceOutput", timeSinceOutput);
+	j.AddAttribute("AnimProgress", animProgress);
+	j.AddAttribute("TimePerFrame", timePerFrame);
+	j.AddAttribute("CurrentFrame", currentFrame);
+	j.AddAttribute("LastOutputDir", lastOutputDir);
+	return j;
 }
 void Drill::FromJSON(JSON j)
 {
+	sf::Vector2i pos = j.GetV2i("Position");
+	chunkID = j.GetInt("ChunkID");
+	id = j.GetInt("ID");
+	pos += game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE;
+	SetPosition(pos);
+	numStone = j.GetInt("NumStone");
+	timeSinceOutput = j.GetFloat("TimeSinceOutput");
+	animProgress = j.GetFloat("AnimProgress");
+	timePerFrame = j.GetFloat("TimePerFrame");
+	currentFrame = j.GetInt("CurrentFrame");
+	lastOutputDir = j.GetInt("LastOutputDir");
+}
+
+void Drill::SetVisualPosition(sf::Vector2i position)
+{
+	Structure::SetVisualPosition(position);
+	groundSprite.setPosition(sprite.getPosition());
 }
