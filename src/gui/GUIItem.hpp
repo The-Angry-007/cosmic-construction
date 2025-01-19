@@ -13,4 +13,5 @@ public:
 	GUIItem(sf::Vector2f position, sf::Vector2f size, int typeID, int amount);
 	void Update(float dt);
 	void RenderToTexture(sf::RenderTexture* texture);
+	void Render();
 };

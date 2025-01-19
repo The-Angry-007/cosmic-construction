@@ -36,3 +36,16 @@ void GUIItem::RenderToTexture(sf::RenderTexture* texture)
 		label->RenderToTexture(texture);
 	}
 }
+void GUIItem::Render()
+{
+	image->position = position;
+	image->size = size;
+	image->Render();
+	actualSize = sf::Vector2f(image->sprite.getGlobalBounds().width / width / 2.f, image->sprite.getGlobalBounds().height / height / 2.f);
+	if (label != nullptr)
+	{
+		label->position = position + actualSize / 2.f;
+		label->size = actualSize / 4.f;
+		label->Render();
+	}
+}
