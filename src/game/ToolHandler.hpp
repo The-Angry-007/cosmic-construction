@@ -26,6 +26,7 @@ public:
 	std::vector<GUIImage*> selectedImages;
 	void ShowInsufficient();
 	void ReloadTally(sf::Vector2i tilePos);
+	void ClearTally();
 	void Update(float dt, Planet* p);
 	void Render();
 	Structure* CreateStructure(int type);

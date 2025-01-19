@@ -510,6 +510,10 @@ void ToolHandler::Update(float dt, Planet* p)
 			selectedImages[i]->sprite.setColor(sf::Color::Red);
 		}
 	}
+	if (selectedTool != 0)
+	{
+		ClearTally();
+	}
 }
 
 void ToolHandler::ShowInsufficient()
@@ -574,9 +578,9 @@ void ToolHandler::ReloadTally(sf::Vector2i tilePos)
 		delete tallyObjs[i];
 	}
 	tallyObjs = {};
-	float width = 0.05f;
+	float width = 0.03f;
 	float totalWidth = (tally.size() * 2.f) * width * 2.f;
-	float y = 0.6f;
+	float y = 0.75f;
 	sf::Vector2f startPos(0.5f - totalWidth / 2.f, y);
 	sf::Vector2f endPos(0.5f + totalWidth / 2.f, y);
 	int N = tally.size() * 2;
@@ -596,4 +600,14 @@ void ToolHandler::ReloadTally(sf::Vector2i tilePos)
 		g->AddObject(l);
 		g->AddObject(item);
 	}
+}
+
+void ToolHandler::ClearTally()
+{
+	for (int i = 0; i < tallyObjs.size(); i++)
+	{
+		guihandler.guis[5]->RemoveObject(guihandler.guis[5]->GetIndex(tallyObjs[i]));
+		delete tallyObjs[i];
+	}
+	tallyObjs = {};
 }
