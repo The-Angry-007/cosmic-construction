@@ -11,6 +11,7 @@ public:
 	float targetZoom;
 	float zoomRate;
 	float zoomSpeed;
+	float moveSpeed;
 	sf::Vector2f prevMousePos;
 	Hitbox* hitbox;
 	~Camera();

@@ -125,20 +125,11 @@ void Planet::Init(bool load)
 }
 void Planet::Update(float dt)
 {
-
-	camera.Update(dt);
-	GenerateChunksInView();
-
-	// if (InputHandler::pressed(binds::Interact))
-	// {
-	// 	sf::Vector2f wmp = camera.WorldMousePos();
-	// 	sf::Vector2i mouseTilePos(floor(wmp.x / TILE_SIZE.x), floor(wmp.y / TILE_SIZE.y));
-	// 	int s = StructureInPos(mouseTilePos);
-	// 	if (s != -1)
-	// 	{
-	// 		structures[s]->Interact();
-	// 	}
-	// }
+	if (game->activePlanet == id)
+	{
+		camera.Update(dt);
+		GenerateChunksInView();
+	}
 }
 
 void buildVertexArray(const std::vector<RenderObject>& renderObjects, sf::VertexArray& vertexArray)

@@ -14,6 +14,7 @@ Camera::Camera(sf::Vector2f position, float zoom)
 	hitbox = new Hitbox(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.f, 1.f));
 	hitbox->AddShape(new HitboxRect(position, sf::Vector2f(zoom * width, zoom * height)));
 	zoomSpeed = 25.f;
+	moveSpeed = 32.f;
 }
 Camera::Camera()
 {
@@ -27,10 +28,27 @@ Camera::Camera()
 	hitbox = new Hitbox(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.f, 1.f));
 	hitbox->AddShape(new HitboxRect(position, sf::Vector2f(zoom * width, zoom * height)));
 	zoomSpeed = 25.f;
+	moveSpeed = 512.f;
 }
 
 void Camera::Update(float dt)
 {
+	if (InputHandler::keyDown(sf::Keyboard::Key::W))
+	{
+		position.y -= moveSpeed * dt * zoom;
+	}
+	if (InputHandler::keyDown(sf::Keyboard::Key::S))
+	{
+		position.y += moveSpeed * dt * zoom;
+	}
+	if (InputHandler::keyDown(sf::Keyboard::Key::A))
+	{
+		position.x -= moveSpeed * dt * zoom;
+	}
+	if (InputHandler::keyDown(sf::Keyboard::Key::D))
+	{
+		position.x += moveSpeed * dt * zoom;
+	}
 	if (InputHandler::pressed(binds::Pan))
 	{
 		mouseStartPos = InputHandler::mousePos;

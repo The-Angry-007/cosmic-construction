@@ -27,6 +27,11 @@ void Game::NewGame()
 	for (uint i = 0; i < planets.size(); i++)
 	{
 		planets[i].Init(false);
+		sf::Clock timer;
+		do
+		{
+			planets[i].Update(0.f);
+		} while (timer.restart().asSeconds() > 0.0001f);
 	}
 }
 void Game::TogglePaused()
