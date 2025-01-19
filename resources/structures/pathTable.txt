@@ -79,3 +79,6 @@ StructureID/Path
 4/planter_0.png
 4/planter_1.png
 5/boulder.png
+6/drill_1.png
+6/drill_2.png
+6/drill_3.png

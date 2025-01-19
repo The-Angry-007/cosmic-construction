@@ -5,3 +5,4 @@ StructureID/Name/Description/SizeX/SizeY
 3/Tree Chopper/Automatically chops down the tree in front of it./1/1
 4/Sapling Planter/Automatically grows a tree every 10 seconds/1/1
 5/Boulder/blank/1/1
+6/Drill/Extracts stone and coal from the ground at 1 item per 2 seconds. Requires fuel to run./2/2

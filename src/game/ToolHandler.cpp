@@ -541,6 +541,10 @@ Structure* ToolHandler::CreateStructure(int type)
 	{
 		return new SaplingPlanter(-2, game->activePlanet, placeDir);
 	}
+	else if (type == 6)
+	{
+		return new Drill(-2, game->activePlanet, placeDir);
+	}
 	else
 	{
 		return nullptr;
