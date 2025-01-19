@@ -582,8 +582,10 @@ void ToolHandler::ReloadTally(sf::Vector2i tilePos)
 	int N = tally.size() * 2;
 	for (int i = 0; i < tally.size(); i++)
 	{
-		sf::Vector2f pos1 = Lerp(startPos, endPos, (2.f * i + 1.f) / (N + 1.f));
-		sf::Vector2f pos2 = Lerp(startPos, endPos, (2.f * i + 2.f) / (N + 1.f));
+		int index = 2 * i + 1;
+
+		sf::Vector2f pos1 = Lerp(startPos, endPos, (index * 2.f - 1.f) / (N * 2.f));
+		sf::Vector2f pos2 = Lerp(startPos, endPos, ((index + 1) * 2.f - 1.f) / (N * 2.f));
 		std::string str = std::to_string(tally[i]);
 		str += " / ";
 		str += std::to_string(cost[i * 2 + 2]);

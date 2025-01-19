@@ -18,6 +18,7 @@ GUIItem::GUIItem(sf::Vector2f position, sf::Vector2f size, int typeID, int amoun
 
 	ResourceHandler::itemAtlas->SetSprite(image->sprite, typeID);
 	image->keepAspectRatio = true;
+	image->origin = sf::Vector2f(0.5f, 0.5f);
 }
 
 void GUIItem::Update(float dt)
