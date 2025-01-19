@@ -11,6 +11,7 @@ public:
 	float timePerFrame;
 	int currentFrame;
 	int lastOutputDir;
+	sf::Sprite groundSprite;
 	Drill(int id, int planetID, int direction);
 	~Drill();
 	void FromJSON(JSON j);

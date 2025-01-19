@@ -66,6 +66,7 @@ void Drill::UpdateNeighbours()
 
 void Drill::Update(float dt)
 {
+	UpdateNeighbours();
 	animProgress += dt;
 	if (animProgress > timePerFrame)
 	{
@@ -92,6 +93,8 @@ void Drill::Update(float dt)
 					c->items[dir].push_back(game->planets[planetID].items.size() - 1);
 					c->progress[dir].push_back(0.f);
 					lastOutputDir = (index + 1) % 8;
+					timeSinceOutput = 0.f;
+					break;
 				}
 			}
 		}

@@ -48,6 +48,7 @@ ToolHandler::~ToolHandler()
 	{
 		guihandler.guis[5]->RemoveObject(guihandler.guis[5]->GetIndex(insufficientLabel));
 	}
+	ClearTally();
 }
 void ToolHandler::Update(float dt, Planet* p)
 {
@@ -239,9 +240,14 @@ void ToolHandler::Update(float dt, Planet* p)
 		}
 		else
 		{
-			sf::Vector2i pos = tilePos;
+			sf::Vector2f pos1(mousePos.x / TILE_SIZE.x, mousePos.y / TILE_SIZE.y);
+			pos1 -= (sf::Vector2f)(ResourceHandler::structureSizes[placeType] - sf::Vector2i(1, 1)) / 2.f;
+			sf::Vector2i pos(floor(pos1.x), floor(pos1.y));
+
 			sf::Vector2i size = ResourceHandler::structureSizes[placeType];
-			pos -= size / 2;
+			// sf::Vector2i pos = tilePos;
+			// sf::Vector2i size = ResourceHandler::structureSizes[placeType];
+			// pos -= size;
 
 			// StorageSilo* s = new StorageSilo(0, game->activePlanet);
 			Structure* s = CreateStructure(placeType);

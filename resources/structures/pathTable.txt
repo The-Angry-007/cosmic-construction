@@ -82,3 +82,4 @@ StructureID/Path
 6/drill_1.png
 6/drill_2.png
 6/drill_3.png
+6/drill_ground.png
