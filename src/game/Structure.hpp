@@ -6,7 +6,7 @@ class Structure
 public:
 	int typeID;
 	int id;
-	int chunkID;
+	int chunkID = -1;
 	int planetID;
 	int zindex;
 	bool blocksItems;
@@ -15,6 +15,7 @@ public:
 	sf::Vector2i position;
 	sf::Vector2i tileSize;
 	sf::Sprite sprite;
+	int direction = 0;
 	Hitbox* hitbox;
 	Structure();
 	virtual void Update(float dt);
@@ -28,6 +29,7 @@ public:
 	virtual void Interact();
 	virtual void TryAddGroundItem(int index);
 	virtual void Destroy();
+	virtual void SetDirection(int direction);
 
 	bool CanBePlaced();
 	virtual ~Structure();

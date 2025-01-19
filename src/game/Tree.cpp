@@ -13,7 +13,6 @@ Tree::Tree(int id, int planetID)
 	blocksItems = true;
 	placedByPlayer = false;
 	parent = -1;
-	chunkID = -1;
 }
 
 Tree ::~Tree()

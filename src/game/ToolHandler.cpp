@@ -294,7 +294,6 @@ void ToolHandler::Update(float dt, Planet* p)
 			if (!InputHandler::down(binds::UseTool))
 			{
 				sf::Vector2f offset = structureStartDraggingPos - mousePos;
-				std::cout << offset.x * offset.x + offset.y * offset.y << std::endl;
 				if (offset.x * offset.x + offset.y * offset.y < 9.f)
 				{
 					p->structures[draggingStructure]->Interact();
@@ -405,7 +404,10 @@ void ToolHandler::Update(float dt, Planet* p)
 			{
 				structureStartDraggingPos = mousePos;
 				draggingStructure = index;
-				std::cout << "dragging" << std::endl;
+			}
+			else if (InputHandler::pressed(binds::RotateStructure) && index != -1)
+			{
+				p->structures[index]->SetDirection((p->structures[index]->direction + 1) % 4);
 			}
 		}
 	}
@@ -446,7 +448,6 @@ void ToolHandler::Update(float dt, Planet* p)
 				}
 				p->structures[index]->Destroy();
 				p->RemoveStructure(index);
-				std::cout << p->items.size() << std::endl;
 			}
 		}
 		if (InputHandler::pressed(binds::UseTool))

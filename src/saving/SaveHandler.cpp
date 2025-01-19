@@ -43,7 +43,6 @@ void SaveHandler::CreateSave(std::string name, int difficulty, std::string seed)
 	RandomHandler::SetSeed(hashedSeed);
 	hashedSeed = RandomHandler::GetNextNumber();
 	RandomHandler::SetSeed(hashedSeed);
-	std::cout << seed << " " << hashedSeed << std::endl;
 	//folders are named numbers instead of the actual name
 	//this allows for illegal characters etc in the name
 

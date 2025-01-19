@@ -9,7 +9,6 @@ public:
 	std::vector<std::vector<int>> items;
 	std::vector<std::vector<float>> progress;
 
-	int direction;
 	float speed;
 	float gap;
 	Conveyor(int id, int planetID, int direction);

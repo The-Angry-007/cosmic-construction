@@ -26,7 +26,6 @@ Conveyor::Conveyor(int id, int planetID, int direction)
 	currentNeighbourIndex = 0;
 	blocksItems = false;
 	placedByPlayer = true;
-	chunkID = -1;
 }
 
 void Conveyor::UpdateNeighbours()

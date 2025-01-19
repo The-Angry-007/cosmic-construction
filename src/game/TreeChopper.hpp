@@ -3,7 +3,6 @@
 class TreeChopper : public Structure
 {
 public:
-	int direction;
 	float timeSinceAction;
 	int phase;
 	TreeChopper(int id, int planetID, int direction);
@@ -13,4 +12,5 @@ public:
 	void RenderPreview();
 	JSON ToJSON();
 	void FromJSON(JSON j);
+	void SetDirection(int direction);
 };

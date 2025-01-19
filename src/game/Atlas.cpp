@@ -87,7 +87,6 @@ Atlas::Atlas(std::vector<sf::Texture>& textures, std::vector<int> ids)
 		auto i2 = textures[i].copyToImage();
 		im.copy(i2, positions[i].x, positions[i].y);
 	}
-	std::cout << totalWidth << " " << totalHeight;
 	im.saveToFile(SaveHandler::workingDir + "\\atlas.png");
 	texture.loadFromImage(im);
 	this->textures = textures;

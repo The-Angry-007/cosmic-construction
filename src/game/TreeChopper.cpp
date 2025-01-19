@@ -5,11 +5,10 @@ TreeChopper::TreeChopper(int id, int planetID, int direction)
 {
 	SetID(id);
 	this->planetID = planetID;
-	this->direction = direction;
 	typeID = 3;
 	tileSize = ResourceHandler::structureSizes[typeID];
 	sprite = sf::Sprite();
-	ResourceHandler::structureAtlas->SetSprite(sprite, typeID, direction * 15);
+	SetDirection(direction);
 	blocksItems = true;
 	placedByPlayer = true;
 	timeSinceAction = 0.f;
@@ -18,9 +17,13 @@ TreeChopper::TreeChopper(int id, int planetID, int direction)
 	//phase 2: chopping down tree
 	//phase 3: moving back
 	phase = 0;
-	chunkID = -1;
 }
-
+void TreeChopper::SetDirection(int direction)
+{
+	this->direction = direction;
+	ResourceHandler::structureAtlas->SetSprite(sprite, typeID, direction * 15);
+	phase = 0;
+}
 void TreeChopper::Update(float dt)
 {
 	timeSinceAction += dt;

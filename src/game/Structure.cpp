@@ -111,3 +111,6 @@ void Structure::Interact()
 
 void Structure::Destroy()
 {}
+
+void Structure::SetDirection(int direction)
+{}
