@@ -392,6 +392,17 @@ void ToolHandler::Update(float dt, Planet* p)
 
 		if (!InputHandler::down(binds::UseTool))
 		{
+			if (index != -1 && draggingItems.size() > 1)
+			{
+				for (int i = 0; i < draggingItems.size(); i++)
+				{
+					sf::Vector2f pos = (sf::Vector2f)tilePos;
+					pos += sf::Vector2f(rand() % 1000, rand() % 1000) / 1000.f;
+					pos.x *= TILE_SIZE.x;
+					pos.y *= TILE_SIZE.y;
+					p->items[draggingItems[i]].position = pos;
+				}
+			}
 			draggingItems = {};
 		}
 		else
