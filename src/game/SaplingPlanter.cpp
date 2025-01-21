@@ -14,6 +14,7 @@ SaplingPlanter::SaplingPlanter(int id, int planetID, int direction)
 	placedByPlayer = true;
 	tileSize = ResourceHandler::structureSizes[typeID];
 	tree = -1;
+	blocksItems = true;
 }
 
 void SaplingPlanter::SetPosition(sf::Vector2i pos)
