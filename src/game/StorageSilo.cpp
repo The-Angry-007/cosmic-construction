@@ -70,20 +70,16 @@ void StorageSilo::UpdateNeighbours()
 		targetLength++;
 		int direction = directions[i];
 		int neighbour = game->planets[planetID].StructureInPos(pos + offsets[i]);
-		if (neighbour != -1)
+		if (neighbour != -1 && game->planets[planetID].structures[neighbour]->isConveyor)
 		{
 			Structure* s = game->planets[planetID].structures[neighbour];
-			if (s->typeID == 0)
+			if (s->direction == direction)
 			{
-				Conveyor* c = dynamic_cast<Conveyor*>(s);
-				if (c->direction == direction)
-				{
-					inputNeighbours.push_back(neighbour);
-				}
-				else if (c->direction == (direction + 2) % 4)
-				{
-					outputNeighbours.push_back(neighbour);
-				}
+				inputNeighbours.push_back(neighbour);
+			}
+			else if (s->direction == (direction + 2) % 4)
+			{
+				outputNeighbours.push_back(neighbour);
 			}
 		}
 		if (inputNeighbours.size() != targetLength)
@@ -115,47 +111,43 @@ void StorageSilo::TryAddGroundItem(int index)
 void StorageSilo::Update(float dt)
 {
 	UpdateNeighbours();
-	for (int i = 0; i < inputNeighbours.size(); i++)
-	{
-		if (inputNeighbours[i] == -1)
-		{
-			continue;
-		}
-		Conveyor* c = dynamic_cast<Conveyor*>(game->planets[planetID].structures[inputNeighbours[i]]);
-		if (c->items[c->direction].size() > 0 && c->progress[c->direction][0] >= 1.f)
-		{
-			AddItem(c->items[c->direction][0]);
-			c->items[c->direction].erase(c->items[c->direction].begin());
-			c->progress[c->direction].erase(c->progress[c->direction].begin());
-		}
-	}
+	// for (int i = 0; i < inputNeighbours.size(); i++)
+	// {
+	// 	if (inputNeighbours[i] == -1)
+	// 	{
+	// 		continue;
+	// 	}
+	// 	Conveyor* c = dynamic_cast<Conveyor*>(game->planets[planetID].structures[inputNeighbours[i]]);
+	// 	if (c->items[c->direction].size() > 0 && c->progress[c->direction][0] >= 1.f)
+	// 	{
+	// 		AddItem(c->items[c->direction][0]);
+	// 		c->items[c->direction].erase(c->items[c->direction].begin());
+	// 		c->progress[c->direction].erase(c->progress[c->direction].begin());
+	// 	}
+	// }
+	//WORKING HERE
+	//NEED TO MAKE THIS USE THE NEW CONVEYORTYPE SYSTEM
 	for (int i = 0; i < outputNeighbours.size(); i++)
 	{
 		if (outputNeighbours[i] != -1)
 		{
-			Conveyor* c = dynamic_cast<Conveyor*>(game->planets[planetID].structures[outputNeighbours[i]]);
+			ConveyorType* c = dynamic_cast<ConveyorType*>(game->planets[planetID].structures[outputNeighbours[i]]);
 			int dir = (c->direction + 2) % 4;
-			if (c->progress[dir].size() == 0 || c->progress[dir][c->progress[dir].size() - 1] > c->gap)
+			int index = items[items.size() - 1];
+			Item& item = game->planets[planetID].items[index];
+
+			if (c->TryAddItem(index, dir, 0.f))
 			{
-				if (itemIDs.size() > 0)
+				item.SetType(itemIDs[previousOutputs[i]]);
+				item.SetParent(outputNeighbours[i]);
+				items.pop_back();
+				itemQuantities[previousOutputs[i]]--;
+				if (itemQuantities[previousOutputs[i]] == 0)
 				{
-					previousOutputs[i] %= itemIDs.size();
-					//eject item here
-					int index = items[items.size() - 1];
-					Item& item = game->planets[planetID].items[index];
-					item.SetType(itemIDs[previousOutputs[i]]);
-					item.SetParent(outputNeighbours[i]);
-					c->items[dir].push_back(index);
-					c->progress[dir].push_back(0.f);
-					itemQuantities[previousOutputs[i]]--;
-					if (itemQuantities[previousOutputs[i]] == 0)
-					{
-						itemQuantities.erase(itemQuantities.begin() + previousOutputs[i]);
-						itemIDs.erase(itemIDs.begin() + previousOutputs[i]);
-					}
-					items.erase(items.end() - 1);
-					previousOutputs[i]++;
+					itemQuantities.erase(itemQuantities.begin() + previousOutputs[i]);
+					itemIDs.erase(itemIDs.begin() + previousOutputs[i]);
 				}
+				previousOutputs[i]++;
 			}
 		}
 	}

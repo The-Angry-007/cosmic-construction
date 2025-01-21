@@ -93,7 +93,7 @@ void Conveyor::Update(float dt)
 				Structure* s = game->planets[planetID].structures[neighbours[direction]];
 				ConveyorType* c = dynamic_cast<ConveyorType*>(s);
 				int dir = (direction + 2) % 4;
-				if (c->TryAddItem(items[direction][0], dir, progress[direction][0] - 1.f))
+				if (progress[direction][0] >= 1.f && c->TryAddItem(items[direction][0], dir, progress[direction][0] - 1.f))
 				{
 					progress[direction].erase(progress[direction].begin());
 					items[direction]
@@ -359,11 +359,11 @@ void Conveyor::Destroy()
 }
 bool Conveyor::TryAddItem(int index, int direction, float progress)
 {
-	if (direction == (this->direction + 2) % 4)
+	if (direction == (this->direction))
 	{
 		return false;
 	}
-	if (this->progress[direction].back() - progress > gap)
+	if (this->progress[direction].size() == 0 || this->progress[direction].back() - progress > gap)
 	{
 		this->progress[direction].push_back(progress);
 		items[direction].push_back(index);
