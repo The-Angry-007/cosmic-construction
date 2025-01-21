@@ -1,6 +1,7 @@
 #pragma once
 #include "Boulder.hpp"
 #include "Conveyor.hpp"
+#include "ConveyorType.hpp"
 #include "Drill.hpp"
 #include "SaplingPlanter.hpp"
 #include "StorageSilo.hpp"

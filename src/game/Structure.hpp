@@ -11,6 +11,7 @@ public:
 	int zindex;
 	bool blocksItems;
 	bool placedByPlayer;
+	bool isConveyor = false;
 	sf::Vector2i bottomRightPos;
 	sf::Vector2i position;
 	sf::Vector2i tileSize;

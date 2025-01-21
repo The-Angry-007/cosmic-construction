@@ -51,7 +51,7 @@ void Drill::UpdateNeighbours()
 		if (structure != -1)
 		{
 			Structure* s = p.structures[structure];
-			if (s->typeID == 0 && s->direction == ((directions[i] + 2) % 4))
+			if (s->typeID == 0 && s->direction != ((directions[i]) % 4))
 			{
 				neighbours.push_back(structure);
 			}
@@ -78,6 +78,9 @@ void Drill::Update(float dt)
 		animProgress = 0.f;
 	}
 	timeSinceOutput += dt;
+	std::vector<int> directions = {
+		2, 2, 3, 3, 0, 0, 1, 1
+	};
 	if (timeSinceOutput > 2.f)
 	{
 		for (int i = 0; i < 8; i++)
@@ -86,7 +89,7 @@ void Drill::Update(float dt)
 			if (neighbours[index] != -1)
 			{
 				Conveyor* c = dynamic_cast<Conveyor*>(game->planets[planetID].structures[neighbours[index]]);
-				int dir = (c->direction + 2) % 4;
+				int dir = (directions[index] + 2) % 4;
 				if (c->progress[dir].size() == 0 || c->progress[dir][c->progress[dir].size() - 1] > c->gap)
 				{
 					numStone = (numStone + 1) % 5;

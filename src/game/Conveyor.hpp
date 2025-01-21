@@ -1,7 +1,7 @@
 #pragma once
-#include "Structure.hpp"
+#include "ConveyorType.hpp"
 extern std::vector<sf::Vector2i> CONVEYOR_OFFSETS;
-class Conveyor : public Structure
+class Conveyor : public ConveyorType
 {
 public:
 	int currentNeighbourIndex;
@@ -22,9 +22,11 @@ public:
 	void SetDirection(int direction);
 
 	int StructureInFront();
-	bool GetAdjacentItems(int dir);
-	void TryInsertItem(int item, float progress);
-	void UpdateNeighbours();
+	bool TryAddItem(int index, int direction, float progress);
+	float Distance(int direction);
+	// void TryInsertItem(int item, float progress);
+	void
+	UpdateNeighbours();
 	JSON ToJSON();
 	void RenderPreview();
 	void Destroy();
