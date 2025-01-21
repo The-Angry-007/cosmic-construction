@@ -44,7 +44,7 @@ void RecipeHandler::InitGUI(int structure)
 	GUIPanel* topPanel = new GUIPanel(sf::Vector2f(0.5f, 0.13f), sf::Vector2f(0.4f, 0.03f), sf::Color(125, 125, 125));
 	gui->AddObject(topPanel);
 	Structure* s = game->ActivePlanet()->structures[structure];
-	std::string name = ResourceHandler::structureTable->GetValue("Name", s->typeID);
+	std::string name = "Select Recipe: " + ResourceHandler::structureTable->GetValue("Name", s->typeID);
 	GUILabel* topLabel = new GUILabel(sf::Vector2f(0.5f, 0.13f), sf::Vector2f(0.9f, 0.025f), name);
 	topLabel->SetColor(sf::Color::Black);
 	gui->AddObject(topLabel);
@@ -58,6 +58,8 @@ void RecipeHandler::InitGUI(int structure)
 		{
 			GUIItem* inpItem = new GUIItem(sf::Vector2f(0.f, 0.f), sf::Vector2f(size, size), recs[i].inputTypes[0], 0);
 			GUIItem* outItem = new GUIItem(sf::Vector2f(0.f, 0.f), sf::Vector2f(size, size), recs[i].outputTypes[0], 0);
+			inpItem->blocksMouseInput = true;
+			outItem->blocksMouseInput = true;
 			gui->AddObject(inpItem);
 			gui->AddObject(outItem);
 		}
@@ -75,7 +77,7 @@ void RecipeHandler::Update(float dt)
 	{
 		gui->Update(dt);
 		Structure* s = game->ActivePlanet()->structures[guiStructure];
-		float inoutgap = 0.01f;
+		float inoutgap = 0.015f;
 		sf::Vector2f gap(0.1f + inoutgap, 0.1f);
 		float size = 0.05f;
 		sf::Vector2f spos(0.1f + size, 0.16f + size);
@@ -86,6 +88,17 @@ void RecipeHandler::Update(float dt)
 			//arranging items
 			gui->GUIObjects[i]->position = pos;
 			gui->GUIObjects[i + 1]->position = pos + sf::Vector2f(inoutgap, 0.f);
+			if (gui->GUIObjects[i]->isClicked() || gui->GUIObjects[i + 1]->isClicked())
+			{
+				InputHandler::RemoveMbPressed(sf::Mouse::Button::Left);
+				InputHandler::RemoveMbDown(sf::Mouse::Button::Left);
+				s->SetRecipe(&recipes[s->typeID][i / 2]);
+				guihandler.guis.pop_back();
+				delete gui;
+				gui = nullptr;
+				game->inMenu = false;
+				break;
+			}
 			pos.x += gap.x;
 			if (pos.x > 1 - spos.x)
 			{

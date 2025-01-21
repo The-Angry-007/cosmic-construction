@@ -2,6 +2,7 @@
 #include "Hitboxes.hpp"
 #include "saving.hpp"
 class Recipe;
+struct RecipeData;
 class Structure
 {
 public:
@@ -34,6 +35,7 @@ public:
 	virtual bool TryAddItem(int index);
 	virtual void Destroy();
 	virtual void SetDirection(int direction);
+	virtual void SetRecipe(RecipeData* data);
 
 	bool CanBePlaced();
 	virtual ~Structure();

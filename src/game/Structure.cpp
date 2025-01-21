@@ -1,6 +1,7 @@
 #include "Structure.hpp"
 #include "Chunk.hpp"
 #include "Main.hpp"
+#include "RecipeHandler.hpp"
 #include "ResourceHandler.hpp"
 int CurrentStructureID = 0;
 Structure::Structure()
@@ -118,4 +119,8 @@ void Structure::SetDirection(int direction)
 bool Structure::TryAddItem(int index)
 {
 	return false;
+}
+
+void Structure::SetRecipe(RecipeData* data)
+{
 }

@@ -14,4 +14,5 @@ public:
 	void Update(float dt);
 	void RenderToTexture(sf::RenderTexture* texture);
 	void Render();
+	bool isClicked();
 };
