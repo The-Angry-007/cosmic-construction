@@ -114,3 +114,8 @@ void Structure::Destroy()
 
 void Structure::SetDirection(int direction)
 {}
+
+bool Structure::TryAddItem(int index)
+{
+	return false;
+}

@@ -5,7 +5,7 @@ class Conveyor : public ConveyorType
 {
 public:
 	int currentNeighbourIndex;
-	std::vector<int> neighbours;
+	int neighbour;
 	std::vector<std::vector<int>> items;
 	std::vector<std::vector<float>> progress;
 
@@ -16,7 +16,7 @@ public:
 	void FromJSON(JSON j);
 	void Update(float dt);
 	void Render();
-	void ProgressLane(int lane, float dt);
+	bool ProgressLane(int lane, float dt, bool moveToMain);
 	void TryAddGroundItem(int index);
 	// void CollectItems();
 	void SetDirection(int direction);

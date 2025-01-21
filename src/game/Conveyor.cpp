@@ -31,28 +31,14 @@ Conveyor::Conveyor(int id, int planetID, int direction)
 
 void Conveyor::UpdateNeighbours()
 {
-	neighbours = {};
-	for (uint i = 0; i < 4; i++)
+	neighbour = -1;
+	int i = direction;
+	sf::Vector2i pos = CONVEYOR_OFFSETS[i] + position;
+	pos += game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE;
+	int index = game->planets[planetID].StructureInPos(pos);
+	if (index != -1)
 	{
-		sf::Vector2i pos = CONVEYOR_OFFSETS[i] + position;
-		pos += game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE;
-		int index = game->planets[planetID].StructureInPos(pos);
-		if (index == -1)
-		{
-			neighbours.push_back(-1);
-		}
-		else
-		{
-			Structure* s = game->planets[planetID].structures[index];
-			if (s->isConveyor)
-			{
-				neighbours.push_back(index);
-			}
-			else
-			{
-				neighbours.push_back(-1);
-			}
-		}
+		neighbour = index;
 	}
 }
 void Conveyor::Update(float dt)
@@ -62,6 +48,7 @@ void Conveyor::Update(float dt)
 	//moving items
 	int numChecked = 0;
 	int index = currentNeighbourIndex;
+	bool doneMove = false;
 	while (numChecked < 3)
 	{
 		numChecked++;
@@ -73,8 +60,18 @@ void Conveyor::Update(float dt)
 		}
 		if (progress[index].size() > 0)
 		{
-			ProgressLane(index, dt);
-			break;
+			if (!doneMove)
+			{
+				if (ProgressLane(index, dt, true))
+				{
+					currentNeighbourIndex = (index + 1) % 4;
+					doneMove = true;
+				}
+			}
+			else
+			{
+				ProgressLane(index, dt, false);
+			}
 		}
 		index = (index + 1) % 4;
 	}
@@ -88,21 +85,31 @@ void Conveyor::Update(float dt)
 			}
 			progress[direction][i] += speed * dt;
 
-			if (neighbours[direction] != -1)
+			if (neighbour != -1)
 			{
-				Structure* s = game->planets[planetID].structures[neighbours[direction]];
-				ConveyorType* c = dynamic_cast<ConveyorType*>(s);
-				int dir = (direction + 2) % 4;
-				if (progress[direction][0] >= 1.f && c->TryAddItem(items[direction][0], dir, progress[direction][0] - 1.f))
+				Structure* s = game->planets[planetID].structures[neighbour];
+				if (s->isConveyor)
 				{
-					progress[direction].erase(progress[direction].begin());
-					items[direction]
-						.erase(items[direction].begin());
+					ConveyorType* c = dynamic_cast<ConveyorType*>(s);
+					int dir = (direction + 2) % 4;
+					if (progress[direction][0] >= 1.f && c->TryAddItem(items[direction][0], dir, progress[direction][0] - 1.f))
+					{
+						progress[direction].erase(progress[direction].begin());
+						items[direction].erase(items[direction].begin());
+					}
+					float prog = c->Distance(dir);
+					if (prog + (1 - progress[direction][i]) < gap)
+					{
+						progress[direction][i] -= speed * dt;
+					}
 				}
-				float prog = c->Distance(dir);
-				if (prog + (1 - progress[direction][i]) < gap)
+				else
 				{
-					progress[direction][i] -= speed * dt;
+					if (progress[direction][0] >= 1.f && s->TryAddItem(items[direction][0]))
+					{
+						items[direction].erase(items[direction].begin());
+						progress[direction].erase(progress[direction].begin());
+					}
 				}
 			}
 		}
@@ -143,8 +150,9 @@ void Conveyor::Update(float dt)
 	// }
 }
 
-void Conveyor::ProgressLane(int lane, float dt)
+bool Conveyor::ProgressLane(int lane, float dt, bool moveToMain)
 {
+	bool moved = false;
 	for (uint i = 0; i < progress[lane].size(); i++)
 	{
 		progress[lane][i] += dt * speed;
@@ -160,15 +168,17 @@ void Conveyor::ProgressLane(int lane, float dt)
 			}
 			if (progress[lane][0] > 1.f)
 			{
-				progress[direction].push_back(progress[lane][0] - 1.f);
-				items[direction].push_back(items[lane][0]);
-				items[lane].erase(items[lane].begin());
-				progress[lane].erase(progress[lane].begin());
-				//cycle current neighbour index
-				currentNeighbourIndex = (lane + 1) % 4;
-				if (currentNeighbourIndex == direction)
+				if (moveToMain)
 				{
-					currentNeighbourIndex = (currentNeighbourIndex + 1) % 4;
+					progress[direction].push_back(progress[lane][0] - 1.f);
+					items[direction].push_back(items[lane][0]);
+					items[lane].erase(items[lane].begin());
+					progress[lane].erase(progress[lane].begin());
+					moved = true;
+				}
+				else
+				{
+					progress[lane][0] = 1.f;
 				}
 			}
 		}
@@ -180,6 +190,7 @@ void Conveyor::ProgressLane(int lane, float dt)
 			}
 		}
 	}
+	return moved;
 }
 
 void Conveyor::Render()

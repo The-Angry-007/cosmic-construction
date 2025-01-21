@@ -16,12 +16,12 @@ public:
 	void SetPosition(sf::Vector2i pos);
 	void SetVisualPosition(sf::Vector2i pos);
 	void TryAddGroundItem(int index);
+	bool TryAddItem(int index);
 	void UpdateNeighbours();
 	void Update(float dt);
 	void Render();
 	JSON ToJSON();
 	void FromJSON(JSON j);
-	void AddItem(int index);
 	void RenderPreview();
 	void Interact();
 	void Destroy();

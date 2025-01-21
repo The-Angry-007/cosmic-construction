@@ -29,6 +29,7 @@ public:
 	virtual void RenderPreview();
 	virtual void Interact();
 	virtual void TryAddGroundItem(int index);
+	virtual bool TryAddItem(int index);
 	virtual void Destroy();
 	virtual void SetDirection(int direction);
 

@@ -106,7 +106,7 @@ void StorageSilo::TryAddGroundItem(int index)
 	}
 	// item->parent = id;
 	item->SetParent(id);
-	AddItem(index);
+	TryAddItem(index);
 }
 void StorageSilo::Update(float dt)
 {
@@ -158,7 +158,7 @@ void StorageSilo::Update(float dt)
 		}
 	}
 }
-void StorageSilo::AddItem(int index)
+bool StorageSilo::TryAddItem(int index)
 {
 	Item& item = game->planets[planetID].items[index];
 	item.SetParent(id);
@@ -192,8 +192,7 @@ void StorageSilo::AddItem(int index)
 				}
 			}
 	}
-
-	//need to remove item from world - also need to figure out why not rendering?
+	return true;
 }
 JSON StorageSilo::ToJSON()
 {
