@@ -73,7 +73,10 @@ void Drill::UpdateNeighbours()
 void Drill::Update(float dt)
 {
 	UpdateNeighbours();
-
+	if (recipe != nullptr)
+	{
+		recipe->Update(dt);
+	}
 	animProgress += dt;
 	if (animProgress > timePerFrame)
 	{

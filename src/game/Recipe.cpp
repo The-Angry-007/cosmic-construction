@@ -28,26 +28,33 @@ void Recipe::Update(float dt)
 	if (craftTimer > 0)
 	{
 		craftTimer -= dt;
-		float maxMult = 0.f;
-		for (int i = 0; i < outputItems.size(); i++)
+		if (craftTimer <= 0.f)
 		{
-			float mult = outputItems[i].size() / (float)(data->outputAmounts[i]);
-			if (mult > maxMult)
-			{
-				maxMult = mult;
-			}
-		}
-		if (maxMult < 5.f)
-		{
+			float maxMult = 0.f;
 			for (int i = 0; i < outputItems.size(); i++)
 			{
-				for (int j = 0; j < data->outputAmounts[i]; j++)
+				float mult = outputItems[i].size() / (float)(data->outputAmounts[i]);
+				if (mult > maxMult)
 				{
-					Item item = Item(sf::Vector2f(0.f, 0.f), -1, data->outputTypes[i]);
-					item.SetParent(1);
-					game->planets[planetID].items.push_back(item);
-					outputItems[i].push_back(game->planets[planetID].items.size() - 1);
+					maxMult = mult;
 				}
+			}
+			if (maxMult < 5.f)
+			{
+				for (int i = 0; i < outputItems.size(); i++)
+				{
+					for (int j = 0; j < data->outputAmounts[i]; j++)
+					{
+						Item item = Item(sf::Vector2f(0.f, 0.f), -1, data->outputTypes[i]);
+						item.SetParent(1);
+						game->planets[planetID].items.push_back(item);
+						outputItems[i].push_back(game->planets[planetID].items.size() - 1);
+					}
+				}
+			}
+			else
+			{
+				craftTimer += dt;
 			}
 		}
 	}
