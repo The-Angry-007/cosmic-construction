@@ -24,4 +24,6 @@ public:
 	void SetPosition(sf::Vector2i position);
 	void SetVisualPosition(sf::Vector2i position);
 	void Interact();
+	bool TryAddItem(int index);
+	void Destroy();
 };

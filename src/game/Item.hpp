@@ -17,6 +17,7 @@ public:
 	Hitbox* accurateHitbox;
 	int parent;
 	int zindex;
+	bool isDeleted = false;
 
 	Item(sf::Vector2f position, int id, int typeID);
 	void SetType(int typeID);

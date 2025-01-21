@@ -92,7 +92,7 @@ void RecipeHandler::Update(float dt)
 			{
 				InputHandler::RemoveMbPressed(sf::Mouse::Button::Left);
 				InputHandler::RemoveMbDown(sf::Mouse::Button::Left);
-				s->SetRecipe(&recipes[s->typeID][i / 2]);
+				s->SetRecipe(&recipes[s->typeID][(i - numBgObjs) / 2]);
 				guihandler.guis.pop_back();
 				delete gui;
 				gui = nullptr;

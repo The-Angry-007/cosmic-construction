@@ -225,6 +225,10 @@ void Planet::Save()
 	itemTable.headers = { "ItemID", "TypeID", "PositionX", "PositionY", "Parent" };
 	for (int i = 0; i < items.size(); i++)
 	{
+		if (items[i].isDeleted)
+		{
+			continue;
+		}
 		itemTable.records.push_back({ std::to_string(items[i].id),
 			std::to_string(items[i].typeId),
 			std::to_string(items[i].position.x),

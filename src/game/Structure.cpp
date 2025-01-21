@@ -1,6 +1,7 @@
 #include "Structure.hpp"
 #include "Chunk.hpp"
 #include "Main.hpp"
+#include "Recipe.hpp"
 #include "RecipeHandler.hpp"
 #include "ResourceHandler.hpp"
 int CurrentStructureID = 0;
@@ -123,4 +124,9 @@ bool Structure::TryAddItem(int index)
 
 void Structure::SetRecipe(RecipeData* data)
 {
+	if (recipe != nullptr)
+	{
+		delete recipe;
+	}
+	recipe = new Recipe(planetID, data);
 }

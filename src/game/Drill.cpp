@@ -1,5 +1,6 @@
 #include "Drill.hpp"
 #include "Main.hpp"
+#include "Recipe.hpp"
 #include "RecipeHandler.hpp"
 #include "ResourceHandler.hpp"
 Drill::Drill(int id, int planetID, int direction)
@@ -72,6 +73,7 @@ void Drill::UpdateNeighbours()
 void Drill::Update(float dt)
 {
 	UpdateNeighbours();
+
 	animProgress += dt;
 	if (animProgress > timePerFrame)
 	{
@@ -83,16 +85,12 @@ void Drill::Update(float dt)
 	std::vector<int> directions = {
 		2, 2, 3, 3, 0, 0, 1, 1
 	};
-	if (timeSinceOutput > 2.f)
+	if (outputItem == -1 && recipe != nullptr)
 	{
-		if (outputItem == -1)
-		{
-			numStone = (numStone + 1) % 5;
-			int output = (numStone == 0) ? 2 : 1;
-			Item item = Item(sf::Vector2f(0.f, 0.f), -1, output);
-			game->planets[planetID].items.push_back(item);
-			outputItem = game->planets[planetID].items.size() - 1;
-		}
+		outputItem = recipe->TryTakeItem();
+	}
+	if (outputItem != -1)
+	{
 		for (int i = 0; i < 8; i++)
 		{
 			int index = (i + lastOutputDir) % 8;
@@ -122,6 +120,14 @@ void Drill::Render()
 	game->planets[planetID].renderObjects.push_back(RenderObject {
 		&groundSprite,
 		-32 });
+}
+
+void Drill::Destroy()
+{
+	if (recipe != nullptr)
+	{
+		recipe->Destroy(this);
+	}
 }
 void Drill::SetPosition(sf::Vector2i position)
 {
@@ -200,4 +206,13 @@ void Drill::Interact()
 		}
 	}
 	RecipeHandler::InitGUI(index);
+}
+
+bool Drill::TryAddItem(int index)
+{
+	if (recipe == nullptr)
+	{
+		return false;
+	}
+	return recipe->TryAddItem(index);
 }

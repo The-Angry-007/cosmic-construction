@@ -4,7 +4,7 @@ inputTypes:0
 inputAmounts:1
 isFuels:1
 fuelLengths:10
-outputTypes:1
+outputTypes:0
 outputAmounts:1
 craftTime:2
 }
