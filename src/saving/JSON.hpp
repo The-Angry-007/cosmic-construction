@@ -16,6 +16,9 @@ public:
 	float GetFloat(std::string keyword);
 	sf::Vector2f GetV2f(std::string keyword);
 	sf::Vector2i GetV2i(std::string keyword);
+	std::vector<int> GetIntArr(std::string keyword);
+	std::vector<float> GetFloatArr(std::string keyword);
+	std::vector<bool> GetBoolArr(std::string keyword);
 	void AddAttribute(std::string keyword, std::string value);
 
 	/*

@@ -10,7 +10,6 @@ SiloMenu::SiloMenu(StorageSilo* s)
 	// 	0,
 	// 	1));
 	GUIPanel* p = new GUIPanel(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.4f, 0.4f), sf::Color(150, 150, 150));
-
 	GUIObjects.push_back(p);
 	GUIPanel* topPanel = new GUIPanel(sf::Vector2f(0.5f, 0.13f), sf::Vector2f(0.4f, 0.03f), sf::Color(125, 125, 125));
 	GUIObjects.push_back(topPanel);

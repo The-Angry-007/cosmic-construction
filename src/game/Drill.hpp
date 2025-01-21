@@ -23,4 +23,5 @@ public:
 	void UpdateNeighbours();
 	void SetPosition(sf::Vector2i position);
 	void SetVisualPosition(sf::Vector2i position);
+	void Interact();
 };

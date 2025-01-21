@@ -1,4 +1,5 @@
 #include "JSON.hpp"
+#include "utils.hpp"
 
 JSON::JSON()
 {
@@ -120,4 +121,52 @@ void JSON::Print()
 		}
 	}
 	std::cout << "]";
+}
+
+std::vector<int> JSON::GetIntArr(std::string keyword)
+{
+	std::string val = GetValue(keyword);
+	if (val.size() == 0)
+	{
+		return {};
+	}
+	std::vector<std::string> vals = Split(val, ',');
+	std::vector<int> intVals = {};
+	for (int i = 0; i < vals.size(); i++)
+	{
+		intVals.push_back(std::stoi(vals[i]));
+	}
+	return intVals;
+}
+
+std::vector<float> JSON::GetFloatArr(std::string keyword)
+{
+	std::string val = GetValue(keyword);
+	if (val.size() == 0)
+	{
+		return {};
+	}
+	std::vector<std::string> vals = Split(val, ',');
+	std::vector<float> floatVals = {};
+	for (int i = 0; i < vals.size(); i++)
+	{
+		floatVals.push_back(std::stof(vals[i]));
+	}
+	return floatVals;
+}
+
+std::vector<bool> JSON::GetBoolArr(std::string keyword)
+{
+	std::string val = GetValue(keyword);
+	if (val.size() == 0)
+	{
+		return {};
+	}
+	std::vector<std::string> vals = Split(val, ',');
+	std::vector<bool> boolVals = {};
+	for (int i = 0; i < vals.size(); i++)
+	{
+		boolVals.push_back(std::stoi(vals[i]));
+	}
+	return boolVals;
 }

@@ -1,6 +1,7 @@
 #include "Game.hpp"
 #include "InputHandler.hpp"
 #include "Main.hpp"
+#include "RecipeHandler.hpp"
 #include "binds.hpp"
 Game::Game()
 {
@@ -81,6 +82,7 @@ void Game::Update(float dt)
 	{
 		return;
 	}
+	RecipeHandler::Update(dt);
 	if (!inMenu)
 	{
 		planets[activePlanet].Update(dt);

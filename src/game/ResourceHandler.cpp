@@ -1,4 +1,5 @@
 #include "ResourceHandler.hpp"
+#include "RecipeHandler.hpp"
 #define inBounds(x, y) (x >= 0 && x < ITEM_SIZE && y >= 0 && y < ITEM_SIZE)
 namespace ResourceHandler
 {
@@ -23,7 +24,7 @@ void ResourceHandler::Init()
 {
 	//items
 	itemTable = new Table();
-	std::string data = SaveHandler::ReadData("resources\\items\\itemTable.txt");
+	std::string data = SaveHandler::ReadData("resources\\text files\\itemTable.txt");
 	itemTable->FromString(data);
 	numItems = itemTable->records.size();
 	std::vector<sf::Texture> allItems = {};
@@ -47,7 +48,7 @@ void ResourceHandler::Init()
 	itemAtlas = new Atlas(allItems);
 	//structures
 	structureTable = new Table();
-	data = SaveHandler::ReadData("resources\\structures\\structureTable.txt");
+	data = SaveHandler::ReadData("resources\\text files\\structureTable.txt");
 	structureTable->FromString(data);
 	numStructures = structureTable->records.size();
 	for (uint i = 0; i < numStructures; i++)
@@ -58,7 +59,7 @@ void ResourceHandler::Init()
 		structureSizes.push_back(size);
 	}
 	Table pathTable = Table();
-	data = SaveHandler::ReadData("resources\\structures\\pathTable.txt");
+	data = SaveHandler::ReadData("resources\\text files\\pathTable.txt");
 	pathTable.FromString(data);
 	std::vector<int> ids;
 	std::vector<sf::Texture> allStructureTextures = {};
@@ -95,7 +96,7 @@ void ResourceHandler::Init()
 	completeAtlas = new Atlas(everyTexture, everyID);
 	structureCosts = {};
 	Table costTable = Table();
-	costTable.FromString(SaveHandler::ReadData("resources\\structures\\costTable.txt"));
+	costTable.FromString(SaveHandler::ReadData("resources\\text files\\costTable.txt"));
 	for (int i = 0; i < costTable.records.size(); i++)
 	{
 		int id = std::stoi(costTable.GetValue("StructureID", i));
@@ -116,6 +117,9 @@ void ResourceHandler::Init()
 		structureCosts[index].push_back(std::stoi(costTable.GetValue("ItemID", i)));
 		structureCosts[index].push_back(std::stoi(costTable.GetValue("Amount", i)));
 	}
+	std::string recipesString = SaveHandler::ReadData("resources\\text files\\recipes.txt");
+	std::vector<JSON> recipeJSONs = SaveHandler::StringToJSONs(recipesString);
+	RecipeHandler::LoadRecipes(recipeJSONs);
 }
 
 sf::Texture ResourceHandler::GenerateOutline(sf::Texture& texture)

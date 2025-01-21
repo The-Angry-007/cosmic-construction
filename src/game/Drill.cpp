@@ -1,5 +1,6 @@
 #include "Drill.hpp"
 #include "Main.hpp"
+#include "RecipeHandler.hpp"
 #include "ResourceHandler.hpp"
 Drill::Drill(int id, int planetID, int direction)
 {
@@ -184,4 +185,19 @@ void Drill::SetVisualPosition(sf::Vector2i position)
 {
 	Structure::SetVisualPosition(position);
 	groundSprite.setPosition(sprite.getPosition());
+}
+
+void Drill::Interact()
+{
+	int index = -1;
+	Planet& p = game->planets[planetID];
+	for (int i = 0; i < p.structures.size(); i++)
+	{
+		if (p.structures[i] == this)
+		{
+			index = i;
+			break;
+		}
+	}
+	RecipeHandler::InitGUI(index);
 }

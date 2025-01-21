@@ -78,7 +78,7 @@ void ToolHandler::Update(float dt, Planet* p)
 			guihandler.GoBack();
 			game->inMenu = false;
 		}
-		else
+		else if (!game->inMenu)
 		{
 			game->inMenu = true;
 

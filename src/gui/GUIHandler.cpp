@@ -4,6 +4,7 @@
 #include "InputHandler.hpp"
 #include "Main.hpp"
 #include "binds.hpp"
+#include "game/RecipeHandler.hpp"
 #include "utils.hpp"
 //constructor
 GUIHandler::GUIHandler()

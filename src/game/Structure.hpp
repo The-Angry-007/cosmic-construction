@@ -1,6 +1,7 @@
 #pragma once
 #include "Hitboxes.hpp"
 #include "saving.hpp"
+class Recipe;
 class Structure
 {
 public:
@@ -10,6 +11,7 @@ public:
 	int planetID;
 	int zindex;
 	bool blocksItems;
+	Recipe* recipe = nullptr;
 	bool placedByPlayer;
 	bool isConveyor = false;
 	sf::Vector2i bottomRightPos;
