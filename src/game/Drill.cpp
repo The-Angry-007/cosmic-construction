@@ -98,7 +98,7 @@ void Drill::Update(float dt)
 			if (neighbours[index] != -1)
 			{
 				ConveyorType* c = dynamic_cast<ConveyorType*>(game->planets[planetID].structures[neighbours[index]]);
-				int dir = (directions[index] + 2) % 4;
+				int dir = directions[index];
 
 				if (c->TryAddItem(outputItem, dir, 0.f))
 				{
