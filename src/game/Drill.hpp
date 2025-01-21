@@ -10,6 +10,7 @@ public:
 	float animProgress;
 	float timePerFrame;
 	int currentFrame;
+	int outputItem;
 	int lastOutputDir;
 	sf::Sprite groundSprite;
 	Drill(int id, int planetID, int direction);

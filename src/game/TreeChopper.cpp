@@ -35,7 +35,20 @@ void TreeChopper::Update(float dt)
 	{
 		tilePos = position + p.GetChunk(chunkID)->position * CHUNK_SIZE;
 		tilePos += CONVEYOR_OFFSETS[direction];
-		index = p.StructureInPos(tilePos);
+		std::vector<int> structs = p.StructuresInArea(tilePos, sf::Vector2i(1, 1));
+		index = -1;
+		for (int i = 0; i < structs.size(); i++)
+		{
+			if (p.structures[structs[i]]->typeID == 4)
+			{
+				index = structs[i];
+				break;
+			}
+			else if (p.structures[structs[i]]->typeID == 2)
+			{
+				index = structs[i];
+			}
+		}
 	}
 	if (phase == 0)
 	{
@@ -96,7 +109,7 @@ void TreeChopper::Update(float dt)
 				}
 				s->tree = -1;
 			}
-			else if (p.structures[index]->typeID != 2)
+			if (p.structures[index]->typeID != 2)
 			{
 				phase = 3;
 				timeSinceAction = 0.f;

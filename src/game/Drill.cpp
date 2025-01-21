@@ -21,6 +21,7 @@ Drill::Drill(int id, int planetID, int direction)
 	numStone = 0;
 	neighbours = {};
 	lastOutputDir = 0;
+	outputItem = -1;
 }
 
 Drill::~Drill()
@@ -83,21 +84,26 @@ void Drill::Update(float dt)
 	};
 	if (timeSinceOutput > 2.f)
 	{
+		if (outputItem == -1)
+		{
+			numStone = (numStone + 1) % 5;
+			int output = (numStone == 0) ? 2 : 1;
+			Item item = Item(sf::Vector2f(0.f, 0.f), -1, output);
+			game->planets[planetID].items.push_back(item);
+			outputItem = game->planets[planetID].items.size() - 1;
+		}
 		for (int i = 0; i < 8; i++)
 		{
 			int index = (i + lastOutputDir) % 8;
 			if (neighbours[index] != -1)
 			{
-				Conveyor* c = dynamic_cast<Conveyor*>(game->planets[planetID].structures[neighbours[index]]);
+				ConveyorType* c = dynamic_cast<ConveyorType*>(game->planets[planetID].structures[neighbours[index]]);
 				int dir = (directions[index] + 2) % 4;
-				if (c->progress[dir].size() == 0 || c->progress[dir][c->progress[dir].size() - 1] > c->gap)
+
+				if (c->TryAddItem(outputItem, dir, 0.f))
 				{
-					numStone = (numStone + 1) % 5;
-					int output = (numStone == 0) ? 2 : 1;
-					Item item = Item(sf::Vector2f(0.f, 0.f), -1, output);
-					game->planets[planetID].items.push_back(item);
-					c->items[dir].push_back(game->planets[planetID].items.size() - 1);
-					c->progress[dir].push_back(0.f);
+					outputItem = -1;
+					timeSinceOutput = 0.f;
 					lastOutputDir = (index + 1) % 8;
 					timeSinceOutput = 0.f;
 					break;
@@ -155,6 +161,7 @@ JSON Drill::ToJSON()
 	j.AddAttribute("TimePerFrame", timePerFrame);
 	j.AddAttribute("CurrentFrame", currentFrame);
 	j.AddAttribute("LastOutputDir", lastOutputDir);
+	j.AddAttribute("OutputItem", outputItem);
 	return j;
 }
 void Drill::FromJSON(JSON j)
@@ -170,6 +177,7 @@ void Drill::FromJSON(JSON j)
 	timePerFrame = j.GetFloat("TimePerFrame");
 	currentFrame = j.GetInt("CurrentFrame");
 	lastOutputDir = j.GetInt("LastOutputDir");
+	outputItem = j.GetInt("OutputItem");
 }
 
 void Drill::SetVisualPosition(sf::Vector2i position)
