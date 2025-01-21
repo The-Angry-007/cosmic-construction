@@ -761,6 +761,7 @@ bool Planet::DeductResources(int typeID, sf::Vector2i position)
 			{
 				if (s->itemIDs[j] == idsLeft[k])
 				{
+					int dec = s->itemQuantities[j];
 					s->itemQuantities[j] -= amountsLeft[k];
 					if (s->itemQuantities[j] <= 0)
 					{
@@ -770,7 +771,12 @@ bool Planet::DeductResources(int typeID, sf::Vector2i position)
 					}
 					else
 					{
+						dec = amountsLeft[k];
 						amountsLeft[k] = 0;
+					}
+					for (int m = 0; m < dec; m++)
+					{
+						s->items.pop_back();
 					}
 					if (amountsLeft[k] <= 0)
 					{
