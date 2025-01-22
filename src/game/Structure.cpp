@@ -68,6 +68,7 @@ void Structure::SetPosition(sf::Vector2i position)
 	sf::Vector2f pos2 = (sf::Vector2f)this->position + (sf::Vector2f)tileSize / 2.f;
 	sf::Vector2f pos = game->planets[planetID].worldPos(pos2, chunks[i].id);
 	sprite.setPosition(pos);
+	game->planets[planetID].UpdateNeighbours();
 }
 void Structure::TryAddGroundItem(int index)
 {}
@@ -83,6 +84,10 @@ void Structure::FromJSON()
 Structure::~Structure()
 {
 	// delete hitbox;
+}
+
+void Structure::UpdateNeighbours()
+{
 }
 
 bool Structure::CanBePlaced()

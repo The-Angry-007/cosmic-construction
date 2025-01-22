@@ -7,8 +7,8 @@ Distributor::Distributor(int id, int planetID, int direction)
 {
 	SetID(id);
 	this->planetID = planetID;
+	this->direction = -1;
 	typeID = 9;
-	SetDirection(direction);
 	tileSize = ResourceHandler::structureSizes[typeID];
 	sprite = sf::Sprite();
 	ResourceHandler::structureAtlas->SetSprite(sprite, 9, 0);
@@ -44,7 +44,7 @@ void Distributor::UpdateNeighbours()
 		if (structure != -1)
 		{
 			Structure* s = p.structures[structure];
-			if (s->isConveyor && s->direction == ((directions[i] + 2) % 4))
+			if (s->isConveyor && dynamic_cast<ConveyorType*>(s)->AcceptsItems(directions[i]))
 			{
 				neighbours.push_back(structure);
 			}
@@ -62,12 +62,11 @@ void Distributor::UpdateNeighbours()
 void Distributor::Update(float dt)
 {
 	//should ideally only be done when new structures created or destroyed
-	UpdateNeighbours();
 	//moving items
 	int numChecked = 0;
 	int index = currentInputIndex;
 	bool doneMove = false;
-	while (numChecked < 3)
+	while (numChecked < 4)
 	{
 		numChecked++;
 		// if (index == direction)
@@ -190,7 +189,7 @@ bool Distributor::ProgressLane(int lane, float dt, bool moveToMain)
 				{
 					int checked = 0;
 					int index = currentOutputIndex;
-					while (checked < 3)
+					while (checked < 4)
 					{
 						if (neighbours[index] != -1 && (progress[index].size() == 0 || progress[index].back() > gap))
 						{
@@ -228,34 +227,34 @@ bool Distributor::ProgressLane(int lane, float dt, bool moveToMain)
 
 void Distributor::Render()
 {
-	zindex = -32;
+	zindex = 16;
 	Planet& p = game->planets[planetID];
 	p.renderObjects.push_back(RenderObject {
 		&sprite,
 		zindex });
-	for (uint i = 0; i < 4; i++)
-	{
-		for (uint j = 0; j < items[i].size(); j++)
-		{
-			sf::Vector2f startPos(0.5f, 0.5f);
-			startPos += (sf::Vector2f)CONVEYOR_OFFSETS[i] / 2.f;
-			sf::Vector2f endPos(0.5f, 0.5f);
-			float prog = progress[i][j];
-			if (neighbours[i] != -1)
-				prog = 1 - prog;
-			if (prog > 1.f)
-			{
-				prog = 1.f;
-			}
-			sf::Vector2f pos = Lerp(startPos, endPos, prog);
-			pos += (sf::Vector2f)position;
-			pos += (sf::Vector2f)(game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE);
-			pos.x *= TILE_SIZE.x;
-			pos.y *= TILE_SIZE.y;
-			game->planets[planetID].items[items[i][j]].position = pos;
-			game->planets[planetID].items[items[i][j]].Render(&game->planets[planetID]);
-		}
-	}
+	// for (uint i = 0; i < 4; i++)
+	// {
+	// 	for (uint j = 0; j < items[i].size(); j++)
+	// 	{
+	// 		sf::Vector2f startPos(0.5f, 0.5f);
+	// 		startPos += (sf::Vector2f)CONVEYOR_OFFSETS[i] / 2.f;
+	// 		sf::Vector2f endPos(0.5f, 0.5f);
+	// 		float prog = progress[i][j];
+	// 		if (neighbours[i] != -1)
+	// 			prog = 1 - prog;
+	// 		if (prog > 1.f)
+	// 		{
+	// 			prog = 1.f;
+	// 		}
+	// 		sf::Vector2f pos = Lerp(startPos, endPos, prog);
+	// 		pos += (sf::Vector2f)position;
+	// 		pos += (sf::Vector2f)(game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE);
+	// 		pos.x *= TILE_SIZE.x;
+	// 		pos.y *= TILE_SIZE.y;
+	// 		game->planets[planetID].items[items[i][j]].position = pos;
+	// 		game->planets[planetID].items[items[i][j]].Render(&game->planets[planetID]);
+	// 	}
+	// }
 }
 
 void Distributor::TryAddGroundItem(int index)
@@ -338,12 +337,11 @@ void Distributor::FromJSON(JSON j)
 	pos.y = std::stoi(j.GetValue("PositionY"));
 	typeID = std::stoi(j.GetValue("TypeID"));
 
-	direction = std::stoi(j.GetValue("Direction"));
 	SetID(std::stoi(j.GetValue("ID")));
 	chunkID = std::stoi(j.GetValue("ChunkID"));
 	pos += game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE;
 
-	ResourceHandler::structureAtlas->SetSprite(sprite, 0, direction);
+	ResourceHandler::structureAtlas->SetSprite(sprite, 9, 0);
 	SetPosition(pos);
 	currentInputIndex = j.GetInt("CurrentInputIndex");
 	currentOutputIndex = j.GetInt("CurrentOutputIndex");
@@ -433,4 +431,9 @@ float Distributor::Distance(int direction)
 		return 1.f;
 	}
 	return progress[direction].back();
+}
+
+bool Distributor::AcceptsItems(int direction)
+{
+	return true;
 }

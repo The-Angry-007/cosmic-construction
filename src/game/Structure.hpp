@@ -23,6 +23,7 @@ public:
 	Hitbox* hitbox;
 	Structure();
 	virtual void Update(float dt);
+	virtual void UpdateNeighbours();
 	virtual void Render();
 	virtual void SetPosition(sf::Vector2i position);
 	void SetID(int id);

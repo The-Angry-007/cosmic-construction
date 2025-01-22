@@ -27,6 +27,7 @@ public:
 	std::vector<RenderObject> renderObjects;
 	void MoveItem(int index);
 	Planet(int id);
+	void UpdateNeighbours();
 	void Init(bool load);
 	void GenerateChunk(sf::Vector2i position);
 	void GenerateChunksInView();

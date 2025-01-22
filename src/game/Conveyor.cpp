@@ -43,8 +43,6 @@ void Conveyor::UpdateNeighbours()
 }
 void Conveyor::Update(float dt)
 {
-	//should ideally only be done when new structures created or destroyed
-	UpdateNeighbours();
 	//moving items
 	int numChecked = 0;
 	int index = currentNeighbourIndex;
@@ -402,4 +400,12 @@ float Conveyor::Distance(int direction)
 		return 1.f;
 	}
 	return progress[direction].back();
+}
+
+bool Conveyor::AcceptsItems(int direction)
+{
+	if (direction != this->direction)
+	{
+		return true;
+	}
 }

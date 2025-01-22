@@ -74,7 +74,6 @@ void Furnace::UpdateNeighbours()
 
 void Furnace::Update(float dt)
 {
-	UpdateNeighbours();
 	if (recipe != nullptr)
 	{
 		recipe->Update(dt);

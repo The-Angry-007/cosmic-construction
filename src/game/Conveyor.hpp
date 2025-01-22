@@ -24,6 +24,7 @@ public:
 	int StructureInFront();
 	bool TryAddItem(int index, int direction, float progress);
 	bool CanAddItem(int direction, float progress);
+	bool AcceptsItems(int direction);
 	float Distance(int direction);
 	// void TryInsertItem(int item, float progress);
 	void

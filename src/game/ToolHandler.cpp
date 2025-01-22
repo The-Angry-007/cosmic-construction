@@ -178,6 +178,7 @@ void ToolHandler::Update(float dt, Planet* p)
 							direction = dir;
 
 							dynamic_cast<Conveyor*>(p->structures[lastPlacedStructure])->SetDirection(direction);
+							p->UpdateNeighbours();
 						}
 						else
 						{
@@ -426,6 +427,7 @@ void ToolHandler::Update(float dt, Planet* p)
 			else if (InputHandler::pressed(binds::RotateStructure) && index != -1)
 			{
 				p->structures[index]->SetDirection((p->structures[index]->direction + 1) % 4);
+				p->UpdateNeighbours();
 			}
 		}
 	}

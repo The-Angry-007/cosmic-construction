@@ -467,7 +467,16 @@ bool Planet::StructureInArea(sf::Vector2i position, sf::Vector2i size)
 	}
 	return false;
 }
-
+void Planet::UpdateNeighbours()
+{
+	for (int i = 0; i < structures.size(); i++)
+	{
+		if (structures[i] != nullptr)
+		{
+			structures[i]->UpdateNeighbours();
+		}
+	}
+}
 int Planet::StructureInPos(sf::Vector2i position)
 {
 	sf::Vector2i chunkPos(

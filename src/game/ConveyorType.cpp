@@ -16,3 +16,8 @@ float ConveyorType::Distance(int direction)
 {
 	return 0.f;
 }
+
+bool ConveyorType::AcceptsItems(int direction)
+{
+	return false;
+}

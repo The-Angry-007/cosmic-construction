@@ -110,7 +110,6 @@ void StorageSilo::TryAddGroundItem(int index)
 }
 void StorageSilo::Update(float dt)
 {
-	UpdateNeighbours();
 	// for (int i = 0; i < inputNeighbours.size(); i++)
 	// {
 	// 	if (inputNeighbours[i] == -1)

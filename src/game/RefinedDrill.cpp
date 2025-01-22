@@ -72,7 +72,6 @@ void RefinedDrill::UpdateNeighbours()
 
 void RefinedDrill::Update(float dt)
 {
-	UpdateNeighbours();
 	if (recipe != nullptr)
 	{
 		recipe->Update(dt);
