@@ -63,6 +63,10 @@ void Structure::SetPosition(sf::Vector2i position)
 	int i = game->planets[planetID].ChunkAtPos(position);
 	chunkID = chunks[i].id;
 	chunks[i].structures.push_back(index);
+	if (!isTerrain)
+	{
+		chunks[i].isAltered = true;
+	}
 	this->position = sf::Vector2i(position.x - chunks[i].position.x * CHUNK_SIZE, position.y - chunks[i].position.y * CHUNK_SIZE);
 	bottomRightPos = this->position + tileSize - sf::Vector2i(1, 1);
 	sf::Vector2f pos2 = (sf::Vector2f)this->position + (sf::Vector2f)tileSize / 2.f;

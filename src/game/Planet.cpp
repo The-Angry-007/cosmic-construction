@@ -42,6 +42,7 @@ void Planet::Init(bool load)
 			pos.y = std::stoi(chunkTable.GetValue("PositionY", i));
 			int id = std::stoi(chunkTable.GetValue("ChunkID", i));
 			Chunk c = Chunk(pos, id, this->id);
+			c.isAltered = true;
 			chunks.push_back(c);
 		}
 		//loading items
@@ -262,6 +263,10 @@ void Planet::Save()
 	chunkTable.headers = { "ChunkID", "PositionX", "PositionY" };
 	for (int i = 0; i < chunks.size(); i++)
 	{
+		if (!chunks[i].isAltered)
+		{
+			continue;
+		}
 		chunkTable.records.push_back({ std::to_string(chunks[i].id),
 			std::to_string(chunks[i].position.x),
 			std::to_string(chunks[i].position.y) });
@@ -272,6 +277,10 @@ void Planet::Save()
 	for (int i = 0; i < structures.size(); i++)
 	{
 		if (structures[i] == nullptr)
+		{
+			continue;
+		}
+		if (!GetChunk(structures[i]->chunkID)->isAltered)
 		{
 			continue;
 		}
@@ -407,6 +416,7 @@ void Planet::MoveItem(int index)
 	}
 	int chunk = ChunkAtPos(item->position);
 	chunks[chunk].items.push_back(index);
+	chunks[chunk].isAltered = true;
 	item->chunkID = chunks[chunk].id;
 }
 Chunk* Planet::GetChunk(int chunkID)
@@ -641,6 +651,7 @@ void Planet::AddStructure(Structure* s)
 void Planet::RemoveStructure(int index)
 {
 	Chunk* c = GetChunk(structures[index]->chunkID);
+	c->isAltered = true;
 	for (int i = 0; i < c->structures.size(); i++)
 	{
 		if (c->structures[i] == index)

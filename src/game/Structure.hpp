@@ -15,6 +15,7 @@ public:
 	Recipe* recipe = nullptr;
 	bool placedByPlayer;
 	bool isConveyor = false;
+	bool isTerrain = false;
 	sf::Vector2i bottomRightPos;
 	sf::Vector2i position;
 	sf::Vector2i tileSize;

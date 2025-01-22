@@ -14,6 +14,7 @@ public:
 	int planetID;
 	std::vector<int> structures;
 	std::vector<int> items;
+	bool isAltered = false;
 	Chunk(sf::Vector2i position, int id, int planetID);
 	void Save();
 	void Update(float dt);
