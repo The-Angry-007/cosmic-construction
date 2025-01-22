@@ -660,6 +660,7 @@ void Planet::RemoveStructure(int index)
 			break;
 		}
 	}
+	UpdateNeighbours();
 }
 
 std::vector<int> Planet::StructuresInArea(sf::Vector2i position, sf::Vector2i size)

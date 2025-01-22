@@ -5,3 +5,5 @@ ItemID/Name/Description/ImagePath
 3/Stone Brick/blank/stone brick.png
 4/Iron Ore/blank/iron ore.png
 5/Copper Ore/blank/copper ore.png
+6/Iron Plate/blank/iron plate.png
+7/Copper Plate/blank/copper plate.png
