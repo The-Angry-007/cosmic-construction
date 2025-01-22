@@ -58,8 +58,15 @@ void GUIItem::Render()
 void GUIItem::SetAmount(int amount)
 {
 	this->amount = amount;
+	if (label != nullptr)
+	{
+		delete label;
+	}
 	if (amount != 0)
 	{
-		label->value = std::to_string(amount);
+		label = new GUILabel(position + size / 2.f, size / 4.f, std::to_string(amount));
+		label->origin = sf::Vector2f(1.f, 1.f);
 	}
+	else
+		label = nullptr;
 }

@@ -136,16 +136,16 @@ void RecipeHandler::Update(float dt)
 		else
 		{
 			int index = numBgObjs;
-			for (int i = 0; i < s->recipe->data->inputTypes.size(); i++)
+			for (int i = 0; i < s->recipe->inputItems.size(); i++)
 			{
 				dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->SetAmount(s->recipe->inputItems[i].size());
 			}
-			index += s->recipe->data->inputTypes.size();
-			for (int i = 0; i < s->recipe->data->outputTypes.size(); i++)
+			index += s->recipe->inputItems.size();
+			for (int i = 0; i < s->recipe->outputItems.size(); i++)
 			{
 				dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->SetAmount(s->recipe->outputItems[i].size());
 			}
-			index += s->recipe->data->outputTypes.size();
+			index += s->recipe->outputItems.size();
 		}
 
 		if (InputHandler::pressed(binds::CloseInventory))

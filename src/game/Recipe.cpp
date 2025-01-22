@@ -86,7 +86,7 @@ void Recipe::Update(float dt)
 			{
 				if (data->isFuels[i])
 				{
-					fuelsLeft[i] -= 1.f;
+					fuelsLeft[i] -= data->craftTime;
 					continue;
 				}
 				for (int j = 0; j < data->inputAmounts[i]; j++)
