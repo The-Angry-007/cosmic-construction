@@ -3,6 +3,7 @@
 #include "Recipe.hpp"
 #include "ResourceHandler.hpp"
 #include "binds.hpp"
+#include "utils.hpp"
 namespace RecipeHandler
 {
 std::vector<std::vector<RecipeData>> recipes;
@@ -178,7 +179,8 @@ void RecipeHandler::Update(float dt)
 				float height = currLength * fuelSize;
 				float pos = 0.5f + fuelOffset;
 				pos += height;
-				dynamic_cast<GUIPanel*>(gui->GUIObjects[i + 1])->SetColor(sf::Color::Green);
+				pos -= fuelSize;
+				dynamic_cast<GUIPanel*>(gui->GUIObjects[i + 1])->SetColor(Lerp(sf::Color::Green, sf::Color::Red, 1.f - currLength));
 				dynamic_cast<GUIPanel*>(gui->GUIObjects[i + 1])->position.y = pos;
 				dynamic_cast<GUIPanel*>(gui->GUIObjects[i + 1])->size.y = height;
 				i++;

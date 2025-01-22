@@ -11,3 +11,4 @@ extern std::vector<std::string> Split(std::string string, char chr);
 extern std::string concat(std::vector<std::string> lines);
 extern void Print(std::vector<std::string> arr);
 extern void Print(std::vector<std::vector<std::string>> arr);
+extern sf::Color Lerp(sf::Color a, sf::Color b, float t);

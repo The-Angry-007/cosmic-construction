@@ -147,3 +147,12 @@ std::string concat(std::vector<std::string> lines)
 	}
 	return result;
 }
+
+sf::Color Lerp(sf::Color a, sf::Color b, float t)
+{
+	return sf::Color(
+		(uint8_t)Lerp(a.r, b.r, t),
+		(uint8_t)Lerp(a.g, b.g, t),
+		(uint8_t)Lerp(a.b, b.b, t),
+		(uint8_t)Lerp(a.a, b.a, t));
+}
