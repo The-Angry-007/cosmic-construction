@@ -191,6 +191,7 @@ JSON Recipe::ToJSON()
 	j.AddAttribute("RecipeFuelsLeft", fuelsLeft);
 	j.AddAttribute("RecipePlanetID", planetID);
 	j.AddAttribute("RecipeCraftTimer", craftTimer);
+	return j;
 }
 
 void Recipe::FromJSON(JSON j)
@@ -201,7 +202,7 @@ void Recipe::FromJSON(JSON j)
 	}
 	for (int i = 0; i < outputItems.size(); i++)
 	{
-		outputItems[i] = j.GetIntArr("RecipeOutputItem" + std::to_string(i));
+		outputItems[i] = j.GetIntArr("RecipeOutputItems" + std::to_string(i));
 	}
 	fuelsLeft = j.GetFloatArr("RecipeFuelsLeft");
 	planetID = j.GetInt("RecipePlanetID");

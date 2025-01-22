@@ -71,12 +71,12 @@ void RecipeHandler::InitGUI(int structure)
 	else
 	{
 		numBgObjs++;
-		GUIImage* arrow = new GUIImage(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.25f, 0.3f), "resources\\images\\arrow.png");
+		GUIImage* arrow = new GUIImage(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.2f, 0.3f), "resources\\images\\arrow.png");
 		arrow->keepAspectRatio = true;
 		gui->AddObject(arrow);
 		//display menu of recipe
-		float inputEnd = 0.25f;
-		float outputStart = 0.75f;
+		float inputEnd = 0.3f;
+		float outputStart = 0.7f;
 		float size = 0.05f;
 		float gap = 0.1f;
 		sf::Vector2f pos(inputEnd, 0.5f);
