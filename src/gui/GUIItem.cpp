@@ -20,6 +20,8 @@ GUIItem::GUIItem(sf::Vector2f position, sf::Vector2f size, int typeID, int amoun
 	image->keepAspectRatio = true;
 	image->origin = sf::Vector2f(0.5f, 0.5f);
 	image->blocksMouseInput = true;
+	nameLabel = nullptr;
+	nameBG = nullptr;
 }
 bool GUIItem::isClicked()
 {
@@ -27,6 +29,28 @@ bool GUIItem::isClicked()
 }
 void GUIItem::Update(float dt)
 {
+	float nameWidth = 0.1f;
+	float nameHeight = 0.05f;
+	if (image->isBlockingMouse())
+	{
+		if (nameLabel == nullptr)
+		{
+			nameLabel = new GUILabel(sf::Vector2f(0.f, 0.f), sf::Vector2f(nameWidth, nameHeight), ResourceHandler::itemTable->GetValue("Name", typeID));
+			nameLabel->SetColor(sf::Color::Black);
+			nameBG = new GUIPanel(sf::Vector2f(0.f, 0.f), sf::Vector2f(nameWidth, nameHeight), sf::Color(200, 200, 200));
+		}
+		nameLabel->position = InputHandler::guiMP + sf::Vector2f(nameWidth, 0.f);
+		nameBG->position = InputHandler::guiMP + sf::Vector2f(nameWidth, 0.f);
+	}
+	else
+	{
+		if (nameLabel != nullptr)
+		{
+			delete nameLabel;
+			delete nameBG;
+			nameLabel = nullptr;
+		}
+	}
 }
 void GUIItem::RenderToTexture(sf::RenderTexture* texture)
 {
@@ -52,6 +76,11 @@ void GUIItem::Render()
 		label->position = position + actualSize / 2.f;
 		label->size = actualSize / 4.f;
 		label->Render();
+	}
+	if (nameLabel != nullptr)
+	{
+		nameBG->Render();
+		nameLabel->Render();
 	}
 }
 

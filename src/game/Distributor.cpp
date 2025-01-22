@@ -44,13 +44,13 @@ void Distributor::UpdateNeighbours()
 		if (structure != -1)
 		{
 			Structure* s = p.structures[structure];
-			if (s->isConveyor && dynamic_cast<ConveyorType*>(s)->AcceptsItems(directions[i]))
+			if (!s->isConveyor || !dynamic_cast<ConveyorType*>(s)->AcceptsItems((directions[i])))
 			{
-				neighbours.push_back(structure);
+				neighbours.push_back(-1);
 			}
 			else
 			{
-				neighbours.push_back(-1);
+				neighbours.push_back(structure);
 			}
 		}
 		else
@@ -288,8 +288,6 @@ void Distributor::TryAddGroundItem(int index)
 
 void Distributor::SetDirection(int direction)
 {
-	this->direction = direction;
-	ResourceHandler::structureAtlas->SetSprite(sprite, 0, direction);
 }
 
 int Distributor::StructureInFront()
