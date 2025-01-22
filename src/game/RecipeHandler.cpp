@@ -143,7 +143,7 @@ void RecipeHandler::Update(float dt)
 		}
 		else
 		{
-			for (int i = 0; s->recipe->inputItems.size(); i++)
+			for (int i = 0; i < s->recipe->inputItems.size(); i++)
 			{
 				dynamic_cast<GUIItem*>(gui->GUIObjects[i + numBgObjs])->SetAmount(s->recipe->inputItems[i].size());
 			}
