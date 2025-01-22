@@ -70,6 +70,7 @@ void RecipeHandler::InitGUI(int structure)
 	}
 	else
 	{
+		topLabel->value = ResourceHandler::structureTable->GetValue("Name", s->typeID);
 		numBgObjs += 2;
 		GUIImage* arrow = new GUIImage(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.15f, 0.3f), "resources\\images\\arrow.png");
 		arrow->sprite.setColor(sf::Color(75, 75, 75));
@@ -169,9 +170,13 @@ void RecipeHandler::Update(float dt)
 			{
 				prog = 1;
 			}
+			prog = 1 - prog;
+			sf::Vector2f arrowSize(0.15f, 0.3f);
+			arrow->size.x = arrowSize.x;
 			sf::IntRect size = sf::IntRect(0, 0, Lerp(0, arrow->sprite.getTexture()->getSize().x, prog), arrow->sprite.getTexture()->getSize().y);
 			arrow->sprite.setTextureRect(size);
-			arrow->sprite.setOrigin(sf::Vector2f(size.width / 2.f, size.height / 2.f));
+			arrow->position.x = (0.5f - arrow->size.x) + (arrow->size.x * ((float)size.width / (float)arrow->sprite.getTexture()->getSize().x));
+			arrow->size.x = ((float)size.width / (float)arrow->sprite.getTexture()->getSize().x) * arrowSize.x;
 			for (int i = 0; i < s->recipe->inputItems.size(); i++)
 			{
 				dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->SetAmount(s->recipe->inputItems[i].size());
