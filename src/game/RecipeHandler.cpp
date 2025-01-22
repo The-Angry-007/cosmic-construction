@@ -1,5 +1,6 @@
 #include "RecipeHandler.hpp"
 #include "Main.hpp"
+#include "Recipe.hpp"
 #include "ResourceHandler.hpp"
 #include "binds.hpp"
 namespace RecipeHandler
@@ -67,6 +68,34 @@ void RecipeHandler::InitGUI(int structure)
 	else
 	{
 		//display menu of recipe
+		float inputEnd = 0.25f;
+		float outputStart = 0.75f;
+		float size = 0.05f;
+		float gap = 0.1f;
+		sf::Vector2f pos(inputEnd, 0.5f);
+		Recipe* r = s->recipe;
+		for (int i = 0; i < r->inputItems.size(); i++)
+		{
+			if (r->data->isFuels[i])
+			{
+				pos = sf::Vector2f(inputEnd, 0.7f);
+				break;
+			}
+		}
+		for (int i = 0; i < r->inputItems.size(); i++)
+		{
+			GUIItem* item = new GUIItem(pos, sf::Vector2f(size, size), r->data->inputTypes[i], r->inputItems[i].size());
+			gui->GUIObjects.push_back(item);
+			pos.x -= gap;
+		}
+		pos = sf::Vector2f(outputStart, pos.y);
+		for (int i = 0; i < r->outputItems.size(); i++)
+		{
+			GUIItem* item = new GUIItem(pos, sf::Vector2f(size, size), r->data->inputTypes[i], r->inputItems[i].size());
+			gui->GUIObjects.push_back(item);
+
+			pos.x += gap;
+		}
 	}
 	game->inMenu = true;
 	guihandler.guis.push_back(gui);

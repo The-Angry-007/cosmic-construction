@@ -60,6 +60,15 @@ void Recipe::Update(float dt)
 	}
 	else
 	{
+		for (int i = 0; i < fuelsLeft.size(); i++)
+		{
+			if (data->isFuels[i] && fuelsLeft[i] <= 1.f)
+			{
+				game->planets[planetID].items[inputItems[i].back()].isDeleted = true;
+				inputItems[i].pop_back();
+				fuelsLeft[i] += data->fuelLengths[i];
+			}
+		}
 		bool canCraft = true;
 		for (int i = 0; i < inputItems.size(); i++)
 		{
@@ -77,7 +86,7 @@ void Recipe::Update(float dt)
 			{
 				if (data->isFuels[i])
 				{
-					continue;
+					fuelsLeft[i] -= 1.f;
 				}
 				for (int j = 0; j < data->inputAmounts[i]; j++)
 				{
@@ -87,20 +96,20 @@ void Recipe::Update(float dt)
 			}
 		}
 	}
-	for (int i = 0; i < fuelsLeft.size(); i++)
-	{
-		if (craftTimer > dt)
-			fuelsLeft[i] -= dt;
-		if (fuelsLeft[i] < 0)
-		{
-			if (inputItems[i].size() > 0)
-			{
-				game->planets[planetID].items[inputItems[i].back()].isDeleted = true;
-				inputItems[i].pop_back();
-				fuelsLeft[i] = data->fuelLengths[i];
-			}
-		}
-	}
+	// for (int i = 0; i < fuelsLeft.size(); i++)
+	// {
+	// 	if (craftTimer > dt)
+	// 		fuelsLeft[i] -= dt;
+	// 	if (fuelsLeft[i] < 0)
+	// 	{
+	// 		if (inputItems[i].size() > 0)
+	// 		{
+	// 			game->planets[planetID].items[inputItems[i].back()].isDeleted = true;
+	// 			inputItems[i].pop_back();
+	// 			fuelsLeft[i] = data->fuelLengths[i];
+	// 		}
+	// 	}
+	// }
 }
 void Recipe::Destroy(Structure* parent)
 {
