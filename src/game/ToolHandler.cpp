@@ -630,6 +630,7 @@ void ToolHandler::ReloadTally(sf::Vector2i tilePos)
 		str += std::to_string(cost[i * 2 + 2]);
 		GUILabel* l = new GUILabel(pos2, sf::Vector2f(width, width), str);
 		GUIItem* item = new GUIItem(pos1, sf::Vector2f(width, width), cost[i * 2 + 1], 0);
+		item->Update(0.f);
 		tallyObjs.push_back(l);
 		tallyObjs.push_back(item);
 		g->AddObject(l);
