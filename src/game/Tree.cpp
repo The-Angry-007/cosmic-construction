@@ -34,7 +34,6 @@ void Tree::Destroy()
 			bool canAdd = true;
 			for (int i = 0; i < structures.size(); i++)
 			{
-				std::cout << p.structures[structures[i]]->typeID << std::endl;
 				if (p.structures[structures[i]]->id != id && p.structures[structures[i]]->blocksItems)
 				{
 					canAdd = false;

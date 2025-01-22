@@ -3,3 +3,5 @@ ItemID/Name/Description/ImagePath
 1/Stone/Harvested from boulders and the ground. Used to make basic machines./stone.png
 2/Coal/A basic fuel source extracted from the ground./coal.png
 3/Stone Brick/blank/stone brick.png
+4/Iron Ore/blank/iron ore.png
+5/Copper Ore/blank/copper ore.png

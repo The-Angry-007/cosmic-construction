@@ -56,7 +56,7 @@ void Furnace::UpdateNeighbours()
 		if (structure != -1)
 		{
 			Structure* s = p.structures[structure];
-			if (s->typeID == 0 && s->direction != ((directions[i]) % 4))
+			if (s->isConveyor && s->direction == ((directions[i] + 2) % 4))
 			{
 				neighbours.push_back(structure);
 			}
