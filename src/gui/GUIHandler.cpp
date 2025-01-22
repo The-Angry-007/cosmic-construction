@@ -63,6 +63,8 @@ void GUIHandler::AddGUI(GUI* gui)
 //updates the active gui
 void GUIHandler::Update(float dt)
 {
+	itemName = nullptr;
+	itemNameBG = nullptr;
 	if (guis.size() > numGUIs && activeGui == 5)
 	{
 		guis[guis.size() - 1]->Update(dt);
@@ -86,6 +88,12 @@ void GUIHandler::Render()
 	if (guis.size() > numGUIs && activeGui == 5)
 	{
 		guis[guis.size() - 1]->Render();
+	}
+	if (itemName != nullptr)
+	{
+		itemNameBG->Render();
+
+		itemName->Render();
 	}
 	fpsLabel->Render();
 	window->setView(currentView);

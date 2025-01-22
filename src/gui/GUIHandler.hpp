@@ -11,6 +11,8 @@ public:
 
 	Settings* settings;
 	GUILabel* fpsLabel;
+	GUIPanel* itemNameBG;
+	GUILabel* itemName;
 	int fps;
 	std::vector<sf::Vector2f> toolPoses;
 	int numTools;

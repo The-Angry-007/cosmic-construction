@@ -43,6 +43,8 @@ void GUIItem::Update(float dt)
 		}
 		nameLabel->position = InputHandler::guiMP + sf::Vector2f(nameWidth + buffer + dist, 0.f);
 		nameBG->position = InputHandler::guiMP + sf::Vector2f(nameWidth + buffer + dist, 0.f);
+		guihandler.itemName = nameLabel;
+		guihandler.itemNameBG = nameBG;
 	}
 	else
 	{
@@ -66,11 +68,6 @@ void GUIItem::RenderToTexture(sf::RenderTexture* texture)
 		label->size = actualSize / 4.f;
 		label->RenderToTexture(texture);
 	}
-	if (nameLabel != nullptr)
-	{
-		nameBG->RenderToTexture(texture);
-		nameLabel->RenderToTexture(texture);
-	}
 }
 void GUIItem::Render()
 {
@@ -83,11 +80,6 @@ void GUIItem::Render()
 		label->position = position + actualSize / 2.f;
 		label->size = actualSize / 4.f;
 		label->Render();
-	}
-	if (nameLabel != nullptr)
-	{
-		nameBG->Render();
-		nameLabel->Render();
 	}
 }
 

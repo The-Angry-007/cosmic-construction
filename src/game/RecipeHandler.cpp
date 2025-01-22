@@ -70,10 +70,14 @@ void RecipeHandler::InitGUI(int structure)
 	}
 	else
 	{
-		numBgObjs++;
-		GUIImage* arrow = new GUIImage(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.2f, 0.3f), "resources\\images\\arrow.png");
+		numBgObjs += 2;
+		GUIImage* arrow = new GUIImage(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.15f, 0.3f), "resources\\images\\arrow.png");
+		arrow->sprite.setColor(sf::Color(75, 75, 75));
+		GUIImage* arrow2 = new GUIImage(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.15f, 0.3f), "resources\\images\\arrow.png");
 		arrow->keepAspectRatio = true;
+		arrow2->keepAspectRatio = true;
 		gui->AddObject(arrow);
+		gui->AddObject(arrow2);
 		//display menu of recipe
 		float inputEnd = 0.3f;
 		float outputStart = 0.7f;
@@ -155,6 +159,19 @@ void RecipeHandler::Update(float dt)
 		else
 		{
 			int index = numBgObjs;
+			GUIImage* arrow = dynamic_cast<GUIImage*>(gui->GUIObjects[index - 1]);
+			float prog = s->recipe->craftTimer / s->recipe->data->craftTime;
+			if (prog < 0)
+			{
+				prog = 0;
+			}
+			if (prog > 1)
+			{
+				prog = 1;
+			}
+			sf::IntRect size = sf::IntRect(0, 0, Lerp(0, arrow->sprite.getTexture()->getSize().x, prog), arrow->sprite.getTexture()->getSize().y);
+			arrow->sprite.setTextureRect(size);
+			arrow->sprite.setOrigin(sf::Vector2f(size.width / 2.f, size.height / 2.f));
 			for (int i = 0; i < s->recipe->inputItems.size(); i++)
 			{
 				dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->SetAmount(s->recipe->inputItems[i].size());
