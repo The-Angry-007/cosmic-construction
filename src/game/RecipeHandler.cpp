@@ -152,11 +152,27 @@ void RecipeHandler::Update(float dt)
 			for (int i = 0; i < s->recipe->inputItems.size(); i++)
 			{
 				dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->SetAmount(s->recipe->inputItems[i].size());
+				if (s->recipe->inputItems[i].size() == 0)
+				{
+					dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->image->sprite.setColor(sf::Color(255, 255, 255, 100));
+				}
+				else
+				{
+					dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->image->sprite.setColor(sf::Color::White);
+				}
 			}
 			index += s->recipe->inputItems.size();
 			for (int i = 0; i < s->recipe->outputItems.size(); i++)
 			{
 				dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->SetAmount(s->recipe->outputItems[i].size());
+				if (s->recipe->outputItems[i].size() == 0)
+				{
+					dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->image->sprite.setColor(sf::Color(255, 255, 255, 100));
+				}
+				else
+				{
+					dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->image->sprite.setColor(sf::Color::White);
+				}
 			}
 			index += s->recipe->outputItems.size();
 			float fuelSize = 0.1f;
