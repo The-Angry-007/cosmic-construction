@@ -78,7 +78,7 @@ void RecipeHandler::InitGUI(int structure)
 		{
 			if (r->data->isFuels[i])
 			{
-				pos = sf::Vector2f(inputEnd, 0.7f);
+				pos = sf::Vector2f(inputEnd, 0.6f);
 				break;
 			}
 		}
@@ -91,9 +91,8 @@ void RecipeHandler::InitGUI(int structure)
 		pos = sf::Vector2f(outputStart, pos.y);
 		for (int i = 0; i < r->outputItems.size(); i++)
 		{
-			GUIItem* item = new GUIItem(pos, sf::Vector2f(size, size), r->data->inputTypes[i], r->inputItems[i].size());
+			GUIItem* item = new GUIItem(pos, sf::Vector2f(size, size), r->data->outputTypes[i], r->outputItems[i].size());
 			gui->GUIObjects.push_back(item);
-
 			pos.x += gap;
 		}
 	}
@@ -106,35 +105,39 @@ void RecipeHandler::Update(float dt)
 	{
 		gui->Update(dt);
 		Structure* s = game->ActivePlanet()->structures[guiStructure];
-		float inoutgap = 0.015f;
-		sf::Vector2f gap(0.1f + inoutgap, 0.1f);
-		float size = 0.05f;
-		sf::Vector2f spos(0.1f + size, 0.16f + size);
-		// spos += gap;
-		sf::Vector2f pos = spos;
-		for (int i = numBgObjs; i < gui->GUIObjects.size(); i += 2)
+		if (s->recipe == nullptr)
 		{
-			//arranging items
-			gui->GUIObjects[i]->position = pos;
-			gui->GUIObjects[i + 1]->position = pos + sf::Vector2f(inoutgap, 0.f);
-			if (gui->GUIObjects[i]->isClicked() || gui->GUIObjects[i + 1]->isClicked())
+			float inoutgap = 0.015f;
+			sf::Vector2f gap(0.1f + inoutgap, 0.1f);
+			float size = 0.05f;
+			sf::Vector2f spos(0.1f + size, 0.16f + size);
+			// spos += gap;
+			sf::Vector2f pos = spos;
+			for (int i = numBgObjs; i < gui->GUIObjects.size(); i += 2)
 			{
-				InputHandler::RemoveMbPressed(sf::Mouse::Button::Left);
-				InputHandler::RemoveMbDown(sf::Mouse::Button::Left);
-				s->SetRecipe(&recipes[s->typeID][(i - numBgObjs) / 2]);
-				guihandler.guis.pop_back();
-				delete gui;
-				gui = nullptr;
-				game->inMenu = false;
-				break;
-			}
-			pos.x += gap.x;
-			if (pos.x > 1 - spos.x)
-			{
-				pos.x = spos.x;
-				pos.y += gap.y;
+				//arranging items
+				gui->GUIObjects[i]->position = pos;
+				gui->GUIObjects[i + 1]->position = pos + sf::Vector2f(inoutgap, 0.f);
+				if (gui->GUIObjects[i]->isClicked() || gui->GUIObjects[i + 1]->isClicked())
+				{
+					InputHandler::RemoveMbPressed(sf::Mouse::Button::Left);
+					InputHandler::RemoveMbDown(sf::Mouse::Button::Left);
+					s->SetRecipe(&recipes[s->typeID][(i - numBgObjs) / 2]);
+					guihandler.guis.pop_back();
+					delete gui;
+					gui = nullptr;
+					game->inMenu = false;
+					break;
+				}
+				pos.x += gap.x;
+				if (pos.x > 1 - spos.x)
+				{
+					pos.x = spos.x;
+					pos.y += gap.y;
+				}
 			}
 		}
+
 		if (InputHandler::pressed(binds::CloseInventory))
 		{
 			guihandler.guis.pop_back();

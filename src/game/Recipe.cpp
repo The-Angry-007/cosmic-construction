@@ -62,7 +62,7 @@ void Recipe::Update(float dt)
 	{
 		for (int i = 0; i < fuelsLeft.size(); i++)
 		{
-			if (data->isFuels[i] && fuelsLeft[i] <= 1.f)
+			if (data->isFuels[i] && fuelsLeft[i] <= 1.f && inputItems[i].size() > 0)
 			{
 				game->planets[planetID].items[inputItems[i].back()].isDeleted = true;
 				inputItems[i].pop_back();
