@@ -194,8 +194,8 @@ bool Distributor::ProgressLane(int lane, float dt, bool moveToMain)
 					{
 						if (neighbours[index] != -1 && (progress[index].size() == 0 || progress[index].back() > gap))
 						{
-							progress[currentOutputIndex].push_back(progress[lane][0] - 1.f);
-							items[currentOutputIndex].push_back(items[lane][0]);
+							progress[index].push_back(progress[lane][0] - 1.f);
+							items[index].push_back(items[lane][0]);
 							items[lane].erase(items[lane].begin());
 							progress[lane].erase(progress[lane].begin());
 							moved = true;
