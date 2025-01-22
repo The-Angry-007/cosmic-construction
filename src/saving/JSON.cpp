@@ -170,3 +170,38 @@ std::vector<bool> JSON::GetBoolArr(std::string keyword)
 	}
 	return boolVals;
 }
+
+void JSON::AddAttribute(std::string keyword, std::vector<int> values)
+{
+	std::string val = "";
+	for (int i = 0; i < values.size(); i++)
+	{
+		val += std::to_string(values[i]);
+		if (i != values.size() - 1)
+		{
+			val += ",";
+		}
+	}
+	AddAttribute(keyword, val);
+}
+void JSON::AddAttribute(std::string keyword, std::vector<float> values)
+{
+	std::string val = "";
+	for (int i = 0; i < values.size(); i++)
+	{
+		val += std::to_string(values[i]);
+		if (i != values.size() - 1)
+		{
+			val += ",";
+		}
+	}
+	AddAttribute(keyword, val);
+}
+
+void JSON::AddJSON(JSON j)
+{
+	for (int i = 0; i < j.keywords.size(); i++)
+	{
+		AddAttribute(j.keywords[i], j.values[i]);
+	}
+}

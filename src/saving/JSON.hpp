@@ -9,6 +9,8 @@ public:
 	JSON();
 	std::string GetValue(std::string keyword);
 	void AddAttribute(std::string keyword, int value);
+	void AddAttribute(std::string keyword, std::vector<int> values);
+	void AddAttribute(std::string keyword, std::vector<float> values);
 	void AddAttribute(std::string keyword, float value);
 	void AddAttribute(std::string keyword, sf::Vector2f value);
 	void AddAttribute(std::string keyword, sf::Vector2i value);
@@ -20,7 +22,7 @@ public:
 	std::vector<float> GetFloatArr(std::string keyword);
 	std::vector<bool> GetBoolArr(std::string keyword);
 	void AddAttribute(std::string keyword, std::string value);
-
+	void AddJSON(JSON j);
 	/*
 	this is changed slightly from design:
 	in design, there was one algorithm to convert a single string

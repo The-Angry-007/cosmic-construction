@@ -19,6 +19,7 @@ void RecipeHandler::LoadRecipes(std::vector<JSON> jsons)
 	{
 		recipes.push_back({});
 	}
+
 	for (int i = 0; i < jsons.size(); i++)
 	{
 		JSON& j = jsons[i];
@@ -30,6 +31,7 @@ void RecipeHandler::LoadRecipes(std::vector<JSON> jsons)
 		r.outputTypes = j.GetIntArr("outputTypes");
 		r.outputAmounts = j.GetIntArr("outputAmounts");
 		r.craftTime = j.GetFloat("craftTime");
+		r.id = i;
 		std::vector<int> structures = j.GetIntArr("StructureIDs");
 		for (int j = 0; j < structures.size(); j++)
 		{
@@ -211,4 +213,19 @@ void RecipeHandler::Update(float dt)
 			game->inMenu = false;
 		}
 	}
+}
+
+RecipeData* RecipeHandler::GetRecipe(int id)
+{
+	for (int i = 0; i < recipes.size(); i++)
+	{
+		for (int j = 0; j < recipes[i].size(); j++)
+		{
+			if (recipes[i][j].id == id)
+			{
+				return &recipes[i][j];
+			}
+		}
+	}
+	return nullptr;
 }

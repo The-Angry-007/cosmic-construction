@@ -17,5 +17,7 @@ public:
 	bool TryAddItem(int index);
 	int TryTakeItem();
 	void Destroy(Structure* parent);
+	JSON ToJSON();
+	void FromJSON(JSON j);
 	~Recipe();
 };

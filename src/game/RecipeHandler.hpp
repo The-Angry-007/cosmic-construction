@@ -10,6 +10,7 @@ struct RecipeData
 	std::vector<int> outputTypes;
 	std::vector<int> outputAmounts;
 	float craftTime;
+	int id;
 };
 namespace RecipeHandler
 {
@@ -21,5 +22,6 @@ extern int numBgObjs;
 void Update(float dt);
 void InitGUI(int structure);
 void LoadRecipes(std::vector<JSON> jsons);
+RecipeData* GetRecipe(int id);
 
 };

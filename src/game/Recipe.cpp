@@ -175,3 +175,35 @@ int Recipe::TryTakeItem()
 Recipe::~Recipe()
 {
 }
+
+JSON Recipe::ToJSON()
+{
+	JSON j = JSON();
+	j.AddAttribute("RecipeID", data->id);
+	for (int i = 0; i < inputItems.size(); i++)
+	{
+		j.AddAttribute("RecipeInputItems" + std::to_string(i), inputItems[i]);
+	}
+	for (int i = 0; i < outputItems.size(); i++)
+	{
+		j.AddAttribute("RecipeOutputItems" + std::to_string(i), outputItems[i]);
+	}
+	j.AddAttribute("RecipeFuelsLeft", fuelsLeft);
+	j.AddAttribute("RecipePlanetID", planetID);
+	j.AddAttribute("RecipeCraftTimer", craftTimer);
+}
+
+void Recipe::FromJSON(JSON j)
+{
+	for (int i = 0; i < inputItems.size(); i++)
+	{
+		inputItems[i] = j.GetIntArr("RecipeInputItems" + std::to_string(i));
+	}
+	for (int i = 0; i < outputItems.size(); i++)
+	{
+		outputItems[i] = j.GetIntArr("RecipeOutputItem" + std::to_string(i));
+	}
+	fuelsLeft = j.GetFloatArr("RecipeFuelsLeft");
+	planetID = j.GetInt("RecipePlanetID");
+	craftTimer = j.GetFloat("RecipeCraftTimer");
+}

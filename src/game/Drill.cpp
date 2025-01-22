@@ -174,6 +174,15 @@ JSON Drill::ToJSON()
 	j.AddAttribute("CurrentFrame", currentFrame);
 	j.AddAttribute("LastOutputDir", lastOutputDir);
 	j.AddAttribute("OutputItem", outputItem);
+	if (recipe != nullptr)
+	{
+		j.AddAttribute("HasRecipe", 1);
+		j.AddJSON(recipe->ToJSON());
+	}
+	else
+	{
+		j.AddAttribute("HasRecipe", 0);
+	}
 	return j;
 }
 void Drill::FromJSON(JSON j)
@@ -190,6 +199,12 @@ void Drill::FromJSON(JSON j)
 	currentFrame = j.GetInt("CurrentFrame");
 	lastOutputDir = j.GetInt("LastOutputDir");
 	outputItem = j.GetInt("OutputItem");
+	if (j.GetInt("HasRecipe"))
+	{
+		int id = j.GetInt("RecipeID");
+		recipe = new Recipe(planetID, RecipeHandler::GetRecipe(id));
+		recipe->FromJSON(j);
+	}
 }
 
 void Drill::SetVisualPosition(sf::Vector2i position)
