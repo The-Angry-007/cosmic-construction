@@ -88,10 +88,10 @@ void Drill::Update(float dt)
 	std::vector<int> directions = {
 		2, 2, 3, 3, 0, 0, 1, 1
 	};
-	if (outputItem == -1 && recipe != nullptr)
-	{
-		outputItem = recipe->TryTakeItem();
-	}
+	// if (outputItem == -1 && recipe != nullptr)
+	// {
+	// 	outputItem = recipe->TryTakeItem();
+	// }
 	if (outputItem != -1)
 	{
 		for (int i = 0; i < 8; i++)
@@ -102,13 +102,18 @@ void Drill::Update(float dt)
 				ConveyorType* c = dynamic_cast<ConveyorType*>(game->planets[planetID].structures[neighbours[index]]);
 				int dir = directions[index];
 
-				if (c->TryAddItem(outputItem, dir, 0.f))
+				if (c->CanAddItem(dir, 0.f))
 				{
-					outputItem = -1;
-					timeSinceOutput = 0.f;
-					lastOutputDir = (index + 1) % 8;
-					timeSinceOutput = 0.f;
-					break;
+					outputItem = recipe->TryTakeItem();
+					if (outputItem != -1)
+					{
+						c->TryAddItem(outputItem, dir, 0.f);
+						outputItem = -1;
+						timeSinceOutput = 0.f;
+						lastOutputDir = (index + 1) % 8;
+						timeSinceOutput = 0.f;
+						break;
+					}
 				}
 			}
 		}

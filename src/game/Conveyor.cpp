@@ -382,7 +382,19 @@ bool Conveyor::TryAddItem(int index, int direction, float progress)
 	}
 	return false;
 }
+bool Conveyor::CanAddItem(int direction, float progress)
+{
+	if (direction == (this->direction))
+	{
+		return false;
+	}
+	if (this->progress[direction].size() == 0 || this->progress[direction].back() - progress > gap)
+	{
 
+		return true;
+	}
+	return false;
+}
 float Conveyor::Distance(int direction)
 {
 	if (progress[direction].size() == 0)
