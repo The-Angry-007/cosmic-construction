@@ -562,6 +562,14 @@ Structure* ToolHandler::CreateStructure(int type)
 	{
 		return new Drill(-2, game->activePlanet, placeDir);
 	}
+	else if (type == 7)
+	{
+		return new Furnace(-2, game->activePlanet, placeDir);
+	}
+	else if (type == 8)
+	{
+		return new RefinedDrill(-2, game->activePlanet, placeDir);
+	}
 	else
 	{
 		return nullptr;

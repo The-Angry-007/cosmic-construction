@@ -1,35 +1,29 @@
-#include "Drill.hpp"
+#include "Furnace.hpp"
 #include "Main.hpp"
 #include "Recipe.hpp"
 #include "RecipeHandler.hpp"
 #include "ResourceHandler.hpp"
-Drill::Drill(int id, int planetID, int direction)
+Furnace::Furnace(int id, int planetID, int direction)
 {
 	SetID(id);
 	this->planetID = planetID;
-	typeID = 6;
+	typeID = 7;
 	tileSize = ResourceHandler::structureSizes[typeID];
 	sprite = sf::Sprite();
-	currentFrame = 0;
-	ResourceHandler::structureAtlas->SetSprite(sprite, typeID, currentFrame);
-	groundSprite = sf::Sprite();
-	ResourceHandler::structureAtlas->SetSprite(groundSprite, typeID, 3);
+	ResourceHandler::structureAtlas->SetSprite(sprite, typeID, 0);
 
 	blocksItems = true;
 	placedByPlayer = true;
-	timePerFrame = 0.3333f;
-	animProgress = 0.f;
-	timeSinceOutput = 0.f;
 	numStone = 0;
 	neighbours = {};
 	lastOutputDir = 0;
 	outputItem = -1;
 }
 
-Drill::~Drill()
+Furnace::~Furnace()
 {}
 
-void Drill::UpdateNeighbours()
+void Furnace::UpdateNeighbours()
 {
 	std::vector<sf::Vector2i> offsets = {
 		{ 0, -1 },
@@ -44,6 +38,14 @@ void Drill::UpdateNeighbours()
 	std::vector<int> directions = {
 		2, 2, 3, 3, 0, 0, 1, 1
 	};
+	if (recipe != nullptr && recipe->craftTimer > 0.f)
+	{
+		ResourceHandler::structureAtlas->SetSprite(sprite, typeID, 1);
+	}
+	else
+	{
+		ResourceHandler::structureAtlas->SetSprite(sprite, typeID, 0);
+	}
 	neighbours = {};
 	Planet& p = game->planets[planetID];
 	sf::Vector2i pos = position + p.GetChunk(chunkID)->position * CHUNK_SIZE;
@@ -70,21 +72,13 @@ void Drill::UpdateNeighbours()
 	}
 }
 
-void Drill::Update(float dt)
+void Furnace::Update(float dt)
 {
 	UpdateNeighbours();
 	if (recipe != nullptr)
 	{
 		recipe->Update(dt);
 	}
-	animProgress += dt;
-	if (animProgress > timePerFrame)
-	{
-		currentFrame = (currentFrame + 1) % 3;
-		ResourceHandler::structureAtlas->SetSprite(sprite, typeID, currentFrame);
-		animProgress = 0.f;
-	}
-	timeSinceOutput += dt;
 	std::vector<int> directions = {
 		2, 2, 3, 3, 0, 0, 1, 1
 	};
@@ -109,9 +103,7 @@ void Drill::Update(float dt)
 					{
 						c->TryAddItem(outputItem, dir, 0.f);
 						outputItem = -1;
-						timeSinceOutput = 0.f;
 						lastOutputDir = (index + 1) % 8;
-						timeSinceOutput = 0.f;
 						break;
 					}
 				}
@@ -120,29 +112,25 @@ void Drill::Update(float dt)
 	}
 }
 
-void Drill::Render()
+void Furnace::Render()
 {
 	game->planets[planetID].renderObjects.push_back(RenderObject {
 		&sprite,
 		32 });
-	game->planets[planetID].renderObjects.push_back(RenderObject {
-		&groundSprite,
-		-32 });
 }
 
-void Drill::Destroy()
+void Furnace::Destroy()
 {
 	if (recipe != nullptr)
 	{
 		recipe->Destroy(this);
 	}
 }
-void Drill::SetPosition(sf::Vector2i position)
+void Furnace::SetPosition(sf::Vector2i position)
 {
 	Structure::SetPosition(position);
-	groundSprite.setPosition(sprite.getPosition());
 }
-void Drill::RenderPreview()
+void Furnace::RenderPreview()
 {
 	int opacity = 100;
 	sf::Color col = sf::Color::Green;
@@ -153,17 +141,13 @@ void Drill::RenderPreview()
 	}
 	col.a = opacity;
 	sprite.setColor(col);
-	groundSprite.setColor(col);
 	Planet& p = game->planets[planetID];
 	p.renderObjects.push_back(RenderObject {
 		&sprite,
 		2000 });
-	p.renderObjects.push_back(RenderObject {
-		&groundSprite,
-		1999 });
 }
 
-JSON Drill::ToJSON()
+JSON Furnace::ToJSON()
 {
 	JSON j = JSON();
 	j.AddAttribute("Position", position);
@@ -171,10 +155,6 @@ JSON Drill::ToJSON()
 	j.AddAttribute("ChunkID", chunkID);
 	j.AddAttribute("ID", id);
 	j.AddAttribute("NumStone", numStone);
-	j.AddAttribute("TimeSinceOutput", timeSinceOutput);
-	j.AddAttribute("AnimProgress", animProgress);
-	j.AddAttribute("TimePerFrame", timePerFrame);
-	j.AddAttribute("CurrentFrame", currentFrame);
 	j.AddAttribute("LastOutputDir", lastOutputDir);
 	j.AddAttribute("OutputItem", outputItem);
 	if (recipe != nullptr)
@@ -188,7 +168,7 @@ JSON Drill::ToJSON()
 	}
 	return j;
 }
-void Drill::FromJSON(JSON j)
+void Furnace::FromJSON(JSON j)
 {
 	sf::Vector2i pos = j.GetV2i("Position");
 	chunkID = j.GetInt("ChunkID");
@@ -196,10 +176,6 @@ void Drill::FromJSON(JSON j)
 	pos += game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE;
 	SetPosition(pos);
 	numStone = j.GetInt("NumStone");
-	timeSinceOutput = j.GetFloat("TimeSinceOutput");
-	animProgress = j.GetFloat("AnimProgress");
-	timePerFrame = j.GetFloat("TimePerFrame");
-	currentFrame = j.GetInt("CurrentFrame");
 	lastOutputDir = j.GetInt("LastOutputDir");
 	outputItem = j.GetInt("OutputItem");
 	if (j.GetInt("HasRecipe"))
@@ -210,13 +186,12 @@ void Drill::FromJSON(JSON j)
 	}
 }
 
-void Drill::SetVisualPosition(sf::Vector2i position)
+void Furnace::SetVisualPosition(sf::Vector2i position)
 {
 	Structure::SetVisualPosition(position);
-	groundSprite.setPosition(sprite.getPosition());
 }
 
-void Drill::Interact()
+void Furnace::Interact()
 {
 	int index = -1;
 	Planet& p = game->planets[planetID];
@@ -231,7 +206,7 @@ void Drill::Interact()
 	RecipeHandler::InitGUI(index);
 }
 
-bool Drill::TryAddItem(int index)
+bool Furnace::TryAddItem(int index)
 {
 	if (recipe == nullptr)
 	{

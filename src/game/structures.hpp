@@ -3,6 +3,8 @@
 #include "Conveyor.hpp"
 #include "ConveyorType.hpp"
 #include "Drill.hpp"
+#include "Furnace.hpp"
+#include "RefinedDrill.hpp"
 #include "SaplingPlanter.hpp"
 #include "StorageSilo.hpp"
 #include "Structure.hpp"

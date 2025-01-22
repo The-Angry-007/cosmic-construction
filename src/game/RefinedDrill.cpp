@@ -1,19 +1,19 @@
-#include "Drill.hpp"
+#include "RefinedDrill.hpp"
 #include "Main.hpp"
 #include "Recipe.hpp"
 #include "RecipeHandler.hpp"
 #include "ResourceHandler.hpp"
-Drill::Drill(int id, int planetID, int direction)
+RefinedDrill::RefinedDrill(int id, int planetID, int direction)
 {
 	SetID(id);
 	this->planetID = planetID;
-	typeID = 6;
+	typeID = 8;
 	tileSize = ResourceHandler::structureSizes[typeID];
 	sprite = sf::Sprite();
 	currentFrame = 0;
 	ResourceHandler::structureAtlas->SetSprite(sprite, typeID, currentFrame);
 	groundSprite = sf::Sprite();
-	ResourceHandler::structureAtlas->SetSprite(groundSprite, typeID, 3);
+	ResourceHandler::structureAtlas->SetSprite(groundSprite, 6, 3);
 
 	blocksItems = true;
 	placedByPlayer = true;
@@ -26,10 +26,10 @@ Drill::Drill(int id, int planetID, int direction)
 	outputItem = -1;
 }
 
-Drill::~Drill()
+RefinedDrill::~RefinedDrill()
 {}
 
-void Drill::UpdateNeighbours()
+void RefinedDrill::UpdateNeighbours()
 {
 	std::vector<sf::Vector2i> offsets = {
 		{ 0, -1 },
@@ -70,7 +70,7 @@ void Drill::UpdateNeighbours()
 	}
 }
 
-void Drill::Update(float dt)
+void RefinedDrill::Update(float dt)
 {
 	UpdateNeighbours();
 	if (recipe != nullptr)
@@ -120,7 +120,7 @@ void Drill::Update(float dt)
 	}
 }
 
-void Drill::Render()
+void RefinedDrill::Render()
 {
 	game->planets[planetID].renderObjects.push_back(RenderObject {
 		&sprite,
@@ -130,19 +130,19 @@ void Drill::Render()
 		-32 });
 }
 
-void Drill::Destroy()
+void RefinedDrill::Destroy()
 {
 	if (recipe != nullptr)
 	{
 		recipe->Destroy(this);
 	}
 }
-void Drill::SetPosition(sf::Vector2i position)
+void RefinedDrill::SetPosition(sf::Vector2i position)
 {
 	Structure::SetPosition(position);
 	groundSprite.setPosition(sprite.getPosition());
 }
-void Drill::RenderPreview()
+void RefinedDrill::RenderPreview()
 {
 	int opacity = 100;
 	sf::Color col = sf::Color::Green;
@@ -163,7 +163,7 @@ void Drill::RenderPreview()
 		1999 });
 }
 
-JSON Drill::ToJSON()
+JSON RefinedDrill::ToJSON()
 {
 	JSON j = JSON();
 	j.AddAttribute("Position", position);
@@ -188,7 +188,7 @@ JSON Drill::ToJSON()
 	}
 	return j;
 }
-void Drill::FromJSON(JSON j)
+void RefinedDrill::FromJSON(JSON j)
 {
 	sf::Vector2i pos = j.GetV2i("Position");
 	chunkID = j.GetInt("ChunkID");
@@ -210,13 +210,13 @@ void Drill::FromJSON(JSON j)
 	}
 }
 
-void Drill::SetVisualPosition(sf::Vector2i position)
+void RefinedDrill::SetVisualPosition(sf::Vector2i position)
 {
 	Structure::SetVisualPosition(position);
 	groundSprite.setPosition(sprite.getPosition());
 }
 
-void Drill::Interact()
+void RefinedDrill::Interact()
 {
 	int index = -1;
 	Planet& p = game->planets[planetID];
@@ -231,7 +231,7 @@ void Drill::Interact()
 	RecipeHandler::InitGUI(index);
 }
 
-bool Drill::TryAddItem(int index)
+bool RefinedDrill::TryAddItem(int index)
 {
 	if (recipe == nullptr)
 	{

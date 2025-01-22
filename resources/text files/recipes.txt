@@ -38,3 +38,13 @@ outputTypes:2
 outputAmounts:1
 craftTime:2
 }
+{
+StructureIDs:7
+inputTypes:2,1
+inputAmounts:1,2
+isFuels:1,0
+fuelLengths:30,0
+outputTypes:3
+outputAmounts:1
+craftTime:5
+}

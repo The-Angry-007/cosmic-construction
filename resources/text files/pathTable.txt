@@ -83,3 +83,8 @@ StructureID/Path
 6/drill_2.png
 6/drill_3.png
 6/drill_ground.png
+7/furnace_off.png
+7/furnace_on.png
+8/refined_drill_1.png
+8/refined_drill_2.png
+8/refined_drill_3.png

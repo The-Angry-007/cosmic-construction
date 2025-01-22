@@ -89,10 +89,14 @@ void RecipeHandler::InitGUI(int structure)
 		{
 			GUIItem* item = new GUIItem(pos, sf::Vector2f(size, size), r->data->inputTypes[i], r->inputItems[i].size());
 			gui->GUIObjects.push_back(item);
-			GUIPanel* bgPanel = new GUIPanel(pos + sf::Vector2f(0, fuelOffset), sf::Vector2f(fuelWidth, fuelSize), sf::Color(50, 50, 50));
-			GUIPanel* colorPanel = new GUIPanel(pos + sf::Vector2f(0, fuelOffset), sf::Vector2f(fuelWidth, fuelSize), sf::Color(50, 50, 50));
-			fuelBars.push_back(bgPanel);
-			fuelBars.push_back(colorPanel);
+			if (r->data->isFuels[i])
+			{
+				GUIPanel* bgPanel = new GUIPanel(pos + sf::Vector2f(0, fuelOffset), sf::Vector2f(fuelWidth, fuelSize), sf::Color(50, 50, 50));
+				GUIPanel* colorPanel = new GUIPanel(pos + sf::Vector2f(0, fuelOffset), sf::Vector2f(fuelWidth, fuelSize), sf::Color(50, 50, 50));
+				fuelBars.push_back(bgPanel);
+				fuelBars.push_back(colorPanel);
+			}
+
 			pos.x -= gap;
 		}
 		pos = sf::Vector2f(outputStart, pos.y);
