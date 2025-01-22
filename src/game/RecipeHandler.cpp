@@ -67,6 +67,10 @@ void RecipeHandler::InitGUI(int structure)
 	}
 	else
 	{
+		numBgObjs++;
+		GUIImage* arrow = new GUIImage(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.5f, 0.5f), "resources\\images\\arrow.png");
+		arrow->keepAspectRatio = true;
+		gui->AddObject(arrow);
 		//display menu of recipe
 		float inputEnd = 0.25f;
 		float outputStart = 0.75f;
@@ -135,6 +139,13 @@ void RecipeHandler::Update(float dt)
 					pos.x = spos.x;
 					pos.y += gap.y;
 				}
+			}
+		}
+		else
+		{
+			for (int i = 0; s->recipe->inputItems.size(); i++)
+			{
+				dynamic_cast<GUIItem*>(gui->GUIObjects[i + numBgObjs])->SetAmount(s->recipe->inputItems[i].size());
 			}
 		}
 

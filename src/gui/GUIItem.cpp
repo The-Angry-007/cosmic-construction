@@ -54,3 +54,12 @@ void GUIItem::Render()
 		label->Render();
 	}
 }
+
+void GUIItem::SetAmount(int amount)
+{
+	this->amount = amount;
+	if (amount != 0)
+	{
+		label->value = std::to_string(amount);
+	}
+}
