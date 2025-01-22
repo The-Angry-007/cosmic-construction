@@ -18,7 +18,7 @@ Recipe::Recipe(int planetID, RecipeData* data)
 	}
 	for (int i = 0; i < data->fuelLengths.size(); i++)
 	{
-		fuelsLeft.push_back(-1.f);
+		fuelsLeft.push_back(0.f);
 	}
 	craftTimer = 0.f;
 }

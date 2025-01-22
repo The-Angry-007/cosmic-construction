@@ -78,10 +78,18 @@ void RecipeHandler::InitGUI(int structure)
 		float gap = 0.1f;
 		sf::Vector2f pos(inputEnd, 0.5f);
 		Recipe* r = s->recipe;
+		std::vector<GUIObject*> fuelBars = {};
+		float fuelSize = 0.1f;
+		float fuelOffset = 0.2f;
+		float fuelWidth = 0.01f;
 		for (int i = 0; i < r->inputItems.size(); i++)
 		{
 			GUIItem* item = new GUIItem(pos, sf::Vector2f(size, size), r->data->inputTypes[i], r->inputItems[i].size());
 			gui->GUIObjects.push_back(item);
+			GUIPanel* bgPanel = new GUIPanel(pos + sf::Vector2f(0, fuelOffset), sf::Vector2f(fuelWidth, fuelSize), sf::Color(50, 50, 50));
+			GUIPanel* colorPanel = new GUIPanel(pos + sf::Vector2f(0, fuelOffset), sf::Vector2f(fuelWidth, fuelSize), sf::Color(50, 50, 50));
+			fuelBars.push_back(bgPanel);
+			fuelBars.push_back(colorPanel);
 			pos.x -= gap;
 		}
 		pos = sf::Vector2f(outputStart, pos.y);
@@ -90,6 +98,10 @@ void RecipeHandler::InitGUI(int structure)
 			GUIItem* item = new GUIItem(pos, sf::Vector2f(size, size), r->data->outputTypes[i], r->outputItems[i].size());
 			gui->GUIObjects.push_back(item);
 			pos.x += gap;
+		}
+		for (int i = 0; i < fuelBars.size(); i++)
+		{
+			gui->GUIObjects.push_back(fuelBars[i]);
 		}
 	}
 	game->inMenu = true;
@@ -146,6 +158,31 @@ void RecipeHandler::Update(float dt)
 				dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->SetAmount(s->recipe->outputItems[i].size());
 			}
 			index += s->recipe->outputItems.size();
+			float fuelSize = 0.1f;
+			float fuelOffset = 0.2f;
+			float fuelWidth = 0.01f;
+			int fuelIndex = 0;
+			for (int i = index; i < gui->GUIObjects.size(); i++)
+			{
+				while (!s->recipe->data->isFuels[fuelIndex])
+				{
+					fuelIndex++;
+				}
+				float currLength = s->recipe->craftTimer;
+				if (currLength < 0.f)
+				{
+					currLength = 0.f;
+				}
+				currLength += s->recipe->fuelsLeft[fuelIndex];
+				currLength /= s->recipe->data->fuelLengths[fuelIndex];
+				float height = currLength * fuelSize;
+				float pos = 0.5f + fuelOffset;
+				pos += height;
+				dynamic_cast<GUIPanel*>(gui->GUIObjects[i + 1])->SetColor(sf::Color::Green);
+				dynamic_cast<GUIPanel*>(gui->GUIObjects[i + 1])->position.y = pos;
+				dynamic_cast<GUIPanel*>(gui->GUIObjects[i + 1])->size.y = height;
+				i++;
+			}
 		}
 
 		if (InputHandler::pressed(binds::CloseInventory))
