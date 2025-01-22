@@ -88,3 +88,4 @@ StructureID/Path
 8/refined_drill_1.png
 8/refined_drill_2.png
 8/refined_drill_3.png
+9/distributor.png

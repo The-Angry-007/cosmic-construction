@@ -10,3 +10,4 @@ StructureID/ItemID/Amount
 7/2/5
 8/3/10
 8/2/3
+9/0/2

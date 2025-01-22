@@ -570,6 +570,10 @@ Structure* ToolHandler::CreateStructure(int type)
 	{
 		return new RefinedDrill(-2, game->activePlanet, placeDir);
 	}
+	else if (type == 9)
+	{
+		return new Distributor(-2, game->activePlanet, placeDir);
+	}
 	else
 	{
 		return nullptr;

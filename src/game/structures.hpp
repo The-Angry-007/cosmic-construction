@@ -2,6 +2,7 @@
 #include "Boulder.hpp"
 #include "Conveyor.hpp"
 #include "ConveyorType.hpp"
+#include "Distributor.hpp"
 #include "Drill.hpp"
 #include "Furnace.hpp"
 #include "RefinedDrill.hpp"
