@@ -68,7 +68,7 @@ void RecipeHandler::InitGUI(int structure)
 	else
 	{
 		numBgObjs++;
-		GUIImage* arrow = new GUIImage(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.5f, 0.5f), "resources\\images\\arrow.png");
+		GUIImage* arrow = new GUIImage(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.25f, 0.3f), "resources\\images\\arrow.png");
 		arrow->keepAspectRatio = true;
 		gui->AddObject(arrow);
 		//display menu of recipe
@@ -78,14 +78,6 @@ void RecipeHandler::InitGUI(int structure)
 		float gap = 0.1f;
 		sf::Vector2f pos(inputEnd, 0.5f);
 		Recipe* r = s->recipe;
-		for (int i = 0; i < r->inputItems.size(); i++)
-		{
-			if (r->data->isFuels[i])
-			{
-				pos = sf::Vector2f(inputEnd, 0.6f);
-				break;
-			}
-		}
 		for (int i = 0; i < r->inputItems.size(); i++)
 		{
 			GUIItem* item = new GUIItem(pos, sf::Vector2f(size, size), r->data->inputTypes[i], r->inputItems[i].size());
@@ -143,10 +135,17 @@ void RecipeHandler::Update(float dt)
 		}
 		else
 		{
-			for (int i = 0; i < s->recipe->inputItems.size(); i++)
+			int index = numBgObjs;
+			for (int i = 0; i < s->recipe->data->inputTypes.size(); i++)
 			{
-				dynamic_cast<GUIItem*>(gui->GUIObjects[i + numBgObjs])->SetAmount(s->recipe->inputItems[i].size());
+				dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->SetAmount(s->recipe->inputItems[i].size());
 			}
+			index += s->recipe->data->inputTypes.size();
+			for (int i = 0; i < s->recipe->data->outputTypes.size(); i++)
+			{
+				dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->SetAmount(s->recipe->outputItems[i].size());
+			}
+			index += s->recipe->data->outputTypes.size();
 		}
 
 		if (InputHandler::pressed(binds::CloseInventory))
