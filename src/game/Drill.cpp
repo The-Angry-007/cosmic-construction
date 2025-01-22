@@ -92,28 +92,25 @@ void Drill::Update(float dt)
 	// {
 	// 	outputItem = recipe->TryTakeItem();
 	// }
-	if (outputItem != -1)
+	for (int i = 0; i < 8; i++)
 	{
-		for (int i = 0; i < 8; i++)
+		int index = (i + lastOutputDir) % 8;
+		if (neighbours[index] != -1)
 		{
-			int index = (i + lastOutputDir) % 8;
-			if (neighbours[index] != -1)
-			{
-				ConveyorType* c = dynamic_cast<ConveyorType*>(game->planets[planetID].structures[neighbours[index]]);
-				int dir = directions[index];
+			ConveyorType* c = dynamic_cast<ConveyorType*>(game->planets[planetID].structures[neighbours[index]]);
+			int dir = directions[index];
 
-				if (c->CanAddItem(dir, 0.f))
+			if (c->CanAddItem(dir, 0.f))
+			{
+				outputItem = recipe->TryTakeItem();
+				if (outputItem != -1)
 				{
-					outputItem = recipe->TryTakeItem();
-					if (outputItem != -1)
-					{
-						c->TryAddItem(outputItem, dir, 0.f);
-						outputItem = -1;
-						timeSinceOutput = 0.f;
-						lastOutputDir = (index + 1) % 8;
-						timeSinceOutput = 0.f;
-						break;
-					}
+					c->TryAddItem(outputItem, dir, 0.f);
+					outputItem = -1;
+					timeSinceOutput = 0.f;
+					lastOutputDir = (index + 1) % 8;
+					timeSinceOutput = 0.f;
+					break;
 				}
 			}
 		}
