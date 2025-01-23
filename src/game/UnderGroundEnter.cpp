@@ -41,7 +41,9 @@ void UndergroundEnter::UpdateNeighbours()
 			if (s->typeID == 11)
 			{
 				endBelt = structure;
+				endBeltPos = tilePos;
 				length = i + 1;
+				break;
 			}
 		}
 	}
@@ -54,6 +56,7 @@ void UndergroundEnter::Update(float dt)
 bool UndergroundEnter::ProgressLane(float dt)
 {
 	bool moved = false;
+	Planet& p = game->planets[planetID];
 	for (uint i = 0; i < progress.size(); i++)
 	{
 		progress[i] += dt * speed;
@@ -61,8 +64,30 @@ bool UndergroundEnter::ProgressLane(float dt)
 		{
 			if (progress[0] > length)
 			{
-				if (true)
+				bool added = false;
+				if (endBelt != -1)
 				{
+					int structure = p.StructureInPos(endBeltPos + CONVEYOR_OFFSETS[i]);
+					if (structure != -1)
+					{
+						Structure* s = p.structures[structure];
+						if (s->isConveyor)
+						{
+							ConveyorType* c = dynamic_cast<ConveyorType*>(s);
+							if (c->TryAddItem(items[0], (direction + 2) % 4, 0.f))
+							{
+								items.erase(items.begin());
+								progress.erase(progress.begin());
+								added = true;
+							}
+						}
+						else if (s->TryAddItem(items[0]))
+						{
+							items.erase(items.begin());
+							progress.erase(progress.begin());
+							added = true;
+						}
+					}
 					//need to either move to end belt or try to add to structure in front of end belt, which is better option?
 
 					// progress[direction].push_back(progress[lane][0] - 1.f);
@@ -71,7 +96,7 @@ bool UndergroundEnter::ProgressLane(float dt)
 					// progress[lane].erase(progress[lane].begin());
 					// moved = true;
 				}
-				else
+				if (!added)
 				{
 					progress[0] = (float)length;
 				}

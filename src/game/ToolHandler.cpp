@@ -267,6 +267,14 @@ void ToolHandler::Update(float dt, Planet* p)
 						p->AddStructure(s2);
 
 						s2->SetPosition(pos);
+						if (placeType == 10)
+						{
+							placeType = 11;
+						}
+						else if (placeType == 11)
+						{
+							placeType = 10;
+						}
 					}
 					else
 					{
@@ -575,6 +583,14 @@ Structure* ToolHandler::CreateStructure(int type)
 	else if (type == 9)
 	{
 		return new Distributor(-2, game->activePlanet, placeDir);
+	}
+	else if (type == 10)
+	{
+		return new UndergroundEnter(-2, game->activePlanet, placeDir);
+	}
+	else if (type == 11)
+	{
+		return new UndergroundExit(-2, game->activePlanet, placeDir);
 	}
 	else
 	{

@@ -139,6 +139,18 @@ void Planet::Init(bool load)
 					AddStructure(t);
 					t->FromJSON(jsons[i]);
 				}
+				else if (jsons[i].GetValue("TypeID") == "10")
+				{
+					UndergroundEnter* t = new UndergroundEnter(-2, id, 0);
+					AddStructure(t);
+					t->FromJSON(jsons[i]);
+				}
+				else if (jsons[i].GetValue("TypeID") == "11")
+				{
+					UndergroundExit* t = new UndergroundExit(-2, id, 0);
+					AddStructure(t);
+					t->FromJSON(jsons[i]);
+				}
 			}
 		}
 	}

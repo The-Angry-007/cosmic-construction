@@ -7,6 +7,7 @@ public:
 	std::vector<float> progress;
 	int length;
 	int endBelt;
+	sf::Vector2i endBeltPos;
 	int maxLength;
 
 	float speed;
