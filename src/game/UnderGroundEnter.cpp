@@ -21,7 +21,7 @@ UndergroundEnter::UndergroundEnter(int id, int planetID, int direction)
 	placedByPlayer = true;
 	isConveyor = true;
 	length = 0;
-	int maxLength = 5;
+	maxLength = 5;
 	endBelt = -1;
 }
 
@@ -29,6 +29,7 @@ void UndergroundEnter::UpdateNeighbours()
 {
 	Planet& p = game->planets[planetID];
 	endBelt = -1;
+	length = 0;
 	sf::Vector2i pos = position + p.GetChunk(chunkID)->position * CHUNK_SIZE;
 	for (int i = 1; i <= maxLength; i++)
 	{
@@ -125,7 +126,7 @@ void UndergroundEnter::Render()
 void UndergroundEnter::SetDirection(int direction)
 {
 	this->direction = direction;
-	ResourceHandler::structureAtlas->SetSprite(sprite, 0, direction);
+	ResourceHandler::structureAtlas->SetSprite(sprite, 10, direction);
 }
 
 int UndergroundEnter::StructureInFront()

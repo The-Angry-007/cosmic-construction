@@ -16,7 +16,7 @@ UndergroundExit::UndergroundExit(int id, int planetID, int direction)
 	blocksItems = true;
 	placedByPlayer = true;
 	isConveyor = true;
-	int maxLength = 5;
+	maxLength = 5;
 	startBelt = -1;
 }
 
@@ -80,6 +80,12 @@ void UndergroundExit::FromJSON(JSON j)
 
 	ResourceHandler::structureAtlas->SetSprite(sprite, 11, direction);
 	SetPosition(pos);
+}
+
+void UndergroundExit::SetDirection(int direction)
+{
+	this->direction = direction;
+	ResourceHandler::structureAtlas->SetSprite(sprite, 10, direction);
 }
 
 UndergroundExit::~UndergroundExit()

@@ -11,6 +11,7 @@ public:
 	void FromJSON(JSON j);
 	void Update(float dt);
 	void Render();
+	void SetDirection(int direction);
 	void UpdateNeighbours();
 	JSON ToJSON();
 	void RenderPreview();
