@@ -280,6 +280,7 @@ void ToolHandler::Update(float dt, Planet* p)
 								ShowSelectArea(position, 0, 0, col);
 								position += CONVEYOR_OFFSETS[placeDir];
 							}
+							break;
 						}
 					}
 				}
