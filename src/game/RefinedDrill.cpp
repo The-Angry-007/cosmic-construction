@@ -54,7 +54,7 @@ void RefinedDrill::UpdateNeighbours()
 		if (structure != -1)
 		{
 			Structure* s = p.structures[structure];
-			if (s->isConveyor && s->direction == ((directions[i] + 2) % 4))
+			if (s->isConveyor && s->direction == ((directions[i] + 2) % 4) || s->direction == -1)
 			{
 				neighbours.push_back(structure);
 			}

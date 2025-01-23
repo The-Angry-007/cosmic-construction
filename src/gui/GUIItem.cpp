@@ -22,6 +22,7 @@ GUIItem::GUIItem(sf::Vector2f position, sf::Vector2f size, int typeID, int amoun
 	image->blocksMouseInput = true;
 	nameLabel = nullptr;
 	nameBG = nullptr;
+	Render();
 }
 bool GUIItem::isClicked()
 {

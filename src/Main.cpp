@@ -14,7 +14,7 @@ int height = 500;
 GUIHandler guihandler = GUIHandler();
 
 Game* game = nullptr;
-int ups = 150;
+int ups = 60;
 sf::Clock updateClock;
 int numUpdates = 0;
 
@@ -67,7 +67,7 @@ int main()
 		if (game != nullptr)
 		{
 			game->Update(dt);
-			int maxUpdates = 5;
+			int maxUpdates = 2;
 			int num = 0;
 
 			while ((num < maxUpdates) && updateClock.getElapsedTime().asSeconds() * ups > numUpdates)
