@@ -39,7 +39,7 @@ void UndergroundEnter::UpdateNeighbours()
 		if (structure != -1)
 		{
 			Structure* s = p.structures[structure];
-			if (s->typeID == 11)
+			if (s->typeID == 11 && s->direction == direction)
 			{
 				endBelt = structure;
 				endBeltPos = tilePos;

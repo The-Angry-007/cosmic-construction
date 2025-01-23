@@ -33,7 +33,7 @@ void UndergroundExit::UpdateNeighbours()
 		if (structure != -1)
 		{
 			Structure* s = p.structures[structure];
-			if (s->typeID == 10)
+			if (s->typeID == 10 && s->direction == direction)
 			{
 				startBelt = structure;
 				break;

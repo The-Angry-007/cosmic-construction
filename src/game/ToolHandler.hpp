@@ -24,6 +24,7 @@ public:
 	sf::Clock insufficientTimer;
 	std::vector<GUIObject*> tallyObjs;
 	std::vector<GUIImage*> selectedImages;
+	void ShowSelectArea(sf::Vector2i pos, int width, int height, sf::Color col);
 	void ShowInsufficient();
 	void ReloadTally(sf::Vector2i tilePos);
 	void ClearTally();

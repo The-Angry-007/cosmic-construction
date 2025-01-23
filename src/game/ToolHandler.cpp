@@ -24,11 +24,7 @@ ToolHandler::ToolHandler()
 	previewStructure = nullptr;
 	insufficientLabel = nullptr;
 	selectedImages = {};
-	for (int i = 0; i < 4; i++)
-	{
-		selectedImages.push_back(new GUIImage(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.5f, 0.5f), "resources\\images\\selection" + std::to_string(i + 1) + ".png"));
-		selectedImages[i]->keepAspectRatio = true;
-	}
+
 	draggingStructure = -1;
 	prevmousepos = sf::Vector2f(0.f, 0.f);
 	tallyObjs = {};
@@ -255,6 +251,39 @@ void ToolHandler::Update(float dt, Planet* p)
 			s->SetVisualPosition(pos);
 
 			previewStructure = s;
+			if (placeType == 11)
+			{
+				sf::Vector2i position = pos;
+				for (int i = 1; i < 9; i++)
+				{
+					position -= CONVEYOR_OFFSETS[placeDir];
+					int structure = p->StructureInPos(position);
+					if (structure != -1)
+					{
+						Structure* s = p->structures[structure];
+						if (s->typeID == 10 && s->direction == placeDir)
+						{
+							sf::Color col = sf::Color::Yellow;
+							int max = dynamic_cast<UndergroundEnter*>(s)->maxLength;
+							if (i > max)
+							{
+								break;
+							}
+							if (i == max)
+							{
+								col = sf::Color::Green;
+							}
+							position += CONVEYOR_OFFSETS[placeDir];
+
+							for (int j = 0; j < i - 1; j++)
+							{
+								ShowSelectArea(position, 0, 0, col);
+								position += CONVEYOR_OFFSETS[placeDir];
+							}
+						}
+					}
+				}
+			}
 
 			if (InputHandler::pressed(binds::UseTool))
 			{
@@ -447,7 +476,13 @@ void ToolHandler::Update(float dt, Planet* p)
 	// #
 	else if (selectedTool == 2)
 	{
-
+		if (index != -1)
+		{
+			Structure* s = p->structures[index];
+			sf::Vector2i coords = (s->position + p->GetChunk(s->chunkID)->position * CHUNK_SIZE);
+			sf::Vector2f tileSize = (sf::Vector2f)s->tileSize - sf::Vector2f(1.f, 1.f);
+			ShowSelectArea(coords, tileSize.x, tileSize.y, sf::Color::Red);
+		}
 		if (InputHandler::down(binds::UseTool) && index != -1)
 		{
 			if (p->structures[index]->placedByPlayer)
@@ -508,35 +543,14 @@ void ToolHandler::Update(float dt, Planet* p)
 		}
 	}
 	index = p->StructureInPos(tilePos);
-	if (index != -1 && ((selectedTool == 1 && hoveringItem == nullptr && draggingItems.size() == 0) || selectedTool == 2))
+	if (index != -1 && ((selectedTool == 1 && hoveringItem == nullptr && draggingItems.size() == 0)))
 	{
 		Structure* s = p->structures[index];
-		sf::Vector2f coords = (sf::Vector2f)(s->position + p->GetChunk(s->chunkID)->position * CHUNK_SIZE);
+		sf::Vector2i coords = (s->position + p->GetChunk(s->chunkID)->position * CHUNK_SIZE);
 		sf::Vector2f tileSize = (sf::Vector2f)s->tileSize - sf::Vector2f(1.f, 1.f);
-		sf::Vector2f tl = p->camera.tileToGUIPos({ 0.f, 0.f });
-		sf::Vector2f br = p->camera.tileToGUIPos({ 1.f, 1.f });
-		sf::Vector2f size = (br - tl) / 2.f;
-		selectedImages[0]->position = p->camera.tileToGUIPos(coords + sf::Vector2f(0.f, 0.f) + sf::Vector2f(0.5f, 0.5f));
-		selectedImages[0]->size = size;
-		selectedImages[1]->position = p->camera.tileToGUIPos(coords + sf::Vector2f(tileSize.x, 0.f) + sf::Vector2f(0.5f, 0.5f));
-		selectedImages[1]->size = size;
-		selectedImages[2]->position = p->camera.tileToGUIPos(coords + tileSize + sf::Vector2f(0.5f, 0.5f));
-		selectedImages[2]->size = size;
-		selectedImages[3]->position = p->camera.tileToGUIPos(coords + sf::Vector2f(0.f, tileSize.y) + sf::Vector2f(0.5f, 0.5f));
-		selectedImages[3]->size = size;
+		ShowSelectArea(coords, tileSize.x, tileSize.y, sf::Color::White);
+	}
 
-		guihandler.guis[5]->InsertObject(selectedImages[0], 0);
-		guihandler.guis[5]->InsertObject(selectedImages[1], 0);
-		guihandler.guis[5]->InsertObject(selectedImages[2], 0);
-		guihandler.guis[5]->InsertObject(selectedImages[3], 0);
-	}
-	if (selectedTool == 2)
-	{
-		for (int i = 0; i < 4; i++)
-		{
-			selectedImages[i]->sprite.setColor(sf::Color::Red);
-		}
-	}
 	if (selectedTool != 0)
 	{
 		ClearTally();
@@ -601,15 +615,12 @@ Structure* ToolHandler::CreateStructure(int type)
 void ToolHandler::Render()
 {
 	//remove selections
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < selectedImages.size(); i++)
 	{
 		int j = guihandler.guis[5]->GetIndex(selectedImages[i]);
-		selectedImages[i]->sprite.setColor(sf::Color::White);
-		if (j != -1)
-		{
-			guihandler.guis[5]->RemoveObject(j);
-		}
+		guihandler.guis[5]->RemoveObject(j);
 	}
+	selectedImages = {};
 }
 
 void ToolHandler::ReloadTally(sf::Vector2i tilePos)
@@ -662,4 +673,33 @@ void ToolHandler::ClearTally()
 		delete tallyObjs[i];
 	}
 	tallyObjs = {};
+}
+
+void ToolHandler::ShowSelectArea(sf::Vector2i pos, int width, int height, sf::Color col)
+{
+	std::vector<GUIImage*> selectedImages = {};
+	for (int i = 0; i < 4; i++)
+	{
+		selectedImages.push_back(new GUIImage(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.5f, 0.5f), "resources\\images\\selection" + std::to_string(i + 1) + ".png"));
+		selectedImages[i]->keepAspectRatio = true;
+	}
+	Planet* p = game->ActivePlanet();
+	sf::Vector2f tl = p->camera.tileToGUIPos({ 0.f, 0.f });
+	sf::Vector2f br = p->camera.tileToGUIPos({ 1.f, 1.f });
+	sf::Vector2f size = (br - tl) / 2.f;
+	sf::Vector2f pos2 = (sf::Vector2f)pos;
+	selectedImages[0]->position = p->camera.tileToGUIPos(pos2 + sf::Vector2f(0.f, 0.f) + sf::Vector2f(0.5f, 0.5f));
+	selectedImages[0]->size = size;
+	selectedImages[1]->position = p->camera.tileToGUIPos(pos2 + sf::Vector2f(width, 0.f) + sf::Vector2f(0.5f, 0.5f));
+	selectedImages[1]->size = size;
+	selectedImages[2]->position = p->camera.tileToGUIPos(pos2 + sf::Vector2f(width, height) + sf::Vector2f(0.5f, 0.5f));
+	selectedImages[2]->size = size;
+	selectedImages[3]->position = p->camera.tileToGUIPos(pos2 + sf::Vector2f(0.f, height) + sf::Vector2f(0.5f, 0.5f));
+	selectedImages[3]->size = size;
+	for (int i = 0; i < 4; i++)
+	{
+		selectedImages[i]->sprite.setColor(col);
+		this->selectedImages.push_back(selectedImages[i]);
+		guihandler.guis[5]->InsertObject(selectedImages[i], 0);
+	}
 }
