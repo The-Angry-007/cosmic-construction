@@ -78,7 +78,7 @@ void UndergroundExit::FromJSON(JSON j)
 	chunkID = std::stoi(j.GetValue("ChunkID"));
 	pos += game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE;
 
-	ResourceHandler::structureAtlas->SetSprite(sprite, 10, direction);
+	ResourceHandler::structureAtlas->SetSprite(sprite, 11, direction);
 	SetPosition(pos);
 }
 

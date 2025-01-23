@@ -231,7 +231,7 @@ bool UndergroundEnter::CanAddItem(int direction, float progress)
 }
 float UndergroundEnter::Distance(int direction)
 {
-	if (direction != ((this->direction + 2) % 4))
+	if (direction != ((this->direction + 2) % 4) || progress.size() == 0)
 	{
 		return 1.f;
 	}
