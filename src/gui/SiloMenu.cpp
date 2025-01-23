@@ -43,10 +43,6 @@ void SiloMenu::Update(float dt)
 		}
 	}
 
-	for (int i = 0; i < items.size(); i++)
-	{
-		items[i].Update(dt);
-	}
 	InputHandler::mouseIsBlocked = true;
 	if (InputHandler::pressed(binds::CloseInventory))
 	{
@@ -78,6 +74,7 @@ void SiloMenu::Render()
 		items[i].position = pos;
 		items[i].size = sf::Vector2f(size, size);
 		items[i].RenderToTexture(&text);
+		items[i].Update(0);
 		pos.x += gap.x;
 		if (pos.x > 1 - spos.x)
 		{

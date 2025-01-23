@@ -47,21 +47,17 @@ void Distributor::UpdateNeighbours()
 			if (s->isConveyor && dynamic_cast<ConveyorType*>(s)->AcceptsItems((directions[i])))
 			{
 				neighbours.push_back(structure);
-				std::cout << s->direction << " ";
 			}
 			else
 			{
 				neighbours.push_back(-1);
-				std::cout << -1 << " ";
 			}
 		}
 		else
 		{
 			neighbours.push_back(-1);
-			std::cout << -1 << " ";
 		}
 	}
-	std::cout << std::endl;
 }
 void Distributor::Update(float dt)
 {
