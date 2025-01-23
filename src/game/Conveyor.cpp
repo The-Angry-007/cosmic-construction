@@ -408,4 +408,5 @@ bool Conveyor::AcceptsItems(int direction)
 	{
 		return true;
 	}
+	return false;
 }

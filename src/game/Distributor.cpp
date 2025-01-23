@@ -44,20 +44,24 @@ void Distributor::UpdateNeighbours()
 		if (structure != -1)
 		{
 			Structure* s = p.structures[structure];
-			if (!s->isConveyor || !dynamic_cast<ConveyorType*>(s)->AcceptsItems((directions[i])))
+			if (s->isConveyor && dynamic_cast<ConveyorType*>(s)->AcceptsItems((directions[i])))
 			{
-				neighbours.push_back(-1);
+				neighbours.push_back(structure);
+				std::cout << s->direction << " ";
 			}
 			else
 			{
-				neighbours.push_back(structure);
+				neighbours.push_back(-1);
+				std::cout << -1 << " ";
 			}
 		}
 		else
 		{
 			neighbours.push_back(-1);
+			std::cout << -1 << " ";
 		}
 	}
+	std::cout << std::endl;
 }
 void Distributor::Update(float dt)
 {

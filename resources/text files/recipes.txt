@@ -9,7 +9,7 @@ outputAmounts:1
 craftTime:2
 }
 {
-StructureIDs:6
+StructureIDs:8
 inputTypes:2
 inputAmounts:1
 isFuels:1
@@ -29,7 +29,7 @@ outputAmounts:1
 craftTime:2
 }
 {
-StructureIDs:6
+StructureIDs:8
 inputTypes:2
 inputAmounts:1
 isFuels:1
@@ -81,7 +81,7 @@ craftTime:5
 {
 StructureIDs:7
 inputTypes:4,2
-inputAmounts:1
+inputAmounts:1,1
 isFuels:0,1
 fuelLengths:30
 outputTypes:6
