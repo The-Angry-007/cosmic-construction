@@ -31,14 +31,10 @@ ToolHandler::ToolHandler()
 }
 ToolHandler::~ToolHandler()
 {
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < selectedImages.size(); i++)
 	{
 		int j = guihandler.guis[5]->GetIndex(selectedImages[i]);
-		selectedImages[i]->sprite.setColor(sf::Color::White);
-		if (j != -1)
-		{
-			guihandler.guis[5]->RemoveObject(j);
-		}
+		guihandler.guis[5]->RemoveObject(j);
 	}
 	if (insufficientLabel != nullptr)
 	{
@@ -387,7 +383,7 @@ void ToolHandler::Update(float dt, Planet* p)
 				}
 				if (dragging)
 					continue;
-				if (p->items[i].accurateHitbox->intersectsPoint(p->camera.WorldMousePos()) && !InputHandler::mouseIsBlocked)
+				if ((p->items[i].hitbox->intersectsPoint(p->camera.WorldMousePos()) && (InputHandler::keyDown(sf::Keyboard::Key::LShift) || p->items[i].accurateHitbox->intersectsPoint(p->camera.WorldMousePos()))) && !InputHandler::mouseIsBlocked)
 				{
 					touchingItems.push_back(i);
 				}
