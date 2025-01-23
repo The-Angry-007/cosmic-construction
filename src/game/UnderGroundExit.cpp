@@ -110,4 +110,5 @@ void UndergroundExit::RenderPreview()
 		2000 });
 }
 void UndergroundExit::Destroy()
-{}
+{
+}
