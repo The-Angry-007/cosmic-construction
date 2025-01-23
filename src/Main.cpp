@@ -14,7 +14,7 @@ int height = 500;
 GUIHandler guihandler = GUIHandler();
 
 Game* game = nullptr;
-int ups = 60;
+int ups = 128;
 sf::Clock updateClock;
 int numUpdates = 0;
 

@@ -4,13 +4,6 @@
 #include "ResourceHandler.hpp"
 #include "utils.hpp"
 
-std::vector<sf::Vector2i> CONVEYOR_OFFSETS = {
-	sf::Vector2i(0, -1),
-	sf::Vector2i(1, 0),
-	sf::Vector2i(0, 1),
-	sf::Vector2i(-1, 0),
-};
-
 UndergroundEnter::UndergroundEnter(int id, int planetID, int direction)
 {
 	SetID(id);
@@ -28,20 +21,30 @@ UndergroundEnter::UndergroundEnter(int id, int planetID, int direction)
 	placedByPlayer = true;
 	isConveyor = true;
 	length = 0;
+	int maxLength = 5;
 	endBelt = -1;
 }
 
 void UndergroundEnter::UpdateNeighbours()
 {
-	// neighbour = -1;
-	// int i = direction;
-	// sf::Vector2i pos = CONVEYOR_OFFSETS[i] + position;
-	// pos += game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE;
-	// int index = game->planets[planetID].StructureInPos(pos);
-	// if (index != -1)
-	// {
-	// 	neighbour = index;
-	// }
+	Planet& p = game->planets[planetID];
+	endBelt = -1;
+	sf::Vector2i pos = position + p.GetChunk(chunkID)->position * CHUNK_SIZE;
+	for (int i = 1; i <= maxLength; i++)
+	{
+		sf::Vector2i offset = CONVEYOR_OFFSETS[direction] * i;
+		sf::Vector2i tilePos = pos + offset;
+		int structure = p.StructureInPos(tilePos);
+		if (structure != -1)
+		{
+			Structure* s = p.structures[structure];
+			if (s->typeID == 11)
+			{
+				endBelt = structure;
+				length = i + 1;
+			}
+		}
+	}
 }
 void UndergroundEnter::Update(float dt)
 {
@@ -60,7 +63,7 @@ bool UndergroundEnter::ProgressLane(float dt)
 			{
 				if (true)
 				{
-					//need to either move to end belt or try to add to structure in front of end belt
+					//need to either move to end belt or try to add to structure in front of end belt, which is better option?
 
 					// progress[direction].push_back(progress[lane][0] - 1.f);
 					// items[direction].push_back(items[lane][0]);
@@ -189,7 +192,7 @@ bool UndergroundEnter::TryAddItem(int index, int direction, float progress)
 	}
 	return false;
 }
-bool UndergroundEnter::TryAddItem(int index, int direction, float progress)
+bool UndergroundEnter::CanAddItem(int direction, float progress)
 {
 	if (direction != ((this->direction + 2) % 4))
 	{

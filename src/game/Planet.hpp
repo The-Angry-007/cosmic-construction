@@ -21,6 +21,7 @@ public:
 	sf::Color backgroundColor;
 	int draggingItem;
 	int hoveringItem;
+	bool updateNeighbours;
 	std::string savePath;
 	sf::VertexArray vertexArray;
 

@@ -294,7 +294,7 @@ void Planet::GenerateChunk(sf::Vector2i position)
 {
 	Chunk c = Chunk(position, -1, id);
 	chunks.push_back(c);
-
+	updateNeighbours = true;
 	if (position == sf::Vector2i(0, 0))
 	{
 		StorageSilo* s = new StorageSilo(-1, id);
@@ -584,6 +584,11 @@ sf::Vector2f Planet::worldPos(sf::Vector2f tilePos, int chunkID)
 
 void Planet::WorldUpdate(float dt)
 {
+	if (updateNeighbours)
+	{
+		UpdateNeighbours();
+		updateNeighbours = false;
+	}
 	// for (uint i = 0; i < chunks.size(); i++)
 	// {
 
@@ -613,6 +618,11 @@ void Planet::WorldUpdate(float dt)
 	for (uint i = 0; i < structuresToUpdate.size(); i++)
 	{
 		structures[structuresToUpdate[i]]->Update(dt);
+	}
+	if (updateNeighbours)
+	{
+		UpdateNeighbours();
+		updateNeighbours = false;
 	}
 }
 
@@ -671,7 +681,7 @@ void Planet::RemoveStructure(int index)
 			break;
 		}
 	}
-	UpdateNeighbours();
+	updateNeighbours = true;
 }
 
 std::vector<int> Planet::StructuresInArea(sf::Vector2i position, sf::Vector2i size)
