@@ -89,3 +89,11 @@ StructureID/Path
 8/refined_drill_2.png
 8/refined_drill_3.png
 9/distributor.png
+10/underground_enter_up.png
+10/underground_enter_right.png
+10/underground_enter_down.png
+10/underground_enter_left.png
+11/underground_exit_up.png
+11/underground_exit_right.png
+11/underground_exit_down.png
+11/underground_exit_left.png

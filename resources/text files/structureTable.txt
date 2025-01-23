@@ -9,3 +9,5 @@ StructureID/Name/Description/SizeX/SizeY
 7/Furnace/Used to smelt items./2/2
 8/Refined Drill/Used to extract more advanced items./2/2
 9/Distributor/Evenly splits input belts across output belts./1/1
+10/Underground Belt/allows items to flow underground across gaps./1/1
+11/Underground belt exit/blank/1/1

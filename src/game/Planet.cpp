@@ -366,7 +366,7 @@ void Planet::GenerateChunk(sf::Vector2i position)
 void Planet::GenerateChunksInView()
 {
 	sf::Clock timer;
-	float maxTime = 0.008f;
+	float maxTime = 0.01f;
 	HitboxShape* hitbox = camera.hitbox->shapes[0];
 	sf::Vector2f topleft = hitbox->currentPos - hitbox->currentSize;
 	sf::Vector2i minPos((int)floor(topleft.x / CHUNK_SIZE_PIXELS.x), (int)floor(topleft.y / CHUNK_SIZE_PIXELS.y));

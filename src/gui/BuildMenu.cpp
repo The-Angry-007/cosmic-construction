@@ -28,8 +28,8 @@ BuildMenu::BuildMenu()
 	menus.push_back({});
 	menus.push_back({});
 	menus.push_back({});
-	typeIDs = { { 0, 9 }, { 3, 4, 6, 7, 8 }, { 1 } };
-	std::vector<std::vector<std::vector<int>>> frames = { { { 0 }, { 0 } }, { { 4 * 15 }, { 0 }, { 0 }, { 0 }, { 0 } }, { { 0, 1 } } };
+	typeIDs = { { 0, 9, 10 }, { 3, 4, 6, 7, 8 }, { 1 } };
+	std::vector<std::vector<std::vector<int>>> frames = { { { 0 }, { 0 }, { 0 } }, { { 4 * 15 }, { 0 }, { 0 }, { 0 }, { 0 } }, { { 0, 1 } } };
 	for (int j = 0; j < 3; j++)
 	{
 		sf::Vector2f imageSize(0.05f, 0.05f);
