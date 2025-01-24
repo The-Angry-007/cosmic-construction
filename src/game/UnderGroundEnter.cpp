@@ -68,7 +68,7 @@ bool UndergroundEnter::ProgressLane(float dt)
 				bool added = false;
 				if (endBelt != -1)
 				{
-					int structure = p.StructureInPos(endBeltPos + CONVEYOR_OFFSETS[i]);
+					int structure = p.StructureInPos(endBeltPos + CONVEYOR_OFFSETS[direction]);
 					if (structure != -1)
 					{
 						Structure* s = p.structures[structure];
