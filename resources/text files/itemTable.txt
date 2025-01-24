@@ -7,3 +7,7 @@ ItemID/Name/Description/ImagePath
 5/Copper Ore/blank/copper ore.png
 6/Iron Plate/blank/iron plate.png
 7/Copper Plate/blank/copper plate.png
+8/Copper Wire/blank/copper wire.png
+9/Sand/blank/sand.png
+10/Coke/blank/coke.png
+11/Iron Gear/blank/iron gear.png

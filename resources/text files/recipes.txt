@@ -88,3 +88,13 @@ outputTypes:6
 outputAmounts:1
 craftTime:5
 }
+{
+StructureIDs:13
+inputTypes:7,2
+inputAmounts:2,1
+isFuels:0,1
+fuelLengths:0,30
+outputTypes:8
+outputAmounts:1
+craftTime:2
+}

@@ -669,6 +669,10 @@ Structure* ToolHandler::CreateStructure(int type)
 	{
 		return new RecipeStructure(-2, game->activePlanet, placeDir, 12);
 	}
+	else if (type == 13)
+	{
+		return new RecipeStructure(-2, game->activePlanet, placeDir, 13);
+	}
 	else
 	{
 		return nullptr;

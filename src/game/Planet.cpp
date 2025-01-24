@@ -157,6 +157,12 @@ void Planet::Init(bool load)
 					AddStructure(t);
 					t->FromJSON(jsons[i]);
 				}
+				else if (jsons[i].GetValue("TypeID") == "13")
+				{
+					RecipeStructure* t = new RecipeStructure(-2, id, 0, 13);
+					AddStructure(t);
+					t->FromJSON(jsons[i]);
+				}
 			}
 		}
 	}
