@@ -4,7 +4,7 @@
 #include "ConveyorType.hpp"
 #include "Distributor.hpp"
 #include "Drill.hpp"
-#include "Furnace.hpp"
+#include "RecipeStructure.hpp"
 #include "RefinedDrill.hpp"
 #include "SaplingPlanter.hpp"
 #include "StorageSilo.hpp"

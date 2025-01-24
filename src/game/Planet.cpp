@@ -123,7 +123,7 @@ void Planet::Init(bool load)
 				}
 				else if (jsons[i].GetValue("TypeID") == "7")
 				{
-					Furnace* t = new Furnace(-2, id, 0);
+					RecipeStructure* t = new RecipeStructure(-2, id, 0, 7);
 					AddStructure(t);
 					t->FromJSON(jsons[i]);
 				}
@@ -148,6 +148,12 @@ void Planet::Init(bool load)
 				else if (jsons[i].GetValue("TypeID") == "11")
 				{
 					UndergroundExit* t = new UndergroundExit(-2, id, 0);
+					AddStructure(t);
+					t->FromJSON(jsons[i]);
+				}
+				else if (jsons[i].GetValue("TypeID") == "12")
+				{
+					RecipeStructure* t = new RecipeStructure(-2, id, 0, 12);
 					AddStructure(t);
 					t->FromJSON(jsons[i]);
 				}

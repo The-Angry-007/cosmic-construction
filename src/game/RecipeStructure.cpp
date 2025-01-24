@@ -1,13 +1,13 @@
-#include "Furnace.hpp"
+#include "RecipeStructure.hpp"
 #include "Main.hpp"
 #include "Recipe.hpp"
 #include "RecipeHandler.hpp"
 #include "ResourceHandler.hpp"
-Furnace::Furnace(int id, int planetID, int direction)
+RecipeStructure::RecipeStructure(int id, int planetID, int direction, int typeID)
 {
 	SetID(id);
 	this->planetID = planetID;
-	typeID = 7;
+	this->typeID = typeID;
 	tileSize = ResourceHandler::structureSizes[typeID];
 	sprite = sf::Sprite();
 	ResourceHandler::structureAtlas->SetSprite(sprite, typeID, 0);
@@ -20,10 +20,10 @@ Furnace::Furnace(int id, int planetID, int direction)
 	outputItem = -1;
 }
 
-Furnace::~Furnace()
+RecipeStructure::~RecipeStructure()
 {}
 
-void Furnace::UpdateNeighbours()
+void RecipeStructure::UpdateNeighbours()
 {
 	std::vector<sf::Vector2i> offsets = {
 		{ 0, -1 },
@@ -38,14 +38,7 @@ void Furnace::UpdateNeighbours()
 	std::vector<int> directions = {
 		2, 2, 3, 3, 0, 0, 1, 1
 	};
-	if (recipe != nullptr && recipe->craftTimer > 0.f)
-	{
-		ResourceHandler::structureAtlas->SetSprite(sprite, typeID, 1);
-	}
-	else
-	{
-		ResourceHandler::structureAtlas->SetSprite(sprite, typeID, 0);
-	}
+
 	neighbours = {};
 	Planet& p = game->planets[planetID];
 	sf::Vector2i pos = position + p.GetChunk(chunkID)->position * CHUNK_SIZE;
@@ -72,7 +65,7 @@ void Furnace::UpdateNeighbours()
 	}
 }
 
-void Furnace::Update(float dt)
+void RecipeStructure::Update(float dt)
 {
 	if (recipe != nullptr)
 	{
@@ -111,25 +104,25 @@ void Furnace::Update(float dt)
 	}
 }
 
-void Furnace::Render()
+void RecipeStructure::Render()
 {
 	game->planets[planetID].renderObjects.push_back(RenderObject {
 		&sprite,
 		32 });
 }
 
-void Furnace::Destroy()
+void RecipeStructure::Destroy()
 {
 	if (recipe != nullptr)
 	{
 		recipe->Destroy(this);
 	}
 }
-void Furnace::SetPosition(sf::Vector2i position)
+void RecipeStructure::SetPosition(sf::Vector2i position)
 {
 	Structure::SetPosition(position);
 }
-void Furnace::RenderPreview()
+void RecipeStructure::RenderPreview()
 {
 	int opacity = 100;
 	sf::Color col = sf::Color::Green;
@@ -146,7 +139,7 @@ void Furnace::RenderPreview()
 		2000 });
 }
 
-JSON Furnace::ToJSON()
+JSON RecipeStructure::ToJSON()
 {
 	JSON j = JSON();
 	j.AddAttribute("Position", position);
@@ -167,7 +160,7 @@ JSON Furnace::ToJSON()
 	}
 	return j;
 }
-void Furnace::FromJSON(JSON j)
+void RecipeStructure::FromJSON(JSON j)
 {
 	sf::Vector2i pos = j.GetV2i("Position");
 	chunkID = j.GetInt("ChunkID");
@@ -185,12 +178,12 @@ void Furnace::FromJSON(JSON j)
 	}
 }
 
-void Furnace::SetVisualPosition(sf::Vector2i position)
+void RecipeStructure::SetVisualPosition(sf::Vector2i position)
 {
 	Structure::SetVisualPosition(position);
 }
 
-void Furnace::Interact()
+void RecipeStructure::Interact()
 {
 	int index = -1;
 	Planet& p = game->planets[planetID];
@@ -205,7 +198,7 @@ void Furnace::Interact()
 	RecipeHandler::InitGUI(index);
 }
 
-bool Furnace::TryAddItem(int index)
+bool RecipeStructure::TryAddItem(int index)
 {
 	if (recipe == nullptr)
 	{

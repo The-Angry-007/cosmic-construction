@@ -97,3 +97,4 @@ StructureID/Path
 11/underground_exit_right.png
 11/underground_exit_down.png
 11/underground_exit_left.png
+12/laser cutter.png

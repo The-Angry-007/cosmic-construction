@@ -5,7 +5,7 @@
 #include "utils.hpp"
 BuildMenu::BuildMenu()
 {
-	std::vector<std::string> titles = { "Transport", "Production", "Storage" };
+	std::vector<std::string> titles = { "Transport", "Production", "Processing" };
 	float infoSize = 0.15f;
 	float height = 0.03f;
 
@@ -28,8 +28,8 @@ BuildMenu::BuildMenu()
 	menus.push_back({});
 	menus.push_back({});
 	menus.push_back({});
-	typeIDs = { { 0, 9, 10 }, { 3, 4, 6, 7, 8 }, { 1 } };
-	std::vector<std::vector<std::vector<int>>> frames = { { { 0 }, { 0 }, { 0 } }, { { 4 * 15 }, { 0 }, { 0 }, { 0 }, { 0 } }, { { 0, 1 } } };
+	typeIDs = { { 1, 0, 9, 10 }, { 3, 4, 6, 8 }, { 7, 12 } };
+	std::vector<std::vector<std::vector<int>>> frames = { { { 0, 1 }, { 0 }, { 0 }, { 0 } }, { { 4 * 15 }, { 0 }, { 0 }, { 0 } }, { { 0 }, { 0 } } };
 	for (int j = 0; j < 3; j++)
 	{
 		sf::Vector2f imageSize(0.05f, 0.05f);

@@ -189,6 +189,7 @@ bool Distributor::ProgressLane(int lane, float dt, bool moveToMain)
 				{
 					int checked = 0;
 					int index = currentOutputIndex;
+					bool added = false;
 					while (checked < 4)
 					{
 						if (neighbours[index] != -1 && (progress[index].size() == 0 || progress[index].back() > gap))
@@ -199,6 +200,7 @@ bool Distributor::ProgressLane(int lane, float dt, bool moveToMain)
 							progress[lane].erase(progress[lane].begin());
 							moved = true;
 							currentOutputIndex = (index + 1) % 4;
+							added = true;
 							break;
 						}
 						else
@@ -206,6 +208,10 @@ bool Distributor::ProgressLane(int lane, float dt, bool moveToMain)
 							index = (index + 1) % 4;
 							checked++;
 						}
+					}
+					if (!added)
+					{
+						progress[lane][0] = 1.f;
 					}
 				}
 				else

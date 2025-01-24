@@ -647,7 +647,7 @@ Structure* ToolHandler::CreateStructure(int type)
 	}
 	else if (type == 7)
 	{
-		return new Furnace(-2, game->activePlanet, placeDir);
+		return new RecipeStructure(-2, game->activePlanet, placeDir, 7);
 	}
 	else if (type == 8)
 	{
@@ -664,6 +664,10 @@ Structure* ToolHandler::CreateStructure(int type)
 	else if (type == 11)
 	{
 		return new UndergroundExit(-2, game->activePlanet, placeDir);
+	}
+	else if (type == 12)
+	{
+		return new RecipeStructure(-2, game->activePlanet, placeDir, 12);
 	}
 	else
 	{

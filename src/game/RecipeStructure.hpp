@@ -1,6 +1,6 @@
 #pragma once
 #include "Structure.hpp"
-class Furnace : public Structure
+class RecipeStructure : public Structure
 {
 public:
 	//number of stone outputted in a row
@@ -8,8 +8,8 @@ public:
 	int numStone;
 	int outputItem;
 	int lastOutputDir;
-	Furnace(int id, int planetID, int direction);
-	~Furnace();
+	RecipeStructure(int id, int planetID, int direction, int typeID);
+	~RecipeStructure();
 	void FromJSON(JSON j);
 	JSON ToJSON();
 	void Update(float dt);
