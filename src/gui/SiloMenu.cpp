@@ -83,6 +83,7 @@ void SiloMenu::Render()
 		}
 	}
 	text.display();
+
 	sf::Sprite s(text.getTexture());
 	sf::IntRect bounds(sf::Vector2i(width * 0.1f, height * 0.16f), sf::Vector2i(width * 0.8f, height * (0.8f - 0.06f)));
 	s.setTextureRect(bounds);

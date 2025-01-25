@@ -5,3 +5,30 @@ plan of attack:
 -remove any items when they enter a building if they wont be exiting it straight after
 (such as in recipes, storage silo etc.)
 should massively improve memory usage etc.
+-fix memory leak when opening new menus
+
+tech tree:
+iron plate DONE
+copper plate DONE
+B laser cutter DONE
+B wire saw DONE
+copper wire DONE
+B crusher DONE
+sand DONE
+B coke furnace DONE
+coke DONE
+iron gear DONE
+empty iron barrel DONE
+B pumpjack DONE
+B upgraded conveyors, etc DONE
+crude oil barrel
+B oil refinery
+petroleum barrel
+plastic
+kerosene barrel
+silicon
+silicon wafer (made in wire saw)
+transistor (made in laser cutter)
+PCB
+AND, OR, NOT gates
+processing unit

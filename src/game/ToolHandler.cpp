@@ -686,6 +686,7 @@ void ToolHandler::Render()
 	{
 		int j = guihandler.guis[5]->GetIndex(selectedImages[i]);
 		guihandler.guis[5]->RemoveObject(j);
+		delete selectedImages[i];
 	}
 	selectedImages = {};
 }

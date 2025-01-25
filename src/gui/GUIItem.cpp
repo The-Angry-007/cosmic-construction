@@ -28,6 +28,19 @@ bool GUIItem::isClicked()
 {
 	return image->isClicked();
 }
+GUIItem::~GUIItem()
+{
+	if (nameLabel != nullptr)
+	{
+		delete nameLabel;
+		delete nameBG;
+	}
+	if (label != nullptr)
+	{
+		delete label;
+	}
+	delete image;
+}
 void GUIItem::Update(float dt)
 {
 	float nameWidth = 0.05f;

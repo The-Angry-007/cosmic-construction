@@ -11,10 +11,10 @@ Hitbox::Hitbox(sf::Vector2f position, sf::Vector2f size)
 
 Hitbox::~Hitbox()
 {
-	// for (uint i = 0; i < shapes.size(); i++)
-	// {
-	// 	delete shapes[i];
-	// }
+	for (uint i = 0; i < shapes.size(); i++)
+	{
+		delete shapes[i];
+	}
 }
 
 void Hitbox::AddShape(HitboxShape* shape)
