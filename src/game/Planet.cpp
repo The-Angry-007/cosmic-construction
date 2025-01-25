@@ -853,7 +853,6 @@ bool Planet::DeductResources(int typeID, sf::Vector2i position)
 			{
 				if (s->itemIDs[j] == idsLeft[k])
 				{
-					int dec = s->itemQuantities[j];
 					s->itemQuantities[j] -= amountsLeft[k];
 					if (s->itemQuantities[j] <= 0)
 					{
@@ -863,12 +862,7 @@ bool Planet::DeductResources(int typeID, sf::Vector2i position)
 					}
 					else
 					{
-						dec = amountsLeft[k];
 						amountsLeft[k] = 0;
-					}
-					for (int m = 0; m < dec; m++)
-					{
-						s->items.pop_back();
 					}
 					if (amountsLeft[k] <= 0)
 					{
@@ -944,6 +938,14 @@ void Planet::AddItem(Item& item)
 
 void Planet::RemoveItem(int index)
 {
+	Chunk* c = GetChunk(items[index].chunkID);
+	for (int i = 0; i < c->items.size(); i++)
+	{
+		if (c->items[i] == index)
+		{
+			c->items.erase(c->items.begin() + i);
+		}
+	}
 	items[index].isDeleted = true;
 	emptyItemSlots.push_back(index);
 }

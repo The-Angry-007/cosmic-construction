@@ -21,7 +21,6 @@ StorageSilo::StorageSilo(int id, int planetID, int direction)
 	{
 		previousOutputs.push_back(0);
 	}
-	items = {};
 	blocksItems = false;
 	placedByPlayer = true;
 }
@@ -94,18 +93,18 @@ void StorageSilo::UpdateNeighbours()
 }
 void StorageSilo::TryAddGroundItem(int index)
 {
-	Item* item = &game->planets[planetID].items[index];
-	Chunk* chunk = game->planets[planetID].GetChunk(item->chunkID);
-	for (int i = 0; i < chunk->items.size(); i++)
-	{
-		if (chunk->items[i] == index)
-		{
-			chunk->items.erase(chunk->items.begin() + i);
-			break;
-		}
-	}
+	// Item* item = &game->planets[planetID].items[index];
+	// Chunk* chunk = game->planets[planetID].GetChunk(item->chunkID);
+	// for (int i = 0; i < chunk->items.size(); i++)
+	// {
+	// 	if (chunk->items[i] == index)
+	// 	{
+	// 		chunk->items.erase(chunk->items.begin() + i);
+	// 		break;
+	// 	}
+	// }
 	// item->parent = id;
-	item->SetParent(id);
+	// item->SetParent(id);
 	TryAddItem(index);
 }
 void StorageSilo::Update(float dt)
@@ -126,7 +125,7 @@ void StorageSilo::Update(float dt)
 	// }
 	//WORKING HERE
 	//NEED TO MAKE THIS USE THE NEW CONVEYORTYPE SYSTEM
-	if (items.size() > 0)
+	if (itemIDs.size() > 0)
 	{
 		for (int i = 0; i < outputNeighbours.size(); i++)
 		{
@@ -136,15 +135,12 @@ void StorageSilo::Update(float dt)
 
 				ConveyorType* c = dynamic_cast<ConveyorType*>(game->planets[planetID].structures[outputNeighbours[i]]);
 				int dir = (c->direction + 2) % 4;
-				int index = items[items.size() - 1];
-				Item& item = game->planets[planetID].items[index];
-
+				Item item = Item(sf::Vector2f(0.f, 0.f), -1, itemIDs[previousOutputs[i]]);
+				item.SetParent(1);
+				game->planets[planetID].AddItem(item);
+				int index = item.id;
 				if (c->TryAddItem(index, dir, 0.f))
 				{
-					item.SetType(itemIDs[previousOutputs[i]]);
-					item.SetParent(outputNeighbours[i]);
-					items.pop_back();
-
 					itemQuantities[previousOutputs[i]]--;
 					if (itemQuantities[previousOutputs[i]] == 0)
 					{
@@ -159,13 +155,12 @@ void StorageSilo::Update(float dt)
 }
 bool StorageSilo::TryAddItem(int index)
 {
-	Item& item = game->planets[planetID].items[index];
-	item.SetParent(id);
-	items.push_back(index);
+	int typeId = game->planets[planetID].items[index].typeId;
+	game->planets[planetID].RemoveItem(index);
 	bool existing = false;
 	for (int i = 0; i < itemIDs.size(); i++)
 	{
-		if (itemIDs[i] == item.typeId)
+		if (itemIDs[i] == typeId)
 		{
 			existing = true;
 			itemQuantities[i]++;
@@ -175,17 +170,17 @@ bool StorageSilo::TryAddItem(int index)
 	if (!existing)
 	{
 
-		if (itemIDs.size() == 0 || item.typeId > itemIDs[itemIDs.size() - 1])
+		if (itemIDs.size() == 0 || typeId > itemIDs[itemIDs.size() - 1])
 		{
-			itemIDs.push_back(item.typeId);
+			itemIDs.push_back(typeId);
 			itemQuantities.push_back(1);
 		}
 		else
 			for (uint i = 0; i < itemIDs.size(); i++)
 			{
-				if (item.typeId < itemIDs[i])
+				if (typeId < itemIDs[i])
 				{
-					itemIDs.insert(itemIDs.begin() + i, item.typeId);
+					itemIDs.insert(itemIDs.begin() + i, typeId);
 					itemQuantities.insert(itemQuantities.begin() + i, 1);
 					break;
 				}
@@ -200,11 +195,6 @@ JSON StorageSilo::ToJSON()
 	j.AddAttribute("TypeID", typeID);
 	j.AddAttribute("ID", id);
 	j.AddAttribute("ChunkID", chunkID);
-	j.AddAttribute("NumItems", (int)items.size());
-	for (int i = 0; i < items.size(); i++)
-	{
-		j.AddAttribute("Item" + std::to_string(i), items[i]);
-	}
 	j.AddAttribute("NumItemIDs", (int)itemIDs.size());
 	for (int i = 0; i < itemIDs.size(); i++)
 	{
@@ -221,11 +211,6 @@ void StorageSilo::FromJSON(JSON j)
 	chunkID = j.GetInt("ChunkID");
 	pos += game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE;
 	SetPosition(pos);
-	int numItems = j.GetInt("NumItems");
-	for (int i = 0; i < numItems; i++)
-	{
-		items.push_back(j.GetInt("Item" + std::to_string(i)));
-	}
 	int numIds = j.GetInt("NumItemIDs");
 	for (int i = 0; i < numIds; i++)
 	{
@@ -290,14 +275,29 @@ void StorageSilo::Interact()
 
 void StorageSilo::Destroy()
 {
-	for (int j = 0; j < items.size(); j++)
+	// for (int j = 0; j < items.size(); j++)
+	// {
+	// 	Item& item = game->planets[planetID].items[items[j]];
+	// 	item.SetParent(-1);
+	// 	item.position = (sf::Vector2f)(position + game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE);
+	// 	item.position += sf::Vector2f(rand() % 1000 * tileSize.x, rand() % 1000 * tileSize.y) / 1000.f;
+	// 	item.position.x *= TILE_SIZE.x;
+	// 	item.position.y *= TILE_SIZE.y;
+	// 	game->planets[planetID].MoveItem(items[j]);
+	// }
+	for (int i = 0; i < itemIDs.size(); i++)
 	{
-		Item& item = game->planets[planetID].items[items[j]];
-		item.SetParent(-1);
-		item.position = (sf::Vector2f)(position + game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE);
-		item.position += sf::Vector2f(rand() % 1000 * tileSize.x, rand() % 1000 * tileSize.y) / 1000.f;
-		item.position.x *= TILE_SIZE.x;
-		item.position.y *= TILE_SIZE.y;
-		game->planets[planetID].MoveItem(items[j]);
+		for (int j = 0; j < itemQuantities[i]; j++)
+		{
+			Item item = Item(sf::Vector2f(0.f, 0.f), -1, itemIDs[i]);
+			game->planets[planetID].AddItem(item);
+			item.SetParent(-1);
+			item.SetParent(-1);
+			item.position = (sf::Vector2f)(position + game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE);
+			item.position += sf::Vector2f(rand() % 1000 * tileSize.x, rand() % 1000 * tileSize.y) / 1000.f;
+			item.position.x *= TILE_SIZE.x;
+			item.position.y *= TILE_SIZE.y;
+			game->planets[planetID].MoveItem(item.id);
+		}
 	}
 }

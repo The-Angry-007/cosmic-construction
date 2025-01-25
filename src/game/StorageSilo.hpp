@@ -4,7 +4,6 @@
 class StorageSilo : public Structure
 {
 public:
-	std::vector<int> items;
 	std::vector<int> itemIDs;
 	std::vector<int> itemQuantities;
 	std::vector<int> inputNeighbours;
