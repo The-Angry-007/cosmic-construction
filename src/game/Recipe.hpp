@@ -9,8 +9,8 @@ public:
 	RecipeData* data;
 	int planetID;
 	std::vector<float> fuelsLeft;
-	std::vector<std::vector<int>> inputItems;
-	std::vector<std::vector<int>> outputItems;
+	std::vector<int> numInputs;
+	std::vector<int> numOutputs;
 	float craftTimer;
 	Recipe(int planetID, RecipeData* data);
 	void Update(float dt);

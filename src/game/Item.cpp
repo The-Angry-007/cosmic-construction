@@ -19,11 +19,16 @@ Item::Item(sf::Vector2f position, int id, int typeID)
 	this->position = position;
 	this->typeId = typeID;
 	accurateHitbox = nullptr;
+	isDeleted = false;
 	ResourceHandler::itemAtlas->SetSprite(sprite, typeID);
 	hitbox = new Hitbox(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.f, 1.f));
 	hitbox->AddShape(new HitboxRect(sf::Vector2f(0.f, 0.f), sf::Vector2f(ITEM_SIZE / 2.f, ITEM_SIZE / 2.f)));
 	zindex = 1;
 	moveDir = sf::Vector2f(0.f, 0.f);
+}
+Item::Item()
+{
+	isDeleted = true;
 }
 
 void Item::Update(float dt, Planet* planet)

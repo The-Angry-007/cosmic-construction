@@ -90,9 +90,9 @@ void RecipeHandler::InitGUI(int structure)
 		float fuelSize = 0.1f;
 		float fuelOffset = 0.2f;
 		float fuelWidth = 0.01f;
-		for (int i = 0; i < r->inputItems.size(); i++)
+		for (int i = 0; i < r->numInputs.size(); i++)
 		{
-			GUIItem* item = new GUIItem(pos, sf::Vector2f(size, size), r->data->inputTypes[i], r->inputItems[i].size());
+			GUIItem* item = new GUIItem(pos, sf::Vector2f(size, size), r->data->inputTypes[i], r->numInputs[i]);
 			gui->GUIObjects.push_back(item);
 			if (r->data->isFuels[i])
 			{
@@ -105,9 +105,9 @@ void RecipeHandler::InitGUI(int structure)
 			pos.x -= gap;
 		}
 		pos = sf::Vector2f(outputStart, pos.y);
-		for (int i = 0; i < r->outputItems.size(); i++)
+		for (int i = 0; i < r->numOutputs.size(); i++)
 		{
-			GUIItem* item = new GUIItem(pos, sf::Vector2f(size, size), r->data->outputTypes[i], r->outputItems[i].size());
+			GUIItem* item = new GUIItem(pos, sf::Vector2f(size, size), r->data->outputTypes[i], r->numOutputs[i]);
 			gui->GUIObjects.push_back(item);
 			pos.x += gap;
 		}
@@ -177,10 +177,10 @@ void RecipeHandler::Update(float dt)
 			arrow->sprite.setTextureRect(size);
 			arrow->position.x = (0.5f - arrow->size.x) + (arrow->size.x * ((float)size.width / (float)arrow->sprite.getTexture()->getSize().x));
 			arrow->size.x = ((float)size.width / (float)arrow->sprite.getTexture()->getSize().x) * arrowSize.x;
-			for (int i = 0; i < s->recipe->inputItems.size(); i++)
+			for (int i = 0; i < s->recipe->numInputs.size(); i++)
 			{
-				dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->SetAmount(s->recipe->inputItems[i].size());
-				if (s->recipe->inputItems[i].size() == 0)
+				dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->SetAmount(s->recipe->numInputs[i]);
+				if (s->recipe->numInputs[i] == 0)
 				{
 					dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->image->sprite.setColor(sf::Color(255, 255, 255, 100));
 				}
@@ -189,11 +189,11 @@ void RecipeHandler::Update(float dt)
 					dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->image->sprite.setColor(sf::Color::White);
 				}
 			}
-			index += s->recipe->inputItems.size();
-			for (int i = 0; i < s->recipe->outputItems.size(); i++)
+			index += s->recipe->numInputs.size();
+			for (int i = 0; i < s->recipe->numOutputs.size(); i++)
 			{
-				dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->SetAmount(s->recipe->outputItems[i].size());
-				if (s->recipe->outputItems[i].size() == 0)
+				dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->SetAmount(s->recipe->numOutputs[i]);
+				if (s->recipe->numOutputs[i] == 0)
 				{
 					dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->image->sprite.setColor(sf::Color(255, 255, 255, 100));
 				}
@@ -202,7 +202,7 @@ void RecipeHandler::Update(float dt)
 					dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->image->sprite.setColor(sf::Color::White);
 				}
 			}
-			index += s->recipe->outputItems.size();
+			index += s->recipe->numOutputs.size();
 			float fuelSize = 0.1f;
 			float fuelOffset = 0.2f;
 			float fuelWidth = 0.01f;

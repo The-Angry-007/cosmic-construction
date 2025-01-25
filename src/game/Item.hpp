@@ -20,6 +20,8 @@ public:
 	bool isDeleted = false;
 
 	Item(sf::Vector2f position, int id, int typeID);
+	//specifically for creating one that is deleted
+	Item();
 	void SetType(int typeID);
 	void SetParent(int index);
 	void Update(float dt, Planet* planet);

@@ -32,3 +32,16 @@ transistor (made in laser cutter)
 PCB
 AND, OR, NOT gates
 processing unit
+
+
+
+UPDATED ITEM SYSTEM TO DO
+x add new constructor to item class that just creates a blank item
+x add some code to planet function that ensures the id of the item is the same as the index when loading in
+x skip over deleted items when saving
+x create add item function that replaces first deleted item,
+x crate delete item function that removes item from chunk
+x set id of item to that index
+for storage silo, recipes etc just delete item upon entry
+structures that SHOULD have items: ones where hte items are actually visible, such as conveyors
+structures that should NOT: ones where the items are invisble, such as storage silos

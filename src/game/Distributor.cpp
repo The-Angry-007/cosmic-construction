@@ -233,34 +233,34 @@ bool Distributor::ProgressLane(int lane, float dt, bool moveToMain)
 
 void Distributor::Render()
 {
-	zindex = 16;
+	zindex = -32;
 	Planet& p = game->planets[planetID];
 	p.renderObjects.push_back(RenderObject {
 		&sprite,
 		zindex });
-	// for (uint i = 0; i < 4; i++)
-	// {
-	// 	for (uint j = 0; j < items[i].size(); j++)
-	// 	{
-	// 		sf::Vector2f startPos(0.5f, 0.5f);
-	// 		startPos += (sf::Vector2f)CONVEYOR_OFFSETS[i] / 2.f;
-	// 		sf::Vector2f endPos(0.5f, 0.5f);
-	// 		float prog = progress[i][j];
-	// 		if (neighbours[i] != -1)
-	// 			prog = 1 - prog;
-	// 		if (prog > 1.f)
-	// 		{
-	// 			prog = 1.f;
-	// 		}
-	// 		sf::Vector2f pos = Lerp(startPos, endPos, prog);
-	// 		pos += (sf::Vector2f)position;
-	// 		pos += (sf::Vector2f)(game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE);
-	// 		pos.x *= TILE_SIZE.x;
-	// 		pos.y *= TILE_SIZE.y;
-	// 		game->planets[planetID].items[items[i][j]].position = pos;
-	// 		game->planets[planetID].items[items[i][j]].Render(&game->planets[planetID]);
-	// 	}
-	// }
+	for (uint i = 0; i < 4; i++)
+	{
+		for (uint j = 0; j < items[i].size(); j++)
+		{
+			sf::Vector2f startPos(0.5f, 0.5f);
+			startPos += (sf::Vector2f)CONVEYOR_OFFSETS[i] / 2.f;
+			sf::Vector2f endPos(0.5f, 0.5f);
+			float prog = progress[i][j];
+			if (neighbours[i] != -1)
+				prog = 1 - prog;
+			if (prog > 1.f)
+			{
+				prog = 1.f;
+			}
+			sf::Vector2f pos = Lerp(startPos, endPos, prog);
+			pos += (sf::Vector2f)position;
+			pos += (sf::Vector2f)(game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE);
+			pos.x *= TILE_SIZE.x;
+			pos.y *= TILE_SIZE.y;
+			game->planets[planetID].items[items[i][j]].position = pos;
+			game->planets[planetID].items[items[i][j]].Render(&game->planets[planetID]);
+		}
+	}
 }
 
 void Distributor::TryAddGroundItem(int index)

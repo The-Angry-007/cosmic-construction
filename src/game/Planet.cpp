@@ -24,6 +24,7 @@ Planet::Planet(int id)
 	camera.position = sf::Vector2f(32 * 17, 32 * 17);
 	structuresToUpdate = {};
 	emptyStructureSlots = {};
+	emptyItemSlots = {};
 }
 void Planet::Init(bool load)
 {
@@ -58,7 +59,21 @@ void Planet::Init(bool load)
 			int typeId = std::stoi(itemTable.GetValue("TypeID", i));
 			Item item = Item(pos, id, typeId);
 			item.SetParent(std::stoi(itemTable.GetValue("Parent", i)));
-			items.push_back(item);
+			//need to double check this is right
+			if (id >= items.size())
+			{
+				while (id > items.size())
+				{
+					items.push_back(Item());
+					emptyItemSlots.push_back(items.size() - 1);
+				}
+				items.push_back(item);
+			}
+			else
+			{
+				items[id] = item;
+			}
+
 			//TODO: DEAL WITH PARENT ATTRIBUTE
 			MoveItem(items.size() - 1);
 		}
@@ -268,7 +283,10 @@ void Planet::Save()
 	itemTable.headers = { "ItemID", "TypeID", "PositionX", "PositionY", "Parent" };
 	for (int i = 0; i < items.size(); i++)
 	{
-
+		if (items[i].isDeleted)
+		{
+			continue;
+		}
 		itemTable.records.push_back({ std::to_string(items[i].id),
 			std::to_string(items[i].typeId),
 			std::to_string(items[i].position.x),
@@ -907,4 +925,25 @@ std::vector<int> Planet::TallyResources(sf::Vector2i position, std::vector<int> 
 		}
 	}
 	return tally;
+}
+
+void Planet::AddItem(Item& item)
+{
+	if (emptyItemSlots.size() > 0)
+	{
+		items[emptyItemSlots.back()] = item;
+		item.id = emptyItemSlots.back();
+		emptyItemSlots.pop_back();
+	}
+	else
+	{
+		item.id = items.size();
+		items.push_back(item);
+	}
+}
+
+void Planet::RemoveItem(int index)
+{
+	items[index].isDeleted = true;
+	emptyItemSlots.push_back(index);
 }
