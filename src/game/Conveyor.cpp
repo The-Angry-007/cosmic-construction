@@ -18,7 +18,6 @@ Conveyor::Conveyor(int id, int planetID, int direction)
 	SetDirection(direction);
 	tileSize = ResourceHandler::structureSizes[typeID];
 	sprite = sf::Sprite();
-	upgradeLevel = 0;
 	ResourceHandler::structureAtlas->SetSprite(sprite, 0, direction + 4 * upgradeLevel);
 	gap = 0.2f;
 	progress = { {}, {}, {}, {} };
@@ -248,7 +247,7 @@ void Conveyor::TryAddGroundItem(int index)
 			break;
 		}
 	}
-	game->planets[planetID].items[index].SetParent(id);
+	item->SetParent(id);
 
 	return;
 }

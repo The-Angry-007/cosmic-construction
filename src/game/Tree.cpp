@@ -61,7 +61,7 @@ void Tree::Destroy()
 		pos += sf::Vector2f(rand() % 1000, rand() % 1000) / 1000.f;
 		pos.x *= TILE_SIZE.x;
 		pos.y *= TILE_SIZE.y;
-		Item item = Item(pos, -1, 1);
+		Item item = Item(pos, -1, 0);
 		item.SetParent(-1);
 		p.AddItem(item);
 		p.MoveItem(item.id);

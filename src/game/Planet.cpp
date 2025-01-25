@@ -75,7 +75,7 @@ void Planet::Init(bool load)
 			}
 
 			//TODO: DEAL WITH PARENT ATTRIBUTE
-			MoveItem(items.size() - 1);
+			MoveItem(item.id);
 		}
 		//loading camera
 		{
@@ -925,8 +925,9 @@ void Planet::AddItem(Item& item)
 {
 	if (emptyItemSlots.size() > 0)
 	{
-		items[emptyItemSlots.back()] = item;
 		item.id = emptyItemSlots.back();
+
+		items[emptyItemSlots.back()] = item;
 		emptyItemSlots.pop_back();
 	}
 	else

@@ -216,6 +216,7 @@ void ToolHandler::Update(float dt, Planet* p)
 								}
 							}
 							dynamic_cast<Conveyor*>(p->structures[lastPlacedStructure])->SetDirection(dir);
+							p->updateNeighbours = true;
 						}
 					}
 					if (p->structures[p->StructureInPos(tilePos)]->typeID == 0)
@@ -436,6 +437,7 @@ void ToolHandler::Update(float dt, Planet* p)
 					pos.x *= TILE_SIZE.x;
 					pos.y *= TILE_SIZE.y;
 					p->items[draggingItems[i]].position = pos;
+					p->MoveItem(draggingItems[i]);
 				}
 			}
 			draggingItems = {};
