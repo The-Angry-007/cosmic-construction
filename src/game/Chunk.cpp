@@ -25,6 +25,7 @@ Chunk::Chunk(sf::Vector2i position, int id, int planetID)
 	sf::Vector2f halfSize = (sf::Vector2f)CHUNK_SIZE_PIXELS / 2.f;
 	sf::Vector2f midpoint = GetWorldPos(halfSize);
 	hitbox->AddShape(new HitboxRect(midpoint, halfSize * 1.1f));
+	isDeleted = false;
 }
 
 Chunk::Chunk()

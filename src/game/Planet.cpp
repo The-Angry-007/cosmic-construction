@@ -58,7 +58,7 @@ void Planet::Init(bool load)
 			{
 				chunks[id] = c;
 			}
-			chunks.push_back(c);
+			// chunks.push_back(c);
 		}
 		//loading items
 		std::string itemPath = path + "items.txt";
@@ -467,10 +467,14 @@ void Planet::GenerateChunksInView()
 			bool exists = false;
 			for (int i = 0; i < chunks.size(); i++)
 			{
+				if (chunks[i].isDeleted)
+				{
+					continue;
+				}
 				if (chunks[i].position.x == x && chunks[i].position.y == y)
 				{
 					exists = true;
-					continue;
+					break;
 				}
 			}
 			if (!exists)
@@ -539,6 +543,10 @@ bool Planet::StructureInArea(sf::Vector2i position, sf::Vector2i size)
 			int chunk = -1;
 			for (uint i = 0; i < chunks.size(); i++)
 			{
+				if (chunks[i].isDeleted)
+				{
+					continue;
+				}
 				if (chunks[i].position.x == x && chunks[i].position.y == y)
 				{
 					chunk = i;
@@ -593,6 +601,10 @@ int Planet::StructureInPos(sf::Vector2i position)
 			int chunk = -1;
 			for (uint i = 0; i < chunks.size(); i++)
 			{
+				if (chunks[i].isDeleted)
+				{
+					continue;
+				}
 				if (chunks[i].position.x == x && chunks[i].position.y == y)
 				{
 					chunk = i;
@@ -643,7 +655,7 @@ int Planet::ChunkAtPos(sf::Vector2f position)
 		}
 	}
 	GenerateChunk(chunkPos);
-	return chunks.size() - 1;
+	return ChunkAtPos(position);
 }
 int Planet::ChunkAtPos(sf::Vector2i position)
 {
@@ -651,13 +663,17 @@ int Planet::ChunkAtPos(sf::Vector2i position)
 	sf::Vector2i chunkPos(floor(chunkPosf.x), floor(chunkPosf.y));
 	for (uint i = 0; i < chunks.size(); i++)
 	{
+		if (chunks[i].isDeleted)
+		{
+			continue;
+		}
 		if (chunks[i].position == chunkPos)
 		{
 			return i;
 		}
 	}
 	GenerateChunk(chunkPos);
-	return chunks.size() - 1;
+	return ChunkAtPos(position);
 }
 
 sf::Vector2i Planet::tilePos(sf::Vector2f position)
@@ -798,6 +814,10 @@ std::vector<int> Planet::StructuresInArea(sf::Vector2i position, sf::Vector2i si
 			int chunk = -1;
 			for (uint i = 0; i < chunks.size(); i++)
 			{
+				if (chunks[i].isDeleted)
+				{
+					continue;
+				}
 				if (chunks[i].position.x == x && chunks[i].position.y == y)
 				{
 					chunk = i;
