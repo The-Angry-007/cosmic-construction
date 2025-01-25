@@ -20,6 +20,7 @@ GUILabel::GUILabel(sf::Vector2f position, sf::Vector2f size, std::string text)
 	this->text.setFont(guihandler.guifont);
 	origin = sf::Vector2f(0.5f, 0.5f);
 	altCharSize = false;
+	hitbox = nullptr;
 }
 void GUILabel::SetColor(sf::Color color)
 {
@@ -156,4 +157,8 @@ void GUILabel::DoWrapping(int charsPerLine)
 		}
 	}
 	value = newVal;
+}
+
+GUILabel::~GUILabel()
+{
 }

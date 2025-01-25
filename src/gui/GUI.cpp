@@ -40,7 +40,10 @@ GUI::~GUI()
 {
 	for (uint i = 0; i < GUIObjects.size(); i++)
 	{
-		delete GUIObjects[i];
+		if (GUIObjects[i] != nullptr)
+		{
+			delete GUIObjects[i];
+		}
 	}
 }
 //update just updates all gui objects

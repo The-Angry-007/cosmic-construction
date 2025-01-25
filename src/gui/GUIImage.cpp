@@ -126,5 +126,4 @@ void GUIImage::RenderToTexture(sf::RenderTexture* texture)
 //nothing to destruct
 GUIImage::~GUIImage()
 {
-	delete hitbox;
 }

@@ -283,7 +283,9 @@ void StorageSilo::SetVisualPosition(sf::Vector2i pos)
 
 void StorageSilo::Interact()
 {
-	guihandler.AddGUI(new SiloMenu(this));
+	SiloMenu* s = new SiloMenu(this);
+	s->Update(0);
+	guihandler.AddGUI(s);
 }
 
 void StorageSilo::Destroy()

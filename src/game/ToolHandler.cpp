@@ -5,7 +5,7 @@
 
 ToolHandler::ToolHandler()
 {
-	selectedTool = 0;
+	selectedTool = 1;
 
 	selectedObj = guihandler.guis[5]->GUIObjects[3 * guihandler.numTools];
 	selectedObj->position = guihandler.toolPoses[selectedTool];

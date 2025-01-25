@@ -8,7 +8,8 @@ class SiloMenu : public GUI
 public:
 	StorageSilo* silo;
 	SiloMenu(StorageSilo* s);
-	std::vector<GUIItem> items;
+	~SiloMenu();
+	std::vector<GUIItem*> items;
 	void Update(float dt);
 	void Render();
 };

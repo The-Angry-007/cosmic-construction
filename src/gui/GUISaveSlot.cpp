@@ -7,6 +7,7 @@
 #include <iostream>
 GUISaveSlot::GUISaveSlot(sf::Vector2f position, std::string path)
 {
+	hitbox = nullptr;
 	this->path = path;
 	this->position = position;
 	auto slotData = Split(SaveHandler::ReadData(path + "\\metadata.txt"), '\n');
@@ -122,4 +123,6 @@ GUISaveSlot::~GUISaveSlot()
 	delete nameLabel;
 	delete playtimeLabel;
 	delete modifiedLabel;
+	delete deleteBG;
+	delete deleteIcon;
 }

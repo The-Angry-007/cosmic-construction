@@ -32,7 +32,12 @@ void GUIObject::Render()
 {}
 
 GUIObject::~GUIObject()
-{}
+{
+	if (hitbox != nullptr)
+	{
+		delete hitbox;
+	}
+}
 
 void GUIObject::RenderToTexture(sf::RenderTexture* texture)
 {}

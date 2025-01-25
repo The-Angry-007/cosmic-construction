@@ -20,6 +20,7 @@ GUIItem::GUIItem(sf::Vector2f position, sf::Vector2f size, int typeID, int amoun
 	image->keepAspectRatio = true;
 	image->origin = sf::Vector2f(0.5f, 0.5f);
 	image->blocksMouseInput = true;
+	hitbox = nullptr;
 	nameLabel = nullptr;
 	nameBG = nullptr;
 	Render();
@@ -30,6 +31,9 @@ bool GUIItem::isClicked()
 }
 GUIItem::~GUIItem()
 {
+	delete image;
+	image = nullptr;
+
 	if (nameLabel != nullptr)
 	{
 		delete nameLabel;
@@ -39,7 +43,6 @@ GUIItem::~GUIItem()
 	{
 		delete label;
 	}
-	delete image;
 }
 void GUIItem::Update(float dt)
 {

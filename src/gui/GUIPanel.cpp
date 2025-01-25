@@ -77,10 +77,6 @@ void GUIPanel::RenderToTexture(sf::RenderTexture* texture)
 
 GUIPanel::~GUIPanel()
 {
-	if (hitbox != nullptr)
-	{
-		delete hitbox;
-	}
 }
 void GUIPanel::SetColor(sf::Color color)
 {
