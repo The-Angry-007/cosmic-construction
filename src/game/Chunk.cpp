@@ -27,6 +27,11 @@ Chunk::Chunk(sf::Vector2i position, int id, int planetID)
 	hitbox->AddShape(new HitboxRect(midpoint, halfSize * 1.1f));
 }
 
+Chunk::Chunk()
+{
+	isDeleted = true;
+}
+
 void Chunk::Update(float dt)
 {
 	// for (int i = 0; i < items.size(); i++)

@@ -15,8 +15,9 @@ public:
 	std::vector<int> structures;
 	std::vector<int> items;
 	bool isAltered = false;
+	bool isDeleted = false;
 	Chunk(sf::Vector2i position, int id, int planetID);
-	void Save();
+	Chunk();
 	void Update(float dt);
 	bool isVisible();
 	void Render();

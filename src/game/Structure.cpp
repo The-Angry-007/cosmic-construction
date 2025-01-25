@@ -38,15 +38,7 @@ void Structure::Render()
 
 void Structure::SetPosition(sf::Vector2i position)
 {
-	int index;
-	for (uint i = 0; i < game->planets[planetID].structures.size(); i++)
-	{
-		if (game->planets[planetID].structures[i] != nullptr && game->planets[planetID].structures[i]->id == id)
-		{
-			index = i;
-			break;
-		}
-	}
+	int index = id;
 	auto& chunks = game->planets[planetID].chunks;
 	if (chunkID != -1)
 	{
@@ -61,7 +53,7 @@ void Structure::SetPosition(sf::Vector2i position)
 		}
 	}
 	int i = game->planets[planetID].ChunkAtPos(position);
-	chunkID = chunks[i].id;
+	chunkID = i;
 	chunks[i].structures.push_back(index);
 	if (!isTerrain)
 	{
@@ -70,7 +62,7 @@ void Structure::SetPosition(sf::Vector2i position)
 	this->position = sf::Vector2i(position.x - chunks[i].position.x * CHUNK_SIZE, position.y - chunks[i].position.y * CHUNK_SIZE);
 	bottomRightPos = this->position + tileSize - sf::Vector2i(1, 1);
 	sf::Vector2f pos2 = (sf::Vector2f)this->position + (sf::Vector2f)tileSize / 2.f;
-	sf::Vector2f pos = game->planets[planetID].worldPos(pos2, chunks[i].id);
+	sf::Vector2f pos = game->planets[planetID].worldPos(pos2, i);
 	sprite.setPosition(pos);
 	game->planets[planetID].updateNeighbours = true;
 }

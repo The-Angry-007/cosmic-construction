@@ -25,6 +25,7 @@ Planet::Planet(int id)
 	structuresToUpdate = {};
 	emptyStructureSlots = {};
 	emptyItemSlots = {};
+	emptyChunkSlots = {};
 }
 void Planet::Init(bool load)
 {
@@ -44,6 +45,19 @@ void Planet::Init(bool load)
 			int id = std::stoi(chunkTable.GetValue("ChunkID", i));
 			Chunk c = Chunk(pos, id, this->id);
 			c.isAltered = true;
+			if (id >= chunks.size())
+			{
+				while (id > chunks.size())
+				{
+					chunks.push_back(Chunk());
+					emptyChunkSlots.push_back(chunks.size() - 1);
+				}
+				chunks.push_back(c);
+			}
+			else
+			{
+				chunks[id] = c;
+			}
 			chunks.push_back(c);
 		}
 		//loading items
@@ -268,6 +282,10 @@ void Planet::Render()
 	window->draw(rect);
 	for (uint i = 0; i < chunks.size(); i++)
 	{
+		if (chunks[i].isDeleted)
+		{
+			continue;
+		}
 		if (chunks[i].isVisible())
 			chunks[i].Render();
 	}
@@ -323,7 +341,7 @@ void Planet::Save()
 	chunkTable.headers = { "ChunkID", "PositionX", "PositionY" };
 	for (int i = 0; i < chunks.size(); i++)
 	{
-		if (!chunks[i].isAltered)
+		if ((!chunks[i].isAltered) || chunks[i].isDeleted)
 		{
 			continue;
 		}
@@ -353,7 +371,17 @@ void Planet::Save()
 void Planet::GenerateChunk(sf::Vector2i position)
 {
 	Chunk c = Chunk(position, -1, id);
-	chunks.push_back(c);
+	if (emptyChunkSlots.size() > 0)
+	{
+		c.id = emptyChunkSlots.back();
+		chunks[emptyChunkSlots.back()] = c;
+		emptyChunkSlots.pop_back();
+	}
+	else
+	{
+		c.id = chunks.size();
+		chunks.push_back(c);
+	}
 	updateNeighbours = true;
 	if (position == sf::Vector2i(0, 0))
 	{
@@ -481,13 +509,17 @@ void Planet::MoveItem(int index)
 }
 Chunk* Planet::GetChunk(int chunkID)
 {
-	for (uint i = 0; i < chunks.size(); i++)
+	if (chunkID < chunks.size())
 	{
-		if (chunks[i].id == chunkID)
-		{
-			return &chunks[i];
-		}
+		return &chunks[chunkID];
 	}
+	// for (uint i = 0; i < chunks.size(); i++)
+	// {
+	// 	if (chunks[i].id == chunkID)
+	// 	{
+	// 		return &chunks[i];
+	// 	}
+	// }
 	return nullptr;
 }
 bool Planet::StructureInArea(sf::Vector2i position, sf::Vector2i size)
@@ -601,6 +633,10 @@ int Planet::ChunkAtPos(sf::Vector2f position)
 	sf::Vector2i chunkPos(floor(chunkPosf.x), floor(chunkPosf.y));
 	for (uint i = 0; i < chunks.size(); i++)
 	{
+		if (chunks[i].isDeleted)
+		{
+			continue;
+		}
 		if (chunks[i].position == chunkPos)
 		{
 			return i;

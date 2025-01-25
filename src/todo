@@ -35,13 +35,10 @@ processing unit
 
 
 
-UPDATED ITEM SYSTEM TO DO
-x add new constructor to item class that just creates a blank item
-x add some code to planet function that ensures the id of the item is the same as the index when loading in
-x skip over deleted items when saving
-x create add item function that replaces first deleted item,
-x crate delete item function that removes item from chunk
-x set id of item to that index
-for storage silo, recipes etc just delete item upon entry
-structures that SHOULD have items: ones where hte items are actually visible, such as conveyors
-structures that should NOT: ones where the items are invisble, such as storage silos
+need to:
+create empty chunk slots list like with items and structures
+add some isdeleted attribute to chunk and stuff
+basically just did everything that was done with items
+
+THEN
+make structure's id same as its index and change anywhere that iterates instead of being O(1)

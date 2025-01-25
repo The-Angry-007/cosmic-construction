@@ -17,6 +17,7 @@ public:
 	std::vector<int> structuresToUpdate;
 	std::vector<Structure*> structures;
 	std::vector<int> emptyStructureSlots;
+	std::vector<int> emptyChunkSlots;
 	std::vector<int> emptyItemSlots;
 	Camera camera;
 	sf::Color backgroundColor;
