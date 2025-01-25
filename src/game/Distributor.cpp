@@ -11,7 +11,7 @@ Distributor::Distributor(int id, int planetID, int direction)
 	typeID = 9;
 	tileSize = ResourceHandler::structureSizes[typeID];
 	sprite = sf::Sprite();
-	ResourceHandler::structureAtlas->SetSprite(sprite, 9, 0);
+	ResourceHandler::structureAtlas->SetSprite(sprite, 9, upgradeLevel);
 	gap = 0.2f;
 	progress = { {}, {}, {}, {} };
 	items = { {}, {}, {}, {} };
@@ -315,6 +315,7 @@ JSON Distributor::ToJSON()
 	j.AddAttribute("ChunkID", std::to_string(chunkID));
 	j.AddAttribute("CurrentInputIndex", std::to_string(currentInputIndex));
 	j.AddAttribute("CurrentOutputIndex", std::to_string(currentOutputIndex));
+	j.AddAttribute("UpgradeLevel", upgradeLevel);
 	for (uint i = 0; i < 4; i++)
 	{
 		std::string strItems = "";
@@ -340,12 +341,12 @@ void Distributor::FromJSON(JSON j)
 	pos.x = std::stoi(j.GetValue("PositionX"));
 	pos.y = std::stoi(j.GetValue("PositionY"));
 	typeID = std::stoi(j.GetValue("TypeID"));
-
+	SetUpgradeLevel(j.GetInt("UpgradeLevel"));
 	SetID(std::stoi(j.GetValue("ID")));
 	chunkID = std::stoi(j.GetValue("ChunkID"));
 	pos += game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE;
 
-	ResourceHandler::structureAtlas->SetSprite(sprite, 9, 0);
+	ResourceHandler::structureAtlas->SetSprite(sprite, 9, upgradeLevel);
 	SetPosition(pos);
 	currentInputIndex = j.GetInt("CurrentInputIndex");
 	currentOutputIndex = j.GetInt("CurrentOutputIndex");

@@ -12,7 +12,7 @@ UndergroundEnter::UndergroundEnter(int id, int planetID, int direction)
 	SetDirection(direction);
 	tileSize = ResourceHandler::structureSizes[typeID];
 	sprite = sf::Sprite();
-	ResourceHandler::structureAtlas->SetSprite(sprite, 10, direction);
+	ResourceHandler::structureAtlas->SetSprite(sprite, 10, direction + 4 * upgradeLevel);
 	gap = 0.2f;
 	progress = {};
 	items = {};
@@ -126,7 +126,7 @@ void UndergroundEnter::Render()
 void UndergroundEnter::SetDirection(int direction)
 {
 	this->direction = direction;
-	ResourceHandler::structureAtlas->SetSprite(sprite, 10, direction);
+	ResourceHandler::structureAtlas->SetSprite(sprite, 10, direction + 4 * upgradeLevel);
 }
 
 int UndergroundEnter::StructureInFront()
@@ -148,6 +148,7 @@ JSON UndergroundEnter::ToJSON()
 	j.AddAttribute("ChunkID", std::to_string(chunkID));
 	j.AddAttribute("Items", items);
 	j.AddAttribute("Progress", progress);
+	j.AddAttribute("UpgradeLevel", upgradeLevel);
 
 	return j;
 }
@@ -157,13 +158,14 @@ void UndergroundEnter::FromJSON(JSON j)
 	pos.x = std::stoi(j.GetValue("PositionX"));
 	pos.y = std::stoi(j.GetValue("PositionY"));
 	typeID = std::stoi(j.GetValue("TypeID"));
+	SetUpgradeLevel(j.GetInt("UpgradeLevel"));
 
 	direction = std::stoi(j.GetValue("Direction"));
 	SetID(std::stoi(j.GetValue("ID")));
 	chunkID = std::stoi(j.GetValue("ChunkID"));
 	pos += game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE;
 
-	ResourceHandler::structureAtlas->SetSprite(sprite, 10, direction);
+	ResourceHandler::structureAtlas->SetSprite(sprite, 10, direction + 4 * upgradeLevel);
 	SetPosition(pos);
 	items = j.GetIntArr("Items");
 	progress = j.GetFloatArr("Progress");

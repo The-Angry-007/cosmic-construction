@@ -12,7 +12,7 @@ UndergroundExit::UndergroundExit(int id, int planetID, int direction)
 	SetDirection(direction);
 	tileSize = ResourceHandler::structureSizes[typeID];
 	sprite = sf::Sprite();
-	ResourceHandler::structureAtlas->SetSprite(sprite, 11, direction);
+	ResourceHandler::structureAtlas->SetSprite(sprite, 11, direction + 4 * upgradeLevel);
 	blocksItems = true;
 	placedByPlayer = true;
 	isConveyor = true;
@@ -63,6 +63,7 @@ JSON UndergroundExit::ToJSON()
 	j.AddAttribute("Direction", std::to_string(direction));
 	j.AddAttribute("ID", std::to_string(id));
 	j.AddAttribute("ChunkID", std::to_string(chunkID));
+	j.AddAttribute("UpgradeLevel", upgradeLevel);
 
 	return j;
 }
@@ -72,20 +73,20 @@ void UndergroundExit::FromJSON(JSON j)
 	pos.x = std::stoi(j.GetValue("PositionX"));
 	pos.y = std::stoi(j.GetValue("PositionY"));
 	typeID = std::stoi(j.GetValue("TypeID"));
-
+	SetUpgradeLevel(j.GetInt("UpgradeLevel"));
 	direction = std::stoi(j.GetValue("Direction"));
 	SetID(std::stoi(j.GetValue("ID")));
 	chunkID = std::stoi(j.GetValue("ChunkID"));
 	pos += game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE;
 
-	ResourceHandler::structureAtlas->SetSprite(sprite, 11, direction);
+	ResourceHandler::structureAtlas->SetSprite(sprite, 11, direction + 4 * upgradeLevel);
 	SetPosition(pos);
 }
 
 void UndergroundExit::SetDirection(int direction)
 {
 	this->direction = direction;
-	ResourceHandler::structureAtlas->SetSprite(sprite, 10, direction);
+	ResourceHandler::structureAtlas->SetSprite(sprite, 11, direction + 4 * upgradeLevel);
 }
 
 UndergroundExit::~UndergroundExit()
