@@ -347,9 +347,9 @@ void Planet::GenerateChunk(sf::Vector2i position)
 		{
 			Item item = Item(sf::Vector2f(0.f, 0.f), -1, 0);
 			item.SetParent(-1);
-			items.push_back(item);
-			MoveItem(items.size() - 1);
-			s->TryAddGroundItem(items.size() - 1);
+			AddItem(item);
+			MoveItem(item.id);
+			s->TryAddGroundItem(item.id);
 		}
 		{
 			for (int i = 0; i < 3; i++)
@@ -638,7 +638,7 @@ void Planet::WorldUpdate(float dt)
 	// }
 	for (uint i = 0; i < items.size(); i++)
 	{
-		if (items[i].parent != -1)
+		if (items[i].parent != -1 || items[i].isDeleted)
 		{
 			continue;
 		}
@@ -939,13 +939,17 @@ void Planet::AddItem(Item& item)
 void Planet::RemoveItem(int index)
 {
 	Chunk* c = GetChunk(items[index].chunkID);
-	for (int i = 0; i < c->items.size(); i++)
+	if (c != nullptr)
 	{
-		if (c->items[i] == index)
+		for (int i = 0; i < c->items.size(); i++)
 		{
-			c->items.erase(c->items.begin() + i);
+			if (c->items[i] == index)
+			{
+				c->items.erase(c->items.begin() + i);
+			}
 		}
 	}
+
 	items[index].isDeleted = true;
 	emptyItemSlots.push_back(index);
 }

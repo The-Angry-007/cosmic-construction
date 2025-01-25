@@ -50,18 +50,9 @@ void Item::Update(float dt, Planet* planet)
 		return;
 	}
 	Structure* s = planet->structures[i];
-	int index;
-	for (int i = 0; i < planet->items.size(); i++)
-	{
-		if (planet->items[i].id == id)
-		{
-			index = i;
-			break;
-		}
-	}
 	if (!s->blocksItems)
 	{
-		s->TryAddGroundItem(index);
+		s->TryAddGroundItem(id);
 	}
 	else
 	{

@@ -183,7 +183,7 @@ bool Distributor::ProgressLane(int lane, float dt, bool moveToMain)
 		progress[lane][i] += dt * speed;
 		if (i == 0)
 		{
-			if (progress[lane][0] > 1.f)
+			if (progress[lane][0] >= 1.f)
 			{
 				if (moveToMain)
 				{

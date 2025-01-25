@@ -368,7 +368,7 @@ void ToolHandler::Update(float dt, Planet* p)
 			std::vector<int> touchingItems = {};
 			for (int i = 0; i < p->items.size(); i++)
 			{
-				if (p->items[i].parent != -1)
+				if (p->items[i].parent != -1 || p->items[i].isDeleted)
 				{
 					continue;
 				}
