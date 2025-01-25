@@ -146,6 +146,10 @@ void StorageSilo::Update(float dt)
 					{
 						itemQuantities.erase(itemQuantities.begin() + previousOutputs[i]);
 						itemIDs.erase(itemIDs.begin() + previousOutputs[i]);
+						if (itemIDs.size() == 0)
+						{
+							break;
+						}
 					}
 					previousOutputs[i]++;
 				}
