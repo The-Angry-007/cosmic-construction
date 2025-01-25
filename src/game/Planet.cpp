@@ -178,6 +178,24 @@ void Planet::Init(bool load)
 					AddStructure(t);
 					t->FromJSON(jsons[i]);
 				}
+				else if (jsons[i].GetValue("TypeID") == "14")
+				{
+					RecipeStructure* t = new RecipeStructure(-2, id, 0, 14);
+					AddStructure(t);
+					t->FromJSON(jsons[i]);
+				}
+				else if (jsons[i].GetValue("TypeID") == "15")
+				{
+					RecipeStructure* t = new RecipeStructure(-2, id, 0, 15);
+					AddStructure(t);
+					t->FromJSON(jsons[i]);
+				}
+				else if (jsons[i].GetValue("TypeID") == "16")
+				{
+					RecipeStructure* t = new RecipeStructure(-2, id, 0, 16);
+					AddStructure(t);
+					t->FromJSON(jsons[i]);
+				}
 			}
 		}
 	}

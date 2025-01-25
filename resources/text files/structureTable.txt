@@ -16,6 +16,3 @@ StructureID/Name/Description/SizeX/SizeY
 14/Coke Furnace/Used to create coke, a more powerful version of coal./2/2
 15/Crusher/Crushes stone into sand to create more advanced materials./2/2
 16/Pumpjack/Extracts crude oil from the ground./2/2
-17/Refined Conveyor/A faster version of the conveyor./1/1
-18/Refined Distributor/A faster version of the distributor./1/1
-19/Refined Underground Belt/A faster version of the underground belt./1/1

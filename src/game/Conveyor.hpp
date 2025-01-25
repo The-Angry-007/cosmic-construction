@@ -9,7 +9,6 @@ public:
 	std::vector<std::vector<int>> items;
 	std::vector<std::vector<float>> progress;
 
-	float speed;
 	float gap;
 	Conveyor(int id, int planetID, int direction);
 	~Conveyor();
@@ -27,8 +26,7 @@ public:
 	bool AcceptsItems(int direction);
 	float Distance(int direction);
 	// void TryInsertItem(int item, float progress);
-	void
-	UpdateNeighbours();
+	void UpdateNeighbours();
 	JSON ToJSON();
 	void RenderPreview();
 	void Destroy();

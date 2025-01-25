@@ -10,7 +10,6 @@ public:
 	sf::Vector2i endBeltPos;
 	int maxLength;
 
-	float speed;
 	float gap;
 	UndergroundEnter(int id, int planetID, int direction);
 	~UndergroundEnter();

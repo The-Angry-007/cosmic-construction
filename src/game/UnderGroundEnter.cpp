@@ -16,7 +16,6 @@ UndergroundEnter::UndergroundEnter(int id, int planetID, int direction)
 	gap = 0.2f;
 	progress = {};
 	items = {};
-	speed = 3.f;
 	blocksItems = true;
 	placedByPlayer = true;
 	isConveyor = true;

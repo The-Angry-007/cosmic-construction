@@ -18,6 +18,7 @@ public:
 	sf::Vector2f structureStartDraggingPos;
 	int draggingStructure;
 	int placeDir;
+	int upgradeLevel = -1;
 	sf::Vector2f prevmousepos;
 	Structure* previewStructure;
 	GUILabel* insufficientLabel;

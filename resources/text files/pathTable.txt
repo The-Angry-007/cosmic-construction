@@ -112,3 +112,9 @@ StructureID/Path
 11/u_underground_exit_left.png
 12/laser cutter.png
 13/wire press.png
+14/coke furnace.png
+15/crusher.png
+16/pumpjack.png
+17/u_conveyor_up.png
+18/u_distributor.png
+19/u_underground_enter_up.png

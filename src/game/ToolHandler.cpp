@@ -503,9 +503,10 @@ void ToolHandler::Update(float dt, Planet* p)
 						randPos.x *= TILE_SIZE.x;
 						randPos.y *= TILE_SIZE.y;
 						// Item item = Item(sf::Vector2f(rand() % 1000, rand() % 1000) / 1000.f + pos, -1, cost[i]);
-						p->items.push_back(Item(pos + randPos, -1, cost[i]));
-						p->items.back().SetParent(-1);
-						p->MoveItem(p->items.size() - 1);
+						Item item = Item(pos + randPos, -1, cost[i]);
+						item.SetParent(-1);
+						p->AddItem(item);
+						p->MoveItem(item.id);
 					}
 				}
 				if (p->structures[index]->typeID == 11)
@@ -530,9 +531,13 @@ void ToolHandler::Update(float dt, Planet* p)
 								randPos.x *= TILE_SIZE.x;
 								randPos.y *= TILE_SIZE.y;
 								// Item item = Item(sf::Vector2f(rand() % 1000, rand() % 1000) / 1000.f + pos, -1, cost[i]);
-								p->items.push_back(Item(pos + randPos, -1, cost[i]));
-								p->items.back().SetParent(-1);
-								p->MoveItem(p->items.size() - 1);
+								Item item = Item(pos + randPos, -1, cost[i]);
+								item.SetParent(-1);
+								p->AddItem(item);
+								p->MoveItem(item.id);
+								// p->items.push_back(Item(pos + randPos, -1, cost[i]));
+								// p->items.back().SetParent(-1);
+								// p->MoveItem(p->items.size() - 1);
 							}
 						}
 						p->structures[index2]->Destroy();
@@ -561,9 +566,10 @@ void ToolHandler::Update(float dt, Planet* p)
 								randPos.x *= TILE_SIZE.x;
 								randPos.y *= TILE_SIZE.y;
 								// Item item = Item(sf::Vector2f(rand() % 1000, rand() % 1000) / 1000.f + pos, -1, cost[i]);
-								p->items.push_back(Item(pos + randPos, -1, cost[i]));
-								p->items.back().SetParent(-1);
-								p->MoveItem(p->items.size() - 1);
+								Item item = Item(pos + randPos, -1, cost[i]);
+								item.SetParent(-1);
+								p->AddItem(item);
+								p->MoveItem(item.id);
 							}
 						}
 						p->structures[index2]->Destroy();
@@ -674,6 +680,18 @@ Structure* ToolHandler::CreateStructure(int type)
 	else if (type == 13)
 	{
 		return new RecipeStructure(-2, game->activePlanet, placeDir, 13);
+	}
+	else if (type == 14)
+	{
+		return new RecipeStructure(-2, game->activePlanet, placeDir, 14);
+	}
+	else if (type == 15)
+	{
+		return new RecipeStructure(-2, game->activePlanet, placeDir, 15);
+	}
+	else if (type == 16)
+	{
+		return new RecipeStructure(-2, game->activePlanet, placeDir, 16);
 	}
 	else
 	{

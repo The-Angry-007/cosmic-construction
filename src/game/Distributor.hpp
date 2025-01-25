@@ -9,7 +9,6 @@ public:
 	std::vector<std::vector<float>> progress;
 	std::vector<int> neighbours;
 
-	float speed;
 	float gap;
 	Distributor(int id, int planetID, int direction);
 	~Distributor();
