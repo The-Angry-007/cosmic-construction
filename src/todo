@@ -1,11 +1,9 @@
-OPTIMISATIONS TO BE MADE
-files get huge due to number of item objects in circulation
-plan of attack:
--make id system just same as index into arrays
--remove any items when they enter a building if they wont be exiting it straight after
-(such as in recipes, storage silo etc.)
-should massively improve memory usage etc.
--fix memory leak when opening new menus
+CURRENT TODO
+delete underground exit class
+add isFlipped variable to structure, make underground exit the flipped variant of the underground enter
+add a new keybind that toggles flipped placement in toolhandler
+add filter conveyor that makes the first item that comes in its filter
+outputs items with that type to the left, otherwise go straight
 
 tech tree:
 iron plate DONE
@@ -27,6 +25,7 @@ B oil refinery
 petroleum barrel
 B chemical plant
 plastic
+plastic barrel
 kerosene barrel
 B electric arc furnace
 silicon wafer

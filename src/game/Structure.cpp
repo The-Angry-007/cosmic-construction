@@ -99,7 +99,10 @@ bool Structure::CanBePlaced()
 	sf::Vector2i pos = position + game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE;
 	return !(game->planets[planetID].StructureInArea(pos, tileSize));
 }
-
+void Structure::SetFlipped(bool flipped)
+{
+	isFlipped = flipped;
+}
 void Structure::RenderPreview()
 {
 	std::cout << "i should not be called" << std::endl;

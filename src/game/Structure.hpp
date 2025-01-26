@@ -16,6 +16,7 @@ public:
 	bool placedByPlayer;
 	bool isConveyor = false;
 	bool isTerrain = false;
+	bool isFlipped = false;
 	sf::Vector2i bottomRightPos;
 	sf::Vector2i position;
 	sf::Vector2i tileSize;
@@ -38,6 +39,7 @@ public:
 	virtual void Destroy();
 	virtual void SetDirection(int direction);
 	virtual void SetRecipe(RecipeData* data);
+	virtual void SetFlipped(bool flipped);
 
 	bool CanBePlaced();
 	virtual ~Structure();

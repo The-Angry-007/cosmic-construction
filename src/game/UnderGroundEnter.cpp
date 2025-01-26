@@ -12,7 +12,7 @@ UndergroundEnter::UndergroundEnter(int id, int planetID, int direction)
 	SetDirection(direction);
 	tileSize = ResourceHandler::structureSizes[typeID];
 	sprite = sf::Sprite();
-	ResourceHandler::structureAtlas->SetSprite(sprite, 10, direction + 4 * upgradeLevel);
+	ResourceHandler::structureAtlas->SetSprite(sprite, 10, direction);
 	gap = 0.2f;
 	speed = 3.f;
 	progress = {};
@@ -27,6 +27,10 @@ UndergroundEnter::UndergroundEnter(int id, int planetID, int direction)
 
 void UndergroundEnter::UpdateNeighbours()
 {
+	if (isFlipped)
+	{
+		return;
+	}
 	Planet& p = game->planets[planetID];
 	endBelt = -1;
 	length = 0;
@@ -39,7 +43,7 @@ void UndergroundEnter::UpdateNeighbours()
 		if (structure != -1)
 		{
 			Structure* s = p.structures[structure];
-			if (s->typeID == 11 && s->direction == direction)
+			if (s->typeID == 10 && s->direction == direction)
 			{
 				endBelt = structure;
 				endBeltPos = tilePos;
@@ -60,66 +64,6 @@ void UndergroundEnter::UpdateNeighbours()
 void UndergroundEnter::Update(float dt)
 {
 	// ProgressLane(dt);
-}
-
-bool UndergroundEnter::ProgressLane(float dt)
-{
-	bool moved = false;
-	Planet& p = game->planets[planetID];
-	for (uint i = 0; i < progress.size(); i++)
-	{
-		progress[i] += dt * speed;
-		if (i == 0)
-		{
-			if (progress[0] > length)
-			{
-				bool added = false;
-				if (endBelt != -1)
-				{
-					int structure = p.StructureInPos(endBeltPos + CONVEYOR_OFFSETS[direction]);
-					if (structure != -1)
-					{
-						Structure* s = p.structures[structure];
-						if (s->isConveyor)
-						{
-							ConveyorType* c = dynamic_cast<ConveyorType*>(s);
-							if (c->TryAddItem(items[0], (direction + 2) % 4, 0.f))
-							{
-								items.erase(items.begin());
-								progress.erase(progress.begin());
-								added = true;
-							}
-						}
-						else if (s->TryAddItem(items[0]))
-						{
-							items.erase(items.begin());
-							progress.erase(progress.begin());
-							added = true;
-						}
-					}
-					//need to either move to end belt or try to add to structure in front of end belt, which is better option?
-
-					// progress[direction].push_back(progress[lane][0] - 1.f);
-					// items[direction].push_back(items[lane][0]);
-					// items[lane].erase(items[lane].begin());
-					// progress[lane].erase(progress[lane].begin());
-					// moved = true;
-				}
-				if (!added)
-				{
-					progress[0] = (float)length;
-				}
-			}
-		}
-		else if (i != 0)
-		{
-			if (progress[i - 1] - progress[i] < gap)
-			{
-				progress[i] -= dt * speed;
-			}
-		}
-	}
-	return moved;
 }
 
 void UndergroundEnter::Render()
@@ -157,6 +101,7 @@ JSON UndergroundEnter::ToJSON()
 	j.AddAttribute("Items", items);
 	j.AddAttribute("Progress", progress);
 	j.AddAttribute("UpgradeLevel", upgradeLevel);
+	j.AddAttribute("IsFlipped", isFlipped);
 
 	return j;
 }
@@ -172,11 +117,30 @@ void UndergroundEnter::FromJSON(JSON j)
 	SetID(std::stoi(j.GetValue("ID")));
 	chunkID = std::stoi(j.GetValue("ChunkID"));
 	pos += game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE;
-
-	ResourceHandler::structureAtlas->SetSprite(sprite, 10, direction + 4 * upgradeLevel);
+	SetFlipped(j.GetInt("IsFlipped"));
+	ResourceHandler::structureAtlas->SetSprite(sprite, 10, direction);
 	SetPosition(pos);
 	items = j.GetIntArr("Items");
 	progress = j.GetFloatArr("Progress");
+}
+
+void UndergroundEnter::SetFlipped(bool flipped)
+{
+	if (flipped == isFlipped)
+	{
+		return;
+	}
+	if (!flipped)
+	{
+		progress = {};
+		for (int i = 0; i < items.size(); i++)
+		{
+			game->planets[planetID].RemoveItem(items[i]);
+		}
+		items = {};
+	}
+	isFlipped = flipped;
+	ResourceHandler::structureAtlas->SetSprite(sprite, 10, direction + 4 * isFlipped);
 }
 
 UndergroundEnter::~UndergroundEnter()
@@ -203,6 +167,10 @@ void UndergroundEnter::RenderPreview()
 
 void UndergroundEnter::Destroy()
 {
+	if (isFlipped)
+	{
+		return;
+	}
 	for (int j = 0; j < items.size(); j++)
 	{
 		Item& item = game->planets[planetID].items[items[j]];
@@ -216,6 +184,10 @@ void UndergroundEnter::Destroy()
 }
 bool UndergroundEnter::TryAddItem(int index, int direction, float progress)
 {
+	if (isFlipped)
+	{
+		return false;
+	}
 	if (direction != ((this->direction + 2) % 4))
 	{
 		return false;
@@ -230,6 +202,10 @@ bool UndergroundEnter::TryAddItem(int index, int direction, float progress)
 }
 bool UndergroundEnter::CanAddItem(int direction, float progress)
 {
+	if (isFlipped)
+	{
+		return false;
+	}
 	if (direction != ((this->direction + 2) % 4))
 	{
 		return false;
@@ -242,6 +218,10 @@ bool UndergroundEnter::CanAddItem(int direction, float progress)
 }
 float UndergroundEnter::Distance(int direction)
 {
+	if (isFlipped)
+	{
+		return 1.f;
+	}
 	if (direction != ((this->direction + 2) % 4) || progress.size() == 0)
 	{
 		return 1.f;
@@ -251,6 +231,10 @@ float UndergroundEnter::Distance(int direction)
 
 bool UndergroundEnter::AcceptsItems(int direction)
 {
+	if (isFlipped)
+	{
+		return false;
+	}
 	if (direction == (this->direction + 2) % 4)
 	{
 		return true;
@@ -260,6 +244,10 @@ bool UndergroundEnter::AcceptsItems(int direction)
 
 void UndergroundEnter::Progress(float dt)
 {
+	if (isFlipped)
+	{
+		return;
+	}
 	for (int i = 0; i < progress.size(); i++)
 	{
 		progress[i] += dt * speed;
@@ -267,6 +255,10 @@ void UndergroundEnter::Progress(float dt)
 }
 void UndergroundEnter::TryAdd()
 {
+	if (isFlipped)
+	{
+		return;
+	}
 	if (neighbour != -1 && progress.size() > 0 && progress[0] >= length)
 	{
 		Structure* s = game->planets[planetID].structures[neighbour];
@@ -292,6 +284,10 @@ void UndergroundEnter::TryAdd()
 
 void UndergroundEnter::KeepDistance()
 {
+	if (isFlipped)
+	{
+		return;
+	}
 	for (int i = 0; i < progress.size(); i++)
 	{
 		if (i == 0)

@@ -3,10 +3,6 @@ StructureID/Path
 0/conveyor_right.png
 0/conveyor_down.png
 0/conveyor_left.png
-0/u_conveyor_up.png
-0/u_conveyor_right.png
-0/u_conveyor_down.png
-0/u_conveyor_left.png
 1/storage_silo_base.png
 1/storage_silo_top.png
 1/silo_tunnel_0.png
@@ -93,28 +89,17 @@ StructureID/Path
 8/refined_drill_2.png
 8/refined_drill_3.png
 9/distributor.png
-9/u_distributor.png
 10/underground_enter_up.png
 10/underground_enter_right.png
 10/underground_enter_down.png
 10/underground_enter_left.png
-10/u_underground_enter_up.png
-10/u_underground_enter_right.png
-10/u_underground_enter_down.png
-10/u_underground_enter_left.png
-11/underground_exit_up.png
-11/underground_exit_right.png
-11/underground_exit_down.png
+10/underground_exit_up.png
+10/underground_exit_right.png
+10/underground_exit_down.png
+10/underground_exit_left.png
 11/underground_exit_left.png
-11/u_underground_exit_up.png
-11/u_underground_exit_right.png
-11/u_underground_exit_down.png
-11/u_underground_exit_left.png
 12/laser cutter.png
 13/wire press.png
 14/coke furnace.png
 15/crusher.png
 16/pumpjack.png
-17/u_conveyor_up.png
-18/u_distributor.png
-19/u_underground_enter_up.png

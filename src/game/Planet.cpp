@@ -192,9 +192,7 @@ void Planet::Init(bool load)
 				}
 				else if (jsons[i].GetValue("TypeID") == "11")
 				{
-					UndergroundExit* t = new UndergroundExit(-2, id, 0);
-					t->FromJSON(jsons[i]);
-					AddStructure(t, true);
+					//REDUNDANT STRUCTURE TYPE
 				}
 				else if (jsons[i].GetValue("TypeID") == "12")
 				{

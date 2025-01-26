@@ -247,10 +247,11 @@ void ToolHandler::Update(float dt, Planet* p)
 
 			// StorageSilo* s = new StorageSilo(0, game->activePlanet);
 			Structure* s = CreateStructure(placeType);
+			s->SetFlipped(placingFlipped);
 			s->SetVisualPosition(pos);
 
 			previewStructure = s;
-			if (placeType == 11)
+			if (placeType == 10 && placingFlipped)
 			{
 				sf::Vector2i position = pos;
 				for (int i = 1; i < 9; i++)
@@ -260,7 +261,7 @@ void ToolHandler::Update(float dt, Planet* p)
 					if (structure != -1)
 					{
 						Structure* s = p->structures[structure];
-						if (s->typeID == 10 && s->direction == placeDir)
+						if (s->typeID == 10 && s->direction == placeDir && !s->isFlipped)
 						{
 							sf::Color col = sf::Color::Yellow;
 							int max = dynamic_cast<UndergroundEnter*>(s)->maxLength;
@@ -293,17 +294,14 @@ void ToolHandler::Update(float dt, Planet* p)
 					{
 						Structure* s2 = CreateStructure(placeType);
 						s2->SetID(-1);
+						s2->SetFlipped(placingFlipped);
 						p->AddStructure(s2);
 
 						s2->SetPosition(pos);
 						p->UpdateNeighbours();
 						if (placeType == 10)
 						{
-							placeType = 11;
-						}
-						else if (placeType == 11)
-						{
-							placeType = 10;
+							placingFlipped = !placingFlipped;
 						}
 					}
 					else
@@ -512,73 +510,7 @@ void ToolHandler::Update(float dt, Planet* p)
 						p->MoveItem(item.id);
 					}
 				}
-				if (p->structures[index]->typeID == 11)
-				{
-					int index2 = dynamic_cast<UndergroundExit*>(p->structures[index])->startBelt;
-					if (index2 != -1)
-					{
-						int type = p->structures[index2]->typeID;
-						auto cost = ResourceHandler::GetCost(type);
-						sf::Vector2f pos = (sf::Vector2f)(p->structures[index2]->position + p->GetChunk(p->structures[index2]->chunkID)->position * CHUNK_SIZE);
-						pos += (sf::Vector2f)(p->structures[index2]->tileSize) / 2.f;
-						pos.x *= TILE_SIZE.x;
-						pos.y *= TILE_SIZE.y;
-						for (int i = 1; i < cost.size(); i += 2)
-						{
-							for (int j = 0; j < cost[i + 1]; j++)
-							{
-								sf::Vector2f randPos(rand() % 1000 - 500, rand() % 1000 - 500);
-								randPos.x *= (p->structures[index2]->tileSize.x / 2.f);
-								randPos.y *= (p->structures[index2]->tileSize.y / 2.f);
-								randPos /= 500.f;
-								randPos.x *= TILE_SIZE.x;
-								randPos.y *= TILE_SIZE.y;
-								// Item item = Item(sf::Vector2f(rand() % 1000, rand() % 1000) / 1000.f + pos, -1, cost[i]);
-								Item item = Item(pos + randPos, -1, cost[i]);
-								item.SetParent(-1);
-								p->AddItem(item);
-								p->MoveItem(item.id);
-								// p->items.push_back(Item(pos + randPos, -1, cost[i]));
-								// p->items.back().SetParent(-1);
-								// p->MoveItem(p->items.size() - 1);
-							}
-						}
-						p->structures[index2]->Destroy();
-						p->RemoveStructure(index2);
-					}
-				}
-				else if (p->structures[index]->typeID == 10)
-				{
-					int index2 = dynamic_cast<UndergroundEnter*>(p->structures[index])->endBelt;
-					if (index2 != -1)
-					{
-						int type = p->structures[index2]->typeID;
-						auto cost = ResourceHandler::GetCost(type);
-						sf::Vector2f pos = (sf::Vector2f)(p->structures[index2]->position + p->GetChunk(p->structures[index2]->chunkID)->position * CHUNK_SIZE);
-						pos += (sf::Vector2f)(p->structures[index2]->tileSize) / 2.f;
-						pos.x *= TILE_SIZE.x;
-						pos.y *= TILE_SIZE.y;
-						for (int i = 1; i < cost.size(); i += 2)
-						{
-							for (int j = 0; j < cost[i + 1]; j++)
-							{
-								sf::Vector2f randPos(rand() % 1000 - 500, rand() % 1000 - 500);
-								randPos.x *= (p->structures[index2]->tileSize.x / 2.f);
-								randPos.y *= (p->structures[index2]->tileSize.y / 2.f);
-								randPos /= 500.f;
-								randPos.x *= TILE_SIZE.x;
-								randPos.y *= TILE_SIZE.y;
-								// Item item = Item(sf::Vector2f(rand() % 1000, rand() % 1000) / 1000.f + pos, -1, cost[i]);
-								Item item = Item(pos + randPos, -1, cost[i]);
-								item.SetParent(-1);
-								p->AddItem(item);
-								p->MoveItem(item.id);
-							}
-						}
-						p->structures[index2]->Destroy();
-						p->RemoveStructure(index2);
-					}
-				}
+
 				p->structures[index]->Destroy();
 				p->RemoveStructure(index);
 			}
@@ -674,7 +606,6 @@ Structure* ToolHandler::CreateStructure(int type)
 	}
 	else if (type == 11)
 	{
-		return new UndergroundExit(-2, game->activePlanet, placeDir);
 	}
 	else if (type == 12)
 	{
