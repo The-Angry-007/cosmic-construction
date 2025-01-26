@@ -59,11 +59,11 @@ GUISaveSlot::GUISaveSlot(sf::Vector2f position, std::string path)
 	modifiedLabel->SetColor(sf::Color::Black);
 	bgObj->blocksMouseInput = true;
 	sf::Vector2f deleteSize(0.04f, 0.04f);
-	deleteBG = new GUIImage(position + sf::Vector2f(size.x - deleteSize.x, -size.y + deleteSize.y), deleteSize, "resources/images/squareButton.png");
+	deleteBG = new GUIImage(position + sf::Vector2f(size.x - deleteSize.x, -size.y + deleteSize.y), deleteSize, "content/resources/images/squareButton.png");
 	deleteBG->blocksMouseInput = true;
 	deleteBG->keepAspectRatio = true;
 	deleteBG->origin = sf::Vector2f(1.f, 0.f);
-	deleteIcon = new GUIImage(position + sf::Vector2f(size.x - deleteSize.x, -size.y + deleteSize.y), deleteSize, "resources/images/trashcan.png");
+	deleteIcon = new GUIImage(position + sf::Vector2f(size.x - deleteSize.x, -size.y + deleteSize.y), deleteSize, "content/resources/images/trashcan.png");
 	deleteIcon->blocksMouseInput = true;
 	deleteIcon->keepAspectRatio = true;
 	deleteIcon->origin = sf::Vector2f(1.f, 0.f);

@@ -24,13 +24,13 @@ Settings::Settings()
 	//FIRST PAGE
 	{
 		GUI* g = new GUI();
-		GUIImage* i = new GUIImage(sf::Vector2f(0.33f, 0.22f), sf::Vector2f(0.15f, 0.04f), "resources/images/buttonBezels.png");
+		GUIImage* i = new GUIImage(sf::Vector2f(0.33f, 0.22f), sf::Vector2f(0.15f, 0.04f), "content/resources/images/buttonBezels.png");
 		GUILabel* l = new GUILabel(sf::Vector2f(0.33f, 0.22f), sf::Vector2f(0.15f - 0.01f, 0.04f - 0.01f), "Controls");
 		l->SetColor(sf::Color::Black);
 		GUIButton* b = new GUIButton(sf::Vector2f(0.33f, 0.22f), sf::Vector2f(0.15f, 0.04f), i, l);
 		g->AddObject(b);
 
-		GUIImage* i2 = new GUIImage(sf::Vector2f(0.67f, 0.22f), sf::Vector2f(0.15f, 0.04f), "resources/images/buttonBezels.png");
+		GUIImage* i2 = new GUIImage(sf::Vector2f(0.67f, 0.22f), sf::Vector2f(0.15f, 0.04f), "content/resources/images/buttonBezels.png");
 		GUILabel* l2 = new GUILabel(sf::Vector2f(0.67f, 0.22f), sf::Vector2f(0.15f - 0.01f, 0.04f - 0.01f), "Audio");
 		l2->SetColor(sf::Color::Black);
 		GUIButton* b2 = new GUIButton(sf::Vector2f(0.67f, 0.22f), sf::Vector2f(0.15f, 0.04f), i2, l2);
@@ -40,7 +40,7 @@ Settings::Settings()
 		l3->SetColor(sf::Color::Black);
 		g->AddObject(l3);
 		GUIPanel* sliderBG = new GUIPanel(sf::Vector2f(0.5f, 0.37f), sf::Vector2f(0.35f, 0.015f), sf::Color(50, 50, 50));
-		GUIImage* sliderKnob = new GUIImage(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.025f, 0.025f), "resources/images/squareButton.png");
+		GUIImage* sliderKnob = new GUIImage(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.025f, 0.025f), "content/resources/images/squareButton.png");
 		sliderKnob->keepAspectRatio = true;
 		GUISlider* s = new GUISlider(sf::Vector2f(0.5f, 0.37f), sf::Vector2f(0.35f, 0.015f), sliderKnob, sliderBG, nullptr);
 		g->AddObject(s);
@@ -53,7 +53,7 @@ Settings::Settings()
 		l4->SetColor(sf::Color::Black);
 		g->AddObject(l4);
 		GUIPanel* sliderBG2 = new GUIPanel(sf::Vector2f(0.5f, 0.53f), sf::Vector2f(0.35f, 0.015f), sf::Color(50, 50, 50));
-		GUIImage* sliderKnob2 = new GUIImage(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.025f, 0.025f), "resources/images/squareButton.png");
+		GUIImage* sliderKnob2 = new GUIImage(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.025f, 0.025f), "content/resources/images/squareButton.png");
 		sliderKnob2->keepAspectRatio = true;
 		GUISlider* s2 = new GUISlider(sf::Vector2f(0.5f, 0.53f), sf::Vector2f(0.35f, 0.015f), sliderKnob2, sliderBG2, nullptr);
 		g->AddObject(s2);
@@ -62,7 +62,7 @@ Settings::Settings()
 		s2->numSteps = 12;
 		s2->value = 0.f;
 
-		GUIImage* i3 = new GUIImage(sf::Vector2f(0.5f, 0.75f), sf::Vector2f(0.3f, 0.04f), "resources/images/buttonBezels.png");
+		GUIImage* i3 = new GUIImage(sf::Vector2f(0.5f, 0.75f), sf::Vector2f(0.3f, 0.04f), "content/resources/images/buttonBezels.png");
 		GUILabel* l5 = new GUILabel(sf::Vector2f(0.5f, 0.75f), sf::Vector2f(0.3f - 0.01f, 0.04f - 0.01f), "Go Back");
 		l5->SetColor(sf::Color::Black);
 		GUIButton* b3 = new GUIButton(sf::Vector2f(0.5f, 0.75f), sf::Vector2f(0.3f, 0.04f), i3, l5);
@@ -104,7 +104,7 @@ Settings::Settings()
 		l->SetColor(sf::Color::Black);
 		g->AddObject(l);
 		GUIPanel* sliderBG = new GUIPanel(sf::Vector2f(0.5f, 0.25f), sf::Vector2f(0.35f, 0.015f), sf::Color(50, 50, 50));
-		GUIImage* sliderKnob = new GUIImage(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.025f, 0.025f), "resources/images/squareButton.png");
+		GUIImage* sliderKnob = new GUIImage(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.025f, 0.025f), "content/resources/images/squareButton.png");
 		sliderKnob->keepAspectRatio = true;
 		GUISlider* s = new GUISlider(sf::Vector2f(0.5f, 0.25f), sf::Vector2f(0.35f, 0.015f), sliderKnob, sliderBG, nullptr);
 		g->AddObject(s);
@@ -113,7 +113,7 @@ Settings::Settings()
 		l2->SetColor(sf::Color::Black);
 		g->AddObject(l2);
 		GUIPanel* sliderBG2 = new GUIPanel(sf::Vector2f(0.5f, 0.4f), sf::Vector2f(0.35f, 0.015f), sf::Color(50, 50, 50));
-		GUIImage* sliderKnob2 = new GUIImage(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.025f, 0.025f), "resources/images/squareButton.png");
+		GUIImage* sliderKnob2 = new GUIImage(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.025f, 0.025f), "content/resources/images/squareButton.png");
 		sliderKnob2->keepAspectRatio = true;
 		GUISlider* s2 = new GUISlider(sf::Vector2f(0.5f, 0.4f), sf::Vector2f(0.35f, 0.015f), sliderKnob2, sliderBG2, nullptr);
 		g->AddObject(s2);
@@ -122,7 +122,7 @@ Settings::Settings()
 		l3->SetColor(sf::Color::Black);
 		g->AddObject(l3);
 		GUIPanel* sliderBG3 = new GUIPanel(sf::Vector2f(0.5f, 0.55f), sf::Vector2f(0.35f, 0.015f), sf::Color(50, 50, 50));
-		GUIImage* sliderKnob3 = new GUIImage(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.025f, 0.025f), "resources/images/squareButton.png");
+		GUIImage* sliderKnob3 = new GUIImage(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.025f, 0.025f), "content/resources/images/squareButton.png");
 		sliderKnob3->keepAspectRatio = true;
 		GUISlider* s3 = new GUISlider(sf::Vector2f(0.5f, 0.55f), sf::Vector2f(0.35f, 0.015f), sliderKnob3, sliderBG3, nullptr);
 		g->AddObject(s3);

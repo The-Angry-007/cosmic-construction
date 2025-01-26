@@ -22,19 +22,55 @@ empty iron barrel DONE
 B pumpjack DONE
 B upgraded conveyors, etc DONE
 crude oil barrel DONE
+B filter conveyor
 B oil refinery
 petroleum barrel
+B chemical plant
 plastic
 kerosene barrel
-silicon
-silicon wafer (made in wire saw)
+B electric arc furnace
+silicon wafer
 transistor (made in laser cutter)
-PCB
-AND, OR, NOT gates
+PCB (made in wire press)
+B circuit assembler
+AND, OR, NOT circuits
 processing unit
+B rocket assembler
+rocket computer system
+rocket fuel tank
+rocket probe (used to send only silo up, so that proper rockets can be sent)
+rocket payload
+rocket thruster
+B/Item rocket launch silo
+boom we have rocket travel
 
 
 
-optimisations to make:
-improve the update neighbours algorithm by only updating structures that NEED to update
-impelment the factorio style
+other features to add today:
+- planet viewer (this will probably take a while)
+
+TUTORIAL SYSTEM
+things to do:
+- add tutorial class
+- write the text of each stage of the tutorial as a table text file
+- figure out a way to only allow certain inputs in each tutorial stage
+- make certain events trigger next tutorial stage
+time taken: 5 days?
+
+days left
+26.1 sun - finish all buildings and structures
+27.1 mon - way to switch to other planets
+28.1 tues - improve terrain gen
+29.1 wed -add some stuff to the moon, mars, venus if have time
+30.1 thurs --TUTORIAL START--
+31.1 fri
+1.2 sat
+2.2 sun --TUTORIAL END --
+3.2 mon -- STAKEHOLDER FEEDBACK START --
+4.2 tues
+5.2 wed
+6.2 thurs
+7.2 fri --STAKEHOLDER FEEDBACK END --
+8.2 sat -- COMMENTING OUT CODE --
+9.2 sun -- COMMENTING OUT CODE --
+10.2 mon submission

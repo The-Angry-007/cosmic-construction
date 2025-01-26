@@ -8,7 +8,7 @@ GUIGalaxy::GUIGalaxy()
 	float mag = sqrt(0.5);
 	vel = sf::Vector2f(mag, mag);
 	//load galaxy image
-	if (!texture.loadFromFile("resources/images/galaxy.png"))
+	if (!texture.loadFromFile("content/resources/images/galaxy.png"))
 	{
 		std::cout << "galaxy failed to load in GUI galaxy" << std::endl;
 		window->close();

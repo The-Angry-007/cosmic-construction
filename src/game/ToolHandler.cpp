@@ -771,7 +771,7 @@ void ToolHandler::ShowSelectArea(sf::Vector2i pos, int width, int height, sf::Co
 	std::vector<GUIImage*> selectedImages = {};
 	for (int i = 0; i < 4; i++)
 	{
-		selectedImages.push_back(new GUIImage(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.5f, 0.5f), "resources\\images\\selection" + std::to_string(i + 1) + ".png"));
+		selectedImages.push_back(new GUIImage(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.5f, 0.5f), "content\\resources\\images\\selection" + std::to_string(i + 1) + ".png"));
 		selectedImages[i]->keepAspectRatio = true;
 	}
 	Planet* p = game->ActivePlanet();

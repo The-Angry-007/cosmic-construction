@@ -33,7 +33,7 @@ int main()
 	window->setVerticalSyncEnabled(true);
 	//set the icon image that is displayed in the corner of the window
 	sf::Image icon;
-	icon.loadFromFile("resources/images/icon.png");
+	icon.loadFromFile("content/resources/images/icon.png");
 	window->setIcon(256, 256, icon.getPixelsPtr());
 
 	//make the window black while loading

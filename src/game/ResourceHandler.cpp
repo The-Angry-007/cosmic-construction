@@ -24,14 +24,14 @@ void ResourceHandler::Init()
 {
 	//items
 	itemTable = new Table();
-	std::string data = SaveHandler::ReadData("resources\\text files\\itemTable.txt");
+	std::string data = SaveHandler::ReadData("content\\resources\\text files\\itemTable.txt");
 	itemTable->FromString(data);
 	numItems = itemTable->records.size();
 	std::vector<sf::Texture> allItems = {};
 	for (uint i = 0; i < numItems; i++)
 	{
 		sf::Texture t;
-		if (!t.loadFromFile("resources\\items\\" + itemTable->GetValue("ImagePath", i)))
+		if (!t.loadFromFile("content\\resources\\items\\" + itemTable->GetValue("ImagePath", i)))
 		{
 			std::cout << "failed to load item texture: row " << i << std::endl;
 		}
@@ -48,7 +48,7 @@ void ResourceHandler::Init()
 	itemAtlas = new Atlas(allItems);
 	//structures
 	structureTable = new Table();
-	data = SaveHandler::ReadData("resources\\text files\\structureTable.txt");
+	data = SaveHandler::ReadData("content\\resources\\text files\\structureTable.txt");
 	structureTable->FromString(data);
 	numStructures = structureTable->records.size();
 	for (uint i = 0; i < numStructures; i++)
@@ -59,7 +59,7 @@ void ResourceHandler::Init()
 		structureSizes.push_back(size);
 	}
 	Table pathTable = Table();
-	data = SaveHandler::ReadData("resources\\text files\\pathTable.txt");
+	data = SaveHandler::ReadData("content\\resources\\text files\\pathTable.txt");
 	pathTable.FromString(data);
 	std::vector<int> ids;
 	std::vector<sf::Texture> allStructureTextures = {};
@@ -69,7 +69,7 @@ void ResourceHandler::Init()
 		int id = std::stoi(pathTable.GetValue("StructureID", i));
 		ids.push_back(id);
 		sf::Texture t;
-		if (!t.loadFromFile("resources\\structures\\" + path))
+		if (!t.loadFromFile("content\\resources\\structures\\" + path))
 		{
 			std::cout << "failed to load structure texture" << std::endl;
 		}
@@ -96,7 +96,7 @@ void ResourceHandler::Init()
 	completeAtlas = new Atlas(everyTexture, everyID);
 	structureCosts = {};
 	Table costTable = Table();
-	costTable.FromString(SaveHandler::ReadData("resources\\text files\\costTable.txt"));
+	costTable.FromString(SaveHandler::ReadData("content\\resources\\text files\\costTable.txt"));
 	for (int i = 0; i < costTable.records.size(); i++)
 	{
 		int id = std::stoi(costTable.GetValue("StructureID", i));
@@ -117,7 +117,7 @@ void ResourceHandler::Init()
 		structureCosts[index].push_back(std::stoi(costTable.GetValue("ItemID", i)));
 		structureCosts[index].push_back(std::stoi(costTable.GetValue("Amount", i)));
 	}
-	std::string recipesString = SaveHandler::ReadData("resources\\text files\\recipes.txt");
+	std::string recipesString = SaveHandler::ReadData("content\\resources\\text files\\recipes.txt");
 	std::vector<JSON> recipeJSONs = SaveHandler::StringToJSONs(recipesString);
 	RecipeHandler::LoadRecipes(recipeJSONs);
 }

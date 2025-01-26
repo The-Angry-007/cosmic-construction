@@ -72,9 +72,9 @@ void RecipeHandler::InitGUI(int structure)
 	{
 		topLabel->value = ResourceHandler::structureTable->GetValue("Name", s->typeID);
 		numBgObjs += 2;
-		GUIImage* arrow = new GUIImage(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.15f, 0.3f), "resources\\images\\arrow.png");
+		GUIImage* arrow = new GUIImage(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.15f, 0.3f), "content\\resources\\images\\arrow.png");
 		arrow->sprite.setColor(sf::Color(75, 75, 75));
-		GUIImage* arrow2 = new GUIImage(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.15f, 0.3f), "resources\\images\\arrow.png");
+		GUIImage* arrow2 = new GUIImage(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.15f, 0.3f), "content\\resources\\images\\arrow.png");
 		arrow->keepAspectRatio = true;
 		arrow2->keepAspectRatio = true;
 		gui->AddObject(arrow);

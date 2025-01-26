@@ -116,7 +116,7 @@ GUI* GUIHandler::GetOpenGUI()
 */
 void GUIHandler::InitGUIS()
 {
-	guifont.loadFromFile("resources/fonts/default font.ttf");
+	guifont.loadFromFile("content/resources/fonts/default font.ttf");
 	activeGui = 0;
 	openedGuis = { 0 };
 	guis = {};
@@ -142,7 +142,7 @@ void GUIHandler::InitGUIS()
 		g->AddObject(galaxy);
 		g->AddObject(dimpanel);
 		//cosmic construction logo
-		GUIImage* logo = new GUIImage(sf::Vector2f(0.5f, 0.3f), sf::Vector2f(0.5f, 0.3f), "resources/images/cosmic construction logo 3.png");
+		GUIImage* logo = new GUIImage(sf::Vector2f(0.5f, 0.3f), sf::Vector2f(0.5f, 0.3f), "content/resources/images/cosmic construction logo 3.png");
 		logo->keepAspectRatio = true;
 		g->AddObject(logo);
 		//new game, load game, settings, help buttons
@@ -156,7 +156,7 @@ void GUIHandler::InitGUIS()
 		{
 			float y = Lerp(top, bottom, i / 3.f);
 			// GUIPanel* p1 = new GUIPanel(sf::Vector2f(0.5f, y), sf::Vector2f(width, height), sf::Color(100, 100, 100));
-			GUIImage* p1 = new GUIImage(sf::Vector2f(0.5f, y), sf::Vector2f(width, height), "resources/images/buttonBezels.png");
+			GUIImage* p1 = new GUIImage(sf::Vector2f(0.5f, y), sf::Vector2f(width, height), "content/resources/images/buttonBezels.png");
 			GUILabel* l1 = new GUILabel(sf::Vector2f(0.5f, y), sf::Vector2f(width - 0.01f, height - 0.01f), labels[i]);
 			if (i == 0)
 			{
@@ -216,7 +216,7 @@ void GUIHandler::InitGUIS()
 		seedField->value = "Enter Seed";
 		g->AddObject(seedPanel);
 		//create save button
-		GUIImage* i = new GUIImage(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.3f, 0.05f), "resources/images/buttonBezels.png");
+		GUIImage* i = new GUIImage(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.3f, 0.05f), "content/resources/images/buttonBezels.png");
 		GUILabel* l = new GUILabel(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.25f, 0.025f), "Create Save");
 		l->SetColor(sf::Color::Black);
 		GUIButton* b = new GUIButton(sf::Vector2f(0.5f, 0.8f), sf::Vector2f(0.3f, 0.05f), i, l);
@@ -290,7 +290,7 @@ void GUIHandler::InitGUIS()
 			sf::Vector2f right = middle + sf::Vector2f(size * (numTools - 1), 0) / 2.f;
 			sf::Vector2f pos = Lerp(left, right, i / (numTools - 1.f));
 			toolPoses.push_back(pos);
-			std::string path = "resources\\images\\" + paths[i];
+			std::string path = "content\\resources\\images\\" + paths[i];
 			GUIPanel* bg = new GUIPanel(pos, sf::Vector2f(size, size) / 2.f * 1.2f, sf::Color(50, 50, 50));
 			bg->keepAspectRatio = true;
 			bg->ratio = 1.f;
@@ -300,12 +300,12 @@ void GUIHandler::InitGUIS()
 			im->keepAspectRatio = true;
 			g->AddObject(im);
 		}
-		GUIImage* selectedTool = new GUIImage(toolPoses[0], sf::Vector2f(size, size) / 2.f / 16.f * 24.f, "resources\\images\\GUISelectedTool.png");
+		GUIImage* selectedTool = new GUIImage(toolPoses[0], sf::Vector2f(size, size) / 2.f / 16.f * 24.f, "content\\resources\\images\\GUISelectedTool.png");
 		selectedTool->keepAspectRatio = true;
 		g->AddObject(selectedTool);
 		{
 			float size = 0.05f;
-			GUIImage* im = new GUIImage(sf::Vector2f(1.f - size, size), sf::Vector2f(size, size), "resources\\images\\GUIHome.png");
+			GUIImage* im = new GUIImage(sf::Vector2f(1.f - size, size), sf::Vector2f(size, size), "content\\resources\\images\\GUIHome.png");
 			im->keepAspectRatio = true;
 			im->origin = sf::Vector2f(1.f, 0.f);
 			GUIButton* b = new GUIButton(sf::Vector2f(1.f - size, size), sf::Vector2f(size, size), im, nullptr);
@@ -333,7 +333,7 @@ void GUIHandler::InitGUIS()
 		{
 			float y = Lerp(top, bottom, i / 3.f);
 			// GUIPanel* p1 = new GUIPanel(sf::Vector2f(0.5f, y), sf::Vector2f(width, height), sf::Color(100, 100, 100));
-			GUIImage* p1 = new GUIImage(sf::Vector2f(0.5f, y), sf::Vector2f(width, height), "resources/images/buttonBezels.png");
+			GUIImage* p1 = new GUIImage(sf::Vector2f(0.5f, y), sf::Vector2f(width, height), "content/resources/images/buttonBezels.png");
 			GUILabel* l1 = new GUILabel(sf::Vector2f(0.5f, y), sf::Vector2f(width - 0.01f, height - 0.01f), labels[i]);
 			l1->SetColor(sf::Color::Black);
 			GUIButton* b1 = new GUIButton(sf::Vector2f(0.5f, y), sf::Vector2f(width, height), p1, l1);

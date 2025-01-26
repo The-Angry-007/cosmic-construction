@@ -7,7 +7,7 @@ GUICheckbox::GUICheckbox(sf::Vector2f position, sf::Vector2f size, sf::Color col
 	//set to not checked by default
 	checked = false;
 	//create an image from the tick image
-	checkImage = new GUIImage(position, size, "resources/images/tick.png");
+	checkImage = new GUIImage(position, size, "content/resources/images/tick.png");
 	//create background image
 	bgObj = new GUIPanel(position, size, col);
 	//make sure the checkbox is always square
