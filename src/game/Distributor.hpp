@@ -12,6 +12,9 @@ public:
 	float gap;
 	Distributor(int id, int planetID, int direction);
 	~Distributor();
+	void Progress(float dt);
+	void TryAdd();
+	void KeepDistance();
 	void FromJSON(JSON j);
 	void Update(float dt);
 	void Render();

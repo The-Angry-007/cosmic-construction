@@ -7,12 +7,16 @@ public:
 	std::vector<float> progress;
 	int length;
 	int endBelt;
+	int neighbour;
 	sf::Vector2i endBeltPos;
 	int maxLength;
 
 	float gap;
 	UndergroundEnter(int id, int planetID, int direction);
 	~UndergroundEnter();
+	void Progress(float dt);
+	void TryAdd();
+	void KeepDistance();
 	void FromJSON(JSON j);
 	void Update(float dt);
 	void Render();

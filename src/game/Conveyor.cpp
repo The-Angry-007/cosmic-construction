@@ -44,81 +44,57 @@ void Conveyor::UpdateNeighbours()
 void Conveyor::Update(float dt)
 {
 	//moving items
-	int numChecked = 0;
-	int index = currentNeighbourIndex;
-	bool doneMove = false;
-	while (numChecked < 3)
-	{
-		numChecked++;
-		if (index == direction)
-		{
-			index = (index + 1) % 4;
-			numChecked--;
-			continue;
-		}
-		if (progress[index].size() > 0)
-		{
-			if (!doneMove)
-			{
-				if (ProgressLane(index, dt, true))
-				{
-					currentNeighbourIndex = (index + 1) % 4;
-					doneMove = true;
-				}
-			}
-			else
-			{
-				ProgressLane(index, dt, false);
-			}
-		}
-		index = (index + 1) % 4;
-	}
-	for (uint i = 0; i < items[direction].size(); i++)
-	{
-		if (i == 0)
-		{
-			if (progress[direction][i] > 1.f)
-			{
-				progress[direction][i] = 1.f;
-			}
-			progress[direction][i] += speed * dt;
+	// int numChecked = 0;
+	// int index = currentNeighbourIndex;
+	// bool doneMove = false;
+	// while (numChecked < 3)
+	// {
+	// 	numChecked++;
+	// 	if (index == direction)
+	// 	{
+	// 		index = (index + 1) % 4;
+	// 		numChecked--;
+	// 		continue;
+	// 	}
+	// 	if (progress[index].size() > 0)
+	// 	{
+	// 		if (!doneMove)
+	// 		{
+	// 			if (ProgressLane(index, dt, true))
+	// 			{
+	// 				currentNeighbourIndex = (index + 1) % 4;
+	// 				doneMove = true;
+	// 			}
+	// 		}
+	// 		else
+	// 		{
+	// 			ProgressLane(index, dt, false);
+	// 		}
+	// 	}
+	// 	index = (index + 1) % 4;
+	// }
+	// for (uint i = 0; i < items[direction].size(); i++)
+	// {
+	// 	if (i == 0)
+	// 	{
+	// 		if (progress[direction][i] > 1.f)
+	// 		{
+	// 			progress[direction][i] = 1.f;
+	// 		}
+	// 		progress[direction][i] += speed * dt;
 
-			if (neighbour != -1)
-			{
-				Structure* s = game->planets[planetID].structures[neighbour];
-				if (s->isConveyor)
-				{
-					ConveyorType* c = dynamic_cast<ConveyorType*>(s);
-					int dir = (direction + 2) % 4;
-					if (progress[direction][0] >= 1.f && c->TryAddItem(items[direction][0], dir, progress[direction][0] - 1.f))
-					{
-						progress[direction].erase(progress[direction].begin());
-						items[direction].erase(items[direction].begin());
-					}
-					float prog = c->Distance(dir);
-					if (prog + (1 - progress[direction][i]) < gap)
-					{
-						progress[direction][i] -= speed * dt;
-					}
-				}
-				else
-				{
-					if (progress[direction][0] >= 1.f && s->TryAddItem(items[direction][0]))
-					{
-						items[direction].erase(items[direction].begin());
-						progress[direction].erase(progress[direction].begin());
-					}
-				}
-			}
-		}
-		else
-		{
-			if (progress[direction][i - 1] - progress[direction][i] > gap)
-			{
-				progress[direction][i] += speed * dt;
-			}
-		}
-	}
+	// 		if (neighbour != -1)
+	// 		{
+	// 		}
+	// 	}
+	// 	else
+	// 	{
+	// 		if (progress[direction][i - 1] - progress[direction][i] > gap)
+	// 		{
+	// 			progress[direction][i] += speed * dt;
+	// 		}
+	// 	}
+	// }
 	//get items from neighbouring conveyors
 	// for (uint i = 0; i < 4; i++)
 	// {
@@ -410,4 +386,129 @@ bool Conveyor::AcceptsItems(int direction)
 		return true;
 	}
 	return false;
+}
+
+void Conveyor::Progress(float dt)
+{
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < progress[i].size(); j++)
+		{
+			progress[i][j] += dt * speed;
+		}
+	}
+}
+
+void Conveyor::TryAdd()
+{
+	if (neighbour != -1 && progress[direction].size() > 0)
+	{
+		Structure* s = game->planets[planetID].structures[neighbour];
+		if (s->isConveyor)
+		{
+			ConveyorType* c = dynamic_cast<ConveyorType*>(s);
+			int dir = (direction + 2) % 4;
+			if (progress[direction][0] >= 1.f && c->TryAddItem(items[direction][0], dir, progress[direction][0] - 1.f))
+			{
+				progress[direction].erase(progress[direction].begin());
+				items[direction].erase(items[direction].begin());
+			}
+			// float prog = c->Distance(dir);
+			// if (prog + (1 - progress[direction][i]) < gap)
+			// {
+			// 	progress[direction][i] -= speed * dt;
+			// }
+		}
+		else
+		{
+			if (progress[direction][0] >= 1.f && s->TryAddItem(items[direction][0]))
+			{
+				items[direction].erase(items[direction].begin());
+				progress[direction].erase(progress[direction].begin());
+			}
+		}
+	}
+	if (progress[direction].size() == 0 || progress[direction].back() >= gap)
+	{
+		int numChecked = 0;
+		int index = currentNeighbourIndex;
+		while (numChecked < 3)
+		{
+			numChecked++;
+			index = (index + 1) % 4;
+			if (index == direction)
+			{
+				index = (index + 1) % 4;
+			}
+			if (progress[index].size() > 0 && progress[index][0] >= 1.f)
+			{
+				progress[direction].push_back(progress[index][0] - 1.f);
+				items[direction].push_back(items[index][0]);
+				items[index].erase(items[index].begin());
+				progress[index].erase(progress[index].begin());
+				currentNeighbourIndex = index;
+				break;
+			}
+		}
+	}
+}
+
+void Conveyor::KeepDistance()
+{
+	for (int i = 0; i < progress[direction].size(); i++)
+	{
+		if (i == 0)
+		{
+			if (progress[direction][i] > 1.f)
+			{
+				progress[direction][i] = 1.f;
+			}
+			if (neighbour != -1)
+			{
+				Structure* s = game->planets[planetID].structures[neighbour];
+				if (s->isConveyor)
+				{
+					ConveyorType* c = dynamic_cast<ConveyorType*>(s);
+					float dist = c->Distance((direction + 2) % 4);
+					if (1.f - progress[direction][0] + dist < gap)
+					{
+						progress[direction][0] = 1.f - (gap - dist);
+					}
+				}
+			}
+		}
+		else
+		{
+			if (progress[direction][i - 1] - progress[direction][i] < gap)
+			{
+				progress[direction][i] = progress[direction][i - 1] - gap;
+				if (progress[direction][i] < 0)
+				{
+					progress[direction][i] = 0.f;
+				}
+			}
+		}
+	}
+	for (int i = 0; i < 4; i++)
+	{
+		if (direction == i)
+		{
+			continue;
+		}
+		if (progress[i].size() > 0 && progress[i][0] > 1.f)
+		{
+			progress[i][0] = 1.f;
+		}
+		for (int j = 1; j < progress[i].size(); j++)
+		{
+			if (progress[i][j - 1] - progress[i][j] < gap)
+			{
+				progress[i][j] = progress[i][j - 1] - gap;
+				if (progress[i][j] < 0)
+				{
+					progress[i][j] = 0.f;
+				}
+			}
+		}
+	}
 }

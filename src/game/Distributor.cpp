@@ -61,118 +61,6 @@ void Distributor::UpdateNeighbours()
 }
 void Distributor::Update(float dt)
 {
-	//should ideally only be done when new structures created or destroyed
-	//moving items
-	int numChecked = 0;
-	int index = currentInputIndex;
-	bool doneMove = false;
-	while (numChecked < 4)
-	{
-		numChecked++;
-		// if (index == direction)
-		// {
-		// 	index = (index + 1) % 4;
-		// 	numChecked--;
-		// 	continue;
-		// }
-		if (progress[index].size() > 0)
-		{
-			if (neighbours[index] == -1)
-			{
-				if (!doneMove)
-				{
-					if (ProgressLane(index, dt, true))
-					{
-						currentInputIndex = (index + 1) % 4;
-						doneMove = true;
-					}
-				}
-				else
-				{
-					ProgressLane(index, dt, false);
-				}
-			}
-			else
-			{
-				int direction = index;
-				for (uint i = 0; i < items[direction].size(); i++)
-				{
-					if (i == 0)
-					{
-						if (progress[direction][i] > 1.f)
-						{
-							progress[direction][i] = 1.f;
-						}
-						progress[direction][i] += speed * dt;
-
-						if (neighbours[direction] != -1)
-						{
-							Structure* s = game->planets[planetID].structures[neighbours[direction]];
-							if (s->isConveyor)
-							{
-								ConveyorType* c = dynamic_cast<ConveyorType*>(s);
-								int dir = (direction + 2) % 4;
-								if (progress[direction][0] >= 1.f && c->TryAddItem(items[direction][0], dir, progress[direction][0] - 1.f))
-								{
-									progress[direction].erase(progress[direction].begin());
-									items[direction].erase(items[direction].begin());
-								}
-								float prog = c->Distance(dir);
-								if (prog + (1 - progress[direction][i]) < gap)
-								{
-									progress[direction][i] -= speed * dt;
-								}
-							}
-							else
-							{
-								if (progress[direction][0] >= 1.f && s->TryAddItem(items[direction][0]))
-								{
-									items[direction].erase(items[direction].begin());
-									progress[direction].erase(progress[direction].begin());
-								}
-							}
-						}
-					}
-					else
-					{
-						if (progress[direction][i - 1] - progress[direction][i] > gap)
-						{
-							progress[direction][i] += speed * dt;
-						}
-					}
-				}
-			}
-		}
-		index = (index + 1) % 4;
-	}
-
-	//get items from neighbouring conveyors
-	// for (uint i = 0; i < 4; i++)
-	// {
-	// 	if (i == direction)
-	// 	{
-	// 		continue;
-	// 	}
-	// 	if (neighbours[i] == -1)
-	// 	{
-	// 		continue;
-	// 	}
-	// 	if (progress[i].size() == 0 || progress[i][progress[i].size() - 1] > gap)
-	// 	{
-	// 		Structure* s = game->planets[planetID].structures[neighbours[i]];
-	// 		Distributor* c = dynamic_cast<Distributor*>(s);
-	// 		if (c->items[c->direction].size() > 0)
-	// 		{
-	// 			if (c->progress[c->direction][0] >= 1.f)
-	// 			{
-	// 				items[i].push_back(c->items[c->direction][0]);
-	// 				progress[i].push_back(c->progress[c->direction][0] - 1.f);
-	// 				c->items[c->direction].erase(c->items[c->direction].begin());
-	// 				c->progress[c->direction].erase(c->progress[c->direction].begin());
-	// 			}
-	// 		}
-	// 	}
-	// }
 }
 
 bool Distributor::ProgressLane(int lane, float dt, bool moveToMain)
@@ -441,4 +329,143 @@ float Distributor::Distance(int direction)
 bool Distributor::AcceptsItems(int direction)
 {
 	return true;
+}
+
+void Distributor::Progress(float dt)
+{
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < progress[i].size(); j++)
+		{
+			progress[i][j] += dt * speed;
+		}
+	}
+}
+
+void Distributor::TryAdd()
+{
+	int numChecked = 0;
+	int index = currentInputIndex;
+	while (numChecked < 4)
+	{
+		numChecked++;
+		index = (index + 1) % 4;
+		if (neighbours[index] != -1)
+		{
+			if (progress[index].size() > 0)
+			{
+				Structure* s = game->planets[planetID].structures[neighbours[index]];
+				if (s->isConveyor)
+				{
+					ConveyorType* c = dynamic_cast<ConveyorType*>(s);
+					int dir = (index + 2) % 4;
+					if (progress[index][0] >= 1.f && c->TryAddItem(items[index][0], dir, progress[index][0] - 1.f))
+					{
+						progress[index].erase(progress[index].begin());
+						items[index].erase(items[index].begin());
+					}
+				}
+				else
+				{
+					if (progress[index][0] >= 1.f && s->TryAddItem(items[index][0]))
+					{
+						items[index].erase(items[index].begin());
+						progress[index].erase(progress[index].begin());
+					}
+				}
+			}
+		}
+		else
+		{
+			if (progress[index].size() > 0 && progress[index][0] >= 1.f)
+			{
+				int numChecked = 0;
+				int index2 = currentOutputIndex;
+				while (numChecked < 4)
+				{
+					numChecked++;
+					index2 = (index2 + 1) % 4;
+					if (neighbours[index2] != -1)
+					{
+						if (progress[index2].size() == 0 || progress[index2].back() > gap)
+						{
+							progress[index2].push_back(progress[index][0] - 1.f);
+							items[index2].push_back(items[index][0]);
+							progress[index].erase(progress[index].begin());
+							items[index].erase(items[index].begin());
+							currentOutputIndex = index2;
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+void Distributor::KeepDistance()
+{
+	for (int j = 0; j < 4; j++)
+	{
+		if (neighbours[j] != -1)
+		{
+			direction = j;
+			for (int i = 0; i < progress[direction].size(); i++)
+			{
+				if (i == 0)
+				{
+					if (progress[direction][i] > 1.f)
+					{
+						progress[direction][i] = 1.f;
+					}
+					Structure* s = game->planets[planetID].structures[neighbours[direction]];
+					if (s->isConveyor)
+					{
+						ConveyorType* c = dynamic_cast<ConveyorType*>(s);
+						float dist = c->Distance((direction + 2) % 4);
+						if (1.f - progress[direction][0] + dist < gap)
+						{
+							progress[direction][0] = 1.f - (gap - dist);
+						}
+					}
+				}
+				else
+				{
+					if (progress[direction][i - 1] - progress[direction][i] < gap)
+					{
+						progress[direction][i] = progress[direction][i - 1] - gap;
+						if (progress[direction][i] < 0)
+						{
+							progress[direction][i] = 0.f;
+						}
+					}
+				}
+			}
+		}
+		else
+		{
+			for (int k = 0; k < progress[j].size(); k++)
+			{
+				if (k == 0)
+				{
+					if (progress[j][k] > 1.f)
+					{
+						progress[j][k] = 1.f;
+					}
+				}
+				else
+				{
+
+					if (progress[j][k - 1] - progress[j][k] < gap)
+					{
+						progress[j][k] = progress[j][k - 1] - gap;
+						if (progress[j][k] < 0)
+						{
+							progress[j][k] = 0.f;
+						}
+					}
+				}
+			}
+		}
+	}
 }

@@ -193,6 +193,7 @@ void ToolHandler::Update(float dt, Planet* p)
 						lastPlacedStructure = p->structures.size();
 						p->AddStructure(s);
 						s->SetPosition(tilePos);
+						p->UpdateNeighbours();
 					}
 					else
 					{
@@ -294,6 +295,7 @@ void ToolHandler::Update(float dt, Planet* p)
 						p->AddStructure(s2);
 
 						s2->SetPosition(pos);
+						p->UpdateNeighbours();
 						if (placeType == 10)
 						{
 							placeType = 11;

@@ -727,6 +727,25 @@ void Planet::WorldUpdate(float dt)
 		}
 		items[i].Update(dt, &game->planets[id]);
 	}
+	//dealing with conveyor types
+	std::vector<ConveyorType*> conveyors = {};
+	for (int i = 0; i < structuresToUpdate.size(); i++)
+	{
+		if (structures[structuresToUpdate[i]]->isConveyor)
+		{
+			ConveyorType* c = dynamic_cast<ConveyorType*>(structures[structuresToUpdate[i]]);
+			c->Progress(dt);
+			conveyors.push_back(c);
+		}
+	}
+	for (int i = 0; i < conveyors.size(); i++)
+	{
+		conveyors[i]->TryAdd();
+	}
+	for (int i = 0; i < conveyors.size(); i++)
+	{
+		conveyors[i]->KeepDistance();
+	}
 	for (uint i = 0; i < structuresToUpdate.size(); i++)
 	{
 		structures[structuresToUpdate[i]]->Update(dt);

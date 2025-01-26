@@ -92,7 +92,6 @@ void GUIHandler::Render()
 	if (itemName != nullptr)
 	{
 		itemNameBG->Render();
-
 		itemName->Render();
 	}
 	fpsLabel->Render();

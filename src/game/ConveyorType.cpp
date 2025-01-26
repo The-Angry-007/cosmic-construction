@@ -34,3 +34,10 @@ void ConveyorType::SetUpgradeLevel(int level)
 		speed = 6.f;
 	}
 }
+
+void ConveyorType::Progress(float dt)
+{}
+void ConveyorType::TryAdd()
+{}
+void ConveyorType::KeepDistance()
+{}

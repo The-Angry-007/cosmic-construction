@@ -36,6 +36,10 @@ GUIItem::~GUIItem()
 
 	if (nameLabel != nullptr)
 	{
+		if (guihandler.itemName == nameLabel)
+		{
+			guihandler.itemName = nullptr;
+		}
 		delete nameLabel;
 		delete nameBG;
 	}

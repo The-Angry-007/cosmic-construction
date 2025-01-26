@@ -14,6 +14,7 @@ UndergroundEnter::UndergroundEnter(int id, int planetID, int direction)
 	sprite = sf::Sprite();
 	ResourceHandler::structureAtlas->SetSprite(sprite, 10, direction + 4 * upgradeLevel);
 	gap = 0.2f;
+	speed = 3.f;
 	progress = {};
 	items = {};
 	blocksItems = true;
@@ -42,15 +43,23 @@ void UndergroundEnter::UpdateNeighbours()
 			{
 				endBelt = structure;
 				endBeltPos = tilePos;
-				length = i + 1;
+				length = (i + 1) * 2.f;
 				break;
 			}
 		}
 	}
+	if (endBelt != -1)
+	{
+		neighbour = p.StructureInPos(endBeltPos + CONVEYOR_OFFSETS[direction]);
+	}
+	else
+	{
+		neighbour = -1;
+	}
 }
 void UndergroundEnter::Update(float dt)
 {
-	ProgressLane(dt);
+	// ProgressLane(dt);
 }
 
 bool UndergroundEnter::ProgressLane(float dt)
@@ -247,4 +256,61 @@ bool UndergroundEnter::AcceptsItems(int direction)
 		return true;
 	}
 	return false;
+}
+
+void UndergroundEnter::Progress(float dt)
+{
+	for (int i = 0; i < progress.size(); i++)
+	{
+		progress[i] += dt * speed;
+	}
+}
+void UndergroundEnter::TryAdd()
+{
+	if (neighbour != -1 && progress.size() > 0 && progress[0] >= length)
+	{
+		Structure* s = game->planets[planetID].structures[neighbour];
+		if (s->isConveyor)
+		{
+			ConveyorType* c = dynamic_cast<ConveyorType*>(s);
+			if (c->TryAddItem(items[0], (direction + 2) % 4, 0.f))
+			{
+				progress.erase(progress.begin());
+				items.erase(items.begin());
+			}
+		}
+		else
+		{
+			if (s->TryAddItem(items[0]))
+			{
+				progress.erase(progress.begin());
+				items.erase(items.begin());
+			}
+		}
+	}
+}
+
+void UndergroundEnter::KeepDistance()
+{
+	for (int i = 0; i < progress.size(); i++)
+	{
+		if (i == 0)
+		{
+			if (progress[i] > length)
+			{
+				progress[i] = (float)length;
+			}
+		}
+		else
+		{
+			if (progress[i - 1] - progress[i] < gap)
+			{
+				progress[i] = progress[i - 1] - gap;
+				if (progress[i] < 0)
+				{
+					progress[i] = 0.f;
+				}
+			}
+		}
+	}
 }

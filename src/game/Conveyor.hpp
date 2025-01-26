@@ -15,6 +15,9 @@ public:
 	void FromJSON(JSON j);
 	void Update(float dt);
 	void Render();
+	void Progress(float dt);
+	void TryAdd();
+	void KeepDistance();
 	bool ProgressLane(int lane, float dt, bool moveToMain);
 	void TryAddGroundItem(int index);
 	// void CollectItems();

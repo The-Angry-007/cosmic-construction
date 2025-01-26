@@ -35,10 +35,6 @@ processing unit
 
 
 
-need to:
-create empty chunk slots list like with items and structures
-add some isdeleted attribute to chunk and stuff
-basically just did everything that was done with items
-
-THEN
-make structure's id same as its index and change anywhere that iterates instead of being O(1)
+optimisations to make:
+improve the update neighbours algorithm by only updating structures that NEED to update
+impelment the factorio style
