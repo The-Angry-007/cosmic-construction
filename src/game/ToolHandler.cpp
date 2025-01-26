@@ -23,6 +23,7 @@ ToolHandler::ToolHandler()
 	prevTilePos = sf::Vector2i(-10000, -10000);
 	previewStructure = nullptr;
 	insufficientLabel = nullptr;
+	placingFlipped = false;
 	selectedImages = {};
 
 	draggingStructure = -1;
@@ -132,6 +133,10 @@ void ToolHandler::Update(float dt, Planet* p)
 
 	if (selectedTool == 0)
 	{
+		if (InputHandler::pressed(binds::FlipStructure))
+		{
+			placingFlipped = !placingFlipped;
+		}
 		if (previewStructure != nullptr)
 		{
 			delete previewStructure;
@@ -464,6 +469,11 @@ void ToolHandler::Update(float dt, Planet* p)
 			else if (InputHandler::pressed(binds::RotateStructure) && index != -1)
 			{
 				p->structures[index]->SetDirection((p->structures[index]->direction + 1) % 4);
+				p->updateNeighbours = true;
+			}
+			else if (InputHandler::pressed(binds::FlipStructure) && index != -1)
+			{
+				p->structures[index]->SetFlipped(!p->structures[index]->isFlipped);
 				p->updateNeighbours = true;
 			}
 		}
