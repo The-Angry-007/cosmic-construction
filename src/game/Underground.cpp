@@ -1,10 +1,10 @@
-#include "UnderGroundEnter.hpp"
+#include "Underground.hpp"
 
 #include "Main.hpp"
 #include "ResourceHandler.hpp"
 #include "utils.hpp"
 
-UndergroundEnter::UndergroundEnter(int id, int planetID, int direction)
+Underground::Underground(int id, int planetID, int direction)
 {
 	SetID(id);
 	this->planetID = planetID;
@@ -25,7 +25,7 @@ UndergroundEnter::UndergroundEnter(int id, int planetID, int direction)
 	endBelt = -1;
 }
 
-void UndergroundEnter::UpdateNeighbours()
+void Underground::UpdateNeighbours()
 {
 	if (isFlipped)
 	{
@@ -61,12 +61,12 @@ void UndergroundEnter::UpdateNeighbours()
 		neighbour = -1;
 	}
 }
-void UndergroundEnter::Update(float dt)
+void Underground::Update(float dt)
 {
 	// ProgressLane(dt);
 }
 
-void UndergroundEnter::Render()
+void Underground::Render()
 {
 	zindex = -32;
 	Planet& p = game->planets[planetID];
@@ -75,13 +75,13 @@ void UndergroundEnter::Render()
 		zindex });
 }
 
-void UndergroundEnter::SetDirection(int direction)
+void Underground::SetDirection(int direction)
 {
 	this->direction = direction;
 	ResourceHandler::structureAtlas->SetSprite(sprite, 10, direction + 4 * upgradeLevel);
 }
 
-int UndergroundEnter::StructureInFront()
+int Underground::StructureInFront()
 {
 	sf::Vector2i pos = position + CONVEYOR_OFFSETS[direction];
 	Chunk* chunk = game->planets[planetID].GetChunk(chunkID);
@@ -89,7 +89,7 @@ int UndergroundEnter::StructureInFront()
 	return game->planets[planetID].StructureInPos(pos);
 }
 
-JSON UndergroundEnter::ToJSON()
+JSON Underground::ToJSON()
 {
 	JSON j = JSON();
 	j.AddAttribute("PositionX", std::to_string(position.x));
@@ -105,7 +105,7 @@ JSON UndergroundEnter::ToJSON()
 
 	return j;
 }
-void UndergroundEnter::FromJSON(JSON j)
+void Underground::FromJSON(JSON j)
 {
 	sf::Vector2i pos(0, 0);
 	pos.x = std::stoi(j.GetValue("PositionX"));
@@ -124,7 +124,7 @@ void UndergroundEnter::FromJSON(JSON j)
 	progress = j.GetFloatArr("Progress");
 }
 
-void UndergroundEnter::SetFlipped(bool flipped)
+void Underground::SetFlipped(bool flipped)
 {
 	if (flipped == isFlipped)
 	{
@@ -143,12 +143,12 @@ void UndergroundEnter::SetFlipped(bool flipped)
 	ResourceHandler::structureAtlas->SetSprite(sprite, 10, direction + 4 * isFlipped);
 }
 
-UndergroundEnter::~UndergroundEnter()
+Underground::~Underground()
 {
 	// delete hitbox;
 }
 
-void UndergroundEnter::RenderPreview()
+void Underground::RenderPreview()
 {
 	int opacity = 100;
 	sf::Color col = sf::Color::Green;
@@ -165,7 +165,7 @@ void UndergroundEnter::RenderPreview()
 		2000 });
 }
 
-void UndergroundEnter::Destroy()
+void Underground::Destroy()
 {
 	if (isFlipped)
 	{
@@ -182,7 +182,7 @@ void UndergroundEnter::Destroy()
 		game->planets[planetID].MoveItem(items[j]);
 	}
 }
-bool UndergroundEnter::TryAddItem(int index, int direction, float progress)
+bool Underground::TryAddItem(int index, int direction, float progress)
 {
 	if (isFlipped)
 	{
@@ -200,7 +200,7 @@ bool UndergroundEnter::TryAddItem(int index, int direction, float progress)
 	}
 	return false;
 }
-bool UndergroundEnter::CanAddItem(int direction, float progress)
+bool Underground::CanAddItem(int direction, float progress)
 {
 	if (isFlipped)
 	{
@@ -216,7 +216,7 @@ bool UndergroundEnter::CanAddItem(int direction, float progress)
 	}
 	return false;
 }
-float UndergroundEnter::Distance(int direction)
+float Underground::Distance(int direction)
 {
 	if (isFlipped)
 	{
@@ -229,7 +229,7 @@ float UndergroundEnter::Distance(int direction)
 	return progress.back();
 }
 
-bool UndergroundEnter::AcceptsItems(int direction)
+bool Underground::AcceptsItems(int direction)
 {
 	if (isFlipped)
 	{
@@ -242,7 +242,7 @@ bool UndergroundEnter::AcceptsItems(int direction)
 	return false;
 }
 
-void UndergroundEnter::Progress(float dt)
+void Underground::Progress(float dt)
 {
 	if (isFlipped)
 	{
@@ -253,7 +253,7 @@ void UndergroundEnter::Progress(float dt)
 		progress[i] += dt * speed;
 	}
 }
-void UndergroundEnter::TryAdd()
+void Underground::TryAdd()
 {
 	if (isFlipped)
 	{
@@ -282,7 +282,7 @@ void UndergroundEnter::TryAdd()
 	}
 }
 
-void UndergroundEnter::KeepDistance()
+void Underground::KeepDistance()
 {
 	if (isFlipped)
 	{

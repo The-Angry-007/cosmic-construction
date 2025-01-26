@@ -186,7 +186,7 @@ void Planet::Init(bool load)
 				}
 				else if (jsons[i].GetValue("TypeID") == "10")
 				{
-					UndergroundEnter* t = new UndergroundEnter(-2, id, 0);
+					Underground* t = new Underground(-2, id, 0);
 					t->FromJSON(jsons[i]);
 					AddStructure(t, true);
 				}

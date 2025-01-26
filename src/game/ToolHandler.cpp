@@ -269,7 +269,7 @@ void ToolHandler::Update(float dt, Planet* p)
 						if (s->typeID == 10 && s->direction == placeDir && !s->isFlipped)
 						{
 							sf::Color col = sf::Color::Yellow;
-							int max = dynamic_cast<UndergroundEnter*>(s)->maxLength;
+							int max = dynamic_cast<Underground*>(s)->maxLength;
 							if (i > max)
 							{
 								break;
@@ -612,7 +612,7 @@ Structure* ToolHandler::CreateStructure(int type)
 	}
 	else if (type == 10)
 	{
-		return new UndergroundEnter(-2, game->activePlanet, placeDir);
+		return new Underground(-2, game->activePlanet, placeDir);
 	}
 	else if (type == 11)
 	{

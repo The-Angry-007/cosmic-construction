@@ -1,6 +1,6 @@
 #pragma once
 #include "ConveyorType.hpp"
-class UndergroundEnter : public ConveyorType
+class Underground : public ConveyorType
 {
 public:
 	std::vector<int> items;
@@ -12,8 +12,8 @@ public:
 	int maxLength;
 
 	float gap;
-	UndergroundEnter(int id, int planetID, int direction);
-	~UndergroundEnter();
+	Underground(int id, int planetID, int direction);
+	~Underground();
 	void Progress(float dt);
 	void TryAdd();
 	void KeepDistance();
