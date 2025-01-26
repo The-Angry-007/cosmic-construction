@@ -57,6 +57,14 @@ void Planet::Init(bool load)
 			else
 			{
 				chunks[id] = c;
+				for (int i = 0; i < emptyChunkSlots.size(); i++)
+				{
+					if (emptyChunkSlots[i] == id)
+					{
+						emptyChunkSlots.erase(emptyChunkSlots.begin() + i);
+						break;
+					}
+				}
 			}
 			// chunks.push_back(c);
 		}
@@ -86,6 +94,14 @@ void Planet::Init(bool load)
 			else
 			{
 				items[id] = item;
+				for (int i = 0; i < emptyItemSlots.size(); i++)
+				{
+					if (emptyItemSlots[i] == id)
+					{
+						emptyItemSlots.erase(emptyItemSlots.begin() + i);
+						break;
+					}
+				}
 			}
 
 			//TODO: DEAL WITH PARENT ATTRIBUTE
@@ -111,104 +127,104 @@ void Planet::Init(bool load)
 				if (jsons[i].GetValue("TypeID") == "0")
 				{
 					Conveyor* c = new Conveyor(-2, id, 0);
-					AddStructure(c);
 					c->FromJSON(jsons[i]);
+					AddStructure(c, true);
 				}
 				else if (jsons[i].GetValue("TypeID") == "1")
 				{
 					StorageSilo* s = new StorageSilo(-2, id);
-					AddStructure(s);
 					s->FromJSON(jsons[i]);
+					AddStructure(s, true);
 				}
 				else if (jsons[i].GetValue("TypeID") == "2")
 				{
 					Tree* t = new Tree(-2, id);
-					AddStructure(t);
 					t->FromJSON(jsons[i]);
+					AddStructure(t, true);
 				}
 				else if (jsons[i].GetValue("TypeID") == "3")
 				{
 					TreeChopper* t = new TreeChopper(-2, id, 0);
-					AddStructure(t);
 					t->FromJSON(jsons[i]);
+					AddStructure(t, true);
 				}
 				else if (jsons[i].GetValue("TypeID") == "4")
 				{
 					SaplingPlanter* t = new SaplingPlanter(-2, id, 0);
-					AddStructure(t);
 					t->FromJSON(jsons[i]);
+					AddStructure(t, true);
 				}
 				else if (jsons[i].GetValue("TypeID") == "5")
 				{
 					Boulder* t = new Boulder(-2, id);
-					AddStructure(t);
 					t->FromJSON(jsons[i]);
+					AddStructure(t, true);
 				}
 				else if (jsons[i].GetValue("TypeID") == "6")
 				{
 					Drill* t = new Drill(-2, id, 0);
-					AddStructure(t);
 					t->FromJSON(jsons[i]);
+					AddStructure(t, true);
 				}
 				else if (jsons[i].GetValue("TypeID") == "7")
 				{
 					RecipeStructure* t = new RecipeStructure(-2, id, 0, 7);
-					AddStructure(t);
 					t->FromJSON(jsons[i]);
+					AddStructure(t, true);
 				}
 				else if (jsons[i].GetValue("TypeID") == "8")
 				{
 					RefinedDrill* t = new RefinedDrill(-2, id, 0);
-					AddStructure(t);
 					t->FromJSON(jsons[i]);
+					AddStructure(t, true);
 				}
 				else if (jsons[i].GetValue("TypeID") == "9")
 				{
 					Distributor* t = new Distributor(-2, id, 0);
-					AddStructure(t);
 					t->FromJSON(jsons[i]);
+					AddStructure(t, true);
 				}
 				else if (jsons[i].GetValue("TypeID") == "10")
 				{
 					UndergroundEnter* t = new UndergroundEnter(-2, id, 0);
-					AddStructure(t);
 					t->FromJSON(jsons[i]);
+					AddStructure(t, true);
 				}
 				else if (jsons[i].GetValue("TypeID") == "11")
 				{
 					UndergroundExit* t = new UndergroundExit(-2, id, 0);
-					AddStructure(t);
 					t->FromJSON(jsons[i]);
+					AddStructure(t, true);
 				}
 				else if (jsons[i].GetValue("TypeID") == "12")
 				{
 					RecipeStructure* t = new RecipeStructure(-2, id, 0, 12);
-					AddStructure(t);
 					t->FromJSON(jsons[i]);
+					AddStructure(t, true);
 				}
 				else if (jsons[i].GetValue("TypeID") == "13")
 				{
 					RecipeStructure* t = new RecipeStructure(-2, id, 0, 13);
-					AddStructure(t);
 					t->FromJSON(jsons[i]);
+					AddStructure(t, true);
 				}
 				else if (jsons[i].GetValue("TypeID") == "14")
 				{
 					RecipeStructure* t = new RecipeStructure(-2, id, 0, 14);
-					AddStructure(t);
 					t->FromJSON(jsons[i]);
+					AddStructure(t, true);
 				}
 				else if (jsons[i].GetValue("TypeID") == "15")
 				{
 					RecipeStructure* t = new RecipeStructure(-2, id, 0, 15);
-					AddStructure(t);
 					t->FromJSON(jsons[i]);
+					AddStructure(t, true);
 				}
 				else if (jsons[i].GetValue("TypeID") == "16")
 				{
 					RecipeStructure* t = new RecipeStructure(-2, id, 0, 16);
-					AddStructure(t);
 					t->FromJSON(jsons[i]);
+					AddStructure(t, true);
 				}
 			}
 		}
@@ -757,7 +773,7 @@ void Planet::WorldUpdate(float dt)
 	}
 }
 
-void Planet::AddStructure(Structure* s)
+void Planet::AddStructure(Structure* s, bool preserveID)
 {
 	std::vector<int> nonUpdateIds = { 2 };
 	bool update = true;
@@ -769,23 +785,61 @@ void Planet::AddStructure(Structure* s)
 			break;
 		}
 	}
-	if (emptyStructureSlots.size() > 0)
+	if (preserveID)
 	{
-		int index = emptyStructureSlots.back();
-		if (update)
+		int id = s->id;
+		if (id >= structures.size())
 		{
-			structuresToUpdate.push_back(index);
+			while (id > structures.size())
+			{
+				structures.push_back(nullptr);
+				emptyStructureSlots.push_back(structures.size() - 1);
+			}
+			structures.push_back(s);
+			if (update)
+			{
+				structuresToUpdate.push_back(structures.size() - 1);
+			}
 		}
-		structures[index] = s;
-		emptyStructureSlots.pop_back();
+		else
+		{
+			structures[id] = s;
+			if (update)
+			{
+				structuresToUpdate.push_back(id);
+			}
+			for (int i = 0; i < emptyStructureSlots.size(); i++)
+			{
+				if (emptyStructureSlots[i] == id)
+				{
+					emptyStructureSlots.erase(emptyStructureSlots.begin() + i);
+					break;
+				}
+			}
+		}
 	}
 	else
 	{
-		if (update)
+		if (emptyStructureSlots.size() > 0)
 		{
-			structuresToUpdate.push_back(structures.size());
+			int index = emptyStructureSlots.back();
+			if (update)
+			{
+				structuresToUpdate.push_back(index);
+			}
+			structures[index] = s;
+			s->id = index;
+			emptyStructureSlots.pop_back();
 		}
-		structures.push_back(s);
+		else
+		{
+			if (update)
+			{
+				structuresToUpdate.push_back(structures.size());
+			}
+			structures.push_back(s);
+			s->id = structures.size() - 1;
+		}
 	}
 }
 

@@ -154,7 +154,7 @@ void ToolHandler::Update(float dt, Planet* p)
 					{
 
 						int direction = placeDir;
-						if (lastPlacedStructure != -1)
+						if (lastPlacedStructure != -1 && p->structures[lastPlacedStructure] != nullptr)
 						{
 							int dir = 0;
 							sf::Vector2i offset = tilePos;
@@ -190,8 +190,9 @@ void ToolHandler::Update(float dt, Planet* p)
 							}
 						}
 						Conveyor* s = new Conveyor(-1, p->id, direction);
-						lastPlacedStructure = p->structures.size();
+
 						p->AddStructure(s);
+						lastPlacedStructure = s->id;
 						s->SetPosition(tilePos);
 						p->UpdateNeighbours();
 					}

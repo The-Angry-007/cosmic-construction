@@ -46,7 +46,7 @@ public:
 	sf::Vector2i tilePos(sf::Vector2f position);
 	sf::Vector2f worldPos(sf::Vector2f tilePos, int chunkID);
 	void WorldUpdate(float dt);
-	void AddStructure(Structure* s);
+	void AddStructure(Structure* s, bool preserveID = false);
 	void AddItem(Item& item);
 	void RemoveItem(int item);
 	void RemoveStructure(int index);

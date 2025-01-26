@@ -32,7 +32,7 @@ void StorageSilo::SetPosition(sf::Vector2i position)
 	{
 		sprites[i].setPosition(this->sprite.getPosition());
 	}
-	UpdateNeighbours();
+	// UpdateNeighbours();
 }
 
 StorageSilo::~StorageSilo()
