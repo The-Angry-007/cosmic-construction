@@ -11,6 +11,7 @@ public:
 	std::vector<std::vector<float>> progress;
 	FilterConveyor(int id, int planetID, int direction);
 	~FilterConveyor();
+	void SetFlipped(bool flipped);
 	void FromJSON(JSON j);
 	void Update(float dt);
 	void Render();
@@ -23,6 +24,7 @@ public:
 	bool CanAddItem(int direction, float progress);
 	bool AcceptsItems(int direction);
 	float Distance(int direction);
+	void SetPosition(sf::Vector2i pos);
 	void UpdateNeighbours();
 	JSON ToJSON();
 	void RenderPreview();

@@ -74,7 +74,7 @@ void FilterConveyor::Render()
 		zindex });
 	p.renderObjects.push_back(RenderObject {
 		&overlaySprite,
-		32 });
+		99 });
 	if (filterItem != -1)
 	{
 		Item& item = game->planets[planetID].items[filterItem];
@@ -92,7 +92,7 @@ void FilterConveyor::Render()
 			startPos += (sf::Vector2f)CONVEYOR_OFFSETS[i] / 2.f;
 			sf::Vector2f endPos(0.5f, 0.5f);
 			float prog = progress[i][j];
-			if (i == direction)
+			if (i != (direction + 2) % 4)
 				prog = 1 - prog;
 			if (prog > 1.f)
 			{
@@ -137,13 +137,21 @@ void FilterConveyor::TryAddGroundItem(int index)
 
 	return;
 }
-
+void FilterConveyor::SetPosition(sf::Vector2i position)
+{
+	Structure::SetPosition(position);
+	overlaySprite.setPosition(sprite.getPosition());
+}
 void FilterConveyor::SetDirection(int direction)
 {
 	this->direction = direction;
-	ResourceHandler::structureAtlas->SetSprite(sprite, 17, direction + 4 * upgradeLevel);
+	ResourceHandler::structureAtlas->SetSprite(sprite, 17, direction + 4 * isFlipped);
 }
-
+void FilterConveyor::SetFlipped(bool flipped)
+{
+	this->isFlipped = flipped;
+	ResourceHandler::structureAtlas->SetSprite(sprite, 17, direction + 4 * isFlipped);
+}
 JSON FilterConveyor::ToJSON()
 {
 	JSON j = JSON();
@@ -186,11 +194,11 @@ void FilterConveyor::FromJSON(JSON j)
 	SetID(std::stoi(j.GetValue("ID")));
 	chunkID = std::stoi(j.GetValue("ChunkID"));
 	pos += game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE;
+	isFlipped = j.GetInt("IsFlipped");
 
-	ResourceHandler::structureAtlas->SetSprite(sprite, 0, direction + 4 * upgradeLevel);
+	ResourceHandler::structureAtlas->SetSprite(sprite, 17, direction + 4 * isFlipped);
 	SetPosition(pos);
 	filterItem = j.GetInt("FilterItem");
-	isFlipped = j.GetInt("IsFlipped");
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -399,6 +407,7 @@ void FilterConveyor::TryAdd()
 			filterItem = items[dir][0];
 			progress[dir].erase(progress[dir].begin());
 			items[dir].erase(items[dir].begin());
+			return;
 		}
 		if (progress[outputDir].size() == 0 || progress[outputDir].back() > gap)
 		{
