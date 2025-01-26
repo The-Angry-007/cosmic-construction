@@ -93,7 +93,6 @@ Settings::Settings()
 		AddBind("Tool 3", &binds::Tool3);
 		AddBind("Close Inventory", &binds::CloseInventory);
 		AddBind("Rotate Structure", &binds::RotateStructure);
-		AddBind("Open Build Menu", &binds::Build);
 	}
 	//AUDIO PAGE
 	{

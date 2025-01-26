@@ -77,11 +77,17 @@ void TreeChopper::Update(float dt)
 		else
 		{
 			int frame = (timeSinceAction / timePerStep) * 15;
+			if (frame > 14)
+			{
+				frame = 14;
+			}
 			ResourceHandler::structureAtlas->SetSprite(sprite, typeID, direction * 15 + frame);
 		}
 	}
 	else if (phase == 2)
 	{
+		ResourceHandler::structureAtlas->SetSprite(sprite, typeID, direction * 15 + 14);
+
 		if (timeSinceAction > timePerStep)
 		{
 			if (index == -1)

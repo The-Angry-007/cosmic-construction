@@ -233,6 +233,8 @@ void RecipeHandler::Update(float dt)
 
 		if (InputHandler::pressed(binds::CloseInventory))
 		{
+			InputHandler::RemovePressed(binds::CloseInventory);
+			InputHandler::RemoveDown(binds::CloseInventory);
 			guihandler.guis.pop_back();
 			delete gui;
 			gui = nullptr;

@@ -63,7 +63,7 @@ void ToolHandler::Update(float dt, Planet* p)
 		}
 	}
 
-	if (InputHandler::pressed(binds::Build))
+	if (InputHandler::pressed(binds::CloseInventory) && (!game->inMenu || guihandler.activeGui == 7))
 	{
 		if (guihandler.activeGui == 7)
 		{
