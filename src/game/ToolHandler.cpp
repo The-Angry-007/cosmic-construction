@@ -637,6 +637,10 @@ Structure* ToolHandler::CreateStructure(int type)
 	{
 		return new RecipeStructure(-2, game->activePlanet, placeDir, 16);
 	}
+	else if (type == 17)
+	{
+		return new FilterConveyor(-2, game->activePlanet, placeDir);
+	}
 	else
 	{
 		return nullptr;

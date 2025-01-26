@@ -29,12 +29,12 @@ BuildMenu::BuildMenu()
 	menus.push_back({});
 	menus.push_back({});
 	typeIDs = {
-		{ 1, 0, 9, 10 },
+		{ 1, 0, 9, 10, 17 },
 		{ 3, 4, 6, 8, 16 },
 		{ 7, 12, 13, 14, 15 }
 	};
 	std::vector<std::vector<std::vector<int>>> frames = {
-		{ { 0, 1 }, { 0 }, { 0 }, { 0 } },
+		{ { 0, 1 }, { 0 }, { 0 }, { 0 }, { 0 } },
 		{ { 4 * 15 }, { 0 }, { 0 }, { 0 }, { 0 } },
 		{ { 0 }, { 0 }, { 0 }, { 0 }, { 0 } }
 	};

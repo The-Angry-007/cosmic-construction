@@ -224,6 +224,12 @@ void Planet::Init(bool load)
 					t->FromJSON(jsons[i]);
 					AddStructure(t, true);
 				}
+				else if (jsons[i].GetValue("TypeID") == "17")
+				{
+					FilterConveyor* t = new FilterConveyor(-2, id, 0);
+					t->FromJSON(jsons[i]);
+					AddStructure(t, true);
+				}
 			}
 		}
 	}

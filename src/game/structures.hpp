@@ -4,6 +4,7 @@
 #include "ConveyorType.hpp"
 #include "Distributor.hpp"
 #include "Drill.hpp"
+#include "FilterConveyor.hpp"
 #include "RecipeStructure.hpp"
 #include "RefinedDrill.hpp"
 #include "SaplingPlanter.hpp"

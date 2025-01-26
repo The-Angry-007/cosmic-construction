@@ -1,17 +1,16 @@
 #pragma once
 #include "ConveyorType.hpp"
-extern std::vector<sf::Vector2i> CONVEYOR_OFFSETS;
-class Conveyor : public ConveyorType
+class FilterConveyor : public ConveyorType
 {
 public:
-	int currentNeighbourIndex;
-	int neighbour;
+	float gap;
+	int filterItem;
+	std::vector<int> neighbours;
+	sf::Sprite overlaySprite;
 	std::vector<std::vector<int>> items;
 	std::vector<std::vector<float>> progress;
-
-	float gap;
-	Conveyor(int id, int planetID, int direction);
-	~Conveyor();
+	FilterConveyor(int id, int planetID, int direction);
+	~FilterConveyor();
 	void FromJSON(JSON j);
 	void Update(float dt);
 	void Render();
@@ -19,14 +18,11 @@ public:
 	void TryAdd();
 	void KeepDistance();
 	void TryAddGroundItem(int index);
-	// void CollectItems();
 	void SetDirection(int direction);
-
 	bool TryAddItem(int index, int direction, float progress);
 	bool CanAddItem(int direction, float progress);
 	bool AcceptsItems(int direction);
 	float Distance(int direction);
-	// void TryInsertItem(int item, float progress);
 	void UpdateNeighbours();
 	JSON ToJSON();
 	void RenderPreview();

@@ -103,3 +103,12 @@ StructureID/Path
 14/coke furnace.png
 15/crusher.png
 16/pumpjack.png
+17/filter_up.png
+17/filter_right.png
+17/filter_down.png
+17/filter_left.png
+17/flipped_filter_up.png
+17/flipped_filter_right.png
+17/flipped_filter_down.png
+17/flipped_filter_left.png
+17/filter_overlay.png
