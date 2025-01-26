@@ -154,7 +154,8 @@ void Distributor::Render()
 void Distributor::TryAddGroundItem(int index)
 {
 	//only add new items if there is room
-	int dir = (direction + 2) % 4;
+	// int dir = (direction + 2) % 4;
+	int dir = 0;
 	if (progress[dir].size() > 0 && progress[dir][progress[dir].size() - 1] < gap)
 	{
 		return;
@@ -233,7 +234,7 @@ void Distributor::FromJSON(JSON j)
 	SetID(std::stoi(j.GetValue("ID")));
 	chunkID = std::stoi(j.GetValue("ChunkID"));
 	pos += game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE;
-
+	direction = -1;
 	ResourceHandler::structureAtlas->SetSprite(sprite, 9, upgradeLevel);
 	SetPosition(pos);
 	currentInputIndex = j.GetInt("CurrentInputIndex");
@@ -306,13 +307,8 @@ bool Distributor::TryAddItem(int index, int direction, float progress)
 }
 bool Distributor::CanAddItem(int direction, float progress)
 {
-	if (direction == (this->direction))
-	{
-		return false;
-	}
 	if (this->progress[direction].size() == 0 || this->progress[direction].back() - progress > gap)
 	{
-
 		return true;
 	}
 	return false;
@@ -409,7 +405,7 @@ void Distributor::KeepDistance()
 	{
 		if (neighbours[j] != -1)
 		{
-			direction = j;
+			int direction = j;
 			for (int i = 0; i < progress[direction].size(); i++)
 			{
 				if (i == 0)
