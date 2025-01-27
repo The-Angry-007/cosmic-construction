@@ -14,6 +14,7 @@ RocketSilo::RocketSilo(int id, int planetID, int direction, int typeID)
 
 	blocksItems = true;
 	placedByPlayer = true;
+	launchType = -1;
 }
 
 RocketSilo::~RocketSilo()

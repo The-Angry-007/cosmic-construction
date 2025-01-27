@@ -119,12 +119,13 @@ void Recipe::Destroy(Structure* parent)
 		{
 			// Item& item = game->planets[planetID].items[inputItems[i][j]];
 			Item item = Item(sf::Vector2f(0.f, 0.f), -1, data->inputTypes[i]);
-			game->planets[planetID].AddItem(item);
 			item.SetParent(-1);
 			item.position = (sf::Vector2f)(position + game->planets[planetID].GetChunk(parent->chunkID)->position * CHUNK_SIZE);
 			item.position += sf::Vector2f(rand() % 1000 * tileSize.x, rand() % 1000 * tileSize.y) / 1000.f;
 			item.position.x *= TILE_SIZE.x;
 			item.position.y *= TILE_SIZE.y;
+			game->planets[planetID].AddItem(item);
+
 			game->planets[planetID].MoveItem(item.id);
 		}
 	}
@@ -134,12 +135,13 @@ void Recipe::Destroy(Structure* parent)
 		{
 			// Item& item = game->planets[planetID].items[outputItems[i][j]];
 			Item item = Item(sf::Vector2f(0.f, 0.f), -1, data->outputTypes[i]);
-			game->planets[planetID].AddItem(item);
 			item.SetParent(-1);
 			item.position = (sf::Vector2f)(position + game->planets[planetID].GetChunk(parent->chunkID)->position * CHUNK_SIZE);
 			item.position += sf::Vector2f(rand() % 1000 * tileSize.x, rand() % 1000 * tileSize.y) / 1000.f;
 			item.position.x *= TILE_SIZE.x;
 			item.position.y *= TILE_SIZE.y;
+			game->planets[planetID].AddItem(item);
+
 			game->planets[planetID].MoveItem(item.id);
 		}
 	}

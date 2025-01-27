@@ -53,69 +53,105 @@ void RecipeHandler::InitGUI(int structure)
 	topLabel->SetColor(sf::Color::Black);
 	gui->AddObject(topLabel);
 	numBgObjs = gui->GUIObjects.size();
-	if (s->recipe == nullptr)
+	if (s->typeID == 22)
 	{
-		//display menu to pick recipe
-		std::vector<RecipeData> recs = recipes[s->typeID];
-		float size = 0.05f;
-		for (int i = 0; i < recs.size(); i++)
+		RocketSilo* r = dynamic_cast<RocketSilo*>(s);
+		if (r->launchType == -1)
 		{
-			GUIItem* inpItem = new GUIItem(sf::Vector2f(0.f, 0.f), sf::Vector2f(size, size), recs[i].inputTypes[0], 0);
-			GUIItem* outItem = new GUIItem(sf::Vector2f(0.f, 0.f), sf::Vector2f(size, size), recs[i].outputTypes[0], 0);
-			inpItem->blocksMouseInput = true;
-			outItem->blocksMouseInput = true;
-			gui->AddObject(inpItem);
-			gui->AddObject(outItem);
+			topLabel->value = "Select Launch Type";
+			GUILabel* option1 = new GUILabel(sf::Vector2f(.3f, .5f), sf::Vector2f(0.195f, 0.2f), "Option 1: send a probe that places a rocket silo on the target planet for future rockets to land on.");
+			GUILabel* option2 = new GUILabel(sf::Vector2f(.7f, .5f), sf::Vector2f(0.195f, 0.2f), "Option 2: send a payload rocket that delivers items to the target planet.");
+			option1->origin = sf::Vector2f(0.5f, 0.f);
+			option2->origin = sf::Vector2f(0.5f, 0.f);
+			option1->SetColor(sf::Color::Black);
+			option2->SetColor(sf::Color::Black);
+			option1->DoWrapping(20);
+			option2->DoWrapping(20);
+			{
+				GUIImage* bg = new GUIImage(sf::Vector2f(.3f, .75f), sf::Vector2f(.1f, .03f), "content\\resources\\images\\buttonBezels.png");
+				GUILabel* text = new GUILabel(sf::Vector2f(.3f, .75f), sf::Vector2f(.1f, .025f), "Option 1");
+				text->SetColor(sf::Color::Black);
+				GUIButton* b = new GUIButton(sf::Vector2f(.3f, .75f), sf::Vector2f(.1f, .03f), bg, text);
+				gui->AddObject(b);
+			}
+			{
+				GUIImage* bg = new GUIImage(sf::Vector2f(.7f, .75f), sf::Vector2f(.1f, .03f), "content\\resources\\images\\buttonBezels.png");
+				GUILabel* text = new GUILabel(sf::Vector2f(.7f, .75f), sf::Vector2f(.1f, .025f), "Option 2");
+				text->SetColor(sf::Color::Black);
+				GUIButton* b = new GUIButton(sf::Vector2f(.7f, .75f), sf::Vector2f(.1f, .03f), bg, text);
+				gui->AddObject(b);
+			}
+			gui->AddObject(option1);
+			gui->AddObject(option2);
 		}
 	}
 	else
 	{
-		topLabel->value = ResourceHandler::structureTable->GetValue("Name", s->typeID);
-		numBgObjs += 2;
-		GUIImage* arrow = new GUIImage(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.15f, 0.3f), "content\\resources\\images\\arrow.png");
-		arrow->sprite.setColor(sf::Color(75, 75, 75));
-		GUIImage* arrow2 = new GUIImage(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.15f, 0.3f), "content\\resources\\images\\arrow.png");
-		arrow->keepAspectRatio = true;
-		arrow2->keepAspectRatio = true;
-		gui->AddObject(arrow);
-		gui->AddObject(arrow2);
-		//display menu of recipe
-		float inputEnd = 0.3f;
-		float outputStart = 0.7f;
-		float size = 0.05f;
-		float gap = 0.1f;
-		sf::Vector2f pos(inputEnd, 0.5f);
-		Recipe* r = s->recipe;
-		std::vector<GUIObject*> fuelBars = {};
-		float fuelSize = 0.1f;
-		float fuelOffset = 0.2f;
-		float fuelWidth = 0.01f;
-		for (int i = 0; i < r->numInputs.size(); i++)
+		if (s->recipe == nullptr)
 		{
-			GUIItem* item = new GUIItem(pos, sf::Vector2f(size, size), r->data->inputTypes[i], r->numInputs[i]);
-			gui->GUIObjects.push_back(item);
-			if (r->data->isFuels[i])
+			//display menu to pick recipe
+			std::vector<RecipeData> recs = recipes[s->typeID];
+			float size = 0.05f;
+			for (int i = 0; i < recs.size(); i++)
 			{
-				GUIPanel* bgPanel = new GUIPanel(pos + sf::Vector2f(0, fuelOffset), sf::Vector2f(fuelWidth, fuelSize), sf::Color(50, 50, 50));
-				GUIPanel* colorPanel = new GUIPanel(pos + sf::Vector2f(0, fuelOffset), sf::Vector2f(fuelWidth, fuelSize), sf::Color(50, 50, 50));
-				fuelBars.push_back(bgPanel);
-				fuelBars.push_back(colorPanel);
+				GUIItem* inpItem = new GUIItem(sf::Vector2f(0.f, 0.f), sf::Vector2f(size, size), recs[i].inputTypes[0], 0);
+				GUIItem* outItem = new GUIItem(sf::Vector2f(0.f, 0.f), sf::Vector2f(size, size), recs[i].outputTypes[0], 0);
+				inpItem->blocksMouseInput = true;
+				outItem->blocksMouseInput = true;
+				gui->AddObject(inpItem);
+				gui->AddObject(outItem);
 			}
+		}
+		else
+		{
+			topLabel->value = ResourceHandler::structureTable->GetValue("Name", s->typeID);
+			numBgObjs += 2;
+			GUIImage* arrow = new GUIImage(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.15f, 0.3f), "content\\resources\\images\\arrow.png");
+			arrow->sprite.setColor(sf::Color(75, 75, 75));
+			GUIImage* arrow2 = new GUIImage(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.15f, 0.3f), "content\\resources\\images\\arrow.png");
+			arrow->keepAspectRatio = true;
+			arrow2->keepAspectRatio = true;
+			gui->AddObject(arrow);
+			gui->AddObject(arrow2);
+			//display menu of recipe
+			float inputEnd = 0.3f;
+			float outputStart = 0.7f;
+			float size = 0.05f;
+			float gap = 0.1f;
+			sf::Vector2f pos(inputEnd, 0.5f);
+			Recipe* r = s->recipe;
+			std::vector<GUIObject*> fuelBars = {};
+			float fuelSize = 0.1f;
+			float fuelOffset = 0.2f;
+			float fuelWidth = 0.01f;
+			for (int i = 0; i < r->numInputs.size(); i++)
+			{
+				GUIItem* item = new GUIItem(pos, sf::Vector2f(size, size), r->data->inputTypes[i], r->numInputs[i]);
+				gui->GUIObjects.push_back(item);
+				if (r->data->isFuels[i])
+				{
+					GUIPanel* bgPanel = new GUIPanel(pos + sf::Vector2f(0, fuelOffset), sf::Vector2f(fuelWidth, fuelSize), sf::Color(50, 50, 50));
+					GUIPanel* colorPanel = new GUIPanel(pos + sf::Vector2f(0, fuelOffset), sf::Vector2f(fuelWidth, fuelSize), sf::Color(50, 50, 50));
+					fuelBars.push_back(bgPanel);
+					fuelBars.push_back(colorPanel);
+				}
 
-			pos.x -= gap;
-		}
-		pos = sf::Vector2f(outputStart, pos.y);
-		for (int i = 0; i < r->numOutputs.size(); i++)
-		{
-			GUIItem* item = new GUIItem(pos, sf::Vector2f(size, size), r->data->outputTypes[i], r->numOutputs[i]);
-			gui->GUIObjects.push_back(item);
-			pos.x += gap;
-		}
-		for (int i = 0; i < fuelBars.size(); i++)
-		{
-			gui->GUIObjects.push_back(fuelBars[i]);
+				pos.x -= gap;
+			}
+			pos = sf::Vector2f(outputStart, pos.y);
+			for (int i = 0; i < r->numOutputs.size(); i++)
+			{
+				GUIItem* item = new GUIItem(pos, sf::Vector2f(size, size), r->data->outputTypes[i], r->numOutputs[i]);
+				gui->GUIObjects.push_back(item);
+				pos.x += gap;
+			}
+			for (int i = 0; i < fuelBars.size(); i++)
+			{
+				gui->GUIObjects.push_back(fuelBars[i]);
+			}
 		}
 	}
+
 	game->inMenu = true;
 	guihandler.guis.push_back(gui);
 }
@@ -125,6 +161,10 @@ void RecipeHandler::Update(float dt)
 	{
 		gui->Update(dt);
 		Structure* s = game->ActivePlanet()->structures[guiStructure];
+		if (s->typeID == 22)
+		{
+			return;
+		}
 		if (s->recipe == nullptr)
 		{
 			float inoutgap = 0.015f;

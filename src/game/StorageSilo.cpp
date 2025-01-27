@@ -153,6 +153,10 @@ void StorageSilo::Update(float dt)
 					}
 					previousOutputs[i]++;
 				}
+				else
+				{
+					game->planets[planetID].RemoveItem(index);
+				}
 			}
 		}
 	}
