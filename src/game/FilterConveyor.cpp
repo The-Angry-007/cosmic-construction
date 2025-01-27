@@ -46,14 +46,14 @@ void FilterConveyor::UpdateNeighbours()
 		if (structure != -1)
 		{
 			Structure* s = p.structures[structure];
-			if (s->isConveyor && dynamic_cast<ConveyorType*>(s)->AcceptsItems((directions[i])))
-			{
-				neighbours.push_back(structure);
-			}
-			else
-			{
-				neighbours.push_back(-1);
-			}
+			// if (s->isConveyor && dynamic_cast<ConveyorType*>(s)->AcceptsItems((directions[i])))
+			// {
+			// 	neighbours.push_back(structure);
+			// }
+			// else
+			// {
+			// }
+			neighbours.push_back(structure);
 		}
 		else
 		{
@@ -268,7 +268,7 @@ void FilterConveyor::Destroy()
 }
 bool FilterConveyor::TryAddItem(int index, int direction, float progress)
 {
-	if (direction == (this->direction))
+	if (direction != (this->direction) + 2 % 4)
 	{
 		return false;
 	}
@@ -282,10 +282,11 @@ bool FilterConveyor::TryAddItem(int index, int direction, float progress)
 }
 bool FilterConveyor::CanAddItem(int direction, float progress)
 {
-	if (direction == (this->direction))
+	if (direction != (this->direction) + 2 % 4)
 	{
 		return false;
 	}
+
 	if (this->progress[direction].size() == 0 || this->progress[direction].back() - progress > gap)
 	{
 
@@ -304,11 +305,7 @@ float FilterConveyor::Distance(int direction)
 
 bool FilterConveyor::AcceptsItems(int direction)
 {
-	if (direction != this->direction)
-	{
-		return true;
-	}
-	return false;
+	return (direction == (this->direction) + 2 % 4);
 }
 
 void FilterConveyor::Progress(float dt)
