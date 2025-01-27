@@ -272,8 +272,8 @@ craftTime:10
 StructureIDs:13
 inputTypes:17,8,10
 inputAmounts:1,5,1
-isFuels:0,1
-fuelLengths:0,50
+isFuels:0,0,1
+fuelLengths:0,0,50
 outputTypes:25
 outputAmounts:1
 craftTime:10
@@ -282,8 +282,8 @@ craftTime:10
 StructureIDs:21
 inputTypes:25,23,10
 inputAmounts:1,1,1
-isFuels:0,01
-fuelLengths:0,050
+isFuels:0,0,1
+fuelLengths:0,0,50
 outputTypes:26
 outputAmounts:1
 craftTime:10
@@ -362,8 +362,8 @@ craftTime:10
 StructureIDs:12
 inputTypes:6,11,15,10
 inputAmounts:50,50,10,1
-isFuels:0,0,1
-fuelLengths:0,0,30
+isFuels:0,0,0,1
+fuelLengths:0,0,0,30
 outputTypes:33
 outputAmounts:1
 craftTime:10
@@ -372,8 +372,8 @@ craftTime:10
 StructureIDs:12
 inputTypes:6,11,21,10
 inputAmounts:50,50,10,1
-isFuels:0,0,1
-fuelLengths:0,0,30
+isFuels:0,0,0,1
+fuelLengths:0,0,0,30
 outputTypes:33
 outputAmounts:1
 craftTime:10
