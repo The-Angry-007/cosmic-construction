@@ -15,6 +15,7 @@ GUIButton::GUIButton(sf::Vector2f position, sf::Vector2f size, GUIObject* bgObj,
 	//sets the click function to the default
 	clickFunc = ClickFuncs::blankFunc;
 	this->dimObj = new GUIPanel(position, size, sf::Color(0, 0, 0, 100));
+	hitbox = nullptr;
 }
 void GUIButton::Render()
 {

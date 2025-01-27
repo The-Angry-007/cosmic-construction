@@ -163,111 +163,139 @@ void RecipeHandler::Update(float dt)
 		Structure* s = game->ActivePlanet()->structures[guiStructure];
 		if (s->typeID == 22)
 		{
-			return;
-		}
-		if (s->recipe == nullptr)
-		{
-			float inoutgap = 0.015f;
-			sf::Vector2f gap(0.1f + inoutgap, 0.1f);
-			float size = 0.05f;
-			sf::Vector2f spos(0.1f + size, 0.16f + size);
-			// spos += gap;
-			sf::Vector2f pos = spos;
-			for (int i = numBgObjs; i < gui->GUIObjects.size(); i += 2)
+			RocketSilo* r = dynamic_cast<RocketSilo*>(s);
+			if (r->launchType == -1)
 			{
-				//arranging items
-				gui->GUIObjects[i]->position = pos;
-				gui->GUIObjects[i + 1]->position = pos + sf::Vector2f(inoutgap, 0.f);
-				if (gui->GUIObjects[i]->isClicked() || gui->GUIObjects[i + 1]->isClicked())
+				GUIObject* b1 = gui->GUIObjects[numBgObjs];
+				GUIObject* b2 = gui->GUIObjects[numBgObjs + 1];
+				if (b1->isClicked())
 				{
 					InputHandler::RemoveMbPressed(sf::Mouse::Button::Left);
 					InputHandler::RemoveMbDown(sf::Mouse::Button::Left);
-					s->SetRecipe(&recipes[s->typeID][(i - numBgObjs) / 2]);
+					r->launchType = 0;
 					guihandler.guis.pop_back();
 					delete gui;
 					gui = nullptr;
 					game->inMenu = false;
-					break;
 				}
-				pos.x += gap.x;
-				if (pos.x > 1 - spos.x)
+				else if (b2->isClicked())
 				{
-					pos.x = spos.x;
-					pos.y += gap.y;
+					InputHandler::RemoveMbPressed(sf::Mouse::Button::Left);
+					InputHandler::RemoveMbDown(sf::Mouse::Button::Left);
+					r->launchType = 1;
+					guihandler.guis.pop_back();
+					delete gui;
+					gui = nullptr;
+					game->inMenu = false;
 				}
 			}
 		}
 		else
 		{
-			int index = numBgObjs;
-			GUIImage* arrow = dynamic_cast<GUIImage*>(gui->GUIObjects[index - 1]);
-			float prog = s->recipe->craftTimer / s->recipe->data->craftTime;
-			if (prog < 0)
+			if (s->recipe == nullptr)
 			{
-				prog = 0;
-			}
-			if (prog > 1)
-			{
-				prog = 1;
-			}
-			prog = 1 - prog;
-			sf::Vector2f arrowSize(0.15f, 0.3f);
-			arrow->size.x = arrowSize.x;
-			sf::IntRect size = sf::IntRect(0, 0, Lerp(0, arrow->sprite.getTexture()->getSize().x, prog), arrow->sprite.getTexture()->getSize().y);
-			arrow->sprite.setTextureRect(size);
-			arrow->position.x = (0.5f - arrow->size.x) + (arrow->size.x * ((float)size.width / (float)arrow->sprite.getTexture()->getSize().x));
-			arrow->size.x = ((float)size.width / (float)arrow->sprite.getTexture()->getSize().x) * arrowSize.x;
-			for (int i = 0; i < s->recipe->numInputs.size(); i++)
-			{
-				dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->SetAmount(s->recipe->numInputs[i]);
-				if (s->recipe->numInputs[i] == 0)
+				float inoutgap = 0.015f;
+				sf::Vector2f gap(0.1f + inoutgap, 0.1f);
+				float size = 0.05f;
+				sf::Vector2f spos(0.1f + size, 0.16f + size);
+				// spos += gap;
+				sf::Vector2f pos = spos;
+				for (int i = numBgObjs; i < gui->GUIObjects.size(); i += 2)
 				{
-					dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->image->sprite.setColor(sf::Color(255, 255, 255, 100));
-				}
-				else
-				{
-					dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->image->sprite.setColor(sf::Color::White);
-				}
-			}
-			index += s->recipe->numInputs.size();
-			for (int i = 0; i < s->recipe->numOutputs.size(); i++)
-			{
-				dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->SetAmount(s->recipe->numOutputs[i]);
-				if (s->recipe->numOutputs[i] == 0)
-				{
-					dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->image->sprite.setColor(sf::Color(255, 255, 255, 100));
-				}
-				else
-				{
-					dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->image->sprite.setColor(sf::Color::White);
+					//arranging items
+					gui->GUIObjects[i]->position = pos;
+					gui->GUIObjects[i + 1]->position = pos + sf::Vector2f(inoutgap, 0.f);
+					if (gui->GUIObjects[i]->isClicked() || gui->GUIObjects[i + 1]->isClicked())
+					{
+						InputHandler::RemoveMbPressed(sf::Mouse::Button::Left);
+						InputHandler::RemoveMbDown(sf::Mouse::Button::Left);
+						s->SetRecipe(&recipes[s->typeID][(i - numBgObjs) / 2]);
+						guihandler.guis.pop_back();
+						delete gui;
+						gui = nullptr;
+						game->inMenu = false;
+						break;
+					}
+					pos.x += gap.x;
+					if (pos.x > 1 - spos.x)
+					{
+						pos.x = spos.x;
+						pos.y += gap.y;
+					}
 				}
 			}
-			index += s->recipe->numOutputs.size();
-			float fuelSize = 0.1f;
-			float fuelOffset = 0.2f;
-			float fuelWidth = 0.01f;
-			int fuelIndex = 0;
-			for (int i = index; i < gui->GUIObjects.size(); i++)
+			else
 			{
-				while (!s->recipe->data->isFuels[fuelIndex])
+				int index = numBgObjs;
+				GUIImage* arrow = dynamic_cast<GUIImage*>(gui->GUIObjects[index - 1]);
+				float prog = s->recipe->craftTimer / s->recipe->data->craftTime;
+				if (prog < 0)
 				{
-					fuelIndex++;
+					prog = 0;
 				}
-				float currLength = s->recipe->craftTimer;
-				if (currLength < 0.f)
+				if (prog > 1)
 				{
-					currLength = 0.f;
+					prog = 1;
 				}
-				currLength += s->recipe->fuelsLeft[fuelIndex];
-				currLength /= s->recipe->data->fuelLengths[fuelIndex];
-				float height = currLength * fuelSize;
-				float pos = 0.5f + fuelOffset;
-				pos += height;
-				pos -= fuelSize;
-				dynamic_cast<GUIPanel*>(gui->GUIObjects[i + 1])->SetColor(Lerp(sf::Color::Green, sf::Color::Red, 1.f - currLength));
-				dynamic_cast<GUIPanel*>(gui->GUIObjects[i + 1])->position.y = pos;
-				dynamic_cast<GUIPanel*>(gui->GUIObjects[i + 1])->size.y = height;
-				i++;
+				prog = 1 - prog;
+				sf::Vector2f arrowSize(0.15f, 0.3f);
+				arrow->size.x = arrowSize.x;
+				sf::IntRect size = sf::IntRect(0, 0, Lerp(0, arrow->sprite.getTexture()->getSize().x, prog), arrow->sprite.getTexture()->getSize().y);
+				arrow->sprite.setTextureRect(size);
+				arrow->position.x = (0.5f - arrow->size.x) + (arrow->size.x * ((float)size.width / (float)arrow->sprite.getTexture()->getSize().x));
+				arrow->size.x = ((float)size.width / (float)arrow->sprite.getTexture()->getSize().x) * arrowSize.x;
+				for (int i = 0; i < s->recipe->numInputs.size(); i++)
+				{
+					dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->SetAmount(s->recipe->numInputs[i]);
+					if (s->recipe->numInputs[i] == 0)
+					{
+						dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->image->sprite.setColor(sf::Color(255, 255, 255, 100));
+					}
+					else
+					{
+						dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->image->sprite.setColor(sf::Color::White);
+					}
+				}
+				index += s->recipe->numInputs.size();
+				for (int i = 0; i < s->recipe->numOutputs.size(); i++)
+				{
+					dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->SetAmount(s->recipe->numOutputs[i]);
+					if (s->recipe->numOutputs[i] == 0)
+					{
+						dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->image->sprite.setColor(sf::Color(255, 255, 255, 100));
+					}
+					else
+					{
+						dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->image->sprite.setColor(sf::Color::White);
+					}
+				}
+				index += s->recipe->numOutputs.size();
+				float fuelSize = 0.1f;
+				float fuelOffset = 0.2f;
+				float fuelWidth = 0.01f;
+				int fuelIndex = 0;
+				for (int i = index; i < gui->GUIObjects.size(); i++)
+				{
+					while (!s->recipe->data->isFuels[fuelIndex])
+					{
+						fuelIndex++;
+					}
+					float currLength = s->recipe->craftTimer;
+					if (currLength < 0.f)
+					{
+						currLength = 0.f;
+					}
+					currLength += s->recipe->fuelsLeft[fuelIndex];
+					currLength /= s->recipe->data->fuelLengths[fuelIndex];
+					float height = currLength * fuelSize;
+					float pos = 0.5f + fuelOffset;
+					pos += height;
+					pos -= fuelSize;
+					dynamic_cast<GUIPanel*>(gui->GUIObjects[i + 1])->SetColor(Lerp(sf::Color::Green, sf::Color::Red, 1.f - currLength));
+					dynamic_cast<GUIPanel*>(gui->GUIObjects[i + 1])->position.y = pos;
+					dynamic_cast<GUIPanel*>(gui->GUIObjects[i + 1])->size.y = height;
+					i++;
+				}
 			}
 		}
 
