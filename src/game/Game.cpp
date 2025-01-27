@@ -72,7 +72,7 @@ void Game::Update(float dt)
 		loadedTimer--;
 		return;
 	}
-	if (InputHandler::pressed(binds::Pause))
+	if (InputHandler::pressed(binds::Pause) && !inMenu)
 	{
 		TogglePaused();
 	}

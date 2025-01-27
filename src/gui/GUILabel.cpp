@@ -38,7 +38,15 @@ void GUILabel::Render()
 	text.setCharacterSize(128);
 	if (true)
 	{
-		text.setCharacterSize(ceil(((floor(cSize.y) + 1)) * 3.f));
+		int numLines = 1;
+		for (int i = 0; i < value.size(); i++)
+		{
+			if (value[i] == '\n')
+			{
+				numLines++;
+			}
+		}
+		text.setCharacterSize(ceil(((floor(cSize.y / numLines) + 1)) * 3.f));
 	}
 	text.setScale(sf::Vector2f(1.f, 1.f));
 

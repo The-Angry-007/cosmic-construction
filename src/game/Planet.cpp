@@ -230,6 +230,30 @@ void Planet::Init(bool load)
 					t->FromJSON(jsons[i]);
 					AddStructure(t, true);
 				}
+				else if (jsons[i].GetValue("TypeID") == "18")
+				{
+					RecipeStructure* t = new RecipeStructure(-2, id, 0, 18);
+					t->FromJSON(jsons[i]);
+					AddStructure(t, true);
+				}
+				else if (jsons[i].GetValue("TypeID") == "19")
+				{
+					RecipeStructure* t = new RecipeStructure(-2, id, 0, 19);
+					t->FromJSON(jsons[i]);
+					AddStructure(t, true);
+				}
+				else if (jsons[i].GetValue("TypeID") == "20")
+				{
+					RecipeStructure* t = new RecipeStructure(-2, id, 0, 20);
+					t->FromJSON(jsons[i]);
+					AddStructure(t, true);
+				}
+				else if (jsons[i].GetValue("TypeID") == "21")
+				{
+					RecipeStructure* t = new RecipeStructure(-2, id, 0, 21);
+					t->FromJSON(jsons[i]);
+					AddStructure(t, true);
+				}
 			}
 		}
 	}

@@ -1,9 +1,3 @@
-CURRENT TODO
-delete underground exit class
-add isFlipped variable to structure, make underground exit the flipped variant of the underground enter
-add a new keybind that toggles flipped placement in toolhandler
-add filter conveyor that makes the first item that comes in its filter
-outputs items with that type to the left, otherwise go straight
 
 tech tree:
 iron plate DONE
@@ -20,24 +14,24 @@ empty iron barrel DONE
 B pumpjack DONE
 B upgraded conveyors, etc DONE
 crude oil barrel DONE
-B filter conveyor
-B oil refinery
-petroleum barrel
-B chemical plant
-plastic
-plastic barrel
-kerosene barrel
-B electric arc furnace
-silicon wafer
+B filter conveyor DONE
+B oil refinery DONE
+petroleum barrel DONE
+B chemical plant DONE
+plastic DONE
+plastic barrel DONE
+kerosene barrel DONE
+B electric arc furnace DONE
+silicon wafer DONE
 transistor (made in laser cutter)
-PCB (made in wire press)
-B circuit assembler
-AND, OR, NOT circuits
-processing unit
-B rocket assembler
-rocket computer system
-rocket fuel tank
-rocket probe (used to send only silo up, so that proper rockets can be sent)
+PCB (made in wire press) DONE
+B circuit assembler DONE
+AND, OR, NOT circuits DONE
+processing unit DONE
+rocket computer system DONE
+rocket fuel tank DONE
+from here on need to actually be added to game
+rocket probe (used to send only silo up, so that proper rockets can be sent) DONE (no recipe implemented yet)
 rocket payload
 rocket thruster
 B/Item rocket launch silo

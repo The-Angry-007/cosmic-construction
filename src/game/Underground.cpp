@@ -118,7 +118,7 @@ void Underground::FromJSON(JSON j)
 	chunkID = std::stoi(j.GetValue("ChunkID"));
 	pos += game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE;
 	SetFlipped(j.GetInt("IsFlipped"));
-	ResourceHandler::structureAtlas->SetSprite(sprite, 10, direction);
+	ResourceHandler::structureAtlas->SetSprite(sprite, 10, direction + 4 * isFlipped);
 	SetPosition(pos);
 	items = j.GetIntArr("Items");
 	progress = j.GetFloatArr("Progress");
