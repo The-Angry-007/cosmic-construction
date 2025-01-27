@@ -26,10 +26,10 @@ void RocketSilo::UpdateNeighbours()
 
 void RocketSilo::Update(float dt)
 {
-	// if (recipe != nullptr)
-	// {
-	// 	recipe->Update(dt);
-	// }
+	if (recipe != nullptr)
+	{
+		recipe->Update(dt);
+	}
 	// std::vector<int> directions = {
 	// 	2, 2, 3, 3, 0, 0, 1, 1
 	// };

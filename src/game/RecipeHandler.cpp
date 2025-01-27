@@ -84,6 +84,34 @@ void RecipeHandler::InitGUI(int structure)
 			gui->AddObject(option1);
 			gui->AddObject(option2);
 		}
+		else
+		{
+			topLabel->value = ResourceHandler::structureTable->GetValue("Name", s->typeID);
+			//display menu of recipe
+			float inputEnd = 0.65f;
+			float size = 0.05f;
+			float gap = 0.1f;
+			sf::Vector2f pos(inputEnd, 0.5f);
+			Recipe* r = s->recipe;
+			std::vector<GUIObject*> fuelBars = {};
+			float fuelSize = 0.1f;
+			float fuelOffset = 0.2f;
+			float fuelWidth = 0.01f;
+			for (int i = 0; i < r->numInputs.size(); i++)
+			{
+				GUIItem* item = new GUIItem(pos, sf::Vector2f(size, size), r->data->inputTypes[i], r->numInputs[i]);
+				gui->GUIObjects.push_back(item);
+				if (r->data->isFuels[i])
+				{
+					GUIPanel* bgPanel = new GUIPanel(pos + sf::Vector2f(0, fuelOffset), sf::Vector2f(fuelWidth, fuelSize), sf::Color(50, 50, 50));
+					GUIPanel* colorPanel = new GUIPanel(pos + sf::Vector2f(0, fuelOffset), sf::Vector2f(fuelWidth, fuelSize), sf::Color(50, 50, 50));
+					fuelBars.push_back(bgPanel);
+					fuelBars.push_back(colorPanel);
+				}
+
+				pos.x -= gap;
+			}
+		}
 	}
 	else
 	{
@@ -116,8 +144,8 @@ void RecipeHandler::InitGUI(int structure)
 			//display menu of recipe
 			float inputEnd = 0.3f;
 			float outputStart = 0.7f;
-			float size = 0.05f;
-			float gap = 0.1f;
+			float size = 0.025f;
+			float gap = 0.05f;
 			sf::Vector2f pos(inputEnd, 0.5f);
 			Recipe* r = s->recipe;
 			std::vector<GUIObject*> fuelBars = {};
@@ -172,6 +200,7 @@ void RecipeHandler::Update(float dt)
 				{
 					InputHandler::RemoveMbPressed(sf::Mouse::Button::Left);
 					InputHandler::RemoveMbDown(sf::Mouse::Button::Left);
+					r->SetRecipe(&recipes[22][0]);
 					r->launchType = 0;
 					guihandler.guis.pop_back();
 					delete gui;
@@ -187,6 +216,22 @@ void RecipeHandler::Update(float dt)
 					delete gui;
 					gui = nullptr;
 					game->inMenu = false;
+				}
+			}
+			else
+			{
+				int index = numBgObjs;
+				for (int i = 0; i < s->recipe->numInputs.size(); i++)
+				{
+					dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->SetAmount(s->recipe->numInputs[i]);
+					if (s->recipe->numInputs[i] == 0)
+					{
+						dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->image->sprite.setColor(sf::Color(255, 255, 255, 100));
+					}
+					else
+					{
+						dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->image->sprite.setColor(sf::Color::White);
+					}
 				}
 			}
 		}

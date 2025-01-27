@@ -268,7 +268,7 @@ void FilterConveyor::Destroy()
 }
 bool FilterConveyor::TryAddItem(int index, int direction, float progress)
 {
-	if (direction != (this->direction) + 2 % 4)
+	if (direction != (this->direction + 2) % 4)
 	{
 		return false;
 	}
@@ -282,7 +282,7 @@ bool FilterConveyor::TryAddItem(int index, int direction, float progress)
 }
 bool FilterConveyor::CanAddItem(int direction, float progress)
 {
-	if (direction != (this->direction) + 2 % 4)
+	if (direction != (this->direction + 2) % 4)
 	{
 		return false;
 	}
@@ -305,7 +305,7 @@ float FilterConveyor::Distance(int direction)
 
 bool FilterConveyor::AcceptsItems(int direction)
 {
-	return (direction == (this->direction) + 2 % 4);
+	return (direction == (this->direction + 2) % 4);
 }
 
 void FilterConveyor::Progress(float dt)
