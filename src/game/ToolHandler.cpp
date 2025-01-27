@@ -657,6 +657,10 @@ Structure* ToolHandler::CreateStructure(int type)
 	{
 		return new RecipeStructure(-2, game->activePlanet, placeDir, 21);
 	}
+	else if (type == 22)
+	{
+		return new RocketSilo(-2, game->activePlanet, placeDir, 22);
+	}
 	else
 	{
 		return nullptr;

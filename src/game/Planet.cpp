@@ -254,6 +254,12 @@ void Planet::Init(bool load)
 					t->FromJSON(jsons[i]);
 					AddStructure(t, true);
 				}
+				else if (jsons[i].GetValue("TypeID") == "22")
+				{
+					RocketSilo* t = new RocketSilo(-2, id, 0, 22);
+					t->FromJSON(jsons[i]);
+					AddStructure(t, true);
+				}
 			}
 		}
 	}
@@ -433,14 +439,18 @@ void Planet::GenerateChunk(sf::Vector2i position)
 		s->placedByPlayer = false;
 		AddStructure(s);
 		s->SetPosition(sf::Vector2i(16, 16));
-		for (int i = 0; i < 10; i++)
+		for (int j = 0; j < ResourceHandler::numItems; j++)
 		{
-			Item item = Item(sf::Vector2f(0.f, 0.f), -1, 0);
-			item.SetParent(-1);
-			AddItem(item);
-			MoveItem(item.id);
-			s->TryAddGroundItem(item.id);
+			for (int i = 0; i < 500; i++)
+			{
+				Item item = Item(sf::Vector2f(0.f, 0.f), -1, j);
+				item.SetParent(-1);
+				AddItem(item);
+				MoveItem(item.id);
+				s->TryAddGroundItem(item.id);
+			}
 		}
+
 		{
 			for (int i = 0; i < 3; i++)
 			{
@@ -1023,6 +1033,7 @@ bool Planet::DeductResources(int typeID, sf::Vector2i position)
 	{
 		for (int k = 0; k < idsLeft.size(); k++)
 		{
+			std::cout << idsLeft[k] << std::endl;
 			StorageSilo* s = dynamic_cast<StorageSilo*>(this->structures[silos[i]]);
 			for (int j = 0; j < s->itemIDs.size(); j++)
 			{

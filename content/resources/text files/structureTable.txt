@@ -21,3 +21,4 @@ StructureID/Name/Description/SizeX/SizeY
 19/Chemical Plant/Used to convert petroleum into plastic./2/2
 20/Electric Arc Furnace/Used to forge silicon wafers./2/2
 21/Circuit Assembler/Used to create advanced circuit boards./2/2
+22/Rocket Silo/Used to send rockets into space./3/3

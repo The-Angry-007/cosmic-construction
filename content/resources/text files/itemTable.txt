@@ -32,3 +32,5 @@ ItemID/Name/Description/ImagePath
 30/Rocket Computer System/blank/rocket computer system.png
 31/Rocket Fuel Tank/blank/rocket fuel tank.png
 32/Rocket Probe/blank/rocket probe.png
+33/Rocket Thruster/blank/rocket thruster.png
+34/Rocket Storage Tank/blank/rocket storage tank.png

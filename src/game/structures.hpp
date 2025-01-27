@@ -7,6 +7,7 @@
 #include "FilterConveyor.hpp"
 #include "RecipeStructure.hpp"
 #include "RefinedDrill.hpp"
+#include "RocketSilo.hpp"
 #include "SaplingPlanter.hpp"
 #include "StorageSilo.hpp"
 #include "Structure.hpp"

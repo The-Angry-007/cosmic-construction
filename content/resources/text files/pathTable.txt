@@ -116,3 +116,6 @@ StructureID/Path
 19/chemical plant.png
 20/electric arc furnace.png
 21/circuit assembler.png
+22/rocket silo.png
+22/rocket.png
+22/rocket thrusters on.png
