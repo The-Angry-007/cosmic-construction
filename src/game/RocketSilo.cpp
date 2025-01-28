@@ -3,6 +3,7 @@
 #include "Recipe.hpp"
 #include "RecipeHandler.hpp"
 #include "ResourceHandler.hpp"
+#include "utils.hpp"
 RocketSilo::RocketSilo(int id, int planetID, int direction, int typeID)
 {
 	SetID(id);
@@ -11,10 +12,12 @@ RocketSilo::RocketSilo(int id, int planetID, int direction, int typeID)
 	tileSize = ResourceHandler::structureSizes[typeID];
 	sprite = sf::Sprite();
 	ResourceHandler::structureAtlas->SetSprite(sprite, typeID, 0);
-
+	rocketSprite = sf::Sprite();
+	ResourceHandler::structureAtlas->SetSprite(rocketSprite, typeID, 1);
 	blocksItems = true;
 	placedByPlayer = true;
 	launchType = -1;
+	launchTimer = 0.f;
 }
 
 RocketSilo::~RocketSilo()
@@ -29,6 +32,24 @@ void RocketSilo::Update(float dt)
 	if (recipe != nullptr)
 	{
 		recipe->Update(dt);
+	}
+	if (launchTimer > 0.f)
+	{
+		launchTimer -= dt;
+		float prog = 1.f - (launchTimer / 10.f);
+		prog = prog * prog * prog;
+		sf::Vector2f worldPos = (sf::Vector2f)position;
+		worldPos += (sf::Vector2f)tileSize / 2.f;
+		worldPos += (sf::Vector2f)(game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE);
+		worldPos.x *= TILE_SIZE.x;
+		worldPos.y *= TILE_SIZE.y;
+		worldPos.y -= prog * (16 * 200);
+		ResourceHandler::structureAtlas->SetSprite(rocketSprite, typeID, 2);
+		rocketSprite.setPosition(worldPos);
+	}
+	else if (recipe != nullptr && recipe->numOutputs[0] > 0)
+	{
+		ResourceHandler::structureAtlas->SetSprite(rocketSprite, typeID, 1);
 	}
 	// std::vector<int> directions = {
 	// 	2, 2, 3, 3, 0, 0, 1, 1
@@ -63,11 +84,25 @@ void RocketSilo::Update(float dt)
 	// }
 }
 
+void RocketSilo::LaunchRocket()
+{
+	delete recipe;
+	recipe = nullptr;
+	launchType = 0;
+	launchTimer = 10.f;
+}
+
 void RocketSilo::Render()
 {
 	game->planets[planetID].renderObjects.push_back(RenderObject {
 		&sprite,
-		32 });
+		-48 });
+	if (launchTimer > 0 || (recipe != nullptr && recipe->numOutputs[0] > 0))
+	{
+		game->planets[planetID].renderObjects.push_back(RenderObject {
+			&rocketSprite,
+			1000 });
+	}
 }
 
 void RocketSilo::Destroy()
@@ -80,6 +115,7 @@ void RocketSilo::Destroy()
 void RocketSilo::SetPosition(sf::Vector2i position)
 {
 	Structure::SetPosition(position);
+	rocketSprite.setPosition(sprite.getPosition());
 }
 void RocketSilo::RenderPreview()
 {

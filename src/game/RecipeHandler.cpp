@@ -111,6 +111,14 @@ void RecipeHandler::InitGUI(int structure)
 
 				pos.x -= gap;
 			}
+			GUIImage* im = new GUIImage(sf::Vector2f(0.5f, 0.6f), sf::Vector2f(0.1f, 0.03f), "content\\resources\\images\\buttonBezels.png");
+			GUILabel* label = new GUILabel(sf::Vector2f(0.5f, 0.6f), sf::Vector2f(0.1f, 0.027f), "Launch");
+			label->SetColor(sf::Color::Black);
+			GUIButton* b = new GUIButton(sf::Vector2f(0.5f, 0.6f), sf::Vector2f(0.1f, 0.03f), im, label);
+			b->dimObj = nullptr;
+			gui->AddObject(b);
+			GUIPanel* p = new GUIPanel(sf::Vector2f(0.5f, 0.6f), sf::Vector2f(0.1f, 0.03f), sf::Color(0, 0, 0, 100));
+			gui->AddObject(p);
 		}
 	}
 	else
@@ -232,6 +240,23 @@ void RecipeHandler::Update(float dt)
 					{
 						dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->image->sprite.setColor(sf::Color::White);
 					}
+				}
+				GUIPanel* p = dynamic_cast<GUIPanel*>(gui->GUIObjects.back());
+				if (s->recipe->numOutputs[0] > 0)
+				{
+					p->SetColor(sf::Color(0, 0, 0, 0));
+					if (gui->GUIObjects[gui->GUIObjects.size() - 2]->isClicked())
+					{
+						r->LaunchRocket();
+						guihandler.guis.pop_back();
+						delete gui;
+						gui = nullptr;
+						game->inMenu = false;
+					}
+				}
+				else
+				{
+					p->SetColor(sf::Color(0, 0, 0, 150));
 				}
 			}
 		}
