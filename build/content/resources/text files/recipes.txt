@@ -396,5 +396,5 @@ isFuels:0,0,0,0
 fuelLengths:0,0,0,0
 outputTypes:35
 outputAmounts:1
-craftTime:1
+craftTime:0.1
 }

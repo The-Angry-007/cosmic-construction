@@ -18,14 +18,19 @@ sf::Clock saveTimer;
 void SaveHandler::ResetWorkingDir()
 {
 	std::string appdata = getenv("APPDATA");
-	workingDir = appdata + "\\cosmic-construction";
+	appdata += "\\";
+	// std::string appdata = "";
+	workingDir = appdata + "cosmic-construction";
 }
 
 void SaveHandler::Init()
 {
 	//reset working directory and make sure root folder exists
 	std::string appdata = getenv("APPDATA");
-	workingDir = appdata + "\\cosmic-construction";
+	appdata += "\\";
+
+	// std::string appdata = "";
+	workingDir = appdata + "cosmic-construction";
 	if (!DirExists(workingDir))
 	{
 		CreateDirectory(workingDir);
