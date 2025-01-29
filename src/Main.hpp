@@ -7,3 +7,4 @@ extern GUIHandler guihandler;
 extern Game* game;
 extern sf::Clock updateClock;
 extern int numUpdates;
+extern int currentBuild;

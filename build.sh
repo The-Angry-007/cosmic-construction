@@ -30,6 +30,22 @@ launch() {
 build_success_launch() {
 	printf '\n'
 	display_styled_symbol 32 "✔" "Succeeded!"
+
+
+	# Define the file name
+	BUILD_FILE="src\\numBuilds.cpp"
+
+	# Extract the current build number using awk
+	CURRENT_BUILD=$(awk -F'=' '/int currentBuild/ {gsub(/[^0-9]/, "", $2); print $2}' "$BUILD_FILE")
+
+	# Increment the build number
+	NEW_BUILD=$((CURRENT_BUILD + 1))
+
+	# Update the file with the new build number using sed
+	sed -i "s/int currentBuild = $CURRENT_BUILD;/int currentBuild = $NEW_BUILD;/" "$BUILD_FILE"
+
+	echo "Build number updated: $CURRENT_BUILD -> $NEW_BUILD"
+
 	launch
 }
 

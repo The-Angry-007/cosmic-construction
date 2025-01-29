@@ -167,7 +167,9 @@ void GUIHandler::InitGUIS()
 			b1->clickFunc = funcs[i];
 			g->AddObject(b1);
 		}
-
+		GUILabel* buildIndex = new GUILabel(sf::Vector2f(0.1f, 0.97f), sf::Vector2f(0.1f, 0.03f), "Current Build: " + std::to_string(currentBuild));
+		buildIndex->origin = sf::Vector2f(0.f, 1.f);
+		g->AddObject(buildIndex);
 		guis.push_back(g);
 	}
 	//NEW GAME MENU
