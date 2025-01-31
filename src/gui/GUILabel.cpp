@@ -114,6 +114,10 @@ void GUILabel::RenderToTexture(sf::RenderTexture* texture)
 
 void GUILabel::DoWrapping(int charsPerLine)
 {
+	if (value == "")
+	{
+		return;
+	}
 	std::string newVal = "";
 	std::vector<std::string> lines = Split(value, '\n');
 	for (int i = 0; i < lines.size(); i++)

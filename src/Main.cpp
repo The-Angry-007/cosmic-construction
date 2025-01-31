@@ -17,6 +17,7 @@ Game* game = nullptr;
 int ups = 64;
 sf::Clock updateClock;
 int numUpdates = 0;
+Tutorial* tutorial = nullptr;
 
 //the main procedure that runs the program
 int main()
@@ -64,6 +65,10 @@ int main()
 
 		/* ---UPDATE--- */
 		guihandler.Update(dt);
+		if (tutorial != nullptr && (game == nullptr || !game->paused))
+		{
+			tutorial->Update(dt);
+		}
 		if (game != nullptr)
 		{
 			game->Update(dt);
@@ -89,6 +94,10 @@ int main()
 		if (game != nullptr)
 		{
 			game->toolHandler->Render();
+		}
+		if (tutorial != nullptr && (game == nullptr || !game->paused))
+		{
+			tutorial->Render();
 		}
 		//display window
 		window->display();

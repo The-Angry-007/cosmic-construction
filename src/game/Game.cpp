@@ -34,6 +34,7 @@ void Game::NewGame()
 			planets[i].Update(0.f);
 		} while (timer.restart().asSeconds() > 0.0001f);
 	}
+	tutorial = new Tutorial();
 }
 void Game::TogglePaused()
 {

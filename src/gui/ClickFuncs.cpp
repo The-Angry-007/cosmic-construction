@@ -76,6 +76,11 @@ void ClickFuncs::OpenSettingsInGame()
 }
 void ClickFuncs::SaveAndQuit()
 {
+	if (tutorial != nullptr)
+	{
+		delete tutorial;
+		tutorial = nullptr;
+	}
 	SaveHandler::SaveGame();
 	delete game->toolHandler;
 	// delete game;
