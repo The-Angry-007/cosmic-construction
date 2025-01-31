@@ -45,10 +45,7 @@ ToolHandler::~ToolHandler()
 }
 void ToolHandler::Update(float dt, Planet* p)
 {
-	if (tutorial != nullptr)
-	{
-		return;
-	}
+
 	delete hoveringItem;
 	hoveringItem = nullptr;
 	if (insufficientLabel != nullptr)
@@ -87,24 +84,28 @@ void ToolHandler::Update(float dt, Planet* p)
 		return;
 	}
 	//CHANGING CURRENT TOOL
-	for (int i = 0; i < bgObjs.size(); i++)
+	if (tutorial == nullptr)
 	{
-		if (bgObjs[i]->isClicked())
+		for (int i = 0; i < bgObjs.size(); i++)
 		{
-			if (i == 0 && selectedTool == 0)
+			if (bgObjs[i]->isClicked())
 			{
-				game->inMenu = true;
-				guihandler.OpenGUI(7);
+				if (i == 0 && selectedTool == 0)
+				{
+					game->inMenu = true;
+					guihandler.OpenGUI(7);
+				}
+				selectedTool = i;
+				InputHandler::RemoveMbPressed(sf::Mouse::Button::Left);
+				InputHandler::RemoveMbDown(sf::Mouse::Button::Left);
 			}
-			selectedTool = i;
-			InputHandler::RemoveMbPressed(sf::Mouse::Button::Left);
-			InputHandler::RemoveMbDown(sf::Mouse::Button::Left);
-		}
-		if (bgObjs[i]->isBlockingMouse())
-		{
-			InputHandler::mouseIsBlocked = true;
+			if (bgObjs[i]->isBlockingMouse())
+			{
+				InputHandler::mouseIsBlocked = true;
+			}
 		}
 	}
+
 	if (InputHandler::pressed(binds::Tool1))
 	{
 

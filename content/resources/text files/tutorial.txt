@@ -2,3 +2,25 @@ Welcome To Cosmic Construction. This tutorial will teach you the basics of the g
 The wooden building is called a storage silo. This allows you to store items which can be used to build new structures. <tab>
 There are a few trees and boulders to the right. These give items when destroyed, which can be dragged into the storage silo. <tab>
 Click repeatedly on the trees and boulders to destroy them.
+Now You have some resources available. You need to put them in the storage silo to use them.<tab>
+Click and drag an item into the storage silo.
+Place the rest of the items in the silo. tip: you can hold shift while dragging an item to drag several at once.
+The idea of this game is to automate production of items, which is done using buildings.<tab>
+Press E to open the build menu.
+Select the Sapling Planter.
+place the sapling planter close to the storage silo. This will automatically grow a tree every 25 seconds.
+Now you need a way to automatically destroy the tree.<tab>
+Open the build menu again.
+Select the Tree Chopper.
+Place the Tree Chopper next to the sapling planter.
+Make sure the chopper is facing towards the planter. You can use R to rotate the structure.
+This will automatically produce wood over time.<tab>
+However, You need a way to automatically gather up the wood.<tab>
+You can do this using conveyors.<tab>
+Open the build menu.
+Select the conveyor.
+Place conveyors in a ring around the planter, then point them into the storage silo.
+Congratulations, You now have an infinite supply of wood.<tab>
+Next, let's set up an infinite supply of stone.<tab>
+To do this, we need a drill. However, the drill is a more complicated structure.<tab>
+Drills require wood as input and can produce either stone or coal.<tab>

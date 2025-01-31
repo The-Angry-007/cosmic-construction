@@ -60,7 +60,7 @@ void Camera::Update(float dt)
 		offset *= zoom;
 		position = cameraStartPos - offset;
 	}
-	if (InputHandler::scroll.y != 0)
+	if (InputHandler::scroll.y != 0 && tutorial == nullptr)
 	{
 		if (InputHandler::scroll.y > 0)
 		{

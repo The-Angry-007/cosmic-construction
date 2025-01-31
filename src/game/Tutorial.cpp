@@ -8,14 +8,30 @@ Tutorial::Tutorial()
 	gui = nullptr;
 	std::string scriptString = SaveHandler::ReadData("content\\resources\\text files\\tutorial.txt");
 	script = Split(scriptString, '\n');
-	int numPhases = 4;
+	int numPhases = script.size();
 	validCodes = {};
 	for (int i = 0; i < numPhases; i++)
 	{
-		validCodes.push_back({});
+		validCodes.push_back({ binds::Pause });
 	}
 	validCodes[3].push_back(binds::UseTool);
+	validCodes[5].push_back(binds::UseTool);
+	validCodes[6].push_back(binds::UseTool);
+	validCodes[6].push_back(sf::Keyboard::Key::LShift + 1);
+	validCodes[8].push_back(binds::CloseInventory);
 	SwitchPhase(0);
+	skippables = {};
+	for (int i = 0; i < numPhases; i++)
+	{
+		if (script[i].back() == '>')
+		{
+			skippables.push_back(true);
+		}
+		else
+		{
+			skippables.push_back(false);
+		}
+	}
 }
 
 void Tutorial::SwitchPhase(int phase)
@@ -25,7 +41,7 @@ void Tutorial::SwitchPhase(int phase)
 		delete gui;
 	}
 	currentPhase = phase;
-	skippables = { true, true, true, false };
+	// skippables = { true, true, true, false, true, false, false };
 	gui = new GUI();
 	GUIPanel* bg = new GUIPanel(sf::Vector2f(0.5f, 0.85f), sf::Vector2f(0.33f, 0.13f), sf::Color(150, 150, 150));
 	GUILabel* label = new GUILabel(sf::Vector2f(0.5f, 0.85f), sf::Vector2f(0.3f, 0.1f), script[currentPhase]);
@@ -36,6 +52,10 @@ void Tutorial::SwitchPhase(int phase)
 	if (phase == 3)
 	{
 		game->toolHandler->selectedTool = 2;
+	}
+	else if (phase == 5)
+	{
+		game->toolHandler->selectedTool = 1;
 	}
 }
 
@@ -49,7 +69,46 @@ void Tutorial::Update(float dt)
 	{
 		SwitchPhase(currentPhase + 1);
 	}
-	LimitInputs();
+	Planet& p = game->planets[game->activePlanet];
+	if (currentPhase == 3 && p.StructuresInArea({ 0, 0 }, { 31, 31 }).size() == 1)
+	{
+		SwitchPhase(4);
+	}
+	if (currentPhase == 5)
+	{
+		StorageSilo* s = dynamic_cast<StorageSilo*>(p.structures[p.StructureInPos({ 16, 16 })]);
+		if (s->itemIDs.size() > 1 || s->itemQuantities[0] > 20)
+		{
+			SwitchPhase(6);
+		}
+	}
+	if (currentPhase == 6)
+	{
+		bool skip = true;
+		for (int i = 0; i < p.items.size(); i++)
+		{
+			if (!p.items[i].isDeleted)
+			{
+				skip = false;
+				break;
+			}
+		}
+		if (skip)
+		{
+			SwitchPhase(7);
+		}
+	}
+	if (currentPhase == 8)
+	{
+		if (InputHandler::pressed(binds::CloseInventory))
+		{
+			SwitchPhase(9);
+		}
+	}
+	if (!game->paused)
+	{
+		LimitInputs();
+	}
 }
 void Tutorial::Render()
 {

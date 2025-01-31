@@ -439,9 +439,10 @@ void Planet::GenerateChunk(sf::Vector2i position)
 		s->placedByPlayer = false;
 		AddStructure(s);
 		s->SetPosition(sf::Vector2i(16, 16));
-		for (int j = 0; j < ResourceHandler::numItems; j++)
+		// for (int j = 0; j < ResourceHandler::numItems; j++)
+		for (int j = 0; j < 1; j++)
 		{
-			for (int i = 0; i < 0; i++)
+			for (int i = 0; i < 20; i++)
 			{
 				Item item = Item(sf::Vector2f(0.f, 0.f), -1, j);
 				item.SetParent(-1);
