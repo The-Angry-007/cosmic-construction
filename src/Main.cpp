@@ -64,11 +64,12 @@ int main()
 		float dt = deltaClock.restart().asSeconds();
 
 		/* ---UPDATE--- */
-		guihandler.Update(dt);
 		if (tutorial != nullptr && (game == nullptr || !game->paused))
 		{
 			tutorial->Update(dt);
 		}
+		guihandler.Update(dt);
+
 		if (game != nullptr)
 		{
 			game->Update(dt);

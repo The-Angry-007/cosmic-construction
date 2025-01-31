@@ -12,4 +12,5 @@ public:
 	void Update(float dt);
 	void Render();
 	void SwitchPhase(int phase);
+	void LimitInputs();
 };

@@ -1,2 +1,4 @@
-Welcome To Cosmic Construction. This tutorial will teach you the basics of the game. <press tab to continue>
-test
+Welcome To Cosmic Construction. This tutorial will teach you the basics of the game. <tab>
+The wooden building is called a storage silo. This allows you to store items which can be used to build new structures. <tab>
+There are a few trees and boulders to the right. These give items when destroyed, which can be dragged into the storage silo. <tab>
+Click repeatedly on the trees and boulders to destroy them.
