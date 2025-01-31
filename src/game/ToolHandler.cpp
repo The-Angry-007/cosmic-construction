@@ -45,6 +45,10 @@ ToolHandler::~ToolHandler()
 }
 void ToolHandler::Update(float dt, Planet* p)
 {
+	if (tutorial != nullptr)
+	{
+		return;
+	}
 	delete hoveringItem;
 	hoveringItem = nullptr;
 	if (insufficientLabel != nullptr)
