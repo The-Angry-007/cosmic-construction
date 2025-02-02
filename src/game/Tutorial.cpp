@@ -257,7 +257,7 @@ void Tutorial::Update(float dt)
 	if (currentPhase == 29)
 	{
 		auto tally = p.TallyResources({ 0, 0 }, { 1, 2 });
-		if (tally[0] > 100 && tally[1] > 100)
+		if (tally[0] > 15 && tally[1] > 5)
 		{
 			SwitchPhase(30);
 		}

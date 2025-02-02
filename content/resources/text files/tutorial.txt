@@ -27,7 +27,7 @@ To do this, you need a drill. However, the drill is a more complicated structure
 Drills require wood as input and can produce either stone or coal.<tab>
 You can select the recipe of the drill by clicking on it.<tab>
 You can also view the progress by clicking on a structure with an active recipe.<tab>
-Use drills to acquire 100 stone and 100 coal.
+Use drills to acquire 15 stone and 5 coal.
 This is all the progression covered by the tutorial.<tab>
 By now, you should have good foundations to expand your factory further.<tab>
 The next steps are to set up furnaces to produce stone bricks, which unlock refined drills.<tab>
