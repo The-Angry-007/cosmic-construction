@@ -76,6 +76,11 @@ void Tutorial::Update(float dt)
 	{
 		gui->Update(dt);
 	}
+	//skip tutorial button was clicked
+	if (tutorial == nullptr)
+	{
+		return;
+	}
 	if (skippables[currentPhase] && InputHandler::keyPressed(sf::Keyboard::Key::Tab))
 	{
 		SwitchPhase(currentPhase + 1);
