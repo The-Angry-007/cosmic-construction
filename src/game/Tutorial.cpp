@@ -19,6 +19,8 @@ Tutorial::Tutorial()
 	validCodes[6].push_back(binds::UseTool);
 	validCodes[6].push_back(sf::Keyboard::Key::LShift + 1);
 	validCodes[8].push_back(binds::CloseInventory);
+	validCodes[9].push_back(binds::CloseInventory);
+	validCodes[9].push_back(binds::UseTool);
 	SwitchPhase(0);
 	skippables = {};
 	for (int i = 0; i < numPhases; i++)
@@ -32,6 +34,7 @@ Tutorial::Tutorial()
 			skippables.push_back(false);
 		}
 	}
+	game->ActivePlanet()->camera.targetZoom = 0.45f;
 }
 
 void Tutorial::SwitchPhase(int phase)
@@ -57,10 +60,18 @@ void Tutorial::SwitchPhase(int phase)
 	{
 		game->toolHandler->selectedTool = 1;
 	}
+	GUIImage* skipImage = new GUIImage(sf::Vector2f(0.92f, 0.9f), sf::Vector2f(0.08f, 0.04f), "content/resources/images/buttonBezels.png");
+	GUILabel* skipLabel = new GUILabel(sf::Vector2f(0.92f, 0.9f), sf::Vector2f(0.075f, 0.035f), "skip tutorial");
+	GUIButton* skipButton = new GUIButton(sf::Vector2f(0.92f, 0.9f), sf::Vector2f(0.08f, 0.04f), skipImage, skipLabel);
+	skipLabel->SetColor(sf::Color::Black);
+	std::function<void()> endFunc = std::bind(&Tutorial::EndTutorial, this);
+	skipButton->clickFunc = endFunc;
+	gui->AddObject(skipButton);
 }
 
 void Tutorial::Update(float dt)
 {
+
 	if (gui != nullptr)
 	{
 		gui->Update(dt);
@@ -104,6 +115,9 @@ void Tutorial::Update(float dt)
 		{
 			SwitchPhase(9);
 		}
+	}
+	if (currentPhase == 9)
+	{
 	}
 	if (!game->paused)
 	{
@@ -198,5 +212,19 @@ void Tutorial::LimitInputs()
 			InputHandler::mouseButtonsDown.erase(InputHandler::mouseButtonsDown.begin() + i);
 			i--;
 		}
+	}
+}
+
+void Tutorial::EndTutorial()
+{
+	tutorial = nullptr;
+	delete this;
+}
+
+Tutorial::~Tutorial()
+{
+	if (gui != nullptr)
+	{
+		delete gui;
 	}
 }

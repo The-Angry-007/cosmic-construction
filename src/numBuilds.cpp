@@ -1,2 +1,2 @@
 #include "Main.hpp"
-int currentBuild = 34;
+int currentBuild = 42;

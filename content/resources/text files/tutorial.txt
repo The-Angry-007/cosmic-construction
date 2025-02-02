@@ -19,8 +19,17 @@ However, You need a way to automatically gather up the wood.<tab>
 You can do this using conveyors.<tab>
 Open the build menu.
 Select the conveyor.
-Place conveyors in a ring around the planter, then point them into the storage silo.
+Wood drops in a 3x3 area with the sapling planter at the centre, so to collect all the wood there must be conveyors in this area.<tab>
+Collect 30 wood automatically.
 Congratulations, You now have an infinite supply of wood.<tab>
 Next, let's set up an infinite supply of stone.<tab>
 To do this, we need a drill. However, the drill is a more complicated structure.<tab>
 Drills require wood as input and can produce either stone or coal.<tab>
+You can select the recipe of the drill by clicking on it.<tab>
+You can also view the progress by clicking on a structure with an active recipe.<tab>
+Use drills to acquire 100 stone and 100 coal.
+This is all the progression covered by the tutorial.<tab>
+By now, you should have good foundations to expand your factory further.<tab>
+The next steps are to set up furnaces to produce stone bricks, which unlock refined drills.<tab>
+These can produce ores which are used for more advanced materials and structures.<tab>
+Good luck, and don't forget that there is a help menu available if you get stuck.<tab>
