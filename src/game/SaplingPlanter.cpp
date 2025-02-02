@@ -41,7 +41,7 @@ void SaplingPlanter::Update(float dt)
 	if (tree == -1)
 	{
 		timeSinceTree += dt;
-		if (timeSinceTree > 25.f)
+		if (timeSinceTree > 15.f)
 		{
 			Tree* tree = new Tree(-1, planetID);
 			tree->parent = id;

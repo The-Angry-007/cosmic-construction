@@ -1,6 +1,7 @@
 #include "Tutorial.hpp"
 #include "Main.hpp"
 #include "binds.hpp"
+#include "gui/BuildMenu.hpp"
 #include "saving.hpp"
 #include "utils.hpp"
 Tutorial::Tutorial()
@@ -21,6 +22,28 @@ Tutorial::Tutorial()
 	validCodes[8].push_back(binds::CloseInventory);
 	validCodes[9].push_back(binds::CloseInventory);
 	validCodes[9].push_back(binds::UseTool);
+	validCodes[10].push_back(binds::UseTool);
+	validCodes[12].push_back(binds::CloseInventory);
+	validCodes[13].push_back(binds::CloseInventory);
+	validCodes[13].push_back(binds::UseTool);
+	validCodes[14].push_back(binds::UseTool);
+	validCodes[15].push_back(binds::RotateStructure);
+	validCodes[19].push_back(binds::CloseInventory);
+	validCodes[20].push_back(binds::CloseInventory);
+	validCodes[20].push_back(binds::UseTool);
+	validCodes[22].push_back(binds::UseTool);
+	validCodes[22].push_back(binds::CloseInventory);
+	validCodes[22].push_back(binds::RotateStructure);
+	validCodes[22].push_back(sf::Keyboard::Key::LShift + 1);
+	validCodes[22].push_back(binds::Tool2);
+	validCodes[22].push_back(binds::Tool3);
+	validCodes[29].push_back(binds::Tool3);
+	validCodes[29].push_back(binds::Tool2);
+	validCodes[29].push_back(binds::CloseInventory);
+	validCodes[29].push_back(binds::RotateStructure);
+	validCodes[29].push_back(sf::Keyboard::Key::LShift + 1);
+	validCodes[29].push_back(binds::UseTool);
+
 	SwitchPhase(0);
 	skippables = {};
 	for (int i = 0; i < numPhases; i++)
@@ -46,7 +69,8 @@ void Tutorial::SwitchPhase(int phase)
 	currentPhase = phase;
 	// skippables = { true, true, true, false, true, false, false };
 	gui = new GUI();
-	GUIPanel* bg = new GUIPanel(sf::Vector2f(0.5f, 0.85f), sf::Vector2f(0.33f, 0.13f), sf::Color(150, 150, 150));
+	GUIPanel* outlineBG = new GUIPanel(sf::Vector2f(0.5f, 0.85f), sf::Vector2f(0.33f, 0.13f), sf::Color(50, 50, 50));
+	GUIPanel* bg = new GUIPanel(sf::Vector2f(0.5f, 0.85f), sf::Vector2f(0.32f, 0.12f), sf::Color(150, 150, 150));
 	GUILabel* label = new GUILabel(sf::Vector2f(0.5f, 0.85f), sf::Vector2f(0.3f, 0.1f), script[currentPhase]);
 	label->SetColor(sf::Color::Black);
 	label->DoWrapping(70);
@@ -83,6 +107,11 @@ void Tutorial::Update(float dt)
 	}
 	if (skippables[currentPhase] && InputHandler::keyPressed(sf::Keyboard::Key::Tab))
 	{
+		if (currentPhase == 36)
+		{
+			EndTutorial();
+			return;
+		}
 		SwitchPhase(currentPhase + 1);
 	}
 	Planet& p = game->planets[game->activePlanet];
@@ -123,7 +152,117 @@ void Tutorial::Update(float dt)
 	}
 	if (currentPhase == 9)
 	{
+		if (game->toolHandler->placeType == 4)
+		{
+			SwitchPhase(10);
+		}
 	}
+	if (currentPhase == 10)
+	{
+		std::vector<int> structures = p.StructuresInArea({ 0, 0 }, { 32, 32 });
+		for (int i = 0; i < structures.size(); i++)
+		{
+			if (p.structures[structures[i]]->typeID == 4)
+			{
+				SwitchPhase(11);
+				break;
+			}
+		}
+	}
+	if (currentPhase == 12)
+	{
+		if (InputHandler::pressed(binds::CloseInventory))
+		{
+			SwitchPhase(13);
+		}
+	}
+	if (currentPhase == 13)
+	{
+		if (game->toolHandler->placeType == 3)
+		{
+			SwitchPhase(14);
+		}
+	}
+	if (currentPhase == 14)
+	{
+		//find sapling planter
+		sf::Vector2i pos(0, 0);
+		std::vector<int> structures = p.StructuresInArea({ 0, 0 }, { 32, 32 });
+		for (int i = 0; i < structures.size(); i++)
+		{
+			if (p.structures[structures[i]]->typeID == 4)
+			{
+				pos = p.structures[structures[i]]->position;
+				break;
+			}
+		}
+		//find tree chopper in neighbouring square
+		for (int i = 0; i < 4; i++)
+		{
+			sf::Vector2i newPos = pos + CONVEYOR_OFFSETS[i];
+			int index = p.StructureInPos(newPos);
+			if (index != -1 && p.structures[index]->typeID == 3)
+			{
+				SwitchPhase(15);
+			}
+		}
+	}
+	if (currentPhase == 15)
+	{
+		game->toolHandler->selectedTool = 1;
+		//find sapling planter
+		sf::Vector2i pos(0, 0);
+		std::vector<int> structures = p.StructuresInArea({ 0, 0 }, { 32, 32 });
+		for (int i = 0; i < structures.size(); i++)
+		{
+			if (p.structures[structures[i]]->typeID == 4)
+			{
+				pos = p.structures[structures[i]]->position;
+				break;
+			}
+		}
+		//find tree chopper in neighbouring square
+		for (int i = 0; i < 4; i++)
+		{
+			sf::Vector2i newPos = pos + CONVEYOR_OFFSETS[i];
+			int index = p.StructureInPos(newPos);
+			if (index != -1 && p.structures[index]->typeID == 3 && p.structures[index]->direction == (i + 2) % 4)
+			{
+				SwitchPhase(16);
+			}
+		}
+	}
+	if (currentPhase == 19)
+	{
+		if (InputHandler::pressed(binds::CloseInventory))
+		{
+			SwitchPhase(20);
+		}
+	}
+	if (currentPhase == 20)
+	{
+		if (game->toolHandler->placeType == 0)
+		{
+			SwitchPhase(21);
+		}
+	}
+	if (currentPhase == 22)
+	{
+		auto numWood = p.TallyResources({ 0, 0 }, { 0 });
+		if (numWood[0] >= 30)
+		{
+			SwitchPhase(23);
+		}
+	}
+	if (currentPhase == 29)
+	{
+		auto tally = p.TallyResources({ 0, 0 }, { 1, 2 });
+		if (tally[0] > 100 && tally[1] > 100)
+		{
+			SwitchPhase(30);
+		}
+	}
+
 	if (!game->paused)
 	{
 		LimitInputs();
