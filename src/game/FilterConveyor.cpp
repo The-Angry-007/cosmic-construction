@@ -380,7 +380,7 @@ void FilterConveyor::TryAdd()
 		// }
 	}
 	int dir = (direction + 2) % 4;
-	if (progress[dir].size() > 0 && progress[dir][0] > 1.f)
+	if (progress[dir].size() > 0 && progress[dir][0] >= 1.f)
 	{
 		int outputDir = direction;
 		if (filterItem != -1)
@@ -420,9 +420,54 @@ void FilterConveyor::KeepDistance()
 {
 	for (int j = 0; j < 4; j++)
 	{
+		if (j == (direction + 2) % 4)
+		{
+			if (progress[j].size() == 0)
+			{
+				continue;
+			}
+			int outputDir = this->direction;
+			if (filterItem != -1)
+			{
+				auto& items = game->planets[planetID].items;
+				int filterType = items[filterItem].typeId;
+				if (filterType == items[this->items[j][0]].typeId)
+				{
+					if (this->isFlipped)
+					{
+						outputDir = (direction + 1) % 4;
+					}
+					else
+					{
+						outputDir = (direction + 3) % 4;
+					}
+				}
+			}
+			if (progress[outputDir].size() > 0)
+			{
+				float dist = progress[outputDir].back();
+				if (dist < gap)
+				{
+					progress[j][0] = 1.f - (gap - dist);
+				}
+			}
+			for (int k = 1; k < progress[j].size(); k++)
+			{
+				if (progress[j][k - 1] - progress[j][k] < gap)
+				{
+					progress[j][k] = progress[j][k - 1] - gap;
+					if (progress[j][k] < 0)
+					{
+						progress[j][k] = 0.f;
+					}
+				}
+			}
+			continue;
+		}
 		if (neighbours[j] != -1)
 		{
 			int direction = j;
+
 			for (int i = 0; i < progress[direction].size(); i++)
 			{
 				if (i == 0)

@@ -1,0 +1,227 @@
+{
+PositionX:16
+PositionY:16
+TypeID:1
+ID:358
+ChunkID:8
+NumItemIDs:1
+ItemID0:0
+ItemQuantity0:9
+}
+{
+PositionX:20
+PositionY:17
+ChunkID:8
+TypeID:2
+ID:359
+Health:3
+Parent:-1
+}
+{
+PositionX:21
+PositionY:17
+ChunkID:8
+TypeID:2
+ID:360
+Health:3
+Parent:-1
+}
+{
+PositionX:26
+PositionY:19
+TypeID:0
+Direction:2
+ID:361
+ChunkID:8
+CurrentNeighbourIndex:3
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:26
+PositionY:18
+TypeID:0
+Direction:2
+ID:362
+ChunkID:8
+CurrentNeighbourIndex:3
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:24
+PositionY:18
+TypeID:0
+Direction:1
+ID:363
+ChunkID:8
+CurrentNeighbourIndex:2
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:25
+PositionY:18
+TypeID:0
+Direction:2
+ID:364
+ChunkID:8
+CurrentNeighbourIndex:3
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:25
+PositionY:19
+TypeID:0
+Direction:2
+ID:365
+ChunkID:8
+CurrentNeighbourIndex:0
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:3
+progress 2:0.890625
+items 3:10,11,12
+progress 3:0.500000,0.265625,0.031250
+}
+{
+PositionX:24
+PositionY:19
+TypeID:17
+Direction:1
+ID:897
+ChunkID:8
+FilterItem:1
+IsFlipped:0
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:13,14,15,17
+progress 1:0.796875,0.562500,0.328125,0.093750
+items 2:
+progress 2:
+items 3:19,7,6,21
+progress 3:0.893750,0.625000,0.390625,0.156250
+}
+{
+PositionX:26
+PositionY:20
+TypeID:0
+Direction:3
+ID:898
+ChunkID:8
+CurrentNeighbourIndex:0
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:25
+PositionY:20
+TypeID:0
+Direction:3
+ID:899
+ChunkID:8
+CurrentNeighbourIndex:0
+UpgradeLevel:0
+items 0:27,28,29
+progress 0:0.984375,0.750000,0.515625
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:23,24,25,26
+progress 3:0.921875,0.687500,0.453125,0.218750
+}
+{
+PositionX:24
+PositionY:20
+TypeID:0
+Direction:3
+ID:900
+ChunkID:8
+CurrentNeighbourIndex:1
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:20,22
+progress 1:0.390625,0.156250
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:23
+PositionY:20
+TypeID:0
+Direction:0
+ID:901
+ChunkID:8
+CurrentNeighbourIndex:1
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:23
+PositionY:19
+TypeID:0
+Direction:1
+ID:902
+ChunkID:8
+CurrentNeighbourIndex:2
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:5,16,18,9
+progress 1:0.921875,0.687500,0.453125,0.218750
+items 2:8
+progress 2:0.984375
+items 3:
+progress 3:
+}

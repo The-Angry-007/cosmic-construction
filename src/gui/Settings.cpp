@@ -48,6 +48,7 @@ Settings::Settings()
 		s->minVal = 0;
 		s->maxVal = 260;
 		s->numSteps = 26;
+		saveInterval = 5;
 
 		GUILabel* l4 = new GUILabel(sf::Vector2f(0.5f, 0.45f), sf::Vector2f(0.35f, 0.025f), "Autosave Interval:");
 		l4->SetColor(sf::Color::Black);

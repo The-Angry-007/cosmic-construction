@@ -1,0 +1,153 @@
+{
+PositionX:16
+PositionY:16
+TypeID:1
+ID:350
+ChunkID:8
+NumItemIDs:0
+}
+{
+PositionX:19
+PositionY:16
+TypeID:0
+Direction:1
+ID:351
+ChunkID:8
+CurrentNeighbourIndex:3
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:31,29,23
+progress 1:0.781250,0.546875,0.312500
+items 2:
+progress 2:
+items 3:18,25,36
+progress 3:0.843750,0.609375,0.140625
+}
+{
+PositionX:21
+PositionY:15
+TypeID:0
+Direction:2
+ID:352
+ChunkID:8
+CurrentNeighbourIndex:3
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:13
+progress 2:0.171875
+items 3:11
+progress 3:0.515625
+}
+{
+PositionX:20
+PositionY:15
+TypeID:0
+Direction:1
+ID:353
+ChunkID:8
+CurrentNeighbourIndex:2
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:6,34
+progress 1:0.812500,0.109375
+items 2:19,0,35,43
+progress 2:0.875000,0.640625,0.406250,0.171875
+items 3:
+progress 3:
+}
+{
+PositionX:19
+PositionY:17
+TypeID:0
+Direction:3
+ID:354
+ChunkID:8
+CurrentNeighbourIndex:1
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:46,17,21,42,2
+progress 1:0.987500,0.787500,0.587500,0.387500,0.187500
+items 2:
+progress 2:
+items 3:47,20
+progress 3:0.671875,0.187500
+}
+{
+PositionX:20
+PositionY:17
+TypeID:0
+Direction:3
+ID:355
+ChunkID:8
+CurrentNeighbourIndex:1
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:37,30,51
+progress 1:0.859375,0.375000,0.175000
+items 2:
+progress 2:
+items 3:45,10,9,15
+progress 3:0.987500,0.787500,0.328125,0.078125
+}
+{
+PositionX:21
+PositionY:17
+TypeID:0
+Direction:3
+ID:356
+ChunkID:8
+CurrentNeighbourIndex:0
+UpgradeLevel:0
+items 0:3,27,40,50,14
+progress 0:0.968750,0.768750,0.500000,0.281250,0.031250
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:48,16,33,44
+progress 3:0.906250,0.706250,0.506250,0.306250
+}
+{
+PositionX:21
+PositionY:16
+TypeID:0
+Direction:2
+ID:357
+ChunkID:8
+CurrentNeighbourIndex:3
+UpgradeLevel:0
+items 0:1,7,4
+progress 0:1.000000,0.625000,0.156250
+items 1:
+progress 1:
+items 2:24,8,12,41
+progress 2:0.831250,0.562500,0.362500,0.162500
+items 3:
+progress 3:
+}
+{
+PositionX:20
+PositionY:16
+TypeID:17
+Direction:1
+ID:358
+ChunkID:8
+FilterItem:39
+IsFlipped:0
+UpgradeLevel:0
+items 0:38
+progress 0:0.421875
+items 1:32,26
+progress 1:0.656250,0.187500
+items 2:
+progress 2:
+items 3:5,49,22,28
+progress 3:0.953125,0.718750,0.250000,0.015625
+}
