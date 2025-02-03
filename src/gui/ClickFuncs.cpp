@@ -93,5 +93,5 @@ void ClickFuncs::ResetCamPos()
 {
 	InputHandler::RemoveMbDown(sf::Mouse::Button::Left);
 	InputHandler::RemoveMbPressed(sf::Mouse::Button::Left);
-	game->planets[game->activePlanet].camera.position = sf::Vector2f(0.f, 0.f);
+	game->planets[game->activePlanet].camera.position = sf::Vector2f(CHUNK_SIZE * TILE_SIZE.x, CHUNK_SIZE * TILE_SIZE.y) / 2.f;
 }
