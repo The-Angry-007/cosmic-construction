@@ -51,6 +51,46 @@ void SiloMenu::Update(float dt)
 			items.push_back(item);
 		}
 	}
+	for (int i = 0; i < items.size(); i++)
+	{
+		if (items[i]->image->isClicked())
+		{
+			int num = 1;
+			int index = 0;
+			for (int j = 0; j < silo->itemIDs.size(); j++)
+			{
+				if (silo->itemIDs[j] == items[i]->typeID)
+				{
+					index = j;
+					break;
+				}
+			}
+			if (InputHandler::keyDown(sf::Keyboard::Key::LShift))
+			{
+				num = silo->itemQuantities[index];
+			}
+
+			game->toolHandler->draggingItems = {};
+			for (int j = 0; j < num; j++)
+			{
+				Item item = Item(game->ActivePlanet()->camera.WorldMousePos(), -2, items[i]->typeID);
+				item.SetParent(-1);
+				game->ActivePlanet()->AddItem(item);
+				game->ActivePlanet()->MoveItem(item.id);
+				game->toolHandler->draggingItems.push_back(item.id);
+				silo->itemQuantities[index]--;
+				if (silo->itemQuantities[index] == 0)
+				{
+					silo->itemQuantities.erase(silo->itemQuantities.begin() + index);
+					silo->itemIDs.erase(silo->itemIDs.begin() + index);
+				}
+			}
+
+			guihandler.guis.erase(guihandler.guis.end() - 1);
+			game->inMenu = false;
+			delete this;
+		}
+	}
 
 	InputHandler::mouseIsBlocked = true;
 	if (InputHandler::pressed(binds::CloseInventory))

@@ -1,0 +1,416 @@
+{
+PositionX:16
+PositionY:16
+TypeID:1
+ID:339
+ChunkID:8
+NumItemIDs:3
+ItemID0:0
+ItemQuantity0:123
+ItemID1:1
+ItemQuantity1:45
+ItemID2:2
+ItemQuantity2:7
+}
+{
+PositionX:19
+PositionY:17
+TypeID:0
+Direction:3
+ID:340
+ChunkID:8
+CurrentNeighbourIndex:1
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:20
+PositionY:18
+TypeID:0
+Direction:3
+ID:341
+ChunkID:8
+CurrentNeighbourIndex:1
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:21
+PositionY:18
+TypeID:0
+Direction:3
+ID:342
+ChunkID:8
+CurrentNeighbourIndex:1
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:19
+PositionY:16
+TypeID:0
+Direction:3
+ID:343
+ChunkID:8
+CurrentNeighbourIndex:1
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:20
+PositionY:16
+TypeID:0
+Direction:3
+ID:344
+ChunkID:8
+CurrentNeighbourIndex:1
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:21
+PositionY:17
+ChunkID:8
+TypeID:3
+ID:345
+Phase:2
+Direction:3
+TimeSinceAction:0.375000
+}
+{
+PositionX:21
+PositionY:16
+TypeID:0
+Direction:3
+ID:346
+ChunkID:8
+CurrentNeighbourIndex:1
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:20
+PositionY:17
+ChunkID:8
+TypeID:4
+ID:347
+TimeSinceTree:0.000000
+Tree:890
+}
+{
+PositionX:19
+PositionY:18
+TypeID:0
+Direction:3
+ID:888
+ChunkID:8
+CurrentNeighbourIndex:1
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:18
+PositionY:13
+TypeID:6
+ChunkID:8
+ID:889
+NumStone:0
+TimeSinceOutput:3.765625
+AnimProgress:0.140625
+TimePerFrame:0.333300
+CurrentFrame:2
+LastOutputDir:1
+OutputItem:-1
+HasRecipe:1
+RecipeID:0
+RecipeNumInputs:3
+RecipeNumOutputs:0
+RecipeFuelsLeft:0.000000
+RecipePlanetID:0
+RecipeCraftTimer:2.250000
+}
+{
+PositionX:20
+PositionY:17
+ChunkID:8
+TypeID:2
+ID:890
+Health:3
+Parent:347
+}
+{
+PositionX:16
+PositionY:9
+TypeID:1
+ID:891
+ChunkID:8
+NumItemIDs:0
+}
+{
+PositionX:18
+PositionY:12
+TypeID:0
+Direction:0
+ID:892
+ChunkID:8
+CurrentNeighbourIndex:2
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:16
+PositionY:13
+TypeID:6
+ChunkID:8
+ID:893
+NumStone:0
+TimeSinceOutput:6.906250
+AnimProgress:0.109375
+TimePerFrame:0.333300
+CurrentFrame:0
+LastOutputDir:2
+OutputItem:-1
+HasRecipe:1
+RecipeID:1
+RecipeNumInputs:2
+RecipeNumOutputs:0
+RecipeFuelsLeft:0.000000
+RecipePlanetID:0
+RecipeCraftTimer:5.109375
+}
+{
+PositionX:17
+PositionY:12
+TypeID:0
+Direction:0
+ID:895
+ChunkID:8
+CurrentNeighbourIndex:2
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:15
+PositionY:11
+TypeID:0
+Direction:3
+ID:896
+ChunkID:8
+CurrentNeighbourIndex:1
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:14
+PositionY:11
+TypeID:0
+Direction:2
+ID:897
+ChunkID:8
+CurrentNeighbourIndex:1
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:14
+PositionY:12
+TypeID:0
+Direction:2
+ID:898
+ChunkID:8
+CurrentNeighbourIndex:0
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:14
+PositionY:13
+TypeID:0
+Direction:2
+ID:899
+ChunkID:8
+CurrentNeighbourIndex:0
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:14
+PositionY:14
+TypeID:0
+Direction:2
+ID:900
+ChunkID:8
+CurrentNeighbourIndex:0
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:51
+progress 2:0.281250
+items 3:
+progress 3:
+}
+{
+PositionX:14
+PositionY:15
+TypeID:0
+Direction:2
+ID:901
+ChunkID:8
+CurrentNeighbourIndex:0
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:14
+PositionY:16
+TypeID:0
+Direction:2
+ID:902
+ChunkID:8
+CurrentNeighbourIndex:0
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:14
+PositionY:17
+TypeID:0
+Direction:1
+ID:903
+ChunkID:8
+CurrentNeighbourIndex:0
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:15
+PositionY:17
+TypeID:0
+Direction:1
+ID:904
+ChunkID:8
+CurrentNeighbourIndex:3
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}

@@ -43,7 +43,6 @@ Tutorial::Tutorial()
 	validCodes[29].push_back(binds::RotateStructure);
 	validCodes[29].push_back(sf::Keyboard::Key::LShift + 1);
 	validCodes[29].push_back(binds::UseTool);
-
 	SwitchPhase(0);
 	skippables = {};
 	for (int i = 0; i < numPhases; i++)
@@ -57,7 +56,7 @@ Tutorial::Tutorial()
 			skippables.push_back(false);
 		}
 	}
-	game->ActivePlanet()->camera.targetZoom = 0.45f;
+	game->ActivePlanet()->camera.targetZoom = 0.4f;
 }
 
 void Tutorial::SwitchPhase(int phase)
@@ -69,11 +68,13 @@ void Tutorial::SwitchPhase(int phase)
 	currentPhase = phase;
 	// skippables = { true, true, true, false, true, false, false };
 	gui = new GUI();
-	GUIPanel* outlineBG = new GUIPanel(sf::Vector2f(0.5f, 0.85f), sf::Vector2f(0.33f, 0.13f), sf::Color(50, 50, 50));
-	GUIPanel* bg = new GUIPanel(sf::Vector2f(0.5f, 0.85f), sf::Vector2f(0.32f, 0.12f), sf::Color(150, 150, 150));
-	GUILabel* label = new GUILabel(sf::Vector2f(0.5f, 0.85f), sf::Vector2f(0.3f, 0.1f), script[currentPhase]);
+	float ypos = 0.85f;
+	GUIPanel* outlineBG = new GUIPanel(sf::Vector2f(0.5f, ypos), sf::Vector2f(0.33f, 0.13f), sf::Color(50, 50, 50));
+	GUIPanel* bg = new GUIPanel(sf::Vector2f(0.5f, ypos), sf::Vector2f(0.32f, 0.12f), sf::Color(150, 150, 150));
+	GUILabel* label = new GUILabel(sf::Vector2f(0.5f, ypos), sf::Vector2f(0.3f, 0.1f), script[currentPhase]);
 	label->SetColor(sf::Color::Black);
 	label->DoWrapping(70);
+	gui->AddObject(outlineBG);
 	gui->AddObject(bg);
 	gui->AddObject(label);
 	if (phase == 3)
@@ -107,7 +108,7 @@ void Tutorial::Update(float dt)
 	}
 	if (skippables[currentPhase] && InputHandler::keyPressed(sf::Keyboard::Key::Tab))
 	{
-		if (currentPhase == 36)
+		if (currentPhase == 35)
 		{
 			EndTutorial();
 			return;

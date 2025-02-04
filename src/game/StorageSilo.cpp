@@ -131,7 +131,7 @@ void StorageSilo::Update(float dt)
 		{
 			if (outputNeighbours[i] != -1)
 			{
-				previousOutputs[i] %= itemIDs.size();
+				previousOutputs[i] = 0;
 
 				ConveyorType* c = dynamic_cast<ConveyorType*>(game->planets[planetID].structures[outputNeighbours[i]]);
 				int dir = (c->direction + 2) % 4;
