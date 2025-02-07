@@ -56,15 +56,15 @@ void SiloMenu::Update(float dt)
 		if (items[i]->image->isClicked())
 		{
 			int num = 1;
-			int index = 0;
-			for (int j = 0; j < silo->itemIDs.size(); j++)
-			{
-				if (silo->itemIDs[j] == items[i]->typeID)
-				{
-					index = j;
-					break;
-				}
-			}
+			int index = i;
+			// for (int j = 0; j < silo->itemIDs.size(); j++)
+			// {
+			// 	if (silo->itemIDs[j] == items[i]->typeID)
+			// 	{
+			// 		index = j;
+			// 		break;
+			// 	}
+			// }
 			if (InputHandler::keyDown(sf::Keyboard::Key::LShift))
 			{
 				num = silo->itemQuantities[index];
@@ -83,12 +83,14 @@ void SiloMenu::Update(float dt)
 				{
 					silo->itemQuantities.erase(silo->itemQuantities.begin() + index);
 					silo->itemIDs.erase(silo->itemIDs.begin() + index);
+					break;
 				}
 			}
 
 			guihandler.guis.erase(guihandler.guis.end() - 1);
 			game->inMenu = false;
 			delete this;
+			break;
 		}
 	}
 

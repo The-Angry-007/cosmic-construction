@@ -68,10 +68,10 @@ void Tutorial::SwitchPhase(int phase)
 	currentPhase = phase;
 	// skippables = { true, true, true, false, true, false, false };
 	gui = new GUI();
-	float ypos = 0.85f;
-	GUIPanel* outlineBG = new GUIPanel(sf::Vector2f(0.5f, ypos), sf::Vector2f(0.33f, 0.13f), sf::Color(50, 50, 50));
-	GUIPanel* bg = new GUIPanel(sf::Vector2f(0.5f, ypos), sf::Vector2f(0.32f, 0.12f), sf::Color(150, 150, 150));
-	GUILabel* label = new GUILabel(sf::Vector2f(0.5f, ypos), sf::Vector2f(0.3f, 0.1f), script[currentPhase]);
+	float ypos = 0.88f;
+	GUIPanel* outlineBG = new GUIPanel(sf::Vector2f(0.5f, ypos), sf::Vector2f(0.33f, 0.1f), sf::Color(50, 50, 50));
+	GUIPanel* bg = new GUIPanel(sf::Vector2f(0.5f, ypos), sf::Vector2f(0.32f, 0.09f), sf::Color(150, 150, 150));
+	GUILabel* label = new GUILabel(sf::Vector2f(0.5f, ypos), sf::Vector2f(0.3f, 0.08f), script[currentPhase]);
 	label->SetColor(sf::Color::Black);
 	label->DoWrapping(70);
 	gui->AddObject(outlineBG);
@@ -258,7 +258,7 @@ void Tutorial::Update(float dt)
 	if (currentPhase == 29)
 	{
 		auto tally = p.TallyResources({ 0, 0 }, { 1, 2 });
-		if (tally[0] > 15 && tally[1] > 5)
+		if (tally[0] >= 15 && tally[1] >= 5)
 		{
 			SwitchPhase(30);
 		}
