@@ -94,7 +94,7 @@ void GUIHandler::Render()
 		itemNameBG->Render();
 		itemName->Render();
 	}
-	fpsLabel->Render();
+	// fpsLabel->Render();
 	window->setView(currentView);
 }
 //return the active gui

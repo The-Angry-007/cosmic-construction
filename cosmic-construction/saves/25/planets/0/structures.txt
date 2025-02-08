@@ -1,0 +1,453 @@
+{
+PositionX:16
+PositionY:16
+TypeID:1
+ID:709
+ChunkID:17
+NumItemIDs:3
+ItemID0:0
+ItemQuantity0:32
+ItemID1:1
+ItemQuantity1:23
+ItemID2:2
+ItemQuantity2:7
+}
+{
+PositionX:13
+PositionY:18
+TypeID:0
+Direction:0
+ID:710
+ChunkID:17
+CurrentNeighbourIndex:2
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:13
+PositionY:16
+TypeID:0
+Direction:1
+ID:711
+ChunkID:17
+CurrentNeighbourIndex:2
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:13
+PositionY:17
+TypeID:0
+Direction:0
+ID:712
+ChunkID:17
+CurrentNeighbourIndex:2
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:14
+PositionY:16
+TypeID:0
+Direction:1
+ID:713
+ChunkID:17
+CurrentNeighbourIndex:3
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:15
+PositionY:16
+TypeID:0
+Direction:0
+ID:714
+ChunkID:17
+CurrentNeighbourIndex:3
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:14
+PositionY:18
+ChunkID:17
+TypeID:3
+ID:715
+Phase:0
+Direction:0
+TimeSinceAction:3.453125
+}
+{
+PositionX:15
+PositionY:17
+TypeID:0
+Direction:1
+ID:716
+ChunkID:17
+CurrentNeighbourIndex:2
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:14
+PositionY:17
+ChunkID:17
+TypeID:4
+ID:717
+TimeSinceTree:4.468750
+Tree:-1
+}
+{
+PositionX:15
+PositionY:18
+TypeID:0
+Direction:0
+ID:1202
+ChunkID:17
+CurrentNeighbourIndex:2
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:20
+PositionY:17
+TypeID:6
+ChunkID:17
+ID:1203
+NumStone:0
+TimeSinceOutput:3.390625
+AnimProgress:0.000000
+TimePerFrame:0.333300
+CurrentFrame:2
+LastOutputDir:3
+OutputItem:-1
+HasRecipe:1
+RecipeID:0
+RecipeNumInputs:3
+RecipeNumOutputs:0
+RecipeFuelsLeft:12.000000
+RecipePlanetID:0
+RecipeCraftTimer:2.625000
+}
+{
+PositionX:19
+PositionY:16
+TypeID:0
+Direction:1
+ID:1204
+ChunkID:17
+CurrentNeighbourIndex:3
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:30,36,33,38,31
+progress 1:0.846875,0.646875,0.446875,0.246875,0.046875
+items 2:
+progress 2:
+items 3:34,37,35,32,39,29
+progress 3:1.000000,0.800000,0.600000,0.400000,0.200000,0.000000
+}
+{
+PositionX:20
+PositionY:16
+TypeID:0
+Direction:2
+ID:1205
+ChunkID:17
+CurrentNeighbourIndex:3
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:28,27,26,25,24,23
+progress 2:1.000000,0.800000,0.600000,0.400000,0.200000,0.000000
+items 3:22,21,20,19,18,17
+progress 3:1.000000,0.800000,0.600000,0.400000,0.200000,0.000000
+}
+{
+PositionX:21
+PositionY:19
+TypeID:0
+Direction:3
+ID:1206
+ChunkID:17
+CurrentNeighbourIndex:1
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:13
+progress 1:0.171875
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:22
+PositionY:18
+TypeID:0
+Direction:2
+ID:1207
+ChunkID:17
+CurrentNeighbourIndex:1
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:18
+PositionY:19
+TypeID:0
+Direction:0
+ID:1208
+ChunkID:17
+CurrentNeighbourIndex:1
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:20
+PositionY:19
+TypeID:0
+Direction:3
+ID:1209
+ChunkID:17
+CurrentNeighbourIndex:1
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:22
+PositionY:17
+TypeID:0
+Direction:1
+ID:1210
+ChunkID:17
+CurrentNeighbourIndex:3
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:22
+PositionY:19
+TypeID:0
+Direction:3
+ID:1211
+ChunkID:17
+CurrentNeighbourIndex:0
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:19
+PositionY:19
+TypeID:0
+Direction:3
+ID:1212
+ChunkID:17
+CurrentNeighbourIndex:1
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:23
+PositionY:17
+TypeID:0
+Direction:2
+ID:1213
+ChunkID:17
+CurrentNeighbourIndex:3
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:23
+PositionY:18
+TypeID:0
+Direction:3
+ID:1214
+ChunkID:17
+CurrentNeighbourIndex:0
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:16
+PositionY:13
+TypeID:6
+ChunkID:17
+ID:1215
+NumStone:0
+TimeSinceOutput:1.609375
+AnimProgress:0.218750
+TimePerFrame:0.333300
+CurrentFrame:0
+LastOutputDir:5
+OutputItem:-1
+HasRecipe:1
+RecipeID:1
+RecipeNumInputs:3
+RecipeNumOutputs:0
+RecipeFuelsLeft:0.000000
+RecipePlanetID:0
+RecipeCraftTimer:10.406250
+}
+{
+PositionX:15
+PositionY:15
+TypeID:0
+Direction:0
+ID:1216
+ChunkID:17
+CurrentNeighbourIndex:2
+UpgradeLevel:0
+items 0:3,14
+progress 0:0.846875,0.646875
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}
+{
+PositionX:15
+PositionY:14
+TypeID:0
+Direction:1
+ID:1217
+ChunkID:17
+CurrentNeighbourIndex:2
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:4,5,9,11,8,15
+progress 1:1.000000,0.800000,0.600000,0.400000,0.200000,0.000000
+items 2:6,7,16,1,2,10
+progress 2:1.000000,0.800000,0.600000,0.400000,0.200000,0.000000
+items 3:
+progress 3:
+}
+{
+PositionX:17
+PositionY:15
+TypeID:0
+Direction:2
+ID:1218
+ChunkID:17
+CurrentNeighbourIndex:0
+UpgradeLevel:0
+items 0:
+progress 0:
+items 1:
+progress 1:
+items 2:
+progress 2:
+items 3:
+progress 3:
+}

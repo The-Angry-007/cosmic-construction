@@ -68,7 +68,7 @@ void Tutorial::SwitchPhase(int phase)
 	currentPhase = phase;
 	// skippables = { true, true, true, false, true, false, false };
 	gui = new GUI();
-	float ypos = 0.88f;
+	float ypos = 0.12f;
 	GUIPanel* outlineBG = new GUIPanel(sf::Vector2f(0.5f, ypos), sf::Vector2f(0.33f, 0.1f), sf::Color(50, 50, 50));
 	GUIPanel* bg = new GUIPanel(sf::Vector2f(0.5f, ypos), sf::Vector2f(0.32f, 0.09f), sf::Color(150, 150, 150));
 	GUILabel* label = new GUILabel(sf::Vector2f(0.5f, ypos), sf::Vector2f(0.3f, 0.08f), script[currentPhase]);
@@ -100,6 +100,15 @@ void Tutorial::Update(float dt)
 	if (gui != nullptr)
 	{
 		gui->Update(dt);
+		float ypos = 0.12f;
+		if (game->inMenu || guihandler.activeGui != 5)
+		{
+			ypos = 1.f - ypos;
+		}
+		for (int i = 0; i < 3; i++)
+		{
+			gui->GUIObjects[i]->position.y = ypos;
+		}
 	}
 	//skip tutorial button was clicked
 	if (tutorial == nullptr)
