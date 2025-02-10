@@ -22,7 +22,7 @@ Distributor::Distributor(int id, int planetID, int direction)
 	placedByPlayer = true;
 	isConveyor = true;
 }
-
+//gets structures in each direction
 void Distributor::UpdateNeighbours()
 {
 	std::vector<sf::Vector2i> offsets = {
@@ -41,6 +41,7 @@ void Distributor::UpdateNeighbours()
 	{
 		sf::Vector2i newPos = pos + offsets[i];
 		int structure = p.StructureInPos(newPos);
+		//if structure is a conveyor and accepts items in this direction, then valid neighbour
 		if (structure != -1)
 		{
 			Structure* s = p.structures[structure];
@@ -63,64 +64,9 @@ void Distributor::Update(float dt)
 {
 }
 
-bool Distributor::ProgressLane(int lane, float dt, bool moveToMain)
-{
-	bool moved = false;
-	for (uint i = 0; i < progress[lane].size(); i++)
-	{
-		progress[lane][i] += dt * speed;
-		if (i == 0)
-		{
-			if (progress[lane][0] >= 1.f)
-			{
-				if (moveToMain)
-				{
-					int checked = 0;
-					int index = currentOutputIndex;
-					bool added = false;
-					while (checked < 4)
-					{
-						if (neighbours[index] != -1 && (progress[index].size() == 0 || progress[index].back() > gap))
-						{
-							progress[index].push_back(progress[lane][0] - 1.f);
-							items[index].push_back(items[lane][0]);
-							items[lane].erase(items[lane].begin());
-							progress[lane].erase(progress[lane].begin());
-							moved = true;
-							currentOutputIndex = (index + 1) % 4;
-							added = true;
-							break;
-						}
-						else
-						{
-							index = (index + 1) % 4;
-							checked++;
-						}
-					}
-					if (!added)
-					{
-						progress[lane][0] = 1.f;
-					}
-				}
-				else
-				{
-					progress[lane][0] = 1.f;
-				}
-			}
-		}
-		else if (i != 0)
-		{
-			if (progress[lane][i - 1] - progress[lane][i] < gap)
-			{
-				progress[lane][i] -= dt * speed;
-			}
-		}
-	}
-	return moved;
-}
-
 void Distributor::Render()
 {
+	//almost exact same as render function of conveyor
 	zindex = -32;
 	Planet& p = game->planets[planetID];
 	p.renderObjects.push_back(RenderObject {
@@ -134,6 +80,7 @@ void Distributor::Render()
 			startPos += (sf::Vector2f)CONVEYOR_OFFSETS[i] / 2.f;
 			sf::Vector2f endPos(0.5f, 0.5f);
 			float prog = progress[i][j];
+			//reverse progress for any output lanes
 			if (neighbours[i] != -1)
 				prog = 1 - prog;
 			if (prog > 1.f)
@@ -150,20 +97,15 @@ void Distributor::Render()
 		}
 	}
 }
-
+//same as conveyor function
 void Distributor::TryAddGroundItem(int index)
 {
 	//only add new items if there is room
-	// int dir = (direction + 2) % 4;
 	int dir = 0;
 	if (progress[dir].size() > 0 && progress[dir][progress[dir].size() - 1] < gap)
 	{
 		return;
 	}
-	// if (index == game->toolHandler->draggingItem && game->activePlanet == planetID)
-	// {
-	// 	return;
-	// }
 	this->items[dir].push_back(index);
 	progress[dir].push_back(0.f);
 	Item* item = &game->planets[planetID].items[index];
@@ -180,19 +122,11 @@ void Distributor::TryAddGroundItem(int index)
 
 	return;
 }
-
+//distributor does not have a specific direction
 void Distributor::SetDirection(int direction)
 {
 }
-
-int Distributor::StructureInFront()
-{
-	sf::Vector2i pos = position + CONVEYOR_OFFSETS[direction];
-	Chunk* chunk = game->planets[planetID].GetChunk(chunkID);
-	pos += chunk->position * CHUNK_SIZE;
-	return game->planets[planetID].StructureInPos(pos);
-}
-
+//convert to JSON object; mostly the same as the conveyor
 JSON Distributor::ToJSON()
 {
 	JSON j = JSON();
@@ -224,6 +158,7 @@ JSON Distributor::ToJSON()
 	}
 	return j;
 }
+//load from JSON object
 void Distributor::FromJSON(JSON j)
 {
 	sf::Vector2i pos(0, 0);
@@ -261,7 +196,7 @@ Distributor::~Distributor()
 {
 	// delete hitbox;
 }
-
+//render red/green version of distributor
 void Distributor::RenderPreview()
 {
 	int opacity = 100;
@@ -278,7 +213,7 @@ void Distributor::RenderPreview()
 		&sprite,
 		2000 });
 }
-
+//place items on ground
 void Distributor::Destroy()
 {
 	for (int i = 0; i < 4; i++)
@@ -295,6 +230,7 @@ void Distributor::Destroy()
 		}
 	}
 }
+//attempt to add item from another conveyor
 bool Distributor::TryAddItem(int index, int direction, float progress)
 {
 	if (this->progress[direction].size() == 0 || this->progress[direction].back() - progress > gap)
@@ -305,6 +241,7 @@ bool Distributor::TryAddItem(int index, int direction, float progress)
 	}
 	return false;
 }
+//same as function above, but does not actually add an item
 bool Distributor::CanAddItem(int direction, float progress)
 {
 	if (this->progress[direction].size() == 0 || this->progress[direction].back() - progress > gap)
@@ -313,6 +250,7 @@ bool Distributor::CanAddItem(int direction, float progress)
 	}
 	return false;
 }
+//gets shortest distance to an item in a certain direction
 float Distributor::Distance(int direction)
 {
 	if (progress[direction].size() == 0)
@@ -321,12 +259,12 @@ float Distributor::Distance(int direction)
 	}
 	return progress[direction].back();
 }
-
+//accepts items from every direction
 bool Distributor::AcceptsItems(int direction)
 {
 	return true;
 }
-
+//moves all items forward
 void Distributor::Progress(float dt)
 {
 	for (int i = 0; i < 4; i++)
@@ -346,6 +284,7 @@ void Distributor::TryAdd()
 	{
 		numChecked++;
 		index = (index + 1) % 4;
+		//for output directions, try and add item to next structure
 		if (neighbours[index] != -1)
 		{
 			if (progress[index].size() > 0)
@@ -371,6 +310,7 @@ void Distributor::TryAdd()
 				}
 			}
 		}
+		//for input directions, cycle through output directions and try to add to one
 		else
 		{
 			if (progress[index].size() > 0 && progress[index][0] >= 1.f)
@@ -398,7 +338,7 @@ void Distributor::TryAdd()
 		}
 	}
 }
-
+//same as code in the conveyor class
 void Distributor::KeepDistance()
 {
 	for (int j = 0; j < 4; j++)

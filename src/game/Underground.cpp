@@ -3,7 +3,9 @@
 #include "Main.hpp"
 #include "ResourceHandler.hpp"
 #include "utils.hpp"
-
+//this is essentially a conveyor with only one lane. a flipped underground is an exit, and a non flipped is an entrance
+//all items are stored in the entrance
+//refer to the conveyor class for comments as most of the code is the same
 Underground::Underground(int id, int planetID, int direction)
 {
 	SetID(id);

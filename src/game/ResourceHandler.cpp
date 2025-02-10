@@ -22,12 +22,13 @@ int numStructureTextures = 0;
 
 void ResourceHandler::Init()
 {
-	//items
+	//item table
 	itemTable = new Table();
 	std::string data = SaveHandler::ReadData("content\\resources\\text files\\itemTable.txt");
 	itemTable->FromString(data);
 	numItems = itemTable->records.size();
 	std::vector<sf::Texture> allItems = {};
+	//item textures
 	for (uint i = 0; i < numItems; i++)
 	{
 		sf::Texture t;
@@ -46,7 +47,7 @@ void ResourceHandler::Init()
 	}
 
 	itemAtlas = new Atlas(allItems);
-	//structures
+	//structure table
 	structureTable = new Table();
 	data = SaveHandler::ReadData("content\\resources\\text files\\structureTable.txt");
 	structureTable->FromString(data);
@@ -59,6 +60,7 @@ void ResourceHandler::Init()
 		structureSizes.push_back(size);
 	}
 	Table pathTable = Table();
+	//structure textures
 	data = SaveHandler::ReadData("content\\resources\\text files\\pathTable.txt");
 	pathTable.FromString(data);
 	std::vector<int> ids;
@@ -94,6 +96,7 @@ void ResourceHandler::Init()
 		everyID.push_back(ids[i] + 2 * numItems);
 	}
 	completeAtlas = new Atlas(everyTexture, everyID);
+	//costs
 	structureCosts = {};
 	Table costTable = Table();
 	costTable.FromString(SaveHandler::ReadData("content\\resources\\text files\\costTable.txt"));
@@ -117,6 +120,7 @@ void ResourceHandler::Init()
 		structureCosts[index].push_back(std::stoi(costTable.GetValue("ItemID", i)));
 		structureCosts[index].push_back(std::stoi(costTable.GetValue("Amount", i)));
 	}
+	//recipes
 	std::string recipesString = SaveHandler::ReadData("content\\resources\\text files\\recipes.txt");
 	std::vector<JSON> recipeJSONs = SaveHandler::StringToJSONs(recipesString);
 	RecipeHandler::LoadRecipes(recipeJSONs);
@@ -124,6 +128,9 @@ void ResourceHandler::Init()
 
 sf::Texture ResourceHandler::GenerateOutline(sf::Texture& texture)
 {
+	//creates a new blank texture
+	//copies over any non-transparent pixels from original
+	//sets transparent pixels to white if they are adjacent to a non-transparent pixel in the original texture
 	auto image = texture.copyToImage();
 	sf::Image newImage;
 	newImage.create(texture.getSize().x + 2, texture.getSize().y + 2, sf::Color::Transparent);
@@ -170,7 +177,7 @@ sf::Texture ResourceHandler::GenerateOutline(sf::Texture& texture)
 	outline.loadFromImage(newImage);
 	return outline;
 }
-
+//finds cost that matches the structure id
 std::vector<int> ResourceHandler::GetCost(int structureID)
 {
 	for (int i = 0; i < structureCosts.size(); i++)

@@ -1,11 +1,13 @@
 #include "Tree.hpp"
 #include "Main.hpp"
 #include "ResourceHandler.hpp"
+//basic terrain tree
 Tree::Tree(int id, int planetID)
 {
 	SetID(id);
 	this->planetID = planetID;
 	typeID = 2;
+	//takes 3 clicks to destroy
 	health = 3;
 	tileSize = ResourceHandler::structureSizes[typeID];
 	sprite = sf::Sprite();
@@ -21,6 +23,7 @@ Tree ::~Tree()
 
 void Tree::Destroy()
 {
+	//places 5 wood in a 3x3 area with the tree at the centre
 	int numItems = 5;
 	//get possible positions to place items
 	std::vector<sf::Vector2i> possiblePositions = {};
@@ -65,9 +68,6 @@ void Tree::Destroy()
 		item.SetParent(-1);
 		p.AddItem(item);
 		p.MoveItem(item.id);
-		// p.items.push_back(Item(pos, -1, 0));
-		// p.items.back().SetParent(-1);
-		// p.MoveItem(p.items.size() - 1);
 	}
 }
 

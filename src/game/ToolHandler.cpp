@@ -48,6 +48,7 @@ void ToolHandler::Update(float dt, Planet* p)
 
 	delete hoveringItem;
 	hoveringItem = nullptr;
+	//show animation of insufficient resources label moving up and fading out
 	if (insufficientLabel != nullptr)
 	{
 		float time = 1.5f;
@@ -64,7 +65,7 @@ void ToolHandler::Update(float dt, Planet* p)
 			insufficientLabel->position = { 0.5f, 0.3f + prog * 0.2f };
 		}
 	}
-
+	//open or close build menu
 	if (InputHandler::pressed(binds::CloseInventory) && (!game->inMenu || guihandler.activeGui == 7))
 	{
 		if (guihandler.activeGui == 7)
@@ -83,7 +84,7 @@ void ToolHandler::Update(float dt, Planet* p)
 	{
 		return;
 	}
-	//CHANGING CURRENT TOOL
+	//if tutorial is not active, switch tool when toolbar icons are clicked
 	if (tutorial == nullptr)
 	{
 		for (int i = 0; i < bgObjs.size(); i++)
@@ -105,7 +106,7 @@ void ToolHandler::Update(float dt, Planet* p)
 			}
 		}
 	}
-
+	//keybinds for each tool
 	if (InputHandler::pressed(binds::Tool1))
 	{
 
@@ -124,7 +125,7 @@ void ToolHandler::Update(float dt, Planet* p)
 	{
 		placeDir = (placeDir + 1) % 4;
 	}
-	//SOME USEFUL VARIABLES
+	//some useful variables
 	sf::Vector2f mousePos = p->camera.WorldMousePos();
 	sf::Vector2i tilePos(floor(mousePos.x / TILE_SIZE.x), floor(mousePos.y / TILE_SIZE.y));
 
@@ -138,19 +139,22 @@ void ToolHandler::Update(float dt, Planet* p)
 
 	if (selectedTool == 0)
 	{
+		//flip structure keybind
 		if (InputHandler::pressed(binds::FlipStructure))
 		{
 			placingFlipped = !placingFlipped;
 		}
+		//reset preview structure
 		if (previewStructure != nullptr)
 		{
 			delete previewStructure;
 			previewStructure = nullptr;
 		}
+		//reload resource tally
 		ReloadTally(tilePos);
+		//conveyor placement
 		if (placeType == 0)
 		{
-
 			Conveyor* c = new Conveyor(0, game->activePlanet, placeDir);
 			c->SetVisualPosition(tilePos);
 
@@ -164,6 +168,7 @@ void ToolHandler::Update(float dt, Planet* p)
 					{
 
 						int direction = placeDir;
+						//rotate previously placed structure to face current one
 						if (lastPlacedStructure != -1 && p->structures[lastPlacedStructure] != nullptr)
 						{
 							int dir = 0;
@@ -184,6 +189,7 @@ void ToolHandler::Update(float dt, Planet* p)
 						}
 						else
 						{
+							//get previous tile pos and use that to point current conveyor
 							if (prevTilePos.x != -10000)
 							{
 								sf::Vector2i offset = tilePos;
@@ -246,14 +252,12 @@ void ToolHandler::Update(float dt, Planet* p)
 		}
 		else
 		{
+			//placing every other structure type
 			sf::Vector2f pos1(mousePos.x / TILE_SIZE.x, mousePos.y / TILE_SIZE.y);
 			pos1 -= (sf::Vector2f)(ResourceHandler::structureSizes[placeType] - sf::Vector2i(1, 1)) / 2.f;
 			sf::Vector2i pos(floor(pos1.x), floor(pos1.y));
 
 			sf::Vector2i size = ResourceHandler::structureSizes[placeType];
-			// sf::Vector2i pos = tilePos;
-			// sf::Vector2i size = ResourceHandler::structureSizes[placeType];
-			// pos -= size;
 
 			// StorageSilo* s = new StorageSilo(0, game->activePlanet);
 			Structure* s = CreateStructure(placeType);
@@ -261,6 +265,7 @@ void ToolHandler::Update(float dt, Planet* p)
 			s->SetVisualPosition(pos);
 
 			previewStructure = s;
+			//highlight size of gap when placing underground belts
 			if (placeType == 10 && placingFlipped)
 			{
 				sf::Vector2i position = pos;
@@ -295,7 +300,7 @@ void ToolHandler::Update(float dt, Planet* p)
 					}
 				}
 			}
-
+			//placing structure
 			if (InputHandler::pressed(binds::UseTool))
 			{
 				if (!p->StructureInArea(pos, size))
@@ -309,6 +314,7 @@ void ToolHandler::Update(float dt, Planet* p)
 
 						s2->SetPosition(pos);
 						p->UpdateNeighbours();
+						//flip if placing underground
 						if (placeType == 10)
 						{
 							placingFlipped = !placingFlipped;
@@ -584,7 +590,7 @@ void ToolHandler::ShowInsufficient()
 	}
 	insufficientTimer.restart();
 }
-
+//factory setup similar to in the planet class; just creates different classes depending on the type id given
 Structure* ToolHandler::CreateStructure(int type)
 {
 	if (type == 1)
@@ -686,6 +692,7 @@ void ToolHandler::Render()
 
 void ToolHandler::ReloadTally(sf::Vector2i tilePos)
 {
+	//tally up resources requried to build current structure and display as GUI
 	auto cost = ResourceHandler::GetCost(placeType);
 	std::vector<int> types = {};
 	for (int i = 1; i < cost.size(); i += 2)
@@ -735,7 +742,7 @@ void ToolHandler::ClearTally()
 	}
 	tallyObjs = {};
 }
-
+//creates selection images with each corner being in the corner of the area specified
 void ToolHandler::ShowSelectArea(sf::Vector2i pos, int width, int height, sf::Color col)
 {
 	std::vector<GUIImage*> selectedImages = {};

@@ -6,7 +6,7 @@ JSON::JSON()
 	keywords = {};
 	values = {};
 }
-
+//this just contains lots of different ways to read from and add to a JSON object.
 std::string JSON::GetValue(std::string keyword)
 {
 	for (uint i = 0; i < keywords.size(); i++)

@@ -28,7 +28,7 @@ Drill::Drill(int id, int planetID, int direction)
 
 Drill::~Drill()
 {}
-
+//gets output neighbours around the drill
 void Drill::UpdateNeighbours()
 {
 	std::vector<sf::Vector2i> offsets = {
@@ -72,10 +72,12 @@ void Drill::UpdateNeighbours()
 
 void Drill::Update(float dt)
 {
+	//update recipe if there is one set
 	if (recipe != nullptr)
 	{
 		recipe->Update(dt);
 	}
+	//progress drill bit animation
 	animProgress += dt;
 	if (animProgress > timePerFrame)
 	{
@@ -83,14 +85,10 @@ void Drill::Update(float dt)
 		ResourceHandler::structureAtlas->SetSprite(sprite, typeID, currentFrame);
 		animProgress = 0.f;
 	}
-	timeSinceOutput += dt;
 	std::vector<int> directions = {
 		2, 2, 3, 3, 0, 0, 1, 1
 	};
-	// if (outputItem == -1 && recipe != nullptr)
-	// {
-	// 	outputItem = recipe->TryTakeItem();
-	// }
+	//attempt to output item
 	if (recipe != nullptr)
 	{
 		for (int i = 0; i < 8; i++)
@@ -103,9 +101,11 @@ void Drill::Update(float dt)
 
 				if (c->CanAddItem(dir, 0.f))
 				{
+					//take output item from recipe
 					outputItem = recipe->TryTakeItem();
 					if (outputItem != -1)
 					{
+						//insert in conveyor
 						c->TryAddItem(outputItem, dir, 0.f);
 						outputItem = -1;
 						timeSinceOutput = 0.f;
@@ -118,7 +118,7 @@ void Drill::Update(float dt)
 		}
 	}
 }
-
+//draw the dirt texture and the drill texture
 void Drill::Render()
 {
 	game->planets[planetID].renderObjects.push_back(RenderObject {
@@ -128,7 +128,7 @@ void Drill::Render()
 		&groundSprite,
 		-32 });
 }
-
+//call destroy function for the recipe
 void Drill::Destroy()
 {
 	if (recipe != nullptr)
@@ -136,11 +136,13 @@ void Drill::Destroy()
 		recipe->Destroy(this);
 	}
 }
+//calls the base class's corresponding function, then updates position of ground sprite
 void Drill::SetPosition(sf::Vector2i position)
 {
 	Structure::SetPosition(position);
 	groundSprite.setPosition(sprite.getPosition());
 }
+//draws drill as either red or ground depending on whether it can be placed
 void Drill::RenderPreview()
 {
 	int opacity = 100;
@@ -161,7 +163,7 @@ void Drill::RenderPreview()
 		&groundSprite,
 		1999 });
 }
-
+//converts data to JSON object
 JSON Drill::ToJSON()
 {
 	JSON j = JSON();
@@ -179,6 +181,7 @@ JSON Drill::ToJSON()
 	if (recipe != nullptr)
 	{
 		j.AddAttribute("HasRecipe", 1);
+		//if the drill has a recipe, the attributes of the recipe are appended
 		j.AddJSON(recipe->ToJSON());
 	}
 	else
@@ -187,6 +190,7 @@ JSON Drill::ToJSON()
 	}
 	return j;
 }
+//loads from JSON object
 void Drill::FromJSON(JSON j)
 {
 	sf::Vector2i pos = j.GetV2i("Position");
@@ -204,17 +208,18 @@ void Drill::FromJSON(JSON j)
 	if (j.GetInt("HasRecipe"))
 	{
 		int id = j.GetInt("RecipeID");
+		//creates new recipe object which loads from the same JSON object
 		recipe = new Recipe(planetID, RecipeHandler::GetRecipe(id));
 		recipe->FromJSON(j);
 	}
 }
-
+//updates position without adding to a chunk etc.
 void Drill::SetVisualPosition(sf::Vector2i position)
 {
 	Structure::SetVisualPosition(position);
 	groundSprite.setPosition(sprite.getPosition());
 }
-
+//opens the recipe's GUI when interacted with
 void Drill::Interact()
 {
 	int index = -1;
@@ -229,7 +234,7 @@ void Drill::Interact()
 	}
 	RecipeHandler::InitGUI(index);
 }
-
+//calls recipe's try add item function
 bool Drill::TryAddItem(int index)
 {
 	if (recipe == nullptr)

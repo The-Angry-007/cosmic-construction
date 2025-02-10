@@ -1,4 +1,5 @@
 #include "RenderObject.hpp"
+//comparison to see whether one render object should be drawn on top of another
 bool operator<(const RenderObject& lhs, const RenderObject& rhs)
 {
 	float y1 = lhs.sprite->getPosition().y + lhs.zindex;

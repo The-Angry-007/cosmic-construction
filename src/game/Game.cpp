@@ -29,15 +29,18 @@ void Game::NewGame()
 	{
 		planets[i].Init(false);
 		sf::Clock timer;
+		//this forces the planet to keep updating until all the starting chunks have been generated
 		do
 		{
 			planets[i].Update(0.f);
 		} while (timer.restart().asSeconds() > 0.0001f);
 	}
+	//initialises the tutorial
 	tutorial = new Tutorial();
 }
 void Game::TogglePaused()
 {
+	//if now paused then open pause menu, otherwise close it
 	paused = !paused;
 	if (paused)
 	{
@@ -50,6 +53,7 @@ void Game::TogglePaused()
 		guihandler.openedGuis[guihandler.openedGuis.size() - 1] = 5;
 	}
 }
+//load in planets
 void Game::LoadGame()
 {
 	for (uint i = 0; i < planets.size(); i++)
@@ -60,29 +64,34 @@ void Game::LoadGame()
 }
 void Game::Update(float dt)
 {
-
+	//check if autosave needs to be completed
 	float timeSinceSave = SaveHandler::saveTimer.getElapsedTime().asSeconds();
+	//save interval of -1 indicates autosave should never happen
 	if (guihandler.settings->saveInterval != -1 && timeSinceSave > guihandler.settings->saveInterval * 60)
 	{
-		std::cout << "running autosave" << std::endl;
+		//restart save timer
 		SaveHandler::saveTimer.restart();
 		SaveHandler::SaveGame();
 	}
+	//prevents the game from updating for 5 frames after being loaded in (visual glitches happen otherwise)
 	if (loadedTimer > 0)
 	{
 		loadedTimer--;
 		return;
 	}
+	//toggle paused if pause button pressed
 	if (InputHandler::pressed(binds::Pause) && !inMenu)
 	{
 		TogglePaused();
 	}
+	//update camera view
 	planets[activePlanet].camera.SetView();
 
 	if (paused)
 	{
 		return;
 	}
+	//update planet, recipe visuals and toolhandler
 	RecipeHandler::Update(dt);
 	if (!inMenu)
 	{
@@ -92,6 +101,7 @@ void Game::Update(float dt)
 }
 void Game::Render()
 {
+	//render active planet
 	planets[activePlanet].Render();
 }
 
@@ -99,7 +109,7 @@ Planet* Game::ActivePlanet()
 {
 	return &planets[activePlanet];
 }
-
+//calls world update for active planet; this is where structures and items are updated and has a fixed delta time
 void Game::WorldUpdate(float dt)
 {
 	if (paused)

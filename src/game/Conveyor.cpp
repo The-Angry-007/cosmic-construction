@@ -2,7 +2,7 @@
 #include "Main.hpp"
 #include "ResourceHandler.hpp"
 #include "utils.hpp"
-
+//the offset each value of a structure's direction variable represents
 std::vector<sf::Vector2i> CONVEYOR_OFFSETS = {
 	sf::Vector2i(0, -1),
 	sf::Vector2i(1, 0),
@@ -20,9 +20,12 @@ Conveyor::Conveyor(int id, int planetID, int direction)
 	sprite = sf::Sprite();
 	ResourceHandler::structureAtlas->SetSprite(sprite, 0, direction + 4 * upgradeLevel);
 	gap = 0.2f;
+	//progress is how far along each item is in the 4 queues in the conveyor
 	progress = { {}, {}, {}, {} };
+	//items stores the ids of the items on each queue in the conveyor
 	items = { {}, {}, {}, {} };
 	speed = 3.f;
+	//the input direction to next add to the main queue (variable name refers to neighbours as this was the old system)
 	currentNeighbourIndex = 0;
 	blocksItems = false;
 	placedByPlayer = true;
@@ -31,6 +34,7 @@ Conveyor::Conveyor(int id, int planetID, int direction)
 
 void Conveyor::UpdateNeighbours()
 {
+	//gets the structure in front of the conveyor
 	neighbour = -1;
 	int i = direction;
 	sf::Vector2i pos = CONVEYOR_OFFSETS[i] + position;
@@ -47,26 +51,32 @@ void Conveyor::Update(float dt)
 
 void Conveyor::Render()
 {
+	//render the conveyor sprite
 	zindex = -32;
 	Planet& p = game->planets[planetID];
 	p.renderObjects.push_back(RenderObject {
 		&sprite,
 		zindex });
+	//render all items on the conveyor
 	for (uint i = 0; i < 4; i++)
 	{
 		for (uint j = 0; j < items[i].size(); j++)
 		{
+			//calculate position of item on conveyor
 			sf::Vector2f startPos(0.5f, 0.5f);
 			startPos += (sf::Vector2f)CONVEYOR_OFFSETS[i] / 2.f;
 			sf::Vector2f endPos(0.5f, 0.5f);
 			float prog = progress[i][j];
+			//reverse progress if on main queue, since for this queue 0 is the middle of the conveyor, not the edge
 			if (i == direction)
 				prog = 1 - prog;
 			if (prog > 1.f)
 			{
 				prog = 1.f;
 			}
+			//lerp between start and end
 			sf::Vector2f pos = Lerp(startPos, endPos, prog);
+			//set position and render
 			pos += (sf::Vector2f)position;
 			pos += (sf::Vector2f)(game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE);
 			pos.x *= TILE_SIZE.x;
@@ -76,7 +86,6 @@ void Conveyor::Render()
 		}
 	}
 }
-
 void Conveyor::TryAddGroundItem(int index)
 {
 	//only add new items if there is room
@@ -85,12 +94,9 @@ void Conveyor::TryAddGroundItem(int index)
 	{
 		return;
 	}
-	// if (index == game->toolHandler->draggingItem && game->activePlanet == planetID)
-	// {
-	// 	return;
-	// }
 	this->items[dir].push_back(index);
 	progress[dir].push_back(0.f);
+	//remove item from its chunk
 	Item* item = &game->planets[planetID].items[index];
 	Chunk* chunk = game->planets[planetID].GetChunk(item->chunkID);
 	for (int i = 0; i < chunk->items.size(); i++)
@@ -111,7 +117,7 @@ void Conveyor::SetDirection(int direction)
 	this->direction = direction;
 	ResourceHandler::structureAtlas->SetSprite(sprite, 0, direction + 4 * upgradeLevel);
 }
-
+//create JSON object representing conveyor
 JSON Conveyor::ToJSON()
 {
 	JSON j = JSON();
@@ -127,6 +133,8 @@ JSON Conveyor::ToJSON()
 	{
 		std::string strItems = "";
 		std::string strProgress = "";
+		//since this code was written before the JSON changes, a list had to be manually created.
+		//if this was to be rewritten, i could just call j.AddAttribute("items " + std::to_string(i), items[i]);
 		for (int j = 0; j < items[i].size(); j++)
 		{
 			strItems += std::to_string(items[i][j]);
@@ -142,6 +150,7 @@ JSON Conveyor::ToJSON()
 	}
 	return j;
 }
+//load conveyor from JSON object
 void Conveyor::FromJSON(JSON j)
 {
 	sf::Vector2i pos(0, 0);
@@ -160,8 +169,9 @@ void Conveyor::FromJSON(JSON j)
 	currentNeighbourIndex = std::stoi(j.GetValue("CurrentNeighbourIndex"));
 	for (int i = 0; i < 4; i++)
 	{
+		//split string into seperate items
 		auto items = Split(j.GetValue("items " + std::to_string(i)), ',');
-		//no items
+		//skip if empty
 		if (items.size() == 1 && items[0].length() == 0)
 		{
 			continue;
@@ -179,7 +189,7 @@ Conveyor::~Conveyor()
 {
 	// delete hitbox;
 }
-
+//draws a red/green version of the conveyor depending on whether it can be placed
 void Conveyor::RenderPreview()
 {
 	int opacity = 100;
@@ -196,7 +206,7 @@ void Conveyor::RenderPreview()
 		&sprite,
 		2000 });
 }
-
+//place items on the ground
 void Conveyor::Destroy()
 {
 	for (int i = 0; i < 4; i++)
@@ -213,8 +223,10 @@ void Conveyor::Destroy()
 		}
 	}
 }
+//try insert item from another conveyor
 bool Conveyor::TryAddItem(int index, int direction, float progress)
 {
+	//cannot insert into output direction
 	if (direction == (this->direction))
 	{
 		return false;
@@ -227,6 +239,7 @@ bool Conveyor::TryAddItem(int index, int direction, float progress)
 	}
 	return false;
 }
+//same as function above, without actually adding the item
 bool Conveyor::CanAddItem(int direction, float progress)
 {
 	if (direction == (this->direction))
@@ -240,6 +253,7 @@ bool Conveyor::CanAddItem(int direction, float progress)
 	}
 	return false;
 }
+//get minimum distance to an item in a given direction
 float Conveyor::Distance(int direction)
 {
 	if (progress[direction].size() == 0)
@@ -248,7 +262,8 @@ float Conveyor::Distance(int direction)
 	}
 	return progress[direction].back();
 }
-
+//check whether items can be added in a certain direction
+//any direction is valid except the output direction
 bool Conveyor::AcceptsItems(int direction)
 {
 	if (direction != this->direction)
@@ -257,7 +272,7 @@ bool Conveyor::AcceptsItems(int direction)
 	}
 	return false;
 }
-
+//move all items forward
 void Conveyor::Progress(float dt)
 {
 	for (int i = 0; i < 4; i++)
@@ -268,11 +283,12 @@ void Conveyor::Progress(float dt)
 		}
 	}
 }
-
+//try move item from main queue to next structure and try move items onto main queue
 void Conveyor::TryAdd()
 {
 	if (neighbour != -1 && progress[direction].size() > 0)
 	{
+		//attempt to add item to another conveyor type object
 		Structure* s = game->planets[planetID].structures[neighbour];
 		if (s->isConveyor)
 		{
@@ -283,13 +299,9 @@ void Conveyor::TryAdd()
 				progress[direction].erase(progress[direction].begin());
 				items[direction].erase(items[direction].begin());
 			}
-			// float prog = c->Distance(dir);
-			// if (prog + (1 - progress[direction][i]) < gap)
-			// {
-			// 	progress[direction][i] -= speed * dt;
-			// }
 		}
 		else
+		//attempt to add item to structure
 		{
 			if (progress[direction][0] >= 1.f && s->TryAddItem(items[direction][0]))
 			{
@@ -298,10 +310,12 @@ void Conveyor::TryAdd()
 			}
 		}
 	}
+	//try to move item onto main queue
 	if (progress[direction].size() == 0 || progress[direction].back() >= gap)
 	{
 		int numChecked = 0;
 		int index = currentNeighbourIndex;
+		//cycle through each queue, starting with currentNeighbourIndex + 1 (since currentNeighbourIndex is the last queue an item was taken from)
 		while (numChecked < 3)
 		{
 			numChecked++;
@@ -317,18 +331,20 @@ void Conveyor::TryAdd()
 				items[index].erase(items[index].begin());
 				progress[index].erase(progress[index].begin());
 				currentNeighbourIndex = index;
+				//if successfully added, end here and set current neighbour index to this direction
 				break;
 			}
 		}
 	}
 }
-
+//ensure there is a gap between items
 void Conveyor::KeepDistance()
 {
 	for (int i = 0; i < progress[direction].size(); i++)
 	{
 		if (i == 0)
 		{
+			//make sure progress is not greater than 1
 			if (progress[direction][i] > 1.f)
 			{
 				progress[direction][i] = 1.f;
@@ -338,6 +354,7 @@ void Conveyor::KeepDistance()
 				Structure* s = game->planets[planetID].structures[neighbour];
 				if (s->isConveyor)
 				{
+					//make sure front item is sufficiently far from item on next conveyor
 					ConveyorType* c = dynamic_cast<ConveyorType*>(s);
 					float dist = c->Distance((direction + 2) % 4);
 					if (1.f - progress[direction][0] + dist < gap)
@@ -349,9 +366,11 @@ void Conveyor::KeepDistance()
 		}
 		else
 		{
+			//set distance to item in front to gap size if it was less than gap size
 			if (progress[direction][i - 1] - progress[direction][i] < gap)
 			{
 				progress[direction][i] = progress[direction][i - 1] - gap;
+				//if progress less than 0, set to 0
 				if (progress[direction][i] < 0)
 				{
 					progress[direction][i] = 0.f;
@@ -359,6 +378,7 @@ void Conveyor::KeepDistance()
 			}
 		}
 	}
+	//same as bottom part of code above, but for directions other than main direction
 	for (int i = 0; i < 4; i++)
 	{
 		if (direction == i)

@@ -35,19 +35,12 @@ void Structure::Render()
 {
 	window->draw(sprite);
 }
-
+//set position function
 void Structure::SetPosition(sf::Vector2i position)
 {
 	int index = id;
-	// for (uint i = 0; i < game->planets[planetID].structures.size(); i++)
-	// {
-	// 	if (game->planets[planetID].structures[i] != nullptr && game->planets[planetID].structures[i]->id == id)
-	// 	{
-	// 		index = i;
-	// 		break;
-	// 	}
-	// }
 	auto& chunks = game->planets[planetID].chunks;
+	//remove structure from current chunk
 	if (chunkID != -1)
 	{
 		auto& structures = game->planets[planetID].GetChunk(chunkID)->structures;
@@ -62,11 +55,14 @@ void Structure::SetPosition(sf::Vector2i position)
 	}
 	int i = game->planets[planetID].ChunkAtPos(position);
 	chunkID = i;
+	//find new chunk and add to it
 	chunks[i].structures.push_back(index);
 	if (!isTerrain)
 	{
+		//set altered if this structure is not part of the terrain generation
 		chunks[i].isAltered = true;
 	}
+	//set position of sprite
 	this->position = sf::Vector2i(position.x - chunks[i].position.x * CHUNK_SIZE, position.y - chunks[i].position.y * CHUNK_SIZE);
 	bottomRightPos = this->position + tileSize - sf::Vector2i(1, 1);
 	sf::Vector2f pos2 = (sf::Vector2f)this->position + (sf::Vector2f)tileSize / 2.f;
@@ -105,7 +101,6 @@ void Structure::SetFlipped(bool flipped)
 }
 void Structure::RenderPreview()
 {
-	std::cout << "i should not be called" << std::endl;
 }
 
 void Structure::SetVisualPosition(sf::Vector2i pos)

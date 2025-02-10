@@ -15,6 +15,7 @@ Tutorial::Tutorial()
 	{
 		validCodes.push_back({ binds::Pause });
 	}
+	//the keybinds that can be pressed in each stage of the tutorial
 	validCodes[3].push_back(binds::UseTool);
 	validCodes[5].push_back(binds::UseTool);
 	validCodes[6].push_back(binds::UseTool);
@@ -61,6 +62,7 @@ Tutorial::Tutorial()
 
 void Tutorial::SwitchPhase(int phase)
 {
+	//create tutorial gui
 	if (gui != nullptr)
 	{
 		delete gui;
@@ -101,6 +103,7 @@ void Tutorial::Update(float dt)
 	{
 		gui->Update(dt);
 		float ypos = 0.12f;
+		//move tutorial to top or bottom depending on whether there is another gui open
 		if (game->inMenu || guihandler.activeGui != 5)
 		{
 			ypos = 1.f - ypos;
@@ -117,6 +120,7 @@ void Tutorial::Update(float dt)
 	}
 	if (skippables[currentPhase] && InputHandler::keyPressed(sf::Keyboard::Key::Tab))
 	{
+		//end of tutorial reached
 		if (currentPhase == 35)
 		{
 			EndTutorial();
@@ -125,6 +129,7 @@ void Tutorial::Update(float dt)
 		SwitchPhase(currentPhase + 1);
 	}
 	Planet& p = game->planets[game->activePlanet];
+	//a bunch of statements that check if a specific condition is met, and if so the next tutorial phase begins
 	if (currentPhase == 3 && p.StructuresInArea({ 0, 0 }, { 31, 31 }).size() == 1)
 	{
 		SwitchPhase(4);
@@ -291,7 +296,7 @@ void Tutorial::Render()
 
 	window->setView(currentView);
 }
-
+//only allow certain keybinds and mouse buttons if they are in the list of valid codes
 void Tutorial::LimitInputs()
 {
 	for (int i = 0; i < InputHandler::keysPressed.size(); i++)

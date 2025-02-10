@@ -33,6 +33,7 @@ void TreeChopper::Update(float dt)
 	int index;
 	if (phase == 0 || phase == 2)
 	{
+		//check if there is a tree next to the tree chopper if the phase is 0 or 2
 		tilePos = position + p.GetChunk(chunkID)->position * CHUNK_SIZE;
 		tilePos += CONVEYOR_OFFSETS[direction];
 		std::vector<int> structs = p.StructuresInArea(tilePos, sf::Vector2i(1, 1));
@@ -52,6 +53,7 @@ void TreeChopper::Update(float dt)
 	}
 	if (phase == 0)
 	{
+		//start extending chopper
 		if (index != -1 && p.structures[index]->typeID == 2)
 		{
 			phase = 1;
@@ -69,8 +71,10 @@ void TreeChopper::Update(float dt)
 	}
 	else if (phase == 1)
 	{
+		//extending chopper
 		if (timeSinceAction > timePerStep)
 		{
+			//extension complete
 			phase = 2;
 			timeSinceAction = 0.f;
 		}
@@ -86,6 +90,7 @@ void TreeChopper::Update(float dt)
 	}
 	else if (phase == 2)
 	{
+		//wait for 1 second then destroy tree
 		ResourceHandler::structureAtlas->SetSprite(sprite, typeID, direction * 15 + 14);
 
 		if (timeSinceAction > timePerStep)
@@ -96,6 +101,7 @@ void TreeChopper::Update(float dt)
 				timeSinceAction = 0.f;
 				return;
 			}
+			//destroying tree
 			if (p.structures[index]->typeID == 4)
 			{
 				SaplingPlanter* s = dynamic_cast<SaplingPlanter*>(p.structures[index]);
@@ -129,6 +135,7 @@ void TreeChopper::Update(float dt)
 	}
 	else if (phase == 3)
 	{
+		//retracting chopper
 		if (timeSinceAction > timePerStep)
 		{
 			phase = 0;

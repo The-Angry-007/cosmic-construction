@@ -31,9 +31,10 @@ void Planet::Init(bool load)
 {
 	if (load)
 	{
+		//loads in data for the planet
 		std::string path = sh::workingDir + "\\planets\\" + std::to_string(id) + "\\";
 		savePath = path;
-		//load items
+		//loads in chunks from table
 		std::string chunkPath = path + "chunks.txt";
 		Table chunkTable = Table();
 		chunkTable.FromString(sh::ReadData(chunkPath));
@@ -45,6 +46,7 @@ void Planet::Init(bool load)
 			int id = std::stoi(chunkTable.GetValue("ChunkID", i));
 			Chunk c = Chunk(pos, id, this->id);
 			c.isAltered = true;
+			//ensures id matches list position
 			if (id >= chunks.size())
 			{
 				while (id > chunks.size())
@@ -81,7 +83,7 @@ void Planet::Init(bool load)
 			int typeId = std::stoi(itemTable.GetValue("TypeID", i));
 			Item item = Item(pos, id, typeId);
 			item.SetParent(std::stoi(itemTable.GetValue("Parent", i)));
-			//need to double check this is right
+			//also ensures item id matches list
 			if (id >= items.size())
 			{
 				while (id > items.size())
@@ -104,10 +106,9 @@ void Planet::Init(bool load)
 				}
 			}
 
-			//TODO: DEAL WITH PARENT ATTRIBUTE
 			MoveItem(item.id);
 		}
-		//loading camera
+		//loading camera: this is a simple json object
 		{
 			JSON camjson = JSON();
 			camjson.FromString(SaveHandler::ReadData(path + "camera.txt"));
@@ -124,6 +125,7 @@ void Planet::Init(bool load)
 			std::vector<JSON> jsons = sh::StringToJSONs(structureData);
 			for (uint i = 0; i < jsons.size(); i++)
 			{
+				//"Factory method pattern": code that just creates objects of different types.
 				if (jsons[i].GetValue("TypeID") == "0")
 				{
 					Conveyor* c = new Conveyor(-2, id, 0);
@@ -265,7 +267,7 @@ void Planet::Init(bool load)
 	}
 	else
 	{
-		// chunks.push_back(Chunk(sf::Vector2i(0, 0), -1, this->id));
+		//generates all visible chunks
 		GenerateChunksInView();
 	}
 }
@@ -273,11 +275,12 @@ void Planet::Update(float dt)
 {
 	if (game->activePlanet == id)
 	{
+		//updates camera and generates any chunks now visible
 		camera.Update(dt);
 		GenerateChunksInView();
 	}
 }
-
+//converts a list of render objects into a vertex array so that all items and structures can be drawn in a single draw call
 void buildVertexArray(const std::vector<RenderObject>& renderObjects, sf::VertexArray& vertexArray)
 {
 	// Set the vertex array to quads and resize it to fit all sprites
@@ -326,10 +329,12 @@ void Planet::Render()
 {
 
 	sf::FloatRect camRect = camera.toFloatRect();
+	//draws background
 	sf::RectangleShape rect(sf::Vector2f(camRect.width, camRect.height));
 	rect.setPosition(camRect.left, camRect.top);
 	rect.setFillColor(backgroundColor);
 	window->draw(rect);
+	//all visible chunks are rendered
 	for (uint i = 0; i < chunks.size(); i++)
 	{
 		if (chunks[i].isDeleted)
@@ -339,21 +344,18 @@ void Planet::Render()
 		if (chunks[i].isVisible())
 			chunks[i].Render();
 	}
-
+	//sort render objects by z index and position, then build vertex array
 	if (renderObjects.size() > 0)
 	{
 		std::sort(renderObjects.begin(), renderObjects.end());
 		buildVertexArray(renderObjects, vertexArray);
-		// for (uint i = 0; i < renderObjects.size(); i++)
-		// {
-		// 	window->draw(*renderObjects[i].sprite);
-		// }
 	}
 	renderObjects = {};
 }
 
 void Planet::Save()
 {
+	//creates necessary folders
 	std::string path = sh::workingDir + "\\planets";
 	if (!sh::DirExists(path))
 	{
@@ -420,6 +422,7 @@ void Planet::Save()
 
 void Planet::GenerateChunk(sf::Vector2i position)
 {
+	//empty slots are used before adding to the end of the list of chunks
 	Chunk c = Chunk(position, -1, id);
 	if (emptyChunkSlots.size() > 0)
 	{
@@ -432,14 +435,16 @@ void Planet::GenerateChunk(sf::Vector2i position)
 		c.id = chunks.size();
 		chunks.push_back(c);
 	}
+	//neighbours need to be updated when chunk is created
 	updateNeighbours = true;
+	//if position of chunk is (0,0), storage silo, trees and boulders are created
 	if (position == sf::Vector2i(0, 0))
 	{
 		StorageSilo* s = new StorageSilo(-1, id);
 		s->placedByPlayer = false;
 		AddStructure(s);
 		s->SetPosition(sf::Vector2i(16, 16));
-		// for (int j = 0; j < ResourceHandler::numItems; j++)
+		//add 20 wood to start off with
 		for (int j = 0; j < 1; j++)
 		{
 			for (int i = 0; i < 20; i++)
@@ -470,9 +475,11 @@ void Planet::GenerateChunk(sf::Vector2i position)
 		}
 		return;
 	}
+	//otherwise, terrain generation algorithm is used
 	RandomHandler::SetNum(position);
 	sf::Vector2i worldPos = position * CHUNK_SIZE;
 	int seed = RandomHandler::seed;
+	//iterate over every tile in the chunk
 	for (int x = 0; x < 32; x++)
 	{
 		for (int y = 0; y < 32; y++)
@@ -480,6 +487,7 @@ void Planet::GenerateChunk(sf::Vector2i position)
 			sf::Vector2i p(x, y);
 			p += worldPos;
 			float noise = RandomHandler::getNoise(p.x, p.y);
+			//if noise is above certain threshold and 1 in 5 chance is true, generate tree
 			if (noise > 0.65f && RandomHandler::GetNextNumber() % 5 == 0)
 			{
 				Tree* t = new Tree(-1, id);
@@ -488,6 +496,7 @@ void Planet::GenerateChunk(sf::Vector2i position)
 			}
 		}
 	}
+	//same is done for boulders, but with different seed
 	RandomHandler::SetSeed(seed + 1);
 	for (int x = 0; x < 32; x++)
 	{
@@ -496,6 +505,7 @@ void Planet::GenerateChunk(sf::Vector2i position)
 			sf::Vector2i p(x, y);
 			p += worldPos;
 			float noise = RandomHandler::getNoise(p.x, p.y);
+			//must also ensure the tile is free
 			if (StructureInPos(p) == -1 && noise > 0.65f && RandomHandler::GetNextNumber() % 9 == 0)
 			{
 				Boulder* t = new Boulder(-1, id);
@@ -508,9 +518,11 @@ void Planet::GenerateChunk(sf::Vector2i position)
 }
 void Planet::GenerateChunksInView()
 {
+	//timer to make sure the generation does not take too long
 	sf::Clock timer;
 	float maxTime = 0.01f;
 	HitboxShape* hitbox = camera.hitbox->shapes[0];
+	//calculate positions to iterate over
 	sf::Vector2f topleft = hitbox->currentPos - hitbox->currentSize;
 	sf::Vector2i minPos((int)floor(topleft.x / CHUNK_SIZE_PIXELS.x), (int)floor(topleft.y / CHUNK_SIZE_PIXELS.y));
 	sf::Vector2f bottomright = hitbox->currentPos + hitbox->currentSize;
@@ -519,6 +531,7 @@ void Planet::GenerateChunksInView()
 	{
 		for (int y = minPos.y; y <= maxPos.y; y++)
 		{
+			//check if chunk already exists
 			bool exists = false;
 			for (int i = 0; i < chunks.size(); i++)
 			{
@@ -532,8 +545,10 @@ void Planet::GenerateChunksInView()
 					break;
 				}
 			}
+			//if does not exist, generate the chunk
 			if (!exists)
 				GenerateChunk(sf::Vector2i(x, y));
+			//stop if max time reached
 			if (timer.getElapsedTime().asSeconds() > maxTime)
 			{
 				return;
@@ -544,6 +559,7 @@ void Planet::GenerateChunksInView()
 
 void Planet::MoveItem(int index)
 {
+	//remove item from its current chunk
 	Item* item = &items[index];
 	if (item->chunkID != -1)
 	{
@@ -557,6 +573,7 @@ void Planet::MoveItem(int index)
 			}
 		}
 	}
+	//add to new chunk if on ground
 	if (item->parent != -1)
 	{
 		return;
@@ -566,36 +583,32 @@ void Planet::MoveItem(int index)
 	chunks[chunk].isAltered = true;
 	item->chunkID = chunks[chunk].id;
 }
+//this used to have to iterate over every chunk, but now that the id is the same as the index it becomes O(1)
 Chunk* Planet::GetChunk(int chunkID)
 {
 	if (chunkID < chunks.size())
 	{
 		return &chunks[chunkID];
 	}
-	// for (uint i = 0; i < chunks.size(); i++)
-	// {
-	// 	if (chunks[i].id == chunkID)
-	// 	{
-	// 		return &chunks[i];
-	// 	}
-	// }
 	return nullptr;
 }
+//checks if there is a structure within a certain area
 bool Planet::StructureInArea(sf::Vector2i position, sf::Vector2i size)
 {
+	//find positions to iterate over
 	sf::Vector2i minChunkPos(
 		floor((float)position.x / (float)CHUNK_SIZE),
 		floor((float)position.y / (float)CHUNK_SIZE));
 	sf::Vector2i maxChunkPos(
 		floor((float)(position.x + size.x) / (float)CHUNK_SIZE),
 		floor((float)(position.y + size.y) / (float)CHUNK_SIZE));
-	// position -= sf::Vector2i(chunkPos.x * CHUNK_SIZE, chunkPos.y * CHUNK_SIZE);
-	//need to also check the chunks left and up
+	//there could be a structure on the edge of a chunk left or up, so the minimums need to be reduced by 1
 	for (int x = minChunkPos.x - 1; x <= maxChunkPos.x; x++)
 	{
 		for (int y = minChunkPos.y - 1; y <= maxChunkPos.y; y++)
 		{
 			int chunk = -1;
+			//find chunk in this position
 			for (uint i = 0; i < chunks.size(); i++)
 			{
 				if (chunks[i].isDeleted)
@@ -607,20 +620,17 @@ bool Planet::StructureInArea(sf::Vector2i position, sf::Vector2i size)
 					chunk = i;
 				}
 			}
+			//if there is no chunk in this position, continue
 			if (chunk == -1)
 			{
 				continue;
 			}
+			//check if each structure collides with position to check
 			for (uint i = 0; i < chunks[chunk].structures.size(); i++)
 			{
 				Structure* s = structures[chunks[chunk].structures[i]];
 				sf::Vector2i pos = s->position + sf::Vector2i(x * CHUNK_SIZE, y * CHUNK_SIZE);
 				sf::Vector2i pos2 = s->bottomRightPos + sf::Vector2i(x * CHUNK_SIZE, y * CHUNK_SIZE);
-				// if (x == 0 && y == 0)
-				// {
-				// 	std::cout << "position is:" << pos.x << " " << pos.y << std::endl;
-				// 	std::cout << "position2 is:" << pos2.x << " " << pos2.y << std::endl;
-				// }
 				sf::IntRect rect1(pos, s->tileSize);
 				sf::IntRect rect2(position, size);
 				if (RectIntersectsRect(rect1, rect2))
@@ -630,10 +640,12 @@ bool Planet::StructureInArea(sf::Vector2i position, sf::Vector2i size)
 			}
 		}
 	}
+	//no collisions found
 	return false;
 }
 void Planet::UpdateNeighbours()
 {
+	//update neighbours of each structure
 	for (int i = 0; i < structures.size(); i++)
 	{
 		if (structures[i] != nullptr)
@@ -642,6 +654,8 @@ void Planet::UpdateNeighbours()
 		}
 	}
 }
+//similar to the structure in area function above, however this one checks a 1x1 area
+//and returns the first structure found that collides with that area
 int Planet::StructureInPos(sf::Vector2i position)
 {
 	sf::Vector2i chunkPos(
@@ -674,11 +688,6 @@ int Planet::StructureInPos(sf::Vector2i position)
 				Structure* s = structures[chunks[chunk].structures[i]];
 				sf::Vector2i pos = s->position + sf::Vector2i(x * CHUNK_SIZE, y * CHUNK_SIZE);
 				sf::Vector2i pos2 = s->bottomRightPos + sf::Vector2i(x * CHUNK_SIZE, y * CHUNK_SIZE);
-				// if (x == 0 && y == 0)
-				// {
-				// 	std::cout << "position is:" << pos.x << " " << pos.y << std::endl;
-				// 	std::cout << "position2 is:" << pos2.x << " " << pos2.y << std::endl;
-				// }
 				if (pos.x <= position.x && pos.y <= position.y)
 				{
 					if (pos2.x >= position.x && pos2.y >= position.y)
@@ -691,7 +700,7 @@ int Planet::StructureInPos(sf::Vector2i position)
 	}
 	return -1;
 }
-
+//finds the chunk at a given world position
 int Planet::ChunkAtPos(sf::Vector2f position)
 {
 	sf::Vector2f chunkPosf(
@@ -709,9 +718,12 @@ int Planet::ChunkAtPos(sf::Vector2f position)
 			return i;
 		}
 	}
+	//if no chunk found, it is generated
 	GenerateChunk(chunkPos);
+	//function is called again (recursive)
 	return ChunkAtPos(position);
 }
+//same as function above but for a tile position instead of a world position
 int Planet::ChunkAtPos(sf::Vector2i position)
 {
 	sf::Vector2f chunkPosf = (sf::Vector2f)position / (float)CHUNK_SIZE;
@@ -731,6 +743,7 @@ int Planet::ChunkAtPos(sf::Vector2i position)
 	return ChunkAtPos(position);
 }
 
+//simple functions to convert between tile pos and world pos
 sf::Vector2i Planet::tilePos(sf::Vector2f position)
 {
 	return sf::Vector2i(floor(position.x / TILE_SIZE.x), floor(position.y / TILE_SIZE.y));
@@ -751,16 +764,13 @@ sf::Vector2f Planet::worldPos(sf::Vector2f tilePos, int chunkID)
 
 void Planet::WorldUpdate(float dt)
 {
+	//if update neighbours has been set to true since last update, then update all neighbours
 	if (updateNeighbours)
 	{
 		UpdateNeighbours();
 		updateNeighbours = false;
 	}
-	// for (uint i = 0; i < chunks.size(); i++)
-	// {
-
-	// 	chunks[i].Update(dt);
-	// }
+	//update items that are not being dragged and are on the ground
 	for (uint i = 0; i < items.size(); i++)
 	{
 		if (items[i].parent != -1 || items[i].isDeleted)
@@ -782,7 +792,7 @@ void Planet::WorldUpdate(float dt)
 		}
 		items[i].Update(dt, &game->planets[id]);
 	}
-	//dealing with conveyor types
+	//dealing with conveyor types - 3 different stages: progress, try add and keep distance
 	std::vector<ConveyorType*> conveyors = {};
 	for (int i = 0; i < structuresToUpdate.size(); i++)
 	{
@@ -801,10 +811,12 @@ void Planet::WorldUpdate(float dt)
 	{
 		conveyors[i]->KeepDistance();
 	}
+	//update other structures
 	for (uint i = 0; i < structuresToUpdate.size(); i++)
 	{
 		structures[structuresToUpdate[i]]->Update(dt);
 	}
+	//if a structure or conveyor triggered an update neighbours event, it is run again
 	if (updateNeighbours)
 	{
 		UpdateNeighbours();
@@ -814,6 +826,7 @@ void Planet::WorldUpdate(float dt)
 
 void Planet::AddStructure(Structure* s, bool preserveID)
 {
+	//check if this structure needs to be added to the list of structures to update
 	std::vector<int> nonUpdateIds = { 2 };
 	bool update = true;
 	for (int i = 0; i < nonUpdateIds.size(); i++)
@@ -824,6 +837,8 @@ void Planet::AddStructure(Structure* s, bool preserveID)
 			break;
 		}
 	}
+	//if the id should be preserved, then the list of structures is expanded to allow this structure to fit
+	//if the list is already big enough, the corresponding empty structure slot value is found and removed
 	if (preserveID)
 	{
 		int id = s->id;
@@ -859,6 +874,7 @@ void Planet::AddStructure(Structure* s, bool preserveID)
 	}
 	else
 	{
+		//otherwise, just fill the first empty structure slot or add to the end
 		if (emptyStructureSlots.size() > 0)
 		{
 			int index = emptyStructureSlots.back();
@@ -884,6 +900,7 @@ void Planet::AddStructure(Structure* s, bool preserveID)
 
 void Planet::RemoveStructure(int index)
 {
+	//remove from its chunk
 	Chunk* c = GetChunk(structures[index]->chunkID);
 	c->isAltered = true;
 	for (int i = 0; i < c->structures.size(); i++)
@@ -894,6 +911,7 @@ void Planet::RemoveStructure(int index)
 			break;
 		}
 	}
+	//delete structure and add its index to list of empty slots
 	delete structures[index];
 	structures[index] = nullptr;
 	emptyStructureSlots.push_back(index);
@@ -907,7 +925,8 @@ void Planet::RemoveStructure(int index)
 	}
 	updateNeighbours = true;
 }
-
+//same as the function that returns a boolean, except all structures found are added to a list
+//which is then returned
 std::vector<int> Planet::StructuresInArea(sf::Vector2i position, sf::Vector2i size)
 {
 	std::vector<int> structs = {};
@@ -917,8 +936,6 @@ std::vector<int> Planet::StructuresInArea(sf::Vector2i position, sf::Vector2i si
 	sf::Vector2i maxChunkPos(
 		floor((float)(position.x + size.x) / (float)CHUNK_SIZE),
 		floor((float)(position.y + size.y) / (float)CHUNK_SIZE));
-	// position -= sf::Vector2i(chunkPos.x * CHUNK_SIZE, chunkPos.y * CHUNK_SIZE);
-	//need to also check the chunks left and up
 	for (int x = minChunkPos.x - 1; x <= maxChunkPos.x; x++)
 	{
 		for (int y = minChunkPos.y - 1; y <= maxChunkPos.y; y++)
@@ -960,14 +977,15 @@ std::vector<int> Planet::StructuresInArea(sf::Vector2i position, sf::Vector2i si
 	}
 	return structs;
 }
-
+//takes away the resources required to build a structure
 bool Planet::DeductResources(int typeID, sf::Vector2i position)
 {
 	sf::Vector2i distance(50, 50);
+	//gets all structures within radius
 	std::vector<int> structures = StructuresInArea(position - distance, 2 * distance);
 	std::vector<int> silos = {};
 	std::vector<float> dists = {};
-
+	//filters out storage silos and sorts them by distance to the target position
 	for (int i = 0; i < structures.size(); i++)
 	{
 		if (this->structures[structures[i]]->typeID == 1)
@@ -1001,7 +1019,7 @@ bool Planet::DeductResources(int typeID, sf::Vector2i position)
 		amountsLeft.push_back(cost[i + 1]);
 		amountsCopy.push_back(cost[i + 1]);
 	}
-
+	//calculates if there are enough resources to successfully deduct them
 	for (int i = 0; i < silos.size(); i++)
 	{
 		StorageSilo* s = dynamic_cast<StorageSilo*>(this->structures[silos[i]]);
@@ -1030,6 +1048,8 @@ bool Planet::DeductResources(int typeID, sf::Vector2i position)
 	{
 		return false;
 	}
+
+	//if so, the resources are deducted
 	for (int i = 0; i < silos.size(); i++)
 	{
 		for (int k = 0; k < idsLeft.size(); k++)
@@ -1063,7 +1083,7 @@ bool Planet::DeductResources(int typeID, sf::Vector2i position)
 
 	return true;
 }
-
+//clear all structures in an area
 void Planet::RemoveStructuresInArea(sf::Vector2i position, sf::Vector2i size)
 {
 	std::vector<int> structures = StructuresInArea(position, size);
@@ -1072,7 +1092,7 @@ void Planet::RemoveStructuresInArea(sf::Vector2i position, sf::Vector2i size)
 		RemoveStructure(structures[i]);
 	}
 }
-
+//similar to the deduct resources function, but all the resources of the types given are added up
 std::vector<int> Planet::TallyResources(sf::Vector2i position, std::vector<int> types)
 {
 	sf::Vector2i distance(50, 50);
@@ -1107,7 +1127,7 @@ std::vector<int> Planet::TallyResources(sf::Vector2i position, std::vector<int> 
 	}
 	return tally;
 }
-
+//attempts to fill an empty slot with the item given, otherwise it is appended to the end of the list.
 void Planet::AddItem(Item& item)
 {
 	if (emptyItemSlots.size() > 0)
@@ -1123,7 +1143,7 @@ void Planet::AddItem(Item& item)
 		items.push_back(item);
 	}
 }
-
+//removes item and adds its index to the list of empty slots
 void Planet::RemoveItem(int index)
 {
 	Chunk* c = GetChunk(items[index].chunkID);

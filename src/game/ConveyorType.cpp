@@ -1,5 +1,7 @@
 #include "ConveyorType.hpp"
 
+//abstract class for structures that behave like a conveyor.
+
 ConveyorType::ConveyorType()
 {}
 ConveyorType::~ConveyorType()
@@ -21,7 +23,8 @@ bool ConveyorType::AcceptsItems(int direction)
 {
 	return false;
 }
-
+//this was going to be for upgraded conveyors that could move items faster, however i decided not to implement this as
+//throughput was not an issue during testing.
 void ConveyorType::SetUpgradeLevel(int level)
 {
 	upgradeLevel = level;

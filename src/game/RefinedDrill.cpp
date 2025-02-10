@@ -3,6 +3,12 @@
 #include "Recipe.hpp"
 #include "RecipeHandler.hpp"
 #include "ResourceHandler.hpp"
+
+//********************************************************************//
+//THE FOLLOWING CODE IS ALMOST THE EXACT SAME AS THE DRILL CLASS CODE //
+//refer to that class for comments                                    //
+//********************************************************************//
+
 RefinedDrill::RefinedDrill(int id, int planetID, int direction)
 {
 	SetID(id);

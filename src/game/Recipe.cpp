@@ -25,9 +25,11 @@ Recipe::Recipe(int planetID, RecipeData* data)
 
 void Recipe::Update(float dt)
 {
+	//if craft is being executed:
 	if (craftTimer > 0)
 	{
 		craftTimer -= dt;
+		//if craft has ended then try and fill up the outputs, if no more room then extend the craft timer a bit
 		if (craftTimer <= 0.f)
 		{
 			float maxMult = 0.f;
@@ -44,10 +46,6 @@ void Recipe::Update(float dt)
 				for (int i = 0; i < numOutputs.size(); i++)
 				{
 					numOutputs[i] += data->outputAmounts[i];
-					// Item item = Item(sf::Vector2f(0.f, 0.f), -1, data->outputTypes[i]);
-					// item.SetParent(1);
-					// game->planets[planetID].items.push_back(item);
-					// outputItems[i].push_back(game->planets[planetID].items.size() - 1);
 				}
 			}
 			else
@@ -58,17 +56,18 @@ void Recipe::Update(float dt)
 	}
 	else
 	{
+		//otherwise, try and start a craft
+		//deplete fuels
 		for (int i = 0; i < fuelsLeft.size(); i++)
 		{
 			if (data->isFuels[i] && fuelsLeft[i] <= 1.f && numInputs[i] >= data->inputAmounts[i])
 			{
 				numInputs[i] -= data->inputAmounts[i];
-				// game->planets[planetID].items[inputItems[i].back()].isDeleted = true;
-				// inputItems[i].pop_back();
 				fuelsLeft[i] += data->fuelLengths[i];
 			}
 		}
 		bool canCraft = true;
+		//check there are enough items
 		for (int i = 0; i < numInputs.size(); i++)
 		{
 			if ((data->isFuels[i] && fuelsLeft[i] <= 0.01f) || (!data->isFuels[i] && numInputs[i] < data->inputAmounts[i]))
@@ -77,6 +76,7 @@ void Recipe::Update(float dt)
 				break;
 			}
 		}
+		//if can craft, deduct resources required
 		if (canCraft)
 		{
 			craftTimer = data->craftTime;
@@ -94,21 +94,7 @@ void Recipe::Update(float dt)
 	}
 }
 
-// for (int i = 0; i < fuelsLeft.size(); i++)
-// {
-// 	if (craftTimer > dt)
-// 		fuelsLeft[i] -= dt;
-// 	if (fuelsLeft[i] < 0)
-// 	{
-// 		if (inputItems[i].size() > 0)
-// 		{
-// 			game->planets[planetID].items[inputItems[i].back()].isDeleted = true;
-// 			inputItems[i].pop_back();
-// 			fuelsLeft[i] = data->fuelLengths[i];
-// 		}
-// 	}
-// }
-//}
+//place input and output items on ground in area the size of the parent structure
 void Recipe::Destroy(Structure* parent)
 {
 	sf::Vector2i position = parent->position;
@@ -117,7 +103,6 @@ void Recipe::Destroy(Structure* parent)
 	{
 		for (int j = 0; j < numInputs[i]; j++)
 		{
-			// Item& item = game->planets[planetID].items[inputItems[i][j]];
 			Item item = Item(sf::Vector2f(0.f, 0.f), -1, data->inputTypes[i]);
 			item.SetParent(-1);
 			item.position = (sf::Vector2f)(position + game->planets[planetID].GetChunk(parent->chunkID)->position * CHUNK_SIZE);
@@ -133,7 +118,6 @@ void Recipe::Destroy(Structure* parent)
 	{
 		for (int j = 0; j < numOutputs[i]; j++)
 		{
-			// Item& item = game->planets[planetID].items[outputItems[i][j]];
 			Item item = Item(sf::Vector2f(0.f, 0.f), -1, data->outputTypes[i]);
 			item.SetParent(-1);
 			item.position = (sf::Vector2f)(position + game->planets[planetID].GetChunk(parent->chunkID)->position * CHUNK_SIZE);
@@ -146,6 +130,7 @@ void Recipe::Destroy(Structure* parent)
 		}
 	}
 }
+//checks if the type id matches one of the inputs and there is enough room to add the item
 bool Recipe::TryAddItem(int index)
 {
 	Item& item = game->planets[planetID].items[index];
@@ -163,6 +148,7 @@ bool Recipe::TryAddItem(int index)
 	}
 	return false;
 }
+//removes one of the output items if there are any
 int Recipe::TryTakeItem()
 {
 	for (int i = 0; i < numOutputs.size(); i++)
@@ -181,39 +167,23 @@ int Recipe::TryTakeItem()
 Recipe::~Recipe()
 {
 }
-
+//adds attributes to JSON, each attribute starts with recipe to prevent conflicts with parent
 JSON Recipe::ToJSON()
 {
 	JSON j = JSON();
 	j.AddAttribute("RecipeID", data->id);
 	j.AddAttribute("RecipeNumInputs", numInputs);
 	j.AddAttribute("RecipeNumOutputs", numOutputs);
-	// for (int i = 0; i < numInputs.size(); i++)
-	// {
-	// 	j.AddAttribute("RecipeNumInputs" + std::to_string(i), numInputs[i]);
-	// }
-	// for (int i = 0; i < outputItems.size(); i++)
-	// {
-	// 	j.AddAttribute("RecipeOutputItems" + std::to_string(i), outputItems[i]);
-	// }
 	j.AddAttribute("RecipeFuelsLeft", fuelsLeft);
 	j.AddAttribute("RecipePlanetID", planetID);
 	j.AddAttribute("RecipeCraftTimer", craftTimer);
 	return j;
 }
-
+//loads from JSON boject
 void Recipe::FromJSON(JSON j)
 {
 	numInputs = j.GetIntArr("RecipeNumInputs");
 	numOutputs = j.GetIntArr("RecipeNumOutputs");
-	// for (int i = 0; i < inputItems.size(); i++)
-	// {
-	// 	inputItems[i] = j.GetIntArr("RecipeInputItems" + std::to_string(i));
-	// }
-	// for (int i = 0; i < outputItems.size(); i++)
-	// {
-	// 	outputItems[i] = j.GetIntArr("RecipeOutputItems" + std::to_string(i));
-	// }
 	fuelsLeft = j.GetFloatArr("RecipeFuelsLeft");
 	planetID = j.GetInt("RecipePlanetID");
 	craftTimer = j.GetFloat("RecipeCraftTimer");

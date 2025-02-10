@@ -11,7 +11,7 @@ GUI* gui = nullptr;
 int guiStructure = -1;
 int numBgObjs = 0;
 }
-
+//loads in recipes from text file
 void RecipeHandler::LoadRecipes(std::vector<JSON> jsons)
 {
 	recipes = {};
@@ -53,9 +53,11 @@ void RecipeHandler::InitGUI(int structure)
 	topLabel->SetColor(sf::Color::Black);
 	gui->AddObject(topLabel);
 	numBgObjs = gui->GUIObjects.size();
+	//rocket silo gui
 	if (s->typeID == 22)
 	{
 		RocketSilo* r = dynamic_cast<RocketSilo*>(s);
+		//no launch type set
 		if (r->launchType == -1)
 		{
 			topLabel->value = "Select Launch Type";
@@ -84,8 +86,10 @@ void RecipeHandler::InitGUI(int structure)
 			gui->AddObject(option1);
 			gui->AddObject(option2);
 		}
+		//launch type set
 		else
 		{
+			//display how many of each required item there is but centred in the screen
 			topLabel->value = ResourceHandler::structureTable->GetValue("Name", s->typeID);
 			//display menu of recipe
 			float inputEnd = 0.65f;
@@ -111,6 +115,7 @@ void RecipeHandler::InitGUI(int structure)
 
 				pos.x -= gap;
 			}
+			//launch button
 			GUIImage* im = new GUIImage(sf::Vector2f(0.5f, 0.6f), sf::Vector2f(0.1f, 0.03f), "content\\resources\\images\\buttonBezels.png");
 			GUILabel* label = new GUILabel(sf::Vector2f(0.5f, 0.6f), sf::Vector2f(0.1f, 0.027f), "Launch");
 			label->SetColor(sf::Color::Black);
@@ -121,6 +126,7 @@ void RecipeHandler::InitGUI(int structure)
 			gui->AddObject(p);
 		}
 	}
+	//other recipe structures
 	else
 	{
 		if (s->recipe == nullptr)
@@ -140,6 +146,7 @@ void RecipeHandler::InitGUI(int structure)
 		}
 		else
 		{
+			//display the inputs, outputs and fuels of the recipe
 			topLabel->value = ResourceHandler::structureTable->GetValue("Name", s->typeID);
 			numBgObjs += 2;
 			GUIImage* arrow = new GUIImage(sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.15f, 0.3f), "content\\resources\\images\\arrow.png");
@@ -197,6 +204,7 @@ void RecipeHandler::Update(float dt)
 	{
 		gui->Update(dt);
 		Structure* s = game->ActivePlanet()->structures[guiStructure];
+		//rocket silo menu
 		if (s->typeID == 22)
 		{
 			RocketSilo* r = dynamic_cast<RocketSilo*>(s);
@@ -204,6 +212,7 @@ void RecipeHandler::Update(float dt)
 			{
 				GUIObject* b1 = gui->GUIObjects[numBgObjs];
 				GUIObject* b2 = gui->GUIObjects[numBgObjs + 1];
+				//check if option buttons are clciked
 				if (b1->isClicked())
 				{
 					InputHandler::RemoveMbPressed(sf::Mouse::Button::Left);
@@ -229,6 +238,7 @@ void RecipeHandler::Update(float dt)
 			else
 			{
 				int index = numBgObjs;
+				//grey out items with an amount of 0
 				for (int i = 0; i < s->recipe->numInputs.size(); i++)
 				{
 					dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->SetAmount(s->recipe->numInputs[i]);
@@ -242,6 +252,7 @@ void RecipeHandler::Update(float dt)
 					}
 				}
 				GUIPanel* p = dynamic_cast<GUIPanel*>(gui->GUIObjects.back());
+				//launch button clicked
 				if (s->recipe->numOutputs[0] > 0)
 				{
 					p->SetColor(sf::Color(0, 0, 0, 0));
@@ -264,17 +275,17 @@ void RecipeHandler::Update(float dt)
 		{
 			if (s->recipe == nullptr)
 			{
+				//arrange items
 				float inoutgap = 0.015f;
 				sf::Vector2f gap(0.1f + inoutgap, 0.1f);
 				float size = 0.05f;
 				sf::Vector2f spos(0.1f + size, 0.16f + size);
-				// spos += gap;
 				sf::Vector2f pos = spos;
 				for (int i = numBgObjs; i < gui->GUIObjects.size(); i += 2)
 				{
-					//arranging items
 					gui->GUIObjects[i]->position = pos;
 					gui->GUIObjects[i + 1]->position = pos + sf::Vector2f(inoutgap, 0.f);
+					//recipe selected
 					if (gui->GUIObjects[i]->isClicked() || gui->GUIObjects[i + 1]->isClicked())
 					{
 						InputHandler::RemoveMbPressed(sf::Mouse::Button::Left);
@@ -296,6 +307,7 @@ void RecipeHandler::Update(float dt)
 			}
 			else
 			{
+				//make arrow match progrerss of craft
 				int index = numBgObjs;
 				GUIImage* arrow = dynamic_cast<GUIImage*>(gui->GUIObjects[index - 1]);
 				float prog = s->recipe->craftTimer / s->recipe->data->craftTime;
@@ -314,6 +326,7 @@ void RecipeHandler::Update(float dt)
 				arrow->sprite.setTextureRect(size);
 				arrow->position.x = (0.5f - arrow->size.x) + (arrow->size.x * ((float)size.width / (float)arrow->sprite.getTexture()->getSize().x));
 				arrow->size.x = ((float)size.width / (float)arrow->sprite.getTexture()->getSize().x) * arrowSize.x;
+				//grey out items with amount of 0
 				for (int i = 0; i < s->recipe->numInputs.size(); i++)
 				{
 					dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->SetAmount(s->recipe->numInputs[i]);
@@ -339,6 +352,7 @@ void RecipeHandler::Update(float dt)
 						dynamic_cast<GUIItem*>(gui->GUIObjects[i + index])->image->sprite.setColor(sf::Color::White);
 					}
 				}
+				//adjust fuel bars
 				index += s->recipe->numOutputs.size();
 				float fuelSize = 0.1f;
 				float fuelOffset = 0.2f;
@@ -368,7 +382,7 @@ void RecipeHandler::Update(float dt)
 				}
 			}
 		}
-
+		//close recipe
 		if (InputHandler::pressed(binds::CloseInventory))
 		{
 			InputHandler::RemovePressed(binds::CloseInventory);
@@ -380,7 +394,7 @@ void RecipeHandler::Update(float dt)
 		}
 	}
 }
-
+//finds recipe with matching id
 RecipeData* RecipeHandler::GetRecipe(int id)
 {
 	for (int i = 0; i < recipes.size(); i++)

@@ -75,7 +75,7 @@ int main()
 			game->Update(dt);
 			int maxUpdates = 2;
 			int num = 0;
-
+			//execute world updates at a maximum of 2 per frame until caught up with real time
 			while ((num < maxUpdates) && updateClock.getElapsedTime().asSeconds() * ups > numUpdates)
 			{
 				num++;

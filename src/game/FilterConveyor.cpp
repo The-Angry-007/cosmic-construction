@@ -22,9 +22,10 @@ FilterConveyor::FilterConveyor(int id, int planetID, int direction)
 	blocksItems = false;
 	placedByPlayer = true;
 	isConveyor = true;
+	//items that match the filter item's type id will move left, otherwise go straight
 	filterItem = -1;
 }
-
+//same as distributor's function
 void FilterConveyor::UpdateNeighbours()
 {
 	std::vector<sf::Vector2i> offsets = {
@@ -46,13 +47,7 @@ void FilterConveyor::UpdateNeighbours()
 		if (structure != -1)
 		{
 			Structure* s = p.structures[structure];
-			// if (s->isConveyor && dynamic_cast<ConveyorType*>(s)->AcceptsItems((directions[i])))
-			// {
-			// 	neighbours.push_back(structure);
-			// }
-			// else
-			// {
-			// }
+
 			neighbours.push_back(structure);
 		}
 		else
@@ -72,9 +67,11 @@ void FilterConveyor::Render()
 	p.renderObjects.push_back(RenderObject {
 		&sprite,
 		zindex });
+	//this sprite acts a frame around the filter item
 	p.renderObjects.push_back(RenderObject {
 		&overlaySprite,
 		99 });
+	//draws filter item in middle of conveyor on top of everything else
 	if (filterItem != -1)
 	{
 		Item& item = game->planets[planetID].items[filterItem];
@@ -84,6 +81,7 @@ void FilterConveyor::Render()
 		item.position = pos;
 		item.Render(&game->planets[planetID]);
 	}
+	//draws other items; almost the same as conveyor's function
 	for (uint i = 0; i < 4; i++)
 	{
 		for (uint j = 0; j < items[i].size(); j++)
@@ -108,7 +106,7 @@ void FilterConveyor::Render()
 		}
 	}
 }
-
+//same as for other conveyor type objects
 void FilterConveyor::TryAddGroundItem(int index)
 {
 	//only add new items if there is room
@@ -117,10 +115,6 @@ void FilterConveyor::TryAddGroundItem(int index)
 	{
 		return;
 	}
-	// if (index == game->toolHandler->draggingItem && game->activePlanet == planetID)
-	// {
-	// 	return;
-	// }
 	this->items[dir].push_back(index);
 	progress[dir].push_back(0.f);
 	Item* item = &game->planets[planetID].items[index];
@@ -137,6 +131,7 @@ void FilterConveyor::TryAddGroundItem(int index)
 
 	return;
 }
+//calls base class's set position function, then updates position of overlay sprite
 void FilterConveyor::SetPosition(sf::Vector2i position)
 {
 	Structure::SetPosition(position);
@@ -147,11 +142,13 @@ void FilterConveyor::SetDirection(int direction)
 	this->direction = direction;
 	ResourceHandler::structureAtlas->SetSprite(sprite, 17, direction + 4 * isFlipped);
 }
+//since the filter conveyor usually outputs filtered items to the left, it can be flipped to output to the right instead
 void FilterConveyor::SetFlipped(bool flipped)
 {
 	this->isFlipped = flipped;
 	ResourceHandler::structureAtlas->SetSprite(sprite, 17, direction + 4 * isFlipped);
 }
+//creates JSON object to store data; almost the exact same as the conveyor function
 JSON FilterConveyor::ToJSON()
 {
 	JSON j = JSON();
@@ -183,6 +180,7 @@ JSON FilterConveyor::ToJSON()
 	}
 	return j;
 }
+//loads from JSON object
 void FilterConveyor::FromJSON(JSON j)
 {
 	sf::Vector2i pos(0, 0);
@@ -219,9 +217,8 @@ void FilterConveyor::FromJSON(JSON j)
 
 FilterConveyor::~FilterConveyor()
 {
-	// delete hitbox;
 }
-
+//draws red/green filter conveyor depending on whether it can be placed
 void FilterConveyor::RenderPreview()
 {
 	int opacity = 100;
@@ -238,7 +235,7 @@ void FilterConveyor::RenderPreview()
 		&sprite,
 		2000 });
 }
-
+//places items on the ground, including the filter item
 void FilterConveyor::Destroy()
 {
 	for (int i = 0; i < 4; i++)
@@ -266,6 +263,7 @@ void FilterConveyor::Destroy()
 		game->planets[planetID].MoveItem(item.id);
 	}
 }
+//can only add items from input direction
 bool FilterConveyor::TryAddItem(int index, int direction, float progress)
 {
 	if (direction != (this->direction + 2) % 4)
@@ -280,6 +278,7 @@ bool FilterConveyor::TryAddItem(int index, int direction, float progress)
 	}
 	return false;
 }
+//same as function above, but does not actually add item
 bool FilterConveyor::CanAddItem(int direction, float progress)
 {
 	if (direction != (this->direction + 2) % 4)
@@ -294,6 +293,7 @@ bool FilterConveyor::CanAddItem(int direction, float progress)
 	}
 	return false;
 }
+//gets closest item in direction specified
 float FilterConveyor::Distance(int direction)
 {
 	if (progress[direction].size() == 0)
@@ -302,7 +302,7 @@ float FilterConveyor::Distance(int direction)
 	}
 	return progress[direction].back();
 }
-
+//only accepts items from input direction
 bool FilterConveyor::AcceptsItems(int direction)
 {
 	return (direction == (this->direction + 2) % 4);
@@ -331,6 +331,7 @@ void FilterConveyor::TryAdd()
 		{
 			continue;
 		}
+		//adding item to neighbouring strutures
 		if (neighbours[index] != -1)
 		{
 			if (progress[index].size() > 0)
@@ -356,39 +357,19 @@ void FilterConveyor::TryAdd()
 				}
 			}
 		}
-		// if (progress[index].size() > 0 && progress[index][0] >= 1.f)
-		// {
-		// 	int numChecked = 0;
-		// 	int index2 = currentOutputIndex;
-		// 	while (numChecked < 4)
-		// 	{
-		// 		numChecked++;
-		// 		index2 = (index2 + 1) % 4;
-		// 		if (neighbours[index2] != -1)
-		// 		{
-		// 			if (progress[index2].size() == 0 || progress[index2].back() > gap)
-		// 			{
-		// 				progress[index2].push_back(progress[index][0] - 1.f);
-		// 				items[index2].push_back(items[index][0]);
-		// 				progress[index].erase(progress[index].begin());
-		// 				items[index].erase(items[index].begin());
-		// 				currentOutputIndex = index2;
-		// 				break;
-		// 			}
-		// 		}
-		// 	}
-		// }
 	}
 	int dir = (direction + 2) % 4;
 	if (progress[dir].size() > 0 && progress[dir][0] >= 1.f)
 	{
 		int outputDir = direction;
+		//changes output direction depending on whether the item's type matches the filter's type
 		if (filterItem != -1)
 		{
 			auto& items = game->planets[planetID].items;
 			int filterType = items[filterItem].typeId;
 			if (filterType == items[this->items[dir][0]].typeId)
 			{
+				//also changes depending on whether the conveyor is flipped
 				if (this->isFlipped)
 				{
 					outputDir = (direction + 1) % 4;
@@ -399,6 +380,7 @@ void FilterConveyor::TryAdd()
 				}
 			}
 		}
+		//if no filter item is set, the item becomes the filter
 		else
 		{
 			filterItem = items[dir][0];
@@ -406,6 +388,7 @@ void FilterConveyor::TryAdd()
 			items[dir].erase(items[dir].begin());
 			return;
 		}
+		//appends to appropriate queue
 		if (progress[outputDir].size() == 0 || progress[outputDir].back() > gap)
 		{
 			progress[outputDir].push_back(progress[dir][0] - 1.f);
@@ -420,12 +403,14 @@ void FilterConveyor::KeepDistance()
 {
 	for (int j = 0; j < 4; j++)
 	{
+		//dealing with input direction:
 		if (j == (direction + 2) % 4)
 		{
 			if (progress[j].size() == 0)
 			{
 				continue;
 			}
+			//find which queue the item would be added to
 			int outputDir = this->direction;
 			if (filterItem != -1)
 			{
@@ -443,6 +428,7 @@ void FilterConveyor::KeepDistance()
 					}
 				}
 			}
+			//check progress in that direction, and ensure the distance is kept
 			if (progress[outputDir].size() > 0)
 			{
 				float dist = progress[outputDir].back();
@@ -451,6 +437,7 @@ void FilterConveyor::KeepDistance()
 					progress[j][0] = 1.f - (gap - dist);
 				}
 			}
+			//for rest of items in the queue, make sure distance to next item is at least the gap size
 			for (int k = 1; k < progress[j].size(); k++)
 			{
 				if (progress[j][k - 1] - progress[j][k] < gap)
@@ -464,6 +451,7 @@ void FilterConveyor::KeepDistance()
 			}
 			continue;
 		}
+		//if this is an output direction:
 		if (neighbours[j] != -1)
 		{
 			int direction = j;
@@ -472,11 +460,13 @@ void FilterConveyor::KeepDistance()
 			{
 				if (i == 0)
 				{
+					//limit progress to 1
 					if (progress[direction][i] > 1.f)
 					{
 						progress[direction][i] = 1.f;
 					}
 					Structure* s = game->planets[planetID].structures[neighbours[direction]];
+					//if neighbour is a conveyor, keep distance to last item on the conveyor
 					if (s->isConveyor)
 					{
 						ConveyorType* c = dynamic_cast<ConveyorType*>(s);
@@ -489,6 +479,7 @@ void FilterConveyor::KeepDistance()
 				}
 				else
 				{
+					//for rest of queue, ensure distance to next item is at least the gap size
 					if (progress[direction][i - 1] - progress[direction][i] < gap)
 					{
 						progress[direction][i] = progress[direction][i - 1] - gap;
@@ -502,6 +493,8 @@ void FilterConveyor::KeepDistance()
 		}
 		else
 		{
+			//for input directions, just ensure the distance to the next item is at least the gap size
+			//and that the first item's progress does not exceed 1.
 			for (int k = 0; k < progress[j].size(); k++)
 			{
 				if (k == 0)

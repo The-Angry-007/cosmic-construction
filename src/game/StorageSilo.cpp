@@ -32,7 +32,6 @@ void StorageSilo::SetPosition(sf::Vector2i position)
 	{
 		sprites[i].setPosition(this->sprite.getPosition());
 	}
-	// UpdateNeighbours();
 }
 
 StorageSilo::~StorageSilo()
@@ -41,6 +40,8 @@ StorageSilo::~StorageSilo()
 
 void StorageSilo::UpdateNeighbours()
 {
+	//some of the code in this function is redundant:
+	//input neighbours are still calculated even though they are never used, only output neighbours are
 	inputNeighbours = {};
 	outputNeighbours = {};
 	sf::Vector2i pos = position;
@@ -93,38 +94,12 @@ void StorageSilo::UpdateNeighbours()
 }
 void StorageSilo::TryAddGroundItem(int index)
 {
-	// Item* item = &game->planets[planetID].items[index];
-	// Chunk* chunk = game->planets[planetID].GetChunk(item->chunkID);
-	// for (int i = 0; i < chunk->items.size(); i++)
-	// {
-	// 	if (chunk->items[i] == index)
-	// 	{
-	// 		chunk->items.erase(chunk->items.begin() + i);
-	// 		break;
-	// 	}
-	// }
-	// item->parent = id;
-	// item->SetParent(id);
 	TryAddItem(index);
 }
 void StorageSilo::Update(float dt)
 {
-	// for (int i = 0; i < inputNeighbours.size(); i++)
-	// {
-	// 	if (inputNeighbours[i] == -1)
-	// 	{
-	// 		continue;
-	// 	}
-	// 	Conveyor* c = dynamic_cast<Conveyor*>(game->planets[planetID].structures[inputNeighbours[i]]);
-	// 	if (c->items[c->direction].size() > 0 && c->progress[c->direction][0] >= 1.f)
-	// 	{
-	// 		AddItem(c->items[c->direction][0]);
-	// 		c->items[c->direction].erase(c->items[c->direction].begin());
-	// 		c->progress[c->direction].erase(c->progress[c->direction].begin());
-	// 	}
-	// }
-	//WORKING HERE
-	//NEED TO MAKE THIS USE THE NEW CONVEYORTYPE SYSTEM
+	//attempt to output items in every direction
+	//previous outputs variable is now redundant as the first item type is outputted to completion instead of cycling through all types.
 	if (itemIDs.size() > 0)
 	{
 		for (int i = 0; i < outputNeighbours.size(); i++)
@@ -283,16 +258,7 @@ void StorageSilo::Interact()
 
 void StorageSilo::Destroy()
 {
-	// for (int j = 0; j < items.size(); j++)
-	// {
-	// 	Item& item = game->planets[planetID].items[items[j]];
-	// 	item.SetParent(-1);
-	// 	item.position = (sf::Vector2f)(position + game->planets[planetID].GetChunk(chunkID)->position * CHUNK_SIZE);
-	// 	item.position += sf::Vector2f(rand() % 1000 * tileSize.x, rand() % 1000 * tileSize.y) / 1000.f;
-	// 	item.position.x *= TILE_SIZE.x;
-	// 	item.position.y *= TILE_SIZE.y;
-	// 	game->planets[planetID].MoveItem(items[j]);
-	// }
+	//distribute all items on the ground
 	for (int i = 0; i < itemIDs.size(); i++)
 	{
 		for (int j = 0; j < itemQuantities[i]; j++)

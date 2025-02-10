@@ -26,6 +26,7 @@ Item::Item(sf::Vector2f position, int id, int typeID)
 	zindex = 1;
 	moveDir = sf::Vector2f(0.f, 0.f);
 }
+//blank item used to fill empty slots in the list of all items
 Item::Item()
 {
 	isDeleted = true;
@@ -33,22 +34,25 @@ Item::Item()
 
 void Item::Update(float dt, Planet* planet)
 {
-	// std::cout << "working" << std::endl;
 	hitbox->shapes[0]->currentPos = position;
 	hitbox->SetTransform(position, sf::Vector2f(1.f, 1.f));
 	if (accurateHitbox != nullptr)
 		accurateHitbox->SetTransform(position, sf::Vector2f(1.f, 1.f));
+	//do not update if not on ground
 	if (parent != -1)
 	{
 		return;
 	}
+	//get structure in position
 	sf::Vector2i tilePos = planet->tilePos(position);
 	int i = planet->StructureInPos(tilePos);
+	//if no structure, dont move
 	if (i == -1)
 	{
 		moveDir = sf::Vector2f(0.f, 0.f);
 		return;
 	}
+	//if structure does not block items, try add to structure
 	Structure* s = planet->structures[i];
 	if (!s->blocksItems)
 	{
@@ -56,6 +60,7 @@ void Item::Update(float dt, Planet* planet)
 	}
 	else
 	{
+		//otherwise move away from structure
 		sf::Vector2f worldTilePos(tilePos.x * TILE_SIZE.x, tilePos.y * TILE_SIZE.y);
 		sf::Vector2f pos = position - worldTilePos;
 		pos.x /= TILE_SIZE.x;
@@ -79,7 +84,6 @@ void Item::Update(float dt, Planet* planet)
 		position.x = (tilePos.x + (moveDir.x + 1) / 2.f) * TILE_SIZE.x;
 		position.y = (tilePos.y + (moveDir.y + 1) / 2.f) * TILE_SIZE.y;
 	}
-	// std::cout << "working 2" << std::endl;
 }
 
 void Item::Render(Planet* planet)
@@ -104,12 +108,15 @@ void Item::SetParent(int index)
 		zindex = 1;
 		chunkID = -1;
 	}
+	//creates a pixel-perfect hitbox if on the ground
 	if (parent == -1 && accurateHitbox == nullptr)
 	{
 		accurateHitbox = new Hitbox(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.f, 1.f));
 		auto image = ResourceHandler::itemTextures[typeId].copyToImage();
 		for (uint i = 0; i < 16; i++)
 		{
+			//this essentially works by scanning through the texture line by line and creating rectangles representing contiguous lines of
+			//non-transparent pixels
 			int startPos = -1;
 			for (int j = 0; j < 16; j++)
 			{

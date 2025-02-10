@@ -4,6 +4,13 @@
 #include "RecipeHandler.hpp"
 #include "ResourceHandler.hpp"
 #include "utils.hpp"
+/*
+
+THE BULK OF THIS CODE IS VERY SIMILAR TO THE RECIPE STRUCTURE CLASS
+THE ONLY DIFFERENCE IS THE UPDATE FUNCTION
+REFER TO RECIPE STRUCTURE CLASS FOR COMMENTS ON EVERYTHING ELSE
+
+*/
 RocketSilo::RocketSilo(int id, int planetID, int direction, int typeID)
 {
 	SetID(id);
@@ -33,10 +40,12 @@ void RocketSilo::Update(float dt)
 	{
 		recipe->Update(dt);
 	}
+	//if launching rocket, calculate the position of the rocket sprite
 	if (launchTimer > 0.f)
 	{
 		launchTimer -= dt;
 		float prog = 1.f - (launchTimer / 10.f);
+		//height increases cubically
 		prog = prog * prog * prog;
 		sf::Vector2f worldPos = (sf::Vector2f)position;
 		worldPos += (sf::Vector2f)tileSize / 2.f;
@@ -51,37 +60,6 @@ void RocketSilo::Update(float dt)
 	{
 		ResourceHandler::structureAtlas->SetSprite(rocketSprite, typeID, 1);
 	}
-	// std::vector<int> directions = {
-	// 	2, 2, 3, 3, 0, 0, 1, 1
-	// };
-	// // if (outputItem == -1 && recipe != nullptr)
-	// // {
-	// // 	outputItem = recipe->TryTakeItem();
-	// // }
-	// if (recipe != nullptr)
-	// {
-	// 	for (int i = 0; i < 8; i++)
-	// 	{
-	// 		int index = (i + lastOutputDir) % 8;
-	// 		if (neighbours[index] != -1)
-	// 		{
-	// 			ConveyorType* c = dynamic_cast<ConveyorType*>(game->planets[planetID].structures[neighbours[index]]);
-	// 			int dir = directions[index];
-
-	// 			if (c->CanAddItem(dir, 0.f))
-	// 			{
-	// 				outputItem = recipe->TryTakeItem();
-	// 				if (outputItem != -1)
-	// 				{
-	// 					c->TryAddItem(outputItem, dir, 0.f);
-	// 					outputItem = -1;
-	// 					lastOutputDir = (index + 1) % 8;
-	// 					break;
-	// 				}
-	// 			}
-	// 		}
-	// 	}
-	// }
 }
 
 void RocketSilo::LaunchRocket()

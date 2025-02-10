@@ -22,7 +22,7 @@ RecipeStructure::RecipeStructure(int id, int planetID, int direction, int typeID
 
 RecipeStructure::~RecipeStructure()
 {}
-
+//gets output neighbours
 void RecipeStructure::UpdateNeighbours()
 {
 	std::vector<sf::Vector2i> offsets = {
@@ -64,9 +64,9 @@ void RecipeStructure::UpdateNeighbours()
 		}
 	}
 }
-
 void RecipeStructure::Update(float dt)
 {
+	//update recipe
 	if (recipe != nullptr)
 	{
 		recipe->Update(dt);
@@ -74,10 +74,7 @@ void RecipeStructure::Update(float dt)
 	std::vector<int> directions = {
 		2, 2, 3, 3, 0, 0, 1, 1
 	};
-	// if (outputItem == -1 && recipe != nullptr)
-	// {
-	// 	outputItem = recipe->TryTakeItem();
-	// }
+	//try and output item from recipe
 	if (recipe != nullptr)
 	{
 		for (int i = 0; i < 8; i++)
@@ -138,7 +135,7 @@ void RecipeStructure::RenderPreview()
 		&sprite,
 		2000 });
 }
-
+//save as JSON object
 JSON RecipeStructure::ToJSON()
 {
 	JSON j = JSON();
@@ -160,6 +157,7 @@ JSON RecipeStructure::ToJSON()
 	}
 	return j;
 }
+//load from JSON object
 void RecipeStructure::FromJSON(JSON j)
 {
 	sf::Vector2i pos = j.GetV2i("Position");
@@ -182,7 +180,7 @@ void RecipeStructure::SetVisualPosition(sf::Vector2i position)
 {
 	Structure::SetVisualPosition(position);
 }
-
+//initialise recipe gui
 void RecipeStructure::Interact()
 {
 	int index = -1;

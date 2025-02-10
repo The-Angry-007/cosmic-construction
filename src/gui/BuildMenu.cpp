@@ -28,16 +28,19 @@ BuildMenu::BuildMenu()
 	menus.push_back({});
 	menus.push_back({});
 	menus.push_back({});
+	//which structures should be on each page
 	typeIDs = {
 		{ 1, 0, 9, 10, 17, 22 },
 		{ 3, 4, 6, 8, 16 },
 		{ 7, 12, 13, 14, 15, 18, 19, 20, 21 }
 	};
+	//which frames of those structures should be displayed
 	std::vector<std::vector<std::vector<int>>> frames = {
 		{ { 0, 1 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0, 1 } },
 		{ { 4 * 15 }, { 0 }, { 0 }, { 0 }, { 0 } },
 		{ { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 } }
 	};
+	//placing the images
 	for (int j = 0; j < 3; j++)
 	{
 		sf::Vector2f imageSize(0.05f, 0.05f);
@@ -105,7 +108,7 @@ void BuildMenu::Update(float dt)
 	for (int i = 0; i < menus[currentTab].size(); i++)
 	{
 		menus[currentTab][i]->Update(dt);
-
+		//structure was clicked: adjust place type
 		if (menus[currentTab][i]->isClicked())
 		{
 			game->toolHandler->placeType = typeIDs[currentTab][i];
@@ -115,6 +118,7 @@ void BuildMenu::Update(float dt)
 			InputHandler::RemoveMbPressed(sf::Mouse::Button::Left);
 			InputHandler::RemoveMbDown(sf::Mouse::Button::Left);
 		}
+		//display info and cost if a structure is being hovered over
 		else if (menus[currentTab][i]->isBlockingMouse())
 		{
 			infoText->value = ResourceHandler::structureTable->GetValue("Name", typeIDs[currentTab][i]);

@@ -21,6 +21,7 @@ void SaplingPlanter::SetPosition(sf::Vector2i pos)
 {
 	Structure::SetPosition(pos);
 	topSprite.setPosition(sprite.getPosition());
+	//move tree when planter is moved
 	if (tree != -1)
 	{
 		auto& structs = game->planets[planetID].structures;
@@ -32,12 +33,12 @@ void SaplingPlanter::SetPosition(sf::Vector2i pos)
 			}
 		}
 	}
-	std::cout << sprite.getPosition().x << " " << sprite.getPosition().y << std::endl;
 }
 
 void SaplingPlanter::Update(float dt)
 {
 	Planet& p = game->planets[planetID];
+	//grow tree if timer reaches 15 seconds and there is currently no tree
 	if (tree == -1)
 	{
 		timeSinceTree += dt;
