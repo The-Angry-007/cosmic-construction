@@ -1,4 +1,4 @@
-binds.cpp:
+----/binds.cpp: ----
 
 #include "binds.hpp"
 //a macro that is used later to convert an input code to a string representing the name of that code
@@ -146,7 +146,7 @@ std::string binds::GetName(int code)
 	return ret;
 }
 
-binds.hpp:
+----/binds.hpp: ----
 
 #pragma once
 
@@ -169,7 +169,7 @@ int buttonToCode(sf::Mouse::Button button);
 std::string GetName(int code);
 }
 
-game.hpp:
+----/game.hpp: ----
 
 #pragma once
 #include "game/Atlas.hpp"
@@ -182,7 +182,7 @@ game.hpp:
 #include "game/structures.hpp"
 
 
-gui.hpp:
+----/gui.hpp: ----
 
 #pragma once
 #include "gui/ClickFuncs.hpp"
@@ -203,7 +203,7 @@ gui.hpp:
 #include "gui/SiloMenu.hpp"
 
 
-Hitboxes.hpp:
+----/Hitboxes.hpp: ----
 
 #pragma once
 #include "hitboxes/Hitbox.hpp"
@@ -211,7 +211,7 @@ Hitboxes.hpp:
 #include "hitboxes/HitboxRect.hpp"
 #include "hitboxes/HitboxShape.hpp"
 
-InputHandler.cpp:
+----/InputHandler.cpp: ----
 
 #include "InputHandler.hpp"
 #include "Main.hpp"
@@ -542,7 +542,7 @@ void InputHandler::RemoveReleased(int code)
 }
 
 
-InputHandler.hpp:
+----/InputHandler.hpp: ----
 
 #pragma once
 namespace InputHandler
@@ -599,7 +599,7 @@ void RemoveDown(int code);
 void RemoveReleased(int code);
 };
 
-Main.cpp:
+----/Main.cpp: ----
 
 #include "Main.hpp"
 #include "InputHandler.hpp"
@@ -710,7 +710,7 @@ int main()
 }
 
 
-Main.hpp:
+----/Main.hpp: ----
 
 #pragma once
 #include "game.hpp"
@@ -725,12 +725,12 @@ extern int numUpdates;
 extern int currentBuild;
 extern Tutorial* tutorial;
 
-numBuilds.cpp:
+----/numBuilds.cpp: ----
 
 #include "Main.hpp"
-int currentBuild = 103;
+int currentBuild = 105;
 
-PCH.hpp:
+----/PCH.hpp: ----
 
 #ifndef PRECOMPILED_HEADER_HPP
 #define PRECOMPILED_HEADER_HPP
@@ -806,14 +806,14 @@ PCH.hpp:
 #endif // PRECOMPILED_HEADER_HPP
 
 
-saving.hpp:
+----/saving.hpp: ----
 
 #pragma once
 #include "saving/JSON.hpp"
 #include "saving/SaveHandler.hpp"
 #include "saving/Table.hpp"
 
-utils.cpp:
+----/utils.cpp: ----
 
 #include "utils.hpp"
 //used to check if hitboxrects collide with other hitboxrects
@@ -974,7 +974,7 @@ sf::Color Lerp(sf::Color a, sf::Color b, float t)
 		(uint8_t)Lerp(a.a, b.a, t));
 }
 
-utils.hpp:
+----/utils.hpp: ----
 
 #pragma once
 
@@ -991,7 +991,7 @@ extern void Print(std::vector<std::string> arr);
 extern void Print(std::vector<std::vector<std::string>> arr);
 extern sf::Color Lerp(sf::Color a, sf::Color b, float t);
 
-game/Atlas.cpp:
+----game/Atlas.cpp: ----
 
 #include "Atlas.hpp"
 #include "ResourceHandler.hpp"
@@ -1127,7 +1127,7 @@ void Atlas::SetSprite(sf::Sprite& sprite, int id)
 	ResourceHandler::completeAtlas->SetSprite(sprite, id, 0);
 }
 
-game/Atlas.hpp:
+----game/Atlas.hpp: ----
 
 #pragma once
 #include "saving.hpp"
@@ -1145,7 +1145,7 @@ public:
 	void SetSprite(sf::Sprite& sprite, int id, int frameNum);
 };
 
-game/Boulder.cpp:
+----game/Boulder.cpp: ----
 
 #include "Boulder.hpp"
 #include "Main.hpp"
@@ -1217,7 +1217,7 @@ void Boulder::Render()
 		17 });
 }
 
-game/Boulder.hpp:
+----game/Boulder.hpp: ----
 
 #pragma once
 #include "Structure.hpp"
@@ -1234,7 +1234,7 @@ public:
 	void Destroy();
 };
 
-game/Camera.cpp:
+----game/Camera.cpp: ----
 
 #include "Camera.hpp"
 #include "InputHandler.hpp"
@@ -1367,7 +1367,7 @@ sf::Vector2f Camera::tileToGUIPos(sf::Vector2f tilePos)
 }
 
 
-game/Camera.hpp:
+----game/Camera.hpp: ----
 
 #pragma once
 #include "Hitboxes.hpp"
@@ -1395,7 +1395,7 @@ public:
 	sf::FloatRect toFloatRect();
 };
 
-game/Chunk.cpp:
+----game/Chunk.cpp: ----
 
 #include "Chunk.hpp"
 #include "Main.hpp"
@@ -1468,7 +1468,7 @@ bool Chunk::isVisible()
 	return hitbox->intersects(game->planets[planetID].camera.hitbox);
 }
 
-game/Chunk.hpp:
+----game/Chunk.hpp: ----
 
 #pragma once
 #include "Hitboxes.hpp"
@@ -1499,7 +1499,7 @@ public:
 };
 extern int CurrentChunkID;
 
-game/Conveyor.cpp:
+----game/Conveyor.cpp: ----
 
 #include "Conveyor.hpp"
 #include "Main.hpp"
@@ -1906,7 +1906,7 @@ void Conveyor::KeepDistance()
 	}
 }
 
-game/Conveyor.hpp:
+----game/Conveyor.hpp: ----
 
 #pragma once
 #include "ConveyorType.hpp"
@@ -1943,7 +1943,7 @@ public:
 	void Destroy();
 };
 
-game/ConveyorType.cpp:
+----game/ConveyorType.cpp: ----
 
 #include "ConveyorType.hpp"
 
@@ -1992,7 +1992,7 @@ void ConveyorType::TryAdd()
 void ConveyorType::KeepDistance()
 {}
 
-game/ConveyorType.hpp:
+----game/ConveyorType.hpp: ----
 
 #pragma once
 #include "Structure.hpp"
@@ -2014,7 +2014,7 @@ public:
 	virtual void SetUpgradeLevel(int level);
 };
 
-game/Distributor.cpp:
+----game/Distributor.cpp: ----
 
 #include "Distributor.hpp"
 #include "Main.hpp"
@@ -2424,7 +2424,7 @@ void Distributor::KeepDistance()
 	}
 }
 
-game/Distributor.hpp:
+----game/Distributor.hpp: ----
 
 #pragma once
 #include "ConveyorType.hpp"
@@ -2464,7 +2464,7 @@ public:
 	void Destroy();
 };
 
-game/Drill.cpp:
+----game/Drill.cpp: ----
 
 #include "Drill.hpp"
 #include "Main.hpp"
@@ -2712,7 +2712,7 @@ bool Drill::TryAddItem(int index)
 	return recipe->TryAddItem(index);
 }
 
-game/Drill.hpp:
+----game/Drill.hpp: ----
 
 #pragma once
 #include "Structure.hpp"
@@ -2744,7 +2744,7 @@ public:
 	void Destroy();
 };
 
-game/FilterConveyor.cpp:
+----game/FilterConveyor.cpp: ----
 
 #include "FilterConveyor.hpp"
 #include "Main.hpp"
@@ -3269,7 +3269,7 @@ void FilterConveyor::KeepDistance()
 	}
 }
 
-game/FilterConveyor.hpp:
+----game/FilterConveyor.hpp: ----
 
 #pragma once
 #include "ConveyorType.hpp"
@@ -3304,7 +3304,7 @@ public:
 	void Destroy();
 };
 
-game/Game.cpp:
+----game/Game.cpp: ----
 
 #include "Game.hpp"
 #include "InputHandler.hpp"
@@ -3427,7 +3427,7 @@ void Game::WorldUpdate(float dt)
 	planets[activePlanet].WorldUpdate(dt);
 }
 
-game/Game.hpp:
+----game/Game.hpp: ----
 
 #pragma once
 #include "Camera.hpp"
@@ -3455,7 +3455,7 @@ public:
 	void Render();
 };
 
-game/Item.cpp:
+----game/Item.cpp: ----
 
 #include "Item.hpp"
 #include "Main.hpp"
@@ -3621,7 +3621,7 @@ void Item::SetType(int typeID)
 	ResourceHandler::itemAtlas->SetSprite(this->sprite, typeID);
 }
 
-game/Item.hpp:
+----game/Item.hpp: ----
 
 #pragma once
 //how big an item is in pixels
@@ -3655,7 +3655,7 @@ public:
 };
 extern int CurrentItemID;
 
-game/PerlinNoise.hpp:
+----game/PerlinNoise.hpp: ----
 
 //----------------------------------------------------------------------------------------
 //
@@ -4299,7 +4299,7 @@ inline typename BasicPerlinNoise<Float>::value_type BasicPerlinNoise<Float>::nor
 #undef SIVPERLIN_CONCEPT_URBG
 #undef SIVPERLIN_CONCEPT_URBG_
 
-game/Planet.cpp:
+----game/Planet.cpp: ----
 
 #include "Planet.hpp"
 #include "InputHandler.hpp"
@@ -5465,7 +5465,7 @@ void Planet::RemoveItem(int index)
 	emptyItemSlots.push_back(index);
 }
 
-game/Planet.hpp:
+----game/Planet.hpp: ----
 
 #pragma once
 #include "Camera.hpp"
@@ -5525,7 +5525,7 @@ public:
 };
 
 
-game/RandomHandler.cpp:
+----game/RandomHandler.cpp: ----
 
 #include "RandomHandler.hpp"
 #include "PerlinNoise.hpp"
@@ -5563,7 +5563,7 @@ float RandomHandler::getNoise(int x, int y)
 	return sivnoise.noise2D_01(x * 0.1f, y * 0.1f);
 }
 
-game/RandomHandler.hpp:
+----game/RandomHandler.hpp: ----
 
 #pragma once
 #include "PerlinNoise.hpp"
@@ -5578,7 +5578,7 @@ void SetSeed(uint64_t seed);
 float getNoise(int x, int y);
 };
 
-game/Recipe.cpp:
+----game/Recipe.cpp: ----
 
 #include "Recipe.hpp"
 #include "Main.hpp"
@@ -5771,7 +5771,7 @@ void Recipe::FromJSON(JSON j)
 	craftTimer = j.GetFloat("RecipeCraftTimer");
 }
 
-game/Recipe.hpp:
+----game/Recipe.hpp: ----
 
 #pragma once
 #include "Structure.hpp"
@@ -5797,7 +5797,7 @@ public:
 	~Recipe();
 };
 
-game/RecipeHandler.cpp:
+----game/RecipeHandler.cpp: ----
 
 #include "RecipeHandler.hpp"
 #include "Main.hpp"
@@ -6211,7 +6211,7 @@ RecipeData* RecipeHandler::GetRecipe(int id)
 	return nullptr;
 }
 
-game/RecipeHandler.hpp:
+----game/RecipeHandler.hpp: ----
 
 #pragma once
 #include "gui.hpp"
@@ -6241,7 +6241,7 @@ RecipeData* GetRecipe(int id);
 
 };
 
-game/RecipeStructure.cpp:
+----game/RecipeStructure.cpp: ----
 
 #include "RecipeStructure.hpp"
 #include "Main.hpp"
@@ -6450,7 +6450,7 @@ bool RecipeStructure::TryAddItem(int index)
 	return recipe->TryAddItem(index);
 }
 
-game/RecipeStructure.hpp:
+----game/RecipeStructure.hpp: ----
 
 #pragma once
 #include "Structure.hpp"
@@ -6477,7 +6477,7 @@ public:
 	void Destroy();
 };
 
-game/RefinedDrill.cpp:
+----game/RefinedDrill.cpp: ----
 
 #include "RefinedDrill.hpp"
 #include "Main.hpp"
@@ -6726,7 +6726,7 @@ bool RefinedDrill::TryAddItem(int index)
 	return recipe->TryAddItem(index);
 }
 
-game/RefinedDrill.hpp:
+----game/RefinedDrill.hpp: ----
 
 #pragma once
 #include "Structure.hpp"
@@ -6758,7 +6758,7 @@ public:
 	void Destroy();
 };
 
-game/RenderObject.cpp:
+----game/RenderObject.cpp: ----
 
 #include "RenderObject.hpp"
 //comparison to see whether one render object should be drawn on top of another
@@ -6773,7 +6773,7 @@ bool operator<(const RenderObject& lhs, const RenderObject& rhs)
 	return lhs.sprite->getPosition().x < rhs.sprite->getPosition().x;
 }
 
-game/RenderObject.hpp:
+----game/RenderObject.hpp: ----
 
 #pragma once
 //very simple struct used for sorting
@@ -6784,7 +6784,7 @@ struct RenderObject
 };
 bool operator<(const RenderObject& lhs, const RenderObject& rhs);
 
-game/ResourceHandler.cpp:
+----game/ResourceHandler.cpp: ----
 
 #include "ResourceHandler.hpp"
 #include "RecipeHandler.hpp"
@@ -6965,7 +6965,7 @@ sf::Texture ResourceHandler::GenerateOutline(sf::Texture& texture)
 	outline.loadFromImage(newImage);
 	return outline;
 }
-
+//finds cost that matches the structure id
 std::vector<int> ResourceHandler::GetCost(int structureID)
 {
 	for (int i = 0; i < structureCosts.size(); i++)
@@ -6978,7 +6978,7 @@ std::vector<int> ResourceHandler::GetCost(int structureID)
 	return {};
 }
 
-game/ResourceHandler.hpp:
+----game/ResourceHandler.hpp: ----
 
 #pragma once
 #include "Atlas.hpp"
@@ -7005,7 +7005,7 @@ std::vector<int> GetCost(int structureID);
 sf::Texture GenerateOutline(sf::Texture& texture);
 };
 
-game/RocketSilo.cpp:
+----game/RocketSilo.cpp: ----
 
 #include "RocketSilo.hpp"
 #include "Main.hpp"
@@ -7183,7 +7183,7 @@ bool RocketSilo::TryAddItem(int index)
 	return recipe->TryAddItem(index);
 }
 
-game/RocketSilo.hpp:
+----game/RocketSilo.hpp: ----
 
 #pragma once
 #include "Structure.hpp"
@@ -7210,7 +7210,7 @@ public:
 	void Destroy();
 };
 
-game/SaplingPlanter.cpp:
+----game/SaplingPlanter.cpp: ----
 
 #include "SaplingPlanter.hpp"
 #include "Main.hpp"
@@ -7320,7 +7320,7 @@ void SaplingPlanter::FromJSON(JSON j)
 	SetPosition(pos);
 }
 
-game/SaplingPlanter.hpp:
+----game/SaplingPlanter.hpp: ----
 
 #pragma once
 #include "Structure.hpp"
@@ -7340,7 +7340,7 @@ public:
 	void SetPosition(sf::Vector2i pos);
 };
 
-game/StorageSilo.cpp:
+----game/StorageSilo.cpp: ----
 
 #include "StorageSilo.hpp"
 #include "Main.hpp"
@@ -7620,7 +7620,7 @@ void StorageSilo::Destroy()
 	}
 }
 
-game/StorageSilo.hpp:
+----game/StorageSilo.hpp: ----
 
 #pragma once
 #include "Structure.hpp"
@@ -7650,7 +7650,7 @@ public:
 	void Destroy();
 };
 
-game/Structure.cpp:
+----game/Structure.cpp: ----
 
 #include "Structure.hpp"
 #include "Chunk.hpp"
@@ -7792,7 +7792,7 @@ void Structure::SetRecipe(RecipeData* data)
 	recipe = new Recipe(planetID, data);
 }
 
-game/Structure.hpp:
+----game/Structure.hpp: ----
 
 #pragma once
 #include "Hitboxes.hpp"
@@ -7843,7 +7843,7 @@ public:
 
 extern int CurrentStructureID;
 
-game/structures.hpp:
+----game/structures.hpp: ----
 
 #pragma once
 #include "Boulder.hpp"
@@ -7863,7 +7863,7 @@ game/structures.hpp:
 #include "Underground.hpp"
 
 
-game/ToolHandler.cpp:
+----game/ToolHandler.cpp: ----
 
 #include "ToolHandler.hpp"
 #include "Main.hpp"
@@ -8640,7 +8640,7 @@ void ToolHandler::ShowSelectArea(sf::Vector2i pos, int width, int height, sf::Co
 }
 
 
-game/ToolHandler.hpp:
+----game/ToolHandler.hpp: ----
 
 #pragma once
 #include "InputHandler.hpp"
@@ -8681,7 +8681,7 @@ public:
 	~ToolHandler();
 };
 
-game/Tree.cpp:
+----game/Tree.cpp: ----
 
 #include "Tree.hpp"
 #include "Main.hpp"
@@ -8786,7 +8786,7 @@ void Tree::Render()
 		17 });
 }
 
-game/Tree.hpp:
+----game/Tree.hpp: ----
 
 #pragma once
 #include "Structure.hpp"
@@ -8804,7 +8804,7 @@ public:
 	void Destroy();
 };
 
-game/TreeChopper.cpp:
+----game/TreeChopper.cpp: ----
 
 #include "TreeChopper.hpp"
 #include "Main.hpp"
@@ -9008,7 +9008,7 @@ void TreeChopper::FromJSON(JSON j)
 	ResourceHandler::structureAtlas->SetSprite(sprite, typeID, direction * 15);
 }
 
-game/TreeChopper.hpp:
+----game/TreeChopper.hpp: ----
 
 #pragma once
 #include "Structure.hpp"
@@ -9027,7 +9027,7 @@ public:
 	void SetDirection(int direction);
 };
 
-game/Tutorial.cpp:
+----game/Tutorial.cpp: ----
 
 #include "Tutorial.hpp"
 #include "Main.hpp"
@@ -9419,7 +9419,7 @@ Tutorial::~Tutorial()
 	}
 }
 
-game/Tutorial.hpp:
+----game/Tutorial.hpp: ----
 
 #pragma once
 #include "gui.hpp"
@@ -9440,7 +9440,7 @@ public:
 	void EndTutorial();
 };
 
-game/Underground.cpp:
+----game/Underground.cpp: ----
 
 #include "Underground.hpp"
 
@@ -9757,7 +9757,7 @@ void Underground::KeepDistance()
 	}
 }
 
-game/Underground.hpp:
+----game/Underground.hpp: ----
 
 #pragma once
 #include "ConveyorType.hpp"
@@ -9798,7 +9798,7 @@ public:
 	void Destroy();
 };
 
-gui/BuildMenu.cpp:
+----gui/BuildMenu.cpp: ----
 
 #include "BuildMenu.hpp"
 #include "GUIStructure.hpp"
@@ -9965,7 +9965,7 @@ void BuildMenu::Render()
 	costText->Render();
 }
 
-gui/BuildMenu.hpp:
+----gui/BuildMenu.hpp: ----
 
 #pragma once
 #include "GUI.hpp"
@@ -9991,7 +9991,7 @@ public:
 	void SetTab(int tab);
 };
 
-gui/ClickFuncs.cpp:
+----gui/ClickFuncs.cpp: ----
 
 #include "ClickFuncs.hpp"
 #include "../saving.hpp"
@@ -10091,7 +10091,7 @@ void ClickFuncs::ResetCamPos()
 	game->planets[game->activePlanet].camera.position = sf::Vector2f(CHUNK_SIZE * TILE_SIZE.x, CHUNK_SIZE * TILE_SIZE.y) / 2.f;
 }
 
-gui/ClickFuncs.hpp:
+----gui/ClickFuncs.hpp: ----
 
 #pragma once
 #include "GUIButton.hpp"
@@ -10109,7 +10109,7 @@ void SaveAndQuit();
 void ResetCamPos();
 }
 
-gui/GUI.cpp:
+----gui/GUI.cpp: ----
 
 #include "GUI.hpp"
 #include "InputHandler.hpp"
@@ -10184,7 +10184,7 @@ void GUI::RenderToTexture(sf::RenderTexture* text)
 	}
 }
 
-gui/gui.hpp:
+----gui/gui.hpp: ----
 
 #pragma once
 #include "GUIObject.hpp"
@@ -10204,7 +10204,7 @@ public:
 	~GUI();
 };
 
-gui/GUIButton.cpp:
+----gui/GUIButton.cpp: ----
 
 #include "GUIButton.hpp"
 #include "ClickFuncs.hpp"
@@ -10274,7 +10274,7 @@ bool GUIButton::isClicked()
 }
 
 
-gui/GUIButton.hpp:
+----gui/GUIButton.hpp: ----
 
 #pragma once
 #include "GUIObject.hpp"
@@ -10295,7 +10295,7 @@ public:
 	bool isBlockingMouse();
 };
 
-gui/GUICheckbox.cpp:
+----gui/GUICheckbox.cpp: ----
 
 #include "GUICheckbox.hpp"
 //constructor for the checkbox - takes a position, size and colour for the background
@@ -10370,7 +10370,7 @@ void GUICheckbox::Render()
 	}
 }
 
-gui/GUICheckbox.hpp:
+----gui/GUICheckbox.hpp: ----
 
 #pragma once
 #include "GUIImage.hpp"
@@ -10390,7 +10390,7 @@ public:
 	void Render();
 };
 
-gui/GUIGalaxy.cpp:
+----gui/GUIGalaxy.cpp: ----
 
 #include "GUIGalaxy.hpp"
 #include "Main.hpp"
@@ -10462,7 +10462,7 @@ void GUIGalaxy::Render()
 }
 
 
-gui/GUIGalaxy.hpp:
+----gui/GUIGalaxy.hpp: ----
 
 #pragma once
 #include "GUIObject.hpp"
@@ -10481,7 +10481,7 @@ public:
 	GUIGalaxy();
 };
 
-gui/GUIHandler.cpp:
+----gui/GUIHandler.cpp: ----
 
 #include "../gui.hpp"
 #include "../saving.hpp"
@@ -10835,7 +10835,7 @@ void GUIHandler::InitGUIS()
 }
 
 
-gui/GUIHandler.hpp:
+----gui/GUIHandler.hpp: ----
 
 #pragma once
 #include "GUI.hpp"
@@ -10871,7 +10871,7 @@ public:
 	GUI* GetOpenGUI();
 };
 
-gui/GUIImage.cpp:
+----gui/GUIImage.cpp: ----
 
 #include "GUIImage.hpp"
 #include "Main.hpp"
@@ -11003,7 +11003,7 @@ GUIImage::~GUIImage()
 {
 }
 
-gui/GUIImage.hpp:
+----gui/GUIImage.hpp: ----
 
 #pragma once
 #include "GUIObject.hpp"
@@ -11021,7 +11021,7 @@ public:
 	void RenderToTexture(sf::RenderTexture* texture);
 };
 
-gui/GUIInputField.cpp:
+----gui/GUIInputField.cpp: ----
 
 #include "GUIInputField.hpp"
 #include "InputHandler.hpp"
@@ -11134,7 +11134,7 @@ void GUIInputField::Render()
 
 
 
-gui/GUIInputField.hpp:
+----gui/GUIInputField.hpp: ----
 
 #pragma once
 #include "GUILabel.hpp"
@@ -11157,7 +11157,7 @@ public:
 	void Render();
 };
 
-gui/GUIItem.cpp:
+----gui/GUIItem.cpp: ----
 
 #include "GUIItem.hpp"
 #include "Main.hpp"
@@ -11281,7 +11281,7 @@ void GUIItem::SetAmount(int amount)
 		label = nullptr;
 }
 
-gui/GUIItem.hpp:
+----gui/GUIItem.hpp: ----
 
 #pragma once
 #include "GUIImage.hpp"
@@ -11307,7 +11307,7 @@ public:
 	bool isClicked();
 };
 
-gui/GUILabel.cpp:
+----gui/GUILabel.cpp: ----
 
 #include "GUILabel.hpp"
 #include "Main.hpp"
@@ -11486,7 +11486,7 @@ GUILabel::~GUILabel()
 {
 }
 
-gui/GUILabel.hpp:
+----gui/GUILabel.hpp: ----
 
 #pragma once
 #include "GUIObject.hpp"
@@ -11507,7 +11507,7 @@ public:
 	void DoWrapping(int charsPerLine);
 };
 
-gui/GUIObject.cpp:
+----gui/GUIObject.cpp: ----
 
 #include "GUIObject.hpp"
 #include "InputHandler.hpp"
@@ -11554,7 +11554,7 @@ void GUIObject::RenderToTexture(sf::RenderTexture* texture)
 {}
 
 
-gui/GUIObject.hpp:
+----gui/GUIObject.hpp: ----
 
 #pragma once
 #include "./hitboxes.hpp"
@@ -11576,7 +11576,7 @@ public:
 };
 
 
-gui/GUIPanel.cpp:
+----gui/GUIPanel.cpp: ----
 
 #include "GUIPanel.hpp"
 #include "Main.hpp"
@@ -11664,7 +11664,7 @@ void GUIPanel::SetColor(sf::Color color)
 	rect.setFillColor(color);
 }
 
-gui/GUIPanel.hpp:
+----gui/GUIPanel.hpp: ----
 
 #pragma once
 #include "GUIObject.hpp"
@@ -11684,7 +11684,7 @@ public:
 	~GUIPanel();
 };
 
-gui/GUISaveSlot.cpp:
+----gui/GUISaveSlot.cpp: ----
 
 #include "GUISaveSlot.hpp"
 #include "../Main.hpp"
@@ -11815,7 +11815,7 @@ GUISaveSlot::~GUISaveSlot()
 	delete deleteIcon;
 }
 
-gui/GUISaveSlot.hpp:
+----gui/GUISaveSlot.hpp: ----
 
 #pragma once
 #include "GUIButton.hpp"
@@ -11840,7 +11840,7 @@ public:
 	~GUISaveSlot();
 };
 
-gui/GUISlider.cpp:
+----gui/GUISlider.cpp: ----
 
 #include "GUISlider.hpp"
 #include "InputHandler.hpp"
@@ -11938,7 +11938,7 @@ GUISlider::~GUISlider()
 }
 
 
-gui/GUISlider.hpp:
+----gui/GUISlider.hpp: ----
 
 #pragma once
 #include "GUIObject.hpp"
@@ -11968,7 +11968,7 @@ public:
 	~GUISlider();
 };
 
-gui/GUIStructure.cpp:
+----gui/GUIStructure.cpp: ----
 
 #include "GUIStructure.hpp"
 #include "Main.hpp"
@@ -12014,7 +12014,7 @@ void GUIStructure::Render()
 	}
 }
 
-gui/GUIStructure.hpp:
+----gui/GUIStructure.hpp: ----
 
 #pragma once
 #include "GUIImage.hpp"
@@ -12030,7 +12030,7 @@ public:
 	void Render();
 };
 
-gui/LoadGame.cpp:
+----gui/LoadGame.cpp: ----
 
 #include "LoadGame.hpp"
 #include "InputHandler.hpp"
@@ -12187,7 +12187,7 @@ void LoadGame::Reload()
 	}
 }
 
-gui/LoadGame.hpp:
+----gui/LoadGame.hpp: ----
 
 #pragma once
 #include "../gui.hpp"
@@ -12202,7 +12202,7 @@ public:
 	void Render();
 };
 
-gui/Settings.cpp:
+----gui/Settings.cpp: ----
 
 #include "../gui.hpp"
 #include "InputHandler.hpp"
@@ -12639,7 +12639,7 @@ void Settings::ExitSettings()
 	guihandler.GoBack();
 }
 
-gui/Settings.hpp:
+----gui/Settings.hpp: ----
 
 #pragma once
 #include "GUI.hpp"
@@ -12676,7 +12676,7 @@ public:
 	void ExitSettings();
 };
 
-gui/SiloMenu.cpp:
+----gui/SiloMenu.cpp: ----
 
 #include "SiloMenu.hpp"
 #include "Main.hpp"
@@ -12812,7 +12812,7 @@ void SiloMenu::Render()
 }
 
 
-gui/SiloMenu.hpp:
+----gui/SiloMenu.hpp: ----
 
 #pragma once
 #include "GUIItem.hpp"
@@ -12830,7 +12830,7 @@ public:
 	void Render();
 };
 
-gui/test.py:
+----gui/test.py: ----
 
 for a in range(8,20,4):
 	for b in range(1,4):
@@ -12843,7 +12843,7 @@ for a in range(8,20,4):
 			print("Bart")
 
 
-hitboxes/Hitbox.cpp:
+----hitboxes/Hitbox.cpp: ----
 
 #include "Hitbox.hpp"
 
@@ -12934,7 +12934,7 @@ bool Hitbox::intersectsPoint(sf::Vector2f point)
 	return false;
 }
 
-hitboxes/Hitbox.hpp:
+----hitboxes/Hitbox.hpp: ----
 
 #pragma once
 #include "HitboxShape.hpp"
@@ -12960,7 +12960,7 @@ public:
 };
 
 
-hitboxes/HitboxCircle.cpp:
+----hitboxes/HitboxCircle.cpp: ----
 
 #include "HitboxCircle.hpp"
 #include "Main.hpp"
@@ -13025,7 +13025,7 @@ bool HitboxCircle::intersectsPoint(sf::Vector2f point)
 }
 
 
-hitboxes/HitboxCircle.hpp:
+----hitboxes/HitboxCircle.hpp: ----
 
 #pragma once
 #include "HitboxShape.hpp"
@@ -13041,7 +13041,7 @@ public:
 	void Display(bool colliding);
 };
 
-hitboxes/HitboxRect.cpp:
+----hitboxes/HitboxRect.cpp: ----
 
 #include "HitboxRect.hpp"
 #include "Main.hpp"
@@ -13108,7 +13108,7 @@ bool HitboxRect::intersectsPoint(sf::Vector2f point)
 }
 
 
-hitboxes/HitboxRect.hpp:
+----hitboxes/HitboxRect.hpp: ----
 
 #pragma once
 #include "HitboxShape.hpp"
@@ -13125,7 +13125,7 @@ public:
 	void Display(bool colliding);
 };
 
-hitboxes/HitboxShape.cpp:
+----hitboxes/HitboxShape.cpp: ----
 
 #include "HitboxShape.hpp"
 
@@ -13166,7 +13166,7 @@ bool HitboxShape::intersectsPoint(sf::Vector2f point)
 }
 
 
-hitboxes/HitboxShape.hpp:
+----hitboxes/HitboxShape.hpp: ----
 
 #pragma once
 class HitboxShape
@@ -13188,7 +13188,7 @@ public:
 };
 
 
-saving/JSON.cpp:
+----saving/JSON.cpp: ----
 
 #include "JSON.hpp"
 #include "utils.hpp"
@@ -13398,7 +13398,7 @@ void JSON::AddJSON(JSON j)
 	}
 }
 
-saving/JSON.hpp:
+----saving/JSON.hpp: ----
 
 #pragma once
 
@@ -13437,7 +13437,7 @@ public:
 	void Print();
 };
 
-saving/SaveHandler.cpp:
+----saving/SaveHandler.cpp: ----
 
 #include "SaveHandler.hpp"
 #include "Main.hpp"
@@ -13765,7 +13765,7 @@ uint64_t SaveHandler::HashFromString(std::string& str)
 	return hash;
 }
 
-saving/SaveHandler.hpp:
+----saving/SaveHandler.hpp: ----
 
 #pragma once
 #include "JSON.hpp"
@@ -13798,7 +13798,7 @@ std::string JSONsToString(std::vector<JSON> jsons);
 std::vector<JSON> StringToJSONs(std::string string);
 }
 
-saving/Table.cpp:
+----saving/Table.cpp: ----
 
 #include "Table.hpp"
 #include "utils.hpp"
@@ -13869,7 +13869,7 @@ std::string Table::ToString()
 	return result;
 }
 
-saving/Table.hpp:
+----saving/Table.hpp: ----
 
 #pragma once
 

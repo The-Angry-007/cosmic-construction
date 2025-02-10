@@ -21,10 +21,10 @@ for root, dirs, files in os.walk(directory):
 	for file in files:
 		file_path = os.path.join(root,file)
 		with open(file_path,'r', encoding = "utf-8", errors="ignore") as f:
-			p = root[len(directory) + 1:]
+			p = "----" + root[len(directory) + 1:]
 			if len(p) > 0:
 				p += "/"
-			p += file + ":\n\n"
+			p += file + ": ----\n\n"
 			allCode += p
 			allCode += f.read()
 			allCode += "\n\n"
