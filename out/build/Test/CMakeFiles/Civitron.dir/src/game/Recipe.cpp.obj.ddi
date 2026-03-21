@@ -1,0 +1,11 @@
+{
+"rules": [
+{
+"primary-output": "CMakeFiles\\Civitron.dir\\src\\game\\Recipe.cpp.obj",
+"requires": [
+]
+}
+],
+"version": 0,
+"revision": 0
+}

@@ -1,7 +1,7 @@
 #include "Camera.hpp"
-#include "InputHandler.hpp"
-#include "Main.hpp"
-#include "binds.hpp"
+#include "../InputHandler.hpp"
+#include "../Main.hpp"
+#include "../binds.hpp"
 Camera::Camera(sf::Vector2f position, float zoom)
 {
 	this->position = position;

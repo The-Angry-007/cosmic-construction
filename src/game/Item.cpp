@@ -1,5 +1,5 @@
 #include "Item.hpp"
-#include "Main.hpp"
+#include "../Main.hpp"
 int CurrentItemID = 0;
 Item::Item(sf::Vector2f position, int id, int typeID)
 {

@@ -1,9 +1,9 @@
 #include "Planet.hpp"
-#include "InputHandler.hpp"
-#include "Main.hpp"
+#include "../InputHandler.hpp"
+#include "../Main.hpp"
+#include "../binds.hpp"
+#include "../utils.hpp"
 #include "RandomHandler.hpp"
-#include "binds.hpp"
-#include "utils.hpp"
 #define sh SaveHandler
 #include "PerlinNoise.hpp"
 Planet::Planet(int id)

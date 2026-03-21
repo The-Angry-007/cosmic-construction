@@ -1,6 +1,6 @@
 #include "GUIStructure.hpp"
-#include "Main.hpp"
-#include "game/ResourceHandler.hpp"
+#include "../Main.hpp"
+#include "../game/ResourceHandler.hpp"
 GUIStructure::GUIStructure(sf::Vector2f position, sf::Vector2f size, int typeID, std::vector<int> frames)
 {
 	this->position = position;

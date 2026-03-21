@@ -1,5 +1,5 @@
 #include "RefinedDrill.hpp"
-#include "Main.hpp"
+#include "../Main.hpp"
 #include "Recipe.hpp"
 #include "RecipeHandler.hpp"
 #include "ResourceHandler.hpp"

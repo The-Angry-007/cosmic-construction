@@ -31,21 +31,6 @@
 			"language" : "CXX",
 			"source" : "C:/Users/kiera/Documents/GitHub/cosmic-construction/src/Main.cpp"
 		},
-		"CMakeFiles/Civitron.dir/src/Platform/MacOS/MacOSPlatform.cpp.obj" : 
-		{
-			"language" : "CXX",
-			"source" : "C:/Users/kiera/Documents/GitHub/cosmic-construction/src/Platform/MacOS/MacOSPlatform.cpp"
-		},
-		"CMakeFiles/Civitron.dir/src/Platform/Unix/LinuxPlatform.cpp.obj" : 
-		{
-			"language" : "CXX",
-			"source" : "C:/Users/kiera/Documents/GitHub/cosmic-construction/src/Platform/Unix/LinuxPlatform.cpp"
-		},
-		"CMakeFiles/Civitron.dir/src/Platform/Win32/WindowsPlatform.cpp.obj" : 
-		{
-			"language" : "CXX",
-			"source" : "C:/Users/kiera/Documents/GitHub/cosmic-construction/src/Platform/Win32/WindowsPlatform.cpp"
-		},
 		"CMakeFiles/Civitron.dir/src/binds.cpp.obj" : 
 		{
 			"language" : "CXX",

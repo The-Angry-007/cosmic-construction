@@ -1,9 +1,9 @@
 #include "RocketSilo.hpp"
-#include "Main.hpp"
+#include "../Main.hpp"
+#include "../utils.hpp"
 #include "Recipe.hpp"
 #include "RecipeHandler.hpp"
 #include "ResourceHandler.hpp"
-#include "utils.hpp"
 /*
 
 THE BULK OF THIS CODE IS VERY SIMILAR TO THE RECIPE STRUCTURE CLASS

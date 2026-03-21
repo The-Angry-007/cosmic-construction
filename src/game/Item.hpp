@@ -1,7 +1,7 @@
 #pragma once
 //how big an item is in pixels
 #define ITEM_SIZE 16
-#include "Hitboxes.hpp"
+#include "../Hitboxes.hpp"
 #include "ResourceHandler.hpp"
 class Planet;
 class Item

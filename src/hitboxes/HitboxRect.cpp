@@ -1,6 +1,6 @@
 #include "HitboxRect.hpp"
-#include "Main.hpp"
-#include "utils.hpp"
+#include "../Main.hpp"
+#include "../utils.hpp"
 HitboxRect::HitboxRect(sf::Vector2f position, sf::Vector2f size)
 {
 	this->position = position;

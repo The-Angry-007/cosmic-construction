@@ -1,8 +1,8 @@
 #include "Game.hpp"
-#include "InputHandler.hpp"
-#include "Main.hpp"
+#include "../InputHandler.hpp"
+#include "../Main.hpp"
+#include "../binds.hpp"
 #include "RecipeHandler.hpp"
-#include "binds.hpp"
 Game::Game()
 {
 	paused = false;

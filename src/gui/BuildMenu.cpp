@@ -1,8 +1,8 @@
 #include "BuildMenu.hpp"
+#include "../Main.hpp"
+#include "../game/ResourceHandler.hpp"
+#include "../utils.hpp"
 #include "GUIStructure.hpp"
-#include "Main.hpp"
-#include "game/ResourceHandler.hpp"
-#include "utils.hpp"
 BuildMenu::BuildMenu()
 {
 	std::vector<std::string> titles = { "Transport", "Production", "Processing" };

@@ -1,5 +1,5 @@
 #include "GUIObject.hpp"
-#include "InputHandler.hpp"
+#include "../InputHandler.hpp"
 GUIObject::GUIObject()
 {}
 

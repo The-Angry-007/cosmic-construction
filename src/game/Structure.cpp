@@ -1,6 +1,6 @@
 #include "Structure.hpp"
+#include "../Main.hpp"
 #include "Chunk.hpp"
-#include "Main.hpp"
 #include "Recipe.hpp"
 #include "RecipeHandler.hpp"
 #include "ResourceHandler.hpp"

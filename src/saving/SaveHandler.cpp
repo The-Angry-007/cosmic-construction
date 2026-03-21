@@ -1,7 +1,7 @@
 #include "SaveHandler.hpp"
-#include "Main.hpp"
-#include "game/RandomHandler.hpp"
-#include "utils.hpp"
+#include "../Main.hpp"
+#include "../game/RandomHandler.hpp"
+#include "../utils.hpp"
 #include <chrono>
 #include <ctime>
 #include <iostream>

@@ -1,5 +1,5 @@
 #include "GUI.hpp"
-#include "InputHandler.hpp"
+#include "../InputHandler.hpp"
 //constructor: only thing to do is initialise guiobjects array.
 GUI::GUI()
 {

@@ -1,5 +1,5 @@
 #include "Chunk.hpp"
-#include "Main.hpp"
+#include "../Main.hpp"
 
 int CurrentChunkID = 0;
 

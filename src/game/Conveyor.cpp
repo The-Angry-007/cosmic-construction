@@ -1,7 +1,7 @@
 #include "Conveyor.hpp"
-#include "Main.hpp"
+#include "../Main.hpp"
+#include "../utils.hpp"
 #include "ResourceHandler.hpp"
-#include "utils.hpp"
 //the offset each value of a structure's direction variable represents
 std::vector<sf::Vector2i> CONVEYOR_OFFSETS = {
 	sf::Vector2i(0, -1),

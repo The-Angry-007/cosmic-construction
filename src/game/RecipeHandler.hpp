@@ -1,5 +1,5 @@
 #pragma once
-#include "gui.hpp"
+#include "../gui.hpp"
 //basic struct for storing recipe data
 struct RecipeData
 {

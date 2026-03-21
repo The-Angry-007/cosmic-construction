@@ -1,5 +1,5 @@
 #pragma once
-#include "Hitboxes.hpp"
+#include "../Hitboxes.hpp"
 #include "Item.hpp"
 
 //chunks will be chunk_size * tile_size pixels wide

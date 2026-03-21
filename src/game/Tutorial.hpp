@@ -1,5 +1,5 @@
 #pragma once
-#include "gui.hpp"
+#include "../gui.hpp"
 class Tutorial
 {
 public:

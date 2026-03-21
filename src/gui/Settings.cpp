@@ -1,9 +1,9 @@
+#include "../InputHandler.hpp"
+#include "../Main.hpp"
+#include "../binds.hpp"
 #include "../gui.hpp"
-#include "InputHandler.hpp"
-#include "Main.hpp"
-#include "binds.hpp"
-#include "saving.hpp"
-#include "utils.hpp"
+#include "../saving.hpp"
+#include "../utils.hpp"
 Settings::Settings()
 {
 

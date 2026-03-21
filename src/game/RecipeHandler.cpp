@@ -1,9 +1,9 @@
 #include "RecipeHandler.hpp"
-#include "Main.hpp"
+#include "../Main.hpp"
+#include "../binds.hpp"
+#include "../utils.hpp"
 #include "Recipe.hpp"
 #include "ResourceHandler.hpp"
-#include "binds.hpp"
-#include "utils.hpp"
 namespace RecipeHandler
 {
 std::vector<std::vector<RecipeData>> recipes;

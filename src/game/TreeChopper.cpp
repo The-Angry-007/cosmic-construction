@@ -1,5 +1,5 @@
 #include "TreeChopper.hpp"
-#include "Main.hpp"
+#include "../Main.hpp"
 #include "ResourceHandler.hpp"
 TreeChopper::TreeChopper(int id, int planetID, int direction)
 {

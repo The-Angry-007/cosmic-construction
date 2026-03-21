@@ -1,6 +1,6 @@
 #include "GUIItem.hpp"
-#include "Main.hpp"
-#include "game/ResourceHandler.hpp"
+#include "../Main.hpp"
+#include "../game/ResourceHandler.hpp"
 GUIItem::GUIItem(sf::Vector2f position, sf::Vector2f size, int typeID, int amount)
 {
 	this->position = position;

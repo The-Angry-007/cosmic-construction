@@ -1,6 +1,6 @@
 #include "GUILabel.hpp"
-#include "Main.hpp"
-#include "utils.hpp"
+#include "../Main.hpp"
+#include "../utils.hpp"
 GUILabel::GUILabel(sf::Vector2f position, sf::Vector2f size, std::string text)
 {
 	//attempt to load default font

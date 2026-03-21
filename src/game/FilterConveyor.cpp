@@ -1,7 +1,7 @@
 #include "FilterConveyor.hpp"
-#include "Main.hpp"
+#include "../Main.hpp"
+#include "../utils.hpp"
 #include "ResourceHandler.hpp"
-#include "utils.hpp"
 
 FilterConveyor::FilterConveyor(int id, int planetID, int direction)
 {

@@ -1,11 +1,11 @@
+#include "../InputHandler.hpp"
+#include "../Main.hpp"
+#include "../binds.hpp"
+#include "../game/RecipeHandler.hpp"
 #include "../gui.hpp"
 #include "../saving.hpp"
+#include "../utils.hpp"
 #include "BuildMenu.hpp"
-#include "InputHandler.hpp"
-#include "Main.hpp"
-#include "binds.hpp"
-#include "game/RecipeHandler.hpp"
-#include "utils.hpp"
 //constructor
 GUIHandler::GUIHandler()
 {

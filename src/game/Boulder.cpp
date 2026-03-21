@@ -1,5 +1,5 @@
 #include "Boulder.hpp"
-#include "Main.hpp"
+#include "../Main.hpp"
 #include "ResourceHandler.hpp"
 Boulder::Boulder(int id, int planetID)
 {

@@ -1,9 +1,9 @@
 #include "Tutorial.hpp"
-#include "Main.hpp"
-#include "binds.hpp"
-#include "gui/BuildMenu.hpp"
-#include "saving.hpp"
-#include "utils.hpp"
+#include "../Main.hpp"
+#include "../binds.hpp"
+#include "../gui/BuildMenu.hpp"
+#include "../saving.hpp"
+#include "../utils.hpp"
 Tutorial::Tutorial()
 {
 	gui = nullptr;

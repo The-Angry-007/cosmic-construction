@@ -63,9 +63,12 @@
 #endif // _WIN32
 
 // Utils
-#include "Utility/FileSystem.hpp"
-#include "Utility/Types.hpp"
+typedef std::uint8_t uchar;
+typedef std::uint16_t ushort;
+typedef std::uint32_t uint;
+typedef std::uint64_t ullong;
 
+typedef std::int64_t llong;
 // Macros
 #define UNUSED(x) (void)(x)
 

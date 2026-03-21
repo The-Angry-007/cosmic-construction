@@ -1,7 +1,7 @@
 #pragma once
-#include "InputHandler.hpp"
+#include "../InputHandler.hpp"
+#include "../gui.hpp"
 #include "Planet.hpp"
-#include "gui.hpp"
 class ToolHandler
 {
 public:

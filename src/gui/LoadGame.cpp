@@ -1,8 +1,8 @@
 #include "LoadGame.hpp"
-#include "InputHandler.hpp"
-#include "Main.hpp"
-#include "saving.hpp"
-#include "utils.hpp"
+#include "../InputHandler.hpp"
+#include "../Main.hpp"
+#include "../saving.hpp"
+#include "../utils.hpp"
 LoadGame::LoadGame(GUIGalaxy* galaxy, GUIPanel* dimpanel)
 {
 	GUIObjects = {};

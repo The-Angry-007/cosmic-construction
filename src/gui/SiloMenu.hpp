@@ -1,6 +1,6 @@
 #pragma once
+#include "../game/StorageSilo.hpp"
 #include "GUIItem.hpp"
-#include "game/StorageSilo.hpp"
 #include "gui.hpp"
 class StorageSilo;
 class SiloMenu : public GUI

@@ -1,5 +1,5 @@
 #include "Tree.hpp"
-#include "Main.hpp"
+#include "../Main.hpp"
 #include "ResourceHandler.hpp"
 //basic terrain tree
 Tree::Tree(int id, int planetID)

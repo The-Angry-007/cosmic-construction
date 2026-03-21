@@ -1,6 +1,6 @@
 #pragma once
-#include "Hitboxes.hpp"
-#include "saving.hpp"
+#include "../Hitboxes.hpp"
+#include "../saving.hpp"
 class Recipe;
 struct RecipeData;
 class Structure

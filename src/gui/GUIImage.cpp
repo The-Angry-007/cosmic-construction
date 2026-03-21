@@ -1,5 +1,5 @@
 #include "GUIImage.hpp"
-#include "Main.hpp"
+#include "../Main.hpp"
 //constructor - takes position, size and path to the image file to be used
 GUIImage::GUIImage(sf::Vector2f position, sf::Vector2f size, std::string path)
 {

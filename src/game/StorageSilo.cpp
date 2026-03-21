@@ -1,5 +1,5 @@
 #include "StorageSilo.hpp"
-#include "Main.hpp"
+#include "../Main.hpp"
 #include "ResourceHandler.hpp"
 StorageSilo::StorageSilo(int id, int planetID, int direction)
 {

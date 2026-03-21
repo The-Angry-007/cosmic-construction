@@ -1,5 +1,5 @@
 #include "GUIGalaxy.hpp"
-#include "Main.hpp"
+#include "../Main.hpp"
 //constructor
 GUIGalaxy::GUIGalaxy()
 {
