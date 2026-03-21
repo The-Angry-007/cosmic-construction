@@ -40,13 +40,13 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 74,
+				"line" : 72,
 				"parent" : 1
 			},
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 234,
+				"line" : 232,
 				"parent" : 1
 			},
 			{
@@ -58,7 +58,7 @@
 			{
 				"command" : 5,
 				"file" : 0,
-				"line" : 87,
+				"line" : 85,
 				"parent" : 1
 			},
 			{
@@ -76,7 +76,7 @@
 			{
 				"command" : 6,
 				"file" : 0,
-				"line" : 286,
+				"line" : 274,
 				"parent" : 1
 			},
 			{
@@ -94,7 +94,7 @@
 			{
 				"command" : 7,
 				"file" : 0,
-				"line" : 274,
+				"line" : 262,
 				"parent" : 1
 			}
 		]

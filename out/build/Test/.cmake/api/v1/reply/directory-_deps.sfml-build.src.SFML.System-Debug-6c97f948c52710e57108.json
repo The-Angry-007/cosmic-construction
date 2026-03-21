@@ -9,7 +9,7 @@
 		"files" : 
 		[
 			"out/build/Test/_deps/sfml-src/cmake/Macros.cmake",
-			"out/build/Test/_deps/sfml-src/src/SFML/Graphics/CMakeLists.txt"
+			"out/build/Test/_deps/sfml-src/src/SFML/System/CMakeLists.txt"
 		],
 		"nodes" : 
 		[
@@ -19,19 +19,19 @@
 			{
 				"command" : 1,
 				"file" : 1,
-				"line" : 88,
+				"line" : 72,
 				"parent" : 0
 			},
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 234,
+				"line" : 232,
 				"parent" : 1
 			},
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 268,
+				"line" : 256,
 				"parent" : 1
 			}
 		]
@@ -44,10 +44,10 @@
 			"destination" : "lib",
 			"paths" : 
 			[
-				"_deps/sfml-build/lib/libsfml-graphics-s-d.a"
+				"_deps/sfml-build/lib/libsfml-system-s-d.a"
 			],
-			"targetId" : "sfml-graphics::@98af38147d5fa7e70f61",
-			"targetIndex" : 7,
+			"targetId" : "sfml-system::@8cb1db2982443611e568",
+			"targetIndex" : 10,
 			"type" : "target"
 		},
 		{
@@ -56,14 +56,14 @@
 			"destination" : "lib/cmake/SFML",
 			"paths" : 
 			[
-				"out/build/Test/_deps/sfml-build/src/SFML/Graphics/SFMLGraphicsDependencies.cmake"
+				"out/build/Test/_deps/sfml-build/src/SFML/System/SFMLSystemDependencies.cmake"
 			],
 			"type" : "file"
 		}
 	],
 	"paths" : 
 	{
-		"build" : "_deps/sfml-build/src/SFML/Graphics",
-		"source" : "out/build/Test/_deps/sfml-src/src/SFML/Graphics"
+		"build" : "_deps/sfml-build/src/SFML/System",
+		"source" : "out/build/Test/_deps/sfml-src/src/SFML/System"
 	}
 }

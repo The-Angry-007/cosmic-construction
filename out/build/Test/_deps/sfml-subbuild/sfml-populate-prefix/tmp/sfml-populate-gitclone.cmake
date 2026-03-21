@@ -52,13 +52,13 @@ endif()
 
 execute_process(
   COMMAND "C:/Program Files/Git/cmd/git.exe"
-          checkout "3.0.1" --
+          checkout "3.0.0" --
   WORKING_DIRECTORY "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src"
   RESULT_VARIABLE error_code
   ${maybe_show_command}
 )
 if(error_code)
-  message(FATAL_ERROR "Failed to checkout tag: '3.0.1'")
+  message(FATAL_ERROR "Failed to checkout tag: '3.0.0'")
 endif()
 
 set(init_submodules TRUE)

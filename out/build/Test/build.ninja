@@ -1783,16 +1783,16 @@ build _deps/sfml-build/src/SFML/Main/CMakeFiles/sfml-main.dir/MainWin32.cpp.obj:
 
 
 #############################################
-# Link the static library _deps\sfml-build\lib\libsfml-main-d.a
+# Link the static library _deps\sfml-build\lib\libsfml-main-s-d.a
 
-build _deps/sfml-build/lib/libsfml-main-d.a: CXX_STATIC_LIBRARY_LINKER__sfml-main_Debug _deps/sfml-build/src/SFML/Main/CMakeFiles/sfml-main.dir/MainWin32.cpp.obj
+build _deps/sfml-build/lib/libsfml-main-s-d.a: CXX_STATIC_LIBRARY_LINKER__sfml-main_Debug _deps/sfml-build/src/SFML/Main/CMakeFiles/sfml-main.dir/MainWin32.cpp.obj
   CONFIG = Debug
   LANGUAGE_COMPILE_FLAGS = -g
   OBJECT_DIR = _deps\sfml-build\src\SFML\Main\CMakeFiles\sfml-main.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_FILE = _deps\sfml-build\lib\libsfml-main-d.a
-  TARGET_PDB = sfml-main-d.a.dbg
+  TARGET_FILE = _deps\sfml-build\lib\libsfml-main-s-d.a
+  TARGET_PDB = sfml-main-s-d.a.dbg
 
 
 #############################################
@@ -5029,7 +5029,7 @@ build libsfml-audio-s-d.a: phony _deps/sfml-build/lib/libsfml-audio-s-d.a
 
 build libsfml-graphics-s-d.a: phony _deps/sfml-build/lib/libsfml-graphics-s-d.a
 
-build libsfml-main-d.a: phony _deps/sfml-build/lib/libsfml-main-d.a
+build libsfml-main-s-d.a: phony _deps/sfml-build/lib/libsfml-main-s-d.a
 
 build libsfml-network-s-d.a: phony _deps/sfml-build/lib/libsfml-network-s-d.a
 
@@ -5049,7 +5049,7 @@ build sfml-audio: phony _deps/sfml-build/lib/libsfml-audio-s-d.a
 
 build sfml-graphics: phony _deps/sfml-build/lib/libsfml-graphics-s-d.a
 
-build sfml-main: phony _deps/sfml-build/lib/libsfml-main-d.a
+build sfml-main: phony _deps/sfml-build/lib/libsfml-main-s-d.a
 
 build sfml-network: phony _deps/sfml-build/lib/libsfml-network-s-d.a
 
@@ -5148,7 +5148,7 @@ build _deps/sfml-build/src/SFML/Graphics/all: phony _deps/sfml-build/lib/libsfml
 #############################################
 # Folder: C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-build/src/SFML/Main
 
-build _deps/sfml-build/src/SFML/Main/all: phony _deps/sfml-build/lib/libsfml-main-d.a
+build _deps/sfml-build/src/SFML/Main/all: phony _deps/sfml-build/lib/libsfml-main-s-d.a
 
 # =============================================================================
 

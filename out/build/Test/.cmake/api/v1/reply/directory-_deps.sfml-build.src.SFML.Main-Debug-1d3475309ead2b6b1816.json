@@ -25,7 +25,7 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 234,
+				"line" : 232,
 				"parent" : 1
 			}
 		]
@@ -38,7 +38,7 @@
 			"destination" : "lib",
 			"paths" : 
 			[
-				"_deps/sfml-build/lib/libsfml-main-d.a"
+				"_deps/sfml-build/lib/libsfml-main-s-d.a"
 			],
 			"targetId" : "sfml-main::@81ec5539f1398dd625f6",
 			"targetIndex" : 8,
