@@ -1,4 +1,5 @@
 #pragma once
+#include "PCH.hpp"
 
 extern bool RectIntersectsRect(sf::FloatRect rect1, sf::FloatRect rect2);
 extern bool RectIntersectsRect(sf::IntRect rect1, sf::IntRect rect2);

@@ -1,4 +1,5 @@
 #pragma once
+#include "../PCH.hpp"
 #include "HitboxShape.hpp"
 
 class HitboxCircle : public HitboxShape

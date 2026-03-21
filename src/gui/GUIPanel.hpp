@@ -1,4 +1,5 @@
 #pragma once
+#include "../PCH.hpp"
 #include "GUIObject.hpp"
 class GUIPanel : public GUIObject
 {

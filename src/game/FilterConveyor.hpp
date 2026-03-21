@@ -1,4 +1,5 @@
 #pragma once
+#include "../PCH.hpp"
 #include "ConveyorType.hpp"
 class FilterConveyor : public ConveyorType
 {

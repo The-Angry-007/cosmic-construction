@@ -1,4 +1,5 @@
 #pragma once
+#include "../PCH.hpp"
 #include "GUI.hpp"
 
 //a special class for the settings gui.

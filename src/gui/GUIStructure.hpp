@@ -1,4 +1,5 @@
 #pragma once
+#include "../PCH.hpp"
 #include "GUIImage.hpp"
 #include "gui.hpp"
 class GUIStructure : public GUIObject

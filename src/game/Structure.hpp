@@ -1,4 +1,5 @@
 #pragma once
+#include "../PCH.hpp"
 #include "../Hitboxes.hpp"
 #include "../saving.hpp"
 class Recipe;

@@ -1,4 +1,5 @@
 #pragma once
+#include "PCH.hpp"
 #include "game/Atlas.hpp"
 #include "game/Camera.hpp"
 #include "game/Chunk.hpp"

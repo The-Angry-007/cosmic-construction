@@ -1,4 +1,5 @@
 #pragma once
+#include "../PCH.hpp"
 #include "GUIObject.hpp"
 
 //the galaxy that scrolls in the background of the main menu
