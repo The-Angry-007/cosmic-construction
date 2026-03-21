@@ -1,2 +1,0 @@
-ItemID/TypeID/PositionX/PositionY/Parent
-51/1/464.000000/468.500000/1

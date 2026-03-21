@@ -1,5 +1,0 @@
-{
-PositionX:533.166992
-PositionY:178.994720
-Zoom:0.251984
-}
