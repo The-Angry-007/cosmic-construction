@@ -1,0 +1,14 @@
+# libvorbisenc pkg-config source file
+
+prefix=C:/Users/kiera/Documents/GitHub/cosmic-construction/out/install/Test
+exec_prefix=C:/Users/kiera/Documents/GitHub/cosmic-construction/out/install/Test/bin
+libdir=C:/Users/kiera/Documents/GitHub/cosmic-construction/out/install/Test/lib
+includedir=C:/Users/kiera/Documents/GitHub/cosmic-construction/out/install/Test/include
+
+Name: vorbisenc
+Description: vorbisenc is a library that provides a convenient API for setting up an encoding environment using libvorbis
+Version: 1.3.7
+Requires.private: vorbis
+Conflicts:
+Libs: -L${libdir} -lvorbisenc
+Cflags: -I${includedir}
