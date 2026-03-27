@@ -222316,7 +222316,6 @@ typedef std::int64_t llong;
 
 # 1 "C:/Users/kiera/Documents/GitHub/cosmic-construction/src/game/Structure.hpp" 1
        
-
 # 1 "C:/Users/kiera/Documents/GitHub/cosmic-construction/src/Hitboxes.hpp" 1
        
 # 1 "C:/Users/kiera/Documents/GitHub/cosmic-construction/src/PCH.hpp" 1
@@ -222400,7 +222399,8 @@ public:
  void Display(bool colliding);
 };
 # 6 "C:/Users/kiera/Documents/GitHub/cosmic-construction/src/Hitboxes.hpp" 2
-# 4 "C:/Users/kiera/Documents/GitHub/cosmic-construction/src/game/Structure.hpp" 2
+# 3 "C:/Users/kiera/Documents/GitHub/cosmic-construction/src/game/Structure.hpp" 2
+
 # 1 "C:/Users/kiera/Documents/GitHub/cosmic-construction/src/saving.hpp" 1
        
 
@@ -222518,7 +222518,8 @@ public:
  sf::Vector2i bottomRightPos;
  sf::Vector2i position;
  sf::Vector2i tileSize;
- sf::Sprite sprite;
+ sf::Texture texture;
+ sf::Sprite sprite = sf::Sprite(texture);
  int direction = 0;
  Hitbox* hitbox;
  Structure();
@@ -222569,7 +222570,7 @@ public:
  float gap;
  int filterItem;
  std::vector<int> neighbours;
- sf::Sprite overlaySprite;
+ sf::Sprite overlaySprite = sf::Sprite(texture);
  std::vector<std::vector<int>> items;
  std::vector<std::vector<float>> progress;
  FilterConveyor(int id, int planetID, int direction);
@@ -223111,7 +223112,8 @@ public:
  int typeId;
  int id;
  int chunkID;
- sf::Sprite sprite;
+ sf::Texture texture;
+ sf::Sprite sprite = sf::Sprite(texture);
  sf::Vector2f moveDir;
  Hitbox* hitbox;
  Hitbox* accurateHitbox;
@@ -223293,7 +223295,7 @@ public:
  int currentFrame;
  int outputItem;
  int lastOutputDir;
- sf::Sprite groundSprite;
+ sf::Sprite groundSprite = sf::Sprite(texture);
  Drill(int id, int planetID, int direction);
  ~Drill();
  void FromJSON(JSON j);
@@ -223353,7 +223355,7 @@ public:
  int currentFrame;
  int outputItem;
  int lastOutputDir;
- sf::Sprite groundSprite;
+ sf::Sprite groundSprite = sf::Sprite(texture);
  RefinedDrill(int id, int planetID, int direction);
  ~RefinedDrill();
  void FromJSON(JSON j);
@@ -223379,7 +223381,7 @@ public:
  int launchType;
  float launchTimer;
  int targetPlanetID;
- sf::Sprite rocketSprite;
+ sf::Sprite rocketSprite = sf::Sprite(texture);
  RocketSilo(int id, int planetID, int direction, int typeID);
  ~RocketSilo();
  void FromJSON(JSON j);
@@ -223423,7 +223425,7 @@ class SaplingPlanter : public Structure
 public:
  int tree;
  float timeSinceTree;
- sf::Sprite topSprite;
+ sf::Sprite topSprite = sf::Sprite(texture);
  SaplingPlanter(int id, int planetID, int direction = 0);
  void Update(float dt);
  void Render();
@@ -223723,9 +223725,7 @@ FilterConveyor::FilterConveyor(int id, int planetID, int direction)
  typeID = 17;
  SetDirection(direction);
  tileSize = ResourceHandler::structureSizes[typeID];
- sprite = sf::Sprite();
  ResourceHandler::structureAtlas->SetSprite(sprite, 17, direction);
- overlaySprite = sf::Sprite();
  ResourceHandler::structureAtlas->SetSprite(overlaySprite, 17, 8);
 
  gap = 0.2f;

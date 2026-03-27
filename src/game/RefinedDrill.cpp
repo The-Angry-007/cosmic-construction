@@ -15,10 +15,8 @@ RefinedDrill::RefinedDrill(int id, int planetID, int direction)
 	this->planetID = planetID;
 	typeID = 8;
 	tileSize = ResourceHandler::structureSizes[typeID];
-	sprite = sf::Sprite();
 	currentFrame = 0;
 	ResourceHandler::structureAtlas->SetSprite(sprite, typeID, currentFrame);
-	groundSprite = sf::Sprite();
 	ResourceHandler::structureAtlas->SetSprite(groundSprite, 6, 3);
 
 	blocksItems = true;

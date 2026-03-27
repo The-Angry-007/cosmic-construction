@@ -5,10 +5,8 @@ SaplingPlanter::SaplingPlanter(int id, int planetID, int direction)
 {
 	SetID(id);
 	this->planetID = planetID;
-	topSprite = sf::Sprite();
 	typeID = 4;
 	ResourceHandler::structureAtlas->SetSprite(topSprite, 4, 1);
-	sprite = sf::Sprite();
 	ResourceHandler::structureAtlas->SetSprite(sprite, 4, 0);
 	timeSinceTree = 0.f;
 	placedByPlayer = true;

@@ -10,7 +10,6 @@ Tree::Tree(int id, int planetID)
 	//takes 3 clicks to destroy
 	health = 3;
 	tileSize = ResourceHandler::structureSizes[typeID];
-	sprite = sf::Sprite();
 	ResourceHandler::structureAtlas->SetSprite(sprite, 2, 0);
 	blocksItems = true;
 	placedByPlayer = false;

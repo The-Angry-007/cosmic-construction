@@ -222907,7 +222907,8 @@ public:
  sf::Vector2i bottomRightPos;
  sf::Vector2i position;
  sf::Vector2i tileSize;
- sf::Sprite sprite;
+ sf::Texture texture;
+ sf::Sprite sprite = sf::Sprite(texture);
  int direction = 0;
  Hitbox* hitbox;
  Structure();
@@ -223056,7 +223057,8 @@ public:
  int typeId;
  int id;
  int chunkID;
- sf::Sprite sprite;
+ sf::Texture texture;
+ sf::Sprite sprite = sf::Sprite(texture);
  sf::Vector2f moveDir;
  Hitbox* hitbox;
  Hitbox* accurateHitbox;
@@ -223259,7 +223261,7 @@ public:
  int currentFrame;
  int outputItem;
  int lastOutputDir;
- sf::Sprite groundSprite;
+ sf::Sprite groundSprite = sf::Sprite(texture);
  Drill(int id, int planetID, int direction);
  ~Drill();
  void FromJSON(JSON j);
@@ -223285,7 +223287,7 @@ public:
  float gap;
  int filterItem;
  std::vector<int> neighbours;
- sf::Sprite overlaySprite;
+ sf::Sprite overlaySprite = sf::Sprite(texture);
  std::vector<std::vector<int>> items;
  std::vector<std::vector<float>> progress;
  FilterConveyor(int id, int planetID, int direction);
@@ -223353,7 +223355,7 @@ public:
  int currentFrame;
  int outputItem;
  int lastOutputDir;
- sf::Sprite groundSprite;
+ sf::Sprite groundSprite = sf::Sprite(texture);
  RefinedDrill(int id, int planetID, int direction);
  ~RefinedDrill();
  void FromJSON(JSON j);
@@ -223379,7 +223381,7 @@ public:
  int launchType;
  float launchTimer;
  int targetPlanetID;
- sf::Sprite rocketSprite;
+ sf::Sprite rocketSprite = sf::Sprite(texture);
  RocketSilo(int id, int planetID, int direction, int typeID);
  ~RocketSilo();
  void FromJSON(JSON j);
@@ -223423,7 +223425,7 @@ class SaplingPlanter : public Structure
 public:
  int tree;
  float timeSinceTree;
- sf::Sprite topSprite;
+ sf::Sprite topSprite = sf::Sprite(texture);
  SaplingPlanter(int id, int planetID, int direction = 0);
  void Update(float dt);
  void Render();
@@ -223705,11 +223707,10 @@ StorageSilo::StorageSilo(int id, int planetID, int direction)
  typeID = 1;
  for (int i = 0; i < 11; i++)
  {
-  sf::Sprite s;
+  sf::Sprite s(texture);
   ResourceHandler::structureAtlas->SetSprite(s, typeID, i);
   sprites.push_back(s);
  }
- this->sprite = sf::Sprite();
  tileSize = ResourceHandler::structureSizes[typeID];
  itemIDs = {};
  itemQuantities = {};

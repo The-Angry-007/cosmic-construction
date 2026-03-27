@@ -12,7 +12,8 @@ public:
 	int typeId;
 	int id;
 	int chunkID;
-	sf::Sprite sprite;
+	sf::Texture texture;
+	sf::Sprite sprite = sf::Sprite(texture);
 	sf::Vector2f moveDir;
 	Hitbox* hitbox;
 	Hitbox* accurateHitbox;

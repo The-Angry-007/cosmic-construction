@@ -13,7 +13,6 @@ Underground::Underground(int id, int planetID, int direction)
 	typeID = 10;
 	SetDirection(direction);
 	tileSize = ResourceHandler::structureSizes[typeID];
-	sprite = sf::Sprite();
 	ResourceHandler::structureAtlas->SetSprite(sprite, 10, direction);
 	gap = 0.2f;
 	speed = 3.f;

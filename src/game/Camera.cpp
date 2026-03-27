@@ -97,15 +97,15 @@ void Camera::Update(float dt)
 sf::FloatRect Camera::toFloatRect()
 {
 	//get float rect representing camera
-	return sf::FloatRect(position.x - width * zoom / 2.f, position.y - height * zoom / 2.f, width * zoom, height * zoom);
+	return sf::FloatRect({ position.x - width * zoom / 2.f, position.y - height * zoom / 2.f }, { width * zoom, height * zoom });
 }
 
 void Camera::SetView()
 {
 	//adjust hitbox to match view and set view of window
 	sf::FloatRect rect = toFloatRect();
-	hitbox->shapes[0]->currentPos = sf::Vector2f(rect.left, rect.top) + 0.5f * sf::Vector2f(rect.width, rect.height);
-	hitbox->shapes[0]->currentSize = sf::Vector2f(rect.width / 2.f, rect.height / 2.f);
+	hitbox->shapes[0]->currentPos = sf::Vector2f(rect.position.x, rect.position.y) + 0.5f * sf::Vector2f(rect.size.x, rect.size.y);
+	hitbox->shapes[0]->currentSize = sf::Vector2f(rect.size.x / 2.f, rect.size.y / 2.f);
 	auto view = sf::View(rect);
 	window->setView(view);
 }

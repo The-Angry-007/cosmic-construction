@@ -1,6 +1,7 @@
 CMakeFiles\Civitron.dir\src\game\Structure.cpp.obj.ddi: \
  C:/Users/kiera/Documents/GitHub/cosmic-construction/src/game/Structure.cpp \
  C:/Users/kiera/Documents/GitHub/cosmic-construction/src/game/Structure.hpp \
+ C:/Users/kiera/Documents/GitHub/cosmic-construction/src/Hitboxes.hpp \
  C:/Users/kiera/Documents/GitHub/cosmic-construction/src/PCH.hpp \
  C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/include/SFML/Audio.hpp \
  C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/include/SFML/Audio/InputSoundFile.hpp \
@@ -578,13 +579,12 @@ CMakeFiles\Civitron.dir\src\game\Structure.cpp.obj.ddi: \
  C:/msys64/ucrt64/include/sec_api/stralign_s.h \
  C:/msys64/ucrt64/include/winsvc.h C:/msys64/ucrt64/include/mcx.h \
  C:/msys64/ucrt64/include/imm.h \
- C:/Users/kiera/Documents/GitHub/cosmic-construction/src/Hitboxes.hpp \
- C:/Users/kiera/Documents/GitHub/cosmic-construction/src/PCH.hpp \
  C:/Users/kiera/Documents/GitHub/cosmic-construction/src/hitboxes/Hitbox.hpp \
  C:/Users/kiera/Documents/GitHub/cosmic-construction/src/PCH.hpp \
  C:/Users/kiera/Documents/GitHub/cosmic-construction/src/hitboxes/HitboxShape.hpp \
  C:/Users/kiera/Documents/GitHub/cosmic-construction/src/hitboxes/HitboxCircle.hpp \
  C:/Users/kiera/Documents/GitHub/cosmic-construction/src/hitboxes/HitboxRect.hpp \
+ C:/Users/kiera/Documents/GitHub/cosmic-construction/src/PCH.hpp \
  C:/Users/kiera/Documents/GitHub/cosmic-construction/src/saving.hpp \
  C:/Users/kiera/Documents/GitHub/cosmic-construction/src/saving/JSON.hpp \
  C:/Users/kiera/Documents/GitHub/cosmic-construction/src/PCH.hpp \

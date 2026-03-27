@@ -283,9 +283,9 @@ void Planet::Update(float dt)
 //converts a list of render objects into a vertex array so that all items and structures can be drawn in a single draw call
 void buildVertexArray(const std::vector<RenderObject>& renderObjects, sf::VertexArray& vertexArray)
 {
-	// Set the vertex array to quads and resize it to fit all sprites
-	vertexArray.setPrimitiveType(sf::Quads);
-	vertexArray.resize(renderObjects.size() * 4);
+	// Set the vertex array to triangles and resize it to fit all sprites (6 vertices per quad)
+	vertexArray.setPrimitiveType(sf::PrimitiveType::Triangles);
+	vertexArray.resize(renderObjects.size() * 6);
 
 	for (size_t i = 0; i < renderObjects.size(); ++i)
 	{
@@ -296,28 +296,44 @@ void buildVertexArray(const std::vector<RenderObject>& renderObjects, sf::Vertex
 		const sf::FloatRect globalBounds = sprite->getGlobalBounds();
 		const sf::IntRect textureRect = sprite->getTextureRect();
 
-		// Calculate quad vertices
-		sf::Vertex* quad = &vertexArray[i * 4];
+		// Precompute positions
+		sf::Vector2f pos = globalBounds.position;
+		sf::Vector2f size = globalBounds.size;
 
-		// Top-left
-		quad[0].position = sf::Vector2f(globalBounds.left, globalBounds.top);
-		quad[0].texCoords = sf::Vector2f(textureRect.left, textureRect.top);
-		quad[0].color = sprite->getColor();
+		// Precompute texcoords
+		sf::Vector2f texPos(textureRect.position);
+		sf::Vector2f texSize(textureRect.size);
 
-		// Top-right
-		quad[1].position = sf::Vector2f(globalBounds.left + globalBounds.width, globalBounds.top);
-		quad[1].texCoords = sf::Vector2f(textureRect.left + textureRect.width, textureRect.top);
-		quad[1].color = sprite->getColor();
+		sf::Color color = sprite->getColor();
 
-		// Bottom-right
-		quad[2].position = sf::Vector2f(globalBounds.left + globalBounds.width, globalBounds.top + globalBounds.height);
-		quad[2].texCoords = sf::Vector2f(textureRect.left + textureRect.width, textureRect.top + textureRect.height);
-		quad[2].color = sprite->getColor();
+		// Get pointer to first vertex of this quad (6 verts)
+		sf::Vertex* tri = &vertexArray[i * 6];
 
-		// Bottom-left
-		quad[3].position = sf::Vector2f(globalBounds.left, globalBounds.top + globalBounds.height);
-		quad[3].texCoords = sf::Vector2f(textureRect.left, textureRect.top + textureRect.height);
-		quad[3].color = sprite->getColor();
+		// Triangle 1 (top-left, top-right, bottom-right)
+		tri[0].position = { pos.x, pos.y };
+		tri[0].texCoords = { texPos.x, texPos.y };
+		tri[0].color = color;
+
+		tri[1].position = { pos.x + size.x, pos.y };
+		tri[1].texCoords = { texPos.x + texSize.x, texPos.y };
+		tri[1].color = color;
+
+		tri[2].position = { pos.x + size.x, pos.y + size.y };
+		tri[2].texCoords = { texPos.x + texSize.x, texPos.y + texSize.y };
+		tri[2].color = color;
+
+		// Triangle 2 (top-left, bottom-right, bottom-left)
+		tri[3].position = { pos.x, pos.y };
+		tri[3].texCoords = { texPos.x, texPos.y };
+		tri[3].color = color;
+
+		tri[4].position = { pos.x + size.x, pos.y + size.y };
+		tri[4].texCoords = { texPos.x + texSize.x, texPos.y + texSize.y };
+		tri[4].color = color;
+
+		tri[5].position = { pos.x, pos.y + size.y };
+		tri[5].texCoords = { texPos.x, texPos.y + texSize.y };
+		tri[5].color = color;
 	}
 	sf::RenderStates states;
 	states.texture = &ResourceHandler::completeAtlas->texture;
@@ -330,8 +346,8 @@ void Planet::Render()
 
 	sf::FloatRect camRect = camera.toFloatRect();
 	//draws background
-	sf::RectangleShape rect(sf::Vector2f(camRect.width, camRect.height));
-	rect.setPosition(camRect.left, camRect.top);
+	sf::RectangleShape rect(sf::Vector2f(camRect.size.x, camRect.size.y));
+	rect.setPosition(sf::Vector2f { camRect.position.x, camRect.position.y });
 	rect.setFillColor(backgroundColor);
 	window->draw(rect);
 	//all visible chunks are rendered

@@ -222313,7 +222313,6 @@ typedef std::int64_t llong;
 # 3 "C:/Users/kiera/Documents/GitHub/cosmic-construction/src/game/ConveyorType.hpp" 2
 # 1 "C:/Users/kiera/Documents/GitHub/cosmic-construction/src/game/Structure.hpp" 1
        
-
 # 1 "C:/Users/kiera/Documents/GitHub/cosmic-construction/src/Hitboxes.hpp" 1
        
 # 1 "C:/Users/kiera/Documents/GitHub/cosmic-construction/src/PCH.hpp" 1
@@ -222397,7 +222396,8 @@ public:
  void Display(bool colliding);
 };
 # 6 "C:/Users/kiera/Documents/GitHub/cosmic-construction/src/Hitboxes.hpp" 2
-# 4 "C:/Users/kiera/Documents/GitHub/cosmic-construction/src/game/Structure.hpp" 2
+# 3 "C:/Users/kiera/Documents/GitHub/cosmic-construction/src/game/Structure.hpp" 2
+
 # 1 "C:/Users/kiera/Documents/GitHub/cosmic-construction/src/saving.hpp" 1
        
 
@@ -222515,7 +222515,8 @@ public:
  sf::Vector2i bottomRightPos;
  sf::Vector2i position;
  sf::Vector2i tileSize;
- sf::Sprite sprite;
+ sf::Texture texture;
+ sf::Sprite sprite = sf::Sprite(texture);
  int direction = 0;
  Hitbox* hitbox;
  Structure();

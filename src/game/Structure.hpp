@@ -1,6 +1,6 @@
 #pragma once
-#include "../PCH.hpp"
 #include "../Hitboxes.hpp"
+#include "../PCH.hpp"
 #include "../saving.hpp"
 class Recipe;
 struct RecipeData;
@@ -21,7 +21,8 @@ public:
 	sf::Vector2i bottomRightPos;
 	sf::Vector2i position;
 	sf::Vector2i tileSize;
-	sf::Sprite sprite;
+	sf::Texture texture;
+	sf::Sprite sprite = sf::Sprite(texture);
 	int direction = 0;
 	Hitbox* hitbox;
 	Structure();

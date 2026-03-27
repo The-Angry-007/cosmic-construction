@@ -222526,7 +222526,8 @@ public:
  int typeId;
  int id;
  int chunkID;
- sf::Sprite sprite;
+ sf::Texture texture;
+ sf::Sprite sprite = sf::Sprite(texture);
  sf::Vector2f moveDir;
  Hitbox* hitbox;
  Hitbox* accurateHitbox;
@@ -222603,13 +222604,13 @@ Atlas::Atlas(std::vector<sf::Texture>& textures)
  }
 
  totalHeight += rowHeight;
- sf::Image im;
+ sf::Image im({ totalWidth, totalHeight });
 
- im.create(totalWidth, totalHeight);
+
  for (uint i = 0; i < textures.size(); i++)
  {
   auto i2 = textures[i].copyToImage();
-  im.copy(i2, positions[i].x, positions[i].y);
+  im.copy(i2, { positions[i].x, positions[i].y });
  }
 
  texture.loadFromImage(im);
@@ -222664,13 +222665,13 @@ Atlas::Atlas(std::vector<sf::Texture>& textures, std::vector<int> ids)
  }
 
  totalHeight += rowHeight;
- sf::Image im;
+ sf::Image im({ totalWidth, totalHeight });
 
- im.create(totalWidth, totalHeight);
+
  for (uint i = 0; i < textures.size(); i++)
  {
   auto i2 = textures[i].copyToImage();
-  im.copy(i2, positions[i].x, positions[i].y);
+  im.copy(i2, { positions[i].x, positions[i].y });
  }
 
  texture.loadFromImage(im);

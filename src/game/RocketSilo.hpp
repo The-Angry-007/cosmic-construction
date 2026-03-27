@@ -7,7 +7,7 @@ public:
 	int launchType;
 	float launchTimer;
 	int targetPlanetID;
-	sf::Sprite rocketSprite;
+	sf::Sprite rocketSprite = sf::Sprite(texture);
 	RocketSilo(int id, int planetID, int direction, int typeID);
 	~RocketSilo();
 	void FromJSON(JSON j);

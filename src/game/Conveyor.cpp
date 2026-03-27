@@ -17,7 +17,6 @@ Conveyor::Conveyor(int id, int planetID, int direction)
 	typeID = 0;
 	SetDirection(direction);
 	tileSize = ResourceHandler::structureSizes[typeID];
-	sprite = sf::Sprite();
 	ResourceHandler::structureAtlas->SetSprite(sprite, 0, direction + 4 * upgradeLevel);
 	gap = 0.2f;
 	//progress is how far along each item is in the 4 queues in the conveyor

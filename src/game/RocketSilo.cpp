@@ -17,9 +17,7 @@ RocketSilo::RocketSilo(int id, int planetID, int direction, int typeID)
 	this->planetID = planetID;
 	this->typeID = typeID;
 	tileSize = ResourceHandler::structureSizes[typeID];
-	sprite = sf::Sprite();
 	ResourceHandler::structureAtlas->SetSprite(sprite, typeID, 0);
-	rocketSprite = sf::Sprite();
 	ResourceHandler::structureAtlas->SetSprite(rocketSprite, typeID, 1);
 	blocksItems = true;
 	placedByPlayer = true;

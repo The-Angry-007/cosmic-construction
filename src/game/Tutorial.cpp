@@ -19,7 +19,7 @@ Tutorial::Tutorial()
 	validCodes[3].push_back(binds::UseTool);
 	validCodes[5].push_back(binds::UseTool);
 	validCodes[6].push_back(binds::UseTool);
-	validCodes[6].push_back(sf::Keyboard::Key::LShift + 1);
+	validCodes[6].push_back((int)sf::Keyboard::Key::LShift + 1);
 	validCodes[8].push_back(binds::CloseInventory);
 	validCodes[9].push_back(binds::CloseInventory);
 	validCodes[9].push_back(binds::UseTool);
@@ -35,14 +35,14 @@ Tutorial::Tutorial()
 	validCodes[22].push_back(binds::UseTool);
 	validCodes[22].push_back(binds::CloseInventory);
 	validCodes[22].push_back(binds::RotateStructure);
-	validCodes[22].push_back(sf::Keyboard::Key::LShift + 1);
+	validCodes[22].push_back((int)sf::Keyboard::Key::LShift + 1);
 	validCodes[22].push_back(binds::Tool2);
 	validCodes[22].push_back(binds::Tool3);
 	validCodes[29].push_back(binds::Tool3);
 	validCodes[29].push_back(binds::Tool2);
 	validCodes[29].push_back(binds::CloseInventory);
 	validCodes[29].push_back(binds::RotateStructure);
-	validCodes[29].push_back(sf::Keyboard::Key::LShift + 1);
+	validCodes[29].push_back((int)sf::Keyboard::Key::LShift + 1);
 	validCodes[29].push_back(binds::UseTool);
 	SwitchPhase(0);
 	skippables = {};
@@ -290,7 +290,7 @@ void Tutorial::Render()
 		return;
 	}
 	sf::View currentView = window->getView();
-	sf::View GUIView(sf::FloatRect(0.f, 0.f, width, height));
+	sf::View GUIView(sf::FloatRect({ 0.f, 0.f }, { width, height }));
 	window->setView(GUIView);
 	gui->Render();
 

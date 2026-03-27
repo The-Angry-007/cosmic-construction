@@ -132,8 +132,7 @@ sf::Texture ResourceHandler::GenerateOutline(sf::Texture& texture)
 	//copies over any non-transparent pixels from original
 	//sets transparent pixels to white if they are adjacent to a non-transparent pixel in the original texture
 	auto image = texture.copyToImage();
-	sf::Image newImage;
-	newImage.create(texture.getSize().x + 2, texture.getSize().y + 2, sf::Color::Transparent);
+	sf::Image newImage({ texture.getSize().x + 2, texture.getSize().y + 2 }, sf::Color::Transparent);
 	sf::Texture outline;
 	for (int i = 0; i < texture.getSize().y + 2; i++)
 	{
@@ -141,9 +140,9 @@ sf::Texture ResourceHandler::GenerateOutline(sf::Texture& texture)
 		{
 			int x = j - 1;
 			int y = i - 1;
-			if (inBounds(x, y) && image.getPixel(x, y).a != 0)
+			if (inBounds(x, y) && image.getPixel({ x, y }).a != 0)
 			{
-				newImage.setPixel(j, i, image.getPixel(x, y));
+				newImage.setPixel({ j, i }, image.getPixel({ x, y }));
 				continue;
 			}
 			bool adjacent = false;
@@ -162,7 +161,7 @@ sf::Texture ResourceHandler::GenerateOutline(sf::Texture& texture)
 					}
 					int nx = x + k;
 					int ny = y + l;
-					if (inBounds(nx, ny) && image.getPixel(nx, ny).a != 0)
+					if (inBounds(nx, ny) && image.getPixel({ nx, ny }).a != 0)
 					{
 						adjacent = true;
 					}
@@ -170,7 +169,7 @@ sf::Texture ResourceHandler::GenerateOutline(sf::Texture& texture)
 			}
 			if (adjacent)
 			{
-				newImage.setPixel(j, i, sf::Color::White);
+				newImage.setPixel({ j, i }, sf::Color::White);
 			}
 		}
 	}

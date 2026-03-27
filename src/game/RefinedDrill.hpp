@@ -13,7 +13,7 @@ public:
 	int currentFrame;
 	int outputItem;
 	int lastOutputDir;
-	sf::Sprite groundSprite;
+	sf::Sprite groundSprite = sf::Sprite(texture);
 	RefinedDrill(int id, int planetID, int direction);
 	~RefinedDrill();
 	void FromJSON(JSON j);

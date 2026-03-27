@@ -120,7 +120,7 @@ void Item::SetParent(int index)
 			int startPos = -1;
 			for (int j = 0; j < 16; j++)
 			{
-				sf::Color pixel = image.getPixel(j, i);
+				sf::Color pixel = image.getPixel({ j, i });
 				if (pixel.a == 0)
 				{
 					if (startPos != -1)

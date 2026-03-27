@@ -8,11 +8,10 @@ StorageSilo::StorageSilo(int id, int planetID, int direction)
 	typeID = 1;
 	for (int i = 0; i < 11; i++)
 	{
-		sf::Sprite s;
+		sf::Sprite s(texture);
 		ResourceHandler::structureAtlas->SetSprite(s, typeID, i);
 		sprites.push_back(s);
 	}
-	this->sprite = sf::Sprite();
 	tileSize = ResourceHandler::structureSizes[typeID];
 	itemIDs = {};
 	itemQuantities = {};

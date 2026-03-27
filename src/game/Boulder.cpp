@@ -9,7 +9,6 @@ Boulder::Boulder(int id, int planetID)
 	//health attribute is how many clicks it takes to destroy the boulder
 	health = 5;
 	tileSize = ResourceHandler::structureSizes[typeID];
-	sprite = sf::Sprite();
 	ResourceHandler::structureAtlas->SetSprite(sprite, typeID, 0);
 	blocksItems = true;
 	placedByPlayer = false;

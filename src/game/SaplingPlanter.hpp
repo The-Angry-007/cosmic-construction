@@ -7,7 +7,7 @@ class SaplingPlanter : public Structure
 public:
 	int tree;
 	float timeSinceTree;
-	sf::Sprite topSprite;
+	sf::Sprite topSprite = sf::Sprite(texture);
 	SaplingPlanter(int id, int planetID, int direction = 0);
 	void Update(float dt);
 	void Render();

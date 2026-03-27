@@ -222875,7 +222875,8 @@ public:
  sf::Vector2i bottomRightPos;
  sf::Vector2i position;
  sf::Vector2i tileSize;
- sf::Sprite sprite;
+ sf::Texture texture;
+ sf::Sprite sprite = sf::Sprite(texture);
  int direction = 0;
  Hitbox* hitbox;
  Structure();
@@ -223052,7 +223053,8 @@ public:
  int typeId;
  int id;
  int chunkID;
- sf::Sprite sprite;
+ sf::Texture texture;
+ sf::Sprite sprite = sf::Sprite(texture);
  sf::Vector2f moveDir;
  Hitbox* hitbox;
  Hitbox* accurateHitbox;
@@ -223244,7 +223246,7 @@ public:
  int currentFrame;
  int outputItem;
  int lastOutputDir;
- sf::Sprite groundSprite;
+ sf::Sprite groundSprite = sf::Sprite(texture);
  Drill(int id, int planetID, int direction);
  ~Drill();
  void FromJSON(JSON j);
@@ -223270,7 +223272,7 @@ public:
  float gap;
  int filterItem;
  std::vector<int> neighbours;
- sf::Sprite overlaySprite;
+ sf::Sprite overlaySprite = sf::Sprite(texture);
  std::vector<std::vector<int>> items;
  std::vector<std::vector<float>> progress;
  FilterConveyor(int id, int planetID, int direction);
@@ -223338,7 +223340,7 @@ public:
  int currentFrame;
  int outputItem;
  int lastOutputDir;
- sf::Sprite groundSprite;
+ sf::Sprite groundSprite = sf::Sprite(texture);
  RefinedDrill(int id, int planetID, int direction);
  ~RefinedDrill();
  void FromJSON(JSON j);
@@ -223364,7 +223366,7 @@ public:
  int launchType;
  float launchTimer;
  int targetPlanetID;
- sf::Sprite rocketSprite;
+ sf::Sprite rocketSprite = sf::Sprite(texture);
  RocketSilo(int id, int planetID, int direction, int typeID);
  ~RocketSilo();
  void FromJSON(JSON j);
@@ -223408,7 +223410,7 @@ class SaplingPlanter : public Structure
 public:
  int tree;
  float timeSinceTree;
- sf::Sprite topSprite;
+ sf::Sprite topSprite = sf::Sprite(texture);
  SaplingPlanter(int id, int planetID, int direction = 0);
  void Update(float dt);
  void Render();
@@ -224596,8 +224598,8 @@ void Planet::Update(float dt)
 void buildVertexArray(const std::vector<RenderObject>& renderObjects, sf::VertexArray& vertexArray)
 {
 
- vertexArray.setPrimitiveType(sf::Quads);
- vertexArray.resize(renderObjects.size() * 4);
+ vertexArray.setPrimitiveType(sf::PrimitiveType::Triangles);
+ vertexArray.resize(renderObjects.size() * 6);
 
  for (size_t i = 0; i < renderObjects.size(); ++i)
  {
@@ -224609,27 +224611,43 @@ void buildVertexArray(const std::vector<RenderObject>& renderObjects, sf::Vertex
   const sf::IntRect textureRect = sprite->getTextureRect();
 
 
-  sf::Vertex* quad = &vertexArray[i * 4];
+  sf::Vector2f pos = globalBounds.position;
+  sf::Vector2f size = globalBounds.size;
 
 
-  quad[0].position = sf::Vector2f(globalBounds.left, globalBounds.top);
-  quad[0].texCoords = sf::Vector2f(textureRect.left, textureRect.top);
-  quad[0].color = sprite->getColor();
+  sf::Vector2f texPos(textureRect.position);
+  sf::Vector2f texSize(textureRect.size);
+
+  sf::Color color = sprite->getColor();
 
 
-  quad[1].position = sf::Vector2f(globalBounds.left + globalBounds.width, globalBounds.top);
-  quad[1].texCoords = sf::Vector2f(textureRect.left + textureRect.width, textureRect.top);
-  quad[1].color = sprite->getColor();
+  sf::Vertex* tri = &vertexArray[i * 6];
 
 
-  quad[2].position = sf::Vector2f(globalBounds.left + globalBounds.width, globalBounds.top + globalBounds.height);
-  quad[2].texCoords = sf::Vector2f(textureRect.left + textureRect.width, textureRect.top + textureRect.height);
-  quad[2].color = sprite->getColor();
+  tri[0].position = { pos.x, pos.y };
+  tri[0].texCoords = { texPos.x, texPos.y };
+  tri[0].color = color;
+
+  tri[1].position = { pos.x + size.x, pos.y };
+  tri[1].texCoords = { texPos.x + texSize.x, texPos.y };
+  tri[1].color = color;
+
+  tri[2].position = { pos.x + size.x, pos.y + size.y };
+  tri[2].texCoords = { texPos.x + texSize.x, texPos.y + texSize.y };
+  tri[2].color = color;
 
 
-  quad[3].position = sf::Vector2f(globalBounds.left, globalBounds.top + globalBounds.height);
-  quad[3].texCoords = sf::Vector2f(textureRect.left, textureRect.top + textureRect.height);
-  quad[3].color = sprite->getColor();
+  tri[3].position = { pos.x, pos.y };
+  tri[3].texCoords = { texPos.x, texPos.y };
+  tri[3].color = color;
+
+  tri[4].position = { pos.x + size.x, pos.y + size.y };
+  tri[4].texCoords = { texPos.x + texSize.x, texPos.y + texSize.y };
+  tri[4].color = color;
+
+  tri[5].position = { pos.x, pos.y + size.y };
+  tri[5].texCoords = { texPos.x, texPos.y + texSize.y };
+  tri[5].color = color;
  }
  sf::RenderStates states;
  states.texture = &ResourceHandler::completeAtlas->texture;
@@ -224642,8 +224660,8 @@ void Planet::Render()
 
  sf::FloatRect camRect = camera.toFloatRect();
 
- sf::RectangleShape rect(sf::Vector2f(camRect.width, camRect.height));
- rect.setPosition(camRect.left, camRect.top);
+ sf::RectangleShape rect(sf::Vector2f(camRect.size.x, camRect.size.y));
+ rect.setPosition(sf::Vector2f { camRect.position.x, camRect.position.y });
  rect.setFillColor(backgroundColor);
  window->draw(rect);
 
@@ -224677,9 +224695,9 @@ void Planet::Save()
  if (!SaveHandler::DirExists(path))
  {
   SaveHandler::
-# 367 "C:/Users/kiera/Documents/GitHub/cosmic-construction/src/game/Planet.cpp" 3
+# 383 "C:/Users/kiera/Documents/GitHub/cosmic-construction/src/game/Planet.cpp" 3
      CreateDirectoryW
-# 367 "C:/Users/kiera/Documents/GitHub/cosmic-construction/src/game/Planet.cpp"
+# 383 "C:/Users/kiera/Documents/GitHub/cosmic-construction/src/game/Planet.cpp"
                     (path);
  }
 

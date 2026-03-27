@@ -7,7 +7,7 @@ public:
 	float gap;
 	int filterItem;
 	std::vector<int> neighbours;
-	sf::Sprite overlaySprite;
+	sf::Sprite overlaySprite = sf::Sprite(texture);
 	std::vector<std::vector<int>> items;
 	std::vector<std::vector<float>> progress;
 	FilterConveyor(int id, int planetID, int direction);

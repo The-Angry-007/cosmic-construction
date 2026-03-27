@@ -222525,7 +222525,8 @@ public:
  int typeId;
  int id;
  int chunkID;
- sf::Sprite sprite;
+ sf::Texture texture;
+ sf::Sprite sprite = sf::Sprite(texture);
  sf::Vector2f moveDir;
  Hitbox* hitbox;
  Hitbox* accurateHitbox;
@@ -222947,7 +222948,8 @@ public:
  sf::Vector2i bottomRightPos;
  sf::Vector2i position;
  sf::Vector2i tileSize;
- sf::Sprite sprite;
+ sf::Texture texture;
+ sf::Sprite sprite = sf::Sprite(texture);
  int direction = 0;
  Hitbox* hitbox;
  Structure();
@@ -223197,8 +223199,7 @@ sf::Texture ResourceHandler::GenerateOutline(sf::Texture& texture)
 
 
  auto image = texture.copyToImage();
- sf::Image newImage;
- newImage.create(texture.getSize().x + 2, texture.getSize().y + 2, sf::Color::Transparent);
+ sf::Image newImage({ texture.getSize().x + 2, texture.getSize().y + 2 }, sf::Color::Transparent);
  sf::Texture outline;
  for (int i = 0; i < texture.getSize().y + 2; i++)
  {
@@ -223206,9 +223207,9 @@ sf::Texture ResourceHandler::GenerateOutline(sf::Texture& texture)
   {
    int x = j - 1;
    int y = i - 1;
-   if ((x >= 0 && x < 16 && y >= 0 && y < 16) && image.getPixel(x, y).a != 0)
+   if ((x >= 0 && x < 16 && y >= 0 && y < 16) && image.getPixel({ x, y }).a != 0)
    {
-    newImage.setPixel(j, i, image.getPixel(x, y));
+    newImage.setPixel({ j, i }, image.getPixel({ x, y }));
     continue;
    }
    bool adjacent = false;
@@ -223227,7 +223228,7 @@ sf::Texture ResourceHandler::GenerateOutline(sf::Texture& texture)
      }
      int nx = x + k;
      int ny = y + l;
-     if ((nx >= 0 && nx < 16 && ny >= 0 && ny < 16) && image.getPixel(nx, ny).a != 0)
+     if ((nx >= 0 && nx < 16 && ny >= 0 && ny < 16) && image.getPixel({ nx, ny }).a != 0)
      {
       adjacent = true;
      }
@@ -223235,7 +223236,7 @@ sf::Texture ResourceHandler::GenerateOutline(sf::Texture& texture)
    }
    if (adjacent)
    {
-    newImage.setPixel(j, i, sf::Color::White);
+    newImage.setPixel({ j, i }, sf::Color::White);
    }
   }
  }
