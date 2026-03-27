@@ -64,10 +64,10 @@ int main()
 		float dt = deltaClock.restart().asSeconds();
 
 		/* ---UPDATE--- */
-		if (tutorial != nullptr && (game == nullptr || !game->paused))
-		{
-			tutorial->Update(dt);
-		}
+		// if (tutorial != nullptr && (game == nullptr || !game->paused))
+		// {
+		// 	tutorial->Update(dt);
+		// }
 		guihandler.Update(dt);
 
 		if (game != nullptr)
@@ -96,10 +96,10 @@ int main()
 		{
 			game->toolHandler->Render();
 		}
-		if (tutorial != nullptr && (game == nullptr || !game->paused))
-		{
-			tutorial->Render();
-		}
+		// if (tutorial != nullptr && (game == nullptr || !game->paused))
+		// {
+		// 	tutorial->Render();
+		// }
 		//display window
 		window->display();
 	}

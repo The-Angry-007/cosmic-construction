@@ -223783,10 +223783,10 @@ int main()
   float dt = deltaClock.restart().asSeconds();
 
 
-  if (tutorial != nullptr && (game == nullptr || !game->paused))
-  {
-   tutorial->Update(dt);
-  }
+
+
+
+
   guihandler.Update(dt);
 
   if (game != nullptr)
@@ -223815,10 +223815,10 @@ int main()
   {
    game->toolHandler->Render();
   }
-  if (tutorial != nullptr && (game == nullptr || !game->paused))
-  {
-   tutorial->Render();
-  }
+
+
+
+
 
   window->display();
  }

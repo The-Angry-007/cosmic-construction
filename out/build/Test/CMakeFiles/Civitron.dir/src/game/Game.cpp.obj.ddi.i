@@ -223781,7 +223781,7 @@ void Game::NewGame()
   } while (timer.restart().asSeconds() > 0.0001f);
  }
 
- tutorial = new Tutorial();
+
 }
 void Game::TogglePaused()
 {

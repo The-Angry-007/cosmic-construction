@@ -36,7 +36,7 @@ void Game::NewGame()
 		} while (timer.restart().asSeconds() > 0.0001f);
 	}
 	//initialises the tutorial
-	tutorial = new Tutorial();
+	// tutorial = new Tutorial();
 }
 void Game::TogglePaused()
 {

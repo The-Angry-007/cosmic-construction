@@ -1070,6 +1070,7 @@ bool Planet::DeductResources(int typeID, sf::Vector2i position)
 	{
 		for (int k = 0; k < idsLeft.size(); k++)
 		{
+			// bool reduceK = false;
 			StorageSilo* s = dynamic_cast<StorageSilo*>(this->structures[silos[i]]);
 			for (int j = 0; j < s->itemIDs.size(); j++)
 			{
@@ -1090,7 +1091,7 @@ bool Planet::DeductResources(int typeID, sf::Vector2i position)
 					{
 						amountsLeft.erase(amountsLeft.begin() + k);
 						idsLeft.erase(idsLeft.begin() + k);
-						k--;
+						break;
 					}
 				}
 			}
