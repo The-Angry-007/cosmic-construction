@@ -13,6 +13,7 @@ GUIImage::GUIImage(sf::Vector2f position, sf::Vector2f size, std::string path)
 			window->close();
 			exit(EXIT_FAILURE);
 		}
+		sprite.setTexture(texture, true);
 	}
 	//do not keep the aspect ratio by default
 	keepAspectRatio = false;

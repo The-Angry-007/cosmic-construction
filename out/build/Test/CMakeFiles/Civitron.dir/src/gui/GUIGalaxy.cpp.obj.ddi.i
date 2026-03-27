@@ -223713,6 +223713,7 @@ GUIGalaxy::GUIGalaxy()
   window->close();
   exit(1);
  }
+ sprite.setTextureRect({ { 0, 0 }, (sf::Vector2i)texture.getSize() });
 
  speed = 12.f;
 

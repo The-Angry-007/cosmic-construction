@@ -223716,6 +223716,7 @@ GUIImage::GUIImage(sf::Vector2f position, sf::Vector2f size, std::string path)
 # 14 "C:/Users/kiera/Documents/GitHub/cosmic-construction/src/gui/GUIImage.cpp"
                    );
   }
+  sprite.setTexture(texture, true);
  }
 
  keepAspectRatio = false;

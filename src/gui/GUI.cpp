@@ -45,6 +45,7 @@ GUI::~GUI()
 			delete GUIObjects[i];
 		}
 	}
+	GUIObjects = {};
 }
 //update just updates all gui objects
 void GUI::Update(float dt)

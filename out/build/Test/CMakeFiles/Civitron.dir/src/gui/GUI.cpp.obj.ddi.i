@@ -222533,6 +222533,7 @@ GUI::~GUI()
    delete GUIObjects[i];
   }
  }
+ GUIObjects = {};
 }
 
 void GUI::Update(float dt)

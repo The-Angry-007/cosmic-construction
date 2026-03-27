@@ -14,6 +14,7 @@ GUIGalaxy::GUIGalaxy()
 		window->close();
 		exit(1);
 	}
+	sprite.setTextureRect({ { 0, 0 }, (sf::Vector2i)texture.getSize() });
 	//how many pixels to move each second
 	speed = 12.f;
 	//the scale of the image
