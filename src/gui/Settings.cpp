@@ -1,9 +1,9 @@
+#include "../InputHandler.hpp"
+#include "../Main.hpp"
+#include "../binds.hpp"
 #include "../gui.hpp"
-#include "InputHandler.hpp"
-#include "Main.hpp"
-#include "binds.hpp"
-#include "saving.hpp"
-#include "utils.hpp"
+#include "../saving.hpp"
+#include "../utils.hpp"
 Settings::Settings()
 {
 
@@ -399,8 +399,7 @@ void Settings::Render()
 	pageGuis[currentGUI]->Render();
 	if (currentGUI == 1)
 	{
-		sf::RenderTexture text;
-		text.create(width, height);
+		sf::RenderTexture text({ width, height });
 		text.setView(sf::View(sf::Vector2f(width / 2.f, height / 2.f), sf::Vector2f(width, height)));
 		text.clear(sf::Color::Transparent);
 		for (uint i = 0; i < bindGUIs.size(); i++)
@@ -411,8 +410,8 @@ void Settings::Render()
 		sf::Sprite s(text.getTexture());
 		sf::IntRect bounds(sf::Vector2i(width * 0.1f, height * 0.16f), sf::Vector2i(width * 0.8f, height * (0.8f - 0.06f)));
 		s.setTextureRect(bounds);
-		s.setPosition(bounds.left, bounds.top);
-		s.setOrigin(0.f, 0.f);
+		s.setPosition({ bounds.position.x, bounds.position.y });
+		s.setOrigin({ 0.f, 0.f });
 
 		window->draw(s);
 	}

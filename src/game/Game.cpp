@@ -1,8 +1,8 @@
 #include "Game.hpp"
-#include "InputHandler.hpp"
-#include "Main.hpp"
+#include "../InputHandler.hpp"
+#include "../Main.hpp"
+#include "../binds.hpp"
 #include "RecipeHandler.hpp"
-#include "binds.hpp"
 Game::Game()
 {
 	paused = false;
@@ -36,7 +36,7 @@ void Game::NewGame()
 		} while (timer.restart().asSeconds() > 0.0001f);
 	}
 	//initialises the tutorial
-	tutorial = new Tutorial();
+	// tutorial = new Tutorial();
 }
 void Game::TogglePaused()
 {

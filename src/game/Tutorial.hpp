@@ -1,5 +1,6 @@
 #pragma once
-#include "gui.hpp"
+#include "../PCH.hpp"
+#include "../gui.hpp"
 class Tutorial
 {
 public:

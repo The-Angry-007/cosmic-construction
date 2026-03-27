@@ -1,6 +1,6 @@
 #include "HitboxCircle.hpp"
-#include "Main.hpp"
-#include "utils.hpp"
+#include "../Main.hpp"
+#include "../utils.hpp"
 
 HitboxCircle::HitboxCircle(sf::Vector2f position, float radius)
 {

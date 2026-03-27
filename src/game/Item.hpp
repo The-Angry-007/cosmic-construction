@@ -1,7 +1,8 @@
 #pragma once
+#include "../PCH.hpp"
 //how big an item is in pixels
 #define ITEM_SIZE 16
-#include "Hitboxes.hpp"
+#include "../Hitboxes.hpp"
 #include "ResourceHandler.hpp"
 class Planet;
 class Item
@@ -11,7 +12,8 @@ public:
 	int typeId;
 	int id;
 	int chunkID;
-	sf::Sprite sprite;
+	sf::Texture texture;
+	sf::Sprite sprite = sf::Sprite(texture);
 	sf::Vector2f moveDir;
 	Hitbox* hitbox;
 	Hitbox* accurateHitbox;

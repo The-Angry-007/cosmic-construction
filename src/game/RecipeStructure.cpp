@@ -1,5 +1,5 @@
 #include "RecipeStructure.hpp"
-#include "Main.hpp"
+#include "../Main.hpp"
 #include "Recipe.hpp"
 #include "RecipeHandler.hpp"
 #include "ResourceHandler.hpp"
@@ -9,7 +9,6 @@ RecipeStructure::RecipeStructure(int id, int planetID, int direction, int typeID
 	this->planetID = planetID;
 	this->typeID = typeID;
 	tileSize = ResourceHandler::structureSizes[typeID];
-	sprite = sf::Sprite();
 	ResourceHandler::structureAtlas->SetSprite(sprite, typeID, 0);
 
 	blocksItems = true;

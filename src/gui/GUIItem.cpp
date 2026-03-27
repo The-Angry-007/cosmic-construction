@@ -1,6 +1,6 @@
 #include "GUIItem.hpp"
-#include "Main.hpp"
-#include "game/ResourceHandler.hpp"
+#include "../Main.hpp"
+#include "../game/ResourceHandler.hpp"
 GUIItem::GUIItem(sf::Vector2f position, sf::Vector2f size, int typeID, int amount)
 {
 	this->position = position;
@@ -82,7 +82,7 @@ void GUIItem::RenderToTexture(sf::RenderTexture* texture)
 	image->position = position;
 	image->size = size;
 	image->RenderToTexture(texture);
-	actualSize = sf::Vector2f(image->sprite.getGlobalBounds().width / width / 2.f, image->sprite.getGlobalBounds().height / height / 2.f);
+	actualSize = sf::Vector2f(image->sprite.getGlobalBounds().size.x / width / 2.f, image->sprite.getGlobalBounds().size.y / height / 2.f);
 	if (label != nullptr)
 	{
 		label->position = position + actualSize / 2.f;
@@ -95,7 +95,7 @@ void GUIItem::Render()
 	image->position = position;
 	image->size = size;
 	image->Render();
-	actualSize = sf::Vector2f(image->sprite.getGlobalBounds().width / width / 2.f, image->sprite.getGlobalBounds().height / height / 2.f);
+	actualSize = sf::Vector2f(image->sprite.getGlobalBounds().size.x / width / 2.f, image->sprite.getGlobalBounds().size.y / height / 2.f);
 	if (label != nullptr)
 	{
 		label->position = position + actualSize / 2.f;

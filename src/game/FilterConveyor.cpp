@@ -1,7 +1,7 @@
 #include "FilterConveyor.hpp"
-#include "Main.hpp"
+#include "../Main.hpp"
+#include "../utils.hpp"
 #include "ResourceHandler.hpp"
-#include "utils.hpp"
 
 FilterConveyor::FilterConveyor(int id, int planetID, int direction)
 {
@@ -10,9 +10,7 @@ FilterConveyor::FilterConveyor(int id, int planetID, int direction)
 	typeID = 17;
 	SetDirection(direction);
 	tileSize = ResourceHandler::structureSizes[typeID];
-	sprite = sf::Sprite();
 	ResourceHandler::structureAtlas->SetSprite(sprite, 17, direction);
-	overlaySprite = sf::Sprite();
 	ResourceHandler::structureAtlas->SetSprite(overlaySprite, 17, 8);
 
 	gap = 0.2f;

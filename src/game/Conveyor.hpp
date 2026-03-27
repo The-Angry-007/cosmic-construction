@@ -1,4 +1,5 @@
 #pragma once
+#include "../PCH.hpp"
 #include "ConveyorType.hpp"
 extern std::vector<sf::Vector2i> CONVEYOR_OFFSETS;
 class Conveyor : public ConveyorType

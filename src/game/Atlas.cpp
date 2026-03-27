@@ -37,13 +37,13 @@ Atlas::Atlas(std::vector<sf::Texture>& textures)
 	}
 	//add height of final row
 	totalHeight += rowHeight;
-	sf::Image im;
+	sf::Image im({ totalWidth, totalHeight });
 	//create image and add textures in positions calculated
-	im.create(totalWidth, totalHeight);
+	// im.create(totalWidth, totalHeight);
 	for (uint i = 0; i < textures.size(); i++)
 	{
 		auto i2 = textures[i].copyToImage();
-		im.copy(i2, positions[i].x, positions[i].y);
+		im.copy(i2, { positions[i].x, positions[i].y });
 	}
 	//convert to texture
 	texture.loadFromImage(im);
@@ -98,13 +98,13 @@ Atlas::Atlas(std::vector<sf::Texture>& textures, std::vector<int> ids)
 	}
 	//add size of final row
 	totalHeight += rowHeight;
-	sf::Image im;
+	sf::Image im({ totalWidth, totalHeight });
 	//add all textures to image
-	im.create(totalWidth, totalHeight);
+	// im.create(totalWidth, totalHeight);
 	for (uint i = 0; i < textures.size(); i++)
 	{
 		auto i2 = textures[i].copyToImage();
-		im.copy(i2, positions[i].x, positions[i].y);
+		im.copy(i2, { positions[i].x, positions[i].y });
 	}
 	//convert to texture
 	texture.loadFromImage(im);

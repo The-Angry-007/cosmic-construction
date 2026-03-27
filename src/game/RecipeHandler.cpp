@@ -1,9 +1,9 @@
 #include "RecipeHandler.hpp"
-#include "Main.hpp"
+#include "../Main.hpp"
+#include "../binds.hpp"
+#include "../utils.hpp"
 #include "Recipe.hpp"
 #include "ResourceHandler.hpp"
-#include "binds.hpp"
-#include "utils.hpp"
 namespace RecipeHandler
 {
 std::vector<std::vector<RecipeData>> recipes;
@@ -322,10 +322,10 @@ void RecipeHandler::Update(float dt)
 				prog = 1 - prog;
 				sf::Vector2f arrowSize(0.15f, 0.3f);
 				arrow->size.x = arrowSize.x;
-				sf::IntRect size = sf::IntRect(0, 0, Lerp(0, arrow->sprite.getTexture()->getSize().x, prog), arrow->sprite.getTexture()->getSize().y);
+				sf::IntRect size = sf::IntRect({ 0, 0 }, { Lerp(0, arrow->sprite.getTexture().getSize().x, prog), arrow->sprite.getTexture().getSize().y });
 				arrow->sprite.setTextureRect(size);
-				arrow->position.x = (0.5f - arrow->size.x) + (arrow->size.x * ((float)size.width / (float)arrow->sprite.getTexture()->getSize().x));
-				arrow->size.x = ((float)size.width / (float)arrow->sprite.getTexture()->getSize().x) * arrowSize.x;
+				arrow->position.x = (0.5f - arrow->size.x) + (arrow->size.x * ((float)size.size.x / (float)arrow->sprite.getTexture().getSize().x));
+				arrow->size.x = ((float)size.size.x / (float)arrow->sprite.getTexture().getSize().x) * arrowSize.x;
 				//grey out items with amount of 0
 				for (int i = 0; i < s->recipe->numInputs.size(); i++)
 				{

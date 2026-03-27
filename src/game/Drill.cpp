@@ -1,5 +1,5 @@
 #include "Drill.hpp"
-#include "Main.hpp"
+#include "../Main.hpp"
 #include "Recipe.hpp"
 #include "RecipeHandler.hpp"
 #include "ResourceHandler.hpp"
@@ -9,10 +9,10 @@ Drill::Drill(int id, int planetID, int direction)
 	this->planetID = planetID;
 	typeID = 6;
 	tileSize = ResourceHandler::structureSizes[typeID];
-	sprite = sf::Sprite();
+	// sprite = sf::Sprite();
 	currentFrame = 0;
 	ResourceHandler::structureAtlas->SetSprite(sprite, typeID, currentFrame);
-	groundSprite = sf::Sprite();
+	// groundSprite = sf::Sprite();
 	ResourceHandler::structureAtlas->SetSprite(groundSprite, typeID, 3);
 
 	blocksItems = true;

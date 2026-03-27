@@ -1,0 +1,5 @@
+# 0 "C:/Users/kiera/Documents/GitHub/cosmic-construction/src/Platform/MacOS/MacOSPlatform.cpp"
+# 1 "C:\\Users\\kiera\\Documents\\GitHub\\cosmic-construction\\out\\build\\Test//"
+# 0 "<built-in>"
+# 0 "<command-line>"
+# 1 "C:/Users/kiera/Documents/GitHub/cosmic-construction/src/Platform/MacOS/MacOSPlatform.cpp"

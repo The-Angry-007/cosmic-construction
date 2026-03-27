@@ -1,2 +1,0 @@
-ChunkID/PositionX/PositionY
-8/0/0

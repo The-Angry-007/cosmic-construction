@@ -1,7 +1,7 @@
 #include "ToolHandler.hpp"
-#include "Main.hpp"
-#include "binds.hpp"
-#include "utils.hpp"
+#include "../Main.hpp"
+#include "../binds.hpp"
+#include "../utils.hpp"
 
 ToolHandler::ToolHandler()
 {

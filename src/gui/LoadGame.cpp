@@ -1,8 +1,8 @@
 #include "LoadGame.hpp"
-#include "InputHandler.hpp"
-#include "Main.hpp"
-#include "saving.hpp"
-#include "utils.hpp"
+#include "../InputHandler.hpp"
+#include "../Main.hpp"
+#include "../saving.hpp"
+#include "../utils.hpp"
 LoadGame::LoadGame(GUIGalaxy* galaxy, GUIPanel* dimpanel)
 {
 	GUIObjects = {};
@@ -86,8 +86,7 @@ void LoadGame::Render()
 		GUIObjects[i]->Render();
 	}
 
-	sf::RenderTexture t;
-	t.create(width, height);
+	sf::RenderTexture t({ width, height });
 	t.clear(sf::Color::Transparent);
 	t.setView(sf::View(sf::Vector2f(width / 2.f, height / 2.f), sf::Vector2f(width, height)));
 
@@ -96,9 +95,8 @@ void LoadGame::Render()
 		saveSlots[i]->RenderToTexture(&t);
 	}
 	t.display();
-	sf::Sprite s;
-	s.setPosition(0.1f * width, 0.18f * height);
-	s.setTexture(t.getTexture());
+	sf::Sprite s(t.getTexture());
+	s.setPosition({ 0.1f * width, 0.18f * height });
 	s.setTextureRect(sf::IntRect(sf::Vector2i(0.1f * width, 0.18f * height), sf::Vector2i(0.8f * width, 0.72f * height)));
 	window->draw(s);
 }

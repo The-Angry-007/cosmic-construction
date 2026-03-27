@@ -1,5 +1,5 @@
 #include "Tree.hpp"
-#include "Main.hpp"
+#include "../Main.hpp"
 #include "ResourceHandler.hpp"
 //basic terrain tree
 Tree::Tree(int id, int planetID)
@@ -10,7 +10,6 @@ Tree::Tree(int id, int planetID)
 	//takes 3 clicks to destroy
 	health = 3;
 	tileSize = ResourceHandler::structureSizes[typeID];
-	sprite = sf::Sprite();
 	ResourceHandler::structureAtlas->SetSprite(sprite, 2, 0);
 	blocksItems = true;
 	placedByPlayer = false;

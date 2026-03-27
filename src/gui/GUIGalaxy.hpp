@@ -1,4 +1,5 @@
 #pragma once
+#include "../PCH.hpp"
 #include "GUIObject.hpp"
 
 //the galaxy that scrolls in the background of the main menu
@@ -6,7 +7,7 @@ class GUIGalaxy : public GUIObject
 {
 public:
 	sf::Texture texture;
-	sf::Sprite sprite;
+	sf::Sprite sprite = sf::Sprite(texture);
 	float speed;
 	sf::Vector2f vel;
 

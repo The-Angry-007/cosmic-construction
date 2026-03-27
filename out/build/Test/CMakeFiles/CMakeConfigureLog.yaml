@@ -1,0 +1,1837 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineSystem.cmake:205 (message)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      The system is: Windows - 10.0.26200 - AMD64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: C:/msys64/ucrt64/bin/g++.exe 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.exe"
+      
+      The CXX compiler identification is GNU, found in:
+        C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/4.0.2/CompilerIdCXX/a.exe
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-5f5t7w"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-5f5t7w"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-5f5t7w'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_2dc22
+        [1/2] C:\\msys64\\ucrt64\\bin\\g++.exe   -v -o CMakeFiles/cmTC_2dc22.dir/CMakeCXXCompilerABI.cpp.obj -c "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeCXXCompilerABI.cpp"
+        Using built-in specs.
+        COLLECT_GCC=C:\\msys64\\ucrt64\\bin\\g++.exe
+        Target: x86_64-w64-mingw32
+        Configured with: ../gcc-15.2.0/configure --prefix=/ucrt64 --with-local-prefix=/ucrt64/local --with-native-system-header-dir=/ucrt64/include --libexecdir=/ucrt64/lib --enable-bootstrap --enable-checking=release --with-arch=nocona --with-tune=generic --enable-mingw-wildcard --enable-languages=c,lto,c++,fortran,ada,objc,obj-c++,jit --enable-shared --enable-static --enable-libatomic --enable-threads=posix --enable-graphite --enable-fully-dynamic-string --enable-libstdcxx-backtrace=yes --enable-libstdcxx-filesystem-ts --enable-libstdcxx-time --disable-libstdcxx-pch --enable-lto --enable-libgomp --disable-libssp --disable-multilib --disable-rpath --disable-win32-registry --disable-nls --disable-werror --disable-symvers --with-libiconv --with-system-zlib --with-gmp=/ucrt64 --with-mpfr=/ucrt64 --with-mpc=/ucrt64 --with-isl=/ucrt64 --with-pkgversion='Rev8, Built by MSYS2 project' --with-bugurl=https://github.com/msys2/MINGW-packages/issues --with-gnu-as --with-gnu-ld --with-libstdcxx-zoneinfo=yes --disable-libstdcxx-debug --enable-plugin --with-boot-ldflags=-static-libstdc++ --with-stage1-ldflags=-static-libstdc++
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 15.2.0 (Rev8, Built by MSYS2 project) 
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_2dc22.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles/cmTC_2dc22.dir/'
+         C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/cc1plus.exe -quiet -v -iprefix C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/ -D_REENTRANT C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_2dc22.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=nocona -version -o C:\\Users\\kiera\\AppData\\Local\\Temp\\cc80q6Qf.s
+        GNU C++17 (Rev8, Built by MSYS2 project) version 15.2.0 (x86_64-w64-mingw32)
+        	compiled by GNU C version 15.2.0, GMP version 6.3.0, MPFR version 4.2.2, MPC version 1.3.1, isl version isl-0.27-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring nonexistent directory "C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/include"
+        ignoring duplicate directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0"
+        ignoring duplicate directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0/x86_64-w64-mingw32"
+        ignoring duplicate directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0/backward"
+        ignoring duplicate directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/15.2.0/include"
+        ignoring nonexistent directory "D:/M/msys64/ucrt64/include"
+        ignoring nonexistent directory "/ucrt64/include"
+        ignoring duplicate directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/15.2.0/include-fixed"
+        ignoring nonexistent directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/include"
+        ignoring nonexistent directory "D:/M/msys64/ucrt64/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0
+         C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0/x86_64-w64-mingw32
+         C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0/backward
+         C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/include
+         C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include
+         C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/include-fixed
+        End of search list.
+        Compiler executable checksum: 3a1a95c83f0136a64748ec8c5a2a87f3
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_2dc22.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles/cmTC_2dc22.dir/'
+         C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles/cmTC_2dc22.dir/CMakeCXXCompilerABI.cpp.obj C:\\Users\\kiera\\AppData\\Local\\Temp\\cc80q6Qf.s
+        GNU assembler version 2.45 (x86_64-w64-mingw32) using BFD version (GNU Binutils) 2.45
+        COMPILER_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/;C:/msys64/ucrt64/bin/../lib/gcc/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/
+        LIBRARY_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/;C:/msys64/ucrt64/bin/../lib/gcc/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_2dc22.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles/cmTC_2dc22.dir/CMakeCXXCompilerABI.cpp.'
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\g++.exe  -v -Wl,-v CMakeFiles/cmTC_2dc22.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_2dc22.exe -Wl,--out-implib,libcmTC_2dc22.dll.a -Wl,--major-image-version,0,--minor-image-version,0   && cd ."
+        Using built-in specs.
+        COLLECT_GCC=C:\\msys64\\ucrt64\\bin\\g++.exe
+        COLLECT_LTO_WRAPPER=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe
+        Target: x86_64-w64-mingw32
+        Configured with: ../gcc-15.2.0/configure --prefix=/ucrt64 --with-local-prefix=/ucrt64/local --with-native-system-header-dir=/ucrt64/include --libexecdir=/ucrt64/lib --enable-bootstrap --enable-checking=release --with-arch=nocona --with-tune=generic --enable-mingw-wildcard --enable-languages=c,lto,c++,fortran,ada,objc,obj-c++,jit --enable-shared --enable-static --enable-libatomic --enable-threads=posix --enable-graphite --enable-fully-dynamic-string --enable-libstdcxx-backtrace=yes --enable-libstdcxx-filesystem-ts --enable-libstdcxx-time --disable-libstdcxx-pch --enable-lto --enable-libgomp --disable-libssp --disable-multilib --disable-rpath --disable-win32-registry --disable-nls --disable-werror --disable-symvers --with-libiconv --with-system-zlib --with-gmp=/ucrt64 --with-mpfr=/ucrt64 --with-mpc=/ucrt64 --with-isl=/ucrt64 --with-pkgversion='Rev8, Built by MSYS2 project' --with-bugurl=https://github.com/msys2/MINGW-packages/issues --with-gnu-as --with-gnu-ld --with-libstdcxx-zoneinfo=yes --disable-libstdcxx-debug --enable-plugin --with-boot-ldflags=-static-libstdc++ --with-stage1-ldflags=-static-libstdc++
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 15.2.0 (Rev8, Built by MSYS2 project) 
+        COMPILER_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/;C:/msys64/ucrt64/bin/../lib/gcc/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/
+        LIBRARY_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/;C:/msys64/ucrt64/bin/../lib/gcc/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_2dc22.exe' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_2dc22.'
+         C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe -plugin C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\kiera\\AppData\\Local\\Temp\\cc5WWXTa.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_2dc22.exe C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/crt2.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/msys64/ucrt64/bin/../lib/gcc -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_2dc22.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_2dc22.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/default-manifest.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o
+        collect2 version 15.2.0
+        C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\kiera\\AppData\\Local\\Temp\\cc5WWXTa.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_2dc22.exe C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/crt2.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/msys64/ucrt64/bin/../lib/gcc -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_2dc22.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_2dc22.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/default-manifest.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o
+        GNU ld (GNU Binutils) 2.45
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_2dc22.exe' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_2dc22.'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCompilerABI.cmake:191 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed CXX implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0]
+          add: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0/x86_64-w64-mingw32]
+          add: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0/backward]
+          add: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/include]
+          add: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include]
+          add: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/include-fixed]
+        end of search list found
+        collapse include dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0] ==> [C:/msys64/ucrt64/include/c++/15.2.0]
+        collapse include dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0/x86_64-w64-mingw32] ==> [C:/msys64/ucrt64/include/c++/15.2.0/x86_64-w64-mingw32]
+        collapse include dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0/backward] ==> [C:/msys64/ucrt64/include/c++/15.2.0/backward]
+        collapse include dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/include] ==> [C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/include]
+        collapse include dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include] ==> [C:/msys64/ucrt64/include]
+        collapse include dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/include-fixed] ==> [C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/include-fixed]
+        implicit include dirs: [C:/msys64/ucrt64/include/c++/15.2.0;C:/msys64/ucrt64/include/c++/15.2.0/x86_64-w64-mingw32;C:/msys64/ucrt64/include/c++/15.2.0/backward;C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/include;C:/msys64/ucrt64/include;C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/include-fixed]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCompilerABI.cmake:227 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
+        ignore line: [Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-5f5t7w']
+        ignore line: []
+        ignore line: [Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_2dc22]
+        ignore line: [[1/2] C:\\msys64\\ucrt64\\bin\\g++.exe   -v -o CMakeFiles/cmTC_2dc22.dir/CMakeCXXCompilerABI.cpp.obj -c "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeCXXCompilerABI.cpp"]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=C:\\msys64\\ucrt64\\bin\\g++.exe]
+        ignore line: [Target: x86_64-w64-mingw32]
+        ignore line: [Configured with: ../gcc-15.2.0/configure --prefix=/ucrt64 --with-local-prefix=/ucrt64/local --with-native-system-header-dir=/ucrt64/include --libexecdir=/ucrt64/lib --enable-bootstrap --enable-checking=release --with-arch=nocona --with-tune=generic --enable-mingw-wildcard --enable-languages=c,lto,c++,fortran,ada,objc,obj-c++,jit --enable-shared --enable-static --enable-libatomic --enable-threads=posix --enable-graphite --enable-fully-dynamic-string --enable-libstdcxx-backtrace=yes --enable-libstdcxx-filesystem-ts --enable-libstdcxx-time --disable-libstdcxx-pch --enable-lto --enable-libgomp --disable-libssp --disable-multilib --disable-rpath --disable-win32-registry --disable-nls --disable-werror --disable-symvers --with-libiconv --with-system-zlib --with-gmp=/ucrt64 --with-mpfr=/ucrt64 --with-mpc=/ucrt64 --with-isl=/ucrt64 --with-pkgversion='Rev8, Built by MSYS2 project' --with-bugurl=https://github.com/msys2/MINGW-packages/issues --with-gnu-as --with-gnu-ld --with-libstdcxx-zoneinfo=yes --disable-libstdcxx-debug --enable-plugin --with-boot-ldflags=-static-libstdc++ --with-stage1-ldflags=-static-libstdc++]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 15.2.0 (Rev8  Built by MSYS2 project) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_2dc22.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles/cmTC_2dc22.dir/']
+        ignore line: [ C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/cc1plus.exe -quiet -v -iprefix C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/ -D_REENTRANT C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_2dc22.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=nocona -version -o C:\\Users\\kiera\\AppData\\Local\\Temp\\cc80q6Qf.s]
+        ignore line: [GNU C++17 (Rev8  Built by MSYS2 project) version 15.2.0 (x86_64-w64-mingw32)]
+        ignore line: [	compiled by GNU C version 15.2.0  GMP version 6.3.0  MPFR version 4.2.2  MPC version 1.3.1  isl version isl-0.27-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring nonexistent directory "C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/include"]
+        ignore line: [ignoring duplicate directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0"]
+        ignore line: [ignoring duplicate directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0/x86_64-w64-mingw32"]
+        ignore line: [ignoring duplicate directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0/backward"]
+        ignore line: [ignoring duplicate directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/15.2.0/include"]
+        ignore line: [ignoring nonexistent directory "D:/M/msys64/ucrt64/include"]
+        ignore line: [ignoring nonexistent directory "/ucrt64/include"]
+        ignore line: [ignoring duplicate directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/15.2.0/include-fixed"]
+        ignore line: [ignoring nonexistent directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/include"]
+        ignore line: [ignoring nonexistent directory "D:/M/msys64/ucrt64/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0]
+        ignore line: [ C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0/x86_64-w64-mingw32]
+        ignore line: [ C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0/backward]
+        ignore line: [ C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/include]
+        ignore line: [ C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include]
+        ignore line: [ C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/include-fixed]
+        ignore line: [End of search list.]
+        ignore line: [Compiler executable checksum: 3a1a95c83f0136a64748ec8c5a2a87f3]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_2dc22.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles/cmTC_2dc22.dir/']
+        ignore line: [ C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles/cmTC_2dc22.dir/CMakeCXXCompilerABI.cpp.obj C:\\Users\\kiera\\AppData\\Local\\Temp\\cc80q6Qf.s]
+        ignore line: [GNU assembler version 2.45 (x86_64-w64-mingw32) using BFD version (GNU Binutils) 2.45]
+        ignore line: [COMPILER_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/]
+        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/]
+        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/]
+        ignore line: [LIBRARY_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/]
+        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/]
+        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/]
+        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/]
+        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/]
+        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_2dc22.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles/cmTC_2dc22.dir/CMakeCXXCompilerABI.cpp.']
+        ignore line: [[2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\g++.exe  -v -Wl -v CMakeFiles/cmTC_2dc22.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_2dc22.exe -Wl --out-implib libcmTC_2dc22.dll.a -Wl --major-image-version 0 --minor-image-version 0   && cd ."]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=C:\\msys64\\ucrt64\\bin\\g++.exe]
+        ignore line: [COLLECT_LTO_WRAPPER=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe]
+        ignore line: [Target: x86_64-w64-mingw32]
+        ignore line: [Configured with: ../gcc-15.2.0/configure --prefix=/ucrt64 --with-local-prefix=/ucrt64/local --with-native-system-header-dir=/ucrt64/include --libexecdir=/ucrt64/lib --enable-bootstrap --enable-checking=release --with-arch=nocona --with-tune=generic --enable-mingw-wildcard --enable-languages=c,lto,c++,fortran,ada,objc,obj-c++,jit --enable-shared --enable-static --enable-libatomic --enable-threads=posix --enable-graphite --enable-fully-dynamic-string --enable-libstdcxx-backtrace=yes --enable-libstdcxx-filesystem-ts --enable-libstdcxx-time --disable-libstdcxx-pch --enable-lto --enable-libgomp --disable-libssp --disable-multilib --disable-rpath --disable-win32-registry --disable-nls --disable-werror --disable-symvers --with-libiconv --with-system-zlib --with-gmp=/ucrt64 --with-mpfr=/ucrt64 --with-mpc=/ucrt64 --with-isl=/ucrt64 --with-pkgversion='Rev8, Built by MSYS2 project' --with-bugurl=https://github.com/msys2/MINGW-packages/issues --with-gnu-as --with-gnu-ld --with-libstdcxx-zoneinfo=yes --disable-libstdcxx-debug --enable-plugin --with-boot-ldflags=-static-libstdc++ --with-stage1-ldflags=-static-libstdc++]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 15.2.0 (Rev8  Built by MSYS2 project) ]
+        ignore line: [COMPILER_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/]
+        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/]
+        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/]
+        ignore line: [LIBRARY_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/]
+        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/]
+        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/]
+        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/]
+        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/]
+        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_2dc22.exe' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_2dc22.']
+        link line: [ C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe -plugin C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\kiera\\AppData\\Local\\Temp\\cc5WWXTa.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_2dc22.exe C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/crt2.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/msys64/ucrt64/bin/../lib/gcc -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_2dc22.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_2dc22.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/default-manifest.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o]
+          arg [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll] ==> ignore
+          arg [-plugin-opt=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe] ==> ignore
+          arg [-plugin-opt=-fresolution=C:\\Users\\kiera\\AppData\\Local\\Temp\\cc5WWXTa.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmingw32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmingwex] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmsvcrt] ==> ignore
+          arg [-plugin-opt=-pass-through=-lkernel32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lpthread] ==> ignore
+          arg [-plugin-opt=-pass-through=-ladvapi32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lshell32] ==> ignore
+          arg [-plugin-opt=-pass-through=-luser32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lkernel32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmingw32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmingwex] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmsvcrt] ==> ignore
+          arg [-plugin-opt=-pass-through=-lkernel32] ==> ignore
+          arg [-m] ==> ignore
+          arg [i386pep] ==> ignore
+          arg [-Bdynamic] ==> search dynamic
+          arg [-o] ==> ignore
+          arg [cmTC_2dc22.exe] ==> ignore
+          arg [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/crt2.o] ==> obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/crt2.o]
+          arg [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o] ==> obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o]
+          arg [-LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0] ==> dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0]
+          arg [-LC:/msys64/ucrt64/bin/../lib/gcc] ==> dir [C:/msys64/ucrt64/bin/../lib/gcc]
+          arg [-LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib] ==> dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib]
+          arg [-LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib] ==> dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib]
+          arg [-LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib] ==> dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib]
+          arg [-LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../..] ==> dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../..]
+          arg [-v] ==> ignore
+          arg [CMakeFiles/cmTC_2dc22.dir/CMakeCXXCompilerABI.cpp.obj] ==> ignore
+          arg [--out-implib] ==> ignore
+          arg [libcmTC_2dc22.dll.a] ==> ignore
+          arg [--major-image-version] ==> ignore
+          arg [0] ==> ignore
+          arg [--minor-image-version] ==> ignore
+          arg [0] ==> ignore
+          arg [-lstdc++] ==> lib [stdc++]
+          arg [-lmingw32] ==> lib [mingw32]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lmingwex] ==> lib [mingwex]
+          arg [-lmsvcrt] ==> lib [msvcrt]
+          arg [-lkernel32] ==> lib [kernel32]
+          arg [-lpthread] ==> lib [pthread]
+          arg [-ladvapi32] ==> lib [advapi32]
+          arg [-lshell32] ==> lib [shell32]
+          arg [-luser32] ==> lib [user32]
+          arg [-lkernel32] ==> lib [kernel32]
+          arg [-lmingw32] ==> lib [mingw32]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lmingwex] ==> lib [mingwex]
+          arg [-lmsvcrt] ==> lib [msvcrt]
+          arg [-lkernel32] ==> lib [kernel32]
+          arg [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/default-manifest.o] ==> obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/default-manifest.o]
+          arg [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o] ==> obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o]
+        ignore line: [collect2 version 15.2.0]
+        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\kiera\\AppData\\Local\\Temp\\cc5WWXTa.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_2dc22.exe C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/crt2.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/msys64/ucrt64/bin/../lib/gcc -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_2dc22.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_2dc22.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/default-manifest.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o]
+        linker tool for 'CXX': C:/msys64/ucrt64/x86_64-w64-mingw32/bin/ld.exe
+        remove lib [msvcrt]
+        remove lib [msvcrt]
+        collapse obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/crt2.o] ==> [C:/msys64/ucrt64/lib/crt2.o]
+        collapse obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o] ==> [C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o]
+        collapse obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/default-manifest.o] ==> [C:/msys64/ucrt64/lib/default-manifest.o]
+        collapse obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o] ==> [C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o]
+        collapse library dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0] ==> [C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0]
+        collapse library dir [C:/msys64/ucrt64/bin/../lib/gcc] ==> [C:/msys64/ucrt64/lib/gcc]
+        collapse library dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib] ==> [C:/msys64/ucrt64/x86_64-w64-mingw32/lib]
+        collapse library dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib] ==> [C:/msys64/ucrt64/lib]
+        collapse library dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib] ==> [C:/msys64/ucrt64/x86_64-w64-mingw32/lib]
+        collapse library dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../..] ==> [C:/msys64/ucrt64/lib]
+        implicit libs: [stdc++;mingw32;gcc_s;gcc;mingwex;kernel32;pthread;advapi32;shell32;user32;kernel32;mingw32;gcc_s;gcc;mingwex;kernel32]
+        implicit objs: [C:/msys64/ucrt64/lib/crt2.o;C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o;C:/msys64/ucrt64/lib/default-manifest.o;C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o]
+        implicit dirs: [C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0;C:/msys64/ucrt64/lib/gcc;C:/msys64/ucrt64/x86_64-w64-mingw32/lib;C:/msys64/ucrt64/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CMakeDetermineLinkerId.cmake:36 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCompilerABI.cmake:270 (cmake_determine_linker_id)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the CXX compiler's linker: "C:/msys64/ucrt64/x86_64-w64-mingw32/bin/ld.exe" "-v"
+      GNU ld (GNU Binutils) 2.45
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "out/build/Test/_deps/sfml-src/CMakeLists.txt:32 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: C:/msys64/ucrt64/bin/gcc.exe 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
+      
+      The C compiler identification is GNU, found in:
+        C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/4.0.2/CompilerIdC/a.exe
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "out/build/Test/_deps/sfml-src/CMakeLists.txt:32 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-qttvyz"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-qttvyz"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-qttvyz'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_39f31
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe   -v -o CMakeFiles/cmTC_39f31.dir/CMakeCCompilerABI.c.obj -c "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeCCompilerABI.c"
+        Using built-in specs.
+        COLLECT_GCC=C:\\msys64\\ucrt64\\bin\\gcc.exe
+        Target: x86_64-w64-mingw32
+        Configured with: ../gcc-15.2.0/configure --prefix=/ucrt64 --with-local-prefix=/ucrt64/local --with-native-system-header-dir=/ucrt64/include --libexecdir=/ucrt64/lib --enable-bootstrap --enable-checking=release --with-arch=nocona --with-tune=generic --enable-mingw-wildcard --enable-languages=c,lto,c++,fortran,ada,objc,obj-c++,jit --enable-shared --enable-static --enable-libatomic --enable-threads=posix --enable-graphite --enable-fully-dynamic-string --enable-libstdcxx-backtrace=yes --enable-libstdcxx-filesystem-ts --enable-libstdcxx-time --disable-libstdcxx-pch --enable-lto --enable-libgomp --disable-libssp --disable-multilib --disable-rpath --disable-win32-registry --disable-nls --disable-werror --disable-symvers --with-libiconv --with-system-zlib --with-gmp=/ucrt64 --with-mpfr=/ucrt64 --with-mpc=/ucrt64 --with-isl=/ucrt64 --with-pkgversion='Rev8, Built by MSYS2 project' --with-bugurl=https://github.com/msys2/MINGW-packages/issues --with-gnu-as --with-gnu-ld --with-libstdcxx-zoneinfo=yes --disable-libstdcxx-debug --enable-plugin --with-boot-ldflags=-static-libstdc++ --with-stage1-ldflags=-static-libstdc++
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 15.2.0 (Rev8, Built by MSYS2 project) 
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_39f31.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles/cmTC_39f31.dir/'
+         C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/cc1.exe -quiet -v -iprefix C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/ -D_REENTRANT C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_39f31.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=nocona -version -o C:\\Users\\kiera\\AppData\\Local\\Temp\\ccbqGgxp.s
+        GNU C23 (Rev8, Built by MSYS2 project) version 15.2.0 (x86_64-w64-mingw32)
+        	compiled by GNU C version 15.2.0, GMP version 6.3.0, MPFR version 4.2.2, MPC version 1.3.1, isl version isl-0.27-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring nonexistent directory "C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/include"
+        ignoring duplicate directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/15.2.0/include"
+        ignoring nonexistent directory "D:/M/msys64/ucrt64/include"
+        ignoring nonexistent directory "/ucrt64/include"
+        ignoring duplicate directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/15.2.0/include-fixed"
+        ignoring nonexistent directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/include"
+        ignoring nonexistent directory "D:/M/msys64/ucrt64/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/include
+         C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include
+         C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/include-fixed
+        End of search list.
+        Compiler executable checksum: f68563dd6aebdc6b84233a210e98d3c3
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_39f31.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles/cmTC_39f31.dir/'
+         C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles/cmTC_39f31.dir/CMakeCCompilerABI.c.obj C:\\Users\\kiera\\AppData\\Local\\Temp\\ccbqGgxp.s
+        GNU assembler version 2.45 (x86_64-w64-mingw32) using BFD version (GNU Binutils) 2.45
+        COMPILER_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/;C:/msys64/ucrt64/bin/../lib/gcc/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/
+        LIBRARY_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/;C:/msys64/ucrt64/bin/../lib/gcc/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_39f31.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles/cmTC_39f31.dir/CMakeCCompilerABI.c.'
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe  -v -Wl,-v CMakeFiles/cmTC_39f31.dir/CMakeCCompilerABI.c.obj -o cmTC_39f31.exe -Wl,--out-implib,libcmTC_39f31.dll.a -Wl,--major-image-version,0,--minor-image-version,0   && cd ."
+        Using built-in specs.
+        COLLECT_GCC=C:\\msys64\\ucrt64\\bin\\gcc.exe
+        COLLECT_LTO_WRAPPER=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe
+        Target: x86_64-w64-mingw32
+        Configured with: ../gcc-15.2.0/configure --prefix=/ucrt64 --with-local-prefix=/ucrt64/local --with-native-system-header-dir=/ucrt64/include --libexecdir=/ucrt64/lib --enable-bootstrap --enable-checking=release --with-arch=nocona --with-tune=generic --enable-mingw-wildcard --enable-languages=c,lto,c++,fortran,ada,objc,obj-c++,jit --enable-shared --enable-static --enable-libatomic --enable-threads=posix --enable-graphite --enable-fully-dynamic-string --enable-libstdcxx-backtrace=yes --enable-libstdcxx-filesystem-ts --enable-libstdcxx-time --disable-libstdcxx-pch --enable-lto --enable-libgomp --disable-libssp --disable-multilib --disable-rpath --disable-win32-registry --disable-nls --disable-werror --disable-symvers --with-libiconv --with-system-zlib --with-gmp=/ucrt64 --with-mpfr=/ucrt64 --with-mpc=/ucrt64 --with-isl=/ucrt64 --with-pkgversion='Rev8, Built by MSYS2 project' --with-bugurl=https://github.com/msys2/MINGW-packages/issues --with-gnu-as --with-gnu-ld --with-libstdcxx-zoneinfo=yes --disable-libstdcxx-debug --enable-plugin --with-boot-ldflags=-static-libstdc++ --with-stage1-ldflags=-static-libstdc++
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 15.2.0 (Rev8, Built by MSYS2 project) 
+        COMPILER_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/;C:/msys64/ucrt64/bin/../lib/gcc/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/
+        LIBRARY_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/;C:/msys64/ucrt64/bin/../lib/gcc/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_39f31.exe' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_39f31.'
+         C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe -plugin C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\kiera\\AppData\\Local\\Temp\\cc1gZFuy.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_39f31.exe C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/crt2.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/msys64/ucrt64/bin/../lib/gcc -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_39f31.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_39f31.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/default-manifest.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o
+        collect2 version 15.2.0
+        C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\kiera\\AppData\\Local\\Temp\\cc1gZFuy.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_39f31.exe C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/crt2.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/msys64/ucrt64/bin/../lib/gcc -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_39f31.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_39f31.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/default-manifest.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o
+        GNU ld (GNU Binutils) 2.45
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_39f31.exe' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_39f31.'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCompilerABI.cmake:191 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "out/build/Test/_deps/sfml-src/CMakeLists.txt:32 (project)"
+    message: |
+      Parsed C implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/include]
+          add: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include]
+          add: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/include-fixed]
+        end of search list found
+        collapse include dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/include] ==> [C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/include]
+        collapse include dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include] ==> [C:/msys64/ucrt64/include]
+        collapse include dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/include-fixed] ==> [C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/include-fixed]
+        implicit include dirs: [C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/include;C:/msys64/ucrt64/include;C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/include-fixed]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCompilerABI.cmake:227 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "out/build/Test/_deps/sfml-src/CMakeLists.txt:32 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
+        ignore line: [Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-qttvyz']
+        ignore line: []
+        ignore line: [Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_39f31]
+        ignore line: [[1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe   -v -o CMakeFiles/cmTC_39f31.dir/CMakeCCompilerABI.c.obj -c "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeCCompilerABI.c"]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=C:\\msys64\\ucrt64\\bin\\gcc.exe]
+        ignore line: [Target: x86_64-w64-mingw32]
+        ignore line: [Configured with: ../gcc-15.2.0/configure --prefix=/ucrt64 --with-local-prefix=/ucrt64/local --with-native-system-header-dir=/ucrt64/include --libexecdir=/ucrt64/lib --enable-bootstrap --enable-checking=release --with-arch=nocona --with-tune=generic --enable-mingw-wildcard --enable-languages=c,lto,c++,fortran,ada,objc,obj-c++,jit --enable-shared --enable-static --enable-libatomic --enable-threads=posix --enable-graphite --enable-fully-dynamic-string --enable-libstdcxx-backtrace=yes --enable-libstdcxx-filesystem-ts --enable-libstdcxx-time --disable-libstdcxx-pch --enable-lto --enable-libgomp --disable-libssp --disable-multilib --disable-rpath --disable-win32-registry --disable-nls --disable-werror --disable-symvers --with-libiconv --with-system-zlib --with-gmp=/ucrt64 --with-mpfr=/ucrt64 --with-mpc=/ucrt64 --with-isl=/ucrt64 --with-pkgversion='Rev8, Built by MSYS2 project' --with-bugurl=https://github.com/msys2/MINGW-packages/issues --with-gnu-as --with-gnu-ld --with-libstdcxx-zoneinfo=yes --disable-libstdcxx-debug --enable-plugin --with-boot-ldflags=-static-libstdc++ --with-stage1-ldflags=-static-libstdc++]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 15.2.0 (Rev8  Built by MSYS2 project) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_39f31.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles/cmTC_39f31.dir/']
+        ignore line: [ C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/cc1.exe -quiet -v -iprefix C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/ -D_REENTRANT C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_39f31.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=nocona -version -o C:\\Users\\kiera\\AppData\\Local\\Temp\\ccbqGgxp.s]
+        ignore line: [GNU C23 (Rev8  Built by MSYS2 project) version 15.2.0 (x86_64-w64-mingw32)]
+        ignore line: [	compiled by GNU C version 15.2.0  GMP version 6.3.0  MPFR version 4.2.2  MPC version 1.3.1  isl version isl-0.27-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring nonexistent directory "C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/include"]
+        ignore line: [ignoring duplicate directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/15.2.0/include"]
+        ignore line: [ignoring nonexistent directory "D:/M/msys64/ucrt64/include"]
+        ignore line: [ignoring nonexistent directory "/ucrt64/include"]
+        ignore line: [ignoring duplicate directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/15.2.0/include-fixed"]
+        ignore line: [ignoring nonexistent directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/include"]
+        ignore line: [ignoring nonexistent directory "D:/M/msys64/ucrt64/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/include]
+        ignore line: [ C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include]
+        ignore line: [ C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/include-fixed]
+        ignore line: [End of search list.]
+        ignore line: [Compiler executable checksum: f68563dd6aebdc6b84233a210e98d3c3]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_39f31.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles/cmTC_39f31.dir/']
+        ignore line: [ C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles/cmTC_39f31.dir/CMakeCCompilerABI.c.obj C:\\Users\\kiera\\AppData\\Local\\Temp\\ccbqGgxp.s]
+        ignore line: [GNU assembler version 2.45 (x86_64-w64-mingw32) using BFD version (GNU Binutils) 2.45]
+        ignore line: [COMPILER_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/]
+        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/]
+        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/]
+        ignore line: [LIBRARY_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/]
+        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/]
+        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/]
+        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/]
+        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/]
+        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_39f31.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles/cmTC_39f31.dir/CMakeCCompilerABI.c.']
+        ignore line: [[2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe  -v -Wl -v CMakeFiles/cmTC_39f31.dir/CMakeCCompilerABI.c.obj -o cmTC_39f31.exe -Wl --out-implib libcmTC_39f31.dll.a -Wl --major-image-version 0 --minor-image-version 0   && cd ."]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=C:\\msys64\\ucrt64\\bin\\gcc.exe]
+        ignore line: [COLLECT_LTO_WRAPPER=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe]
+        ignore line: [Target: x86_64-w64-mingw32]
+        ignore line: [Configured with: ../gcc-15.2.0/configure --prefix=/ucrt64 --with-local-prefix=/ucrt64/local --with-native-system-header-dir=/ucrt64/include --libexecdir=/ucrt64/lib --enable-bootstrap --enable-checking=release --with-arch=nocona --with-tune=generic --enable-mingw-wildcard --enable-languages=c,lto,c++,fortran,ada,objc,obj-c++,jit --enable-shared --enable-static --enable-libatomic --enable-threads=posix --enable-graphite --enable-fully-dynamic-string --enable-libstdcxx-backtrace=yes --enable-libstdcxx-filesystem-ts --enable-libstdcxx-time --disable-libstdcxx-pch --enable-lto --enable-libgomp --disable-libssp --disable-multilib --disable-rpath --disable-win32-registry --disable-nls --disable-werror --disable-symvers --with-libiconv --with-system-zlib --with-gmp=/ucrt64 --with-mpfr=/ucrt64 --with-mpc=/ucrt64 --with-isl=/ucrt64 --with-pkgversion='Rev8, Built by MSYS2 project' --with-bugurl=https://github.com/msys2/MINGW-packages/issues --with-gnu-as --with-gnu-ld --with-libstdcxx-zoneinfo=yes --disable-libstdcxx-debug --enable-plugin --with-boot-ldflags=-static-libstdc++ --with-stage1-ldflags=-static-libstdc++]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 15.2.0 (Rev8  Built by MSYS2 project) ]
+        ignore line: [COMPILER_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/]
+        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/]
+        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/]
+        ignore line: [LIBRARY_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/]
+        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/]
+        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/]
+        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/]
+        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/]
+        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_39f31.exe' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_39f31.']
+        link line: [ C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe -plugin C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\kiera\\AppData\\Local\\Temp\\cc1gZFuy.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_39f31.exe C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/crt2.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/msys64/ucrt64/bin/../lib/gcc -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_39f31.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_39f31.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/default-manifest.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o]
+          arg [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll] ==> ignore
+          arg [-plugin-opt=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe] ==> ignore
+          arg [-plugin-opt=-fresolution=C:\\Users\\kiera\\AppData\\Local\\Temp\\cc1gZFuy.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmingw32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_eh] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmingwex] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmsvcrt] ==> ignore
+          arg [-plugin-opt=-pass-through=-lkernel32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lpthread] ==> ignore
+          arg [-plugin-opt=-pass-through=-ladvapi32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lshell32] ==> ignore
+          arg [-plugin-opt=-pass-through=-luser32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lkernel32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmingw32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_eh] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmingwex] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmsvcrt] ==> ignore
+          arg [-plugin-opt=-pass-through=-lkernel32] ==> ignore
+          arg [-m] ==> ignore
+          arg [i386pep] ==> ignore
+          arg [-Bdynamic] ==> search dynamic
+          arg [-o] ==> ignore
+          arg [cmTC_39f31.exe] ==> ignore
+          arg [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/crt2.o] ==> obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/crt2.o]
+          arg [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o] ==> obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o]
+          arg [-LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0] ==> dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0]
+          arg [-LC:/msys64/ucrt64/bin/../lib/gcc] ==> dir [C:/msys64/ucrt64/bin/../lib/gcc]
+          arg [-LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib] ==> dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib]
+          arg [-LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib] ==> dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib]
+          arg [-LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib] ==> dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib]
+          arg [-LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../..] ==> dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../..]
+          arg [-v] ==> ignore
+          arg [CMakeFiles/cmTC_39f31.dir/CMakeCCompilerABI.c.obj] ==> ignore
+          arg [--out-implib] ==> ignore
+          arg [libcmTC_39f31.dll.a] ==> ignore
+          arg [--major-image-version] ==> ignore
+          arg [0] ==> ignore
+          arg [--minor-image-version] ==> ignore
+          arg [0] ==> ignore
+          arg [-lmingw32] ==> lib [mingw32]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lgcc_eh] ==> lib [gcc_eh]
+          arg [-lmingwex] ==> lib [mingwex]
+          arg [-lmsvcrt] ==> lib [msvcrt]
+          arg [-lkernel32] ==> lib [kernel32]
+          arg [-lpthread] ==> lib [pthread]
+          arg [-ladvapi32] ==> lib [advapi32]
+          arg [-lshell32] ==> lib [shell32]
+          arg [-luser32] ==> lib [user32]
+          arg [-lkernel32] ==> lib [kernel32]
+          arg [-lmingw32] ==> lib [mingw32]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lgcc_eh] ==> lib [gcc_eh]
+          arg [-lmingwex] ==> lib [mingwex]
+          arg [-lmsvcrt] ==> lib [msvcrt]
+          arg [-lkernel32] ==> lib [kernel32]
+          arg [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/default-manifest.o] ==> obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/default-manifest.o]
+          arg [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o] ==> obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o]
+        ignore line: [collect2 version 15.2.0]
+        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\kiera\\AppData\\Local\\Temp\\cc1gZFuy.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_39f31.exe C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/crt2.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/msys64/ucrt64/bin/../lib/gcc -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_39f31.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_39f31.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/default-manifest.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o]
+        linker tool for 'C': C:/msys64/ucrt64/x86_64-w64-mingw32/bin/ld.exe
+        remove lib [gcc_eh]
+        remove lib [msvcrt]
+        remove lib [gcc_eh]
+        remove lib [msvcrt]
+        collapse obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/crt2.o] ==> [C:/msys64/ucrt64/lib/crt2.o]
+        collapse obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o] ==> [C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o]
+        collapse obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/default-manifest.o] ==> [C:/msys64/ucrt64/lib/default-manifest.o]
+        collapse obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o] ==> [C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o]
+        collapse library dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0] ==> [C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0]
+        collapse library dir [C:/msys64/ucrt64/bin/../lib/gcc] ==> [C:/msys64/ucrt64/lib/gcc]
+        collapse library dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib] ==> [C:/msys64/ucrt64/x86_64-w64-mingw32/lib]
+        collapse library dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib] ==> [C:/msys64/ucrt64/lib]
+        collapse library dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib] ==> [C:/msys64/ucrt64/x86_64-w64-mingw32/lib]
+        collapse library dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../..] ==> [C:/msys64/ucrt64/lib]
+        implicit libs: [mingw32;gcc;mingwex;kernel32;pthread;advapi32;shell32;user32;kernel32;mingw32;gcc;mingwex;kernel32]
+        implicit objs: [C:/msys64/ucrt64/lib/crt2.o;C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o;C:/msys64/ucrt64/lib/default-manifest.o;C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o]
+        implicit dirs: [C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0;C:/msys64/ucrt64/lib/gcc;C:/msys64/ucrt64/x86_64-w64-mingw32/lib;C:/msys64/ucrt64/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CMakeDetermineLinkerId.cmake:36 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCompilerABI.cmake:270 (cmake_determine_linker_id)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "out/build/Test/_deps/sfml-src/CMakeLists.txt:32 (project)"
+    message: |
+      Running the C compiler's linker: "C:/msys64/ucrt64/x86_64-w64-mingw32/bin/ld.exe" "-v"
+      GNU ld (GNU Binutils) 2.45
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CheckSourceCompiles.cmake:104 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckCSourceCompiles.cmake:58 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/FindThreads.cmake:97 (check_c_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/FindThreads.cmake:163 (_threads_check_libc)"
+      - "out/build/Test/_deps/sfml-src/src/SFML/System/CMakeLists.txt:69 (find_package)"
+    checks:
+      - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-u2hizt"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-u2hizt"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "CMAKE_HAVE_LIBC_PTHREAD"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-u2hizt'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_4e49b
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_4e49b.dir/src.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-u2hizt/src.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe   CMakeFiles/cmTC_4e49b.dir/src.c.obj -o cmTC_4e49b.exe -Wl,--out-implib,libcmTC_4e49b.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckIncludeFileCXX.cmake:98 (try_compile)"
+      - "out/build/Test/_deps/sfml-src/src/SFML/Window/CMakeLists.txt:317 (check_include_file_cxx)"
+    checks:
+      - "Looking for C++ include dinput.h"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-vrw0jn"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-vrw0jn"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "DINPUT_H_FOUND"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-vrw0jn'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_3b80b
+        [1/2] C:\\msys64\\ucrt64\\bin\\g++.exe    -o CMakeFiles/cmTC_3b80b.dir/CheckIncludeFile.cxx.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-vrw0jn/CheckIncludeFile.cxx
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\g++.exe   CMakeFiles/cmTC_3b80b.dir/CheckIncludeFile.cxx.obj -o cmTC_3b80b.exe -Wl,--out-implib,libcmTC_3b80b.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CheckSourceCompiles.cmake:104 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckCXXSourceCompiles.cmake:58 (cmake_check_source_compiles)"
+      - "out/build/Test/_deps/sfml-src/src/SFML/Window/CMakeLists.txt:342 (check_cxx_source_compiles)"
+    checks:
+      - "Performing Test ATOMIC_TEST"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-xlj9wo"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-xlj9wo"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "ATOMIC_TEST"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-xlj9wo'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_28564
+        [1/2] C:\\msys64\\ucrt64\\bin\\g++.exe -DATOMIC_TEST   -o CMakeFiles/cmTC_28564.dir/src.cxx.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-xlj9wo/src.cxx
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\g++.exe   CMakeFiles/cmTC_28564.dir/src.cxx.obj -o cmTC_28564.exe -Wl,--out-implib,libcmTC_28564.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckIncludeFiles.cmake:141 (try_compile)"
+      - "out/build/Test/_deps/ogg-src/CMakeLists.txt:57 (check_include_files)"
+    checks:
+      - "Looking for include file inttypes.h"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-d9huzx"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-d9huzx"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "INCLUDE_INTTYPES_H"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-d9huzx'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_3d7c1
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe    -o CMakeFiles/cmTC_3d7c1.dir/INCLUDE_INTTYPES_H.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-d9huzx/INCLUDE_INTTYPES_H.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe   CMakeFiles/cmTC_3d7c1.dir/INCLUDE_INTTYPES_H.c.obj -o cmTC_3d7c1.exe -Wl,--out-implib,libcmTC_3d7c1.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckIncludeFiles.cmake:141 (try_compile)"
+      - "out/build/Test/_deps/ogg-src/CMakeLists.txt:58 (check_include_files)"
+    checks:
+      - "Looking for include file stdint.h"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-sjz7kz"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-sjz7kz"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "INCLUDE_STDINT_H"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-sjz7kz'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_ccaa3
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe    -o CMakeFiles/cmTC_ccaa3.dir/INCLUDE_STDINT_H.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-sjz7kz/INCLUDE_STDINT_H.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe   CMakeFiles/cmTC_ccaa3.dir/INCLUDE_STDINT_H.c.obj -o cmTC_ccaa3.exe -Wl,--out-implib,libcmTC_ccaa3.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckIncludeFiles.cmake:141 (try_compile)"
+      - "out/build/Test/_deps/ogg-src/CMakeLists.txt:59 (check_include_files)"
+    checks:
+      - "Looking for include file sys/types.h"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-22szpc"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-22szpc"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "INCLUDE_SYS_TYPES_H"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-22szpc'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_b1789
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe    -o CMakeFiles/cmTC_b1789.dir/INCLUDE_SYS_TYPES_H.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-22szpc/INCLUDE_SYS_TYPES_H.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe   CMakeFiles/cmTC_b1789.dir/INCLUDE_SYS_TYPES_H.c.obj -o cmTC_b1789.exe -Wl,--out-implib,libcmTC_b1789.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckIncludeFile.cmake:99 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckTypeSize.cmake:318 (check_include_file)"
+      - "out/build/Test/_deps/ogg-src/cmake/CheckSizes.cmake:3 (check_type_size)"
+      - "out/build/Test/_deps/ogg-src/CMakeLists.txt:69 (include)"
+    checks:
+      - "Looking for sys/types.h"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-d7cofc"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-d7cofc"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/ogg-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_SYS_TYPES_H"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-d7cofc'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_0c81e
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe    -o CMakeFiles/cmTC_0c81e.dir/CheckIncludeFile.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-d7cofc/CheckIncludeFile.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe   CMakeFiles/cmTC_0c81e.dir/CheckIncludeFile.c.obj -o cmTC_0c81e.exe -Wl,--out-implib,libcmTC_0c81e.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckIncludeFile.cmake:99 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckTypeSize.cmake:319 (check_include_file)"
+      - "out/build/Test/_deps/ogg-src/cmake/CheckSizes.cmake:3 (check_type_size)"
+      - "out/build/Test/_deps/ogg-src/CMakeLists.txt:69 (include)"
+    checks:
+      - "Looking for stdint.h"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-z8bk78"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-z8bk78"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/ogg-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_STDINT_H"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-z8bk78'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_6dde2
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe    -o CMakeFiles/cmTC_6dde2.dir/CheckIncludeFile.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-z8bk78/CheckIncludeFile.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe   CMakeFiles/cmTC_6dde2.dir/CheckIncludeFile.c.obj -o cmTC_6dde2.exe -Wl,--out-implib,libcmTC_6dde2.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckIncludeFile.cmake:99 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckTypeSize.cmake:320 (check_include_file)"
+      - "out/build/Test/_deps/ogg-src/cmake/CheckSizes.cmake:3 (check_type_size)"
+      - "out/build/Test/_deps/ogg-src/CMakeLists.txt:69 (include)"
+    checks:
+      - "Looking for stddef.h"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-dyjzr4"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-dyjzr4"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/ogg-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_STDDEF_H"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-dyjzr4'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_00bfa
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe    -o CMakeFiles/cmTC_00bfa.dir/CheckIncludeFile.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-dyjzr4/CheckIncludeFile.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe   CMakeFiles/cmTC_00bfa.dir/CheckIncludeFile.c.obj -o cmTC_00bfa.exe -Wl,--out-implib,libcmTC_00bfa.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckTypeSize.cmake:212 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckTypeSize.cmake:339 (__check_type_size_impl)"
+      - "out/build/Test/_deps/ogg-src/cmake/CheckSizes.cmake:3 (check_type_size)"
+      - "out/build/Test/_deps/ogg-src/CMakeLists.txt:69 (include)"
+    checks:
+      - "Check size of int16_t"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-grngho"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-grngho"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/ogg-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_INT16_SIZE"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-grngho'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_64bcc
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe    -o CMakeFiles/cmTC_64bcc.dir/INT16_SIZE.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-grngho/INT16_SIZE.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe   CMakeFiles/cmTC_64bcc.dir/INT16_SIZE.c.obj -o cmTC_64bcc.exe -Wl,--out-implib,libcmTC_64bcc.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckTypeSize.cmake:212 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckTypeSize.cmake:339 (__check_type_size_impl)"
+      - "out/build/Test/_deps/ogg-src/cmake/CheckSizes.cmake:4 (check_type_size)"
+      - "out/build/Test/_deps/ogg-src/CMakeLists.txt:69 (include)"
+    checks:
+      - "Check size of uint16_t"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-to2j98"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-to2j98"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/ogg-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_UINT16_SIZE"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-to2j98'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_e868d
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe    -o CMakeFiles/cmTC_e868d.dir/UINT16_SIZE.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-to2j98/UINT16_SIZE.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe   CMakeFiles/cmTC_e868d.dir/UINT16_SIZE.c.obj -o cmTC_e868d.exe -Wl,--out-implib,libcmTC_e868d.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckTypeSize.cmake:212 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckTypeSize.cmake:339 (__check_type_size_impl)"
+      - "out/build/Test/_deps/ogg-src/cmake/CheckSizes.cmake:5 (check_type_size)"
+      - "out/build/Test/_deps/ogg-src/CMakeLists.txt:69 (include)"
+    checks:
+      - "Check size of u_int16_t"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-5xs7bj"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-5xs7bj"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/ogg-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_U_INT16_SIZE"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-5xs7bj'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_2e17b
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe    -o CMakeFiles/cmTC_2e17b.dir/U_INT16_SIZE.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-5xs7bj/U_INT16_SIZE.c
+        FAILED: [code=1] CMakeFiles/cmTC_2e17b.dir/U_INT16_SIZE.c.obj 
+        C:\\msys64\\ucrt64\\bin\\gcc.exe    -o CMakeFiles/cmTC_2e17b.dir/U_INT16_SIZE.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-5xs7bj/U_INT16_SIZE.c
+        C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-5xs7bj/U_INT16_SIZE.c:27:22: error: 'u_int16_t' undeclared here (not in a function); did you mean 'uint16_t'?
+           27 | #define SIZE (sizeof(u_int16_t))
+              |                      ^~~~~~~~~
+        C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-5xs7bj/U_INT16_SIZE.c:29:12: note: in expansion of macro 'SIZE'
+           29 |   ('0' + ((SIZE / 10000)%10)),
+              |            ^~~~
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckTypeSize.cmake:212 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckTypeSize.cmake:339 (__check_type_size_impl)"
+      - "out/build/Test/_deps/ogg-src/cmake/CheckSizes.cmake:6 (check_type_size)"
+      - "out/build/Test/_deps/ogg-src/CMakeLists.txt:69 (include)"
+    checks:
+      - "Check size of int32_t"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-od9599"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-od9599"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/ogg-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_INT32_SIZE"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-od9599'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_f7e43
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe    -o CMakeFiles/cmTC_f7e43.dir/INT32_SIZE.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-od9599/INT32_SIZE.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe   CMakeFiles/cmTC_f7e43.dir/INT32_SIZE.c.obj -o cmTC_f7e43.exe -Wl,--out-implib,libcmTC_f7e43.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckTypeSize.cmake:212 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckTypeSize.cmake:339 (__check_type_size_impl)"
+      - "out/build/Test/_deps/ogg-src/cmake/CheckSizes.cmake:7 (check_type_size)"
+      - "out/build/Test/_deps/ogg-src/CMakeLists.txt:69 (include)"
+    checks:
+      - "Check size of uint32_t"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-g74l1w"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-g74l1w"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/ogg-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_UINT32_SIZE"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-g74l1w'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_51f18
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe    -o CMakeFiles/cmTC_51f18.dir/UINT32_SIZE.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-g74l1w/UINT32_SIZE.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe   CMakeFiles/cmTC_51f18.dir/UINT32_SIZE.c.obj -o cmTC_51f18.exe -Wl,--out-implib,libcmTC_51f18.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckTypeSize.cmake:212 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckTypeSize.cmake:339 (__check_type_size_impl)"
+      - "out/build/Test/_deps/ogg-src/cmake/CheckSizes.cmake:8 (check_type_size)"
+      - "out/build/Test/_deps/ogg-src/CMakeLists.txt:69 (include)"
+    checks:
+      - "Check size of u_int32_t"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-ainl95"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-ainl95"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/ogg-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_U_INT32_SIZE"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-ainl95'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_ef024
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe    -o CMakeFiles/cmTC_ef024.dir/U_INT32_SIZE.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-ainl95/U_INT32_SIZE.c
+        FAILED: [code=1] CMakeFiles/cmTC_ef024.dir/U_INT32_SIZE.c.obj 
+        C:\\msys64\\ucrt64\\bin\\gcc.exe    -o CMakeFiles/cmTC_ef024.dir/U_INT32_SIZE.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-ainl95/U_INT32_SIZE.c
+        C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-ainl95/U_INT32_SIZE.c:27:22: error: 'u_int32_t' undeclared here (not in a function); did you mean 'uint32_t'?
+           27 | #define SIZE (sizeof(u_int32_t))
+              |                      ^~~~~~~~~
+        C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-ainl95/U_INT32_SIZE.c:29:12: note: in expansion of macro 'SIZE'
+           29 |   ('0' + ((SIZE / 10000)%10)),
+              |            ^~~~
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckTypeSize.cmake:212 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckTypeSize.cmake:339 (__check_type_size_impl)"
+      - "out/build/Test/_deps/ogg-src/cmake/CheckSizes.cmake:9 (check_type_size)"
+      - "out/build/Test/_deps/ogg-src/CMakeLists.txt:69 (include)"
+    checks:
+      - "Check size of int64_t"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-261a3h"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-261a3h"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/ogg-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_INT64_SIZE"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-261a3h'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_da8ec
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe    -o CMakeFiles/cmTC_da8ec.dir/INT64_SIZE.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-261a3h/INT64_SIZE.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe   CMakeFiles/cmTC_da8ec.dir/INT64_SIZE.c.obj -o cmTC_da8ec.exe -Wl,--out-implib,libcmTC_da8ec.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckTypeSize.cmake:212 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckTypeSize.cmake:339 (__check_type_size_impl)"
+      - "out/build/Test/_deps/ogg-src/cmake/CheckSizes.cmake:10 (check_type_size)"
+      - "out/build/Test/_deps/ogg-src/CMakeLists.txt:69 (include)"
+    checks:
+      - "Check size of short"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-8g3k4a"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-8g3k4a"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/ogg-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_SHORT_SIZE"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-8g3k4a'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_15117
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe    -o CMakeFiles/cmTC_15117.dir/SHORT_SIZE.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-8g3k4a/SHORT_SIZE.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe   CMakeFiles/cmTC_15117.dir/SHORT_SIZE.c.obj -o cmTC_15117.exe -Wl,--out-implib,libcmTC_15117.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckTypeSize.cmake:212 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckTypeSize.cmake:339 (__check_type_size_impl)"
+      - "out/build/Test/_deps/ogg-src/cmake/CheckSizes.cmake:11 (check_type_size)"
+      - "out/build/Test/_deps/ogg-src/CMakeLists.txt:69 (include)"
+    checks:
+      - "Check size of int"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-lsl2u9"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-lsl2u9"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/ogg-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_INT_SIZE"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-lsl2u9'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_7d393
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe    -o CMakeFiles/cmTC_7d393.dir/INT_SIZE.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-lsl2u9/INT_SIZE.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe   CMakeFiles/cmTC_7d393.dir/INT_SIZE.c.obj -o cmTC_7d393.exe -Wl,--out-implib,libcmTC_7d393.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckTypeSize.cmake:212 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckTypeSize.cmake:339 (__check_type_size_impl)"
+      - "out/build/Test/_deps/ogg-src/cmake/CheckSizes.cmake:12 (check_type_size)"
+      - "out/build/Test/_deps/ogg-src/CMakeLists.txt:69 (include)"
+    checks:
+      - "Check size of long"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-qcby3e"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-qcby3e"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/ogg-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_LONG_SIZE"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-qcby3e'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_1d7f2
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe    -o CMakeFiles/cmTC_1d7f2.dir/LONG_SIZE.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-qcby3e/LONG_SIZE.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe   CMakeFiles/cmTC_1d7f2.dir/LONG_SIZE.c.obj -o cmTC_1d7f2.exe -Wl,--out-implib,libcmTC_1d7f2.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckTypeSize.cmake:212 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckTypeSize.cmake:339 (__check_type_size_impl)"
+      - "out/build/Test/_deps/ogg-src/cmake/CheckSizes.cmake:13 (check_type_size)"
+      - "out/build/Test/_deps/ogg-src/CMakeLists.txt:69 (include)"
+    checks:
+      - "Check size of long long"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-tb5tea"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-tb5tea"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/ogg-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_LONG_LONG_SIZE"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-tb5tea'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_0fef2
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe    -o CMakeFiles/cmTC_0fef2.dir/LONG_LONG_SIZE.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-tb5tea/LONG_LONG_SIZE.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe   CMakeFiles/cmTC_0fef2.dir/LONG_LONG_SIZE.c.obj -o cmTC_0fef2.exe -Wl,--out-implib,libcmTC_0fef2.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CheckSourceCompiles.cmake:104 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckCSourceCompiles.cmake:58 (cmake_check_source_compiles)"
+      - "out/build/Test/_deps/flac-src/cmake/UseSystemExtensions.cmake:3 (check_c_source_compiles)"
+      - "out/build/Test/_deps/flac-src/CMakeLists.txt:107 (include)"
+    checks:
+      - "Performing Test HAVE_MBSTATE"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-jekis1"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-jekis1"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline "
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/flac-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_MBSTATE"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-jekis1'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_3cb17
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe -DHAVE_MBSTATE  -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline -o CMakeFiles/cmTC_3cb17.dir/src.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-jekis1/src.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline  CMakeFiles/cmTC_3cb17.dir/src.c.obj -o cmTC_3cb17.exe -Wl,--out-implib,libcmTC_3cb17.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CheckSourceCompiles.cmake:104 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckCSourceCompiles.cmake:58 (cmake_check_source_compiles)"
+      - "out/build/Test/_deps/flac-src/cmake/UseSystemExtensions.cmake:16 (check_c_source_compiles)"
+      - "out/build/Test/_deps/flac-src/CMakeLists.txt:107 (include)"
+    checks:
+      - "Performing Test DODEFINE_EXTENSIONS"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-rl5jvi"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-rl5jvi"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline "
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/flac-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "DODEFINE_EXTENSIONS"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-rl5jvi'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_cc76d
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe -DDODEFINE_EXTENSIONS  -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline -o CMakeFiles/cmTC_cc76d.dir/src.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-rl5jvi/src.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline  CMakeFiles/cmTC_cc76d.dir/src.c.obj -o cmTC_cc76d.exe -Wl,--out-implib,libcmTC_cc76d.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckIncludeFile.cmake:99 (try_compile)"
+      - "out/build/Test/_deps/flac-src/CMakeLists.txt:111 (check_include_file)"
+    checks:
+      - "Looking for byteswap.h"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-i0o9ux"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-i0o9ux"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline "
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/flac-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_BYTESWAP_H"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-i0o9ux'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_018d0
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe   -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline -o CMakeFiles/cmTC_018d0.dir/CheckIncludeFile.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-i0o9ux/CheckIncludeFile.c
+        FAILED: [code=1] CMakeFiles/cmTC_018d0.dir/CheckIncludeFile.c.obj 
+        C:\\msys64\\ucrt64\\bin\\gcc.exe   -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline -o CMakeFiles/cmTC_018d0.dir/CheckIncludeFile.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-i0o9ux/CheckIncludeFile.c
+        C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-i0o9ux/CheckIncludeFile.c:1:10: fatal error: byteswap.h: No such file or directory
+            1 | #include <byteswap.h>
+              |          ^~~~~~~~~~~~
+        compilation terminated.
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckIncludeFile.cmake:99 (try_compile)"
+      - "out/build/Test/_deps/flac-src/CMakeLists.txt:112 (check_include_file)"
+    checks:
+      - "Looking for inttypes.h"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-98ozec"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-98ozec"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline "
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/flac-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_INTTYPES_H"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-98ozec'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_1efb6
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe   -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline -o CMakeFiles/cmTC_1efb6.dir/CheckIncludeFile.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-98ozec/CheckIncludeFile.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline  CMakeFiles/cmTC_1efb6.dir/CheckIncludeFile.c.obj -o cmTC_1efb6.exe -Wl,--out-implib,libcmTC_1efb6.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckIncludeFile.cmake:99 (try_compile)"
+      - "out/build/Test/_deps/flac-src/CMakeLists.txt:114 (check_include_file)"
+    checks:
+      - "Looking for stdbool.h"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-3py9ux"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-3py9ux"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline "
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/flac-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_STDBOOL_H"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-3py9ux'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_6a16a
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe   -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline -o CMakeFiles/cmTC_6a16a.dir/CheckIncludeFile.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-3py9ux/CheckIncludeFile.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline  CMakeFiles/cmTC_6a16a.dir/CheckIncludeFile.c.obj -o cmTC_6a16a.exe -Wl,--out-implib,libcmTC_6a16a.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckIncludeFile.cmake:99 (try_compile)"
+      - "out/build/Test/_deps/flac-src/CMakeLists.txt:115 (check_include_file)"
+    checks:
+      - "Looking for arm_neon.h"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-7mbiy5"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-7mbiy5"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline "
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/flac-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "FLAC__HAS_NEONINTRIN"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-7mbiy5'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_6ea6c
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe   -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline -o CMakeFiles/cmTC_6ea6c.dir/CheckIncludeFile.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-7mbiy5/CheckIncludeFile.c
+        FAILED: [code=1] CMakeFiles/cmTC_6ea6c.dir/CheckIncludeFile.c.obj 
+        C:\\msys64\\ucrt64\\bin\\gcc.exe   -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline -o CMakeFiles/cmTC_6ea6c.dir/CheckIncludeFile.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-7mbiy5/CheckIncludeFile.c
+        C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-7mbiy5/CheckIncludeFile.c:1:10: fatal error: arm_neon.h: No such file or directory
+            1 | #include <arm_neon.h>
+              |          ^~~~~~~~~~~~
+        compilation terminated.
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckIncludeFile.cmake:99 (try_compile)"
+      - "out/build/Test/_deps/flac-src/CMakeLists.txt:124 (check_include_file)"
+    checks:
+      - "Looking for x86intrin.h"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-584r5r"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-584r5r"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline "
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/flac-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "FLAC__HAS_X86INTRIN"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-584r5r'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_35ce8
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe   -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline -o CMakeFiles/cmTC_35ce8.dir/CheckIncludeFile.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-584r5r/CheckIncludeFile.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline  CMakeFiles/cmTC_35ce8.dir/CheckIncludeFile.c.obj -o cmTC_35ce8.exe -Wl,--out-implib,libcmTC_35ce8.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckFunctionExists.cmake:93 (try_compile)"
+      - "out/build/Test/_deps/flac-src/CMakeLists.txt:127 (check_function_exists)"
+    checks:
+      - "Looking for fseeko"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-48a86h"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-48a86h"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline "
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/flac-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_FSEEKO"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-48a86h'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_ad6e1
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe   -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline  -DCHECK_FUNCTION_EXISTS=fseeko -o CMakeFiles/cmTC_ad6e1.dir/CheckFunctionExists.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-48a86h/CheckFunctionExists.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline  -DCHECK_FUNCTION_EXISTS=fseeko  CMakeFiles/cmTC_ad6e1.dir/CheckFunctionExists.c.obj -o cmTC_ad6e1.exe -Wl,--out-implib,libcmTC_ad6e1.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CheckSourceCompiles.cmake:104 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckCSourceCompiles.cmake:58 (cmake_check_source_compiles)"
+      - "out/build/Test/_deps/flac-src/CMakeLists.txt:129 (check_c_source_compiles)"
+    checks:
+      - "Performing Test HAVE_BSWAP16"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-f7fv0y"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-f7fv0y"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline "
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/flac-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_BSWAP16"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-f7fv0y'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_d9b47
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe -DHAVE_BSWAP16  -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline -o CMakeFiles/cmTC_d9b47.dir/src.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-f7fv0y/src.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline  CMakeFiles/cmTC_d9b47.dir/src.c.obj -o cmTC_d9b47.exe -Wl,--out-implib,libcmTC_d9b47.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CheckSourceCompiles.cmake:104 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckCSourceCompiles.cmake:58 (cmake_check_source_compiles)"
+      - "out/build/Test/_deps/flac-src/CMakeLists.txt:130 (check_c_source_compiles)"
+    checks:
+      - "Performing Test HAVE_BSWAP32"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-kn0wd9"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-kn0wd9"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline "
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/flac-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_BSWAP32"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-kn0wd9'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_e0f58
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe -DHAVE_BSWAP32  -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline -o CMakeFiles/cmTC_e0f58.dir/src.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-kn0wd9/src.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline  CMakeFiles/cmTC_e0f58.dir/src.c.obj -o cmTC_e0f58.exe -Wl,--out-implib,libcmTC_e0f58.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CheckSourceCompiles.cmake:104 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckCSourceCompiles.cmake:58 (cmake_check_source_compiles)"
+      - "out/build/Test/_deps/flac-src/CMakeLists.txt:131 (check_c_source_compiles)"
+    checks:
+      - "Performing Test HAVE_LANGINFO_CODESET"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-msjbh1"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-msjbh1"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline "
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/flac-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_LANGINFO_CODESET"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-msjbh1'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_e7558
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe -DHAVE_LANGINFO_CODESET  -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline -o CMakeFiles/cmTC_e7558.dir/src.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-msjbh1/src.c
+        FAILED: [code=1] CMakeFiles/cmTC_e7558.dir/src.c.obj 
+        C:\\msys64\\ucrt64\\bin\\gcc.exe -DHAVE_LANGINFO_CODESET  -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline -o CMakeFiles/cmTC_e7558.dir/src.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-msjbh1/src.c
+        C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-msjbh1/src.c:2:14: fatal error: langinfo.h: No such file or directory
+            2 |     #include <langinfo.h>
+              |              ^~~~~~~~~~~~
+        compilation terminated.
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CheckSourceCompiles.cmake:104 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "out/build/Test/_deps/flac-src/CMakeLists.txt:142 (check_c_compiler_flag)"
+    checks:
+      - "Performing Test HAVE_WERROR_FLAG"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-n4koao"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-n4koao"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline "
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/flac-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_WERROR_FLAG"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-n4koao'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_8736f
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe -DHAVE_WERROR_FLAG  -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline     -Werror -o CMakeFiles/cmTC_8736f.dir/src.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-n4koao/src.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline  CMakeFiles/cmTC_8736f.dir/src.c.obj -o cmTC_8736f.exe -Wl,--out-implib,libcmTC_8736f.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CheckSourceCompiles.cmake:104 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "out/build/Test/_deps/flac-src/CMakeLists.txt:143 (check_c_compiler_flag)"
+    checks:
+      - "Performing Test HAVE_DECL_AFTER_STMT_FLAG"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-ih4lzc"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-ih4lzc"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline "
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/flac-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_DECL_AFTER_STMT_FLAG"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-ih4lzc'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_d60f1
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe -DHAVE_DECL_AFTER_STMT_FLAG  -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline     -Wdeclaration-after-statement -o CMakeFiles/cmTC_d60f1.dir/src.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-ih4lzc/src.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline  CMakeFiles/cmTC_d60f1.dir/src.c.obj -o cmTC_d60f1.exe -Wl,--out-implib,libcmTC_d60f1.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CheckSourceCompiles.cmake:104 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "out/build/Test/_deps/flac-src/CMakeLists.txt:144 (check_c_compiler_flag)"
+    checks:
+      - "Performing Test HAVE_STACKREALIGN_FLAG"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-8ypfp2"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-8ypfp2"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline "
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/flac-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_STACKREALIGN_FLAG"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-8ypfp2'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_ffa16
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe -DHAVE_STACKREALIGN_FLAG  -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline     -mstackrealign -o CMakeFiles/cmTC_ffa16.dir/src.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-8ypfp2/src.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline  CMakeFiles/cmTC_ffa16.dir/src.c.obj -o cmTC_ffa16.exe -Wl,--out-implib,libcmTC_ffa16.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CheckSourceCompiles.cmake:104 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckCXXCompilerFlag.cmake:55 (cmake_check_compiler_flag)"
+      - "out/build/Test/_deps/flac-src/CMakeLists.txt:145 (check_cxx_compiler_flag)"
+    checks:
+      - "Performing Test HAVE_WEFFCXX_FLAG"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-i5fpt3"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-i5fpt3"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-Wall -Wextra -Wcast-align -Wshadow -Wwrite-strings -Wctor-dtor-privacy -Wnon-virtual-dtor -Wreorder -Wsign-promo -Wundef "
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/flac-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_WEFFCXX_FLAG"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-i5fpt3'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_d678e
+        [1/2] C:\\msys64\\ucrt64\\bin\\g++.exe -DHAVE_WEFFCXX_FLAG  -Wall -Wextra -Wcast-align -Wshadow -Wwrite-strings -Wctor-dtor-privacy -Wnon-virtual-dtor -Wreorder -Wsign-promo -Wundef     -Weffc++ -o CMakeFiles/cmTC_d678e.dir/src.cxx.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-i5fpt3/src.cxx
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\g++.exe -Wall -Wextra -Wcast-align -Wshadow -Wwrite-strings -Wctor-dtor-privacy -Wnon-virtual-dtor -Wreorder -Wsign-promo -Wundef  CMakeFiles/cmTC_d678e.dir/src.cxx.obj -o cmTC_d678e.exe -Wl,--out-implib,libcmTC_d678e.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckIncludeFile.cmake:99 (try_compile)"
+      - "out/build/Test/_deps/flac-src/src/libFLAC/CMakeLists.txt:3 (check_include_file)"
+    checks:
+      - "Looking for cpuid.h"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-1chyik"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-1chyik"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline "
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/flac-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_CPUID_H"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-1chyik'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_627c0
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe   -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline -o CMakeFiles/cmTC_627c0.dir/CheckIncludeFile.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-1chyik/CheckIncludeFile.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline  CMakeFiles/cmTC_627c0.dir/CheckIncludeFile.c.obj -o cmTC_627c0.exe -Wl,--out-implib,libcmTC_627c0.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckIncludeFile.cmake:99 (try_compile)"
+      - "out/build/Test/_deps/flac-src/src/libFLAC/CMakeLists.txt:4 (check_include_file)"
+    checks:
+      - "Looking for sys/param.h"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-u29fu0"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-u29fu0"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline "
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/flac-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_SYS_PARAM_H"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-u29fu0'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_be75a
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe   -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline -o CMakeFiles/cmTC_be75a.dir/CheckIncludeFile.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-u29fu0/CheckIncludeFile.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline  CMakeFiles/cmTC_be75a.dir/CheckIncludeFile.c.obj -o cmTC_be75a.exe -Wl,--out-implib,libcmTC_be75a.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckFunctionExists.cmake:93 (try_compile)"
+      - "out/build/Test/_deps/flac-src/src/libFLAC/CMakeLists.txt:7 (check_function_exists)"
+    checks:
+      - "Looking for lround"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-ogqkl9"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-ogqkl9"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline "
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/flac-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_LROUND"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-ogqkl9'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_82d65
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe   -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline  -DCHECK_FUNCTION_EXISTS=lround -o CMakeFiles/cmTC_82d65.dir/CheckFunctionExists.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-ogqkl9/CheckFunctionExists.c
+        <command-line>: warning: conflicting types for built-in function 'lround'; expected 'long int(double)' [-Wbuiltin-declaration-mismatch]
+        C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-ogqkl9/CheckFunctionExists.c:7:3: note: in expansion of macro 'CHECK_FUNCTION_EXISTS'
+            7 |   CHECK_FUNCTION_EXISTS(void);
+              |   ^~~~~~~~~~~~~~~~~~~~~
+        C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-ogqkl9/CheckFunctionExists.c:1:1: note: 'lround' is declared in header '<math.h>'
+          +++ |+#include <math.h>
+            1 | #ifdef CHECK_FUNCTION_EXISTS
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline  -DCHECK_FUNCTION_EXISTS=lround  CMakeFiles/cmTC_82d65.dir/CheckFunctionExists.c.obj -o cmTC_82d65.exe -Wl,--out-implib,libcmTC_82d65.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lm  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "out/build/Test/_deps/flac-src/cmake/CheckCPUArch.cmake:6 (try_compile)"
+      - "out/build/Test/_deps/flac-src/cmake/CheckCPUArch.cmake:18 (_CHECK_CPU_ARCH)"
+      - "out/build/Test/_deps/flac-src/src/libFLAC/CMakeLists.txt:13 (check_cpu_arch_x64)"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/flac-build/CMakeFiles/CMakeTmp"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/flac-build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline "
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/flac-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_FLAC__CPU_X86_64"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/flac-build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_bd6e5
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe   -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline -o CMakeFiles/cmTC_bd6e5.dir/CheckCPUArch.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/flac-build/CMakeFiles/CMakeTmp/CheckCPUArch.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline  CMakeFiles/cmTC_bd6e5.dir/CheckCPUArch.c.obj -o cmTC_bd6e5.exe -Wl,--out-implib,libcmTC_bd6e5.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CheckSourceCompiles.cmake:104 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "out/build/Test/_deps/flac-src/src/libFLAC/CMakeLists.txt:101 (check_c_compiler_flag)"
+    checks:
+      - "Performing Test HAVE_ASSOC_MATH"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-i71rzm"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-i71rzm"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline "
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/flac-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_ASSOC_MATH"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-i71rzm'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_adace
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe -DHAVE_ASSOC_MATH  -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline     -fassociative-math -fno-signed-zeros -fno-trapping-math -freciprocal-math -o CMakeFiles/cmTC_adace.dir/src.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-i71rzm/src.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline  CMakeFiles/cmTC_adace.dir/src.c.obj -o cmTC_adace.exe -Wl,--out-implib,libcmTC_adace.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lm  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckFunctionExists.cmake:93 (try_compile)"
+      - "out/build/Test/_deps/flac-src/microbench/CMakeLists.txt:6 (check_function_exists)"
+    checks:
+      - "Looking for clock_gettime"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-cltfyj"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-cltfyj"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline "
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/flac-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_CLOCK_GETTIME"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-cltfyj'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_6667d
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe   -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline  -DCHECK_FUNCTION_EXISTS=clock_gettime -o CMakeFiles/cmTC_6667d.dir/CheckFunctionExists.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-cltfyj/CheckFunctionExists.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline  -DCHECK_FUNCTION_EXISTS=clock_gettime  CMakeFiles/cmTC_6667d.dir/CheckFunctionExists.c.obj -o cmTC_6667d.exe -Wl,--out-implib,libcmTC_6667d.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lrt  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        FAILED: [code=1] cmTC_6667d.exe 
+        C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Waggregate-return -Wcast-align -Wnested-externs -Wshadow -Wundef -Wmissing-declarations -Winline  -DCHECK_FUNCTION_EXISTS=clock_gettime  CMakeFiles/cmTC_6667d.dir/CheckFunctionExists.c.obj -o cmTC_6667d.exe -Wl,--out-implib,libcmTC_6667d.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lrt  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -lrt: No such file or directory
+        collect2.exe: error: ld returned 1 exit status
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckLibraryExists.cmake:112 (try_compile)"
+      - "out/build/Test/_deps/vorbis-src/CMakeLists.txt:62 (check_library_exists)"
+    checks:
+      - "Looking for floor in m"
+    directories:
+      source: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-xaudyn"
+      binary: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-xaudyn"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/sfml-src/cmake/Modules/;C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/_deps/vorbis-src/cmake"
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "HAVE_LIBM"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-xaudyn'
+        
+        Run Build Command(s): C:/PROGRA~1/ninja/ninja.exe -v cmTC_a5ae4
+        [1/2] C:\\msys64\\ucrt64\\bin\\gcc.exe   -DCHECK_FUNCTION_EXISTS=floor -o CMakeFiles/cmTC_a5ae4.dir/CheckFunctionExists.c.obj -c C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-xaudyn/CheckFunctionExists.c
+        <command-line>: warning: conflicting types for built-in function 'floor'; expected 'double(double)' [-Wbuiltin-declaration-mismatch]
+        C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-xaudyn/CheckFunctionExists.c:7:3: note: in expansion of macro 'CHECK_FUNCTION_EXISTS'
+            7 |   CHECK_FUNCTION_EXISTS(void);
+              |   ^~~~~~~~~~~~~~~~~~~~~
+        C:/Users/kiera/Documents/GitHub/cosmic-construction/out/build/Test/CMakeFiles/CMakeScratch/TryCompile-xaudyn/CheckFunctionExists.c:1:1: note: 'floor' is declared in header '<math.h>'
+          +++ |+#include <math.h>
+            1 | #ifdef CHECK_FUNCTION_EXISTS
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\msys64\\ucrt64\\bin\\gcc.exe -DCHECK_FUNCTION_EXISTS=floor  CMakeFiles/cmTC_a5ae4.dir/CheckFunctionExists.c.obj -o cmTC_a5ae4.exe -Wl,--out-implib,libcmTC_a5ae4.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lm  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+...

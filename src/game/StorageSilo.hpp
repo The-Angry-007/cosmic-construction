@@ -1,6 +1,7 @@
 #pragma once
+#include "../PCH.hpp"
+#include "../gui.hpp"
 #include "Structure.hpp"
-#include "gui.hpp"
 class StorageSilo : public Structure
 {
 public:

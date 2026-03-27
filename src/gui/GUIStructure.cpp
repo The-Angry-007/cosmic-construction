@@ -1,6 +1,6 @@
 #include "GUIStructure.hpp"
-#include "Main.hpp"
-#include "game/ResourceHandler.hpp"
+#include "../Main.hpp"
+#include "../game/ResourceHandler.hpp"
 GUIStructure::GUIStructure(sf::Vector2f position, sf::Vector2f size, int typeID, std::vector<int> frames)
 {
 	this->position = position;
@@ -30,7 +30,7 @@ void GUIStructure::Render()
 	for (int i = 0; i < images.size(); i++)
 	{
 		images[i]->Render();
-		sf::Vector2f s(images[i]->sprite.getGlobalBounds().width / width, images[i]->sprite.getGlobalBounds().height / height);
+		sf::Vector2f s(images[i]->sprite.getGlobalBounds().size.x / width, images[i]->sprite.getGlobalBounds().size.y / height);
 		if (s.x > actualSize.x)
 		{
 			actualSize.x = s.x;

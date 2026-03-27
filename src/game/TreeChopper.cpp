@@ -1,5 +1,5 @@
 #include "TreeChopper.hpp"
-#include "Main.hpp"
+#include "../Main.hpp"
 #include "ResourceHandler.hpp"
 TreeChopper::TreeChopper(int id, int planetID, int direction)
 {
@@ -7,7 +7,6 @@ TreeChopper::TreeChopper(int id, int planetID, int direction)
 	this->planetID = planetID;
 	typeID = 3;
 	tileSize = ResourceHandler::structureSizes[typeID];
-	sprite = sf::Sprite();
 	SetDirection(direction);
 	blocksItems = true;
 	placedByPlayer = true;

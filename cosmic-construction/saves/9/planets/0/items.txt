@@ -1,1 +1,0 @@
-ItemID/TypeID/PositionX/PositionY/Parent

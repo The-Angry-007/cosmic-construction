@@ -48,12 +48,12 @@
             "intelliSenseMode": "windows-gcc-x86",
             "cStandard": "c11",
             "cppStandard": "c++17",
-            "compilerPath": "C:/mingw32/bin/gcc.exe",
+            "compilerPath": "C:/msys64/ucrt64/bin/g++.exe",
             "includePath": [
                 "${workspaceFolder}/src",
                 "${workspaceFolder}/lib",
                 "${workspaceFolder}/test",
-                "C:/SFML-2.5.1/include"
+                "C:/SFML-3.0.0/include"
             ],
             "defines": [
                 "_DEBUG",

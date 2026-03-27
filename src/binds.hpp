@@ -1,4 +1,5 @@
 #pragma once
+#include "PCH.hpp"
 
 //a namespace that contains the codes for keybinds
 namespace binds

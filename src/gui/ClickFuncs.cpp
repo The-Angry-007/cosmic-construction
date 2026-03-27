@@ -1,6 +1,6 @@
 #include "ClickFuncs.hpp"
+#include "../Main.hpp"
 #include "../saving.hpp"
-#include "Main.hpp"
 
 //default click function that buttons use
 void ClickFuncs::blankFunc()

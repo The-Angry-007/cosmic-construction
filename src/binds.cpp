@@ -7,26 +7,26 @@
 namespace binds
 {
 //here is where each keybind is defined and its default value.
-int Pause = sf::Keyboard::Key::Escape + 1;
-int Fullscreen = sf::Keyboard::Key::F11 + 1;
-int Pan = -(sf::Mouse::Button::Right + 1);
-int UseTool = -(sf::Mouse::Button::Left + 1);
-int Tool1 = sf::Keyboard::Key::Num1 + 1;
-int Tool2 = sf::Keyboard::Key::Num2 + 1;
-int Tool3 = sf::Keyboard::Key::Num3 + 1;
-int RotateStructure = sf::Keyboard::Key::R + 1;
-int CloseInventory = sf::Keyboard::Key::E + 1;
-int FlipStructure = sf::Keyboard::Key::F + 1;
+int Pause = (int)sf::Keyboard::Key::Escape + 1;
+int Fullscreen = (int)sf::Keyboard::Key::F11 + 1;
+int Pan = -((int)sf::Mouse::Button::Right + 1);
+int UseTool = -((int)sf::Mouse::Button::Left + 1);
+int Tool1 = (int)sf::Keyboard::Key::Num1 + 1;
+int Tool2 = (int)sf::Keyboard::Key::Num2 + 1;
+int Tool3 = (int)sf::Keyboard::Key::Num3 + 1;
+int RotateStructure = (int)sf::Keyboard::Key::R + 1;
+int CloseInventory = (int)sf::Keyboard::Key::E + 1;
+int FlipStructure = (int)sf::Keyboard::Key::F + 1;
 }
 //the code version of keycodes adds 1, since keyboard keys has a code assigned to the value 0 as well as mouse buttons.
 int binds::keyToCode(sf::Keyboard::Key key)
 {
-	return key + 1;
+	return (int)key + 1;
 }
 //mouse buttons are stored as negative numbers.
 int binds::buttonToCode(sf::Mouse::Button button)
 {
-	return -button - 1;
+	return -(int)button - 1;
 }
 
 /*uses the SFML enums for keyboard keys and mouse buttons to assign a string name to each code.

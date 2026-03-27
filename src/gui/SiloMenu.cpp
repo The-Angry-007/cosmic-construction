@@ -1,6 +1,6 @@
 #include "SiloMenu.hpp"
-#include "Main.hpp"
-#include "binds.hpp"
+#include "../Main.hpp"
+#include "../binds.hpp"
 SiloMenu::SiloMenu(StorageSilo* s)
 {
 	this->silo = s;

@@ -1,5 +1,6 @@
 #pragma once
-#include "./hitboxes.hpp"
+#include "../PCH.hpp"
+#include "../hitboxes.hpp"
 class GUIObject
 {
 public:

@@ -1,6 +1,6 @@
 #include "GUISlider.hpp"
-#include "InputHandler.hpp"
-#include "utils.hpp"
+#include "../InputHandler.hpp"
+#include "../utils.hpp"
 GUISlider::GUISlider(sf::Vector2f position, sf::Vector2f size, GUIObject* knob, GUIObject* background, GUIObject* completion)
 {
 	this->position = position;

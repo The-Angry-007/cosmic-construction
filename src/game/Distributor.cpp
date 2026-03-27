@@ -1,7 +1,7 @@
 #include "Distributor.hpp"
-#include "Main.hpp"
+#include "../Main.hpp"
+#include "../utils.hpp"
 #include "ResourceHandler.hpp"
-#include "utils.hpp"
 
 Distributor::Distributor(int id, int planetID, int direction)
 {
@@ -10,7 +10,6 @@ Distributor::Distributor(int id, int planetID, int direction)
 	this->direction = -1;
 	typeID = 9;
 	tileSize = ResourceHandler::structureSizes[typeID];
-	sprite = sf::Sprite();
 	ResourceHandler::structureAtlas->SetSprite(sprite, 9, upgradeLevel);
 	gap = 0.2f;
 	progress = { {}, {}, {}, {} };

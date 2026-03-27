@@ -1,6 +1,7 @@
 #pragma once
-#include "Hitboxes.hpp"
-#include "gui.hpp"
+#include "../PCH.hpp"
+#include "../Hitboxes.hpp"
+#include "../gui.hpp"
 class Camera
 {
 public:

@@ -1,4 +1,5 @@
 #pragma once
+#include "../PCH.hpp"
 #include "GUIObject.hpp"
 class GUILabel : public GUIObject
 {
@@ -7,7 +8,7 @@ public:
 	std::string value;
 	sf::Color color;
 	sf::Vector2f origin;
-	sf::Text text;
+	sf::Text text = sf::Text(font);
 	bool altCharSize;
 	~GUILabel();
 	GUILabel(sf::Vector2f position, sf::Vector2f size, std::string text);

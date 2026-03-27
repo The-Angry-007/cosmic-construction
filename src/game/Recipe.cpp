@@ -1,5 +1,5 @@
 #include "Recipe.hpp"
-#include "Main.hpp"
+#include "../Main.hpp"
 #include "RecipeHandler.hpp"
 Recipe::Recipe(int planetID, RecipeData* data)
 {

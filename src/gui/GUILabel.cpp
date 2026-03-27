@@ -1,6 +1,6 @@
 #include "GUILabel.hpp"
-#include "Main.hpp"
-#include "utils.hpp"
+#include "../Main.hpp"
+#include "../utils.hpp"
 GUILabel::GUILabel(sf::Vector2f position, sf::Vector2f size, std::string text)
 {
 	//attempt to load default font
@@ -34,7 +34,7 @@ void GUILabel::Render()
 	sf::Vector2f cPos((float)position.x * width, (float)position.y * height);
 	sf::Vector2f cSize((float)size.x * width, (float)size.y * height);
 	//find maximum character scale that fits in bounds
-	text.setOrigin(0.f, 0.f);
+	text.setOrigin({ 0.f, 0.f });
 	text.setCharacterSize(128);
 	if (true)
 	{
@@ -52,8 +52,8 @@ void GUILabel::Render()
 
 	sf::FloatRect bounds = text.getLocalBounds();
 
-	float widthMult = ((float)bounds.width) / (cSize.x * 2.f);
-	float heightMult = ((float)bounds.height) / (cSize.y * 2.f);
+	float widthMult = ((float)bounds.size.x) / (cSize.x * 2.f);
+	float heightMult = ((float)bounds.size.y) / (cSize.y * 2.f);
 	float scale;
 	if (widthMult > heightMult)
 	{
@@ -65,8 +65,8 @@ void GUILabel::Render()
 	}
 	text.setScale(sf::Vector2f(scale, scale));
 	sf::FloatRect newBounds = text.getLocalBounds();
-	sf::Vector2f topleft(newBounds.left, newBounds.top);
-	sf::Vector2f origin(newBounds.width * this->origin.x, newBounds.height * this->origin.y);
+	sf::Vector2f topleft(newBounds.position.x, newBounds.position.y);
+	sf::Vector2f origin(newBounds.size.x * this->origin.x, newBounds.size.y * this->origin.y);
 	text.setOrigin(topleft + origin);
 	text.setPosition(cPos - cSize + 2.f * sf::Vector2f(this->origin.x * cSize.x, this->origin.y * cSize.y));
 	text.setPosition((sf::Vector2f)(sf::Vector2i)text.getPosition());
@@ -80,7 +80,7 @@ void GUILabel::RenderToTexture(sf::RenderTexture* texture)
 	sf::Vector2f cPos((float)position.x * width, (float)position.y * height);
 	sf::Vector2f cSize((float)size.x * width, (float)size.y * height);
 	//find maximum character scale that fits in bounds
-	text.setOrigin(0.f, 0.f);
+	text.setOrigin({ 0.f, 0.f });
 	text.setScale(sf::Vector2f(1.f, 1.f));
 	text.setCharacterSize(128);
 	if (false)
@@ -90,8 +90,8 @@ void GUILabel::RenderToTexture(sf::RenderTexture* texture)
 
 	sf::FloatRect bounds = text.getLocalBounds();
 
-	float widthMult = ((float)bounds.width) / (cSize.x * 2.f);
-	float heightMult = ((float)bounds.height) / (cSize.y * 2.f);
+	float widthMult = ((float)bounds.size.x) / (cSize.x * 2.f);
+	float heightMult = ((float)bounds.size.y) / (cSize.y * 2.f);
 	float scale;
 	if (widthMult > heightMult)
 	{
@@ -103,8 +103,8 @@ void GUILabel::RenderToTexture(sf::RenderTexture* texture)
 	}
 	text.setScale(sf::Vector2f(scale, scale));
 	sf::FloatRect newBounds = text.getLocalBounds();
-	sf::Vector2f topleft(newBounds.left, newBounds.top);
-	sf::Vector2f origin(newBounds.width * this->origin.x, newBounds.height * this->origin.y);
+	sf::Vector2f topleft(newBounds.position.x, newBounds.position.y);
+	sf::Vector2f origin(newBounds.size.x * this->origin.x, newBounds.size.y * this->origin.y);
 	text.setOrigin(topleft + origin);
 	text.setPosition(cPos - cSize + 2.f * sf::Vector2f(this->origin.x * cSize.x, this->origin.y * cSize.y));
 	text.setPosition((sf::Vector2f)(sf::Vector2i)text.getPosition());

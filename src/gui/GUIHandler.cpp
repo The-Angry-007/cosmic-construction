@@ -1,11 +1,11 @@
+#include "../InputHandler.hpp"
+#include "../Main.hpp"
+#include "../binds.hpp"
+#include "../game/RecipeHandler.hpp"
 #include "../gui.hpp"
 #include "../saving.hpp"
+#include "../utils.hpp"
 #include "BuildMenu.hpp"
-#include "InputHandler.hpp"
-#include "Main.hpp"
-#include "binds.hpp"
-#include "game/RecipeHandler.hpp"
-#include "utils.hpp"
 //constructor
 GUIHandler::GUIHandler()
 {
@@ -82,7 +82,7 @@ void GUIHandler::Update(float dt)
 void GUIHandler::Render()
 {
 	sf::View currentView = window->getView();
-	sf::View GUIView(sf::FloatRect(0.f, 0.f, width, height));
+	sf::View GUIView(sf::FloatRect({ 0.f, 0.f }, { width, height }));
 	window->setView(GUIView);
 	guis[activeGui]->Render();
 	if (guis.size() > numGUIs && activeGui == 5)
@@ -116,7 +116,7 @@ GUI* GUIHandler::GetOpenGUI()
 */
 void GUIHandler::InitGUIS()
 {
-	guifont.loadFromFile("content/resources/fonts/default font.ttf");
+	guifont.openFromFile("content/resources/fonts/default font.ttf");
 	activeGui = 0;
 	openedGuis = { 0 };
 	guis = {};

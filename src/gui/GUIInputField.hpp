@@ -1,4 +1,5 @@
 #pragma once
+#include "../PCH.hpp"
 #include "GUILabel.hpp"
 #include "GUIObject.hpp"
 

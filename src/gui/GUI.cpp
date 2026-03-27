@@ -1,5 +1,5 @@
 #include "GUI.hpp"
-#include "InputHandler.hpp"
+#include "../InputHandler.hpp"
 //constructor: only thing to do is initialise guiobjects array.
 GUI::GUI()
 {
@@ -45,6 +45,7 @@ GUI::~GUI()
 			delete GUIObjects[i];
 		}
 	}
+	GUIObjects = {};
 }
 //update just updates all gui objects
 void GUI::Update(float dt)
