@@ -222330,13 +222330,13 @@ bool RectIntersectsRect(sf::FloatRect rect1, sf::FloatRect rect2)
 {
 
 
- bool cond1 = (rect2.left > rect1.left + rect1.width);
+ bool cond1 = (rect2.position.x > rect1.position.x + rect1.size.x);
 
- bool cond2 = (rect2.left + rect2.width < rect1.left);
+ bool cond2 = (rect2.position.x + rect2.size.x < rect1.position.x);
 
- bool cond3 = (rect2.top > rect1.top + rect1.height);
+ bool cond3 = (rect2.position.y > rect1.position.y + rect1.size.y);
 
- bool cond4 = (rect2.top + rect2.height < rect1.top);
+ bool cond4 = (rect2.position.y + rect2.size.y < rect1.position.y);
 
  if (!(cond1 || cond2 || cond3 || cond4))
  {
@@ -222350,13 +222350,13 @@ bool RectIntersectsRect(sf::IntRect rect1, sf::IntRect rect2)
 {
 
 
- bool cond1 = (rect2.left >= rect1.left + rect1.width);
+ bool cond1 = (rect2.position.x >= rect1.position.x + rect1.size.x);
 
- bool cond2 = (rect2.left + rect2.width <= rect1.left);
+ bool cond2 = (rect2.position.x + rect2.size.x <= rect1.position.x);
 
- bool cond3 = (rect2.top >= rect1.top + rect1.height);
+ bool cond3 = (rect2.position.y >= rect1.position.y + rect1.size.y);
 
- bool cond4 = (rect2.top + rect2.height <= rect1.top);
+ bool cond4 = (rect2.position.y + rect2.size.y <= rect1.position.y);
 
  if (!(cond1 || cond2 || cond3 || cond4))
  {
@@ -222369,8 +222369,8 @@ bool RectIntersectsRect(sf::IntRect rect1, sf::IntRect rect2)
 bool RectIntersectsCircle(sf::Vector2f pos, float r, sf::FloatRect rect)
 {
 
- float closestX = clamp(pos.x, rect.left, rect.left + rect.width);
- float closestY = clamp(pos.y, rect.top, rect.top + rect.height);
+ float closestX = clamp(pos.x, rect.position.x, rect.position.x + rect.size.x);
+ float closestY = clamp(pos.y, rect.position.y, rect.position.y + rect.size.y);
 
  float dx = pos.x - closestX;
  float dy = pos.y - closestY;

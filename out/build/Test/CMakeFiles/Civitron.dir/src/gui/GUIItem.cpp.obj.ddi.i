@@ -222423,7 +222423,7 @@ class GUIImage : public GUIObject
 {
 public:
  sf::Texture texture;
- sf::Sprite sprite;
+ sf::Sprite sprite = sf::Sprite(texture);
  bool keepAspectRatio;
  sf::Vector2f origin;
  GUIImage(sf::Vector2f position, sf::Vector2f size, std::string path);
@@ -222443,7 +222443,7 @@ public:
  std::string value;
  sf::Color color;
  sf::Vector2f origin;
- sf::Text text;
+ sf::Text text = sf::Text(font);
  bool altCharSize;
  ~GUILabel();
  GUILabel(sf::Vector2f position, sf::Vector2f size, std::string text);
@@ -222711,7 +222711,7 @@ class GUIGalaxy : public GUIObject
 {
 public:
  sf::Texture texture;
- sf::Sprite sprite;
+ sf::Sprite sprite = sf::Sprite(texture);
  float speed;
  sf::Vector2f vel;
 
@@ -223781,7 +223781,7 @@ void GUIItem::RenderToTexture(sf::RenderTexture* texture)
  image->position = position;
  image->size = size;
  image->RenderToTexture(texture);
- actualSize = sf::Vector2f(image->sprite.getGlobalBounds().width / width / 2.f, image->sprite.getGlobalBounds().height / height / 2.f);
+ actualSize = sf::Vector2f(image->sprite.getGlobalBounds().size.x / width / 2.f, image->sprite.getGlobalBounds().size.y / height / 2.f);
  if (label != nullptr)
  {
   label->position = position + actualSize / 2.f;
@@ -223794,7 +223794,7 @@ void GUIItem::Render()
  image->position = position;
  image->size = size;
  image->Render();
- actualSize = sf::Vector2f(image->sprite.getGlobalBounds().width / width / 2.f, image->sprite.getGlobalBounds().height / height / 2.f);
+ actualSize = sf::Vector2f(image->sprite.getGlobalBounds().size.x / width / 2.f, image->sprite.getGlobalBounds().size.y / height / 2.f);
  if (label != nullptr)
  {
   label->position = position + actualSize / 2.f;

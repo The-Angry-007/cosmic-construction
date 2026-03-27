@@ -7,7 +7,7 @@ class GUIGalaxy : public GUIObject
 {
 public:
 	sf::Texture texture;
-	sf::Sprite sprite;
+	sf::Sprite sprite = sf::Sprite(texture);
 	float speed;
 	sf::Vector2f vel;
 

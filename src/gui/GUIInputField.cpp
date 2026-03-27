@@ -74,7 +74,7 @@ void GUIInputField::Update(float dt)
 			focused = false;
 			displayValue = value;
 		}
-		if (InputHandler::keyPressed(sf::Keyboard::Left))
+		if (InputHandler::keyPressed(sf::Keyboard::Key::Left))
 		{
 			cursorPos--;
 			if (cursorPos < -1)
@@ -82,7 +82,7 @@ void GUIInputField::Update(float dt)
 				cursorPos = -1;
 			}
 		}
-		if (InputHandler::keyPressed(sf::Keyboard::Right))
+		if (InputHandler::keyPressed(sf::Keyboard::Key::Right))
 		{
 			cursorPos++;
 			if (cursorPos > value.length() - 1)

@@ -34,7 +34,7 @@ bool HitboxRect::intersects(HitboxShape* other)
 void HitboxRect::Display(bool colliding)
 {
 	sf::RectangleShape drawRect(sf::Vector2f(currentSize.x * 2, currentSize.y * 2));
-	drawRect.setPosition(currentPos.x, currentPos.y);
+	drawRect.setPosition({ currentPos.x, currentPos.y });
 	drawRect.setOrigin(sf::Vector2f(currentSize.x, currentSize.y));
 
 	if (colliding)
@@ -51,11 +51,11 @@ void HitboxRect::Display(bool colliding)
 bool HitboxRect::intersectsPoint(sf::Vector2f point)
 {
 	sf::FloatRect rect(currentPos - currentSize, 2.f * currentSize);
-	if (point.x < rect.left || point.y < rect.top)
+	if (point.x < rect.position.x || point.y < rect.position.y)
 	{
 		return false;
 	}
-	if (point.x > rect.left + rect.width || point.y > rect.top + rect.height)
+	if (point.x > rect.position.x + rect.size.x || point.y > rect.position.y + rect.size.y)
 	{
 		return false;
 	}

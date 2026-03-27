@@ -29,13 +29,13 @@ int main()
 	//initialise the window object
 	window = std::make_unique<sf::RenderWindow>();
 	//make a 800x500 window with the title "Cosmic Construction"
-	window->create(sf::VideoMode(width, height), "Cosmic Construction");
+	window->create(sf::VideoMode({ width, height }), "Cosmic Construction");
 	window->setFramerateLimit(1000);
 	window->setVerticalSyncEnabled(true);
 	//set the icon image that is displayed in the corner of the window
 	sf::Image icon;
 	icon.loadFromFile("content/resources/images/icon.png");
-	window->setIcon(256, 256, icon.getPixelsPtr());
+	window->setIcon({ 256, 256 }, icon.getPixelsPtr());
 
 	//make the window black while loading
 	window->clear(sf::Color::Black);
@@ -58,7 +58,7 @@ int main()
 			continue;
 		}
 		//adjust the window's view to match the window's dimensions
-		sf::View view(sf::FloatRect(0.f, 0.f, width, height));
+		sf::View view(sf::FloatRect({ 0.f, 0.f }, { width, height }));
 		window->setView(view);
 		//calculate delta time (time passed since last frame)
 		float dt = deltaClock.restart().asSeconds();

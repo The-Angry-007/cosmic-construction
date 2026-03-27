@@ -222668,7 +222668,7 @@ class GUIImage : public GUIObject
 {
 public:
  sf::Texture texture;
- sf::Sprite sprite;
+ sf::Sprite sprite = sf::Sprite(texture);
  bool keepAspectRatio;
  sf::Vector2f origin;
  GUIImage(sf::Vector2f position, sf::Vector2f size, std::string path);
@@ -222722,7 +222722,7 @@ class GUIGalaxy : public GUIObject
 {
 public:
  sf::Texture texture;
- sf::Sprite sprite;
+ sf::Sprite sprite = sf::Sprite(texture);
  float speed;
  sf::Vector2f vel;
 
@@ -222746,7 +222746,7 @@ public:
  std::string value;
  sf::Color color;
  sf::Vector2f origin;
- sf::Text text;
+ sf::Text text = sf::Text(font);
  bool altCharSize;
  ~GUILabel();
  GUILabel(sf::Vector2f position, sf::Vector2f size, std::string text);
@@ -224136,8 +224136,7 @@ void Settings::Render()
  pageGuis[currentGUI]->Render();
  if (currentGUI == 1)
  {
-  sf::RenderTexture text;
-  text.create(width, height);
+  sf::RenderTexture text({ width, height });
   text.setView(sf::View(sf::Vector2f(width / 2.f, height / 2.f), sf::Vector2f(width, height)));
   text.clear(sf::Color::Transparent);
   for (uint i = 0; i < bindGUIs.size(); i++)
@@ -224148,8 +224147,8 @@ void Settings::Render()
   sf::Sprite s(text.getTexture());
   sf::IntRect bounds(sf::Vector2i(width * 0.1f, height * 0.16f), sf::Vector2i(width * 0.8f, height * (0.8f - 0.06f)));
   s.setTextureRect(bounds);
-  s.setPosition(bounds.left, bounds.top);
-  s.setOrigin(0.f, 0.f);
+  s.setPosition({ bounds.position.x, bounds.position.y });
+  s.setOrigin({ 0.f, 0.f });
 
   window->draw(s);
  }

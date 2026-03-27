@@ -82,7 +82,7 @@ void GUIItem::RenderToTexture(sf::RenderTexture* texture)
 	image->position = position;
 	image->size = size;
 	image->RenderToTexture(texture);
-	actualSize = sf::Vector2f(image->sprite.getGlobalBounds().width / width / 2.f, image->sprite.getGlobalBounds().height / height / 2.f);
+	actualSize = sf::Vector2f(image->sprite.getGlobalBounds().size.x / width / 2.f, image->sprite.getGlobalBounds().size.y / height / 2.f);
 	if (label != nullptr)
 	{
 		label->position = position + actualSize / 2.f;
@@ -95,7 +95,7 @@ void GUIItem::Render()
 	image->position = position;
 	image->size = size;
 	image->Render();
-	actualSize = sf::Vector2f(image->sprite.getGlobalBounds().width / width / 2.f, image->sprite.getGlobalBounds().height / height / 2.f);
+	actualSize = sf::Vector2f(image->sprite.getGlobalBounds().size.x / width / 2.f, image->sprite.getGlobalBounds().size.y / height / 2.f);
 	if (label != nullptr)
 	{
 		label->position = position + actualSize / 2.f;

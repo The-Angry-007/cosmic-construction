@@ -222668,7 +222668,7 @@ class GUIImage : public GUIObject
 {
 public:
  sf::Texture texture;
- sf::Sprite sprite;
+ sf::Sprite sprite = sf::Sprite(texture);
  bool keepAspectRatio;
  sf::Vector2f origin;
  GUIImage(sf::Vector2f position, sf::Vector2f size, std::string path);
@@ -222722,7 +222722,7 @@ class GUIGalaxy : public GUIObject
 {
 public:
  sf::Texture texture;
- sf::Sprite sprite;
+ sf::Sprite sprite = sf::Sprite(texture);
  float speed;
  sf::Vector2f vel;
 
@@ -222746,7 +222746,7 @@ public:
  std::string value;
  sf::Color color;
  sf::Vector2f origin;
- sf::Text text;
+ sf::Text text = sf::Text(font);
  bool altCharSize;
  ~GUILabel();
  GUILabel(sf::Vector2f position, sf::Vector2f size, std::string text);
@@ -223866,7 +223866,7 @@ void GUIHandler::Update(float dt)
 void GUIHandler::Render()
 {
  sf::View currentView = window->getView();
- sf::View GUIView(sf::FloatRect(0.f, 0.f, width, height));
+ sf::View GUIView(sf::FloatRect({ 0.f, 0.f }, { width, height }));
  window->setView(GUIView);
  guis[activeGui]->Render();
  if (guis.size() > numGUIs && activeGui == 5)
@@ -223889,7 +223889,7 @@ GUI* GUIHandler::GetOpenGUI()
 # 117 "C:/Users/kiera/Documents/GitHub/cosmic-construction/src/gui/GUIHandler.cpp"
 void GUIHandler::InitGUIS()
 {
- guifont.loadFromFile("content/resources/fonts/default font.ttf");
+ guifont.openFromFile("content/resources/fonts/default font.ttf");
  activeGui = 0;
  openedGuis = { 0 };
  guis = {};

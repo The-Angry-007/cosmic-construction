@@ -222488,7 +222488,7 @@ class GUIImage : public GUIObject
 {
 public:
  sf::Texture texture;
- sf::Sprite sprite;
+ sf::Sprite sprite = sf::Sprite(texture);
  bool keepAspectRatio;
  sf::Vector2f origin;
  GUIImage(sf::Vector2f position, sf::Vector2f size, std::string path);
@@ -222542,7 +222542,7 @@ class GUIGalaxy : public GUIObject
 {
 public:
  sf::Texture texture;
- sf::Sprite sprite;
+ sf::Sprite sprite = sf::Sprite(texture);
  float speed;
  sf::Vector2f vel;
 
@@ -222566,7 +222566,7 @@ public:
  std::string value;
  sf::Color color;
  sf::Vector2f origin;
- sf::Text text;
+ sf::Text text = sf::Text(font);
  bool altCharSize;
  ~GUILabel();
  GUILabel(sf::Vector2f position, sf::Vector2f size, std::string text);
@@ -223801,8 +223801,7 @@ void LoadGame::Render()
   GUIObjects[i]->Render();
  }
 
- sf::RenderTexture t;
- t.create(width, height);
+ sf::RenderTexture t({ width, height });
  t.clear(sf::Color::Transparent);
  t.setView(sf::View(sf::Vector2f(width / 2.f, height / 2.f), sf::Vector2f(width, height)));
 
@@ -223811,9 +223810,8 @@ void LoadGame::Render()
   saveSlots[i]->RenderToTexture(&t);
  }
  t.display();
- sf::Sprite s;
- s.setPosition(0.1f * width, 0.18f * height);
- s.setTexture(t.getTexture());
+ sf::Sprite s(t.getTexture());
+ s.setPosition({ 0.1f * width, 0.18f * height });
  s.setTextureRect(sf::IntRect(sf::Vector2i(0.1f * width, 0.18f * height), sf::Vector2i(0.8f * width, 0.72f * height)));
  window->draw(s);
 }

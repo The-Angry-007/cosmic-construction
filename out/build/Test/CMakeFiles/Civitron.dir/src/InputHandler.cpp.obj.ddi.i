@@ -222668,7 +222668,7 @@ class GUIImage : public GUIObject
 {
 public:
  sf::Texture texture;
- sf::Sprite sprite;
+ sf::Sprite sprite = sf::Sprite(texture);
  bool keepAspectRatio;
  sf::Vector2f origin;
  GUIImage(sf::Vector2f position, sf::Vector2f size, std::string path);
@@ -222722,7 +222722,7 @@ class GUIGalaxy : public GUIObject
 {
 public:
  sf::Texture texture;
- sf::Sprite sprite;
+ sf::Sprite sprite = sf::Sprite(texture);
  float speed;
  sf::Vector2f vel;
 
@@ -222746,7 +222746,7 @@ public:
  std::string value;
  sf::Color color;
  sf::Vector2f origin;
- sf::Text text;
+ sf::Text text = sf::Text(font);
  bool altCharSize;
  ~GUILabel();
  GUILabel(sf::Vector2f position, sf::Vector2f size, std::string text);
@@ -223816,67 +223816,67 @@ void InputHandler::ProcessEvents()
  typedText = "";
  scroll = sf::Vector2f(0, 0);
  mouseIsBlocked = false;
- sf::Event event;
 
- while (window->pollEvent(event))
+
+ while (const std::optional event = window->pollEvent())
  {
 
-  if (event.type == event.Closed)
+  if (event->is<sf::Event::Closed>())
   {
    window->close();
    exit(0);
   }
 
-  else if (event.type == event.KeyPressed)
+  else if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>())
   {
 
-   if (getIndex(keysDown, event.key.code) == -1)
+   if (getIndex(keysDown, keyPressed->code) == -1)
    {
-    keysDown.push_back(event.key.code);
-    keysPressed.push_back(event.key.code);
+    keysDown.push_back(keyPressed->code);
+    keysPressed.push_back(keyPressed->code);
    }
   }
 
-  else if (event.type == event.KeyReleased)
+  else if (const auto* keyReleased = event->getIf<sf::Event::KeyReleased>())
   {
 
-   int index = getIndex(keysDown, event.key.code);
+   int index = getIndex(keysDown, keyReleased->code);
    if (index != -1)
    {
     keysDown.erase(keysDown.begin() + index);
-    keysReleased.push_back(event.key.code);
+    keysReleased.push_back(keyReleased->code);
    }
   }
 
-  else if (event.type == event.MouseButtonPressed)
+  else if (const auto* mbPressed = event->getIf<sf::Event::MouseButtonPressed>())
   {
-   if (getIndex(mouseButtonsDown, event.mouseButton.button) == -1)
+   if (getIndex(mouseButtonsDown, mbPressed->button) == -1)
    {
-    mouseButtonsDown.push_back(event.mouseButton.button);
-    mouseButtonsPressed.push_back(event.mouseButton.button);
+    mouseButtonsDown.push_back(mbPressed->button);
+    mouseButtonsPressed.push_back(mbPressed->button);
    }
   }
-  else if (event.type == event.MouseButtonReleased)
+  else if (const auto* mbReleased = event->getIf<sf::Event::MouseButtonReleased>())
   {
-   int index = getIndex(mouseButtonsDown, event.mouseButton.button);
+   int index = getIndex(mouseButtonsDown, mbReleased->button);
    if (index != -1)
    {
     mouseButtonsDown.erase(mouseButtonsDown.begin() + index);
-    mouseButtonsReleased.push_back(event.mouseButton.button);
+    mouseButtonsReleased.push_back(mbReleased->button);
    }
   }
 
-  else if (event.type == event.TextEntered)
+  else if (const auto* text = event->getIf<sf::Event::TextEntered>())
   {
-   typedText += event.text.unicode;
+   typedText += text->unicode;
   }
 
-  else if (event.type == event.MouseWheelScrolled)
+  else if (const auto* mouseScroll = event->getIf<sf::Event::MouseWheelScrolled>())
   {
-   scroll.y = event.mouseWheelScroll.delta;
+   scroll.y = mouseScroll->delta;
   }
 
-  else if (event.type == event.Resized)
+  else if (const auto* resized = event->getIf<sf::Event::Resized>())
   {
    width = window->getSize().x;
    height = window->getSize().y;
@@ -223895,13 +223895,13 @@ void InputHandler::ProcessEvents()
   int style;
 
   window->close();
-  sf::VideoMode v(width, height);
+  sf::VideoMode v({ width, height });
 
   if (isFullscreen)
   {
    oldWidth = width;
    oldHeight = height;
-   style = sf::Style::Fullscreen;
+   style = (int)sf::State::Fullscreen;
    v = sf::VideoMode::getFullscreenModes()[0];
   }
 
@@ -223909,8 +223909,8 @@ void InputHandler::ProcessEvents()
   {
    width = oldWidth;
    height = oldHeight;
-   style = sf::Style::Default;
-   v = sf::VideoMode(width, height);
+   style = (int)sf::State::Windowed;
+   v = sf::VideoMode({ width, height });
   }
 
   window->create(v, "Cosmic Construction", style);
@@ -223932,7 +223932,7 @@ void InputHandler::ProcessEvents()
 
   sf::Image icon;
   icon.loadFromFile("resources/images/icon.png");
-  window->setIcon(256, 256, icon.getPixelsPtr());
+  window->setIcon({ 256, 256 }, icon.getPixelsPtr());
  }
 }
 

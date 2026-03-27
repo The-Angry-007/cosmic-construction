@@ -14,13 +14,11 @@ GUIGalaxy::GUIGalaxy()
 		window->close();
 		exit(1);
 	}
-	//set the texture of the sprite to the galaxy
-	sprite.setTexture(texture);
 	//how many pixels to move each second
 	speed = 12.f;
 	//the scale of the image
 	size = sf::Vector2f(.8f, .8f);
-	sprite.setScale(size.x, size.y);
+	sprite.setScale({ size.x, size.y });
 	//set the origin to be the top left corner and set the position to be (0,0)
 	sprite.setOrigin(sf::Vector2f(0.f, 0.f));
 	position = sf::Vector2f(0.f, 0.f);
@@ -35,25 +33,25 @@ void GUIGalaxy::Update(float dt)
 	//get the bounds of the sprite
 	sf::FloatRect bounds = sprite.getGlobalBounds();
 	//if the top is below the top of the screen, reverse the y velocity
-	if (bounds.top > 0)
+	if (bounds.position.y > 0)
 	{
 		position -= vel * dt * speed;
 		vel.y *= -1;
 	}
 	//same with if the bottom is above the bottom of the screen
-	else if (bounds.top + bounds.height < height)
+	else if (bounds.position.y + bounds.size.y < height)
 	{
 		position -= vel * dt * speed;
 		vel.y *= -1;
 	}
 	//same with left side beyond the left side of the screen
-	if (bounds.left > 0)
+	if (bounds.position.x > 0)
 	{
 		position -= vel * dt * speed;
 		vel.x *= -1;
 	}
 	//same with right side before right side of the screen
-	else if (bounds.left + bounds.width < width)
+	else if (bounds.position.x + bounds.size.x < width)
 	{
 		position -= vel * dt * speed;
 		vel.x *= -1;

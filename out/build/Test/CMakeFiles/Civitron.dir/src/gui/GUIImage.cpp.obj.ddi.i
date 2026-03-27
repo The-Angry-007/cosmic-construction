@@ -222420,7 +222420,7 @@ class GUIImage : public GUIObject
 {
 public:
  sf::Texture texture;
- sf::Sprite sprite;
+ sf::Sprite sprite = sf::Sprite(texture);
  bool keepAspectRatio;
  sf::Vector2f origin;
  GUIImage(sf::Vector2f position, sf::Vector2f size, std::string path);
@@ -222666,7 +222666,7 @@ class GUIGalaxy : public GUIObject
 {
 public:
  sf::Texture texture;
- sf::Sprite sprite;
+ sf::Sprite sprite = sf::Sprite(texture);
  float speed;
  sf::Vector2f vel;
 
@@ -222690,7 +222690,7 @@ public:
  std::string value;
  sf::Color color;
  sf::Vector2f origin;
- sf::Text text;
+ sf::Text text = sf::Text(font);
  bool altCharSize;
  ~GUILabel();
  GUILabel(sf::Vector2f position, sf::Vector2f size, std::string text);
@@ -223716,7 +223716,6 @@ GUIImage::GUIImage(sf::Vector2f position, sf::Vector2f size, std::string path)
 # 14 "C:/Users/kiera/Documents/GitHub/cosmic-construction/src/gui/GUIImage.cpp"
                    );
   }
-  sprite.setTexture(texture);
  }
 
  keepAspectRatio = false;
@@ -223734,7 +223733,7 @@ void GUIImage::Render()
  hitbox->shapes[0]->currentPos = position;
 
 
- sf::Vector2u texSize(sprite.getTextureRect().width, sprite.getTextureRect().height);
+ sf::Vector2u texSize(sprite.getTextureRect().size.x, sprite.getTextureRect().size.y);
 
  sf::Vector2f cPos(position.x * width, position.y * height);
  sf::Vector2f cSize(size.x * width, size.y * height);
@@ -223757,16 +223756,16 @@ void GUIImage::Render()
    scale = 1.f / heightMult;
   }
 
-  sprite.setScale(scale, scale);
+  sprite.setScale({ scale, scale });
  }
 
  else
  {
-  sprite.setScale(1.f / widthMult, 1.f / heightMult);
+  sprite.setScale({ 1.f / widthMult, 1.f / heightMult });
  }
  sprite.setPosition(cPos);
  sf::FloatRect bounds = sprite.getLocalBounds();
- sf::Vector2f origin(bounds.width * this->origin.x, bounds.height * this->origin.y);
+ sf::Vector2f origin(bounds.size.x * this->origin.x, bounds.size.y * this->origin.y);
 
  sprite.setOrigin(origin);
 
@@ -223775,10 +223774,10 @@ void GUIImage::Render()
 
  sf::FloatRect finalBounds = sprite.getGlobalBounds();
 
- sf::Vector2f s = sf::Vector2f(bounds.width * sprite.getScale().x, bounds.height * sprite.getScale().y);
+ sf::Vector2f s = sf::Vector2f(bounds.size.x * sprite.getScale().x, bounds.size.y * sprite.getScale().y);
 
- hitbox->shapes[0]->currentSize = sf::Vector2f(bounds.width * sprite.getScale().x / 2.f / width, bounds.height * sprite.getScale().y / 2.f / height);
- sf::Vector2f mid(finalBounds.left + s.x / 2.f, finalBounds.top + s.y / 2.f);
+ hitbox->shapes[0]->currentSize = sf::Vector2f(bounds.size.x * sprite.getScale().x / 2.f / width, bounds.size.y * sprite.getScale().y / 2.f / height);
+ sf::Vector2f mid(finalBounds.position.x + s.x / 2.f, finalBounds.position.y + s.y / 2.f);
  hitbox->shapes[0]->currentPos = sf::Vector2f(mid.x / width, mid.y / height);
 
  window->draw(sprite);
@@ -223787,7 +223786,7 @@ void GUIImage::Render()
 void GUIImage::RenderToTexture(sf::RenderTexture* texture)
 {
  hitbox->shapes[0]->currentPos = position;
- sf::Vector2u texSize(sprite.getTextureRect().width, sprite.getTextureRect().height);
+ sf::Vector2u texSize(sprite.getTextureRect().size.x, sprite.getTextureRect().size.y);
 
  sf::Vector2f cPos(position.x * width, position.y * height);
  sf::Vector2f cSize(size.x * width, size.y * height);
@@ -223806,22 +223805,22 @@ void GUIImage::RenderToTexture(sf::RenderTexture* texture)
   {
    scale = 1.f / heightMult;
   }
-  sprite.setScale(scale, scale);
+  sprite.setScale({ scale, scale });
  }
  else
  {
-  sprite.setScale(1.f / widthMult, 1.f / heightMult);
+  sprite.setScale({ 1.f / widthMult, 1.f / heightMult });
  }
  sprite.setPosition(cPos);
  sf::FloatRect bounds = sprite.getLocalBounds();
- sf::Vector2f topleft(bounds.left, bounds.top);
- sf::Vector2f origin(bounds.width * this->origin.x, bounds.height * this->origin.y);
+ sf::Vector2f topleft(bounds.position.x, bounds.position.y);
+ sf::Vector2f origin(bounds.size.x * this->origin.x, bounds.size.y * this->origin.y);
  sprite.setOrigin(topleft + origin);
  sprite.setPosition(cPos - cSize + 2.f * sf::Vector2f(this->origin.x * cSize.x, this->origin.y * cSize.y));
  sf::FloatRect finalBounds = sprite.getGlobalBounds();
- sf::Vector2f s = sf::Vector2f(bounds.width * sprite.getScale().x, bounds.height * sprite.getScale().y);
- hitbox->shapes[0]->currentSize = sf::Vector2f(bounds.width * sprite.getScale().x / 2.f / width, bounds.height * sprite.getScale().y / 2.f / height);
- sf::Vector2f mid(finalBounds.left + s.x / 2.f, finalBounds.top + s.y / 2.f);
+ sf::Vector2f s = sf::Vector2f(bounds.size.x * sprite.getScale().x, bounds.size.y * sprite.getScale().y);
+ hitbox->shapes[0]->currentSize = sf::Vector2f(bounds.size.x * sprite.getScale().x / 2.f / width, bounds.size.y * sprite.getScale().y / 2.f / height);
+ sf::Vector2f mid(finalBounds.size.x + s.x / 2.f, finalBounds.size.y + s.y / 2.f);
  hitbox->shapes[0]->currentPos = sf::Vector2f(mid.x / width, mid.y / height);
  texture->draw(sprite);
 }

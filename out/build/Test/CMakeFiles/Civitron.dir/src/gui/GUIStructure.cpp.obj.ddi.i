@@ -222423,7 +222423,7 @@ class GUIImage : public GUIObject
 {
 public:
  sf::Texture texture;
- sf::Sprite sprite;
+ sf::Sprite sprite = sf::Sprite(texture);
  bool keepAspectRatio;
  sf::Vector2f origin;
  GUIImage(sf::Vector2f position, sf::Vector2f size, std::string path);
@@ -222681,7 +222681,7 @@ class GUIGalaxy : public GUIObject
 {
 public:
  sf::Texture texture;
- sf::Sprite sprite;
+ sf::Sprite sprite = sf::Sprite(texture);
  float speed;
  sf::Vector2f vel;
 
@@ -222705,7 +222705,7 @@ public:
  std::string value;
  sf::Color color;
  sf::Vector2f origin;
- sf::Text text;
+ sf::Text text = sf::Text(font);
  bool altCharSize;
  ~GUILabel();
  GUILabel(sf::Vector2f position, sf::Vector2f size, std::string text);
@@ -223744,7 +223744,7 @@ void GUIStructure::Render()
  for (int i = 0; i < images.size(); i++)
  {
   images[i]->Render();
-  sf::Vector2f s(images[i]->sprite.getGlobalBounds().width / width, images[i]->sprite.getGlobalBounds().height / height);
+  sf::Vector2f s(images[i]->sprite.getGlobalBounds().size.x / width, images[i]->sprite.getGlobalBounds().size.y / height);
   if (s.x > actualSize.x)
   {
    actualSize.x = s.x;

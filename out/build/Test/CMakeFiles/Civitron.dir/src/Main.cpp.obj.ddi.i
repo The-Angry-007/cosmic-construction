@@ -222611,7 +222611,7 @@ class GUIImage : public GUIObject
 {
 public:
  sf::Texture texture;
- sf::Sprite sprite;
+ sf::Sprite sprite = sf::Sprite(texture);
  bool keepAspectRatio;
  sf::Vector2f origin;
  GUIImage(sf::Vector2f position, sf::Vector2f size, std::string path);
@@ -222665,7 +222665,7 @@ class GUIGalaxy : public GUIObject
 {
 public:
  sf::Texture texture;
- sf::Sprite sprite;
+ sf::Sprite sprite = sf::Sprite(texture);
  float speed;
  sf::Vector2f vel;
 
@@ -222689,7 +222689,7 @@ public:
  std::string value;
  sf::Color color;
  sf::Vector2f origin;
- sf::Text text;
+ sf::Text text = sf::Text(font);
  bool altCharSize;
  ~GUILabel();
  GUILabel(sf::Vector2f position, sf::Vector2f size, std::string text);
@@ -223748,13 +223748,13 @@ int main()
 
  window = std::make_unique<sf::RenderWindow>();
 
- window->create(sf::VideoMode(width, height), "Cosmic Construction");
+ window->create(sf::VideoMode({ width, height }), "Cosmic Construction");
  window->setFramerateLimit(1000);
  window->setVerticalSyncEnabled(true);
 
  sf::Image icon;
  icon.loadFromFile("content/resources/images/icon.png");
- window->setIcon(256, 256, icon.getPixelsPtr());
+ window->setIcon({ 256, 256 }, icon.getPixelsPtr());
 
 
  window->clear(sf::Color::Black);
@@ -223777,7 +223777,7 @@ int main()
    continue;
   }
 
-  sf::View view(sf::FloatRect(0.f, 0.f, width, height));
+  sf::View view(sf::FloatRect({ 0.f, 0.f }, { width, height }));
   window->setView(view);
 
   float dt = deltaClock.restart().asSeconds();
